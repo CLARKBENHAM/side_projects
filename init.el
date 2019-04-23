@@ -52,19 +52,35 @@
 
 
 (defun copy-exec ()
-  "Copys selected code, pulls up new python buffer, sends to buffer, executes, jumps back"
-  (interactive);; (mark) (point) (prefix-numeric-value current-prefix.arg)
-  (run-python);;starts automatically else keeps existing
+  "Copys selected code, pulls up new python buffer, sends to buffer, executes, jumps back. If starting a new process use C-x rightarrow to go back to buffer"
+  ;;at some point should call appropriate repl and not just python
+  (interactive)
+  (run-python)
   (kill-ring-save (region-beginning) (region-end))
   (other-window 1)
   (python-shell-switch-to-shell)
   (yank)
   (comint-send-input)
-  (other-window -1);[i for i in range(10)]
+  (other-window -1)
   )
 
 (global-set-key (kbd "C-x p") 'copy-exec)
 
+
+(defun run-cell()
+"evaluates all code between previous '#%%' and next '#%%' markers"
+  (interactive)
+;(message   (search-backward "#%%"))
+  (search-backward "#%%")
+  (right-char 3)
+  (message "moved2")
+  (set-mark-command nil)
+    (message "moved3")
+  (search-forward "#%%")
+  (left-char 3)
+    (message "moved4")
+  (copy-exec)
+  )
 (global-set-key (kbd "M-RET") 'run-cell) 
 
 
@@ -76,3 +92,17 @@
    (buffer-file-name )))
 (global-set-key (kbd "C-; f") 'my-load-file)
 
+
+
+(defun show-file-name ()
+  "Copy file path"
+  (interactive)
+  (message (buffer-file-name))
+  ;;update: process for windows, issue is that can't replace w \
+  (kill-new
+    (replace-regexp-in-string "c:/" "C:/" (file-truename buffer-file-name))
+   )
+  )
+
+C:/Users/Clark Benham/AppData/Roaming/.emacs.d/init.el
+(global-set-key (kbd "C-; p") 'show-file-name)
