@@ -368,7 +368,8 @@ bpa_cum_cap, plants = get_bpa_nameplate_capacity("only_increasing", path = "Desk
 
 
 import requests
-def get_renerableorg_info(plant_status = ""):
+def get_renewableorg_info():
+    #Information from table
     aweb_url = "https://renewablenw.org/project_map?field_project_state_value%5B%5D=ID&field_project_state_value%5B%5D=MT&field_project_state_value%5B%5D=OR&field_project_state_value%5B%5D=WA&tid%5B%5D=7&field_project_opstatus_value%5B%5D=Approved&field_project_opstatus_value%5B%5D=Proposed&field_project_opstatus_value%5B%5D=Operating&field_project_opstatus_value%5B%5D=In+Permitting+Process&field_project_opstatus_value%5B%5D=Under+Construction"
     got = requests.get(aweb_url)
     got_str = got.content.decode('utf-8')
@@ -379,19 +380,51 @@ def get_renerableorg_info(plant_status = ""):
     table_list = [list(re.findall(regex, i )) for i in table_str.split("</tr>")]
     cols = ["Name",	"State",	"County", "Capacity", "Unit", "Developers", "Partners", "Operating Status", "Year"]
     all_plants = pd.DataFrame.from_records(table_list, columns = cols)
-    if plant_status!= "":
-        status_ix = all_plants.loc[:, "Operating Status"] == plant_status
-        return all_plants[status_ix]
-    return all_plants
-#%%
-head_start_ix = 0#got_str.find("<head>")
-head_end_ix = got_str.find("</head>")
-head_str = got_str[head_start_ix:head_end_ix]
+    all_plants.dropna(axis = 0, how = 'all', inplace = True)
+    all_plants.Name = all_plants.Name.apply(lambda sr: sr.strip())
+    
+    #Information from Map
+    script_start_ix = got_str.find("""{"locpick":false,"nodrag":0,"nokeyboard":0,"nomousezoom":1,"nocontzoom":0,"autozoom":0,"dynmarkers":0,"overview":0,"collapsehack":0,"scale":1,"extramarkerevents":false,"clickableshapes":false,"highlight":0},"markermode":"1","id":"auto1map","markers":""")
+    script_end_ix = got_str.find("</script>", script_start_ix)
+    script_str = got_str[script_start_ix:script_end_ix]
+    regex2 = "latitude\"\:(\d+\.\d+),\"longitude\":(-\d+\.\d+).*?\{\"title\"\:\"(.*?)\""
+    latlon_title = [list(re.findall(regex2, i)[0]) for i in script_str.split("}},{")] 
+    plant_latlon = pd.DataFrame.from_records(latlon_title)
+    plant_latlon.iloc[:,0] = [float(i[:11]) for i in plant_latlon.iloc[:,0]]
+    plant_latlon.iloc[:,1] = [float(i[:9]) for i in plant_latlon.iloc[:,1]]
+    plant_latlon.columns = ["Latitude", "Longitude", "Name"]
+    status_reg = r'Operating Status:\\u003C\\/span\\u003E\\u003Cspan\\u003E\ (Operating)|(Under Construction)|(Proposed)|(Approved)|(In\ Permitting\ Process)\\u003C'
+    plant_latlon['Status'] = [j for i in script_str.split("}},{") 
+                            for j in re.findall(status_reg,i)[0] \
+                            if j != '']
+    plant_latlon.Name = plant_latlon.Name.apply(lambda sr: sr.strip().replace('\\u00e1','á').replace('\\u0026', '&').replace('\\', ''))#process so match all_plants Names
+    #could get number of turbines w/ each project; is that valuable?
+    merged = plant_latlon.merge(all_plants, how = 'inner', left_on = "Name", right_on = "Name")
+    
+    #check which Plant Names don't match up
+    unmerged = set(all_plants.Name.values) - set(merged.Name.values)
+    all_plants_unmerged = all_plants.iloc[np.where([i in unmerged for i in all_plants.Name])[0],:]
+    op_ix = all_plants_unmerged.loc[:, 'Operating Status'] == 'Operating'
+    print("all_plants in operation which weren't merged",
+          [i for i in all_plants_unmerged[op_ix.values].values])
+    print("all_plants which weren't merged", set(all_plants.Name.values) - set(merged.Name.values))
+    
+    unmerged = set(plant_latlon.Name.values) - set(merged.Name.values)
+    plant_latlon_unmerged =  plant_latlon.iloc[np.where([i in unmerged for i in plant_latlon.Name])[0],:]
+    op_ix = plant_latlon_unmerged.loc[:, 'Status'] == 'Operating'
+    print("\nplant_latlon in operation which weren't merged",
+          [i for i in plant_latlon_unmerged[op_ix.values].values])
+    print("plant_latlon which weren't merged", set(plant_latlon.Name.values) - set(merged.Name.values), "\n\n")
+    
+    #check that Status and Operating Status columns are equal
+    if all(merged.Status == merged.loc[:, 'Operating Status'].apply(lambda sr: sr.strip())):
+        return merged.drop('Operating Status', axis = 1)
+    else:
+        return merged
+merged = get_renewableorg_info()
 
-script_start_ix = head_str.find("<script>")
-script_end_ix = head_str.find("</script>")
-script_str = got_str[script_start_ix:script_end_ix]
-script_str
+
+
 
 
 
