@@ -639,3 +639,330 @@ def best_of_day_r2(buy,sell, cycles_per_day = 1, hr_capacity = 4, extra_charges 
         ix_used = best_low_hi_ix
 #    print(day_best, ix_used, rates[ix_used[1]] - rates[ix_used[0]])
     return day_best, ix_used
+#%%
+    
+p = [i for i in k]
+p[12:12+4] = [-10]*4
+
+sz = 24
+hr_capacity = 4
+
+potential_ix = [[0]*hr_capacity]*(sz-hr_capacity+1)
+potential_ix[0] = [ix for ix, val in sorted(zip(range(hr_capacity), p[:hr_capacity]), key = lambda tup: tup[1], reverse = True)]#indexs
+print(potential_ix[0])
+for i in range(hr_capacity,sz):
+    potential_ix[i-hr_capacity+1],_ ,_ = insert_sort(p[:sz], potential_ix[i-hr_capacity], i, hr_capacity = hr_capacity, buying = True)
+    print(potential_ix[i-hr_capacity+1], [p[i] for i in potential_ix[i-hr_capacity+1]])
+print(potential_ix[-1], sorted(list(range(12,12+4)), reverse = True))
+#ix = TestBattery.iter_thru_insert_sort(self, q, 24)
+#self.assertEqual(list(range(12,12+hr_capacity)), sorted(ix[0]), msg = "buying")
+
+#tztbat = TestBattery()
+#print(tztbat.hourly_rates[:24])
+#tztbat.test_insert_sort_duplicates()
+#%%
+#unittest.main()
+
+def intermitant(rates, hr_capacity = 4, cycles_per_day = 1, into_blocks = False, use_add = True, for_testing = False):#what does use add do?
+    "returns dicts of profit, buy locs, sell locs[locs are absolute] with buying at best hr_capacity buys,\
+    then selling at best hr_cap sells. All sells occur after all buys. Assumes always completely, charge, discharge each day"
+    assert(hr_capacity*2 <= 24)
+    if into_blocks:#calculates assuming can only charge in continious hours
+        return intermitant(rates=block(rates, hr_capacity), hr_capacity = 1, cycles_per_day = 1, into_blocks = False, for_testing = for_testing )
+    
+    
+    if len(rates)%24 <= 2*hr_capacity and len(rates)%24 != 0:#need to be able to completely buy, sell on last day
+        print("Droping the last day's hours to make times equal")
+        rates = rates[:-len(rates)%24]
+        
+    num_days = int(math.ceil(len(rates)/24))
+    buy_locs = {i:[] for i in range(num_days)}
+    sell_locs = {i:[] for i in range(num_days)}
+    profits = {i:[] for i in range(num_days)}
+    
+    buy_profit = [0]*(25-2*hr_capacity)#will be negative for buying; positve for selling
+    sell_profit = [0]*(25-2*hr_capacity)
+    buy_ix = [[0] for _ in range(hr_capacity)]*(25-2*hr_capacity)#list of lists; each sublist is of best places to buy up to that point(indexs for rates)
+    sell_ix = [[0] for _ in range(hr_capacity)]*(25-2*hr_capacity)#sublist is hour withen TOTAL PERIOD
+
+    #should treat first as special too
+
+    for i in range(num_days):#2, num_days-1):
+        #lengths are 24 - hr_capacity + 1 as start at 0 is w/ hr_capacity joined together, have 24-hr_cap other options "in front"
+        #list buy_ix[i] is list of indicies for the smallest values in list thus seen, sorted with largest value in 0th position
+        loc_in_buy_ix = 0
+        buy_ix[loc_in_buy_ix] = [ix for _, ix in sorted(zip(rates[i*24:i*24+hr_capacity], range(i*24,i*24+hr_capacity)), reverse = True)]
+        buy_profit[loc_in_buy_ix] = -1*sum(rates[i*24:i*24+hr_capacity])
+        buy_alternates = [0]*(25-2*hr_capacity)#have to stop selling with room for 
+        
+        #swap firs value in list; smallest value in 0th position
+        #don't reverse the range as need to pair with the locations of vals in rates   
+        loc_in_sell_ix = 24-2*hr_capacity
+        sell_ix[loc_in_sell_ix] = [ix for _, ix in sorted(zip(rates[(i+1)*24-hr_capacity:(i+1)*24], range((i+1)*24-hr_capacity,(i+1)*24)), reverse = False)]
+        sell_profit[loc_in_sell_ix] = sum(rates[(i+1)*24-hr_capacity:(i+1)*24])
+        sell_alternates = [0]*(25-2*hr_capacity)
+        
+        for j in range(24*i+23-hr_capacity, i*24+hr_capacity-1, -1):#calc indexes of selling; end of night to first hr_cap where just buying
+            sell_ix[loc_in_sell_ix-1], profit_change, alt = insert_sort(rates, sell_ix[loc_in_sell_ix], j, hr_capacity, buying = False)
+            sell_profit[loc_in_sell_ix-1] = sell_profit[loc_in_sell_ix] + profit_change#profit_change pos; sell for more
+            sell_alternates[loc_in_sell_ix] = alt
+            loc_in_sell_ix -= 1
+        
+        #take into account situation where only discharge a little on the last few hours of each day
+        
+        
+        #adjust for situation when abs(buy[0]) > sell[0]
+        day_prft = 0
+        day_indxs = [[0], [0]]
+        for j in range(i*24+hr_capacity, 24*i+24-hr_capacity):#calc indexes of buying from possible option to last before would just be selling hour of night
+            buy_ix[loc_in_buy_ix+1], profit_change, alt = insert_sort(rates, buy_ix[loc_in_buy_ix], j, hr_capacity, buying = True)
+            buy_profit[loc_in_buy_ix+1] = buy_profit[loc_in_buy_ix] - profit_change#profit_change negative; less outlay for buying power
+            buy_alternates[loc_in_buy_ix] = alt
+            
+            reps = 0
+            #if make a copy have to redo deletes each time; don't want this?
+            #after delete highest buy, next value could have been even higher and be profitable.
+            day_buy = np.copy(buy_ix[loc_in_buy_ix+1])
+            day_sell = np.copy(sell_ix[loc_in_buy_ix+1])
+            calc_prft = sell_profit[loc_in_buy_ix] + buy_profit[loc_in_buy_ix + 1]
+            while rates[day_buy[0]] >= rates[day_sell[0]] and reps < hr_capacity-1:
+#                print(day_buy, day_sell, day_buy[0], day_sell[0], reps)
+                calc_prft += day_buy[0]
+                calc_prft -= day_sell[0]
+                day_buy = np.delete(day_buy, 0)
+                day_sell = np.delete(day_sell, 0)
+                reps += 1
+#                print(buy_ix[loc_in_buy_ix+1], "\n", sell_ix[loc_in_buy_ix+1], "\n\n\n")
+            
+                
+            if sell_profit[loc_in_buy_ix] + buy_profit[loc_in_buy_ix] > day_prft:#this buys as early, sells as late as possible
+                day_prft = sell_profit[loc_in_buy_ix] + buy_profit[loc_in_buy_ix]
+                day_indxs = [buy_ix[loc_in_buy_ix], sell_ix[loc_in_buy_ix] ]
+            loc_in_buy_ix += 1
+        
+        profits[i] = day_prft
+        [buy_locs[i], sell_locs[i]] = day_indxs 
+#%%
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import random
+import timeit
+import math
+import itertools
+
+#Way Beth Wants it; actually use bottom
+def intermitant2(rates, hr_capacity = 4, cycles_per_day = 1, into_blocks = False, use_add = True, for_testing = False):#what does use add do?
+    "returns dicts of profit, buy locs, sell locs[locs are absolute] with buying at best hr_capacity buys,\
+    then selling at best hr_cap sells. All sells occur after all buys. Assumes always completely, charge, discharge each day"
+    assert(hr_capacity*2 <= 24)
+    if not isinstance(rates, np.ndarray):
+        rates = np.array(rates)
+    if into_blocks:#calculates assuming can only charge in continious hours
+        return intermitant2(rates=block(rates, hr_capacity), hr_capacity = 1, cycles_per_day = 1, into_blocks = False, for_testing = for_testing )
+    
+    if len(rates)%24 <= 2*hr_capacity and len(rates)%24 != 0:#need to be able to completely buy, sell on last day
+        print("Droping the last day's hours to make times equal")
+        rates = rates[:-len(rates)%24]
+        
+    num_days = int(math.ceil(len(rates)/24))
+    buy_locs = {i:[] for i in range(num_days)}
+    sell_locs = {i:[] for i in range(num_days)}
+    profits = {i:[] for i in range(num_days)}
+    
+    buy_profit = [0]*(23)#will be negative for buying; positve for selling
+    sell_profit = [0]*(23)
+    buy_ix = [[0] for _ in range(hr_capacity)]*(23)#list of lists; each sublist is of best places to buy up to that point(indexs for rates)
+    sell_ix = [[0] for _ in range(hr_capacity)]*(23)#sublist is hour withen TOTAL PERIOD
+
+    #should treat first as special too
+
+    for i in range(num_days):#2, num_days-1):
+        #lengths are 24 - hr_capacity + 1 as start at 0 is w/ hr_capacity joined together, have 24-hr_cap other options "in front"
+        #list buy_ix[i] is list of indicies for the smallest values in list thus seen, sorted with largest value in 0th position
+        loc_in_buy_ix = 0
+        buy_ix[loc_in_buy_ix] = [i*24]#[ix for _, ix in sorted(zip(rates[i*24:i*24+hr_capacity], range(i*24,i*24+hr_capacity)), reverse = True)]
+        buy_profit[loc_in_buy_ix] = -rates[i*24]
+        buy_alternates = [0]*(23)#have to stop selling with room to sell at least once 
+        
+        #don't reverse the range as need to pair with the locations of vals in rates   
+        loc_in_sell_ix = 22#starts at 'end'
+        sell_ix[loc_in_sell_ix] = [i*24+23]#[ix for _, ix in sorted(zip(rates[(i+1)*24-hr_capacity:(i+1)*24], range((i+1)*24-hr_capacity,(i+1)*24)), reverse = False)]
+        sell_profit[loc_in_sell_ix] = rates[i*24 + 23]#sum(rates[(i+1)*24-hr_capacity:(i+1)*24])
+        sell_alternates = [0]*(23)#25-2*hr_capacity)
+        
+        for j in range(24*i+23-hr_capacity, i*24+hr_capacity-1, -1):#calc indexes of selling; end of night to first hr_cap where just buying
+            sell_ix[loc_in_sell_ix-1], profit_change, alt = insert_sort(rates, sell_ix[loc_in_sell_ix], j, hr_capacity, buying = False)
+            sell_profit[loc_in_sell_ix-1] = sell_profit[loc_in_sell_ix] + profit_change#profit_change pos; sell for more
+            sell_alternates[loc_in_sell_ix] = alt
+            loc_in_sell_ix -= 1
+                
+
+        
+        for j in range(i*24, 24*i+23):#calc indexes of buying from possible option to last before would just be selling hour of night
+            buy_ix[loc_in_buy_ix+1], profit_change, alt = insert_sort(rates, buy_ix[loc_in_buy_ix], j, hrs_used, buying = True)
+            buy_profit[loc_in_buy_ix+1] = buy_profit[loc_in_buy_ix] + profit_change#profit_change negative; less outlay for buying power
+            buy_alternates[loc_in_buy_ix] = alt
+            loc_in_buy_ix += 1
+
+        #get best buy/sell locations
+        #SELL PROFITS are REVERSED! 
+        #give them 'room' to buy; sell. needs hr_cap left in day to unwind; hr_cap in start to buy 
+        
+        
+#        #buying price always decreases/constant, selling increases/ as go towards indx 0
+        prft = [i+j for i,j in zip(buy_profit, sell_profit)]
+        profits[i] = max(prft)
+        indx = prft.index(profits[i])
+        buy_locs[i] = buy_ix[indx]#[partial_charge]
+        sell_locs[i] = sell_ix[indx]#[partial_charge]
+        
+    return profits, buy_locs, sell_locs
+
+def locs_to_01(buy_locs, sell_locs, hr_capacity):
+    if isinstance(buy_locs, dict):
+        out = [0]*24*len(buy_locs.keys())
+        b_ix = [i for j in buy_locs.values() for i in j]
+        s_ix = [i for j in sell_locs.values() for i in j]
+        rm_val =[i for i in b_ix if i in s_ix]
+        for dup in rm_val:
+            del b_ix[b_ix.index(dup)]
+            del s_ix[s_ix.index(dup)]
+        list(map(out.__setitem__, b_ix + s_ix,
+                           iter([1 for _ in range(len(b_ix))] + [-1 for _ in range(len(s_ix))])))     
+    else:
+        print("Got a single list, Assuming it's just for a single day")
+        out = [0]*24
+        list(map(out.__setitem__, [j%24 for j in buy_locs] + [j%24 for j in sell_locs],\
+                           iter([1 for _ in range(len(buy_locs))] \
+                                 + [-1 for _ in range(len(sell_locs))])))#list is just so map evals     
+    return out
+#%%############################################################################
+    
+
+
+
+#version going in pixel
+def insert_sort(rates, current_indxs, potential_ix, hr_capacity, buying = True):
+    "returns NEW list w/ inserted/deletes values (still sorted) and profit change of changing that\
+    returns list of all indexs hold equivalent values (or none). \
+    Want to swap 0th[0 is largest value for buying, lowest value for selling. \
+    Can't expand more than 1 index per iteration"
+    #all indexs based on location in rates
+    ix_pntr = 0           
+    #current_indxs should be sorted based on value they index, in reverse order rates[indx[0]] > rates[indx[-1]]
+    if buying:#val shuold be smaller than largest element in list(which is at indx 0)
+#        print(rates[current_indxs[ix_pntr]], rates[potential_ix], "testing")
+        while rates[current_indxs[ix_pntr]] > rates[potential_ix]:
+            ix_pntr += 1
+            if ix_pntr == hr_capacity:#pntr interated thru list, smaller than all
+                #profit change will be negative; subtracting large from smaller  
+                return current_indxs[1:] + [potential_ix], rates[potential_ix] - rates[current_indxs[0]]       
+        if ix_pntr != 0:
+            return current_indxs[1:ix_pntr] + [potential_ix] + current_indxs[ix_pntr:], rates[potential_ix] - rates[current_indxs[0]]
+        else:#no changes made; was larger
+            return current_indxs, 0
+        
+    else:#selling, larger than smallest val in list
+        #normal order. rates[indx[0]] < rates[indx[-1]]. Want to swap 0th
+        while rates[current_indxs[ix_pntr]] < rates[potential_ix]:
+            ix_pntr += 1
+            if ix_pntr == hr_capacity:#pntr interated thru list; larger than all
+                return current_indxs[1:] + [potential_ix], rates[potential_ix] - rates[current_indxs[0]]
+            #Above is increase size: rates[current_indxs[0]] was set equal to rates[potential_indx], cancels leaving profit change. If decrease size; the value you replace is updated
+        if ix_pntr != 0:#sell iter's thru backward so if later see an identical value; don't want to replace it
+                return current_indxs[1:ix_pntr] + [potential_ix] + current_indxs[ix_pntr:], rates[potential_ix] - rates[current_indxs[0]]
+        else:#no changes made
+            return current_indxs, 0
+
+
+
+
+def intermitant2(rates, hr_capacity = 4, cycles_per_day = 1, into_blocks = False, use_add = True, for_testing = False):#what does use add do?
+    "returns dicts of profit, buy locs, sell locs[locs are absolute] with buying at best hr_capacity buys,\
+    then selling at best hr_cap sells. All sells occur after all buys. Assumes always completely, charge, discharge each day"
+    assert(hr_capacity*2 <= 24)
+    if not isinstance(rates, np.ndarray):
+        rates = np.array(rates)
+    if into_blocks:#calculates assuming can only charge in continious hours
+        return intermitant2(rates=block(rates, hr_capacity), hr_capacity = 1, cycles_per_day = 1, into_blocks = False, for_testing = for_testing )
+    
+    if len(rates)%24 <= 2*hr_capacity and len(rates)%24 != 0:#need to be able to completely buy, sell on last day
+        print("Droping the last day's hours to make times equal")
+        rates = rates[:-len(rates)%24]
+
+    num_days = int(math.ceil(len(rates)/24))
+    buy_locs = {i:[] for i in range(num_days)}
+    sell_locs = {i:[] for i in range(num_days)}
+    profits = {i:[] for i in range(num_days)}
+    
+    buy_profit = [0]*(25-2*hr_capacity)#will be negative for buying; positve for selling
+    sell_profit = [0]*(25-2*hr_capacity)
+    buy_ix = [[0]*hr_capacity]*(25-2*hr_capacity)#list of lists; each sublist is of best places to buy up to that point(indexs for rates)
+    sell_ix = [[0]*hr_capacity]*(25-2*hr_capacity)#sublist is hour withen TOTAL PERIOD
+
+    #should treat first as special too
+
+    for i in range(num_days):#2, num_days-1):
+        #lengths are 24 - hr_capacity + 1 as start at 0 is w/ hr_capacity joined together, have 24-hr_cap other options "in front"
+        #list buy_ix[i] is list of indicies for the smallest values in list thus seen, sorted with largest value in 0th position
+        loc_in_buy_ix = 0
+        buy_ix[loc_in_buy_ix] = [ix for _, ix in sorted(zip(rates[i*24:i*24+hr_capacity], range(i*24,i*24+hr_capacity)), reverse = True)]
+        buy_profit[loc_in_buy_ix] = -1*sum(rates[i*24:i*24+hr_capacity])
+        buy_alternates = [0]*(25-2*hr_capacity)#have to stop selling with room for 
+        
+        #swap firs value in list; smallest value in 0th position
+        #don't reverse the range as need to pair with the locations of vals in rates   
+        loc_in_sell_ix = 24-2*hr_capacity
+        sell_ix[loc_in_sell_ix] = [ix for _, ix in sorted(zip(rates[(i+1)*24-hr_capacity:(i+1)*24], range((i+1)*24-hr_capacity,(i+1)*24)), reverse = False)]
+        sell_profit[loc_in_sell_ix] = sum(rates[(i+1)*24-hr_capacity:(i+1)*24])
+        sell_alternates = [0]*(25-2*hr_capacity)
+        
+        for j in range(i*24+hr_capacity, 24*i+24-hr_capacity):#calc indexes of buying from possible option to last before would just be selling hour of night
+#            print("Buying rates: ", rates[buy_ix[loc_in_buy_ix]], ". ix: ", buy_ix[loc_in_buy_ix], "cost", buy_profit[loc_in_buy_ix])
+            buy_ix[loc_in_buy_ix+1], profit_change, alt = insert_sort(rates, buy_ix[loc_in_buy_ix], j, hr_capacity, buying = True)
+            buy_profit[loc_in_buy_ix+1] = buy_profit[loc_in_buy_ix] - profit_change#profit_change negative; less outlay for buying power
+            buy_alternates[loc_in_buy_ix] = alt
+            loc_in_buy_ix += 1
+
+        for j in range(24*i+23-hr_capacity, i*24+hr_capacity-1, -1):#calc indexes of selling; end of night to first hr_cap where just buying
+#            print("Selling rates: ", rates[sell_ix[loc_in_sell_ix]], ". ix: ", sell_ix[loc_in_sell_ix], "sold", sell_profit[loc_in_sell_ix])
+            sell_ix[loc_in_sell_ix-1], profit_change, alt = insert_sort(rates, sell_ix[loc_in_sell_ix], j, hr_capacity, buying = False)
+            sell_profit[loc_in_sell_ix-1] = sell_profit[loc_in_sell_ix] + profit_change#profit_change pos; sell for more
+            sell_alternates[loc_in_sell_ix] = alt
+            loc_in_sell_ix -= 1
+
+        #issue: buying locations are indexed from 0; so if last rate is at 6th loc then that's index 2
+
+        #get best buy/sell locations
+        #SELL PROFITS are REVERSED! 
+        #give them 'room' to buy; sell. needs hr_cap left in day to unwind; hr_cap in start to buy
+        
+        #buying price always decreases/constant, selling increases/ as go towards indx 0
+        prft = [i+j for i,j in zip(buy_profit, sell_profit)]
+        profits[i] = max(prft)
+        indx = prft.index(profits[i])
+        buy_locs[i] = buy_ix[indx]
+        sell_locs[i] = sell_ix[indx]
+        
+    return buy_locs, sell_locs, profits
+
+            
+def locs_to_01(buy_locs, sell_locs, hr_capacity):
+    if isinstance(buy_locs, dict):
+        out = [0]*24*len(buy_locs.keys())
+        b_ix = [i for j in buy_locs.values() for i in j]
+        s_ix = [i for j in sell_locs.values() for i in j]
+        rm_val =[i for i in b_ix if i in s_ix]
+        for dup in rm_val:
+            del b_ix[b_ix.index(dup)]
+            del s_ix[s_ix.index(dup)]
+        list(map(out.__setitem__, b_ix + s_ix,
+                           iter([1 for _ in range(len(b_ix))] + [-1 for _ in range(len(s_ix))])))     
+    else:
+        print("Got a single list, Assuming it's just for a single day")
+        out = [0]*24
+        list(map(out.__setitem__, [j%24 for j in buy_locs] + [j%24 for j in sell_locs],\
+                           iter([1 for _ in range(len(buy_locs))] \
+                                 + [-1 for _ in range(len(sell_locs))])))#list is just so map evals     
+    return out

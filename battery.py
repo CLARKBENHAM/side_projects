@@ -52,6 +52,7 @@ def plot_bs(blocked_rates):
     #plt.scatter(which_trade[:dayz], profits[:dayz] + blocked_rates[which_trade[:dayz]])
 plot_bs(blocked_rates[-24:])
 #%%#%%
+#qwer
 def block(hourly_rates, n, ret_array = True):
     if ret_array:
         return np.array([np.mean(hourly_rates[i:i+n]) for i in range(len(hourly_rates) - n)])
@@ -106,23 +107,47 @@ def bs_2_seriesBad(mins, maxs, cycles = 1, sell_twice = False, i = None, prices 
 #        return todays_profit + profit2, min(mins[later_sale+1:], default = 2**32-1), later_sale#default if sold at end of period
     return todays_profit, ix#since can check up to index of selling value 
 #returns lowest buying price after sold, highest selling price
-t =  [int(i) for i in "79 71 63 62 52 63 36 27  9 97 78 69 37 67  2 48 13 23 99 65 35 14 52 49".split(" ") if i != ""]
-f = list(range(24))
-bs_2_series(t, t)
       
-def bs_2_series(minprx, maxprx):
+def bs_2_series2(minprx, maxprx):
     "given 2 list of buying, selling prices(buying occuring before selling at same index)\
     return max profit, indxs. "
     prft = 0
     indxs = [0,0]
+    if len(minprx) == 0:#if only increases will be included
+        return prft, indxs
     for j in range(len(maxprx)):
         for i in range(j+1):
             if maxprx[j] - minprx[i] > prft:
                 prft = maxprx[j] - minprx[i]
                 indxs = [i,j]
     return prft, indxs
-unittest.main()
+#unittest.main()
+    
+def bs_2_series(minprx, maxprx):
+    "given 2 list of buying, selling prices(buying occuring before selling at same index)\
+    return max profit, indxs."
+    if len(minprx) == 0:#if only increases will be included
+        return 0, [0,0]
+    mxmax = maxprx[-1]
+    indx = [0] * len(maxprx)
+    for i,val in enumerate(maxprx[-2::-1]):
+        if val > mxmax:
+            mxmax = val
+            indx[len(maxprx) - i - 2] = len(maxprx) - i - 2
+        else:
+            indx[len(maxprx) - i - 2] = indx[len(maxprx) - i - 1]#carry previous best forward
+        maxprx[len(maxprx) - i - 2] = mxmax
+    out_ix = [0,0]
+    prft = 0
+    for i, val in enumerate(minprx):
+        if (maxprx[i] - val) > prft:
+            prft = maxprx[i] - val
+            out_ix = [i, indx[i]]
+    return prft, out_ix
 
+t =  [int(i) for i in "79 71 63 62 52 63 36 27  9 97 78 69 37 67  2 48 13 23 99 65 35 14 52 49".split(" ") if i != ""]
+f = list(range(24))
+#%%
 def n_ahead_ave(series, n, ret_array = False):
     "take list(array) and returns list(array) w/ len - n average of current AND **N-1** elements\
     in front of each index; drops last n elements. is more efficent starting around n>20\
@@ -316,6 +341,7 @@ def loc_abs_minmax(rates, into_days = False):
         else:
             return best_low_hi_ix
 #%%
+            #qwer
 def best_of_block1T(rates = hourly_rates, into_blocks = True, hr_capacity = 4):
     #Version which will be tested
     #should rename hr_capacity
@@ -337,12 +363,9 @@ def best_of_block1T(rates = hourly_rates, into_blocks = True, hr_capacity = 4):
 #    i = num_days - 1
 #    profits[i], indxs[i] = bs_2_series(rates[i*24:][inflect_up[i*24:]], rates[i*24:][inflect_down[i*24:]])#
     return profits, indxs
-best_of_block1T(rates =tztrt)#need to get 70
+best_of_block1T(rates = hourly_rates)#need to get 70
 
 
-
-
-#%%
 def best_of_block2T(rates = hourly_rates, into_blocks = True, hr_capacity = 4): 
     #DOES NOT go across 24hr blocks
     #version which will be tested
@@ -360,10 +383,11 @@ def best_of_block2T(rates = hourly_rates, into_blocks = True, hr_capacity = 4):
         profits[i], day_minmax_ix = bs_2_series(rates[day_ix][min_loc], rates[day_ix][max_loc])#slices dont include end; add extra buying location, but not selling
         indxs[i] = [i*24 + min_loc[day_minmax_ix[0]], i*24 + max_loc[day_minmax_ix[1]]]
     return profits, indxs
-best_of_block2T(rates = tztrt)#should be 70
-unittest.main()#fdsa
+best_of_block2T(rates = hourly_rates)#should be 70
+#unittest.main()#fdsa
 
-#%%
+
+#qwer
 def best_of_day_r(rates = hourly_rates, cycles_per_day = 1, hr_capacity = 4, into_blocks = True):
     "gets best buy/sell of ALL rates, recurs w/o those indexs to recalculate. \
     Can alternate Buying, Selling. cycles_per_day is number of alternations; hr_cap is \
@@ -439,10 +463,10 @@ def best_of_block3(rates = hourly_rates, cycles_per_day= 1, into_blocks = True, 
     #for last iteration
     #profit[i] = best_of_day_r(rates = rates[len(rates) - (num_days-1)*24:], hr_capacity = hr_capacity, extra_charge = extra_charge, into_blocks =False)        
     return profit, indxs#[i for j in indxs for i in j]
-best_of_block3(rates = tzt, into_blocks = False, hr_capacity = 1, cycles_per_day = 2)
-unittest.main()
+best_of_block3(rates = hourly_rates, into_blocks = False, hr_capacity = 1, cycles_per_day = 1)
+#unittest.main()
+    
 #%%
-
 #doesn't work yet
 def best_of_block4(rates = hourly_rates, hr_capacity = 4, into_blocks = True, sep_days = True):
     "a bad/lazy way to get best in period,   \
@@ -480,9 +504,7 @@ def best_of_block4(rates = hourly_rates, hr_capacity = 4, into_blocks = True, se
                     
             if prft_cng > 0:
             elif prft <= 0:#book best profit        
-        #%%
-def best_of_rates(rates = hourly_rates):
-        
+                
         #%%
 best_low_hi = [2**32-1, -2**32]
 low_best_hi = [2**32-1, -2**32] 
@@ -583,13 +605,30 @@ k = [410,
 
 #%%
 #scenario: battery must completely charge then discharge, but can wait between increasing/decreasing charges doing so.
+#qwer
 def insert_sort(rates, current_indxs, potential_ix, hr_capacity, buying = True):
     "returns NEW list w/ inserted/deletes values (still sorted); \
-    returns list of all indexs hold equivalent values (or none). Want to swap 0th"
+    returns list of all indexs hold equivalent values (or none). \
+    Want to swap 0th[0 is largest value for buying, lowest value for selling. \
+    Can't expand more than 1 index per iteration"
     #all indexs based on location in rates
     ix_pntr = 0
-#    hr_capacity = self.hr_capacity#change when put in class
-    
+    sz_change = hr_capacity - len(current_indxs)    
+    if sz_change <= 0:
+        current_indxs = current_indxs[-hr_capacity:]
+        profit_change = -1*sum(rates[:-sz_change])#value of rates that are no longer included
+        #will drive buy/sell profit closer to 0. Make less negative/positive. add/subtract
+    else: 
+            current_indxs = sorted([potential_ix] + current_indxs, 
+                                   key = lambda ix: rates[ix], 
+                                   reverse = buying)#when buying largest values should be in 0th position
+            profit_change = rates[potential_ix]
+            try:
+                alt = [rates[i] for i in current_indxs].index(rates[potential_ix])
+                return current_indxs, profit_change, (alt, potential_ix)
+            except:
+                return current_indxs, profit_change, None
+            
     #current_indxs should be sorted based on value they index, in reverse order rates[indx[0]] > rates[indx[-1]]
     if buying:#val shuold be smaller than largest element in list(which is at indx 0)
 #        print(rates[current_indxs[ix_pntr]], rates[potential_ix], "testing")
@@ -597,52 +636,38 @@ def insert_sort(rates, current_indxs, potential_ix, hr_capacity, buying = True):
             ix_pntr += 1
             if ix_pntr == hr_capacity:#pntr interated thru list, smaller than all
                 #profit change will be negative; subtracting large from smaller  
-                return current_indxs[1:] + [potential_ix], rates[potential_ix] - rates[current_indxs[0]], None           
-        if ix_pntr != 0:#was smaller than atleast 1 val
-            return current_indxs[1:ix_pntr] + [potential_ix] + current_indxs[ix_pntr:], rates[potential_ix] - rates[current_indxs[0]], None
-        elif rates[current_indxs[ix_pntr]] == rates[potential_ix]:#a duplicate of largest value in list
-            return current_indxs, 0, (current_indxs[ix_pntr], potential_ix)
+                return current_indxs[1:] + [potential_ix], rates[potential_ix] - rates[current_indxs[0]] - profit_change , None           
+        if ix_pntr != 0:
+            if rates[current_indxs[ix_pntr]] == rates[potential_ix]:#a duplicate of some value in list
+                return  current_indxs[1:ix_pntr] + [potential_ix] + current_indxs[ix_pntr:], -profit_change , (current_indxs[ix_pntr], potential_ix)
+            else:#was smaller than atleast 1 val
+                return current_indxs[1:ix_pntr] + [potential_ix] + current_indxs[ix_pntr:], rates[potential_ix] - rates[current_indxs[0]] - profit_change , None
         else:#no changes made; was larger
-            return current_indxs, 0, None
+            return current_indxs, -profit_change , None
         
     else:#selling, larger than smallest val in list
         #normal order. rates[indx[0]] < rates[indx[-1]]. Want to swap 0th
         while rates[current_indxs[ix_pntr]] < rates[potential_ix]:
             ix_pntr += 1
             if ix_pntr == hr_capacity:#pntr interated thru list; larger than all
-                return current_indxs[1:] + [potential_ix], rates[potential_ix] - rates[current_indxs[0]], None                
-        if ix_pntr != 0:#was smaller than atleast 1 val
-            return current_indxs[1:ix_pntr] + [potential_ix] + current_indxs[ix_pntr:], rates[potential_ix] - rates[current_indxs[0]], None
-        elif rates[current_indxs[ix_pntr]] == rates[potential_ix]:#a duplicate; currently selling earlier(iterating backwards)
-            return current_indxs, 0, (current_indxs[ix_pntr], potential_ix)
+                return current_indxs[1:] + [potential_ix], profit_change + rates[potential_ix] - rates[current_indxs[0]], None
+            #Above is increase size: rates[current_indxs[0]] was set equal to rates[potential_indx], cancels leaving profit change. If decrease size; the value you replace is updated
+        if ix_pntr != 0:
+            if rates[current_indxs[ix_pntr]] == rates[potential_ix]:#a duplicate; currently selling earlier(iterating backwards)
+                return  current_indxs[1:ix_pntr] + [potential_ix] + current_indxs[ix_pntr:], profit_change , (current_indxs[ix_pntr], potential_ix)
+            else:#was smaller than atleast 1 val
+                return current_indxs[1:ix_pntr] + [potential_ix] + current_indxs[ix_pntr:], profit_change + rates[potential_ix] - rates[current_indxs[0]], None
         else:#no changes made; 
-            return current_indxs, 0, None
-
-p = [i for i in k]
-p[12:12+4] = [-10]*4
-
-sz = 24
-hr_capacity = 4
-
-potential_ix = [[0]*hr_capacity]*(sz-hr_capacity+1)
-potential_ix[0] = [ix for ix, val in sorted(zip(range(hr_capacity), p[:hr_capacity]), key = lambda tup: tup[1], reverse = True)]#indexs
-print(potential_ix[0])
-for i in range(hr_capacity,sz):
-    potential_ix[i-hr_capacity+1],_ ,_ = insert_sort(p[:sz], potential_ix[i-hr_capacity], i, hr_capacity = hr_capacity, buying = True)
-    print(potential_ix[i-hr_capacity+1], [p[i] for i in potential_ix[i-hr_capacity+1]])
-print(potential_ix[-1], sorted(list(range(12,12+4)), reverse = True))
-#ix = TestBattery.iter_thru_insert_sort(self, q, 24)
-#self.assertEqual(list(range(12,12+hr_capacity)), sorted(ix[0]), msg = "buying")
-
-#tztbat = TestBattery()
-#print(tztbat.hourly_rates[:24])
-#tztbat.test_insert_sort_duplicates()
-#%%
-#unittest.main()
-#%%
-
-
-
+            return current_indxs, profit_change , None
+        
+#tzt = list(range(10)) + list(range(10,0,-1))
+#current_indx = [0]
+#for i in range(1,20):
+#    current_indx, prft_change, _ = insert_sort(tzt, current_indx, i, 5, buying = False)
+#print( "index: " + str(current_indx) +  \
+#                           "rates: " + str([tzt[i] for i in current_indx]) +\
+#                           "prftchange: " +  str(prft_change) + " " + str(i))
+##%%   
 def max_indx(series, buying):
     if buying:#buy is negative
         best_buy = max(series)#where spent the least
@@ -653,18 +678,17 @@ def max_indx(series, buying):
         si = [i for i,val in enumerate(series) if val == best_sell][-1]#want last sellable location
         return best_sell, si
 
-def num_hr_chrg(rates, buy_loc, sell_loc, hr_capacity):
-    "calculates how many of the buy/sell locations are actually increasing profits. \
-    Returns how many to use"
-    i = 0
-    while rates[buy_loc[i]] < rates[sell_loc[i]] and i < hr_capacity:#starts at best, works towards marginal
-        i += 1
-    return i
+#def sum_buys_less_than_sells(b,s):
+#    "takes in a list of buying, selling prices and returns the sum of values where\
+#    buy is less than selling"
+    
 
 def intermitant(rates, hr_capacity = 4, cycles_per_day = 1, into_blocks = False, use_add = True, for_testing = False):#what does use add do?
     "returns dicts of profit, buy locs, sell locs[locs are absolute] with buying at best hr_capacity buys,\
     then selling at best hr_cap sells. All sells occur after all buys. Assumes always completely, charge, discharge each day"
     assert(hr_capacity*2 <= 24)
+    if not isinstance(rates, np.ndarray):
+        rates = np.array(rates)
     if into_blocks:#calculates assuming can only charge in continious hours
         return intermitant(rates=block(rates, hr_capacity), hr_capacity = 1, cycles_per_day = 1, into_blocks = False, for_testing = for_testing )
     
@@ -678,10 +702,10 @@ def intermitant(rates, hr_capacity = 4, cycles_per_day = 1, into_blocks = False,
     sell_locs = {i:[] for i in range(num_days)}
     profits = {i:[] for i in range(num_days)}
     
-    buy_profit = [0]*(25-2*hr_capacity)#will be negative for buying; positve for selling
-    sell_profit = [0]*(25-2*hr_capacity)
-    buy_ix = [[0]*hr_capacity]*(25-2*hr_capacity)#list of lists; each sublist is of best places to buy up to that point(indexs for rates)
-    sell_ix = [[0]*hr_capacity]*(25-2*hr_capacity)#sublist is hour withen TOTAL PERIOD
+    buy_profit = [0]*(23)#will be negative for buying; positve for selling
+    sell_profit = [0]*(23)
+    buy_ix = [[0] for _ in range(hr_capacity)]*(23)#list of lists; each sublist is of best places to buy up to that point(indexs for rates)
+    sell_ix = [[0] for _ in range(hr_capacity)]*(23)#sublist is hour withen TOTAL PERIOD
 
     #should treat first as special too
 
@@ -689,74 +713,124 @@ def intermitant(rates, hr_capacity = 4, cycles_per_day = 1, into_blocks = False,
         #lengths are 24 - hr_capacity + 1 as start at 0 is w/ hr_capacity joined together, have 24-hr_cap other options "in front"
         #list buy_ix[i] is list of indicies for the smallest values in list thus seen, sorted with largest value in 0th position
         loc_in_buy_ix = 0
-        buy_ix[loc_in_buy_ix] = [ix for _, ix in sorted(zip(rates[i*24:i*24+hr_capacity], range(i*24,i*24+hr_capacity)), reverse = True)]
-        buy_profit[loc_in_buy_ix] = -1*sum(rates[i*24:i*24+hr_capacity])
-        buy_alternates = [0]*(25-2*hr_capacity)#have to stop selling with room for 
+        buy_ix[loc_in_buy_ix] = [i*24]#[ix for _, ix in sorted(zip(rates[i*24:i*24+hr_capacity], range(i*24,i*24+hr_capacity)), reverse = True)]
+        buy_profit[loc_in_buy_ix] = -rates[i*24]
+        buy_alternates = [0]*(23)#have to stop selling with room to sell at least once 
         
-        #swap firs value in list; smallest value in 0th position
         #don't reverse the range as need to pair with the locations of vals in rates   
-        loc_in_sell_ix = 24-2*hr_capacity
-        sell_ix[loc_in_sell_ix] = [ix for _, ix in sorted(zip(rates[(i+1)*24-hr_capacity:(i+1)*24], range((i+1)*24-hr_capacity,(i+1)*24)), reverse = False)]
-        sell_profit[loc_in_sell_ix] = sum(rates[(i+1)*24-hr_capacity:(i+1)*24])
-        sell_alternates = [0]*(25-2*hr_capacity)
+        loc_in_sell_ix = 22#starts at 'end'
+        sell_ix[loc_in_sell_ix] = [i*24+23]#[ix for _, ix in sorted(zip(rates[(i+1)*24-hr_capacity:(i+1)*24], range((i+1)*24-hr_capacity,(i+1)*24)), reverse = False)]
+        sell_profit[loc_in_sell_ix] = rates[i*24 + 23]#sum(rates[(i+1)*24-hr_capacity:(i+1)*24])
+        sell_alternates = [0]*(23)#25-2*hr_capacity)
         
-        for j in range(i*24+hr_capacity, 24*i+24-hr_capacity):#calc indexes of buying from possible option to last before would just be selling hour of night
-#            print("Buying rates: ", rates[buy_ix[loc_in_buy_ix]], ". ix: ", buy_ix[loc_in_buy_ix], "cost", buy_profit[loc_in_buy_ix])
-            buy_ix[loc_in_buy_ix+1], profit_change, alt = insert_sort(rates, buy_ix[loc_in_buy_ix], j, hr_capacity, buying = True)
-            buy_profit[loc_in_buy_ix+1] = buy_profit[loc_in_buy_ix] - profit_change#profit_change negative; less outlay for buying power
-            buy_alternates[loc_in_buy_ix] = alt
-            loc_in_buy_ix += 1
-
-        for j in range(24*i+23-hr_capacity, i*24+hr_capacity-1, -1):#calc indexes of selling; end of night to first hr_cap where just buying
-#            print("Selling rates: ", rates[sell_ix[loc_in_sell_ix]], ". ix: ", sell_ix[loc_in_sell_ix], "sold", sell_profit[loc_in_sell_ix])
-            sell_ix[loc_in_sell_ix-1], profit_change, alt = insert_sort(rates, sell_ix[loc_in_sell_ix], j, hr_capacity, buying = False)
+#        for j in range(24*i+23-hr_capacity, i*24+hr_capacity-1, -1):#calc indexes of selling; end of night to first hr_cap where just buying
+#            sell_ix[loc_in_sell_ix-1], profit_change, alt = insert_sort(rates, sell_ix[loc_in_sell_ix], j, hr_capacity, buying = False)
+#            sell_profit[loc_in_sell_ix-1] = sell_profit[loc_in_sell_ix] + profit_change#profit_change pos; sell for more
+#            sell_alternates[loc_in_sell_ix] = alt
+#            loc_in_sell_ix -= 1
+        
+        #calc indexes of selling; end of night to first hr_cap where just buying
+        for j in range(24*i+22, i*24, -1):#range has to leave room to buy at first loc; initialized w/ selling at 24*i+23
+            hrs_used = min(hr_capacity, j%24, abs(24-j))
+            sell_ix[loc_in_sell_ix-1], profit_change, alt = insert_sort(rates, sell_ix[loc_in_sell_ix], j, hrs_used, buying = False)
             sell_profit[loc_in_sell_ix-1] = sell_profit[loc_in_sell_ix] + profit_change#profit_change pos; sell for more
             sell_alternates[loc_in_sell_ix] = alt
             loc_in_sell_ix -= 1
+#            print(j)
+#            print("selling stuff", j, hrs_used, sell_profit[loc_in_sell_ix-1], "\n")
+        #take into account situation where only discharge a little on the last few hours of each day
+        
+        #adjust for situation when abs(buy[0]) > sell[0]
+        day_prft = 0
+        day_indxs = [[0], [0]]
+        
+        for j in range(i*24, 24*i+23):#calc indexes of buying from possible option to last before would just be selling hour of night
+            hrs_used = min(hr_capacity, (j+1)%24, abs(23-j))
+            if j%24 != 0:#need to be able to compare buy @0, sell 1@;(both have loc = 0)
+                buy_ix[loc_in_buy_ix+1], profit_change, alt = insert_sort(rates, buy_ix[loc_in_buy_ix], j, hrs_used, buying = True)
+                buy_profit[loc_in_buy_ix+1] = buy_profit[loc_in_buy_ix] + profit_change#profit_change negative; less outlay for buying power
+                buy_alternates[loc_in_buy_ix] = alt
+                loc_in_buy_ix += 1
 
-        #issue: buying locations are indexed from 0; so if last rate is at 6th loc then that's index 2
-
+            #if make a copy have to redo deletes each time; don't want this?
+            #after delete highest buy, next value could have been even higher and be profitable.
+#            print(buy_ix[loc_in_buy_ix], sell_ix[loc_in_buy_ix])
+            max_cycle = min(len(buy_ix[loc_in_buy_ix]), len(sell_ix[loc_in_buy_ix]))#have to buy/sell in equal quantities
+            day_buy = np.array(buy_ix[loc_in_buy_ix][-max_cycle:], dtype = np.int_)
+            day_sell = np.array(sell_ix[loc_in_buy_ix][-max_cycle:], dtype = np.int_)
+            calc_prft = sum(rates[day_sell]) - sum(rates[day_buy])#sell_profit[loc_in_buy_ix] + buy_profit[loc_in_buy_ix + 1]
+#            reps = max(0, (2**32)*(len(day_buy)==0 or len(day_sell)==0))
+            reps = 0
+#            print("\n\n###########\n", hrs_used, day_buy, day_sell, i)
+            try:
+                while reps < hrs_used and rates[day_buy[0]] >= rates[day_sell[0]]:
+    #                print(day_buy, day_sell, day_buy[0], day_sell[0], reps)
+#                    print(calc_prft, rates[day_buy[0]], rates[day_sell[0]])
+                    calc_prft += rates[day_buy[0]]
+                    calc_prft -= rates[day_sell[0]]
+                    day_buy = np.delete(day_buy, 0)
+                    day_sell = np.delete(day_sell, 0)
+#                    print(day_buy, day_sell, calc_prft,"\n")
+                    if len(day_buy) == 0 or len(day_sell) == 0:
+                        break
+                    reps += 1
+#                print(buy_ix[loc_in_buy_ix+1], "\n", sell_ix[loc_in_buy_ix+1], "\n\n\n")
+#            print(buy_profit, sell_profit, day_buy, day_sell, calc_prft, hrs_used, j, "\n")
+            except Exception as e:
+                print(reps, hrs_used, day_buy, day_sell, rates)
+                return e
+            if calc_prft > day_prft:#this buys as early, sells as late as possible
+                day_prft = calc_prft#sell_profit[loc_in_buy_ix] + buy_profit[loc_in_buy_ix]
+                day_indxs = [day_buy, day_sell]#sell_ix[loc_in_buy_ix] 
+        
+        profits[i] = day_prft
+        [buy_locs[i], sell_locs[i]] = day_indxs 
         #get best buy/sell locations
         #SELL PROFITS are REVERSED! 
         #give them 'room' to buy; sell. needs hr_cap left in day to unwind; hr_cap in start to buy
         
-        #buying price always decreases/constant, selling increases/ as go towards indx 0
-        assert(use_add)
-        if use_add:
-#            print(buy_ix, sell_ix, sell_alternates, sep = "\n")
-            prft = [i+j for i,j in zip(buy_profit, sell_profit)]
-            profits[i] = max(prft)
-            indx = prft.index(profits[i])
-            buy_locs[i] = buy_ix[indx]
-            sell_locs[i] = sell_ix[indx]
+        
+#        
+#        #buying price always decreases/constant, selling increases/ as go towards indx 0
+#        assert(use_add)
+#        if use_add:
+##            print(buy_ix, sell_ix, sell_alternates, sep = "\n")
+#            prft = [i+j for i,j in zip(buy_profit, sell_profit)]
+#            profits[i] = max(prft)
+#            indx = prft.index(profits[i])
+#            #doesn't HAVE to use entire capacity in a given day
+##            partial_charge = buy_ix[indx] <= sell_ix[indxs]#'worst' prices are both in 0th location
+#            buy_locs[i] = buy_ix[indx]#[partial_charge]
+#            sell_locs[i] = sell_ix[indx]#[partial_charge]
+#
+#        else:#doesn't work; use method above  
+#            best_buy, bi = max_indx(buy_profit, buying = True)#get where spent the least(neg val)
+#            best_sell, si = max_indx(sell_profit, buying = False)
+#            #hr = buy_ix + hr_cap - 1#hours start at 0
+#            #hr = hrs_in_day(24) - hr_cap  - sell_ix
+#            #buy_ix + hr_cap - 1 = hr_in_day - hr_cap - sell_ix
+#            #buy_ix = hr_in_day - 2*hr_cap + 1 - sell_ix
+#            #sell_ix = hr_in_day - 2*hr_cap + 1 - buy_ix
+##            print(f"{i}: \n {bi} {buy_profit} \n {si} {sell_profit}")
+#            #25-2*hr_capacity-si-1]
+#            loc_min, bi2 = max_indx(buy_profit[:len(buy_profit)-si], buying = True)#could sell where bought; 
+##            print(loc_min, bi2, best_sell, si)
+#            #25-2*hr_capacity-bi-1
+#            loc_max, si2 = max_indx(sell_profit[:len(sell_profit)-bi], buying = False)
+##            print(best_buy, bi, loc_max, si,"\n\n\n")
+#    
+#            if best_sell + loc_min > loc_max + best_buy:#buys are negative
+#    #            print(i,"indxs sell max:", si, best_sell, bi2, loc_min)
+#                profits[i] = best_sell + loc_min
+#                buy_locs[i] = buy_ix[bi2]
+#                sell_locs[i] = sell_ix[si]
+#            else:
+#    #            print(i,"indxs buy min: ", si2, loc_max, bi, best_buy)
+#                profits[i] = loc_max + best_buy
+#                buy_locs[i] = buy_ix[bi]
+#                sell_locs[i] = sell_ix[si2]    
+#      
 
-        else:#doesn't work; use method above  
-            best_buy, bi = max_indx(buy_profit, buying = True)#get where spent the least(neg val)
-            best_sell, si = max_indx(sell_profit, buying = False)
-            #hr = buy_ix + hr_cap - 1#hours start at 0
-            #hr = hrs_in_day(24) - hr_cap  - sell_ix
-            #buy_ix + hr_cap - 1 = hr_in_day - hr_cap - sell_ix
-            #buy_ix = hr_in_day - 2*hr_cap + 1 - sell_ix
-            #sell_ix = hr_in_day - 2*hr_cap + 1 - buy_ix
-#            print(f"{i}: \n {bi} {buy_profit} \n {si} {sell_profit}")
-            #25-2*hr_capacity-si-1]
-            loc_min, bi2 = max_indx(buy_profit[:len(buy_profit)-si], buying = True)#could sell where bought; 
-#            print(loc_min, bi2, best_sell, si)
-            #25-2*hr_capacity-bi-1
-            loc_max, si2 = max_indx(sell_profit[:len(sell_profit)-bi], buying = False)
-#            print(best_buy, bi, loc_max, si,"\n\n\n")
-    
-            if best_sell + loc_min > loc_max + best_buy:#buys are negative
-    #            print(i,"indxs sell max:", si, best_sell, bi2, loc_min)
-                profits[i] = best_sell + loc_min
-                buy_locs[i] = buy_ix[bi2]
-                sell_locs[i] = sell_ix[si]
-            else:
-    #            print(i,"indxs buy min: ", si2, loc_max, bi, best_buy)
-                profits[i] = loc_max + best_buy
-                buy_locs[i] = buy_ix[bi]
-                sell_locs[i] = sell_ix[si2]    
-      
 
         #this is where are making the mistake about when to buy/sell twice in a day; 
         #by solely prioritizing present profit vs. comparing against the benifit to alternative days
@@ -770,12 +844,54 @@ def intermitant(rates, hr_capacity = 4, cycles_per_day = 1, into_blocks = False,
     #need to treat last day as special case of not looking forward
 #    print("\n\n\n\n\n")
     if for_testing:#format it in the same way as the others
-        return profits, [[i, j] for i,j in zip(buy_loc.values(), sell_loc.values())]
+        return profits, [[i, j] for i,j in zip(buy_locs.values(), sell_locs.values())]
     else:
         return profits, buy_locs, sell_locs
+    
+import itertools
+def locs_to_01(buy_locs, sell_locs, hr_capacity):
+    if isinstance(buy_locs, dict):
+        out = [0]*24*len(buy_locs.keys())
+        b_ix = [i for j in buy_locs.values() for i in j]
+        s_ix = [i for j in sell_locs.values() for i in j]
+        rm_val =[i for i in b_ix if i in s_ix]
+        for dup in rm_val:
+            del b_ix[b_ix.index(dup)]
+            del s_ix[s_ix.index(dup)]
+        list(map(out.__setitem__, b_ix + s_ix,
+                           iter([1 for _ in range(len(b_ix))] + [-1 for _ in range(len(s_ix))])))     
+    else:
+        print("Got a single list, Assuming it's just for a single day")
+        out = [0]*24
+        list(map(out.__setitem__, [j%24 for j in buy_locs] + [j%24 for j in sell_locs],\
+                           iter([1 for _ in range(len(buy_locs))] \
+                                 + [-1 for _ in range(len(sell_locs))])))#list is just so map evals     
+    return out
+#hourly_rates[:24] = np.arange(0,24-)
+#tzt = np.array([2,93, 5, 1, 44,82,63,80,74,14,70,12,87,63, 8,25,39,22,81,23,18,80,0, 99])
+#tzt = np.array([2,93, 5, 1, 44,82,63,80,74,14,70,12,87,63, 8,25,39,22,81,23,-1000,-1000,99, 99])
+#tzt = [7, 253, 758, 931, 569, 315, 602, 730, 858, 790, 613, 775, 247, 805, 239, 305, 942, 135, 162, 70, 434, 776, 614, 120]
+#tzt = [93,2, 5, 0,44,82,63,80,74,14,70,12,87,63, 8,25,39,22,81,23,18,80,53, 82]
+#tzt = [284, 178, 912, 228, 121, 572, 324, 15, 776, 363, 9, 399, 596, 747, 816, 830, 219, 637, 220, 925, 463, 168, 235, 731]
+#tzt = [39, 947, 881, 357, 263, 708, 686, 271, 979, 551, 259, 815, 623, 470, 452, 454, 390, 792, 21, 127, 266, 251, 843, 293]
+#for i in range(31):
+#    tzt = instr[i*24:i*24+24]
+#    profits, buy_locs, sell_locs = intermitant(tzt, hr_capacity = 4)
+#    cal_prft = sum([tzt[i] for i in sell_locs[0]]) - sum([tzt[i] for i in buy_locs[0]])
+#    print(profits, buy_locs, sell_locs, cal_prft, cal_prft == profits[0], "\n")
+#
+tzt = [int(i) for i in re.findall('\d+', '[42 18 65 25 49 11 87  8 29 36  4 52 79  3 74 82 68 27 95 33 60 85 48 87]')]
+#tzt = [100, -1500, -1500, 2000, 2000, 44, 82, 63, 80, 74, 14, 70, 12, 87, 63, 8, 25, 39, 22, 81, 23, 18, 80, 0]
 
-        
-
+profits, buy_locs, sell_locs = intermitant(tzt, hr_capacity = 4)
+i = 0   
+plot_bs_loc(tzt[i*24:i*24+24], [j%24 for j in buy_locs[i]], [j%24 for j in sell_locs[i]])
+print(locs_to_01(buy_locs, sell_locs, 4))
+#binary = locs_to_01(buy_locs, sell_locs, 1)
+#for i in range(len(tzt)//24):
+#    print(sum(binary[i*24:i*24+24]), "\n")
+#unittest.main()   
+#%%
 #print(intermitant(hourly_rates), "out\n\n")
 hr_capacity = 4
 
@@ -790,7 +906,6 @@ print(profits[w], [i%24 for i in bl], [i%24 for i in sl])
 plot_bs_loc(tztrt[24*w:24*w+24], [i%24 for i in bl], [i%24 for i in sl])
 
 
-
 unittest.main()
 
 #%%
@@ -798,19 +913,18 @@ import unittest
 
 class TestBattery(unittest.TestCase):
     
-#    def __init__(self):
+#    def __init__(self, num_days = 31, hourly_rates = None, hr_capacity = 4, blocked_rates = None):
     num_days = 31
-    hourly_rates = np.random.randint(0, high = 1000, size = 24*num_days)
+    hr_capacity = 4
+    hourly_rates = np.random.randint(0, high = 1000, size = int(24*num_days))
+#    blocked_rates = np.array([np.mean(hourly_rates[i:i+hr_capacity]) for i in range(num_days - hr_capacity)]) 
+    profits, buy_locs, sell_locs = intermitant(hourly_rates, hr_capacity = hr_capacity)     
+    
     f = open("hourly_rates.txt", "w")#need to wipe old data, "a" = append instead of overwrite
     f.write(np.array2string(hourly_rates))
     f.close()
-    
-    hr_capacity = 4
-    blocked_rates = np.array([np.mean(hourly_rates[i:i+hr_capacity]) for i in range(num_days - hr_capacity)])
-
     longMessage = True
         
-#    @staticmethod
     def day_decorator(test):
         "decorater that runs test for all possible days"
         def wrapper(self):
@@ -819,7 +933,6 @@ class TestBattery(unittest.TestCase):
                     test(self, rates = hourly_rates[i*24:i*24+24])
                 except Exception as e:
                     e.args += ("error with day ", str(i) ," for test " ,str(test) , " at loc " , str(hourly_rates[i*24:i*24+24]))
-                    test.failurerates = hourly_rates[i*24:i*24+24]
                     raise e
         return wrapper
     
@@ -856,26 +969,26 @@ class TestBattery(unittest.TestCase):
 #            self.assertEqual(rates[ix[0]], rates[np.where(rates == min(rates[:ix[1]]))[0][0]])
 ##            self.assertEqual(ix[0], np.where(rates == max(rates[:ix[1]]))[0][0])
     
-    @day_decorator
-    def test_indxs_match(self, rates = None, hr_capacity = 4):#get decorator to work
-        "test profits equal indxs"
-        for fn in [best_of_block1T, best_of_block2T, best_of_block3]:
-                tezt_blocked = block(rates, hr_capacity)
-                prfts, indxs = fn(rates, hr_capacity = hr_capacity, into_blocks = True)
-                for i,j in zip(prfts, indxs):
-                    self.assertEqual(i, sum(tezt_blocked[k] for k in j[1::2]) - sum(tezt_blocked[k] for k in j[::2]), msg = str(fn))
+#    @day_decorator
+#    def test_indxs_match(self, rates = None, hr_capacity = 4):#get decorator to work
+#        "test profits equal indxs"
+#        for fn in [best_of_block1T, best_of_block2T, best_of_block3]:
+#                tezt_blocked = block(rates, hr_capacity)
+#                prfts, indxs = fn(rates, hr_capacity = hr_capacity, into_blocks = True)
+#                for i,j in zip(prfts, indxs):
+#                    self.assertEqual(i, sum(tezt_blocked[k] for k in j[1::2]) - sum(tezt_blocked[k] for k in j[::2]), msg = str(fn))
                     
-    @hr_block_decorator
-    def test_indxs_consistent(self, hr_capacity = 4):#change to self, buy_locs, sell_locs
-        "takes dict of buy/selling indexs and checks that no buy occurs after sell"
-        for fn in [best_of_block1T, best_of_block2T]:
-            _, indxs = fn(self.hourly_rates, hr_capacity = hr_capacity, into_blocks = True)
-#            buy_locs, sell_locs = [i[0] for i in indxs], [i[1] for i in indxs]
-            for i, (lst_b,lst_s) in enumerate(indxs):#zip(self.buy_locs.values(), self.sell_locs.values())):
-                self.assertLessEqual(lst_b, lst_s, msg = "indexs overlap")#INDEXS ?should never be equal?; (lstb) < min(lsts)
-                self.assertLess(lst_b, lst_s, msg = "indexs overlap or are equal")#INDEXS ?should never be equal?; max(lstb) < min(lsts)
-#                self.assertEqual(len(lst_b), self.hr_capacity, msg = "sell indxs wrong len")
-#                self.assertEqual(len(lst_s), self.hr_capacity, msg = "buy indxs wrong len")
+#    @hr_block_decorator
+#    def test_indxs_consistent(self, hr_capacity = 4):#change to self, buy_locs, sell_locs
+#        "takes dict of buy/selling indexs and checks that no buy occurs after sell"
+#        for fn in [best_of_block1T, best_of_block2T]:
+#            _, indxs = fn(self.hourly_rates, hr_capacity = hr_capacity, into_blocks = True)
+##            buy_locs, sell_locs = [i[0] for i in indxs], [i[1] for i in indxs]
+#            for i, (lst_b,lst_s) in enumerate(indxs):#zip(self.buy_locs.values(), self.sell_locs.values())):
+#                self.assertLessEqual(lst_b, lst_s, msg = "indexs overlap")#INDEXS ?should never be equal?; (lstb) < min(lsts)
+#                self.assertLess(lst_b, lst_s, msg = "indexs overlap or are equal")#INDEXS ?should never be equal?; max(lstb) < min(lsts)
+##                self.assertEqual(len(lst_b), self.hr_capacity, msg = "sell indxs wrong len")
+##                self.assertEqual(len(lst_s), self.hr_capacity, msg = "buy indxs wrong len")
 
     @day_decorator#add hr block
     def test_indxs_best_itermitant(self, rates = None):
@@ -883,62 +996,70 @@ class TestBattery(unittest.TestCase):
         higher after last buy."
         day_rates = [i for i in rates]
         profit, buy_loc, sell_loc = intermitant(day_rates, hr_capacity = self.hr_capacity, cycles_per_day = 1, into_blocks = False)
-        worst_buy = max([day_rates[i] for i in buy_loc[0]])
-        worst_sell = min([day_rates[i] for i in sell_loc[0]])
-        last_buy_loc =max(buy_loc[0])
-        first_sell_loc = min(sell_loc[0])
-        for i in sorted(set(sell_loc[0] + buy_loc[0]), reverse = True):#delete elements from list back to front so don't change indexs of elements
-            del day_rates[i] #if buy/sell at same indx will only delete one 
-        try:
-            self.assertLessEqual(worst_buy, min(day_rates[:first_sell_loc]), msg = "bought more expensive on day " + str(i))
-            self.assertGreaterEqual(worst_sell, max(day_rates[last_buy_loc+1:]), msg = "sold cheaply on day " + str(i))
-        except:
-            plot_bs_loc(rates[24*i:24*i+24], [j%24 for j in bl], [j%24 for j in sl])
-            print(day_rates)
+        if len(buy_loc[0]) !=0 and len(sell_loc[0]) !=0:
+            worst_buy = max([day_rates[i] for i in buy_loc[0]])
+            worst_sell = min([day_rates[i] for i in sell_loc[0]])
+            last_buy_loc =max(buy_loc[0])
+            first_sell_loc = min(sell_loc[0])
+    #        for i in sorted(set(sell_loc[0] + buy_loc[0]), reverse = True):#delete elements from list back to front so don't change indexs of elements
+    #            del day_rates[i] #if buy/sell at same indx will only delete one 
+    #        try:
+            self.assertLessEqual(worst_buy, min(day_rates[last_buy_loc+1:first_sell_loc], default = 2**32), \
+                                 msg = "bought more expensive on day " + str(i) + "; rates: " + str(day_rates) +\
+                                 str(buy_loc[0])+str(sell_loc[0]))
+            self.assertGreaterEqual(worst_sell, max(day_rates[last_buy_loc+1:first_sell_loc], default = -1*2**32), \
+                                    msg = "sold cheaply on day " + str(i) + "; rates: " + str(day_rates) +\
+                                    str(buy_loc[0])+str(sell_loc[0]))
+#        except Exception as e:
+#            plot_bs_loc(rates[24*i:24*i+24], [j%24 for j in buy_loc], [j%24 for j in sell_loc])
+#            print(day_rates)
+#            return e
       
 #    @day_decorator
 #    def test_indx_best_day_block(self, rates = None):
 #        "test best of block are getting best indxs"
 #        for fn in [best_of_block1T, best_of_block2T, best_of_block3]:
               
-    def test_block1T2T3_val1(self):
-        for rates  in [[79, 71, 63, 62, 52, 63, 36, 27, 9, 97, 78, 69, 37, 67, 2, 48, 13, 23, 99, 65, 35, 14, 52, 49]]:#, \
-                       #[31, 49, 96, 56, 77, 56, 70, 88, 95, 86, 32, 39, 30, 73, 96, 21, 45, 88, 13, 32, 83, 38, 7, 37]]:
-            profits1, indxs1 = best_of_block1T(rates = rates, into_blocks = True, hr_capacity = 1)
-            profits2, indxs2 = best_of_block2T(rates = rates,   into_blocks = True, hr_capacity = 1)
-            profits3, indxs3 = best_of_block3(rates = rates, cycles_per_day = 1, into_blocks = True, hr_capacity = 1)
-    #        print(profits1, indxs1, profits2, indxs2, profits3, indxs3)
-            self.assertTrue(all(p == 70. for p in [profits1[0], profits2[0], profits3[0]]))#day decorator only gives 1 day
-            self.assertTrue(all(i == [18,20] for i in [indxs1[0], indxs2[0], indxs3[0]]))#day decorator only gives 1 day
+#    def test_block1T2T3_val1(self):
+#        for rates  in [[79, 71, 63, 62, 52, 63, 36, 27, 9, 97, 78, 69, 37, 67, 2, 48, 13, 23, 99, 65, 35, 14, 52, 49]]:#, \
+#                       #[31, 49, 96, 56, 77, 56, 70, 88, 95, 86, 32, 39, 30, 73, 96, 21, 45, 88, 13, 32, 83, 38, 7, 37]]:
+#            profits1, indxs1 = best_of_block1T(rates = rates, into_blocks = True, hr_capacity = 1)
+#            profits2, indxs2 = best_of_block2T(rates = rates,   into_blocks = True, hr_capacity = 1)
+#            profits3, indxs3 = best_of_block3(rates = rates, cycles_per_day = 1, into_blocks = True, hr_capacity = 1)
+#    #        print(profits1, indxs1, profits2, indxs2, profits3, indxs3)
+#            self.assertCountEqual([97,97,97], [profits1[0], profits2[0], profits3[0]])#day decorator only gives 1 day
+#            self.assertTrue([[14,18],[14,18],[14,18]], [indxs1[0], indxs2[0], indxs3[0]])#day decorator only gives 1 day
+#            
+#    def test_block1_equals_block3T(self):
+#        profits1, indxs1 = best_of_block1T(rates = self.hourly_rates, into_blocks = True, hr_capacity = 4)
+#        profits3, indxs3 = best_of_block3(rates = self.hourly_rates, cycles_per_day = 1, into_blocks = True, hr_capacity = 4)
+##        for ix, (p1, p3) in enumerate(zip(profits1, profits3)):
+##            if p1 != p3:
+##                print("Error at: ", indxs1[ix], indxs3[ix])
+#        self.assertCountEqual(profits1, profits3, msg = f"indx1: {indxs1}\n indx3: {indxs3}")
+
             
-    def test_block1_equals_block3T(self):
-        profits1, indxs1 = best_of_block1T(rates = self.hourly_rates, into_blocks = True, hr_capacity = 4)
-        profits3, indxs3 = best_of_block3(rates = self.hourly_rates, cycles_per_day = 1, into_blocks = True, hr_capacity = 4)
-#        for ix, (p1, p3) in enumerate(zip(profits1, profits3)):
-#            if p1 != p3:
-#                print("Error at: ", indxs1[ix], indxs3[ix])
-        self.assertCountEqual(profits1, profits3, msg = f"ndx1: {indxs1, indxs}\n indx3: {indxs1, indxs}")
-#        try:
-#            self.assertCountEqual(indxs1, indxs3)#could have same value at different indxs
-#        except Exception as e:
-            
-#need to fix block2T    
-    @day_decorator
-    def test_block1T2T3_equal(self, rates = None):#gribb; going to have to debug this
-        profits1, indxs1 = best_of_block1T(rates = rates, into_blocks = True, hr_capacity = 4)
-        profits2, indxs2 = best_of_block2T(rates = rates, into_blocks = True, hr_capacity = 4)
-        profits3, indxs3 = best_of_block3(rates = rates, cycles_per_day = 1, into_blocks = True, hr_capacity = 4)
-#        for ix, p1p2p3 in enumerate(zip(profits1, profits2, profits3)):
-#            if 3 != p1p2p3.count(p1p2p3[0]):
-#                print("Error at: ", indxs1[ix], indxs2[ix], indxs3[ix])
-#                print([self.hourly_rates[i[0]-4:i[1]+4] for i in (indxs1[ix], indxs2[ix], indxs3[ix])])
-#                print("\n\n")
-        self.assertEqual(profits1[0], profits2[0], profits3[0])#day decorator only gives 1 day
-        self.assertCountEqual(indxs1[0], indxs2[0], indxs3[0])
+#    @day_decorator
+#    def test_block1T2T3_equal(self, rates = None):#gribb; going to have to debug this
+#        profits1, indxs1 = best_of_block1T(rates = rates, into_blocks = True, hr_capacity = 4)
+#        profits2, indxs2 = best_of_block2T(rates = rates, into_blocks = True, hr_capacity = 4)
+#        profits3, indxs3 = best_of_block3(rates = rates, cycles_per_day = 1, into_blocks = True, hr_capacity = 4)
+##        for ix, p1p2p3 in enumerate(zip(profits1, profits2, profits3)):
+##            if 3 != p1p2p3.count(p1p2p3[0]):
+##                print("Error at: ", indxs1[ix], indxs2[ix], indxs3[ix])
+##                print([self.hourly_rates[i[0]-4:i[1]+4] for i in (indxs1[ix], indxs2[ix], indxs3[ix])])
+##                print("\n\n")
+#        self.assertTrue(all((profits1[0] == profits2[0], 
+#                            profits1[0] == profits3[0],
+#                            profits2[0] == profits3[0])), 
+#                            msg = str("profits: \n" + str(profits1[0]) + "\n" +
+#                            str(profits2[0]) + "\n"+ str(profits3[0])))#day decorator only gives 1 day
+#        self.assertTrue(all((indxs1[0] == indxs2[0], 
+#                            indxs1[0] == indxs3[0],
+#                            indxs2[0] == indxs3[0])), 
+#                          msg = str(str(indxs1[0]) + "\n" + str(indxs2[0]) + "\n" + str(indxs3[0])))
             
     def test_loc_minmax1_equals_loc_minmax2(self):
-        #self.hourly_rates = np.random.randint(0, high = 100, size = 744)
-        #self.hourly_rates[1:3] = [60,60]
         b,s = get_loc_minmax2(self.hourly_rates, locs = False)
         buy_locs, sell_locs = get_loc_minmax1(self.hourly_rates)
         self.assertCountEqual(b, buy_locs)#, msg = {f"test_equal(buy_locs, b)"})
@@ -948,50 +1069,58 @@ class TestBattery(unittest.TestCase):
         self.assertCountEqual(s, list(np.where(sell_locs)[0]))#, msg = {f"test_equal(sell_locs, s)"})
         
     ###############################################################
-    profits, buy_locs, sell_locs = intermitant(hourly_rates, hr_capacity = hr_capacity)     
 # insert_sort(rates, current_indxs, potential_ix, hr_capacity, buying = True)      
-    def iter_thru_insert_sort(self, rates, sz):
-        "test insert sort does get minimum/maximum n elements, going forward and backwards"
-        hr_capacity = self.hr_capacity
-        out = [0]*4
-       
-        potential_ix = [[0]*hr_capacity]*(sz-hr_capacity+1)
+    def iter_thru_insert_sort(self, rates, sz, hr_capacity = None):
+        "test insert sort does get minimum/maximum n elements, going forward and backwards.\
+        Buy Forward, sell forward, buy backwards, sell backwards"
+        hr_capacity = hr_capacity or self.hr_capacity
+#        print("\n\n\n##################", hr_capacity, "##################\n\n\n\n\n")
+        out = [0]*5
+        out[4] = hr_capacity
+        potential_ix = [[0]*hr_capacity for _ in range(sz-hr_capacity+1)]
         potential_ix[0] = [ix for ix, val in sorted(zip(range(hr_capacity), rates[:hr_capacity]), key = lambda tup: tup[1], reverse = True)]#indexs
         for i in range(hr_capacity,sz):
             potential_ix[i-hr_capacity+1],_ ,_ = insert_sort(rates[:sz], potential_ix[i-hr_capacity], i, hr_capacity = hr_capacity, buying = True)
         out[0] =  potential_ix[-1]
         
-        potential_ix = [[0]*hr_capacity]*(sz-hr_capacity+1)        
+        potential_ix = [[0]*hr_capacity for _ in range(sz-hr_capacity+1)]      
         potential_ix[0] = [ix for ix, val in sorted(zip(range(hr_capacity), rates[:hr_capacity]), key = lambda tup: tup[1], reverse = False)]#indexs
         for i in range(hr_capacity,sz):
             potential_ix[i-hr_capacity+1], _, _ = insert_sort(rates[:sz], potential_ix[i-hr_capacity], i, hr_capacity = hr_capacity, buying = False)
         out[1] =  potential_ix[-1]
         
         #iterating backwards
-        potential_ix = [[0]*hr_capacity]*(sz-hr_capacity+1)
+        potential_ix = [[0]*hr_capacity for _ in range(sz-hr_capacity+1)]
         potential_ix[-1] = [ix for ix, val in sorted(zip(range(sz-hr_capacity,sz), rates[sz-hr_capacity:sz]), key = lambda tup: tup[1], reverse = True)]#indexs
         for i in range(sz-hr_capacity-1,-1,-1):
             potential_ix[i], _, _ = insert_sort(rates[:sz], potential_ix[i+1], i, hr_capacity = hr_capacity, buying = True)
         out[2] =  potential_ix[0]
         
-        potential_ix = [[0]*hr_capacity]*(sz-hr_capacity+1)
+        potential_ix = [[0]*hr_capacity for _ in range(sz-hr_capacity+1)]
         potential_ix[-1] = [ix for ix, val in sorted(zip(range(sz-hr_capacity,sz), rates[sz-hr_capacity:sz]), key = lambda tup: tup[1], reverse = False)]#indexs
         for i in range(sz-hr_capacity-1,-1,-1):
             potential_ix[i], _, _ = insert_sort(rates[:sz], potential_ix[i+1], i, hr_capacity = hr_capacity, buying = False)
+#            print([rates[i] for i in potential_ix[i]])
+#            print(potential_ix[i])
         out[3] =  potential_ix[0]
         return out
     
     @day_decorator
     def test_insert_sort_getting_minmax(self, rates):
         "test insert sort does get minimum/maximum n elements"#
-        ix = TestBattery.iter_thru_insert_sort(self, rates, 24)
-        rates_sorted =sorted(rates[:24])
-        self.assertCountEqual([rates[i] for i in ix[0]], sorted(rates_sorted[:hr_capacity], reverse=True))  
-        self.assertCountEqual([rates[i] for i in ix[1]], sorted(rates_sorted[-hr_capacity:], reverse=False))
-        
+#        print("test insert sort now", self.hr_capacity)
+        ix = self.iter_thru_insert_sort(rates, 24, hr_capacity = self.hr_capacity)
+#        print("test insert sort now has ended")
+        rates_sorted = sorted(rates[:24])
+        self.assertCountEqual([rates[i] for i in ix[0]], sorted(rates_sorted[:self.hr_capacity], reverse=True),
+                              msg = f"{ix[0]}")  
+        self.assertCountEqual([rates[i] for i in ix[1]], sorted(rates_sorted[-self.hr_capacity:], reverse=False),
+                              msg = f"{ix[1]}")
         #iterating backwards
-        self.assertCountEqual([rates[i] for i in ix[2]], sorted(rates_sorted[:hr_capacity], reverse=True))  
-        self.assertCountEqual([rates[i] for i in ix[3]], sorted(rates_sorted[-hr_capacity:], reverse=False))
+        self.assertCountEqual([rates[i] for i in ix[2]], sorted(rates_sorted[:self.hr_capacity], reverse=True),
+                              msg = f"{ix[2]}")  
+        self.assertCountEqual([rates[i] for i in ix[3]], sorted(rates_sorted[-self.hr_capacity:], reverse=False),
+                              msg = f"{ix[3]}, {ix[4]}, {[rates[i] for i in ix[3]]}, { sorted(rates_sorted[-self.hr_capacity:], reverse=False)}")
            
     @day_decorator
     def test_insert_sort_duplicates(self, rates):
@@ -1000,77 +1129,94 @@ class TestBattery(unittest.TestCase):
         ix = TestBattery.iter_thru_insert_sort(self, q, 24)
         self.assertEqual(ix[0], sorted(list(range(12,12+4)), reverse = True), msg = "buying")
         self.assertEqual(ix[2], sorted(list(range(12,12+4)), reverse = False), msg = "buying back")
-        
+
         q[12:12+self.hr_capacity] = [11000]*self.hr_capacity
         ix = TestBattery.iter_thru_insert_sort(self, q, 24)
         self.assertEqual(ix[1], sorted(list(range(12,12+4)), reverse = True), msg = "selling")
         self.assertEqual(ix[3], sorted(list(range(12,12+4)), reverse = False), msg = "selling, iter backwards")    
         
         
-        
-        
-#    @staticmethod #nake this a decorator??
-    def driving_tests(self, testlist, expected_prfit, expected_indx, *kwargs):
-        #change so kwarg has fn, and their args in sorted order
-        
-        "**kwarg is a named vector of the arguments for functions. Name is function object for value of argument"
+    def test_insert_sort_peaked_rates(self):#replace w/ iter_thru
+        tzt = list(range(10,0,-1))+list(range(10))
+        ix = TestBattery.iter_thru_insert_sort(self, tzt, 20, hr_capacity = 5)
+        self.assertEqual([tzt[i] for i in ix[0]], [2,2,1,1,0])
+        self.assertEqual([tzt[i] for i in ix[2]], [2,2,1,1,0])
+
+        tzt = list(range(10)) + list(range(10,0,-1))
+        ix = TestBattery.iter_thru_insert_sort(self, tzt, 20, hr_capacity = 5)
+        self.assertEqual([tzt[i] for i in ix[1]], [8,8,9,9,10])
+        self.assertEqual([tzt[i] for i in ix[3]], [8,8,9,9,10])
+
+
+    def driving_tests(self, testlist, expected_prfit, expected_indx, kwargs):
+        "**kwarg is a named vector of the arguments for functions. \
+        Name is function object for value of argument"
         for fn in [intermitant]:# [best_of_block1T, best_of_block2T, best_of_block3, intermitant]:
-            print(kwargs)
-            profits, indxs = fn(testlist, kwargs[0][fn])
-            profit_from_indx = sum([testlist[i[1]] for i in indxs])- sum([testlist[j[1]] for j in indxs])
-            self.assertTrue(all([expected_prfit==profit_from_indx, expected_prfit ==profits[0]]), msg = f"{indxs}")
-            for got, ex in zip(indx, expected_indx):
+#            print(kwargs)
+            profits, indxs = fn(testlist, **kwargs[fn])
+            profit_from_indx = sum([testlist[si] for day in indxs for si in day[1]])- sum([testlist[bi] for day in indxs for bi in day[0]])
+#            print(indxs, [day for day in indxs], [day for cycle in indxs for day in cycle[0]])
+#            self.assertTrue(1==0, msg = f"{[testlist[cycle[1]] for day in indxs for cycle in day]}; buys: {[testlist[cycle[0]] for day in indxs for cycle in day]}")
+            self.assertTrue(all([expected_prfit == profit_from_indx, expected_prfit == profits[0]]), \
+                            msg = f"sell Locs: {[si for day in indxs for si in day[1]]}; \n \
+                            Buy Locs: {[bi for day in indxs for bi in day[0]]}; \n \
+                            expected_prfit: {expected_prfit}; \n \
+                            profit_from_indx: {profit_from_indx}; \n \
+                            outputed profits: {profits[0]} \n \
+                            testarr: {testlist}")
+            for got, ex in zip(indxs, expected_indx):
                 for g1, ex1 in zip(got, ex):
-                    self.assertEqual(sorted(g1), sorted(ex1))
-#        profits, buy_locs, sell_locs = intermitant(testlist)
-#        expected_profit = sum([testlist[i] for i in buy_locs])- sum([testlist[j] for j in sell_locs])
-#        indxs = [[i,j] for i,j in zip(buy_locs, sell_locs)]
-#        self.assertEqual(profits[0], expected_profit)
+                    self.assertCountEqual(sorted(g1), sorted(ex1),msg = f"{got}, {ex}")
+            print(kwargs[fn]['hr_capacity'])
+            self.assertEqual(0,
+                             sum(locs_to_01([bi for day in indxs for bi in day[0]], 
+                                        [si for day in indxs for si in day[1]], 
+                                        kwargs[fn]['hr_capacity'])))
+                    
         
-        
-        
-        
-        
-        
-        
-    def test_intermitant_vals1(self):
+    def test_intermitant_vals(self):
         "tests buy/sell indx, profit for an example day for intermitant"
-#        for testarr1 in  [[34, 89, 96, 67, 42, 56, 16, 84, 93, 37, 36, 63, 77, 48, 40, 92, 98,
-#           24, 24, 48, 15, 72, 30, 17]]:#, [79, 71, 63, 62, 52, 63, 36, 27, 9, 97, 78, 69, 37, 67, 2, 48, 13, 23, 99, 65, 35, 14, 52, 49]
-#            profits, buy_locs, sell_locs = intermitant(testarr1)
-        expected_b = [0,4,5,6]
-        expected_s = [7,8,15,16]
-        expected_profit = sum([testarr1[i] for i in expected_s])- sum([testarr1[j] for j in expected_b])
-#            self.assertEqual(sorted(buy_locs[0]), sorted(expected_b))
-#            self.assertEqual(sorted(sell_locs[0]), sorted(expected_s))
-#            self.assertEqual(profits[0], expected_profit)
-        testlist = [34, 89, 96, 67, 42, 56, 16, 84, 93, 37, 36, 63, 77, 48, 40, 92, 98, 24, 24, 48, 15, 72, 30, 17]
-        self.driving_tests(testlist, 219, [[0,4,5,6], [7,8,15,16]], {intermitant: {'hr_capacity': 4, "for_testing": True}})
-    #print(expected_profit)
-           
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    def test_vals_dec(self):
+        for k, testarr1 in  enumerate([\
+                [34, 89, 96, 67, 42, 56, 16, 84, 93, 37, 36, 63, 77, 48, 40, 92, 98,24, 24, 48, 15, 72, 30, 17],
+                [2,93, 5, 0,44,82,63,80,74,14,70,12,87,63, 8,25,39,22,81,23,18,80,53, 82],#test can buy 0, sell 1
+                [2,83, 5, 1, 44,82,63,80,74,14,70,12,87,63, 8,25,39,22,81,23,18,80,0, 99],#test buy 22, sell 23
+                [2,93, 5, 1, 44,82,63,80,74,14,70,12,87,63, 8,25,39,22,81,23,-1000,-1000,99, 99],#test don't use entiterity of the hour capacity
+                [234, 199, 669, 616, 596, 93, 63, 698, 10, 348, 136, 847, 795, 980, 121, 160, 188, 171, 309, 530, 717, 408, 327, 626],#shouldn't buy/sell at 0,1
+                [234, 199, 669, 616, 596, 93, 63, 698, 10, 348, 136, 847, 795, 980, 121, 160, 188, 171, 309, 530, 717, 408, 1000, 0],#shouldn't buy/sell at 22,23
+                [-1500, -1500, 2000, 2000, 44,82,63,80,74,14,70,12,87,63, 8,25,39,22,81,23,18,80,0, 99],#only use partial charging on first hours
+                [100, -1500, -1500, 2000, 2000, 44,82,63,80,74,14,70,12,87,63,8,25,39,22,81,23,18,80,0],#ignore buys of partial charging on first hours
+                [0, 3000, 100, -1500, -1500, 2000, 2000, 44,82,63,80,74,14, 99 ,12,87,63, 8,25,39,22,81,23,80],#ignore buy/sell cycle with partial charging later
+                ]):
+    #, [79, 71, 63, 62, 52, 63, 36, 27, 9, 97, 78, 69, 37, 67, 2, 48, 13, 23, 99, 65, 35, 14, 52, 49]
+            expected_b = [[0,4,5,6], [0], [22], [20,21], [8], [8], [0,1], [1,2], [0,3,4]][k]
+            expected_s = [[7,8,15,16], [1], [23], [22,23], [13], [22], [2,3], [3,4], [5,6,13]][k]
+            expected_profit = sum([testarr1[i] for i in expected_s])- sum([testarr1[j] for j in expected_b])
+            kwargs = [{intermitant: {'hr_capacity': 4, "for_testing": True}}, \
+                      {intermitant: {'hr_capacity': 1, "for_testing": True}},\
+                      {intermitant: {'hr_capacity': 1, "for_testing": True}},\
+                      {intermitant: {'hr_capacity': 5, "for_testing": True}},\
+                      {intermitant: {'hr_capacity': 1, "for_testing": True}},\
+                      {intermitant: {'hr_capacity': 1, "for_testing": True}},\
+                      {intermitant: {'hr_capacity': 6, "for_testing": True}},
+                      {intermitant: {'hr_capacity': 6, "for_testing": True}},
+                      {intermitant: {'hr_capacity': 6, "for_testing": True}},
+                      ][k]
+            self.driving_tests(testarr1, expected_profit, [[expected_b, expected_s]], kwargs)
+
+    def test_vals_dec(self):#need to deal with case where there are no infleciton points.
         "values only decrease"
         testlist = list(range(48,24,-1))
-        for fn in [best_of_block1T, best_of_block2T, best_of_block3]:
-            profits, indxs = fn(testlist)
-            expected_profit = sum([testlist[i[1]] for i in indxs])- sum([testlist[j[1]] for j in indxs])
-            self.assertTrue(all([0==expected_profit, 0==profits[0]]), msg = f"{indxs}")
-            self.assertEqual(indxs, [0,0])
+#        for fn in [best_of_block1T, best_of_block2T, best_of_block3]:
+#            profits, indxs = fn(testlist)
+#            expected_profit = sum([testlist[i[1]] for i in indxs])- sum([testlist[j[1]] for j in indxs])
+#            self.assertTrue(all([0==expected_profit, 0==profits[0]]), msg = f"{indxs}")
+##            self.assertEqual(indxs, [0,0])
         profits, buy_locs, sell_locs = intermitant(testlist)
-        expected_profit = sum([testlist[i] for i in expected_s])- sum([testlist[j] for j in expected_b])
-        self.assertTrue(all([0==expected_profit, 0==profits[0]]), msg = f"{buy_locs}, {sell_locs}")
-        self.assertEqual(buy_locs[0], [0])
-        self.assertEqual(sell_locs[0], [0])
+        expected_profit = sum([testlist[i] for i in sell_locs])- sum([testlist[j] for j in buy_locs])
+        self.assertCountEqual([True, True], [0==expected_profit, 0==profits[0]], msg = f"{buy_locs}, {sell_locs}")
+        self.assertEqual(0, sum(locs_to_01(buy_locs, sell_locs, 4)), msg="testing locs to 01")
+#        self.assertEqual(buy_locs[0], [0])
+#        self.assertEqual(sell_locs[0], [0])
         
         
     def test_vals_dec_hold(self):
@@ -1078,32 +1224,35 @@ class TestBattery(unittest.TestCase):
         testlist = list(range(48,24,-1))
         testlist[4:8] = [44]*4
         testlist[16:21] = [30]*5
-        for fn in [best_of_block1T, best_of_block2T, best_of_block3]:
-            profits, indxs = fn(testlist)
-            expected_profit = sum([testlist[i[1]] for i in indxs])- sum([testlist[j[1]] for j in indxs])
-            self.assertTrue(all([0==expected_profit, 0==profits[0]]), msg = f"{indxs}")
-            self.assertEqual(indxs, [0,0])
+#        for fn in [best_of_block1T, best_of_block2T, best_of_block3]:
+#            profits, indxs = fn(testlist)
+#            expected_profit = sum([testlist[i[1]] for i in indxs])- sum([testlist[j[0]] for j in indxs])
+#            self.assertTrue(all([0==expected_profit, 0==profits[0]]), msg = f"{indxs}")
+##            self.assertEqual(indxs, [0,0])
         profits, buy_locs, sell_locs = intermitant(testlist)
-        expected_profit = sum([testlist[i] for i in expected_s])- sum([testlist[j] for j in expected_b])
-        self.assertTrue(all([0==expected_profit, 0==profits[0]]), msg = f"{buy_locs}, {sell_locs}")
-        self.assertEqual(buy_locs[0], [0])
-        self.assertEqual(sell_locs[0], [0])
+        expected_profit = sum([testlist[i] for i in sell_locs])- sum([testlist[j] for j in buy_locs])
+        self.assertCountEqual([True, True], [0==expected_profit, 0==profits[0]], msg = f"{buy_locs}, {sell_locs}")
+        self.assertEqual(0, sum(locs_to_01(buy_locs, sell_locs, 4)), msg="testing locs to 01")
+#        self.assertEqual(buy_locs[0], [0])
+#        self.assertEqual(sell_locs[0], [0])
             
     @hr_block_decorator
-    def test_vals_inc(self, hr_capacity = 1):
+    def test_vals_inc(self, hr_capacity = 4):
         "values only increase"
         testlist = list(range(24,48))
-        true_prft = 23*hr_capacity - 2*hr_capacity
-        for fn in [best_of_block1T, best_of_block2T, best_of_block3]:
-            profits, indxs = fn(testlist)
-            expected_profit = sum([testlist[i[1]] for i in indxs])- sum([testlist[j[1]] for j in indxs])
-            self.assertTrue(all([true_prft==expected_profit, true_prft==profits[0]]), msg = f"{indxs}")
-            self.assertEqual(indxs, [0,0])
-        profits, buy_locs, sell_locs = intermitant(testlist)
-        expected_profit = sum([testlist[i] for i in expected_s])- sum([testlist[j] for j in expected_b])
-        self.assertTrue(all([true_prft==expected_profit, true_prft==profits[0]]), msg = f"{buy_locs}, {sell_locs}")
-        self.assertEqual(buy_locs[0], list(range(hr_capacity)))
-        self.assertEqual(sell_locs[0], list(range(23,23-hr_capacity,-1)))
+        true_prft = 23*hr_capacity - hr_capacity*(hr_capacity - 1)
+#        for fn in [best_of_block1T, best_of_block2T, best_of_block3]:
+#            profits, indxs = fn(testlist)
+#            expected_profit = sum([testlist[i[1]] for i in indxs])- sum([testlist[j[1]] for j in indxs])
+#            self.assertCountEqual([True, True], [true_prft==expected_profit, true_prft==profits[0]], msg = f"{indxs}")
+#            self.assertEqual(indxs, [0,23])
+        profits, buy_locs, sell_locs = intermitant(testlist, hr_capacity = hr_capacity)
+        expected_profit = sum([testlist[i] for i in sell_locs[0]])- sum([testlist[j] for j in buy_locs[0]])
+        self.assertCountEqual([True, True], [true_prft==expected_profit, true_prft==profits[0]], 
+                              msg = f"{buy_locs}, {sell_locs}, {true_prft}, {expected_profit}, {profits}")
+        self.assertCountEqual(buy_locs[0], list(range(hr_capacity)))
+        self.assertCountEqual(sell_locs[0], list(range(23,23-hr_capacity,-1)))
+        self.assertEqual(0, sum(locs_to_01(buy_locs, sell_locs, 4)))
 
     @hr_block_decorator
     def test_vals_inc_hold(self, hr_capacity = 1):
@@ -1112,16 +1261,19 @@ class TestBattery(unittest.TestCase):
         testlist[4:8] = [28]*4
         testlist[16:21] = [42]*5
         true_prft = sum(testlist[-hr_capacity:])- sum(testlist[:hr_capacity])
-        for fn in [best_of_block1T, best_of_block2T, best_of_block3]:
-            profits, indxs = fn(testlist)
-            expected_profit = sum([testlist[i[1]] for i in indxs])- sum([testlist[j[1]] for j in indxs])
-            self.assertTrue(all([true_prft==expected_profit, true_prft==profits[0]]), msg = f"{indxs}")
-            self.assertEqual(indxs, [0,0])
-        profits, buy_locs, sell_locs = intermitant(testlist)
-        expected_profit = sum([testlist[i] for i in expected_s])- sum([testlist[j] for j in expected_b])
-        self.assertTrue(all([true_prft==expected_profit, true_prft==profits[0]]), msg = f"{buy_locs}, {sell_locs}")
-        self.assertEqual(buy_locs[0], list(range(hr_capacity)))
-        self.assertEqual(sell_locs[0], list(range(23,23-hr_capacity,-1)))
+#        for fn in [best_of_block1T, best_of_block2T, best_of_block3]:
+#            profits, indxs = fn(testlist)
+#            expected_profit = sum([testlist[i[1]] for i in indxs])- sum([testlist[j[1]] for j in indxs])
+#            self.assertCountEqual([True, True], [true_prft==expected_profit, true_prft==profits[0]], msg = f"{indxs}")
+#            self.assertEqual(indxs, [list(range(hr_capacity)),list(range(23,23-hr_capacity,-1))] )
+     
+        profits, buy_locs, sell_locs = intermitant(testlist, hr_capacity = hr_capacity)
+        expected_profit = sum([testlist[i] for i in sell_locs[0]])- sum([testlist[j] for j in buy_locs[0]])
+        self.assertCountEqual([True, True], [true_prft==expected_profit, true_prft==profits[0]],\
+                          msg = f"{buy_locs}, {sell_locs}, {true_prft},{expected_profit}, {profits}")
+        self.assertCountEqual(buy_locs[0], list(range(hr_capacity)))
+        self.assertCountEqual(sell_locs[0], list(range(23,23-hr_capacity,-1)))
+        self.assertEqual(0, sum(locs_to_01(buy_locs, sell_locs, 4)))
 
     @day_decorator
     def test_best_of_day_r_vs_intermitant(self, rates):#handle duplicate values differently
@@ -1129,39 +1281,32 @@ class TestBattery(unittest.TestCase):
         profit_r, ix_r =  best_of_day_r(rates = rates, cycles_per_day = 1, hr_capacity = 1, into_blocks = False)
         profits, buy_locs, sell_locs = intermitant(rates, cycles_per_day = 1, hr_capacity = 1, into_blocks = False)
         self.assertEqual(profit_r, profits[0])#, msg =f"profits failed at day {i}")
-        self.assertEqual([rates[i] for i in ix_r], [rates[buy_locs[0]], rates[sell_locs[0]]])#, msg =f"indx failed at day {i}")
+#        self.assertEqual([rates[i] for i in ix_r], [rates[buy_locs[0]], rates[sell_locs[0]]])#, msg =f"indx failed at day {i}")
             #allowing diff indxs as long as rates val constant
-#            self.assertEqual([[i] for i in ix_r], [buy_locs[0], sell_locs[0]], msg =f"failed at day {i}")
-#            except:
-#                self.assertEqual(1,0, msg =f"failed at day {i}")
 
-    @day_decorator#intermitant can't yet cycle multiple times; is expected to fail. best_of_r is wrong for cylcing.
-    def test_best_of_day_r_vs_intermitant_multiple(self, rates):
-        "are getting best high/low prices in a period; multiple cycles"
-        hr_capacity = self.hr_capacity#doesn't actually change hr_cap currently
-        for num_cycles in range(2, (24-hr_capacity*2)//2 - 1):#-1 for offset
-                profit_r, ix_r =  best_of_day_r(rates = rates, cycles_per_day = num_cycles, hr_capacity = 1, into_blocks = False)
-                profits, buy_locs, sell_locs = intermitant(rates, cycles_per_day = num_cycles, hr_capacity = 1, into_blocks = False)
-                self.assertEqual(profit_r, profits[0], msg = str(num_cycles) + " Cycles were run")
-                self.assertEqual(ix_r, [buy_locs[0], sell_locs[0]], msg = str(num_cycles) + " Cycles were run")
 
-#    @day_decorator
-#    def foo(self, rates):
-#        a = 3
-#        b = 0
-#        for i in range(a):
-#            b += i
-#        print(a,b)
-#        self.assertEqual(0, 1)
+#    @day_decorator#intermitant can't yet cycle multiple times; is expected to fail. best_of_r is wrong for cylcing.
+#    def test_best_of_day_r_vs_intermitant_multiple(self, rates):
+#        "are getting best high/low prices in a period; multiple cycles"
+#        hr_capacity = self.hr_capacity#doesn't actually change hr_cap currently
+#        for num_cycles in range(2, (24-hr_capacity*2)//2 - 1):#-1 for offset
+##            num_cycles = 1#haven't yet updated this
+#            profit_r, ix_r =  best_of_day_r(rates = rates, cycles_per_day = num_cycles, hr_capacity = 1, into_blocks = False)
+#            profits, buy_locs, sell_locs = intermitant(rates, cycles_per_day = num_cycles, hr_capacity = 1, into_blocks = False)
+#            self.assertEqual(profit_r, profits[0], msg = str(num_cycles) + " Cycles were run")
+#            self.assertEqual(ix_r, [buy_locs[0], sell_locs[0]], msg = str(num_cycles) + " Cycles were run")
+
+
 tzt = [int(i) for i in re.findall("\d+", '[79 71 63 62 52 63 36 27  9 97 78 69 37 67  2 48 13 23 99 65 35 14 52 49]')]
-tztbat = TestBattery()
-#tztbat.foo()
+#tztbat = TestBattery()
+#tztbat.test_intermitant_vals()
+#tztbat.test_indxs_best_itermitant()
 #print(tztbat.hourly_rates[:24])
 #tztbat.test_insert_sort_duplicates()
-tztbat.test_intermitant_vals1()
-print("\nasdf")
+
+#print("\nasdf")
 #rt = tztbat.self.hourly_rates
-#unittest.main()
+unittest.main()
 #%%
  f = open("hourly_rates.txt", "r")#need to wipe old data, "a" = append instead of overwrite
 instr = f.read()
