@@ -15,7 +15,7 @@ import time
 #Weather token: XUxckTkzjdLZvkPvtIpjVwRSawSPGETi
 baseurl = 'https://www.ncdc.noaa.gov/cdo-web/api/v2/'
 today_dt = datetime.strftime(datetime.now(), "%Y-%m-%d")#gets date from yesturday to today, yyyy-mm-dd
-yester_dt = datetime.strftime(datetime.now() - timedelta(2), "%Y-%m-%d")
+yester_dt = datetime.strftime(datetime.now() - timedelta(4), "%Y-%m-%d")
 todaystr = 'enddate=' + today_dt
 yesterstr = 'startdate=' + yester_dt
 headers = {'token': 'XUxckTkzjdLZvkPvtIpjVwRSawSPGETi'}
@@ -81,108 +81,49 @@ def iter_thru_req(requrl, maxresults = 365*835, index = None, columns = None ):
    
     out_df = pd.DataFrame(index = index, columns = columns, dtype = np.float32)#might be an int; but not sure
     i = 0
-    try:
-        offset = 1
-        incremented_by = 0
-        size = 100
-        while offset + incremented_by < size:
-    #        print(requrl,"\n\n")
-            frst_req = requests.get(requrl, headers = {'token': 'XUxckTkzjdLZvkPvtIpjVwRSawSPGETi'})
-            frst_js = frst_req.json()
-            offset = frst_js['metadata']['resultset']['offset']
-            size = min(frst_js['metadata']['resultset']['count'], maxresults)
-            try:
-                incremented_by = frst_js['metadata']['resultset']['limit']
-            except:
-                incremented_by = 25#default limit size
-            offset += incremented_by
-    #            req_lst[i] = pd.DataFrame.from_dict(frst_js['results'])
-            adate, astat, aval = get_date_stat_val(frst_req)
-            out_df.loc[adate, astat] = aval
-    
-            new_limit = min(1000, size - offset)#maximium value 
-            
-            lmt_locs = [i for m in re.finditer('limit=\d+', requrl) for i in m.span()]   
-            if len(lmt_locs) == 0:
-                requrl += '&limit=' + str(new_limit)
-            else:
-                requrl = requrl[:lmt_locs[0]] + 'limit=' + str(new_limit) +  requrl[lmt_locs[1]:]
-        
-            offset_locs = [i for m in re.finditer('offset=\d+', requrl) for i in m.span()]
-            if len(offset_locs) == 0:
-                requrl += '&offset=' + str(offset)
-            else:
-                requrl = requrl[:offset_locs[0]] + 'offset=' + str(offset) +  requrl[offset_locs[1]:]
-    #        print(requrl, size, offset, incremented_by, "\n", sep = " | ")
-            print(i)
-            i += 1
-            time.sleep(1)
+    offset = 1
+    incremented_by = 0
+    size = 100
+    while offset + incremented_by < size:
+#        print(requrl,"\n\n")
+        frst_req = requests.get(requrl, headers = {'token': 'XUxckTkzjdLZvkPvtIpjVwRSawSPGETi'})
+        frst_js = frst_req.json()
+        offset = frst_js['metadata']['resultset']['offset']
+        size = min(frst_js['metadata']['resultset']['count'], maxresults)
+        try:
+            incremented_by = frst_js['metadata']['resultset']['limit']
+        except:
+            incremented_by = 25#default limit size
+        offset += incremented_by
+#            req_lst[i] = pd.DataFrame.from_dict(frst_js['results'])
+        adate, astat, aval = get_date_stat_val(frst_req)
+        out_df.loc[adate, astat] = aval
 
-    except:
-        print("\n\n\n\got an error\n\n\n\n\n###################################")
-        return out_df,frst_req 
+        new_limit = min(1000, size - offset)#maximium value 
+        
+        lmt_locs = [i for m in re.finditer('limit=\d+', requrl) for i in m.span()]   
+        if len(lmt_locs) == 0:
+            requrl += '&limit=' + str(new_limit)
+        else:
+            requrl = requrl[:lmt_locs[0]] + 'limit=' + str(new_limit) +  requrl[lmt_locs[1]:]
+    
+        offset_locs = [i for m in re.finditer('offset=\d+', requrl) for i in m.span()]
+        if len(offset_locs) == 0:
+            requrl += '&offset=' + str(offset)
+        else:
+            requrl = requrl[:offset_locs[0]] + 'offset=' + str(offset) +  requrl[offset_locs[1]:]
+#        print(requrl, size, offset, incremented_by, "\n", sep = " | ")
+        print(i)
+        i += 1
+        time.sleep(1)
     return out_df, frst_req
 
-#%%
-requrl = 'https://www.ncdc.noaa.gov/cdo-web/api/v2/stations?limit=1000' + '&' + yesterstr + '&' + todaystr
-station_df, req = iter_thru_req(requrl, maxresults = 3000)
-
-#filename = 'Desktop\side_projects\stations.p'
-#with open(filename, 'wb') as filehandler:
-#    pickle.dump(station_df, filehandler)
-#
 #station_df.to_csv(r'Desktop\side_projects\stations.txt', index = None)
-#%%
-station_latlon =station_df.loc[:,['latitude','longitude']]
-station_df.to_csv(r'Desktop\side_projects\station_latlon.txt', index = None)
+##%%
+#requrl = 'https://www.ncdc.noaa.gov/cdo-web/api/v2/stations?limit=1000' + '&' + yesterstr + '&' + todaystr + '&locationid=FIPS:37'
+#a = make_request(requrl)
+#wa_station_ids = [i['id'] for i in a.json()['results']]
 
-#frst_req = requests.get(requrl, headers = {'token': 'XUxckTkzjdLZvkPvtIpjVwRSawSPGETi'})
-#frst_req = requests.get('https://www.ncdc.noaat.gov/cdo-web/api/v2/locationcategories?limit=5', headers = {'token': 'XUxckTkzjdLZvkPvtIpjVwRSawSPGETi'})
-#iter_thru_req('https://www.ncdc.noaa.gov/cdo-web/api/v2/datasets')
-        #%%
-#need to map COOP to NOAA?
-        #using the fcc API
-url = "https://geo.fcc.gov/api/census/block/find?latitude=49.259&longitude=-122.8591&showall=false&format=json"
-def fcc_fips_api(lat,lon):
-    url = "https://geo.fcc.gov/api/census/block/find?latitude=" +\
-    str(lat)+ "&longitude=" + str(lon)+ "&showall=false&format=json"#can't usefstrings for py2
-    js =requests.get(url).json()
-    return js['Block']['FIPS']
-
-#below didn't work
-def fcc_api(lat,lon):
-    "takes FCC API calls to pd.Series"
-    if isinstance(lat, float):
-        url = "https://geo.fcc.gov/api/census/block/find?latitude=" +\
-        str(lat)+ "&longitude=" + str(lon)+ "&showall=false&format=json"#can't usefstrings for py2
-        js = requests.get(url).json()
-        return pd.io.json.json_normalize(js).iloc[0]
-    elif isinstance(lat, pd.Series):
-        latlon_df = pd.DataFrame(index = range(lat.shape[0]), columns = ['datacoverage', 'elevation', 'elevationUnit', 'id', 'latitude',
-       'longitude', 'maxdate', 'mindate', 'name'])
-        for i in range(lat.shape[0]):
-            latlon_df.iloc[i,:] = fcc_api(lat.iloc[i], lon.iloc[i])
-        return latlon_df
-    else:
-        print("an Error")
-fcc_df = fcc_api(station_df['latitude'], station_df['longitude'])#allnan?
-write_pickle_file("fcc_df", fcc_df)
-#[(j,k) for i in zip(tzt_df.loc[:,['latitude', 'longitude']].values) for j,k in i]
-#fips = [fcc_fips_api(lat,lon) for lat,lon in zip(station_df['latitude'], station_df['longitude'])]
-
-#%%
-#convert station_df to actual types#grib
-wa_stations = station_df.loc[:,['id', 'fips']]
-wa_stations = wa_stations.dropna()
-wa_stations = wa_stations.loc[wa_stations['fips'].apply(lambda rw: rw[:2] == '53'), :]
-stat_id = wa_stations.iloc[0,0]
-stat_id2 = wa_stations.iloc[1,0]
-stat_id3 = wa_stations.iloc[2,0]
-
-#do all stations have the same amount of info?
-#wa_station_dict = {i:[0] for i in wa_stations}
-
-#wa_weather_df = pd.DataFrame(index =ex_indx, columns = wa_stations)
 #%%
 #datatypes you want
 f = open('Desktop\side_projects\search_catagories.txt','r')
@@ -227,6 +168,7 @@ for i, name in enumerate(wind_dataset.values):
         wind_dataset[name] = req.json()['results'][0]['id']
     except:
         wind_dataset[name] = None
+    time.sleep(0.21)#can't make more than 5 requests per second
 #%%
 def get_datatype_description(given_ix):
     "gets the datatype descriptions of given a set of datatype IDs as an index\
@@ -246,12 +188,6 @@ good_datatypes = pd.DataFrame(
 good_datatypes.drop('Description', inplace = True)
 write_pickle_file("wind_datasets", good_datatypes, index = True)
 
-#%%
-#getting what I think are the most relavent datatypes
-my_datatypes = list(good_datatypes.drop(good_datatypes.index[2:24]).dropna().index)
-my_datatypes = my_datatypes[:3] + my_datatypes[4:]
-for i in my_datatypes:
-    print(f"{i}: {good_datatypes.loc[i, 'Description']}")
 
 #%%
 #gets all the current weather stations in WA
@@ -286,7 +222,7 @@ for data_type in good_datatypes.index:
         write_pickle_file(str(f"api_data\{str(data_type)}"), all_req_dict[data_type], index = True)
 #write_pickle_file("pulled_data", [i for i in all_req_dict.values()])
 print(all_req_dict)
-
+x_values = pd.concat(all_req_dict.values)
 
 
 
@@ -364,10 +300,8 @@ def get_bpa_nameplate_capacity(cumulative_how, path = ""):
 bpa_cum_cap, plants = get_bpa_nameplate_capacity("only_increasing", path = "Desktop\side_projects\\")
 
 #%%
-#Get's plant capacity from a diff website
+#Get's plant capacity from a different website; I did notice some differences between this and the project status on BPA and Federal Registry
 
-
-import requests
 def get_renewableorg_info():
     #Information from table
     aweb_url = "https://renewablenw.org/project_map?field_project_state_value%5B%5D=ID&field_project_state_value%5B%5D=MT&field_project_state_value%5B%5D=OR&field_project_state_value%5B%5D=WA&tid%5B%5D=7&field_project_opstatus_value%5B%5D=Approved&field_project_opstatus_value%5B%5D=Proposed&field_project_opstatus_value%5B%5D=Operating&field_project_opstatus_value%5B%5D=In+Permitting+Process&field_project_opstatus_value%5B%5D=Under+Construction"
@@ -426,6 +360,89 @@ merged = get_renewableorg_info()
 
 
 
+#%%
+#BPA interconnection Queue
+#has all actual requests
+inter_queue = pd.read_excel('Downloads\InterconnectionQueueOutput.xlsx')
+print(inter_queue)
+
+
+
+
+
+
+
+#%%
+#%%
+#convert station_df to actual types#grib
+wa_stations = station_df.loc[:,['id', 'fips']]
+wa_stations = wa_stations.dropna()
+wa_stations = wa_stations.loc[wa_stations['fips'].apply(lambda rw: rw[:2] == '53'), :]
+stat_id = wa_stations.iloc[0,0]
+stat_id2 = wa_stations.iloc[1,0]
+stat_id3 = wa_stations.iloc[2,0]
+
+#do all stations have the same amount of info?
+#wa_station_dict = {i:[0] for i in wa_stations}
+
+#wa_weather_df = pd.DataFrame(index =ex_indx, columns = wa_stations)
+#%%
+requrl = 'https://www.ncdc.noaa.gov/cdo-web/api/v2/stations?limit=1000' + '&' + yesterstr + '&' + todaystr #+ '&locationid=FIPS:37'
+station_df, req = iter_thru_req(requrl, maxresults = 1000)#currently 577 WA stations 
+#station_df.to_csv(r'Desktop\side_projects\station_latlon.txt', index = None)
+
+#filename = 'Desktop\side_projects\stations.p'
+#with open(filename, 'wb') as filehandler:
+#    pickle.dump(station_df, filehandler)
+#
+
+#%%
+#station_latlon =station_df.loc[:,['latitude','longitude']]
+#station_df.to_csv(r'Desktop\side_projects\station_latlon.txt', index = None)
+
+#frst_req = requests.get(requrl, headers = {'token': 'XUxckTkzjdLZvkPvtIpjVwRSawSPGETi'})
+#frst_req = requests.get('https://www.ncdc.noaat.gov/cdo-web/api/v2/locationcategories?limit=5', headers = {'token': 'XUxckTkzjdLZvkPvtIpjVwRSawSPGETi'})
+#iter_thru_req('https://www.ncdc.noaa.gov/cdo-web/api/v2/datasets')
+        #%%
+#need to map COOP to NOAA?
+        #using the fcc API
+url = "https://geo.fcc.gov/api/census/block/find?latitude=49.259&longitude=-122.8591&showall=false&format=json"
+def fcc_fips_api(lat,lon):
+    url = "https://geo.fcc.gov/api/census/block/find?latitude=" +\
+    str(lat)+ "&longitude=" + str(lon)+ "&showall=false&format=json"#can't usefstrings for py2
+    js =requests.get(url).json()
+    return js['Block']['FIPS']
+
+#below didn't work
+def fcc_api(lat,lon):
+    "takes FCC API calls to pd.Series"
+    if isinstance(lat, float):
+        url = "https://geo.fcc.gov/api/census/block/find?latitude=" +\
+        str(lat)+ "&longitude=" + str(lon)+ "&showall=false&format=json"#can't usefstrings for py2
+        js = requests.get(url).json()
+        return pd.io.json.json_normalize(js).iloc[0]
+    elif isinstance(lat, pd.Series):
+        latlon_df = pd.DataFrame(index = range(lat.shape[0]), columns = ['datacoverage', 'elevation', 'elevationUnit', 'id', 'latitude',
+       'longitude', 'maxdate', 'mindate', 'name'])
+        for i in range(lat.shape[0]):
+            latlon_df.iloc[i,:] = fcc_api(lat.iloc[i], lon.iloc[i])
+        return latlon_df
+    else:
+        print("an Error")
+fcc_df = fcc_api(station_df['latitude'], station_df['longitude'])#allnan?
+write_pickle_file("fcc_df", fcc_df)
+#[(j,k) for i in zip(tzt_df.loc[:,['latitude', 'longitude']].values) for j,k in i]
+#fips = [fcc_fips_api(lat,lon) for lat,lon in zip(station_df['latitude'], station_df['longitude'])]
+
+
+
+#%%
+#%%
+#getting what I think are the most relavent datatypes
+my_datatypes = list(good_datatypes.drop(good_datatypes.index[2:24]).dropna().index)
+my_datatypes = my_datatypes[:3] + my_datatypes[4:]
+for i in my_datatypes:
+    print(f"{i}: {good_datatypes.loc[i, 'Description']}")
 
 
 #%%    
