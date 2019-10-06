@@ -400,6 +400,8 @@ def best_of_day_r(rates = hourly_rates, cycles_per_day = 1, hr_capacity = 4, int
         return profit, [var for pair in zip(b_locs,s_locs) for var in pair]#averages are "combined" into the present hour from future hours.
     #above WILL go wrong
     
+    #below works for purpose; but not for say allowing to charge over 2 hours discharge over 2, and then repeat
+    
     #doesn't change w/ hr_capacity changing
     assert(hr_capacity == 1)
     assert(cycles_per_day == 1)#cycling per day is wrong as could buy twice then sell twice
