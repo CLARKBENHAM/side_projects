@@ -1,6 +1,8 @@
 import random
 import win32com.client as wincl
-
+import sys
+import re
+    
 def add_aloud(numa, numb):
     "Given the number of digits in the first <= number of digits of second digit to be based asks addition on them"
     speak = wincl.Dispatch("SAPI.SpVoice")
@@ -26,11 +28,9 @@ def add_aloud(numa, numb):
         print(f"Correct!, {a} + {b} = {ans}\n")
 
 if __name__ == '__main__':
-    import sys
-    import re
     try:
-        dig = list(map(lambda i: int(re.findall(r'\d+', i)[0]), sys.argv[1:]))
-        add_aloud(*dig)
+        digits = list(map(lambda i: int(re.findall(r'\d+', i)[0]), sys.argv[1:]))
+        add_aloud(*digits)
     except IndexError:
         add_aloud(3,4)
             
