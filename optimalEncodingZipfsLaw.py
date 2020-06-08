@@ -1,6 +1,7 @@
 import numpy as np
 import scipy.stats as ss
 import matplotlib.pyplot as plt
+#import pandas as pd
 
 """Question: given that words follow zipfs law, 
 When an inverted index is created what is the optimal encoding metric for the distance between documents?
