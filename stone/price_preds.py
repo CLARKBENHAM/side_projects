@@ -17,7 +17,7 @@ xl_bk = xlrd.open_workbook(prices_file)
 commodities = xl_bk.sheet_names()
 
 models = {}
-security_d = {}
+security_d = []
 curve_prices_d = []
 for ix, name in enumerate(commodities):
     b = xl_bk.sheet_by_index(ix)
@@ -27,70 +27,107 @@ for ix, name in enumerate(commodities):
                 for i in b.col_values(0)[7:]]
     com_maturities = b.row_values(0)[1::4]
     com_ab = commodities[ix]
-    curve_prices = pd.DataFrame(list(zip(*[b.col_values(i)[7:]
-                                            for i in range(2,sz,4)]
-                                            )),
+    curve_prices = pd.DataFrame(np.array([pd.to_numeric(b.col_values(i)[7:],
+                                                        errors = 'coerce'
+                                                        )
+                                            for i in range(2,sz,4)
+                                            ]).T,
                                  columns = com_maturities,
                                  index = dates,
-                                 dtype = float)
-    curve_prices = curve_prices.dropna()
-    curve_prices_d += [curve_prices]
+                                 )
+    curve_prices_d += [curve_prices.dropna()]
+    if False:#slow and aren't using yet
+        sec_df = pd.DataFrame(list(zip(*[b.col_values(i)[7:]
+                                                for i in range(1,sz,4)]
+                                                )) )
+        securities = np.unique(sec_df.values)
+        securities = securities[~np.isin(securities, ('', '#N/A N/A'))]
+                                                      
+        def get_security(s):
+            "returns prices for 1 single future"
+            rows, _ = np.where(sec_df == s)
+            #get all of row, column not just those indexes.
+            return pd.Series(data = curve_prices.values[sec_df == s], 
+                      index = curve_prices.index[rows],
+                      name = s
+                      )
     
-#    sec_df = pd.DataFrame(list(zip(*[b.col_values(i)[7:]
-#                                            for i in range(1,sz,4)]
-#                                            )) )
-#    securities = np.unique(sec_df.to_numpy().flatten())
-#    securities = securities[~np.isin(securities, ('', '#N/A N/A'))]
-#                                                  
-#    def get_security(s):
-#        "returns prices for 1 single future"
-##        vals = curve_prices.to_numpy()[sec_df == s]
-##        tf = ~pd.isnull(vals)
-##        return vals[~pd.isnull(vals)].values
-#        return pd.Series(data = curve_prices.to_numpy()[sec_df == s], 
-#                  index = curve_prices.index[(sec_df == s).any(axis=1)],
-#                  name = s
-#                  )
-#    sec_df = [get_security(s) for s in securities]
-##    sec_df = {s+ " " + com_ab: get_security(s)
-##                for s in securities}
-#    security_d.update(sec_df)
-#    break
-long_ix = max([(i, df.shape[0]) for i, df in enumerate(curve_prices_d)], 
-               key = lambda i: i[1])[0]
+        sec_list = [get_security(s) for s in securities]
+        security_d += sec_list
+
+def longest_index(df_list):
+    "returns the index of the longest dataframe from a list of df's"
+    return max([(i, df.shape[0]) 
+                for i, df in enumerate(df_list)], 
+                   key = lambda i: i[1]
+                   )[0]
+    
+long_ix = longest_index(curve_prices_d)
 df_idx = curve_prices_d.pop(long_ix)
 curve_prices_df = df_idx.join(curve_prices_d)
+#curve_prices_df.dropna(inplace = True)
 curve_prices_d += [df_idx]
-#securities_df = pd.concat(security_d)
+
+futures = [i.replace("COMB", "").replace("Comdty", "").replace(" ", "") 
+            for i in curve_prices_df]#eg CL 1
+futures_ab = set([re.sub("\d+", "",i) 
+                    for i in futures])#eg CL
+curve_prices_df.columns = futures
+
+#long_ix = longest_index(curve_prices_d)
+#df_idx = curve_prices_d.pop(long_ix)
+#securities_df = df_idx.join(curve_prices_d)
+#security_d+= [df_idx]
+
 #%% Make Price Graphs from future's
 
 #%%
-import matplotlib.pyplot as plt
+from scipy import integrate
+import defs
 
-#wheat plots, W, KW, MW
-#Corn, soybean, soymeal: C, S, SM
-#Canola, BeanOil: RS, BO
-#NY Lon Cocoa, coffee: CC, QC, KC
-#Crude, heating: CL, HO
+hist_val = curve_prices_df.reindex(curve_prices_df.index[::-1])
+hist_pct = hist_val.pct_change(periods = 252)#6mo out
+hist_vol = hist_pct.std(axis=0)
+
+for ab in defs.abv_cme_url:
+    if ab:
+        tick = ab + "1"
+        ix = futures.index(tick)
+        base_ix = hist_val.iloc[:,ix].first_valid_index()
+        base_prx = hist_val.loc[base_ix, tick]
+        dist = ss.lognorm(loc = 0, scale = 1, s = hist_vol.values[ix])
+        
+        x = np.linspace(hist_pct.iloc[:,ix].min(),
+                        hist_pct.iloc[:,ix].max(),
+                        100)*2
+        
+        fig, ax =plt.subplots()
+        x_axis = [i for i in  base_prx * (1 + x) if i > 0]
+        
+        probs = [integrate.quad(lambda x: dist.pdf(x/base_prx)/base_prx, i,j)[0]
+                         for i,j in zip(x_axis[:-1], x_axis[1:])]
+        probs = [100*i/sum(probs) for i in probs]
+        
+        plt.bar(x_axis[:-1], probs, label="Probabilities")
+        plt.legend()
+        plt.title(f"Probability of ending prices of {hist_vol.index[ix]} in 12mo")
+        xformatter = mticker.FormatStrFormatter('$%.0f')
+        ax.xaxis.set_major_formatter(xformatter)
+        yformatter = mticker.FormatStrFormatter('%.1f%%')
+        ax.yaxis.set_major_formatter(yformatter)
+        plt.show()
 
 
-
-#Ethanol/RINS/Biodiesel
-
-#No: Platinum, Palladium, Milk: PA, PL, NFDM
-
-#earliest expiration date in month, an approximation
+#plt.plot(x_axis, dist.pdf(x), label='dist')
+#plt.yscale('log')
 #%%
-#[re.findall("([a-zA-Z]+).*(\d+)",i)[0] for i in futures]
-
-#ix = 8
-#name = 'Crude Oil'
 
 
 
-#%%
 
-#%%
+
+
+#%% Predicting comodity pries
 #impute missing
 curve_prices_df = curve_prices_df.dropna(axis=0)
 a=(curve_prices_df =='#N/A N/A')
@@ -121,7 +158,7 @@ pipe.fit(X_train, y_train)
 #curve_prices_df = pd.concat(curve_prices_d, axis=1)
 
 #%%
-#Predicting revenue for each of the companies
+#Predicting revenue for each of the companies, by reading in revenue from model
 
 #import pyxlsb
 program_Cos = ['Express Grain (KCO)']
@@ -162,6 +199,17 @@ for sheet_name, h_ix, sector_Cos in zip(sheet_names, hist_ixs, Cos):
     print(margin)
 #for co in fatoil_Cos: 
 #%%
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 #a = pd.read_excel("16.16 Historical Commodity Price Data.xlsx", 'Corn')
 #get size before read in?
 with open(prices_file) as f:
@@ -170,7 +218,7 @@ with open(prices_file) as f:
 a = pd.read_excel(prices_file, 'Corn', 
                   skiprows = 6, 
                   index_col = 0,
-                  use_cols = list(range(2,,3)))
+                  use_cols = list(range(2,sz,3)))
 #indx = pd.to_datetime(a.iloc[6:,0])
 #%%
 curve_prices = a.iloc[6:,2::4].astype(float)

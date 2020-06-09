@@ -5,7 +5,8 @@ import xlrd
 import os
 import sklearn
 #os.system("pip install xlrd")
-os.chdir("Desktop\Stone_presidio\Data\FFIEC CDR Call Bulk All Schedules 03312020")
+#os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_presixdio\\Data\\FFIEC CDR Call Bulk All Schedules 03312020")
+os.chdir(os.getcwd() + "\\FFIEC CDR Call Bulk All Schedules 03312020")
 #%%
 names =[]
 def find_ffiec(col_name):
@@ -41,7 +42,7 @@ tot_num = data_dict['RCON5577'].sum()#Wrong?
 num_less100 = data_dict['RCON5584'].sum()
 num_less250 = data_dict['RCON5586'].sum()
 num_less500 = data_dict['RCON5588'].sum()
-#num_more500 = tot_num - (num_less100 + num_less250 + num_less500)
+num_more500 = tot_num - (num_less100 + num_less250 + num_less500)
 #%%
 tot_ag = data_dict['RCON1590'].sum()
 
@@ -49,11 +50,14 @@ amnt_less100 = data_dict['RCON5585'].sum()
 amnt_less250 = data_dict['RCON5587'].sum()
 amnt_less500 = data_dict['RCON5589'].sum()
 amnt_more500 = tot_ag - amnt_less100 - amnt_less250 - amnt_less500
-print(amnt_more500 )
+
+plt.scatter([amnt_less100,amnt_less250, amnt_less500], list(range(3)) )
+
+
 [i/tot_ag for i in (amnt_less100 , amnt_less250, amnt_less500)]
 #all 6%? did/didn't include residential improvements
 #%%
-
+total_bank_sz = 
 
 
 
