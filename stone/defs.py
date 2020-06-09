@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Jun  5 14:25:00 2020
-
 @author: Clark Benham
+
+cd ..\side_projects
+copy ..\Stone_Presidio\*.py .\stone\*
+git add .
+git commit -m
 """
-#copy ..\Stone_Presidio\*.py .\stone\*
 
 
 name_abv = {'Corn':'C',
@@ -57,8 +60,37 @@ abv_cme_url = {'C': 'https://www.cmegroup.com/trading/agricultural/grain-and-oil
                 'PA': None,
                 'LE': None,
                 'BO': 'https://www.cmegroup.com/trading/agricultural/grain-and-oilseed/soybean-oil.html',
-                'RS': 'https://www.theice.com/products/251/Canola-Futures',#ICE
-                'SM': "https://www.cmegroup.com/trading/agricultural/grain-and-oilseed/soybean-meal_quotes_globex.html"}
+                'RS': '',#'https://www.theice.com/products/251/Canola-Futures',#ICE
+                'SM': "https://www.cmegroup.com/trading/agricultural/grain-and-oilseed/soybean-meal_quotes_globex.html"
+                }
+
+abv_cme_units = {'C': 'U.S. cents per bushel',
+               'S': 'U.S. cents per bushel',
+               'W': 'U.S. cents per bushel',
+               'KW': 'U.S. cents per bushel',
+               'MW': '',
+               'CC': '',
+               'QC': '',
+               'KC': '',
+               'CL': 'U.S. dollars and cents per barrel',
+               'HO': 'U.S. dollars and cents per gallon',
+               'BO': 'U.S. cents per pound',
+               'RS': '',
+               'SM': 'U.S. dollars and cents per short ton'}
+
+abv_formatted_units = {'C': chr(162) + '/bushel',
+                       'S': chr(162) + '/bushel',
+                       'W': chr(162) + '/bushel',
+                       'KW': chr(162) + '/bushel',
+                       'MW': '',
+                       'CC': '',
+                       'QC': '',
+                       'KC': '',
+                       'CL': chr(36) + '/barrel',
+                       'HO': chr(36) + '/gallon',
+                       'BO': chr(162) + '/pound',
+                       'RS': '',
+                       'SM': chr(36) + '/short ton'}
 
 abv_cme_jsEndpts = {'C': ['https://www.cmegroup.com/CmeWS/mvc/Quotes/Future/300/G?quoteCodes=&_=1591408462672',
                           'https://www.cmegroup.com/CmeWS/mvc/Quotes/Future/300/G?pageSize=50&_=1591408462674',
@@ -97,24 +129,40 @@ abv_cme_jsEndpts = {'C': ['https://www.cmegroup.com/CmeWS/mvc/Quotes/Future/300/
 #%%
 #https://www.barchart.com/futures/quotes/KCN20/historical-prices?page=all
                 
-#%% 
+con_month_abv = {'January': 'F',
+                'February': 'G',
+                'March': 'H',
+                'April': 'J',
+                'May': 'K',
+                'June': 'M',
+                'July': 'N',
+                'August': 'Q',
+                'September': 'U',
+                'October': 'V',
+                'November': 'X',
+                'December': 'Z'}
+m_abv_con_abv = {k[:3]: v for k,v in con_month_abv.items()}
 
 #%% temp
 #collection_date = max([i for i in curve_prices_df.index 
 #                       if type(i) == pd._libs.tslibs.timestamps.Timestamp])
-#
+
 #futures = [i.replace("COMB", "").replace("Comdty", "").replace(" ", "") 
 #            for i in curve_prices_df]#eg CL 1
 #futures_ab = set([re.sub("\d+", "",i) 
 #                    for i in futures])#eg CL
 #
-#has_expired = {i:False  #if the contract trading on dec 18th 2019 is for January settle
-#                   for i in futures_ab}
+#collection_date = max(curve_prices_df.index)#datetime.datetime(2019, 12, 18)
+#next_month = (collection_date + relativedelta(months = 1)).month
+#
 #contract_moAhead = [re.findall("([a-zA-Z]+)(\d+)",i)[0] 
 #                       for i in futures]#CL 8, not CL X20
-#for contract, mo in contract_moAhead: 
-#    if mo == '0':
-#        has_expired[contract] = True
+#
+#asdf = [i.name for i in securities_d]
+#contract_months = {
+#has_expired = {contract: mo == str(next_month) #contract has already expired at the end of data collection
+#                   for contract, mo in contract_moAhead}
+#        
 #
 #expiry_month = {con + mo: collection_date 
 #                        + relativedelta(months=int(mo)+has_expired[con])

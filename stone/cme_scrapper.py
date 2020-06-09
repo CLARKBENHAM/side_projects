@@ -5,6 +5,7 @@ import requests
 import matplotlib.dates as mdates
 import defs#mine
 import pdb
+import random
 
 #%% Bloomberg scraping
 def get_bbl_com_prx(ticker, driver):
@@ -92,6 +93,17 @@ def get_all_cme_prx():
             print(tckr, e)
     return cme_data
 
+def make_cme_df(cme_data):
+    cme_d = [pd.Series(data = cme_data[k][1], 
+                       index =cme_data[k][0],
+                       name = k) 
+                for k in cme_data.keys()]
+    long_ix = longest_index(cme_d)
+    df_idx = cme_d.pop(long_ix)
+    cme_df = df_idx.to_frame().join(cme_d, how='outer')
+    cme_d += [df_idx]
+    return cme_df
+
 #%%
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
@@ -102,7 +114,6 @@ clz = plt.close('all')
 def base_formatter(title):
     "returns fig, ax with all appropriate Initalized formating settings"
     fig, ax = plt.subplots(figsize=(16,12))
-#    fig.suptitle(title, fontsize=20)
     ax.set_title(title, fontsize=20)
     ax.set_prop_cycle(cycler('color', ['c', 'c', 
                                        'y', 'y', 
@@ -136,9 +147,8 @@ def end_formatter(dates, fig, ax):
     # rotates and right aligns the x labels, and moves the bottom of the
     # axes up to make room for them
     fig.autofmt_xdate()
-        
 #    removes white space
-    plt.tight_layout(h_pad=90, w_pad = 90)
+    plt.tight_layout()
     
 def plot_prices(data_l, old_data_l, tckrs, save_path= ''):
     """takes 2 lists of dicts of 'date', and 'adj_close' 
@@ -187,7 +197,7 @@ def multi_plots(tckrs_l, target_dir = 'mult_prx_graphs'):
         plot_prices(data_l, old_data_l, tckrs,
                     save_path = "")
         
-multi_plots(tckrs_l, target_dir = "")#temp")
+#multi_plots(tckrs_l, target_dir = "")#temp")
 #%%
 
 
@@ -229,13 +239,12 @@ def multi_plots(tckrs_l, target_dir = 'mult_prx_graphs'):
                         'adj_close':curve_prices_df[tck + '1']}
                         for tck in tckrs]
         plot_prices(data_l, old_data_l, tckrs,
-                    save_path = "")#f"{target_dir}\\" + ", ".join(tckrs))
-        
+                    save_path = f"{target_dir}\\" + ", ".join(tckrs))
 #    os.system(f'powershell -command "Compress-Archive {target_dir} {target_dir}.zip"')
         
 tckrs_l = [('W', 'KW', 'MW', 'C'), ('S', 'SM', 'RS', 'BO'), ('CL', 'HO')]
 multi_plots(tckrs_l)
-#plot_prices(data_l, old_data_l, tckrs[0], save_path = "")
+plot_prices(data_l, old_data_l, tckrs[0], save_path = "")
 
 #%% Plot Rin prices
 import xlrd 
