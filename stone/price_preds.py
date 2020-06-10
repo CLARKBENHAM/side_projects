@@ -178,9 +178,7 @@ def longest_index(df_list):
                 for i, df in enumerate(df_list)], 
                    key = lambda i: i[1]
                    )[0]
-t = time.time()
 curve_prices_d, security_d = get_blb_excel(prices_file)
-print(time.time()-t)
 
 long_ix = longest_index(curve_prices_d)
 df_idx = curve_prices_d.pop(long_ix)
@@ -207,22 +205,32 @@ def write_data():
                         for i in futures]
     curve_prices_df.columns = out_col_names
     curve_prices_df.to_csv("Historical prxs")
-    #Notes
-    pd.DataFrame({k:[abv_name[k], 
-                     abv_cme_units[k], 
-                     abv_cme_url[k], 
-                     abv_name[k] + f" ({abv_formatted_units[k]})"] 
-                for k in abv_cme_units.keys()
-                    if k and k!=''}
-                ).to_csv("notes")
     
     #CME DATA
-    if cme_data not in globals(): 
-        cme_data = get_all_cme_prx()
-    cme_df = cme_scrapper.make_cme_df(cme_data)
+#    if 'cme_data' not in globals(): 
+#        cme_data = get_all_cme_prx()
+#    cme_df = cme_scrapper.make_cme_df(globals()['cme_data'])
     cme_df.to_csv("Spot Futures")
-    
+
+    #Notes
+    def ticker_notes(k):
+        return [abv_name[k], 
+                     abv_cme_units[k], 
+                     abv_cme_url[k], 
+                     abv_name[k] + f" ({abv_formatted_units[k]})"]
+    notes_body = {k: ticker_notes(k) if k not in defs.cme_to_blb \
+                      else ticker_notes(defs.cme_to_blb[k])
+                        for k in cme_data.keys()
+                            if k and k!=''
+                        }
+    pd.DataFrame(notes_body,
+                  index = ['Name', 'Price Def', 'Title', 'Link' ]
+                ).to_csv("notes")
     #RINS
+ 
+    return None
+
+write_data()
 
 #%% figuring out how to combine securities
 t = time.time()
