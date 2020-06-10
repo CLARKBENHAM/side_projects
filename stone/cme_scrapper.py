@@ -35,7 +35,7 @@ def get_bbl_com_prx(ticker, driver):
 
 #%%
 #CME endpoints
-def convert_quote(item):
+def convert_cme_quote(item):
     "converts string quote returned from CME endpoint to float"
     if item["productName"] in ('Corn Futures', 
                                "Soybean Futures", 
@@ -49,48 +49,55 @@ def convert_quote(item):
     else:
         if item['last'] != '-':
             return float(item['last'])
-        else:                                        
-            return float(item['priorSettle'])        
+        elif item['priorSettle'] != '-':                                        
+            return float(item['priorSettle']) 
+        else:
+            return np.nan
 
 def get_cme_com_prx(ticker):
     """Get's ALL contract prices from CME for a given Comdty ticker
-    eg. 'CL' return *tuples* of datetime expiries, most reccent price"""
-    if 'www.cmegroup.com' in ticker:
-        urls = [ticker]
-        #get w/ selenium
-    elif ticker in defs.abv_cme_jsEndpts and defs.abv_cme_jsEndpts[ticker]:
+    If dynamic content, must have JS endpoint defined in defs.defs.abv_cme_jsEndpts
+    else will be treated as static by getting that ticker's URL or treating ticker as URL
+    eg. 'CL' return *tuples* of datetime expiries, most reccent price.
+    """
+    #have dynamically generated prices, use endpoints to process
+    if ticker in defs.abv_cme_jsEndpts and defs.abv_cme_jsEndpts[ticker]:
         urls = defs.abv_cme_jsEndpts[ticker]
+        for u in urls:
+            try:
+                r = requests.get(u).json()
+                date_prx = [(datetime.strptime(item['expirationDate'], 
+                                              '%Y%m%d'
+                                              ), 
+                            convert_cme_quote(item))
+                             for item in r['quotes']] 
+                                #if int(item['volume'].replace(",", "")) > 0]
+                return list(zip(*date_prx)) 
+            except Exception as e:
+                print(e)
+                last_exception = e
+        else:
+            print(f"Valid ticker: {ticker}, but stale/out of date endpoints")
+            raise last_exception
     else:
-        raise Exception(f"Invalid ticker: {ticker} doesn't have CME JS endpoint")
-    for u in urls:
-        try:
-            r = requests.get(u).json()
-            date_prx = [(datetime.strptime(item['expirationDate'], 
-                                          '%Y%m%d'
-                                          ), 
-                        convert_quote(item))
-                         for item in r['quotes'] 
-                            if int(item['volume'].replace(",", "")) > 0]
-            return list(zip(*date_prx)) 
-        except Exception as e:
-            return r['quotes'][0]
-            print(e)
-            time.sleep(1)
-            last_exception = e
-            pdb.set_trace()
-    else:
-        print(f"Valid ticker: {ticker}, but stale/out of date endpoints")
-        raise last_exception 
-        
-def get_all_cme_prx():
-    cme_data = {}
+        raise f"Invalid ticker: {ticker} doesn't have CME JS endpoint, so has 0-Volume"
+#    elif ticker in defs.abv_cme_url:
+#        url = defs.abv_cme_url[ticker]
+#    elif 'www.cmegroup.com' in ticker:
+#        url = ticker
+#    #get static content
+                
+def get_all_cme_prx(cme_data = {}):
+    """Updated cme_data dict with current CME prices, 
+    5 sec average delay per request"""
     for tckr in defs.abv_cme_jsEndpts.keys():
-        try:
-            months, prices = get_cme_com_prx(tckr)
-            cme_data[tckr] = [months, prices]
-            time.sleep(10*random.random()+3)
-        except Exception as e:
-            print(tckr, e)
+        if tckr not in cme_data.keys():
+            try:
+                months, prices = get_cme_com_prx(tckr)
+                cme_data[tckr] = [months, prices]
+                time.sleep(8*random.random()+1)
+            except Exception as e:
+                print(tckr, e)
     return cme_data
 
 def make_cme_df(cme_data):
@@ -103,6 +110,16 @@ def make_cme_df(cme_data):
     cme_df = df_idx.to_frame().join(cme_d, how='outer')
     cme_d += [df_idx]
     return cme_df
+
+cme_df = make_cme_df(get_all_cme_prx(cme_data))
+#%%
+
+        
+#%%
+
+#%%
+url = 'https://www.cmegroup.com/trading/agricultural/softs/coffee.html'
+r = requests.get(url)#.json()
 
 #%%
 import matplotlib.pyplot as plt
@@ -182,20 +199,6 @@ def plot_prices(data_l, old_data_l, tckrs, save_path= ''):
         plt.savefig(save_path)
     else:
         plt.show()
-        
-def multi_plots(tckrs_l, target_dir = 'mult_prx_graphs'):
-    "Makes plots of multiple prices together"
-    for tckrs in tckrs_l:
-        tckrs = [tck for tck in tckrs 
-                    if tck in cme_data]
-        data_l = [{'date':cme_data[tck][0], 
-                   'adj_close': cme_data[tck][1]}
-                    for tck in tckrs]
-        old_data_l = [{'date': curve_prices_df.index, 
-                        'adj_close':curve_prices_df[tck + '1']}
-                        for tck in tckrs]
-        plot_prices(data_l, old_data_l, tckrs,
-                    save_path = "")
         
 #multi_plots(tckrs_l, target_dir = "")#temp")
 #%%
