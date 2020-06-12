@@ -10,13 +10,14 @@ git commit -m
 git push
 cd ..\Stone_Presidio
 """
+import time, requests, random
 
 #bloomberg
 name_abv = {'Corn':'C',
          'Soybean':'S',
-         'Chicago Wheat':'W',
-         'Kansas Wheat':'KW',
-         'Minneapolis Wheat':'MW',
+         'Chicago Wheat':'W', #Wheat Pit
+         'Kansas Wheat':'KW', #hard Red Wheat
+         'Minneapolis Wheat':'MW', #spring wehat
          'NY Cocoa':'CC',
          'London Cocoa':'QC',
          'Coffee':'KC',
@@ -136,12 +137,13 @@ def get_CME_endpoints(start = 344, end=500):
                         r = r.json()
                         print(f"{i}: {r['quotes'][0]['productName']}", file=f)
                         print(f"{i}: {u},","\n", file=f)
-                    time.sleep(1+4*random.random())
+                    time.sleep(1+8 
+                               *random.random())
             except:
                 print("failed on", i)
                 time.sleep(10)
             start = i + 1      
-#get_CME_endpoints()
+#get_CME_endpoints(start=500, end=1000)
 #%%
 abv_bbl_url = {'C': 'https://www.bloomberg.com/quote/C%201:COM',
                'S': 'https://www.bloomberg.com/quote/S%201:COM',
@@ -158,7 +160,15 @@ abv_bbl_url = {'C': 'https://www.bloomberg.com/quote/C%201:COM',
                'SM': 'https://www.bloomberg.com/quote/SM1:COM'} 
 #%%
 #https://www.barchart.com/futures/quotes/KCN20/historical-prices?page=all
-                
+#barchart.com specific tikers
+barcharts_tickers= {'QC': 'CA',
+                    'LE': 'DF',
+                    'EH': 'FH',#Barchart is NY, CME is CME GLobex
+                    'CU': 'FL'#Barchart is CHI, CME is CHI; quotes differ
+                        }
+barcharts_tickers.update({k:k for k in abv_name.keys() 
+                            if k not in barcharts_tickers})
+#%%        
 con_month_abv = {'January': 'F',
                 'February': 'G',
                 'March': 'H',
@@ -171,35 +181,47 @@ con_month_abv = {'January': 'F',
                 'October': 'V',
                 'November': 'X',
                 'December': 'Z'}
+
 month_abv_con = {k[:3]: v for k,v in con_month_abv.items()}
+int_month_abv = {i+1:v for i, v in enumerate(con_month_abv.values())}
 
-#%% temp
-#collection_date = max([i for i in curve_prices_df.index 
-#                       if type(i) == pd._libs.tslibs.timestamps.Timestamp])
+#%%
 
-#futures = [i.replace("COMB", "").replace("Comdty", "").replace(" ", "") 
-#            for i in curve_prices_df]#eg CL 1
-#futures_ab = set([re.sub("\d+", "",i) 
-#                    for i in futures])#eg CL
-#
-#collection_date = max(curve_prices_df.index)#datetime.datetime(2019, 12, 18)
-#next_month = (collection_date + relativedelta(months = 1)).month
-#
-#contract_moAhead = [re.findall("([a-zA-Z]+)(\d+)",i)[0] 
-#                       for i in futures]#CL 8, not CL X20
-#
-#asdf = [i.name for i in securities_d]
-#contract_months = {
-#has_expired = {contract: mo == str(next_month) #contract has already expired at the end of data collection
-#                   for contract, mo in contract_moAhead}
-#        
-#
-#expiry_month = {con + mo: collection_date 
-#                        + relativedelta(months=int(mo)+has_expired[con])
-#                            for con, mo in contract_moAhead}
+def write_data():
+    "writes all data"
 
+    out_col_names = [abv_name[re.sub("\d+", "",i)] + "_" + re.findall("\d+",i)[0]
+                        for i in futures]
+    curve_prices_df.columns = out_col_names
+    curve_prices_df.to_csv("Historical prxs")
+    
+    #CME DATA
+#    if 'cme_data' not in globals(): 
+#        cme_data = get_all_cme_prx()
+#    cme_df = cme_scrapper.make_cme_df(globals()['cme_data'])
+    cme_df.to_csv("Spot Futures")
 
+    #Notes
+    def ticker_notes(k):
+        "Data for CME ticker k"
+        return [abv_name[k], 
+                abv_cme_units[k], 
+                abv_cme_url[k], 
+                abv_name[k] + f" ({abv_formatted_units[k]})"]
+    notes_body = {k: ticker_notes(k) if k not in cme_to_blb \
+                      else ticker_notes(cme_to_blb[k])
+                        for k in cme_data.keys()
+                            if k and k!=''
+                        }
+    pd.DataFrame(notes_body,
+                  index = ['Name', 'Price Def', 'Title', 'Link' ]
+                ).to_csv("notes")
+    #RINS
+ 
+    return None
 
+# write_data()
+#%%
 #contract_expiry_dates = {'BO':14,
 #                         'C ':14,
 #                         'CC',

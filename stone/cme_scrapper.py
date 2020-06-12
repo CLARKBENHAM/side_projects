@@ -5,7 +5,7 @@ import requests
 import matplotlib.dates as mdates
 import defs#mine
 import pdb
-import random
+import random, time, datetime
 
 #%% Bloomberg scraping
 def get_bbl_com_prx(ticker, driver):
@@ -111,15 +111,18 @@ def make_cme_df(cme_data):
     cme_d += [df_idx]
     return cme_df
 
-cme_df = make_cme_df(get_all_cme_prx(cme_data))
+#cme_df = make_cme_df(get_all_cme_prx(cme_data))
 #%%
+def get_barchart_historicals(ticker):
+    pass
 
-        
-#%%
+def make_barchart_historicals(tickers):
+    pass
+r = requests.get('https://www.barchart.com/futures/quotes/FLN20/overview')
+r.content
 
-#%%
-url = 'https://www.cmegroup.com/trading/agricultural/softs/coffee.html'
-r = requests.get(url)#.json()
+
+
 
 #%%
 import matplotlib.pyplot as plt
@@ -201,19 +204,8 @@ def plot_prices(data_l, old_data_l, tckrs, save_path= ''):
         plt.show()
         
 #multi_plots(tckrs_l, target_dir = "")#temp")
-#%%
-
-
-        #%%
-
-
-#%%
-for data, old_data, tckr in zip(data_l, old_data_l, tckrs):
-    print(sum(data['adj_close']))
 
 #%% 
-import time
-import random
 os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio")
 #cme_data = get_all_cme_prx()
 
@@ -247,34 +239,38 @@ def multi_plots(tckrs_l, target_dir = 'mult_prx_graphs'):
         
 tckrs_l = [('W', 'KW', 'MW', 'C'), ('S', 'SM', 'RS', 'BO'), ('CL', 'HO')]
 multi_plots(tckrs_l)
-plot_prices(data_l, old_data_l, tckrs[0], save_path = "")
 
 #%% Plot Rin prices
 import xlrd 
 import os
 
-os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
-renew_file = "eia renewable fuels, All Tables in One.xls"
-xl_bk = xlrd.open_workbook(renew_file)
-b = xl_bk.sheet_by_name("Table017")
-
-dates = [i.replace("-", " ").replace(".", "").strip() for i in b.col_values(0)[8:-5]]
-dates = [datetime.strptime(i, "%b %y") for i in dates]
-biodiesel_prx = [float(i) for i in b.col_values(1)[8:] if i]
-diesel_prx = [float(i) for i in b.col_values(2)[8:] if i]
-
-tckrs =("Bio", "Diesel")
-old_data_l = [{'date':dates, 
-               'adj_close': biodiesel_prx},
-                {'date':dates, 
-               'adj_close': diesel_prx}
-                ]
-data_l = [{'date': dates, 
-           'adj_close': [None]*len(dates)}]*2
-
-plot_prices(data_l, old_data_l, tckrs,
-                    save_path = "")#f"{target_dir}\\" + ", ".join(tckrs))
-
+def eia_renewable_table(table = 17):
+    os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
+    renew_file = "eia renewable fuels, All Tables in One.xls"
+    xl_bk = xlrd.open_workbook(renew_file)
+    if table == 17:
+        b = xl_bk.sheet_by_name("Table017")
+        dates = [i.replace("-", " ").replace(".", "").strip() for i in b.col_values(0)[8:-5]]
+        dates = [datetime.strptime(i, "%b %y") for i in dates]
+        biodiesel_prx = [float(i) for i in b.col_values(1)[8:] if i]
+        diesel_prx = [float(i) for i in b.col_values(2)[8:] if i]
+        return dates, biodiesel_prx, diesel_prx
+    
+def eia_renewable_table_plots(table=17):
+    if table == 17:
+        dates, biodiesel_prx, diesel_prx = eia_renewable_table(table=table)
+        old_data_l = [{'date':dates, 
+                           'adj_close': biodiesel_prx},
+                            {'date':dates, 
+                           'adj_close': diesel_prx}
+                            ]
+        data_l = [{'date': dates, 
+                   'adj_close': [None]*len(dates)}]*2
+        tckrs =("Bio", "Diesel")
+        plot_prices(data_l, old_data_l, tckrs,
+                            save_path = f"{target_dir}\\" + ", ".join(tckrs))
+    
+#eia_renewable_table_plots(table=17)
 #%%
 
 
@@ -284,33 +280,53 @@ plot_prices(data_l, old_data_l, tckrs,
 
 
 #%%
-#Alternative Scrapping method
+#Alternative Scrapping methods
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.support import expected_conditions as EC
+driver_path = "C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\chromedriver_win32\\chromedriver.exe"
 
-driver = webdriver.Chrome()
-wait = WebDriverWait(driver, 9)
-u = 'https://www.bloomberg.com/quote/CC1:COM'
-driver.get(u)
-val = wait.until(
-        EC.presence_of_element_located(
-                (By.XPATH, '//span[contains(@class, "priceText")]')
-                ))
-print(val.text)
-prx = driver.find_elements_by_xpath('//span[contains(@class, "priceText")]')
-print(prx.text)
+def get_blb(u = 'https://www.bloomberg.com/quote/CC1:COM', existing_driver = None):
+    "Get current prices from Bloomberg"
+    driver = existing_driver or webdriver.Chrome(executable_path = driver_path)
+    wait = WebDriverWait(driver, 9)
+    driver.get(u)
+    val = wait.until(
+            EC.presence_of_element_located(
+                    (By.XPATH, '//span[contains(@class, "priceText")]')
+                    ))
+    print(val.text)
+    prx = driver.find_elements_by_xpath('//span[contains(@class, "priceText")]')
+    print([i.text for i in prx])
+    if not existing_driver:
+        driver.close()
+        
+def check_barchart(existing_driver = None):
+    driver = existing_driver or webdriver.Chrome(executable_path = driver_path)
+    wait = WebDriverWait(driver, 9)
+    for ticker in defs.abv_name.keys():
+        u = f"https://www.barchart.com/futures/quotes/{ticker}N20/overview"
+        driver.get(u)
+        try:
+            name = wait.until(
+                    EC.presence_of_element_located(
+                            (By.XPATH, '//span[@class="symbol"]')#//*[@id="main-content-column"]/div/div[1]/div[1]/h1/span[1]s
+                            ))
+            print(f"{ticker}: {name.text}")
+        except:
+            print(f"{ticker}:    ,#FAILED")
+        time.sleep(0.5)
+    if not existing_driver:
+        driver.close()
+
+#driver = webdriver.Chrome(executable_path = driver_path)
+#get_blb(existing_driver = driver)
+#check_barchart(existing_driver = driver)
 #%%
-#driver.get(soymeal_url)
-#table = driver.find_element_by_xpath('//*[@id="quotesFuturesProductTable1"]')
-#tb = driver.find_elements_by_xpath('//td[contains(@id, "quotesFuturesProductTable1_")]')
 
-#%%
-driver.close()
-
-#%% Try and hve 2 y axis
+#%%TODO: Try and hve 2 y axis
 
 def plot_prices(data_l, old_data_l, tckrs, save_path= ''):
     """takes 2 lists of dicts of 'date', and 'adj_close' 
