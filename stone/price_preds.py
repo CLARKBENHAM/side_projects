@@ -9,42 +9,14 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 import time
 import re
+import pdb
+from collections import OrderedDict
 
-os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
-prices_file = "16.16 Historical Commodity Price Data.xlsx"
+os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio")
+import defs
+#import cme_scrapper
 
-#xl_bk = xlrd.open_workbook(prices_file) 
-commodities = xl_bk.sheet_names()
-security_d = []
-curve_prices_d = []
-ix = 15
-b = xl_bk.sheet_by_index(ix)
-sz = len(b.row_values(6))
-date_lens = [len(b.col_values(i)) 
-                for i in range(0,sz,4)]
-long_col = 4*date_lens.index(max(date_lens))
-dates = [datetime(*xlrd.xldate_as_tuple(i,0)) if type(i) == float
-         else None
-            for i in b.col_values(long_col)[7:]]
-com_maturities = b.row_values(0)[1::4]
-com_ab = commodities[ix]
-    
-short_col = 4*date_lens.index(min(date_lens))
-short_col_len = min(date_lens)
-short_col_date = b.col_values(short_col)[-1]
-is_date_aligned = [b.col_values(i)[short_col_len-1] == short_col_date
-                       for i in range(0,sz,4)]
-bad_date_cols = [4*ix for ix, i in enumerate(is_date_aligned) 
-                                if not i]
-
-bad_date_cols
 #%%import Data from Com pricing spreadsheet
-
-#com_dict = {name:pd.read_excel("16.16 Historical Commodity Price Data.xlsx", name )
-#            for name in xl_bk.sheet_names()}
-os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
-prices_file = "16.16 Historical Commodity Price Data.xlsx"
-
 def int_col(n,base=26):
     "convert 0 index column number to excel column name"
     if n < 0:
@@ -53,91 +25,203 @@ def int_col(n,base=26):
         return chr(65 + n)         
     return int_col(n//base-1,base) + int_col(n%base,base)
 
-#file_name = prices_file
-#sheet_ix = 15
-#target_indx = dates
-def make_blb_row_aligned(file_name, sheet_ix, bad_date_cols, target_indx, bk = None):
+def make_blb_book_row_aligned(file_name):
+    """Takes file name, of (Bloomberg formatted security columns),
+    Writes book to make all sheet's securities's columns date aligned.
+    iterates over worksheets calling make_blb_sheet_aligned
+    """
+    bk_open = False
+    xlrd_bk = xlrd.open_workbook(file_name)
+    
+    for sht_ix, name in enumerate(xlrd_bk.sheet_names()):
+        b = xlrd_bk.sheet_by_index(sht_ix)       
+        sz = len([i for i in b.row_values(6)])
+        #See blb_dates_are_skipped()
+        date_cols = [[datetime(*xlrd.xldate_as_tuple(j,0)) 
+                        for j in b.col_values(i)[7:] 
+                    if j] 
+                        for i in range(0,sz,4)]
+        dates = sorted(set([i
+                            for c in date_cols
+                                for i in c]),
+                        reverse = True)
+        is_date_aligned = [col[-1] == dates[len(col)-1]
+                               for col in date_cols]
+    
+        if not all(is_date_aligned):
+            print(f"\nWARNING: Row's not date aligned, some days missing, for {name}")
+            bad_date_cols = [4*ix for ix,i in enumerate(is_date_aligned) 
+                                if not i]
+            print(bad_date_cols)
+            if not bk_open:
+                wrote_bk = openpyxl.load_workbook(file_name, data_only = True)
+                bk_open = True
+            #keeps book open in case have to write to another sheet; opening takes forever
+            wrote_bk = make_blb_sheet_aligned(file_name, 
+                                                 sht_ix, 
+                                                 bad_date_cols,
+                                                 dates,
+                                                 wrote_bk)
+    if bk_open:
+        wrote_bk.save(prices_file + "(2)")
+        wrote_bk.close()
+    
+def make_blb_sheet_aligned(file_name, sht_ix, bad_date_cols, target_indx, wrote_bk):
     """for each sheet in this file of bloomberg formatted data, all columns will
         be row aligned on each date. Must be xlsx workbook.
         file_name: name of book this operation is to be performed on
-        sheet_ix:
+        sht_ix: sheet_ix
         bad_date_cols: list of columns of dates(as ints) which needs to be extended+next 2 cols
         target_indx: the dates that data_ix will now hold (as dt objects)
-        returns: the book that was opened, *MUST* be {{saved + closed}} by caller"""
-#    target_indx = [i.strftime("%Y-%m-%d %H:%M:%S") for i in target_indx]
-    bk = bk or openpyxl.load_workbook(file_name, data_only = True)                 
-    sheet = bk.worksheets[sheet_ix]
+                     a strict superset of columns in bad_date_cols 
+                        (values only in bad_date_cols will be removed)
+        wrote_bk: the openpyxl book to write to
+        returns: the book that was opened, *MUST* be {{saved + closed}} by caller
+        """
+    sheet = wrote_bk.worksheets[sht_ix]
     for c in bad_date_cols:
-        d_col = [i.value for i in sheet[int_col(c)]][7:]
-        for i,v in enumerate(reversed(d_col)):#openpyxl appends a bunch of empty cells
-            if v is not None:   
-                valid_till = len(d_col) - i
-                break
-        d_col = d_col[:valid_till]
-        t_col =[i.value for i in sheet[int_col(c+1)]][7:valid_till]
-        v_col = [i.value for i in sheet[int_col(c+2)]][7:valid_till]
+        #Have to remove all values that aren't in target_indx
+        valid_idx, d_col = list(zip(*[(ix, v.value) 
+                                for ix, v in enumerate(sheet[int_col(c)])
+                                    if v.value in target_indx]
+                                ))
+        d_col = list(d_col)
+        valid_idx = set(valid_idx)
+        t_col = [v.value for ix, v in enumerate(sheet[int_col(c+1)])
+                                    if ix in valid_idx]
+        v_col = [v.value for ix, v in enumerate(sheet[int_col(c+2)])
+                                    if ix in valid_idx]
         for ix, v in enumerate(target_indx):
-            if d_col[ix] !=v and d_col[ix] != "#N/A N/A": 
-                print(f"inserted {v} @ {ix}, col {c}, was {d_col[ix]}")
+            if ix >= len(d_col) or (d_col[ix] !=v and d_col[ix] != "#N/A N/A"): 
+                try:
+                    print(f"inserted {v} @ {ix}, col {c}, was {d_col[ix]}")
+                except:
+                    print(f"inserted {v} @ end, col {c}")
                 d_col.insert(ix, v)
                 t_col.insert(ix, "#N/A N/A")
                 v_col.insert(ix, "#N/A N/A")
-#                time.sleep(0.1)
+            if len(d_col) > len(target_indx):
+                pdb.set_trace()
         t_col += [ "#N/A N/A"]*(len(d_col) - len(t_col))#??, not sure why not same sz
         v_col += [ "#N/A N/A"]*(len(d_col) - len(v_col))
     
-        #writeback uses excel locations, 1-indexed not 0
+        #writeback uses excel locations, 1-indexed instead of 0
         for row in range(8, 8 + len(d_col)):
-            sheet.cell(column=c+1, row=row, value="{0}".format(d_col[row-8]))
-            sheet.cell(column=c+2, row=row, value="{0}".format(t_col[row-8]))
-            sheet.cell(column=c+3, row=row, value="{0}".format(v_col[row-8]))
-    return bk
+            sheet.cell(column=c+1, row=row).value = d_col[row-8]
+            sheet.cell(column=c+2, row=row).value = t_col[row-8]
+            sheet.cell(column=c+3, row=row).value = v_col[row-8]
+    return wrote_bk
+
+def sort_contracts(sec_names):
+    "Sorts Contracts, Most reccent first"
+    sec_mt , sec_yr = list(zip(*[re.findall("([a-zA-Z])(\d+)", i)[0]
+                                 for i in sec_names]))
     
-#make_blb_row_aligned(prices_file, 
-#                     15, 
-#                     bad_date_cols,
-#                     dates)
+    assert all([len(i) == 2 or i in ('1', '0', '9') for i in sec_yr]), \
+            f"Recheck date conversion, {sec_yr[:100]}"
+    sec_yr = [21 if yr == '1' else 
+              20 if yr == '0' else 
+              19 if yr == '9' else
+              int(yr) 
+                  for yr in sec_yr]
+    
+    month_abreviations = list(defs.con_month_abv.values())
+    sec_mt = [month_abreviations.index(i) for i in sec_mt]
+    reformatted = [yr*100 + m for yr,m in zip(sec_yr, sec_mt)]
+    return [s for _,s in sorted(zip(reformatted, sec_names),
+                                     key = lambda i: i[0],
+                                     reverse= True)]
+
+def return_expired(sec_list, curve_prices, contract_abv=""):
+    """Returns a pandas df with the expiry prices for each contract, with columns
+    being the number of months since that expiry. Use for predicting future prices
+    without concurrent trading, eg. prediciting August settle given June settle vs
+    estimating current CL1 given current CL2.
+    Warning: Off by 1 Error, If contract had last trading day as last date 
+    collected that contract won't be included"""
+    collection_date = max([max(i.index) for i in sec_list])
+    expired_contract = [i for i in sec_list
+                            if max(i.index)<collection_date ]
+    
+    sorted_contract = [i.name for i in sorted(expired_contract, 
+                                              key = lambda i: max(i.index),
+                                              reverse = True)]
+    
+    prev_contract = {sorted_contract[i]: sorted_contract[i+1]
+                                 for i in range(len(sorted_contract)-1)}
+    prev_contract[sorted_contract[-1]] = 'last'    
+    con_2_expiry = {i.name: max(i.index) for i in expired_contract}
+    con_2_expiry['last'] =  min(
+                                next(
+                                    filter(lambda i: i.name == sorted_contract[-1], 
+                                            sec_list)
+                                     ).index
+                                )
+    #inclusive range of dates where front month
+    con_range = {curr: (con_2_expiry[prev]+timedelta(1), con_2_expiry[curr]) 
+                      for curr, prev in prev_contract.items()}
+    
+    def _expiry_prices(tick, out_sz=None):
+        """"gets the expiry month prices for a given contract as np.array"""
+        indxs = np.logical_and(curve_prices.index >= con_range[tick][0],
+                                curve_prices.index <= con_range[tick][1])
+        out = curve_prices.iloc[indxs, 0]
+        if out_sz:
+            missing_sz = out_sz - len(out)
+            if missing_sz > 0:
+                return np.concatenate((out.values, 
+                                      np.repeat(np.nan, missing_sz)))
+            else:
+                return out[:out_sz].values
+        else:
+            return out.values
+        
+    def _make_filler(t,ix):
+        return [[np.nan]*len(filt_indx(t)) for _ in range(ix)]
+    
+    expired_curve = pd.DataFrame(
+                        np.concatenate(
+                            [np.stack(
+                                [_expiry_prices(j,
+                                           out_sz = len(filt_indx(t)))
+                                     for j in sorted_contract[ix:]]
+                                + _make_filler(t,ix)
+                                 ).T
+                                    for ix, t in enumerate(sorted_contract)
+                            ]),
+                        columns = [f"{contract_abv} {i}Ago" #not all contracts 1Mo
+                                   for i in range(len(sorted_contract))]
+                        )
+    return expired_curve
+
 #%%
-    
-def get_blb_excel(prices_file, individual_securities = True):
-    """Reads in data from a workbook with many sheets of Bloomberg formated
-    historical future's prices, with Top Row Dates aligned and 
-    the **Bottom** date of each contract aligned. 
-        [will fail on Jan 1, Jan 3, Jan 4 vs. Jan 1, Jan 2, Jan 4]
+def get_blb_excel(prices_file, individual_securities = True,  already_formatted = False):
+    """Reads in data from an excel workbook with many sheets of Bloomberg formated
+    historical future's prices, with Top Row Dates aligned.
+    Returns Pandas DF's
     """
-    wrote_bk = None
+    if not already_formatted:
+        print(f"Will be long, is reformatting, make sure {prices_file} is closed")
+        make_blb_book_row_aligned(prices_file)#modifies book
+
     xl_bk = xlrd.open_workbook(prices_file)
     commodities = xl_bk.sheet_names()
     security_d = []
     curve_prices_d = []
-    for ix, name in enumerate(commodities):
-        b = xl_bk.sheet_by_index(ix)
-        sz = len(b.row_values(6))
-        date_lens = [len(b.col_values(i)) 
-                        for i in range(0,sz,4)]
-        long_col = 4*date_lens.index(max(date_lens))
-        dates = [datetime(*xlrd.xldate_as_tuple(i,0)) if type(i) == float
-                 else None
-                    for i in b.col_values(long_col)[7:]]
-        com_maturities = b.row_values(0)[1::4]
-        com_ab = commodities[ix]
-            
-        short_col = 4*date_lens.index(min(date_lens))
-        short_col_len = min(date_lens)
-        short_col_date = b.col_values(short_col)[-1]
-        is_date_aligned = [b.col_values(i)[short_col_len-1] == short_col_date
-                               for i in range(0,sz,4)]
-        if not all(is_date_aligned):
-            print(f"WARNING: Row's not date aligned, some days missing, for {name}")
-            bad_date_cols = [i for i in enumerate(is_date_aligned) 
-                                if not i]
-            #keeps book open in case have to write to another sheet; opening takes forever
-            wrote_bk = make_blb_row_aligned(prices_file, 
-                                 ix, 
-                                 bad_date_cols,
-                                 b.col_values(long_col)[7:],
-                                 bk = wrote_bk)
-            
+    expired_curve_d = []
+    
+    for sht_ix, name in enumerate(commodities):
+        b = xl_bk.sheet_by_index(sht_ix)               
+        com_maturities = [i for i in b.row_values(0)[1::4] if i]
+        sz = len([i for i in b.row_values(6)])
+        date_cols = [[datetime(*xlrd.xldate_as_tuple(j,0)) 
+                            for j in b.col_values(i)[7:] 
+                        if j] 
+                            for i in range(0,sz,4)]
+        dates = sorted(set([i
+                            for c in date_cols
+                                for i in c]),
+                        reverse = True)
         curve_prices = pd.DataFrame(np.array([pd.to_numeric(b.col_values(i)[7:],
                                                             errors = 'coerce'
                                                             )
@@ -148,194 +232,70 @@ def get_blb_excel(prices_file, individual_securities = True):
                                      )            
         curve_prices_d += [curve_prices]#.dropna()
 
-        if individual_securities:#slow
-            sec_df = pd.DataFrame(list(zip(*[b.col_values(i)[7:]
-                                                    for i in range(1,sz,4)]
-                                                    )) )
-            securities = np.unique(sec_df.values)
-            securities = securities[~np.isin(securities, ('', '#N/A N/A'))]
-                                                          
-            def get_security(s):
-                "returns prices for 1 single future"
-                rows, _ = np.where(sec_df == s)
-                #get all of row, column not just those indexes.
-                df = pd.Series(data = curve_prices.values[sec_df == s], 
-                          index = curve_prices.index[rows],
-                          name = s
-                          ).dropna()
-                return df[~pd.isna(df.index)]
-            sec_list = [get_security(s) for s in securities]
-            security_d += sec_list
-    if wrote_bk:
-        wrote_bk.save(prices_file)
-        wrote_bk.close()
-    xl_bk.close()
-    return curve_prices_d, security_d
-        
-def longest_index(df_list):
-    "returns the index of the longest dataframe from a list of df's"
-    return max([(i, df.shape[0]) 
-                for i, df in enumerate(df_list)], 
-                   key = lambda i: i[1]
-                   )[0]
-curve_prices_d, security_d = get_blb_excel(prices_file)
+        ##individual_securities
+        sec_df = pd.DataFrame(list(zip(*[b.col_values(i)[7:]
+                                                for i in range(1,sz,4)]
+                                                )) )
+        securities = np.unique(sec_df.values)
+        securities = securities[~np.isin(securities, ('', '#N/A N/A'))]
+                                                      
+        def get_security(s):
+            "returns prices for 1 single future"
+            rows, _ = np.where(sec_df == s)
+            #get all of row, column not just those indexes.
+            df = pd.Series(data = curve_prices.values[sec_df == s], 
+                      index = curve_prices.index[rows],
+                      name = s
+                      ).dropna()
+            return df[~pd.isna(df.index)]
+        sec_list = [get_security(s) for s in securities]
+        security_d += sec_list
+    
+        ##expired securities
+        expired_curve = return_expired(sec_list, curve_prices)
+        expired_curve_d += [expired_curve]
 
-long_ix = longest_index(curve_prices_d)
-df_idx = curve_prices_d.pop(long_ix)
-curve_prices_df = df_idx.join(curve_prices_d)
-#curve_prices_df.dropna(inplace = True)
-#curve_prices_df.reindex(curve_prices_df.index[::-1]) #NA axis
-curve_prices_d += [df_idx]
+    curve_prices_df = pd.concat(curve_prices_d,
+                            axis=1,
+                            join='outer', 
+                            sort=True).iloc[::-1]#largest axis up top
+    curve_prices_df.dropna(how='all', inplace=True)
+    curve_prices_df.columns = [i.replace("COMB", "").replace("Comdty", "").replace(" ", "") 
+                for i in curve_prices_df.columns]#eg CL 1
+    securities_df = pd.concat(security_d, 
+                              axis=1, 
+                              join='outer',
+                              sort=True).iloc[::-1]
+    #sizes are off since Some columns have date's with prices, but no ticker??
+    securities_df.dropna(how='all', inplace=True)
+    expired_curves_df = pd.concat(expired_curve_d, 
+                              axis=1, 
+                              join='outer',
+                              sort=True).iloc[::-1]
+
+    return curve_prices_df, securities_df, expired_curves_df
+
+os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
+prices_file = "16.16 Historical Commodity Price Data.xlsx"
+curve_prices_df, securities_df, expired_curves_df = get_blb_excel(prices_file, 
+                                                                  already_formatted  = True)
 
 futures = [i.replace("COMB", "").replace("Comdty", "").replace(" ", "") 
             for i in curve_prices_df]#eg CL 1
 futures_ab = set([re.sub("\d+", "",i) 
                     for i in futures])#eg CL
-curve_prices_df.columns = futures
+#%% 
+
+# month_rng = sorted(set([datetime(d.year, d.month, 1)
+#                         for d in securities_df.index]))
+# month_abvs = sort_contracts([f"{defs.int_month_abv[i.month]}{str(i.year)[-2:]}" 
+#                              for i in month_rng])
 
 
-#%%
-os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio")
-import defs
-#import cme_scrapper
 
-def write_data():
-    "writes all data"
-    out_col_names = [defs.abv_name[re.sub("\d+", "",i)] + "_" + re.findall("\d+",i)[0]
-                        for i in futures]
-    curve_prices_df.columns = out_col_names
-    curve_prices_df.to_csv("Historical prxs")
-    
-    #CME DATA
-#    if 'cme_data' not in globals(): 
-#        cme_data = get_all_cme_prx()
-#    cme_df = cme_scrapper.make_cme_df(globals()['cme_data'])
-    cme_df.to_csv("Spot Futures")
-
-    #Notes
-    def ticker_notes(k):
-        return [abv_name[k], 
-                     abv_cme_units[k], 
-                     abv_cme_url[k], 
-                     abv_name[k] + f" ({abv_formatted_units[k]})"]
-    notes_body = {k: ticker_notes(k) if k not in defs.cme_to_blb \
-                      else ticker_notes(defs.cme_to_blb[k])
-                        for k in cme_data.keys()
-                            if k and k!=''
-                        }
-    pd.DataFrame(notes_body,
-                  index = ['Name', 'Price Def', 'Title', 'Link' ]
-                ).to_csv("notes")
-    #RINS
- 
-    return None
-
-write_data()
-
-#%% figuring out how to combine securities
-t = time.time()
-long_ix = longest_index(security_d)
-df_idx = security_d.pop(long_ix)
-securities_df = df_idx.to_frame().join(security_d)
-security_d += [df_idx]
-print("1: ", time.time() - t)
-#%%
-t = time.time()
-securities_df  = curve_prices_df
-securities_df.drop(labels=securities_df.columns,
-                   axis=1,
-                   inplace=True)
-securities_df = securities_df.join(security_d, how='outer')
-print("2: ", time.time() - t)
-
-#securities_df = pd.concat(security_d, axis=1, join='outer', sort=True)
-#%%
-future_contracts = [i.name for i in security_d]
-security_df = pd.DataFrame(security_d, 
-                           columns = future_contracts, 
-                           index = curve_prices_df)
-
-#%%
-securities_df = pd.concat(security_d, axis=1, join_axes = [curve_prices_df.index])
-#%%
-#have duplicates na's
-securities_df = pd.concat(security_d, axis=1, join='outer', sort=True)
-
-#%%
-l= [i.to_frame() for i in security_d ]
-pd.concat(l, axis=1, join='outer', sort=True)
-#%%
-cs = []
-for i in security_d:
-    if list(i.index) != list(set(i.index)):
-        c = i
-        s = set(c.index)
-        for j in c.index:
-            try:
-                s.remove(j)
-            except:
-                print(c.name, j)
-#%%
-for c in cs:
-    
-#%%
-
-#%%
-a = pd.Series([1,2,3,4], index=[np.nan,2,8,9], name='1')
-b = pd.Series([5,6,7,8], index=[np.nan,2,8, 9], name='1')
-c = pd.Series([5,6,7,8], index=[np.nan, 6,7,8], name='2')
-l = [a,a,c]
-pd.concat(l, axis=1, join='outer', sort=True)
-
-#%%
-a = pd.Series([1,2,3,4]*100, index=list(range(1,401)), name='1')
-b = pd.Series([5,6,7,8]*100, index=list(range(400)), name='1')
-c = pd.Series([5,6,7,8]*1000, index=list(range(2000))*2, name='2')
-l = [a,a,b, c]
-pd.concat(l, axis=1, join='outer', sort=True)
+#%% 
 
 
-#%% Make Price Graphs from future's
-
-#%%
-from scipy import integrate
-import defs
-
-hist_val = curve_prices_df.reindex(curve_prices_df.index[::-1])
-hist_pct = hist_val.pct_change(periods = 252)#6mo out
-hist_vol = hist_pct.std(axis=0)
-
-for ab in defs.abv_cme_url:
-    if ab:
-        tick = ab + "1"
-        ix = futures.index(tick)
-        base_ix = hist_val.iloc[:,ix].first_valid_index()
-        base_prx = hist_val.loc[base_ix, tick]
-        dist = ss.lognorm(loc = 0, scale = 1, s = hist_vol.values[ix])
-        
-        x = np.linspace(hist_pct.iloc[:,ix].min(),
-                        hist_pct.iloc[:,ix].max(),
-                        100)*2
-        
-        fig, ax =plt.subplots()
-        x_axis = [i for i in  base_prx * (1 + x) if i > 0]
-        
-        probs = [integrate.quad(lambda x: dist.pdf(x/base_prx)/base_prx, i,j)[0]
-                         for i,j in zip(x_axis[:-1], x_axis[1:])]
-        probs = [100*i/sum(probs) for i in probs]
-        
-        plt.bar(x_axis[:-1], probs, label="Probabilities")
-        plt.legend()
-        plt.title(f"Probability of ending prices of {hist_vol.index[ix]} in 12mo")
-        xformatter = mticker.FormatStrFormatter('$%.0f')
-        ax.xaxis.set_major_formatter(xformatter)
-        yformatter = mticker.FormatStrFormatter('%.1f%%')
-        ax.yaxis.set_major_formatter(yformatter)
-        plt.show()
-
-
-#plt.plot(x_axis, dist.pdf(x), label='dist')
-#plt.yscale('log')
 #%%
 
 
@@ -416,38 +376,44 @@ for sheet_name, h_ix, sector_Cos in zip(sheet_names, hist_ixs, Cos):
 #for co in fatoil_Cos: 
 #%%
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-#a = pd.read_excel("16.16 Historical Commodity Price Data.xlsx", 'Corn')
-#get size before read in?
-with open(prices_file) as f:
-    print(f.readline())
-#%%
-a = pd.read_excel(prices_file, 'Corn', 
-                  skiprows = 6, 
-                  index_col = 0,
-                  use_cols = list(range(2,sz,3)))
-#indx = pd.to_datetime(a.iloc[6:,0])
-#%%
-curve_prices = a.iloc[6:,2::4].astype(float)
-curve_prices.columns = a.columns[1::4]
-curve_prices.index = indx
-#%%
-sec_names = a.columns[1::4].unqiue()
-#a.drop(labels = [1:5], axis=1)
-
-a.drop(columns=[2::3])
-#space cols
-#unified index
-#%%
-a.iloc[:,1]
 
 
+#%% Make Price Distribution Graphs from future's
+from scipy import integrate
+import defs
+
+hist_val = curve_prices_df.reindex(curve_prices_df.index[::-1])
+hist_pct = hist_val.pct_change(periods = 252)#6mo out
+hist_vol = hist_pct.std(axis=0)
+
+for ab in defs.abv_cme_url:
+    if ab:
+        tick = ab + "1"
+        ix = futures.index(tick)
+        base_ix = hist_val.iloc[:,ix].first_valid_index()
+        base_prx = hist_val.loc[base_ix, tick]
+        dist = ss.lognorm(loc = 0, scale = 1, s = hist_vol.values[ix])
+        
+        x = np.linspace(hist_pct.iloc[:,ix].min(),
+                        hist_pct.iloc[:,ix].max(),
+                        100)*2
+        
+        fig, ax =plt.subplots()
+        x_axis = [i for i in  base_prx * (1 + x) if i > 0]
+        
+        probs = [integrate.quad(lambda x: dist.pdf(x/base_prx)/base_prx, i,j)[0]
+                         for i,j in zip(x_axis[:-1], x_axis[1:])]
+        probs = [100*i/sum(probs) for i in probs]
+        
+        plt.bar(x_axis[:-1], probs, label="Probabilities")
+        plt.legend()
+        plt.title(f"Probability of ending prices of {hist_vol.index[ix]} in 12mo")
+        xformatter = mticker.FormatStrFormatter('$%.0f')
+        ax.xaxis.set_major_formatter(xformatter)
+        yformatter = mticker.FormatStrFormatter('%.1f%%')
+        ax.yaxis.set_major_formatter(yformatter)
+        plt.show()
+
+
+#plt.plot(x_axis, dist.pdf(x), label='dist')
+#plt.yscale('log')
