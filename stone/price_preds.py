@@ -5,16 +5,17 @@ import xlrd
 import openpyxl
 import os
 import sklearn
-from datetime import datetime, timedelta
+from datetime import timedelta, datetime
 from dateutil.relativedelta import relativedelta
 import time
 import re
 import pdb
-from collections import OrderedDict
+from collections import OrderedDict, namedtuple
+import pickle
 
 os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio")
 import defs
-#import cme_scrapper
+import cme_scrapper
 
 #%%import Data from Com pricing spreadsheet
 def int_col(n,base=26):
@@ -124,21 +125,24 @@ def sort_contracts(sec_names):
               19 if yr == '9' else
               int(yr) 
                   for yr in sec_yr]
-    
     month_abreviations = list(defs.con_month_abv.values())
-    sec_mt = [month_abreviations.index(i) for i in sec_mt]
-    reformatted = [yr*100 + m for yr,m in zip(sec_yr, sec_mt)]
+    sec_mt = [month_abreviations.index(i) 
+                  for i in sec_mt]
+    reformatted = [yr*100 + m 
+                       for yr,m in zip(sec_yr, sec_mt)]
     return [s for _,s in sorted(zip(reformatted, sec_names),
                                      key = lambda i: i[0],
                                      reverse= True)]
 
-def return_expired(sec_list, curve_prices, contract_abv=""):
+def return_expired(sec_list, curve_prices):
     """Returns a pandas df with the expiry prices for each contract, with columns
     being the number of months since that expiry. Use for predicting future prices
     without concurrent trading, eg. prediciting August settle given June settle vs
     estimating current CL1 given current CL2.
     Warning: Off by 1 Error, If contract had last trading day as last date 
     collected that contract won't be included"""
+    contract_abv = re.sub("\d+", "", sec_list[0].name)[:-1].strip()
+    
     collection_date = max([max(i.index) for i in sec_list])
     expired_contract = [i for i in sec_list
                             if max(i.index)<collection_date ]
@@ -177,18 +181,22 @@ def return_expired(sec_list, curve_prices, contract_abv=""):
             return out.values
         
     def _make_filler(t,ix):
-        return [[np.nan]*len(filt_indx(t)) for _ in range(ix)]
-    
+        "NAs to add to 'back' of df for things expired farther in the past"
+        return [[np.nan]*len( _expiry_prices(t)) for _ in range(ix)]
+
     expired_curve = pd.DataFrame(
                         np.concatenate(
                             [np.stack(
                                 [_expiry_prices(j,
-                                           out_sz = len(filt_indx(t)))
+                                           out_sz = len( _expiry_prices(t)))
                                      for j in sorted_contract[ix:]]
                                 + _make_filler(t,ix)
                                  ).T
                                     for ix, t in enumerate(sorted_contract)
                             ]),
+                        index = [f"{t} {i} before expiry"
+                                     for t in sorted_contract
+                                         for i in range(len(_expiry_prices(t)))],
                         columns = [f"{contract_abv} {i}Ago" #not all contracts 1Mo
                                    for i in range(len(sorted_contract))]
                         )
@@ -206,9 +214,9 @@ def get_blb_excel(prices_file, individual_securities = True,  already_formatted 
 
     xl_bk = xlrd.open_workbook(prices_file)
     commodities = xl_bk.sheet_names()
-    security_d = []
-    curve_prices_d = []
-    expired_curve_d = []
+    security_l = []
+    curve_prices_l = []
+    expired_curves_d = {}
     
     for sht_ix, name in enumerate(commodities):
         b = xl_bk.sheet_by_index(sht_ix)               
@@ -230,7 +238,7 @@ def get_blb_excel(prices_file, individual_securities = True,  already_formatted 
                                      columns = com_maturities,
                                      index = dates,
                                      )            
-        curve_prices_d += [curve_prices]#.dropna()
+        curve_prices_l += [curve_prices]#.dropna()
 
         ##individual_securities
         sec_df = pd.DataFrame(list(zip(*[b.col_values(i)[7:]
@@ -248,53 +256,107 @@ def get_blb_excel(prices_file, individual_securities = True,  already_formatted 
                       name = s
                       ).dropna()
             return df[~pd.isna(df.index)]
-        sec_list = [get_security(s) for s in securities]
-        security_d += sec_list
+        sec_list = list(filter(lambda i: len(i) > 0,
+                               [get_security(s) for s in securities]))
+        security_l += sec_list
     
         ##expired securities
-        expired_curve = return_expired(sec_list, curve_prices)
-        expired_curve_d += [expired_curve]
+        contract_abv = re.sub("\d+", "", sec_list[0].name)[:-1].strip()
+        expired_curve = return_expired(sec_list,
+                                       curve_prices)
+        expired_curves_d[contract_abv] = expired_curve
 
-    curve_prices_df = pd.concat(curve_prices_d,
-                            axis=1,
-                            join='outer', 
-                            sort=True).iloc[::-1]#largest axis up top
+    #make dataframes
+    curve_prices_df = pd.concat(curve_prices_l,
+                                axis=1,
+                                join='outer', 
+                                sort=True).iloc[::-1]#largest axis up top
     curve_prices_df.dropna(how='all', inplace=True)
     curve_prices_df.columns = [i.replace("COMB", "").replace("Comdty", "").replace(" ", "") 
                 for i in curve_prices_df.columns]#eg CL 1
-    securities_df = pd.concat(security_d, 
+    securities_df = pd.concat(security_l, 
                               axis=1, 
                               join='outer',
                               sort=True).iloc[::-1]
     #sizes are off since Some columns have date's with prices, but no ticker??
     securities_df.dropna(how='all', inplace=True)
-    expired_curves_df = pd.concat(expired_curve_d, 
-                              axis=1, 
-                              join='outer',
-                              sort=True).iloc[::-1]
+    # expired_curves_df = pd.concat(expired_curve_d, 
+    #                               axis=1, 
+    #                               join='outer').iloc[::-1]
+    return curve_prices_df, securities_df, expired_curves_d
 
-    return curve_prices_df, securities_df, expired_curves_df
-
-os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
-prices_file = "16.16 Historical Commodity Price Data.xlsx"
-curve_prices_df, securities_df, expired_curves_df = get_blb_excel(prices_file, 
-                                                                  already_formatted  = True)
-
-futures = [i.replace("COMB", "").replace("Comdty", "").replace(" ", "") 
-            for i in curve_prices_df]#eg CL 1
-futures_ab = set([re.sub("\d+", "",i) 
-                    for i in futures])#eg CL
-#%% 
+def save_struct(struct, name):
+    "handler to pickle data"    
+    os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data\\pickled_data")
+    with open(f'{name}.p', 'wb') as file:
+        pickle.dump(struct,  file)
+    
+def load_struct(name):
+    os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data\\pickled_data")
+    with open(f'{name}.p', 'rb') as file:
+        return pickle.load(file)
+    
+def data_handler(save_data = False):
+    """"MODIFIES GLOBALS; by assigning values to data_structs
+    All purpose data handler, uses subfolder 'picked_data'.
+    """
+    data_structs = ('curve_prices_df',
+                    'securities_df', 
+                    'expired_curves_d', 
+                    'cme_df',
+                    'eia_bio_df')
+    if save_data:
+        for struct_name in data_structs:
+            try:
+                struct = eval(struct_name)
+                save_struct(struct, struct_name)
+            except Exception as e:
+                print(e)
+        return None
+    else:#load data
+        for struct_name in data_structs:
+           try:
+               exec(f"global {struct_name}", globals())
+               exec(f"globals()[struct_name] = load_struct(struct_name)")
+           except Exception as e:
+               print(f"""Haven't pickeled {struct_name}, Processing data Now.\n""", e, "\n\n")
+               
+               if struct_name in ('curve_prices_df', 'securities_df', 'expired_curves_d'):
+                   os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
+                   prices_file = "16.16 Historical Commodity Price Data.xlsx"
+                   (curve_prices_df, 
+                    securities_df, 
+                    expired_curves_d) = get_blb_excel(prices_file, 
+                                                      already_formatted  = True)                                                     
+                   save_struct(curve_prices_df, 'curve_prices_df')
+                   save_struct(securities_df, 'securities_df')
+                   save_struct(expired_curves_d, 'expired_curves_d')
+                   
+               elif struct_name == 'cme_df':
+                   cme_df = cme_scrapper.make_cme_df(cme_scrapper.get_all_cme_prx())
+                   save_struct(cme_df,'cme_df')
+                   
+               elif struct_name == 'eia_bio_df':
+                   os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
+                   eia_bio_df = cme_scrapper.eia_renewable_table(table=17)
+                   save_struct(eia_bio_df, 'eia_bio_df')
+                   
+               exec(f"global {struct_name}", globals())
+               exec(f"globals()[struct_name] = load_struct(struct_name)") 
+    
+data_handler(save_data = False)
+#%%    
+# futures = [i.replace("COMB", "").replace("Comdty", "").replace(" ", "") 
+#             for i in curve_prices_df]#eg CL 1
+# futures_ab = set([re.sub("\d+", "",i) 
+#                     for i in futures])#eg CL
 
 # month_rng = sorted(set([datetime(d.year, d.month, 1)
 #                         for d in securities_df.index]))
 # month_abvs = sort_contracts([f"{defs.int_month_abv[i.month]}{str(i.year)[-2:]}" 
 #                              for i in month_rng])
-
-
-
 #%% 
-
+=
 
 #%%
 

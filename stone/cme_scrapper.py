@@ -1,58 +1,35 @@
 import numpy as np
-import urllib3
+import pandas as pd
 import json
 import requests
 import matplotlib.dates as mdates
-import defs#mine
 import pdb
-import random, time, datetime
+import random, time
+from datetime import datetime
 
-#%% Bloomberg scraping
-def get_bbl_com_prx(ticker, driver):
-    "Get's the *Front* month contract prices from bloomberg for a given Comdty ticker"
-    if 'www.bloomberg.com' in ticker:
-        url = ticker
-    elif ticker in defs.abv_bbl_url:
-        if defs.abv_bbl_url[ticker]:
-            url = defs.abv_bbl_url[ticker]
-        else:
-            raise Exception("Ticker without URL")
-    else:
-        if len(ticker) == 1:
-            url = f'https://www.bloomberg.com/quote/{ticker}\%201:COM'
-        elif len(ticker) == 2:
-            url = f'https://www.bloomberg.com/quote/{ticker}1:COM'
-        else:
-            raise Exception("Invalid ticker")
-    try:
-        diver.get(url)
-        prx = driver.find_elements_by_xpath('//span[contains(@class, "priceText")]')
-        return float(prx.replace(",", ""))
-    except:
-        driver.sleep(2)
-        prx = driver.find_elements_by_xpath('//span[contains(@class, "priceText")]')
-        return float(prx.replace(",", ""))
 
+import defs#mine
 #%%
 #CME endpoints
 def convert_cme_quote(item):
     "converts string quote returned from CME endpoint to float"
+    if item['last'] != '-':
+        qt = item['last']
+    elif item['priorSettle'] != '-':                                        
+        qt = item['priorSettle']
+    else:
+        return np.nan
+
     if item["productName"] in ('Corn Futures', 
                                "Soybean Futures", 
                                'Chicago SRW Wheat Futures', 
-                               'KC HRW Wheat Futures'):
-        qt = item['last']  if item['last'] != '-' else item['priorSettle']
-        return float(qt[:-2]) + float(qt[-1])/8
+                               'KC HRW Wheat Futures'): 
+        (dollars, eigth_cents) = qt.split("'")
+        return float(dollars) + float(eigth_cents)/8
     elif item['productName'] == 'Soybean Oil Futures':
-        qt = item['last']  if item['last'] != '-' else item['priorSettle']
         return float(qt)/100
     else:
-        if item['last'] != '-':
-            return float(item['last'])
-        elif item['priorSettle'] != '-':                                        
-            return float(item['priorSettle']) 
-        else:
-            return np.nan
+        return float(qt)        
 
 def get_cme_com_prx(ticker):
     """Get's ALL contract prices from CME for a given Comdty ticker
@@ -74,11 +51,11 @@ def get_cme_com_prx(ticker):
                                 #if int(item['volume'].replace(",", "")) > 0]
                 return list(zip(*date_prx)) 
             except Exception as e:
+                pdb.set_trace()
                 print(e)
                 last_exception = e
         else:
-            print(f"Valid ticker: {ticker}, but stale/out of date endpoints")
-            raise last_exception
+            raise f"Valid ticker: {ticker}, but stale/out of date endpoints"
     else:
         raise f"Invalid ticker: {ticker} doesn't have CME JS endpoint, so has 0-Volume"
 #    elif ticker in defs.abv_cme_url:
@@ -97,29 +74,32 @@ def get_all_cme_prx(cme_data = {}):
                 cme_data[tckr] = [months, prices]
                 time.sleep(8*random.random()+1)
             except Exception as e:
-                print(tckr, e)
+                print(f"Getting {tckr} failed: ", e)
     return cme_data
 
-def make_cme_df(cme_data):
+def make_cme_df(cme_data=None):
+    if cme_data is None:
+        cme_data = get_all_cme_prx()
     cme_d = [pd.Series(data = cme_data[k][1], 
                        index =cme_data[k][0],
                        name = k) 
                 for k in cme_data.keys()]
-    long_ix = longest_index(cme_d)
-    df_idx = cme_d.pop(long_ix)
-    cme_df = df_idx.to_frame().join(cme_d, how='outer')
-    cme_d += [df_idx]
+    cme_df = pd.concat(cme_d, 
+                              axis=1, 
+                              join='outer',
+                              sort=True).iloc[::-1]
     return cme_df
 
-#cme_df = make_cme_df(get_all_cme_prx(cme_data))
+
 #%%
+#TODO
 def get_barchart_historicals(ticker):
     pass
 
 def make_barchart_historicals(tickers):
     pass
-r = requests.get('https://www.barchart.com/futures/quotes/FLN20/overview')
-r.content
+# r = requests.get('https://www.barchart.com/futures/quotes/FLN20/overview')
+# r.content
 
 
 
@@ -203,13 +183,8 @@ def plot_prices(data_l, old_data_l, tckrs, save_path= ''):
     else:
         plt.show()
         
-#multi_plots(tckrs_l, target_dir = "")#temp")
-
 #%% 
-os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio")
-#cme_data = get_all_cme_prx()
-
-def single_plots(target_dir = 'sing_prx_graphs'):
+def single_plots(cme_data, target_dir = 'sing_prx_graphs', save_plots = False):
     "makes plots of individual commodities, and zips them"
     for (tckr, (months, prices)) in cme_data.items():
         data = {'date':months,
@@ -218,11 +193,11 @@ def single_plots(target_dir = 'sing_prx_graphs'):
         old_data = {'date': curve_prices_df.index, 
                     'adj_close':curve_prices_df[column]}
         plot_prices(data, old_data, tckr, save_path = f"{target_dir}\\" + tckr)
-#    os.system(f'powershell -command "Compress-Archive {target_dir} {target_dir}.zip"')
+    if save_plots and target_dir:
+        os.system(f'powershell -command "Compress-Archive {target_dir} {target_dir}.zip"')
     
-single_plots(target_dir = 'sing_prx_graphs')
-#%% Makes plots of multiple values together
-def multi_plots(tckrs_l, target_dir = 'mult_prx_graphs'):
+# Makes plots of multiple values together
+def multi_plots(tckrs_l, target_dir = 'mult_prx_graphs', save_plots = False):
     "Makes plots of multiple prices together"
     for tckrs in tckrs_l:
         tckrs = [tck for tck in tckrs 
@@ -235,10 +210,12 @@ def multi_plots(tckrs_l, target_dir = 'mult_prx_graphs'):
                         for tck in tckrs]
         plot_prices(data_l, old_data_l, tckrs,
                     save_path = f"{target_dir}\\" + ", ".join(tckrs))
-#    os.system(f'powershell -command "Compress-Archive {target_dir} {target_dir}.zip"')
-        
-tckrs_l = [('W', 'KW', 'MW', 'C'), ('S', 'SM', 'RS', 'BO'), ('CL', 'HO')]
-multi_plots(tckrs_l)
+    if save_plots and target_dir:
+        os.system(f'powershell -command "Compress-Archive {target_dir} {target_dir}.zip"')
+
+# single_plots(target_dir = 'sing_prx_graphs')        
+# tckrs_l = [('W', 'KW', 'MW', 'C'), ('S', 'SM', 'RS', 'BO'), ('CL', 'HO')]
+# multi_plots(tckrs_l)
 
 #%% Plot Rin prices
 import xlrd 
@@ -246,36 +223,64 @@ import os
 
 def eia_renewable_table(table = 17):
     os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
-    renew_file = "eia renewable fuels, All Tables in One.xls"
-    xl_bk = xlrd.open_workbook(renew_file)
+    renewables_file = 'eia renewable fuels, All Tables in One.xlsx'
+    xl_bk = xlrd.open_workbook(renewables_file)
     if table == 17:
         b = xl_bk.sheet_by_name("Table017")
         dates = [i.replace("-", " ").replace(".", "").strip() for i in b.col_values(0)[8:-5]]
         dates = [datetime.strptime(i, "%b %y") for i in dates]
         biodiesel_prx = [float(i) for i in b.col_values(1)[8:] if i]
         diesel_prx = [float(i) for i in b.col_values(2)[8:] if i]
-        return dates, biodiesel_prx, diesel_prx
+        bio_df = pd.DataFrame({'Retail Biodiesel': biodiesel_prx,
+                               'Retail Diesel': diesel_prx},
+                           index = dates)
+        return  bio_df.reindex(sorted(dates, reverse = True))
     
-def eia_renewable_table_plots(table=17):
+def eia_renewable_table_plots(table=17, target_dir = ""):
     if table == 17:
-        dates, biodiesel_prx, diesel_prx = eia_renewable_table(table=table)
-        old_data_l = [{'date':dates, 
-                           'adj_close': biodiesel_prx},
-                            {'date':dates, 
-                           'adj_close': diesel_prx}
+        bio_df = eia_renewable_table(table=table)
+        old_data_l = [{'date':bio_df.index, 
+                           'adj_close': bio_df['Retail Biodiesel']},
+                            {'date':bio_df.index, 
+                           'adj_close': bio_df['Retail Diesel']}
                             ]
-        data_l = [{'date': dates, 
-                   'adj_close': [None]*len(dates)}]*2
+        data_l = [{'date': bio_df.index, 
+                   'adj_close': [None]*len(bio_df.index)}]*2
         tckrs =("Bio", "Diesel")
-        plot_prices(data_l, old_data_l, tckrs,
-                            save_path = f"{target_dir}\\" + ", ".join(tckrs))
+        if target_dir:
+            plot_prices(data_l, old_data_l, tckrs,
+                                save_path = f"{target_dir}\\" + ", ".join(tckrs))
+        else:
+            plot_prices(data_l, old_data_l, tckrs)
+            
     
-#eia_renewable_table_plots(table=17)
-#%%
-
-
-
-
+# eia_bio_df = eia_renewable_table(table=17)
+# eia_renewable_table_plots(table=17)
+#%% Bloomberg scraping
+def get_bbl_com_prx(ticker, driver):
+    "Get's the *Front* month contract prices from bloomberg for a given Comdty ticker"
+    if 'www.bloomberg.com' in ticker:
+        url = ticker
+    elif ticker in defs.abv_bbl_url:
+        if defs.abv_bbl_url[ticker]:
+            url = defs.abv_bbl_url[ticker]
+        else:
+            raise Exception("Ticker without URL")
+    else:
+        if len(ticker) == 1:
+            url = f'https://www.bloomberg.com/quote/{ticker}\%201:COM'
+        elif len(ticker) == 2:
+            url = f'https://www.bloomberg.com/quote/{ticker}1:COM'
+        else:
+            raise Exception("Invalid ticker")
+    try:
+        driver.get(url)
+        prx = driver.find_elements_by_xpath('//span[contains(@class, "priceText")]')
+        return float(prx.replace(",", ""))
+    except:
+        driver.sleep(2)
+        prx = driver.find_elements_by_xpath('//span[contains(@class, "priceText")]')
+        return float(prx.replace(",", ""))
 
 
 
@@ -287,6 +292,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.support import expected_conditions as EC
 driver_path = "C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\chromedriver_win32\\chromedriver.exe"
+
 
 def get_blb(u = 'https://www.bloomberg.com/quote/CC1:COM', existing_driver = None):
     "Get current prices from Bloomberg"
@@ -304,6 +310,7 @@ def get_blb(u = 'https://www.bloomberg.com/quote/CC1:COM', existing_driver = Non
         driver.close()
         
 def check_barchart(existing_driver = None):
+    "Want to know if the CME ticker's I'm using correspond to the correct Barchart Tickers"
     driver = existing_driver or webdriver.Chrome(executable_path = driver_path)
     wait = WebDriverWait(driver, 9)
     for ticker in defs.abv_name.keys():
@@ -328,7 +335,7 @@ def check_barchart(existing_driver = None):
 
 #%%TODO: Try and hve 2 y axis
 
-def plot_prices(data_l, old_data_l, tckrs, save_path= ''):
+def plot_prices_2ax(data_l, old_data_l, tckrs, save_path= ''):
     """takes 2 lists of dicts of 'date', and 'adj_close' 
     for forward forcasts and previous prices"""
     fig, ax = plt.subplots(figsize=(16,12))
