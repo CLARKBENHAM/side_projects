@@ -34,7 +34,8 @@ name_abv = {'Corn':'C',
          }
 abv_name = {v:k for k,v in name_abv.items()}
 
-cme_to_blb = {'CJ':'CC'
+cme_to_blb = {'CJ':'CC',
+              'ZW': 'W'#CME Globex, but clearPort and Clearing use 'W'
               }
 #for i in abv_name.keys():
 #    print(f"'{i}': ',")
@@ -222,6 +223,16 @@ def write_data():
 
 # write_data()
 #%%
+groups = {'grains': ('C', 'S', 'W', 'KW', 'MW', 'SM'),
+          'coffe_cocoa': ('CC', 'QC', 'KC'),
+          'ag_oil': ('RS', 'SM'),
+          'other_ags': ('LE'),
+          'hydrocarbons': ('CL', 'HO'),
+          'bio-energy': ('EH', 'CU'),
+          'metals': ('PL', 'PA')
+          }
+
+
 #contract_expiry_dates = {'BO':14,
 #                         'C ':14,
 #                         'CC',
