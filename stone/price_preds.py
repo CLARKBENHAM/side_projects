@@ -166,41 +166,81 @@ def return_expired(sec_list, curve_prices):
                       for curr, prev in prev_contract.items()}
     
     def _expiry_prices(tick, out_sz=None):
-        """"gets the expiry month prices for a given contract as np.array"""
+        """"gets the expiry month prices for a given contract as np.array,
+        tick is ticker of the expired contract.
+        For contracts that have fewer trading days then out_sz,
+        the prices in the *first* front month trading date will be used.
+        out_sz: size of df to be returned"""
         indxs = np.logical_and(curve_prices.index >= con_range[tick][0],
                                 curve_prices.index <= con_range[tick][1])
         out = curve_prices.iloc[indxs, 0]
         if out_sz:
             missing_sz = out_sz - len(out)
             if missing_sz > 0:
+                #contract has fewer trading days then some contract after it
                 return np.concatenate((out.values, 
-                                      np.repeat(np.nan, missing_sz)))
+                                      np.repeat(out.iloc[-1], missing_sz)))
             else:
                 return out[:out_sz].values
         else:
             return out.values
         
     def _make_filler(t,ix):
-        "NAs to add to 'back' of df for things expired farther in the past"
+        """NAs to add to 'back' of df for contracts that weren't traded over the entire period.
+        eg. to the back of CLZ18 for the dates beyond (Dec 18 - start of data)
+        when this wasn't traded for the entire length of backtest
+        Needs to be transposed"""
         return [[np.nan]*len( _expiry_prices(t)) for _ in range(ix)]
-
+    
+    def _make_index():
+        "Makes the index for ticker t of datetime objects"
+        #each list(filter) will be same length as out_sz
+        dt_index =  [ix for tick in sorted_contract
+                         for ix in filter(lambda i: i >= con_range[tick][0] 
+                                                and i <= con_range[tick][1],
+                                          curve_prices.index)]
+        named_index = [f"{t} {i} before expiry"
+                            for t in sorted_contract
+                                for i in range(len(_expiry_prices(t)))]
+        tuples = list(zip(dt_index, named_index))
+        return pd.MultiIndex.from_tuples(tuples, names=['Dates', 'Description'])
+    
     expired_curve = pd.DataFrame(
                         np.concatenate(
                             [np.stack(
                                 [_expiry_prices(j,
-                                           out_sz = len( _expiry_prices(t)))
+                                                out_sz = len( _expiry_prices(t)))
                                      for j in sorted_contract[ix:]]
                                 + _make_filler(t,ix)
                                  ).T
                                     for ix, t in enumerate(sorted_contract)
                             ]),
-                        index = [f"{t} {i} before expiry"
-                                     for t in sorted_contract
-                                         for i in range(len(_expiry_prices(t)))],
+                        index = _make_index(),
                         columns = [f"{contract_abv} {i}Ago" #not all contracts 1Mo
                                    for i in range(len(sorted_contract))]
                         )
+    assert np.unique(expired_curve.index.get_level_values('Dates')).shape[0] == expired_curve.shape[0], "break"
     return expired_curve
+
+def process_macroTrendsnet():
+    os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data\MacroTrends")
+    out = {}
+    for file in os.listdir():
+        name = file.split("-")[0]
+        df = pd.read_csv(file,
+                         header = 16,
+                         index_col = 0,
+                         parse_dates = True,
+                         dtype={'value':np.float64}).iloc[:,0]
+        df.columns = [name]
+        if name in ('wheat', 'corn'):
+            df *= 100
+        out[name] = df
+    return pd.concat(out,
+                     axis=1, 
+                     join='outer',
+                     sort=True
+                     ).sort_index(ascending = False)
 
 #%%
 def get_blb_excel(prices_file, individual_securities = True,  already_formatted = False):
@@ -230,11 +270,12 @@ def get_blb_excel(prices_file, individual_securities = True,  already_formatted 
                             for c in date_cols
                                 for i in c]),
                         reverse = True)
-        curve_prices = pd.DataFrame(np.array([pd.to_numeric(b.col_values(i)[7:],
-                                                            errors = 'coerce'
-                                                            )
-                                                for i in range(2,sz,4)
-                                                ]).T,
+        curve_prices = pd.DataFrame(
+                                np.array(
+                                    [pd.to_numeric(b.col_values(i)[7:],
+                                                   errors = 'coerce')
+                                           for i in range(2,sz,4)]
+                                        ).T,
                                      columns = com_maturities,
                                      index = dates,
                                      )            
@@ -262,8 +303,9 @@ def get_blb_excel(prices_file, individual_securities = True,  already_formatted 
     
         ##expired securities
         contract_abv = re.sub("\d+", "", sec_list[0].name)[:-1].strip()
+        #Issue is that not all contracts expire at the same time     
         expired_curve = return_expired(sec_list,
-                                       curve_prices)
+                                        curve_prices)
         expired_curves_d[contract_abv] = expired_curve
 
     #make dataframes
@@ -287,14 +329,28 @@ def get_blb_excel(prices_file, individual_securities = True,  already_formatted 
 
 def save_struct(struct, name):
     "handler to pickle data"    
+    d = os.getcwd()
     os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data\\pickled_data")
     with open(f'{name}.p', 'wb') as file:
         pickle.dump(struct,  file)
+    os.chdir(d)
     
 def load_struct(name):
+    d = os.getcwd()
     os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data\\pickled_data")
     with open(f'{name}.p', 'rb') as file:
         return pickle.load(file)
+    os.chdir(d)
+    
+def reprocess_struct(name):
+    "Deletes pickled data so data_handler will reload it"
+    d = os.getcwd()
+    os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data\\pickled_data")
+    try:
+        os.remove(f"{name}.p")    
+    except Exception as e:
+        print(e)
+    os.chdir(d)
     
 def data_handler(save_data = False):
     """"MODIFIES GLOBALS; by assigning values to data_structs
@@ -327,7 +383,8 @@ def data_handler(save_data = False):
                    (curve_prices_df, 
                     securities_df, 
                     expired_curves_d) = get_blb_excel(prices_file, 
-                                                      already_formatted  = True)                                                     
+                                                      already_formatted  = True) 
+                    
                    save_struct(curve_prices_df, 'curve_prices_df')
                    save_struct(securities_df, 'securities_df')
                    save_struct(expired_curves_d, 'expired_curves_d')
@@ -335,16 +392,33 @@ def data_handler(save_data = False):
                elif struct_name == 'cme_df':
                    cme_df = cme_scrapper.make_cme_df(cme_scrapper.get_all_cme_prx())
                    save_struct(cme_df,'cme_df')
-                   
+                 
                elif struct_name == 'eia_bio_df':
                    os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
                    eia_bio_df = cme_scrapper.eia_renewable_table(table=17)
                    save_struct(eia_bio_df, 'eia_bio_df')
+               elif struct_name == 'cotton':
+                   os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data\MacroTrends")
+                   cotton = pd.read_csv('cotton-prices-historical-chart-data.csv',
+                                         header = 16,
+                                         index_col = 0,
+                                         parse_dates = True,
+                                         dtype={'value':np.float64}).iloc[:,0]
+                   cotton.columns = ["CT1"]
+               elif struct_name == 'historic_front_month':
+                   historic_front_month = process_macroTrendsnet()
                    
                exec(f"global {struct_name}", globals())
                exec(f"globals()[struct_name] = load_struct(struct_name)") 
     
+# reprocess_struct('expired_curves_d')
 data_handler(save_data = False)
+
+os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
+# prices_file = "16.16 Historical Commodity Price Data.xlsx"
+# get_blb_excel(prices_file, 
+#               already_formatted  = True)
+
 #%%    
 # futures = [i.replace("COMB", "").replace("Comdty", "").replace(" ", "") 
 #             for i in curve_prices_df]#eg CL 1
@@ -355,37 +429,32 @@ data_handler(save_data = False)
 #                         for d in securities_df.index]))
 # month_abvs = sort_contracts([f"{defs.int_month_abv[i.month]}{str(i.year)[-2:]}" 
 #                              for i in month_rng])
-#%% 
-=
-
-#%%
-
-
-
-
-
 
 #%% Predicting comodity pries
-#impute missing
-curve_prices_df = curve_prices_df.dropna(axis=0)
-a=(curve_prices_df =='#N/A N/A')
-curve_prices_df = curve_prices_df[~a.any(axis=1)]
+def preprocessing():
+    "Remove all NAs from data"
+    curve_prices_df = curve_prices_df.dropna(axis=0)
+    a=(curve_prices_df =='#N/A N/A')
+    curve_prices_df = curve_prices_df[~a.any(axis=1)]
 
 #%%
-front_cols = [i for i in curve_prices_df.columns 
-             if '1 ' in i and '11' not in i and '21' not in i]
-rest_cols = [i for i in curve_prices_df.columns if i not in front_cols]
+from sklearn.model_selection import train_test_split
+def make_prediction_df():
+    front_cols = [i for i in curve_prices_df.columns 
+                 if '1 ' in i and '11' not in i and '21' not in i]
+    rest_cols = [i for i in curve_prices_df.columns if i not in front_cols]
+    
+    X = curve_prices_df.loc[:,rest_cols]
+    Y = curve_prices_df.loc[:,front_cols[0]]
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, random_state=0)
 
-X = curve_prices_df.loc[:,rest_cols]
-Y = curve_prices_df.loc[:,front_cols[0]]
+
 #%%
 from sklearn.pipeline import Pipeline
-from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 
-X_train, X_test, y_train, y_test = train_test_split(X, Y, random_state=0)
 pipe = Pipeline([('impute', SimpleImputer()),
                      ('scaler', StandardScaler()),
                      ('linear', LinearRegression())])
