@@ -35,8 +35,10 @@ name_abv = {'Corn':'C',
 abv_name = {v:k for k,v in name_abv.items()}
 
 cme_to_blb = {'CJ':'CC',
-              'ZW': 'W'#CME Globex, but clearPort and Clearing use 'W'
+              'ZW': 'W',#CME Globex, but clearPort and Clearing use 'W'
+              'KC':'KT'
               }
+#cotton source: https://www.macrotrends.net/2533/cotton-prices-historical-chart-data
 #for i in abv_name.keys():
 #    print(f"'{i}': ',")
 #%%
@@ -45,7 +47,7 @@ abv_cme_units = {'C': 'U.S. cents per bushel',
                'W': 'U.S. cents per bushel',
                'KW': 'U.S. cents per bushel',
                'MW': '',
-               'CC': '',
+               'CC': 'U.S. dollars and cents per Metric Ton',
                'CJ': 'U.S. dollars and cents per Metric Ton',
                'QC': '',
                'KC': 'U.S. dollars and cents per pound',
@@ -232,6 +234,15 @@ groups = {'grains': ('C', 'S', 'W', 'KW', 'MW', 'SM'),
           'metals': ('PL', 'PA')
           }
 
+"""
+https://www.macrotrends.net/2535/coffee-prices-historical-chart-data?
+https://www.macrotrends.net/futures/cocoa
+https://www.macrotrends.net/2533/cotton-prices-historical-chart-data
+https://www.macrotrends.net/2532/corn-prices-historical-chart-data
+https://www.macrotrends.net/2534/wheat-prices-historical-chart-data
+https://www.macrotrends.net/futures/crude-oil
+https://www.macrotrends.net/futures/heating-oil
+"""
 
 #contract_expiry_dates = {'BO':14,
 #                         'C ':14,
