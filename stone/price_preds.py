@@ -17,7 +17,7 @@ os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio")
 import defs
 import cme_scrapper
 
-#%%import Data from Com pricing spreadsheet
+#% import Data from Com pricing spreadsheet
 def int_col(n,base=26):
     "convert 0 index column number to excel column name"
     if n < 0:
@@ -64,7 +64,7 @@ def make_blb_book_row_aligned(file_name):
                                                  dates,
                                                  wrote_bk)
     if bk_open:
-        wrote_bk.save(prices_file + "(2)")
+        wrote_bk.save(file_name + "(2)")
         wrote_bk.close()
     
 def make_blb_sheet_aligned(file_name, sht_ix, bad_date_cols, target_indx, wrote_bk):
@@ -203,7 +203,12 @@ def return_expired(sec_list, curve_prices):
                             for t in sorted_contract
                                 for i in range(len(_expiry_prices(t)))]
         tuples = list(zip(dt_index, named_index))
-        return pd.MultiIndex.from_tuples(tuples, names=['Dates', 'Description'])
+        multi_indx = pd.MultiIndex.from_tuples(tuples,
+                                               names=['Dates', 'Description'])
+        
+        axis_unique = len(np.unique(dt_index)) == len(dt_index)
+        assert axis_unique, "datetime axis is not unqiue, repeated dates"
+        return dt_index
     
     expired_curve = pd.DataFrame(
                         np.concatenate(
@@ -219,28 +224,38 @@ def return_expired(sec_list, curve_prices):
                         columns = [f"{contract_abv} {i}Ago" #not all contracts 1Mo
                                    for i in range(len(sorted_contract))]
                         )
-    assert np.unique(expired_curve.index.get_level_values('Dates')).shape[0] == expired_curve.shape[0], "break"
     return expired_curve
 
-def process_macroTrendsnet():
+def process_macroTrendsnet(file = None):
+    """Return df of all excel sheets from macrotrend's in folder, are spot prices
+    if file != none then just that file's series"""
     os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data\MacroTrends")
-    out = {}
-    for file in os.listdir():
+    def _1_macroTrends_sht(file):
         name = file.split("-")[0]
         df = pd.read_csv(file,
-                         header = 16,
+                         header = 15,
                          index_col = 0,
                          parse_dates = True,
                          dtype={'value':np.float64}).iloc[:,0]
-        df.columns = [name]
+        # df.columns = [name]#no columns since series
+        df.name = name
         if name in ('wheat', 'corn'):
             df *= 100
-        out[name] = df
-    return pd.concat(out,
-                     axis=1, 
-                     join='outer',
-                     sort=True
-                     ).sort_index(ascending = False)
+        return df
+    
+    if file is not None:
+        return _1_macroTrends_sht(file
+                                  ).sort_index(ascending = False)
+    else:
+        out = {}
+        for file in os.listdir():
+            name = file.split("-")[0]
+            out[name] = _1_macroTrends_sht(file)
+        return pd.concat(out,
+                         axis=1, 
+                         join='outer',
+                         sort=True
+                         ).sort_index(ascending = False)
 
 #%%
 def get_blb_excel(prices_file, individual_securities = True,  already_formatted = False):
@@ -322,24 +337,30 @@ def get_blb_excel(prices_file, individual_securities = True,  already_formatted 
                               sort=True).iloc[::-1]
     #sizes are off since Some columns have date's with prices, but no ticker??
     securities_df.dropna(how='all', inplace=True)
-    # expired_curves_df = pd.concat(expired_curve_d, 
-    #                               axis=1, 
-    #                               join='outer').iloc[::-1]
-    return curve_prices_df, securities_df, expired_curves_d
+    expired_curves_df = pd.concat(expired_curves_d, 
+                                  axis=1, 
+                                  join='outer').iloc[::-1]
+    return curve_prices_df, securities_df, expired_curves_df
 
 def save_struct(struct, name):
     "handler to pickle data"    
     d = os.getcwd()
     os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data\\pickled_data")
-    with open(f'{name}.p', 'wb') as file:
-        pickle.dump(struct,  file)
+    if isinstance(struct, pd.DataFrame) or isinstance(struct, pd.Series):
+        struct.to_pickle(f'{name}.p')
+    else:
+        with open(f'{name}.p', 'wb') as file:
+            pickle.dump(struct,  file)
     os.chdir(d)
     
 def load_struct(name):
     d = os.getcwd()
     os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data\\pickled_data")
-    with open(f'{name}.p', 'rb') as file:
-        return pickle.load(file)
+    try:
+        with open(f'{name}.p', 'rb') as file:
+            return pickle.load(file)
+    except:
+        return pd.read_pickle(f'{name}.p')
     os.chdir(d)
     
 def reprocess_struct(name):
@@ -349,18 +370,20 @@ def reprocess_struct(name):
     try:
         os.remove(f"{name}.p")    
     except Exception as e:
-        print(e)
+        print(f"{name} alread removed", e)
     os.chdir(d)
     
 def data_handler(save_data = False):
     """"MODIFIES GLOBALS; by assigning values to data_structs
     All purpose data handler, uses subfolder 'picked_data'.
+    Gets all seperated data sources
     """
     data_structs = ('curve_prices_df',
                     'securities_df', 
-                    'expired_curves_d', 
+                    'expired_curves_df', 
                     'cme_df',
-                    'eia_bio_df')
+                    'eia_bio_df',
+                    'historic_front_month')
     if save_data:
         for struct_name in data_structs:
             try:
@@ -377,66 +400,106 @@ def data_handler(save_data = False):
            except Exception as e:
                print(f"""Haven't pickeled {struct_name}, Processing data Now.\n""", e, "\n\n")
                
-               if struct_name in ('curve_prices_df', 'securities_df', 'expired_curves_d'):
+               if struct_name in ('curve_prices_df', 'securities_df', 'expired_curves_df'):
                    os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
                    prices_file = "16.16 Historical Commodity Price Data.xlsx"
                    (curve_prices_df, 
                     securities_df, 
-                    expired_curves_d) = get_blb_excel(prices_file, 
+                    expired_curves_df) = get_blb_excel(prices_file, 
                                                       already_formatted  = True) 
                     
                    save_struct(curve_prices_df, 'curve_prices_df')
                    save_struct(securities_df, 'securities_df')
-                   save_struct(expired_curves_d, 'expired_curves_d')
+                   save_struct(expired_curves_df, 'expired_curves_df')
                    
                elif struct_name == 'cme_df':
                    cme_df = cme_scrapper.make_cme_df(cme_scrapper.get_all_cme_prx())
                    save_struct(cme_df,'cme_df')
                  
                elif struct_name == 'eia_bio_df':
+                   #https://www.ers.usda.gov/data-products/us-bioenergy-statistics/
                    os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
                    eia_bio_df = cme_scrapper.eia_renewable_table(table=17)
                    save_struct(eia_bio_df, 'eia_bio_df')
-               elif struct_name == 'cotton':
-                   os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data\MacroTrends")
-                   cotton = pd.read_csv('cotton-prices-historical-chart-data.csv',
-                                         header = 16,
-                                         index_col = 0,
-                                         parse_dates = True,
-                                         dtype={'value':np.float64}).iloc[:,0]
-                   cotton.columns = ["CT1"]
+
                elif struct_name == 'historic_front_month':
                    historic_front_month = process_macroTrendsnet()
+                   save_struct(historic_front_month, 'historic_front_month')
+
+               ##unused
+               elif struct_name == 'cotton':
+                   cotton = process_macroTrendsnet(
+                               file = 'cotton-prices-historical-chart-data.csv')
+                   save_struct(cotton, 'cotton')
                    
+               elif struct_name == 'wk_diesel2':
+                   #https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=pet&s=emd_epd2d_pte_nus_dpg&f=w
+                   os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
+                   wk_diesel2 = pd.read_excel('weekly_US_No2_Retail_diesel.xls',
+                                              sheet_name = 'Data 1',
+                                              header=2, 
+                                              index_col=0)
+                   wk_diesel2 = wk_diesel2.iloc[::-1]
+                   wk_diesel2.columns = ["No 2 Diesel Retail"]
+                   save_struct(wk_diesel2, 'wk_diesel2')
+
                exec(f"global {struct_name}", globals())
                exec(f"globals()[struct_name] = load_struct(struct_name)") 
+        #not nessisary
+        return (eval(i) for i in data_structs)
     
-# reprocess_struct('expired_curves_d')
-data_handler(save_data = False)
-
-os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
-# prices_file = "16.16 Historical Commodity Price Data.xlsx"
-# get_blb_excel(prices_file, 
-#               already_formatted  = True)
-
-#%%    
-# futures = [i.replace("COMB", "").replace("Comdty", "").replace(" ", "") 
-#             for i in curve_prices_df]#eg CL 1
-# futures_ab = set([re.sub("\d+", "",i) 
-#                     for i in futures])#eg CL
-
-# month_rng = sorted(set([datetime(d.year, d.month, 1)
-#                         for d in securities_df.index]))
-# month_abvs = sort_contracts([f"{defs.int_month_abv[i.month]}{str(i.year)[-2:]}" 
-#                              for i in month_rng])
+#Makes pyflakes behave
+(curve_prices_df,
+securities_df, 
+expired_curves_df, 
+cme_df,
+eia_bio_df,
+historic_front_month) = data_handler(save_data = False)
 
 #%% Predicting comodity pries
-def preprocessing():
-    "Remove all NAs from data"
+def preprocessing(months_back = 15):
+    """Do all preprocessing to return X_train, Y_train, X_test, y_test. 
+    combine data, Remove all NAs from data.
+    months_back: how far back to keep expires prices for, approx."""
+    min_gap = timedelta(months_back*30)
+    con_abv = set([i[:2] for i in securities_df.columns])
+    con_d = {c: sort_contracts(
+                    [i[2:]
+                     for i in securities_df.columns 
+                        if i[:2] == c]
+                    ) 
+                for c in con_abv}
+    #last trading date for each contract
+    con_d_last = {k: [securities_df.index[
+                        next(i 
+                           for i,x in enumerate(securities_df[k+con])
+                               if x == x)#filters NAs
+                               ]
+                        for con in l] 
+                  for k,l in con_d.items()}
+    #some contracts have changed in length
+    con_numCon = {k: next((i 
+                          for i in range(1, months_back) 
+                           if min([e-s 
+                                   for e,s in zip(l[i:], l[:-i])])
+                              > min_gap), 
+                          months_back)
+                      for k,l in con_d_last.items()}
+    columns = [f"{contract_abv} {i}Ago" 
+                   for contract_abv, m_back in con_numCon.items()
+                       for i in range(1,m_back)]
+    #Which ever length of columns is smallest
+    row_ix = min([next(i 
+                     for i in reversed(expired_curves_df[c])
+                         if i == i)
+                for c in columns])
+    expired_curves_df = expired_curves_df.loc[:row_ix,columns]
+
     curve_prices_df = curve_prices_df.dropna(axis=0)
     a=(curve_prices_df =='#N/A N/A')
     curve_prices_df = curve_prices_df[~a.any(axis=1)]
 
+preprocessing()
 #%%
 from sklearn.model_selection import train_test_split
 def make_prediction_df():
@@ -461,59 +524,24 @@ pipe = Pipeline([('impute', SimpleImputer()),
 
 pipe.fit(X_train, y_train)
 
-#%%
-#curve_prices_df = pd.concat(curve_prices_d, axis=1)
 
-#%%
-#Predicting revenue for each of the companies, by reading in revenue from model
 
-#import pyxlsb
-program_Cos = ['Express Grain (KCO)']
-fatoil_Cos = ['Western Dubuque', 'Hero', 'Kolmar', 'Sinclair', 'Mendota', 'Verbio']
-energy_Cos = ['SGR Energy', 'Hiper Gas', 'Petromax']
-cocoa_Cos = ['Hershey']
-Cos =  [program_Cos, fatoil_Cos, energy_Cos, cocoa_Cos]
-
-sheet_names = ['Rev Build_ Programs', 'Rev Build_ Fats&Oils', 
-               'Rev Build_ Energy', 'Rev Build_ Cocoa Trading']
-hist_ixs = [slice(12, 21), slice(12, 21), slice(12, 21), slice(12, 21)]
-
-model_file_dir = 'C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio'
-os.chdir(model_file_dir)
-model_file_name = '20200520 02 FCStone Presidio Model WIP.xlsx'
-model_bk = xlrd.open_workbook(model_file + "\\" + model_file_name)
-#print(model_bk.sheet_names())    
-#model_pybk = pyxlsb.open_workbook(model_file + "\\" + model_file_name)
-#print(model_pybk.sheets)
-for sheet_name, h_ix, sector_Cos in zip(sheet_names, hist_ixs, Cos):
-    b = model_bk.sheet_by_name(sheet_name)
-    co = sector_Cos[0]
-    co_ix = b.col_values(0).index(co)    
-    historical_rev = b.row_values(co_ix)[h_ix]
-    
-    try:
-        gross_ix =  b.col_values(0, 
-                                start_rowx = 0, 
-                                end_rowx = 200).index('Gross Revenue')
-        cos_ix =  b.col_values(0, 
-                                start_rowx = 0, 
-                                end_rowx = 200).index('Cost of Sales')
-        margin = [1-j/i for i,j in zip(b.row_values(gross_ix)[h_ix],
-                                     b.row_values(cos_ix)[h_ix])]#COS is line below gross revenue
-    except:
-        print(b.col_values(0, start_rowx = 0, end_rowx = 200), "\n\n\n\n")
-        margin = None
-    print(margin)
-#for co in fatoil_Cos: 
 #%%
     
-
 
 #%% Make Price Distribution Graphs from future's
 from scipy import integrate
-import defs
 
-hist_val = curve_prices_df.reindex(curve_prices_df.index[::-1])
+futures = [i.replace("COMB", "").replace("Comdty", "").replace(" ", "") 
+            for i in curve_prices_df]#eg CL 1
+futures_ab = set([re.sub("\d+", "",i) 
+                    for i in futures])#eg CL
+
+# month_rng = sorted(set([datetime(d.year, d.month, 1)
+#                         for d in securities_df.index]))
+# month_abvs = sort_contracts([f"{defs.int_month_abv[i.month]}{str(i.year)[-2:]}" 
+#                               for i in month_rng])
+
 hist_pct = hist_val.pct_change(periods = 252)#6mo out
 hist_vol = hist_pct.std(axis=0)
 
