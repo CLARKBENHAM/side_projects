@@ -355,13 +355,13 @@ temp.to_csv("price request 6_19.csv")
 
 bio = eia_bio_df.loc[:,"Retail Biodiesel"]
 bio.name = "Retail Biodiesel"
-wk_diesel2.columns = ["No 2 Diesel Retail"]
+retail_diesel2.columns = ["No 2 Diesel Retail"]
 
 bean_oil = process_macroTrendsnet()['soybean oil'].dropna()
 bean_oil.name = "Soybean Oil"
 bean_oil = bean_oil.loc[[i 
                          for i in bean_oil.index 
-                         if i >= min(min(wk_diesel2.index),
+                         if i >= min(min(retail_diesel2.index),
                                      min(bio.index))]]
 
 bio.index = [next(j 
@@ -369,12 +369,12 @@ bio.index = [next(j
                     if j >= i) 
              for i in bio.index]
 
-wk_diesel2.index = [next(j 
+retail_diesel2.index = [next(j 
                         for j in reversed(bean_oil.index) 
                         if j >= i) 
-                    for i in wk_diesel2.index]
+                    for i in retail_diesel2.index]
 
-temp = bean_oil.to_frame().join((bio, wk_diesel2),
+temp = bean_oil.to_frame().join((bio, retail_diesel2),
                            how='left',
                            sort = True
                            ).fillna(method='bfill').fillna(method='ffill')
@@ -382,7 +382,128 @@ temp = bean_oil.to_frame().join((bio, wk_diesel2),
 units_row = ["(Dollars per Pound)", 
              "(Dollars per Gallon)",
              "(Dollars per Gallon)"]
+# os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
+# temp.to_csv("price request 6_22.csv")
+#%%
+def where_BLB_MacroTrends_differ():
+    """There's some differences between say day pricing on 
+    Bloomberg and Macrotrends and I can't tell why"""
+    for df_n, m_n in zip(('CC1', 'KC1', 'C1', 'HO1', 'BO1', 'W1', 'CL1'),
+                        ['cocoa', 'coffee', 'corn', 'heating', 'soybean oil', 'wheat',
+           'wti']):
+        x = curve_prices_df[df_n].dropna()
+        y = historic_front_month.loc[historic_front_month.index.isin(x.index),
+                                     m_n].dropna()
+        x = x[y.index] 
+        a = pd.DataFrame(({'x':x,
+                           'y':y, 
+                           'year':[i.year for i in x.index],
+                           'day': [i.day for i in x.index]}))
+        difs =  a.apply(lambda row: row.iloc[0] != row.iloc[1], 
+                       axis =1)
+        print(df_n,
+              m_n, 
+                # difs.groupby(a['year']).sum(),
+                difs.groupby(a['day']).sum(),
+               # set([i.day for i in difs.index]),
+              # np.corrcoef(x,y),
+              "\n\n"
+                )
+    # a[a.apply(lambda row: row.iloc[0] != row.iloc[1] and row.iloc[2] == 2015,
+    #           axis =1)]
+# where_BLB_MacroTrends_differ()
 
-os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
-temp.to_csv("price request 6_22.csv")
+# plt.plot(retail_diesel2)
+# plt.plot(eia_bio_df.index, eia_bio_df["Retail Diesel"])
 
+
+# plt.plot(retail_diesel2.join(eia_bio_df.loc[:,"Retail Diesel"],
+#                             how='left',
+#                             sort = True
+#                             ).fillna(method='bfill')['Retail Diesel'])
+# plt.plot(eia_bio_df["Retail Diesel"])
+# plt.show()
+epa_diesel = eia_bio_df['Retail Diesel']
+
+epa_diesel.index = [next(j 
+                        for j in reversed(retail_diesel2.index) 
+                        if j >= i) 
+                    for i in epa_diesel.index]
+
+temp = retail_diesel2.join(epa_diesel,
+                           how='left',
+                           sort = True
+                           ).fillna(method='bfill').fillna(method='ffill')
+plt.plot(temp)
+plt.show()
+
+#%%
+
+
+
+num_cols = con_back or len(sorted_contract)
+    def _expiry_prices(tick, out_sz=None):
+        """"gets the expiry month prices for a given contract as np.array,
+        tick is ticker of the expired contract.
+        For contracts that have fewer trading days then out_sz,
+        the prices in the *first* front month trading date will be used.
+        This will be flipped for the very last, unexpired contract, which will 
+        map to first trading days of each contract(??this doesn't work??, grib)
+        out_sz: size of df to be returned"""
+        indxs = np.logical_and(curve_prices.index >= con_range[tick][0],
+                                curve_prices.index <= con_range[tick][1])
+        out = curve_prices.iloc[indxs, 0]#front month prices for this Commodity
+        if out_sz:
+            missing_sz = out_sz - len(out)
+            if missing_sz > 0:
+                #contract has fewer trading days then some contract after it
+                return np.concatenate((out.values, 
+                                      np.repeat(out.iloc[-1], missing_sz)))
+            else:
+                if tick != front_mo_con:
+                    return out[:out_sz].values
+                else:
+                    return out[-out_sz:].values
+        else:
+            return out.values
+        
+    def _make_filler(t,ix):
+        """NAs to add to 'back' of df for contracts that weren't traded over the entire period.
+        eg. to the back of CLZ18 for the dates beyond (Dec 18 - start of data)
+        when this wasn't traded for the entire length of backtest
+        Needs to be transposed"""
+        return [[np.nan]*len( _expiry_prices(t)) for _ in range(ix - num_cols)]
+    
+    def _make_index():
+        "Makes the index for ticker t of datetime objects"
+        #each list(filter) will be same length as out_sz
+        dt_index =  [ix for tick in sorted_contract
+                         for ix in filter(lambda i: i >= con_range[tick][0] 
+                                                and i <= con_range[tick][1],
+                                          curve_prices.index)]
+        named_index = [f"{t} {i} before expiry"
+                            for t in sorted_contract
+                                for i in range(len(_expiry_prices(t)))]
+        tuples = list(zip(dt_index, named_index))
+        multi_indx = pd.MultiIndex.from_tuples(tuples,
+                                               names=['Dates', 'Description'])
+        
+        axis_unique = len(np.unique(dt_index)) == len(dt_index)
+        assert axis_unique, "datetime axis is not unqiue, repeated dates"
+        return dt_index
+    
+    expired_curve = pd.DataFrame(
+                        np.concatenate(
+                            [np.stack(
+                                [_expiry_prices(j,
+                                                out_sz = len( _expiry_prices(t)))
+                                     for j in sorted_contract[ix:ix+num_cols]]
+                                + _make_filler(t,ix)
+                                 ).T
+                                    for ix, t in enumerate(sorted_contract):
+                                        if ix < num_cols
+                            ]),
+                        index = _make_index(),
+                        columns = [f"{contract_abv} {i}Ago" #not all contracts 1Mo
+                                   for i in range(num_cols)]
+                        )
