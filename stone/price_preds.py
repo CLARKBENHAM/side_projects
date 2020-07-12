@@ -430,7 +430,9 @@ def data_handler(save_data = False,
                                 'cme_df',
                                 'eia_bio_df',
                                 'historic_front_month',
-                                'retail_diesel2')):
+                                'retail_diesel2',
+                                'corp_yc',
+                                'corp_credit',)):
     """"MODIFIES GLOBALS; by assigning values to data_structs
     All purpose data handler, uses subfolder 'picked_data'.
     Gets all seperated data sources
@@ -494,6 +496,11 @@ def data_handler(save_data = False,
                    retail_diesel2.columns = ["No 2 Diesel Retail"]
                    save_struct(retail_diesel2, 'retail_diesel2')
 
+               elif struct_name in ('corp_yc', 'corp_credit'):
+                   corp_yc, corp_credit = cme_scrapper.corp_bond_fred()
+                   save_struct(corp_yc, 'corp_yc')
+                   save_struct(corp_credit, 'corp_credit')
+
                exec(f"global {struct_name}", globals())
                exec(f"globals()[struct_name] = load_struct(struct_name)")
         #not nessisary
@@ -506,9 +513,10 @@ expired_curves_df,
 cme_df,
 eia_bio_df,
 historic_front_month,
-retail_diesel2) = data_handler(save_data = False)
+retail_diesel2,
+corp_yc,
+corp_credit) = data_handler(save_data = False)
 
-all_data =load_struct('all_data')
 #%% Predicting comodity pries
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer, KNNImputer
@@ -518,11 +526,13 @@ from sklearn import linear_model
 
 seed = 0
 
-def bridge_imputer(df, trend_model="date_reg", seed = seed, std_range = 50, print_r2=False):#x1, x2, sd, ln
+def bridge_imputer(df, trend_model="date_reg", seed = seed, std_range = 35,
+                   print_r2=False, end_nan_preds = np.inf):#x1, x2, sd, ln
     """ takes pandas df or Series with index *Reverse* sorted index
     Returns pd.df with na values imputed from a brownian bridge.
     use_trend: Use linear model in addition to residuals
     std_range: Size of index window to take std over; excluding NAs, before period start
+    end_nan_preds: how vary from first/last valid index will prediction go
     """
     np.random.seed(seed)
     if isinstance(df, pd.Series):
@@ -533,19 +543,46 @@ def bridge_imputer(df, trend_model="date_reg", seed = seed, std_range = 50, prin
     pre_std = df.std()
     for c in df.columns:
         x = df[c]
-        f_indx = x.first_valid_index()
-        f_ix = len(x[:f_indx])
-        l_indx = x.last_valid_index()
-        l_ix = len(x[:l_indx])
-        #time varying Var + std?
+        fi = next(filter(lambda i: x.iloc[i] == x.iloc[i],
+                         range(len(x))))
+        li = next(filter(lambda i: x.iloc[i] == x.iloc[i],
+                         range(len(x)-1, -1, -1)))
+        fl = max(0, fi-end_nan_preds)
+        ll = min(len(x), li+end_nan_preds)
+        front_nans = pd.Series(np.repeat(np.nan, fl),
+                              x.index[:fl])
+        back_nans = pd.Series(np.repeat(np.nan, len(x) - ll),
+                              x.index[ll:])
+        x = x.iloc[fl:ll]
+
+        num_nans = 10#make preds after more than 10 NAs
+        make_preds_for = set([i.span()[0]
+                             for i in re.finditer("1"*num_nans,
+                                                  x.isna()
+                                                      .astype(int)
+                                                          .astype(str)
+                                                              .str
+                                                                  .cat()
+                                                  )])
+        #time varying trend?
         if trend_model == 'start_stop':
             raise Exception("Makes very Bad predictions")
+            f_indx = x.first_valid_index()
+            f_ix = len(x[:f_indx])
+            l_indx = x.last_valid_index()
+            l_ix = len(x[:l_indx])
             m = (x[f_indx] - x[l_indx])/(f_ix - l_ix)
-            trend = [np.nan]*f_ix \
-                    + [m*i if v==v else np.nan
-                       for i,v in enumerate(x.iloc[f_ix:l_ix+1])] \
-                    + [np.nan]*(len(x) - l_ix - 1)
-            detrend = x - trend#np.std(x - trend)
+            trend = pd.Series([np.nan]*f_ix \
+                                + [m*i if v==v else np.nan
+                                   for i,v in enumerate(x.iloc[f_ix:l_ix+1])] \
+                                + [np.nan]*(len(x) - l_ix - 1),
+                                index = x.index)
+            series = pd.Series([trend[i]
+                                    if i in make_preds_for
+                                    else x.iloc[i]
+                                    for i in range(len(x))
+                                ],
+                                index = x.index)
             if print_r2:
                 z = x.dropna()
                 m = sum(z)/len(z)
@@ -557,11 +594,13 @@ def bridge_imputer(df, trend_model="date_reg", seed = seed, std_range = 50, prin
                 print(f"Trend for {c} increased var:",
                       f"{np.nanvar(x -trend):.3f} vs. {np.nanvar(x):.3f}.")
                       # f"corr coef: {np.cov(x*trend)/np.sqrt(np.nanvar(x)*np.nanvar(trend))}")
-            if detrend.iloc[0] != detrend.iloc[0]:
-                detrend.iloc[0] = x[f_indx] - m*f_ix
-            if detrend.iloc[-1] != detrend.iloc[-1]:
-                detrend.iloc[-1] = x[l_indx] + m*(len(x) - l_ix - 1)
+            if series.iloc[0] != series.iloc[0]:
+                series.iloc[0] = x[f_indx] - m*f_ix
+            if series.iloc[-1] != series.iloc[-1]:
+                series.iloc[-1] = x[l_indx] + m*(len(x) - l_ix - 1)
+
         elif trend_model == 'date_reg':
+            #Could increase Vol if NA pred is out of sync with surrounding valid points
             model = None
             cor = 0
             season = None
@@ -570,54 +609,85 @@ def bridge_imputer(df, trend_model="date_reg", seed = seed, std_range = 50, prin
                                     for i in  x.index
                                     if x[i] == x[i]])
                 temp = x.dropna()
-
-                temp_mod= linear_model.LinearRegression().fit(dates,)
+                temp_mod= linear_model.LinearRegression().fit(dates,temp)
                 if temp_mod.score(dates, x.dropna()) > cor:
                     model = temp_mod
                     season = j
                     cor = temp_mod.score(dates, x.dropna())
             if print_r2:
                 print(c, f"R^2 = {cor:.2f}", season)
-            detrend = pd.Series(x.index,
-                              index = x.index
-                              ).apply(lambda i:
-                                         x[i] if x[i]==x[i]
-                                             else model.predict(
-                                                 np.array([[i.year,
-                                                            abs(i.month
-                                                                + i.day/i.month
-                                                                -season)]]))[0])
-            if detrend.iloc[0] != detrend.iloc[0]:
-                i = x.index[0]
-                detrend.iloc[0] =  model.predict(np.array([[i.year,
-                                                      abs(i.month-season)]]))
-            if detrend.iloc[-1] != detrend.iloc[-1]:
-                i = x.index[-1]
-                detrend.iloc[-1] =  model.predict(np.array([[i.year,
-                                                       abs(i.month-season)]]))
-        else:
-            if detrend.iloc[0] != detrend.iloc[0]:
-                detrend.iloc[0] = x[f_indx]
-            if detrend.iloc[-1] != detrend.iloc[-1]:
-                detrend.iloc[-1] = x[l_indx]
-            detrend = x - sum(x)/len(x)
 
-        valid_ixs = np.where(~x.isna())[0]
+            def _date_pred(i):
+                return model.predict(
+                                    np.array([[i.year,
+                                               abs(i.month
+                                                   + i.day/i.month
+                                                   -season)]])
+                                            )[0]
+
+            series = pd.Series([_date_pred(x.index[i])
+                                    if i in make_preds_for
+                                    else x.iloc[i]
+                                    for i in range(len(x))
+                                ],
+                                index = x.index)
+            if series.iloc[0] != series.iloc[0]:
+                i = x.index[0]
+                series.iloc[0] =  _date_pred(i)
+            if series.iloc[-1] != series.iloc[-1]:
+                i = x.index[-1]
+                series.iloc[-1] =  _date_pred(i)
+        else:
+            def _seg_interpol(i):
+                """use linear interpolation between valid points,
+                sets first/last points to prev"""
+                s,e = i.span()
+                try:
+                    a = x[x.iloc[:s].last_valid_index()]
+                except:
+                    a = x[x.first_valid_index()]
+                try:
+                    b =  x[x.iloc[e:].first_valid_index()]
+                except:
+                    b = x[x.last_valid_index()]
+                return (a+b)/2
+
+            nan_means = iter([_seg_interpol(i)
+                                  for i in re.finditer("1"*num_nans,
+                                                        x.isna()
+                                                            .astype(int)
+                                                                .astype(str)
+                                                                    .str
+                                                                        .cat()
+                                                        )])
+            series = pd.Series([next(nan_means)
+                                    if i in make_preds_for
+                                    else x.iloc[i]
+                                    for i in range(len(x))
+                                ],
+                                index = x.index)
+            if series.iloc[0] != series.iloc[0]:
+                series.iloc[0] =  x[x.first_valid_index()]
+            if series.iloc[-1] != series.iloc[-1]:
+                series.iloc[-1] = x[x.last_valid_index()]
+
+        valid_ixs = np.where(~series.isna())[0]
         bridge_ixs = [(i,j) for i,j in zip(valid_ixs[:-1],
                                            valid_ixs[1:])
                         if i +1 < j]
 
-        temp = detrend.dropna()
+        temp = x.dropna()#if use series, SD will be underestimated
         m1 = sum(temp[:std_range])
         m2 = sum(temp[:std_range]**2)
         ts_ix = 0#inclusive
         te_ix = std_range-1#inclusive
         for s, e in bridge_ixs:
-            s_indx = x.index[s]#not in temp axis
+            s_indx = series.index[s]
             try:
-                s_ix = temp.index.get_loc(s_indx) + 1 #exclusive
+                t_indx = temp[s_indx:].index[0]
+                s_ix = temp.index.get_loc(t_indx) + 1 #exclusive
             except:
-                pdb.set_trace()
+                s_ix = -1#at end, inclusive?
 
             n_added = max(len(temp.iloc[te_ix:s_ix])-1, 0)
             m1 += sum(temp.iloc[te_ix+1:s_ix])  \
@@ -626,35 +696,34 @@ def bridge_imputer(df, trend_model="date_reg", seed = seed, std_range = 50, prin
                 - sum(temp.iloc[ts_ix:ts_ix+n_added]**2)
             ts_ix += n_added
             te_ix += n_added
-            # te_indx = temp.index[te_ix]
-            date_range = (temp.index[ts_ix] - temp.index[te_ix]).days#unbiased est
             #issue of calc std over indexs, but then use for sd over dates, if gaps vary in size
-            sd = np.sqrt((m2/std_range - (m1/std_range)**2))
-            # if  c == 'Retail Biodiesel' and s < date_range:#and s%3 == 0
-            #     print(c, [f"{i:.2f}" for i in (sd, temp.iloc[ts_ix:te_ix+1].std(),
-            #           m1, sum(temp.iloc[ts_ix:te_ix+1]),
-            #           m2, sum(temp.iloc[ts_ix:te_ix+1]**2))])
-            # if abs(m1 - sum(temp.iloc[ts_ix:te_ix+1])) > 0.01:
-            #     ts_ix -= n_added
-            #     te_ix -= n_added
-            #     te_indx = temp.index[te_ix]
-            #     m1 -= sum(temp.iloc[te_ix+1:s_ix])  \
-            #         - sum(temp.iloc[ts_ix:ts_ix+n_added])
-            #     m2 -= sum(temp.iloc[te_ix+1:s_ix]**2)  \
-            #         - sum(temp.iloc[ts_ix:ts_ix+n_added]**2)
+            date_range = (temp.index[ts_ix] - temp.index[te_ix]).days#unbiased est
+            ix_range = 1 + te_ix - ts_ix
+            sd = np.sqrt((m2/ix_range - (m1/ix_range)**2))
+            # if (m2/ix_range - (m1/ix_range)**2) < 0 or\
+            #     abs(temp.iloc[ts_ix:te_ix+1].std() - sd) > 0.02 or\
+            #     abs(m1 - sum(temp.iloc[ts_ix:te_ix+1])) > 0.01:
             #     pdb.set_trace()
-
-            a,b = detrend.iloc[s], detrend.iloc[e]
-            ln = len(detrend.iloc[s+1:e])
+                # ts_ix -= n_added
+                # te_ix -= n_added
+                # m1 -= sum(temp.iloc[te_ix+1:s_ix])  \
+                #     - sum(temp.iloc[ts_ix:ts_ix+n_added])
+                # m2 -= sum(temp.iloc[te_ix+1:s_ix]**2)  \
+                #     - sum(temp.iloc[ts_ix:ts_ix+n_added]**2)
+            if sd != sd:
+                sd = 0.001
+                print("Set SD for ", c)
+            #     pdb.set_trace()
+            a,b = series.iloc[s], series.iloc[e]
+            ln = len(series.iloc[s+1:e])
             #assumes equal var over dates w/o indexs
-            days_passed = [(i-j).days for i,j in zip(x.index[s+1:e],
-                                                     x.index[s+2:e+1])]
-            mx, mn = max(x) + 2*sd, min(x) - 2*sd
+            days_passed = [(i-j).days for i,j in zip(series.index[s+1:e],
+                                                     series.index[s+2:e+1])]
             wiener_proc = np.cumsum([np.random.normal(0, sd*np.sqrt(d))
                                      for d in days_passed])
-            detrend.iloc[s+1:e] = [a + (b-a)*i/ln + w - wiener_proc[-1]*i/ln
-                             for i, w in enumerate(wiener_proc)]
-        df.loc[:,c] = x
+            series.iloc[s+1:e] = [a + (b-a)*i/ln + w - wiener_proc[-1]*i/ln
+                                   for i, w in enumerate(wiener_proc)]
+        df.loc[:,c] = pd.concat((front_nans, series, back_nans), axis=0)
     std_ratio = df.std()/pre_std
     if any([i>1.15 or i < 0.85 for i in std_ratio]):
         print("The following data series changed SD by more than 15%:",
@@ -663,73 +732,116 @@ def bridge_imputer(df, trend_model="date_reg", seed = seed, std_range = 50, prin
                     if i>1.15 or i < 0.85])
     return df
 
-# all_data =load_struct('all_data')
-# isint = lambda i: i in '0123456789'
-# all_data = all_data.loc[:, [n for n in all_data.columns if ((isint(n[-1]) and n[-1] == '1') or (not isint(n[-1])))]]
-z = bridge_imputer(all_data['Retail Biodiesel'], trend_model = 'date_reg', print_r2=True)
-# print("\n\n\n", z.isna().sum())
-# all_data =load_struct('all_data')
-# bridge_imputer(all_data, trend = 'date_reg',print_r2=True)
-
-
-# z = all_data.loc[:,'Retail Biodiesel']
-# pre_std = all_data.iloc[:3000,:].std()
-
-# all_data= bridge_imputer(all_data, trend = False)
 #%%
-# z = all_data
-all_data =load_struct('all_data')
 
-std_ratio = z.iloc[:4000,:].std()/all_data.iloc[:4000,:].std()
-if any([i>1.15 or i < 0.85 for i in std_ratio]):
-    print("The following data series changed STD by more than 15%:",
-          [(c,i)
-            for i,c in zip(std_ratio, all_data.columns)
-                if i>1.15 or i < 0.85])
+def make_roll_adjust(abv, m_ago = 0, window=30):
+    """Makes m_ago month prices the expiry prices of those contracts.
+    returns The roll adjusted for commodity eg. 'CL{m_ago}'
+        #ISSUE:eg. 27 = m_ago but only 24Cl contracts
+    """
+    print(abv)
+    contracts = sort_contracts([i
+                                for i in securities_df.columns
+                                if len(abv) == 2 and abv[0] + " " == i[:2]
+                                or len(abv) > 2  and abv[:2] == i[:2]])
+    last_con_ix = next(filter(lambda ic: np.isnan(securities_df[ic[1]][0]),
+                              enumerate(contracts))
+                       )[0] - 1 + m_ago
+    try:
+        first_con_ix = next(filter(lambda ic: not np.isnan(
+                                                securities_df[ic[1]][-1]),
+                                enumerate(contracts))
+                        )[0] + 1 + m_ago
+    except:
+         first_con_ix = next(filter(lambda ic: not np.isnan(
+                                                securities_df[ic[1]][-2]),
+                                enumerate(contracts))
+                        )[0] + 1 + m_ago
+    d = securities_df.loc[:,contracts[last_con_ix:first_con_ix+1]]
+    #make all values the settlement price
+    # settle_price[~d.isna()] = d.apply(lambda c: c[c.first_valid_index()],
+    #                                   axis=0)
+    # assert d.fillna(method='bfill', axis=1).iloc[:,0] ==\
+    #         d.apply(lambda r: r.dropna()[m_ago], axis=1)
+    expiry_ix = d.apply(lambda c: c.index.get_loc(c.first_valid_index()),
+                                      axis=0)
+    expiry_ix.index = [d.columns.get_loc(i) for i in expiry_ix.index]
+    first_expiry = d.index.get_loc(
+                            securities_df.loc[:,
+                                              contracts[first_con_ix+1]
+                                              ].first_valid_index())
+    first_ix = pd.Series(np.append(expiry_ix.values[1:],
+                                   [first_expiry]
+                                   ) - 1,
+                         index = expiry_ix.index)
+    # first_ix.index = [d.index.get_loc(i) for i in first_ix.index]
+    roll_vals = [d.iloc[f, f_ix] - d.iloc[e, e_ix]
+                 for f,f_ix, e,e_ix in zip(first_ix, first_ix.index,
+                                           expiry_ix, expiry_ix.index)]
+    roll_adjustment = np.repeat(0.0, len(d))
+    roll_adjustment[first_ix.values] = roll_vals
+    return np.cumsum(roll_adjustment)
+
+# settle_price = d.apply(lambda c: c[c.first_valid_index()],
+#                                   axis=0)
+# front_start_price = d.apply(lambda c: c[c.first_valid_index()],
+#                                   axis=0)
+# #take's the m_ago'th contract value for a given date
+# m_contracts = d.apply(lambda r: r.dropna()[m_ago], axis=1)
+# return m_contracts#.rolling(window).var
+
+abv_mean = {abv[:-1]: make_roll_adjust(abv) for abv in front}
 #%%
-import matplotlib.pyplot as plt
+securities_df[sort_contracts([i
+                              for i in securities_df.columns
+                              if 'CL' in i and securities_df[i][0] ])]
 
-# plt.scatter(all_data.loc[:,'Retail Biodiesel'].index,
-#               all_data.loc[:,'Retail Biodiesel'],
-#               s = 3,
-#               marker = '_')
-plt.acorr(z.dropna(), maxlags=400, normed=True)
-plt.show()
-#%%
-fig, ax = plt.subplots()
-# z = all_data.loc[:,'Retail Biodiesel']
-indx = z.index[4600]
-ax.scatter(z[:indx].index,#'Retail Biodiesel'].index,
-              z[:indx],#'Retail Biodiesel'],
-              s = 0.1)
-# all_data = load_struct('all_data')
-ax.scatter(all_data.loc[:indx,'Retail Biodiesel'].index,
-              all_data.loc[:indx,'Retail Biodiesel'],
-              s = 3,
-              marker = '_')
-fig.show()
-#%%
-plt.plot(imputer.fit_transform(all_data.loc[:,'Retail Biodiesel'].values.reshape(-1,1)))
-plt.show()
+# con_abv = [i[:2] for i in curve_df.columns]
+# futures_curve = curve_df.groupby(con_abv)
+# dvol_30 = futures_curve.rolling(30).std()
+# dvol_90 = futures_curve.rolling(90).std()
+# dvol_360 = futures_curve.rolling(360).std()
 
-
-
+# futures_curve.std()
     #%%
+def my_imputer(i, imp = KNNImputer(n_neighbors=10, weights='distance')):
+    "Bridge impute values between ends; else use KNN"
+    return imp.fit_transform(brige_transform(i, end_nan_preds = 4))
+
+def realized_vol():
+    "Adds Realized volatility for each commodity"
+    front = [i for i in curve_prices_df.columns if re.match("[A-Z]+1$",i)]
+    lixs = curve_prices_df.loc[:,front].apply(lambda c: (c.name, c.last_valid_index()),
+                                    axis=0)
+#ix::-1 does what you'd expect :ix:-1 to do
+    dvar_30 = pd.concat([curve_prices_df.loc[ix::-1,c]\
+                                         .dropna().rolling(30).var()
+                           for c,ix in lixs],
+                          axis=1).dropna()[::-1]
+    dvar_30.columns = [i+" 30d vol" for i in front]
+
+
 def preprocessing(months_back = 15,
-                  impute = KNNImputer(n_neighbors=10, weights='distance').fit_transform):
+                  impute = KNNImputer(n_neighbors=10, weights='distance').fit_transform,
+                  reprocess_data = False):
     """Do all preprocessing to return X_train, Y_train, X_test, y_test.
     combine data, Remove all NAs from data.
     months_back: how far back to keep expires prices for, approx.
     start_date: The oldest date for which prices will be kept"""
     #No NA Valid NA, or Valid, NA, Valid in curve_prices:  ((expired_curves_df.iloc[:-2,:] == expired_curves_df.iloc[:-2,:]) & (expired_curves_df.iloc[1:-1,:] != expired_curves_df.iloc[1:-1,:]) & (expired_curves_df.iloc[2:,:] == expired_curves_df.iloc[2:,:])).sum().sum()
     #But NAs of prices before started trading/didn't trade that far back? Invert regression
+    if not reprocess_data:
+        try:
+            return load_struct("all_data")
+        except:
+            pass
     end_date = securities_df.index[0]
-    min_gap = timedelta(30*months_back)
+    min_gap = timedelta(30*months_back)#~months ago
     start_date = min_gap + securities_df.index[-1]
 
     #BLB sheet data
     con_abv = set([i[:2] for i in securities_df.columns])
-   #expired contracts only
+    #expired contracts only
     con_d = {c: sort_contracts(
                     [i[2:]
                      for i in securities_df.columns
@@ -780,7 +892,9 @@ def preprocessing(months_back = 15,
                                 axis=1,
                                 join='outer',
                                 sort=True).iloc[::-1]
+
     curve_df = curve_df[curve_df.index >= last_row]
+
     #rebuild expiry_prices to use imputed values from curve_prices
     sec_list = [securities_df[i].dropna() for i in securities_df.columns]
     sec_list_d = {c: list(filter(lambda i: i.name[:2] == c, sec_list))
@@ -794,9 +908,10 @@ def preprocessing(months_back = 15,
                                   axis=1,
                                   join='outer').iloc[::-1]
     #outerjoin leaves Nas since different indexs; since different contracts expire at different times.
-    expired_df.iloc[:,:] = imputer.fit_transform(expired_df)#grib?
+    expired_df.iloc[:,:] = impute(expired_df)#grib?
+    realized_vol_df = realized_vol(expired_df)
 
-    #macroTrends: only take unique commoditie's columns, after start date
+    #macroTrends: only take Unique commoditie's columns, after start date
     front_mth = historic_front_month[['cotton']].dropna()
     front_mth = front_mth[np.logical_and(end_date >= front_mth.index,
                                          front_mth.index >= start_date)]
@@ -815,19 +930,41 @@ def preprocessing(months_back = 15,
                                     how='left',
                                     sort = True
                                     ).fillna(method='ffill')
+
+    yc = corp_yc[np.logical_and(end_date >= corp_yc.index,
+                                         corp_yc.index >= start_date)]
+    credit = corp_credit[np.logical_and(end_date >= corp_credit.index,
+                                         corp_credit.index >= start_date)]
     all_data = pd.concat([curve_df,
                           expired_df,
+                          retail_diesels,
                           front_mth,
-                          retail_diesels],
+                          yc,
+                          credit],
                          join='outer',
                          axis = 1,
                          sort=True).iloc[::-1]
 
+    save_struct(all_data, 'all_data2')
+    #cuts off Nans at end
+    all_data = bridge_imputer(all_data, end_nan_preds = 60)
+    all_data = all_data[all_data.index
+                            >= max(all_data.apply(lambda c:
+                                                  c.last_valid_index()))]
+    if all_data.isna().sum().sum() > 0:
+        pdb.set_trace()
+    save_struct(all_data, 'all_data')
     return all_data
 
-all_data = preprocessing(impute = bridge_imputer)
+# all_data = load_struct('all_data')
+all_data = preprocessing()
+
 #Difference of what dates should have data
 # [i for i in all_data['SM 1Ago'][all_data['SM 1Ago'].isna()].index if i in curve_df.index]
+#%%
+
+
+
 #%%
 from sklearn.model_selection import train_test_split
 def make_prediction_df():
