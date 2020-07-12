@@ -9,7 +9,7 @@ x = np.array(pd.concat([pd.DataFrame([1]*nrow), data.iloc[:,:3]],axis=1))
 y = np.array(data.loc[:,'y'])
 theta = np.ones((4,1))
 
-def prediction_reg(x,theta):  
+def prediction_reg(x,theta):
     pred = x @ theta
     return pred.reshape(-1)
 
@@ -38,9 +38,9 @@ def calc_grad(train, theta):
     g1 = 2*(y-pred).reshape(1,-1)
     grad = theta @ g1
     return np.mean(grad, axis = 1)
-    
+
 calc_grad(theta, data[:2])
-    
+
 #%%
 
 data = pd.read_csv("file:///C:/Users/student.DESKTOP-UT02KBN/Downloads/VAIwT1.csv")
@@ -53,7 +53,7 @@ for name in data.columns[1:4]:
     plt.ylabel('Sales')
     plt.title(f"Corr: {data.loc[:,name].corr(data.loc[:,'sales'])}")
     plt.show()
-    
+
 data['CPS'] = data.apply(lambda row: sum(row[1:4])/row[4],axis=1)
 data['isSuccess'] = data.apply(lambda row: (row[4]>15) and (row[5] < 20), axis=1)
 
@@ -96,22 +96,22 @@ for y,m in ((y,m) for y in range(f_Y, l_Y+1)
         print(link.get('href'))
         urls.append(link.get('href'))
 #%%
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
 #%%
 def int_col(n,base=26):
     "convert 0 index column number to excel column name"
     if n < 0:
         return ""
-    elif n < base: 
-        return chr(65 + n)         
+    elif n < base:
+        return chr(65 + n)
     return int_col(n//base-1,base) + int_col(n%base,base)
 
 def blb_dates_are_skipped(b):
@@ -123,9 +123,9 @@ def blb_dates_are_skipped(b):
               all the dates every security should have)
     """
     sz = len(b.row_values(6))
-    date_cols = [[datetime(*xlrd.xldate_as_tuple(j,0)) 
-                    for j in b.col_values(i)[7:] 
-                if j] 
+    date_cols = [[datetime(*xlrd.xldate_as_tuple(j,0))
+                    for j in b.col_values(i)[7:]
+                if j]
                     for i in range(0,sz,4)]
     dates = sorted(set([i
                         for c in date_cols
@@ -139,7 +139,7 @@ os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
 prices_file = "16.16 Historical Commodity Price Data.xlsx"
 
 individual_securities = True
-        
+
 wrote_bk = None
 xl_bk = xlrd.open_workbook(prices_file)
 commodities = xl_bk.sheet_names()
@@ -156,25 +156,25 @@ is_date_aligned, dates = blb_dates_are_skipped(b)
 #%%
 if not all(is_date_aligned):
     print(f"\nWARNING: Row's not date aligned, some days missing, for {name}")
-    bad_date_cols = [4*ix for ix,i in enumerate(is_date_aligned) 
+    bad_date_cols = [4*ix for ix,i in enumerate(is_date_aligned)
                         if not i]
 #    #keeps book open in case have to write to another sheet; opening takes forever
-#    wrote_bk = make_blb_row_aligned(prices_file, 
-#                         sht_ix, 
+#    wrote_bk = make_blb_row_aligned(prices_file,
+#                         sht_ix,
 #                         bad_date_cols,
 #                         dates,
 #                         bk = wrote_bk)
 #%
-    (file_name, sheet_ix, bad_date_cols, target_indx, bk) =  (prices_file, 
-                                                                     sht_ix, 
+    (file_name, sheet_ix, bad_date_cols, target_indx, bk) =  (prices_file,
+                                                                     sht_ix,
                                                                      bad_date_cols,
                                                                      dates,
                                                                      wrote_bk)
-    bk = bk or openpyxl.load_workbook(file_name, data_only = True)                 
+    bk = bk or openpyxl.load_workbook(file_name, data_only = True)
     sheet = bk.worksheets[sheet_ix]
     for c in bad_date_cols:
         #Have to remove all values that aren't in target_indx
-        valid_idx, d_col = list(zip(*[(ix, v.value) 
+        valid_idx, d_col = list(zip(*[(ix, v.value)
                                 for ix, v in enumerate(sheet[int_col(c)])
                                     if v.value in target_indx]
                                 ))#[7:]
@@ -185,15 +185,15 @@ if not all(is_date_aligned):
                                     if ix in valid_idx]
         print(f"Bad col len: {len(d_col)} vs. {len(target_indx)}")
 #        for i,v in enumerate(reversed(d_col)):#openpyxl appends a bunch of empty cells
-#            if v is not None:   
+#            if v is not None:
 #                valid_till = len(d_col) - i
 #                break
 #        d_col = d_col[:valid_till]
 #        t_col =[i.value for i in sheet[int_col(c+1)]][7:valid_till]
 #        v_col = [i.value for i in sheet[int_col(c+2)]][7:valid_till]
-    
+
         for ix, v in enumerate(target_indx):
-            if d_col[ix] !=v and d_col[ix] != "#N/A N/A": 
+            if d_col[ix] !=v and d_col[ix] != "#N/A N/A":
                 print(f"inserted {v} @ {ix}, col {c}, was {d_col[ix]}")
                 d_col.insert(ix, v)
                 t_col.insert(ix, "#N/A N/A")
@@ -203,16 +203,16 @@ if not all(is_date_aligned):
 #                time.sleep(0.1)
         t_col += [ "#N/A N/A"]*(len(d_col) - len(t_col))#??, not sure why not same sz
         v_col += [ "#N/A N/A"]*(len(d_col) - len(v_col))
-    
+
         #writeback uses excel locations, 1-indexed not 0
         for row in range(8, 8 + len(d_col)):
             sheet.cell(column=c+1, row=row).value = d_col[row-8]
             sheet.cell(column=c+2, row=row).value = t_col[row-8]
             sheet.cell(column=c+3, row=row).value = v_col[row-8]
-            
+
     wrote_bk.save(prices_file)
 
-    
+
 #%%
 
 
@@ -246,8 +246,8 @@ def int_col(n,base=26):
     "convert 0 index column number to excel column name"
     if n < 0:
         return ""
-    elif n < base: 
-        return chr(65 + n)         
+    elif n < base:
+        return chr(65 + n)
     return int_col(n//base-1,base) + int_col(n%base,base)
 
 
@@ -255,14 +255,14 @@ def int_col(n,base=26):
 def process_blb_xlsx(file_name):
     bk_open = False
     xlrd_bk = xlrd.open_workbook(file_name)
-    
+
     for sht_ix, name in enumerate(xlrd_bk.sheet_names()):
-        b = xlrd_bk.sheet_by_index(sht_ix)       
+        b = xlrd_bk.sheet_by_index(sht_ix)
         sz = len([i for i in b.row_values(6)])
         #See blb_dates_are_skipped()
-        date_cols = [[datetime(*xlrd.xldate_as_tuple(j,0)) 
-                        for j in b.col_values(i)[7:] 
-                    if j] 
+        date_cols = [[datetime(*xlrd.xldate_as_tuple(j,0))
+                        for j in b.col_values(i)[7:]
+                    if j]
                         for i in range(0,sz,4)]
         dates = sorted(set([i
                             for c in date_cols
@@ -270,10 +270,10 @@ def process_blb_xlsx(file_name):
                         reverse = True)
         is_date_aligned = [col[-1] == dates[len(col)-1]
                                for col in date_cols]
-    
+
         if not all(is_date_aligned):
             print(f"\nWARNING: Row's not date aligned, some days missing, for {name}")
-            bad_date_cols = [4*ix for ix,i in enumerate(is_date_aligned) 
+            bad_date_cols = [4*ix for ix,i in enumerate(is_date_aligned)
                                 if not i]
             print(bad_date_cols)
             if not bk_open:
@@ -284,7 +284,7 @@ def process_blb_xlsx(file_name):
             sheet = wrote_bk.worksheets[sht_ix]
             for c in bad_date_cols:
                 #Have to remove all values that aren't in target_indx
-                valid_idx, d_col = list(zip(*[(ix, v.value) 
+                valid_idx, d_col = list(zip(*[(ix, v.value)
                                         for ix, v in enumerate(sheet[int_col(c)])
                                             if v.value in target_indx]
                                         ))
@@ -295,7 +295,7 @@ def process_blb_xlsx(file_name):
                 v_col = [v.value for ix, v in enumerate(sheet[int_col(c+2)])
                                             if ix in valid_idx]
                 for ix, v in enumerate(target_indx):
-                    if ix >= len(d_col) or (d_col[ix] !=v and d_col[ix] != "#N/A N/A"): 
+                    if ix >= len(d_col) or (d_col[ix] !=v and d_col[ix] != "#N/A N/A"):
                         try:
                             print(f"inserted {v} @ {ix}, col {c}, was {d_col[ix]}")
                         except:
@@ -307,7 +307,7 @@ def process_blb_xlsx(file_name):
                         pdb.set_trace()
                 t_col += [ "#N/A N/A"]*(len(d_col) - len(t_col))#??, not sure why not same sz
                 v_col += [ "#N/A N/A"]*(len(d_col) - len(v_col))
-            
+
                 #writeback uses excel locations, 1-indexed instead of 0
                 for row in range(8, 8 + len(d_col)):
                     sheet.cell(column=c+1, row=row).value = d_col[row-8]
@@ -337,7 +337,7 @@ temp = temp.join(cotton, how="inner")
 temp = temp[temp.isna().sum(axis=1) < 3]
 temp = temp.loc[:,['KC1', 'CC1', 'CT1', 'C1', 'W1', 'CL1', 'HO1']]
 
-names_row = ["Coffee", "Cocoa (NY)", "Cotton", "Corn","Wheat (Chicago)", 
+names_row = ["Coffee", "Cocoa (NY)", "Cotton", "Corn","Wheat (Chicago)",
                 "Crude Oil", "Heating Oil"]
 units_row = ['U.S. dollars and cents per pound',
              'U.S. dollars and cents per Metric Ton',
@@ -359,19 +359,19 @@ retail_diesel2.columns = ["No 2 Diesel Retail"]
 
 bean_oil = process_macroTrendsnet()['soybean oil'].dropna()
 bean_oil.name = "Soybean Oil"
-bean_oil = bean_oil.loc[[i 
-                         for i in bean_oil.index 
+bean_oil = bean_oil.loc[[i
+                         for i in bean_oil.index
                          if i >= min(min(retail_diesel2.index),
                                      min(bio.index))]]
 
-bio.index = [next(j 
-                    for j in reversed(bean_oil.index) 
-                    if j >= i) 
+bio.index = [next(j
+                    for j in reversed(bean_oil.index)
+                    if j >= i)
              for i in bio.index]
 
-retail_diesel2.index = [next(j 
-                        for j in reversed(bean_oil.index) 
-                        if j >= i) 
+retail_diesel2.index = [next(j
+                        for j in reversed(bean_oil.index)
+                        if j >= i)
                     for i in retail_diesel2.index]
 
 temp = bean_oil.to_frame().join((bio, retail_diesel2),
@@ -379,14 +379,14 @@ temp = bean_oil.to_frame().join((bio, retail_diesel2),
                            sort = True
                            ).fillna(method='bfill').fillna(method='ffill')
 
-units_row = ["(Dollars per Pound)", 
+units_row = ["(Dollars per Pound)",
              "(Dollars per Gallon)",
              "(Dollars per Gallon)"]
 # os.chdir("C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\Stone_Presidio\\Data")
 # temp.to_csv("price request 6_22.csv")
 #%%
 def where_BLB_MacroTrends_differ():
-    """There's some differences between say day pricing on 
+    """There's some differences between say day pricing on
     Bloomberg and Macrotrends and I can't tell why"""
     for df_n, m_n in zip(('CC1', 'KC1', 'C1', 'HO1', 'BO1', 'W1', 'CL1'),
                         ['cocoa', 'coffee', 'corn', 'heating', 'soybean oil', 'wheat',
@@ -394,15 +394,15 @@ def where_BLB_MacroTrends_differ():
         x = curve_prices_df[df_n].dropna()
         y = historic_front_month.loc[historic_front_month.index.isin(x.index),
                                      m_n].dropna()
-        x = x[y.index] 
+        x = x[y.index]
         a = pd.DataFrame(({'x':x,
-                           'y':y, 
+                           'y':y,
                            'year':[i.year for i in x.index],
                            'day': [i.day for i in x.index]}))
-        difs =  a.apply(lambda row: row.iloc[0] != row.iloc[1], 
+        difs =  a.apply(lambda row: row.iloc[0] != row.iloc[1],
                        axis =1)
         print(df_n,
-              m_n, 
+              m_n,
                 # difs.groupby(a['year']).sum(),
                 difs.groupby(a['day']).sum(),
                # set([i.day for i in difs.index]),
@@ -425,9 +425,9 @@ def where_BLB_MacroTrends_differ():
 # plt.show()
 epa_diesel = eia_bio_df['Retail Diesel']
 
-epa_diesel.index = [next(j 
-                        for j in reversed(retail_diesel2.index) 
-                        if j >= i) 
+epa_diesel.index = [next(j
+                        for j in reversed(retail_diesel2.index)
+                        if j >= i)
                     for i in epa_diesel.index]
 
 temp = retail_diesel2.join(epa_diesel,
@@ -447,7 +447,7 @@ num_cols = con_back or len(sorted_contract)
         tick is ticker of the expired contract.
         For contracts that have fewer trading days then out_sz,
         the prices in the *first* front month trading date will be used.
-        This will be flipped for the very last, unexpired contract, which will 
+        This will be flipped for the very last, unexpired contract, which will
         map to first trading days of each contract(??this doesn't work??, grib)
         out_sz: size of df to be returned"""
         indxs = np.logical_and(curve_prices.index >= con_range[tick][0],
@@ -457,7 +457,7 @@ num_cols = con_back or len(sorted_contract)
             missing_sz = out_sz - len(out)
             if missing_sz > 0:
                 #contract has fewer trading days then some contract after it
-                return np.concatenate((out.values, 
+                return np.concatenate((out.values,
                                       np.repeat(out.iloc[-1], missing_sz)))
             else:
                 if tick != front_mo_con:
@@ -466,19 +466,19 @@ num_cols = con_back or len(sorted_contract)
                     return out[-out_sz:].values
         else:
             return out.values
-        
+
     def _make_filler(t,ix):
         """NAs to add to 'back' of df for contracts that weren't traded over the entire period.
         eg. to the back of CLZ18 for the dates beyond (Dec 18 - start of data)
         when this wasn't traded for the entire length of backtest
         Needs to be transposed"""
         return [[np.nan]*len( _expiry_prices(t)) for _ in range(ix - num_cols)]
-    
+
     def _make_index():
         "Makes the index for ticker t of datetime objects"
         #each list(filter) will be same length as out_sz
         dt_index =  [ix for tick in sorted_contract
-                         for ix in filter(lambda i: i >= con_range[tick][0] 
+                         for ix in filter(lambda i: i >= con_range[tick][0]
                                                 and i <= con_range[tick][1],
                                           curve_prices.index)]
         named_index = [f"{t} {i} before expiry"
@@ -487,11 +487,11 @@ num_cols = con_back or len(sorted_contract)
         tuples = list(zip(dt_index, named_index))
         multi_indx = pd.MultiIndex.from_tuples(tuples,
                                                names=['Dates', 'Description'])
-        
+
         axis_unique = len(np.unique(dt_index)) == len(dt_index)
         assert axis_unique, "datetime axis is not unqiue, repeated dates"
         return dt_index
-    
+
     expired_curve = pd.DataFrame(
                         np.concatenate(
                             [np.stack(

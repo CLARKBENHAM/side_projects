@@ -70,7 +70,7 @@ def unit_formatter(unit_des):
         return unit_des
 
 abv_formatted_units = {k:unit_formatter(v) for k,v in abv_cme_units.items()}
-    
+
 abv_cme_url = {'C': 'https://www.cmegroup.com/trading/agricultural/grain-and-oilseed/corn.html',
                 'S': 'https://www.cmegroup.com/trading/agricultural/grain-and-oilseed/soybean.html',
                 'W': 'https://www.cmegroup.com/trading/agricultural/grain-and-oilseed/wheat.html',
@@ -140,12 +140,12 @@ def get_CME_endpoints(start = 344, end=500):
                         r = r.json()
                         print(f"{i}: {r['quotes'][0]['productName']}", file=f)
                         print(f"{i}: {u},","\n", file=f)
-                    time.sleep(1+8 
+                    time.sleep(1+8
                                *random.random())
             except:
                 print("failed on", i)
                 time.sleep(10)
-            start = i + 1      
+            start = i + 1
 #get_CME_endpoints(start=500, end=1000)
 #%%
 abv_bbl_url = {'C': 'https://www.bloomberg.com/quote/C%201:COM',
@@ -160,7 +160,7 @@ abv_bbl_url = {'C': 'https://www.bloomberg.com/quote/C%201:COM',
                'HO': 'https://www.bloomberg.com/quote/HO1:COM',
                'BO': 'https://www.bloomberg.com/quote/BO1:COM',
                'RS': 'https://www.bloomberg.com/quote/RS1:COM',
-               'SM': 'https://www.bloomberg.com/quote/SM1:COM'} 
+               'SM': 'https://www.bloomberg.com/quote/SM1:COM'}
 #%%
 #https://www.barchart.com/futures/quotes/KCN20/historical-prices?page=all
 #barchart.com specific tikers
@@ -169,9 +169,9 @@ barcharts_tickers= {'QC': 'CA',
                     'EH': 'FH',#Barchart is NY, CME is CME GLobex
                     'CU': 'FL'#Barchart is CHI, CME is CHI; quotes differ
                         }
-barcharts_tickers.update({k:k for k in abv_name.keys() 
+barcharts_tickers.update({k:k for k in abv_name.keys()
                             if k not in barcharts_tickers})
-#%%        
+#%%
 con_month_abv = {'January': 'F',
                 'February': 'G',
                 'March': 'H',
@@ -197,9 +197,9 @@ def write_data():
                         for i in futures]
     curve_prices_df.columns = out_col_names
     curve_prices_df.to_csv("Historical prxs")
-    
+
     #CME DATA
-#    if 'cme_data' not in globals(): 
+#    if 'cme_data' not in globals():
 #        cme_data = get_all_cme_prx()
 #    cme_df = cme_scrapper.make_cme_df(globals()['cme_data'])
     cme_df.to_csv("Spot Futures")
@@ -207,9 +207,9 @@ def write_data():
     #Notes
     def ticker_notes(k):
         "Data for CME ticker k"
-        return [abv_name[k], 
-                abv_cme_units[k], 
-                abv_cme_url[k], 
+        return [abv_name[k],
+                abv_cme_units[k],
+                abv_cme_url[k],
                 abv_name[k] + f" ({abv_formatted_units[k]})"]
     notes_body = {k: ticker_notes(k) if k not in cme_to_blb \
                       else ticker_notes(cme_to_blb[k])
@@ -220,7 +220,7 @@ def write_data():
                   index = ['Name', 'Price Def', 'Title', 'Link' ]
                 ).to_csv("notes")
     #RINS
- 
+
     return None
 
 # write_data()
@@ -243,6 +243,24 @@ https://www.macrotrends.net/2534/wheat-prices-historical-chart-data
 https://www.macrotrends.net/futures/crude-oil
 https://www.macrotrends.net/futures/heating-oil
 """
+def bridge_ex_plotter():
+    import matplotlib.pyplot as plt
+    eia_bio_df = load_struct('eia_bio_df')
+    z = bridge_imputer(eia_bio_df['Retail Biodiesel'],
+                       trend_model = 'date_reg',
+                       print_r2=True,
+                       end_nan_preds = 30)
+
+    fig, ax = plt.subplots()
+    indx = z.index[4600]
+    ax.scatter(z[:indx].index,#'Retail Biodiesel'].index,
+                z[:indx],#'Retail Biodiesel'],
+                s = 0.1)
+    ax.scatter(eia_bio_df.loc[:indx,'Retail Biodiesel'].index,
+                eia_bio_df.loc[:indx,'Retail Biodiesel'],
+                s = 3,
+                marker = '_')
+    fig.show()
 
 #contract_expiry_dates = {'BO':14,
 #                         'C ':14,
