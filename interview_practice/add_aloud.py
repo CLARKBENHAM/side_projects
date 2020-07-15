@@ -139,6 +139,13 @@ def add_aloud(numa, numb):
                 print(a,b)
         print(f"Correct!, {a} + {b} = {ans}\n")
 
+#5x5 grid which flashes blue circles; have to click the cells which held blue
+#click arrow which changed direction
+
+#hit 1/0 if coloured circles on left or on right match
+
+#hit 1/0 if center arrow of 5 points left vs. right (and line appears at different heights)
+
 if __name__ == '__main__':
     try:
         digits = list(map(lambda i: int(re.findall(r'\d+', i)[0]), sys.argv[1:]))
