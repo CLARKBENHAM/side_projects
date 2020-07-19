@@ -102,28 +102,29 @@ def make_barchart_historicals(tickers):
 # r.content
 
 #%%
+def get_fred(series_id, make_series = False, extra_specs = ""):
+    key = load_struct('fred_key')
+    url = f"https://api.stlouisfed.org/fred/series/observations?" \
+            + f"series_id={series_id}&api_key={key}" \
+            + "&observation_start=2000-01-01&file_type=json" \
+            + extra_specs
+    r = requests.get(url).json()
+    if make_series:
+        return pd.Series([float(i['value']) if i['value'] != "."
+                          else np.nan
+                          for i in r['observations']],
+                         index =[datetime.strptime(i['date'], "%Y-%m-%d")
+                                 for i in r['observations']],
+                         name = series_id)[::-1]
+    else:
+        return r
+
 def corp_bond_fred():
     """Gets FRED's bond data; from following links:
         (IG) https://fred.stlouisfed.org/release/tables?rid=402&eid=219299
         (BB) https://fred.stlouisfed.org/series/BAMLH0A1HYBB
         (CCC) https://fred.stlouisfed.org/series/BAMLH0A3HYC
         """
-    def get_fred(series_id, make_series = False, extra_specs = ""):
-        key = "8013774bf23efdce1c2a57dc5b021689"
-        url = f"https://api.stlouisfed.org/fred/series/observations?" \
-                + f"series_id={series_id}&api_key={key}" \
-                + "&observation_start=2000-01-01&file_type=json" \
-                + extra_specs
-        r = requests.get(url).json()
-        if make_series:
-            print(series_id)
-            return pd.Series([float(i['value']) if i['value'] != "." else np.nan for i in r['observations']],
-                             index =[datetime.strptime(i['date'], "%Y-%m-%d")
-                                     for i in r['observations']],
-                             name = series_id)[::-1]
-        else:
-            return r
-
     corp_bond_series = "HQMCB"#high quality
     bonds = [(i//2, i%2) for i in list(range(1,15)) + [20, 30, 40, 60]]#don't need past 30yrs
     bond_ids = [corp_bond_series + "6MT" if y == 0
@@ -132,20 +133,21 @@ def corp_bond_fred():
                 for y,m in bonds]
     reqs = [None]*len(bond_ids)
     for i,b in enumerate(bond_ids):
-        reqs[i] = _get_fred(b)
+        reqs[i] = get_fred(b)
     #what if dates don't match?
+    pdb.set_trace()
     corp_yc = pd.DataFrame([[float(i['value']) for i in j['observations']]
                              for j in reqs],
                         columns = [datetime.strptime(i['date'], "%Y-%m-%d")
                                    for i in reqs[0]['observations']],
-                        index = [bond_ids]).T[::-1]
+                        index = bond_ids).T[::-1]
     #ICE, option adjusted spreads
-    ccc_bonds = _get_fred("BAMLH0A3HYC", make_series=True)
-    bb_bonds = _get_fred("BAMLH0A1HYBB", make_series=True)
-    b_bonds = _get_fred("BAMLH0A2HYB", make_series=True)
+    ccc_bonds = get_fred("BAMLH0A3HYC", make_series=True)
+    bb_bonds = get_fred("BAMLH0A1HYBB", make_series=True)
+    b_bonds = get_fred("BAMLH0A2HYB", make_series=True)
     #Moody
-    baa_bonds = _get_fred("DBAA", make_series=True)
-    aaa_bonds = _get_fred("DAAA", make_series=True)
+    baa_bonds = get_fred("DBAA", make_series=True)
+    aaa_bonds = get_fred("DAAA", make_series=True)
 
     corp_credit = pd.concat((ccc_bonds, bb_bonds, b_bonds, baa_bonds, aaa_bonds),
                             axis=1)
@@ -154,7 +156,53 @@ def corp_bond_fred():
     # corp_credit.index = pd.to_datetime(corp_credit.index)
     return corp_yc, corp_credit
 
+# corp_yc, corp_credit =  corp_bond_fred()
 
+#Scrape inventory levels
+def get_eia(series_id, make_series = False, extra_specs = ""):
+    key = load_struct('eia_key')
+    url = f"http://api.eia.gov/series/?api_key={key}" \
+            + f"series_id={series_id}
+            + "&start=2000-01-01&out=json" \
+            + extra_specs
+    r = requests.get(url).json()
+    if make_series:
+        return pd.Series([float(i['value']) if i['value'] != "."
+                          else np.nan
+                          for i in r['observations']],
+                         index =[datetime.strptime(i['date'], "%Y-%m-%d")
+                                 for i in r['observations']],
+                         name = series_id)[::-1]
+    else:
+        return r
+
+def get_eia_df(series_ids)
+    key = load_struct('eia_key')
+    if len(series_ids) < 10:
+        url = f"http://api.eia.gov/series/?api_key={key}" \
+                + f"series_id={';'.join(series_ids)}
+                + "&start=2000-01-01&out=json"
+        r = requests.get(url).json()
+    elif len(series_ids) < 100:
+        #use post method
+    else:
+
+    return pd.Series([float(i['value']) if i['value'] != "." else np.nan for i in r['observations']],
+                         index =[datetime.strptime(i['date'], "%Y-%m-%d")
+                                 for i in r['observations']],
+                         name = series_id)[::-1]
+    else:
+        return r
+
+def eia_inventories():
+    eia_key = load_struct('eia_key')
+    base_url =
+    weekly_cushing_stocks = requests.get(base_url
+                                         + "series_id=PET.W_EPC0_SAX_YCUOK_MBBL.W"
+                                         ).json()
+#%%
+
+http://api.eia.gov/series/?series_id=sssssss&api_key=YOUR_API_KEY_HERE[&num=][&out=xml|json]
 #%%
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
@@ -234,7 +282,6 @@ def plot_prices(data_l, old_data_l, tckrs, save_path= ''):
     else:
         plt.show()
 
-#%%
 def single_plots(cme_data, target_dir = 'sing_prx_graphs', save_plots = False):
     "makes plots of individual commodities, and zips them"
     for (tckr, (months, prices)) in cme_data.items():
