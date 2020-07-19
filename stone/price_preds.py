@@ -518,6 +518,7 @@ corp_yc,
 corp_credit) = data_handler(save_data = False)
 
 #%% Predicting comodity pries
+import matplotlib.pyplot as plt
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer, KNNImputer
 #iterativeIMputer doesn't have convergence guarantees
@@ -526,7 +527,7 @@ from sklearn import linear_model
 
 seed = 0
 
-def bridge_imputer(df, trend_model="date_reg", seed = seed, std_range = 35,
+def bridge_impute(df, trend_model="date_reg", seed = seed, std_range = 35,
                    print_r2=False, end_nan_preds = np.inf):#x1, x2, sd, ln
     """ takes pandas df or Series with index *Reverse* sorted index
     Returns pd.df with na values imputed from a brownian bridge.
@@ -734,92 +735,121 @@ def bridge_imputer(df, trend_model="date_reg", seed = seed, std_range = 35,
 
 #%%
 
-def make_roll_adjust(abv, m_ago = 0, window=30):
-    """Makes m_ago month prices the expiry prices of those contracts.
-    returns The roll adjusted for commodity eg. 'CL{m_ago}'
-        #ISSUE:eg. 27 = m_ago but only 24Cl contracts
+def roll_adjust(abv, m_ago = 1, securities_df = securities_df):
     """
-    print(abv)
+    returns The roll adjusted for commodity eg. 'CL{m_ago}', CL1.
+    Assumes Most reccent values are at top; reversed time order.
+        #ISSUE:eg. 27 = m_ago but only 24Cl contracts, not for that purpose
+    everything rolled on the last day (bad, fix, grib)
+    #Negative vaules are correct.
+    #For CL a inter contract decline average of $1/4 could be due to
+        interest rates increasing prices as contract goes to expiry
+    """
+    assert len(abv) >= 2
+    if securities_df.index[0] < securities_df.index[-1]:
+        print("Reversed Index")
+        securities_df = securities_df[::-1]
     contracts = sort_contracts([i
                                 for i in securities_df.columns
-                                if len(abv) == 2 and abv[0] + " " == i[:2]
-                                or len(abv) > 2  and abv[:2] == i[:2]])
-    last_con_ix = next(filter(lambda ic: np.isnan(securities_df[ic[1]][0]),
-                              enumerate(contracts))
-                       )[0] - 1 + m_ago
+                                if len(abv) == 2 and abv[0] + " " == i[:2] #C1
+                                or len(abv) > 2  and abv[:2] == i[:2]]) #CL1
+    #front month contract when data collected
     try:
-        first_con_ix = next(filter(lambda ic: not np.isnan(
-                                                securities_df[ic[1]][-1]),
-                                enumerate(contracts))
-                        )[0] + 1 + m_ago
-    except:
-         first_con_ix = next(filter(lambda ic: not np.isnan(
-                                                securities_df[ic[1]][-2]),
-                                enumerate(contracts))
-                        )[0] + 1 + m_ago
-    d = securities_df.loc[:,contracts[last_con_ix:first_con_ix+1]]
-    #make all values the settlement price
-    # settle_price[~d.isna()] = d.apply(lambda c: c[c.first_valid_index()],
-    #                                   axis=0)
-    # assert d.fillna(method='bfill', axis=1).iloc[:,0] ==\
-    #         d.apply(lambda r: r.dropna()[m_ago], axis=1)
+        last_con_ix = next(filter(lambda ic: np.isnan(securities_df[ic[1]][0]),
+                                  enumerate(contracts))
+                           )[0] - 2 + m_ago
+    except:#no contract in front of spot contract
+        last_con_ix = 0
+    first_con_ix = len(contracts) - m_ago + 1
+    d = securities_df.loc[:,contracts[last_con_ix:first_con_ix]]
     expiry_ix = d.apply(lambda c: c.index.get_loc(c.first_valid_index()),
                                       axis=0)
     expiry_ix.index = [d.columns.get_loc(i) for i in expiry_ix.index]
-    first_expiry = d.index.get_loc(
-                            securities_df.loc[:,
-                                              contracts[first_con_ix+1]
-                                              ].first_valid_index())
-    first_ix = pd.Series(np.append(expiry_ix.values[1:],
-                                   [first_expiry]
-                                   ) - 1,
-                         index = expiry_ix.index)
-    # first_ix.index = [d.index.get_loc(i) for i in first_ix.index]
-    roll_vals = [d.iloc[f, f_ix] - d.iloc[e, e_ix]
-                 for f,f_ix, e,e_ix in zip(first_ix, first_ix.index,
-                                           expiry_ix, expiry_ix.index)]
+    expiry_ix.sort_values()
+
+    roll_vals = [d.iloc[row_ix, old_c_ix] - d.iloc[row_ix, new_c_ix]
+                 for  row_ix, old_c_ix, new_c_ix in zip(expiry_ix[1:],
+                                                        expiry_ix.index[1:],
+                                                        expiry_ix.index[:-1])]
     roll_adjustment = np.repeat(0.0, len(d))
-    roll_adjustment[first_ix.values] = roll_vals
-    return np.cumsum(roll_adjustment)
+    #adjust on new contract's 1st day, most reccent spread is unchanged
+    roll_adjustment[expiry_ix.values[1:]+1] = roll_vals
+    roll_adjustment = np.cumsum(roll_adjustment)
 
-# settle_price = d.apply(lambda c: c[c.first_valid_index()],
-#                                   axis=0)
-# front_start_price = d.apply(lambda c: c[c.first_valid_index()],
-#                                   axis=0)
-# #take's the m_ago'th contract value for a given date
-# m_contracts = d.apply(lambda r: r.dropna()[m_ago], axis=1)
-# return m_contracts#.rolling(window).var
+    if m_ago > 1:
+        before_first_con = contracts[first_con_ix]
+        before_first_con_ix = first_con_ix - last_con_ix
+        expiry_ix[before_first_con_ix] = d.index.get_loc(
+                                            d[before_first_con].first_valid_index()
+                                            ) + 1
+    else:
+        first_con = contracts[-1]
+        expiry_ix[first_con_ix] = d.index.get_loc(
+                                        d[first_con].last_valid_index()
+                                        ) + 1
+    unadjusted_contract = pd.concat([d.iloc[row_ix:n_row_ix, c_ix]
+                                        for (row_ix,
+                                             n_row_ix,
+                                             c_ix) in zip(expiry_ix[:-1],
+                                                          expiry_ix[1:],
+                                                        expiry_ix.index[:-1]
+                                                        )])
+    return unadjusted_contract - roll_adjustment
 
-abv_mean = {abv[:-1]: make_roll_adjust(abv) for abv in front}
-#%%
-securities_df[sort_contracts([i
-                              for i in securities_df.columns
-                              if 'CL' in i and securities_df[i][0] ])]
+def test_roll_adjust():
+    tm = pd.DataFrame([[i.day - j if j//3 >= i.month
+                        else np.nan
+                        for j in range(3,12,3)]
+                        for i in pd.date_range(start = "1/1/2018",
+                                               end = "3/31/2018")],
+                      columns = ['C H00', 'C J00', 'C K00'],
+                      index = pd.date_range(start = "1/1/2018",
+                                            end = "3/31/2018"))[::-1]
+    a = roll_adjust('C ', securities_df=tm)
+    plt.plot(tm['C H00'], label = 'C H00')
+    plt.plot(tm['C J00'], label = 'C K00')
+    plt.plot(tm['C K00'], label = 'C J00')
+    plt.plot(a)
+    plt.legend()
+    plt.show()
 
-# con_abv = [i[:2] for i in curve_df.columns]
-# futures_curve = curve_df.groupby(con_abv)
-# dvol_30 = futures_curve.rolling(30).std()
-# dvol_90 = futures_curve.rolling(90).std()
-# dvol_360 = futures_curve.rolling(360).std()
-
-# futures_curve.std()
     #%%
 def my_imputer(i, imp = KNNImputer(n_neighbors=10, weights='distance')):
     "Bridge impute values between ends; else use KNN"
-    return imp.fit_transform(brige_transform(i, end_nan_preds = 4))
+    return imp.fit_transform(brige_impute(i, end_nan_preds = 4))
 
-def realized_vol():
-    "Adds Realized volatility for each commodity"
-    front = [i for i in curve_prices_df.columns if re.match("[A-Z]+1$",i)]
-    lixs = curve_prices_df.loc[:,front].apply(lambda c: (c.name, c.last_valid_index()),
-                                    axis=0)
-#ix::-1 does what you'd expect :ix:-1 to do
-    dvar_30 = pd.concat([curve_prices_df.loc[ix::-1,c]\
-                                         .dropna().rolling(30).var()
-                           for c,ix in lixs],
-                          axis=1).dropna()[::-1]
-    dvar_30.columns = [i+" 30d vol" for i in front]
+def realized_vol(all_data, window=30):
+    """Adds Realized volatility for each commodity.
+    if there's a term structure it multiplies each column by
+    that col's percentage of the total sum"""
+    #subtract var from chaging contracts is unnessisary since blb rolls
+    def term_struct_var(col_names):
+        "return var of series weighted by it's % of total sum"
+        term_vars = pd.concat([all_data.loc[::-1, i].rolling(window).var()
+                                  for i in col_names],
+                              axis=1)
+        var_ratio = term_vars.sum(axis=0)/term_vars.sum().sum()
+        return term_vars @ var_ratio.T
 
+    curve_price_tickers = [i[:-1]
+                           for i in all_data.columns
+                           if re.match("[A-Z]+1$",i)]
+    dvar = pd.concat([term_struct_var([j
+                                       for j in all_data.columns
+                                       if re.match(f"{i}\d",j)])
+                      for i in curve_price_tickers],
+                          axis=1)[::-1] #will index match?
+    dvar.columns = [i + f" {window}d var" for i in curve_price_tickers]
+
+    dvar[f'Retail Biodiesel {window}d var'] = term_struct_var(['Retail Biodiesel'])
+
+    dvar[f'Credit {window}d var']  = term_struct_var([i
+                                                      for i in all_data.columns
+                                                      if 'BAMLH' in i])
+    dvar[f'Rates {window}d var']  = term_struct_var([i
+                                                      for i in all_data.columns
+                                                      if 'HQMCB' in i])
+    return dvar.fillna(method='ffill', axis=0)
 
 def preprocessing(months_back = 15,
                   impute = KNNImputer(n_neighbors=10, weights='distance').fit_transform,
@@ -909,12 +939,11 @@ def preprocessing(months_back = 15,
                                   join='outer').iloc[::-1]
     #outerjoin leaves Nas since different indexs; since different contracts expire at different times.
     expired_df.iloc[:,:] = impute(expired_df)#grib?
-    realized_vol_df = realized_vol(expired_df)
 
     #macroTrends: only take Unique commoditie's columns, after start date
-    front_mth = historic_front_month[['cotton']].dropna()
-    front_mth = front_mth[np.logical_and(end_date >= front_mth.index,
-                                         front_mth.index >= start_date)]
+    cotton = historic_front_month[['cotton']].dropna()
+    cotton = cotton[np.logical_and(end_date >= cotton.index,
+                                         cotton.index >= start_date)]
 
     #EIA (bio-)diesel
     r_diesel2 = retail_diesel2[np.logical_and(end_date >=retail_diesel2.index,
@@ -931,14 +960,21 @@ def preprocessing(months_back = 15,
                                     sort = True
                                     ).fillna(method='ffill')
 
+    #grib #CME stuff? EH; but have to adjust for only being monthly
+    # ethanol = cme_df['EH'][np.logical_and(end_date >= cme_df.index,
+    #                                      cme_df.index >= start_date)]
+    # ethanol.columns = ["CME Ethanol"]
+
+    ## !STOCKS! gribb
     yc = corp_yc[np.logical_and(end_date >= corp_yc.index,
                                          corp_yc.index >= start_date)]
     credit = corp_credit[np.logical_and(end_date >= corp_credit.index,
                                          corp_credit.index >= start_date)]
+
     all_data = pd.concat([curve_df,
                           expired_df,
                           retail_diesels,
-                          front_mth,
+                          cotton,
                           yc,
                           credit],
                          join='outer',
@@ -947,7 +983,7 @@ def preprocessing(months_back = 15,
 
     save_struct(all_data, 'all_data2')
     #cuts off Nans at end
-    all_data = bridge_imputer(all_data, end_nan_preds = 60)
+    all_data = bridge_impute(all_data, end_nan_preds = 60)
     all_data = all_data[all_data.index
                             >= max(all_data.apply(lambda c:
                                                   c.last_valid_index()))]
@@ -956,18 +992,27 @@ def preprocessing(months_back = 15,
     save_struct(all_data, 'all_data')
     return all_data
 
+def feature_engineering(all_data):
+    realized_vol_df = realized_vol(all_data)
+    return pd.concat([all_data,
+                      realized_vol_df,
+                      ],
+                     axis = 1)
+
 # all_data = load_struct('all_data')
-all_data = preprocessing()
+# all_data = feature_engineering(preprocessing())
+all_data = feature_engineering(all_data)
 
 #Difference of what dates should have data
 # [i for i in all_data['SM 1Ago'][all_data['SM 1Ago'].isna()].index if i in curve_df.index]
-#%%
-
 
 
 #%%
 from sklearn.model_selection import train_test_split
+
 def make_prediction_df():
+
+
     front_cols = [i for i in curve_prices_df.columns
                  if '1 ' in i and '11' not in i and '21' not in i]
     rest_cols = [i for i in curve_prices_df.columns if i not in front_cols]
