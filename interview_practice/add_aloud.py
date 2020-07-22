@@ -95,7 +95,7 @@ def hidden_math(argv, kwargs, num_qs = None, num_lines = 40):
                 return _finished(num_right, num_guesses)
             num_guesses += 1
             cnt += 1
-        print(f"Correct!\n\n")
+        print("Correct!\n\n")
         num_right +=1
         if num_qs and num_right == num_qs:
             return _finished(num_right, num_guesses)
