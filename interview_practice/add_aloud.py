@@ -4,7 +4,7 @@ import sys
 import re
 import time
 
-def math_q(a_range, b_range, tp=("+", "-", "*", "/"), difficulty = "easy",
+def math_q(a_range, b_range, tp = ("+", "-", "*", "/"), difficulty = "easy",
            negatives = False, num_decimal_digits = 0):
     "Baseline question generator"
     try:
@@ -40,10 +40,8 @@ def math_q(a_range, b_range, tp=("+", "-", "*", "/"), difficulty = "easy",
             out += [float(v)]
         a,b = out
     else:
-        a = _rand(*a_range)
-        b = _rand(*b_range)
-    if random.random()>0.5:
-        a,b = b,a
+        a = _rand(a_range)
+        b = _rand(b_range)
     if op == "-":
         a = a + b
     elif op == "/":
@@ -79,9 +77,11 @@ def hidden_math(argv, kwargs, num_qs = None, num_lines = 40):
 
     while True:
         a, b, op, ans = math_q(*argv, **kwargs)
-        g = ans - 1
+        if random.random()>0.5:
+            a,b = b,a
         _prnt(a,b,op)
         cnt = 1
+        g = ans - 1
         while g != ans:
             if cnt %5 == 0:
                 _prnt(a,b,op)
@@ -113,7 +113,72 @@ hidden_math([(1003, 9999), (3, 9)], {'tp': ("*"),
 
 # hidden_math([(13, 99), (13, 99)], {'tp': ("*"), 'difficulty': 'hard'}, num_qs = 1)
 # hidden_math([(13, 99), (13, 99)], {'tp': ("/"), 'difficulty': 'hard'}, num_qs = 3)
+#%%
+def kelly_bet(odds_range, num_qs = None, num_lines = 0,
+              p_win_difficulty = "hard", p_win_num_decimal_digits = 0):
+    """Gives Bet ratio and Odds and need to calculate kelly bet
+    ods_range: list of tuples for each side of bet
+    num_lines: Prints a bunch of lines after the question (make it disappear)
+    num_qs: Stops after this many q's
+    num_lines: how far to print down after question; set to 0 for no printing
+    """
+    flash_time = 1.8
+    num_right = 0
+    num_guesses = 0
+    if isinstance(odds_range, tuple):
+        odds_range = [(1,1), odds_range]
+    kwargs = {'tp': ("+"),
+                'difficulty': 'easy',
+                'negatives': False,
+                'num_decimal_digits': 0}
 
+    def _finished(num_right, num_guesses, t = time.time()):
+        t = time.time() - t
+        print(f"Total Correct: {num_right}, in {t//60:.0f}' {t%60:.1f}\" ")
+        print(f"Average Accuracy: {num_right/num_guesses *100:.1f}%.",
+                  f"Average Time: {t/num_right:.2f}\" ")
+        return None
+
+    def _prnt(a,b, p_win):
+        if a % 1 == 0:
+            a = int(a)
+        if b % 1 == 0:
+            b = int(b)
+        print(f"{a} : {b} with p_win = {p_win}")
+        time.sleep(flash_time)
+        print("\n"*num_lines)
+
+    while True:
+        a, b, _, _ = math_q(*odds_range, **kwargs)
+        p_win, _, _, _ =  math_q((1,10), (2,2), tp = ("+"),
+                                 difficulty = p_win_difficulty,
+                                 num_decimal_digits= p_win_num_decimal_digits)
+        p_win /= 10
+        _prnt(a, b, p_win)
+        odds = b/a #normalized so your 1 : against
+        ans = (p_win * (odds + 1) - 1) / odds
+        ans = max(0, min(1, ans))
+        cnt = 1
+        g = 2
+        while g != ans:
+            if cnt %5 == 0:
+                _prnt(a,b,op)
+            g = input(": ")
+            while 'r' in g:
+                _prnt(a,b,op)
+                g = input(": ")
+            try:
+                g = eval(g)
+            except:
+                return _finished(num_right, num_guesses)
+            num_guesses += 1
+            cnt += 1
+        print("Correct!\n\n")
+        num_right +=1
+        if num_qs and num_right == num_qs:
+            return _finished(num_right, num_guesses)
+
+kelly_bet([(3, 9), (9, 19)])
     #%%
 def add_aloud(numa, numb):
     "Given the number of digits in the first <= number of digits of second digit to be based asks addition on them"
