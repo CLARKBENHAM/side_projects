@@ -47,6 +47,21 @@ def math_q(a_range, b_range, tp = ("+", "-", "*", "/"), difficulty = "easy",
     elif op == "/":
         a = a * b
     ans = eval(f"{a}{op}{b}")
+    if difficulty == 'hard2':
+        #assumes they're all ints
+        sb = str(b)
+        sa = str(a)
+        num_digits_cycle = random.randint(1, min(len(str(a)), len(str(b))))
+        if op == '-':
+            # num_cycle = len(str(a)) > len(str(b))
+            cycle_ix = [i for i in range(len(str(b))) if str(a)[-i] < str(b)[i]]
+            if len(cycle_ix) < num_digits_cycle:
+                new_ixs = random.sample(set(range(len(b))) - set(cycle_ix),
+                                        num_digits_cycle - len(cycle_ix))
+                for ix in new_ixs:
+                    b += random.randint(int(str(a)[ix] - b + 1,
+                                        10 - int(str(b)[ix]) -1) * 10**ix
+        ans = eval(f"{a}{op}{b}")
     return a,b,op, ans
 
 def hidden_math(argv, kwargs, num_qs = None, num_lines = 40):
@@ -105,13 +120,12 @@ def hidden_math(argv, kwargs, num_qs = None, num_lines = 40):
 #         math_q((1000, 10000), (1000, 10000), tp=("+", "-"))
 #     else:
 
-hidden_math([(1003, 9999), (3, 9)], {'tp': ("*"),
-                                    'difficulty': 'hard',
-                                    'negatives': False,
-                                    'num_decimal_digits': 0})
-# hidden_math([(13, 99), (13, 99)], {'tp': ("*", '/'), 'difficulty': 'hard'}, num_lines = 40)
+# hidden_math([(1003, 9999), (3, 9)], {'tp': ("*"),
+#                                     'difficulty': 'hard',
+#                                     'negatives': False,
+#                                     'num_decimal_digits': 0})
+hidden_math([(13, 99), (13, 99)], {'tp': ("*"), 'difficulty': 'hard'}, num_lines = 40)
 
-# hidden_math([(13, 99), (13, 99)], {'tp': ("*"), 'difficulty': 'hard'}, num_qs = 1)
 # hidden_math([(13, 99), (13, 99)], {'tp': ("/"), 'difficulty': 'hard'}, num_qs = 3)
 #%%
 def kelly_bet(odds_range, num_qs = None, num_lines = 0,
@@ -145,27 +159,29 @@ def kelly_bet(odds_range, num_qs = None, num_lines = 0,
         if b % 1 == 0:
             b = int(b)
         print(f"{a} : {b} with p_win = {p_win}")
-        time.sleep(flash_time)
-        print("\n"*num_lines)
+        if num_lines != 0:
+            time.sleep(flash_time)
+            print("\n"*num_lines)
 
     while True:
         a, b, _, _ = math_q(*odds_range, **kwargs)
-        p_win, _, _, _ =  math_q((1,10), (2,2), tp = ("+"),
+        p_win, _, _, _ =  math_q((4,10), (2,2), tp = ("+"),
                                  difficulty = p_win_difficulty,
                                  num_decimal_digits= p_win_num_decimal_digits)
         p_win /= 10
         _prnt(a, b, p_win)
         odds = b/a #normalized so your 1 : against
         ans = (p_win * (odds + 1) - 1) / odds
-        ans = max(0, min(1, ans))
+        ans = max(0, min(1, ans))#never > 1
+        #rounding issue?
         cnt = 1
         g = 2
-        while g != ans:
+        while abs(g - ans) > 10**-9:
             if cnt %5 == 0:
-                _prnt(a,b,op)
+                _prnt(a, b, p_win)
             g = input(": ")
             while 'r' in g:
-                _prnt(a,b,op)
+                _prnt(a,b, p_win)
                 g = input(": ")
             try:
                 g = eval(g)
@@ -177,7 +193,7 @@ def kelly_bet(odds_range, num_qs = None, num_lines = 0,
         num_right +=1
         if num_qs and num_right == num_qs:
             return _finished(num_right, num_guesses)
-
+#p - q/b
 kelly_bet([(3, 9), (9, 19)])
     #%%
 def add_aloud(numa, numb):
