@@ -59,7 +59,7 @@ def math_q(a_range, b_range, tp = ("+", "-", "*", "/"), difficulty = "easy",
                 new_ixs = random.sample(set(range(len(b))) - set(cycle_ix),
                                         num_digits_cycle - len(cycle_ix))
                 for ix in new_ixs:
-                    b += random.randint(int(str(a)[ix] - b + 1,
+                    b += random.randint(int(str(a))[ix] - b + 1,
                                         10 - int(str(b)[ix]) -1) * 10**ix
         ans = eval(f"{a}{op}{b}")
     return a,b,op, ans
