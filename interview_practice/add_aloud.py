@@ -48,7 +48,7 @@ def math_q(a_range, b_range, tp = ("+", "-", "*", "/"), difficulty = "easy",
         a = a * b
     ans = eval(f"{a}{op}{b}")
     if difficulty == 'hard2':
-        #assumes they're all ints
+        #assumes they're all ints!!
         sb = str(b)
         sa = str(a)
         num_digits_cycle = random.randint(1, min(len(str(a)), len(str(b))))
