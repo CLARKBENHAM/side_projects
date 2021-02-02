@@ -82,6 +82,10 @@ for url in urls[5:]:
 
 print(df)
 #%%
+import os
+if os.getcwd().split("\\")[-1] != "side_projects":
+    os.chdir(".\Desktop\side_projects")
+
 df.to_pickle("current_option_prices")
 df =  pd.read_pickle("current_option_prices")
 
