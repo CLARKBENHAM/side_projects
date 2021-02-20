@@ -5,10 +5,12 @@ from zipfile import ZipFile
 from datetime import datetime
 from collections import namedtuple
 import re
+from pathlib import Path
+import pdb
 #%%
 #response datetime; taking others from 'RAW FILE POST-PROCESS COUNTS'
 plate_results = namedtuple("emailed_plate_results", ['Datetime',
-                                                    'File',#plate name
+                                                    'File',#day result name
                                                     'Positive',
                                                      'Negative',
                                                      'Invalid',
@@ -17,124 +19,59 @@ plate_results = namedtuple("emailed_plate_results", ['Datetime',
                                                      'Duplicate',
                                                      'Preliminary'])
 
-def _proc_email_file(email_path = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab"):
-    "given directory to gmail archive of emails, "
-    #os.listdir returns sorted by modified date, earliest first
-    #FIX!!
-    file = next(iter([i for i in os.listdir(email_path)[::-1] if 'takeout' in i]))
-    if file[-4:] == ".zip":    
-        zf = ZipFile(f'{email_path}/{file}', 'r')
-        zf.extractall(f"{email_path}/{file[:-4]}")
-        zf.close()
-        os.remove(f'{email_path}/{file}')
-        file = file[:-4]
-    mbox = mailbox.mbox(f"{email_path}\{file}\Takeout\Mail\covid_response_results.mbox")#f"{email_path}/{file[:-4]}")
-    
-# [mailbox_body(m) for m in mbox]
-#%% bad regex del
-regex = re.compile("""([a-zA-Z0-9\_]+).xlsx COVID test results counts. Please review the attachments
--------------------------------------------
-RAW FILE PRE-PROCESS COUNTS: 
--------------------------------------------
-Negative = \d+
-Inconclusive = \d+
--------------------------------------------
-                                           
--------------------------------------------
-RAW FILE POST-PROCESS COUNTS: 
--------------------------------------------
-Positive = (\d+)
-Negative = (\d+)
-Invalid = (\d+)
-Inconclusive = (\d+)
-Notfound = (\d+)
-Duplicate = (\d+)
-Preliminary = (\d+)
--------------------------------------------""")
-#'TR_2020_11_24_102140_REP_LB_M2.xlsx COVID test results counts. Please review the attachments\n-------------------------------------------\nRAW FILE PRE-PROCESS COUNTS: \n-------------------------------------------\nNegative = 22\nInconclusive = 2\n-------------------------------------------\n                                           \n-------------------------------------------\nRAW FILE POST-PROCESS COUNTS: \n-------------------------------------------\nPositive = 0\nNegative = 22\nInvalid = 0\nInconclusive = 2\nNotfound = 0\nDuplicate = 0\nPreliminary = 0
-re.findall(regex, content)
-#%%
-file_re = re.compile("([a-zA-Z0-9\_]+.xlsx) COVID test results counts.")
-result_re = re.compile("""Positive = (\d+)
-Negative = (\d+)
-Invalid = (\d+)
-Inconclusive = (\d+)
-Notfound = (\d+)
-Duplicate = (\d+)
-Preliminary = (\d+)""")
-emails = []
-excel_only = []
-bad = ""
-
 def get_email_body(message, decode=False):
     """attachments can contain sub attachments;
     decode: if true returns bytes, else str
     """
     if message.is_multipart():
-        	content = ''.join(get_email_body(part) for part in message.get_payload())
+        content = ''.join(get_email_body(part) for part in message.get_payload())
     else:
-        	content = message.get_payload(decode=decode)
+        content = message.get_payload(decode=decode)
     return content
 
-def no_attachments(message):
-    "detects if email contains any attachments"
-    if message.get_content_maintype() == 'multipart':
-        for part in message.walk():
-            if part.get_content_maintype() == 'multipart':
-                continue
-            if part.get('Content-Disposition') is None:
-                continue
-            filename = part.get_filename()
-            if filename:
-                return False
-    return True
-
-for message in mbox:
-    if not no_attachments(message):
+def proc_gmail_export(base_dir = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab"):
+    "given directory to gmail exported archive of emails, "
+    #Data is in the email body itself, not the attachments
+    #max date takeout is taken
+    email_dir = max([i for i in os.listdir(base_dir) if 'takeout' in i],
+                    key = lambda p: int(p[8:16]))
+    if email_dir[-4:] == ".zip":    
+        zf = ZipFile(f'{base_dir}/{email_dir}', 'r')
+        zf.extractall(f"{base_dir}/{email_dir[:-4]}")
+        zf.close()
+        os.remove(f'{base_dir}/{email_dir}')
+        email_dir = email_dir[:-4]
+    mbox = mailbox.mbox(f"{base_dir}\{email_dir}\Takeout\Mail\covid_response_results.mbox")
+    file_re = re.compile("([a-zA-Z0-9\_]+\.xlsx) COVID test results counts")
+    result_re = re.compile('Positive = (\d+)\n'\
+                            'Negative = (\d+)\n'\
+                            'Invalid = (\d+)\n'\
+                            'Inconclusive = (\d+)\n'\
+                            'Notfound = (\d+)\n'\
+                            'Duplicate = (\d+)\n'\
+                            'Preliminary = (\d+)\n')
+    #that result_re has fewer matches is correct, see: [c for c in content if len(re.findall(result_re, c)) ^ len(re.findall(file_re, c))]
+    emails = []
+    for message in mbox:
         content = get_email_body(message)
         try:
             dt = datetime.strptime(" ".join(message['date'].split(" ")[:5]),
-                           "%a, %d %b %Y %X")
+                                   "%a, %d %b %Y %X")
             file = re.findall(file_re, content)[0]
-            values = re.findall(regex, content)[0]
+            values = re.findall(result_re, content)[0]
             email = plate_results._make([dt, file, *map(int, values)])
             emails += [email]
         except Exception as e:
-            # break
-            print(e)
-            excel_only += [message]
-            bad = content
-#bunch of bad emails have only None file names
-#%%
-os.chdir(f'{email_path}\{file}')
-c = None
-def extractattachements(message):
-    global c
-    i = 0
-    if message.get_content_maintype() == 'multipart':
-        for part in message.walk():
-            if part.get_content_maintype() == 'multipart':
-                continue
-            if part.get('Content-Disposition') is None:
-                continue
-            filename = part.get_filename()
-            if filename:
-                i = 1
-                print(message['date'], filename )
-                # fb = open(filename,'wb')
-                # fb.write(part.get_payload(decode=True))
-                # fb.close()
-    if i == 0:
-        c = message
-        print(1/0)
-[extractattachements(b) for b in excel_only]
+            pass
+    return emails
+
+response_emails = proc_gmail_export()
+responses = {i.File: i.Datetime for i in response_emails}
+len(responses)
 #%%
 
-excel_only = [b for b in excel_only if not isblank(b)]
-len(excel_only)
-# [get_email_body(i) for i in blank_msg]
 
-#list(message.walk())[3].get_filename()
+
 #%%
 # email_responses = {file:response_dt}
 
@@ -170,4 +107,88 @@ for month in month_folders:
             
             
             
-            
+ #%%
+class gmail_archive_extra_helpers: 
+    #currently unused
+    def plate_response(mbox):
+        """"returns {day_result_string: Datetime,...}
+        a tuple of plate ID found from excel sheet name and the response's datetime.
+        Note: many emails from this address aren't about a particular plate
+            eg: general cordination emails, aggregate results for the whole day, error notifications
+        returns (-1,-1) on invalid
+        **ALWAYS RETURNS (-1,-1) as ALL Date is in body iteself; the attached email files are general summaries of the day
+        """
+        plate_response_dt = {}
+        for message in mbox:
+            if message.get_content_maintype() == 'multipart':
+                for part in message.walk():
+                    if part.get_content_maintype() == 'multipart':
+                        continue
+                    if part.get('Content-Disposition') is None:
+                        continue
+                    filename = part.get_filename()
+                    print(filename)
+                    if filename  and  ".xlsx" in filename: 
+                        #need to fix below
+                        if "test_results_aggregate_counts" not in filename:
+                            dt = datetime.strptime(" ".join(message['date'].split(" ")[:5]),
+                                   "%a, %d %b %Y %X")
+                            plate_id = re.findall(file_re, filename)[0]
+                            plate_response_dt[plate_id] = dt
+                        else:
+                            break
+        return plate_response_dt
+    #bunch of bad emails don't get picked up in file regex in *body*. only None file names?
+    
+    def _no_attachments(message):
+        "detects if email contains any attachments; *some* of the emails not containing results"
+        if message.get_content_maintype() == 'multipart':
+            for part in message.walk():
+                if part.get_content_maintype() == 'multipart':
+                    continue
+                if part.get('Content-Disposition') is None:
+                    continue
+                filename = part.get_filename()
+                if filename:
+                    return False
+        return True
+    
+    def _extract_attachements(mbox, target_path):
+        """get data in excel file attachments that wasn't included in .txt
+        no .txt files exist without matching .xlsx file;
+            .txt files weren't included until Dec 24th 2020
+        """
+        #target_path = f'{base_dir}\{email_dir}'
+        os.chdir(target_path)
+        if "temp" not in target_path and "temp" not in os.listdir():
+            os.mkdir("temp")
+            os.chdir("temp")
+        for message in mbox:
+            if message.get_content_maintype() == 'multipart':
+                for part in message.walk():
+                    if part.get_content_maintype() == 'multipart':
+                        continue
+                    if part.get('Content-Disposition') is None:
+                        continue
+                    filename = part.get_filename()
+                    if filename and ".png" not in filename:
+                        fb = open(filename,'wb')
+                        fb.write(part.get_payload(decode=True))
+                        fb.close()
+                        
+    def compare_xlsx2txt():
+        "in the dir  _extract_attachements exports to"
+        txt =[]
+        xlsx = []
+        for f in os.listdir():
+            if ".xlsx" in f:
+                xlsx += [f[-13:-5]]
+            elif ".txt" in f:
+                txt += [f[-18:-10]]
+        len(txt), len(xlsx)
+        set(txt) - set(xlsx)
+
+                        
+                        
+                        
+                        
