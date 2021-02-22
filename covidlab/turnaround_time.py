@@ -42,6 +42,7 @@ def proc_gmail_export(base_dir = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\s
         os.remove(f'{base_dir}/{email_dir}')
         email_dir = email_dir[:-4]
     mbox = mailbox.mbox(f"{base_dir}\{email_dir}\Takeout\Mail\covid_response_results.mbox")
+    
     file_re = re.compile("([a-zA-Z0-9\_]+\.xlsx) COVID test results counts")
     result_re = re.compile('Positive = (\d+)\n'\
                             'Negative = (\d+)\n'\
@@ -50,7 +51,7 @@ def proc_gmail_export(base_dir = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\s
                             'Notfound = (\d+)\n'\
                             'Duplicate = (\d+)\n'\
                             'Preliminary = (\d+)\n')
-    #that result_re has fewer matches is correct, see: [c for c in content if len(re.findall(result_re, c)) ^ len(re.findall(file_re, c))]
+    #that result_re has fewer matches than file_re is correct, see: [c for c in content if len(re.findall(result_re, c)) ^ len(re.findall(file_re, c))]
     emails = []
     for message in mbox:
         content = get_email_body(message)
@@ -62,18 +63,15 @@ def proc_gmail_export(base_dir = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\s
             email = plate_results._make([dt, file, *map(int, values)])
             emails += [email]
         except Exception as e:
+            #non plate result emails 
             pass
     return emails
 
 response_emails = proc_gmail_export()
-responses = {i.File: i.Datetime for i in response_emails}
-len(responses)
+email_responses = {i.File: i.Datetime for i in response_emails}
+len(email_responses)
 #%%
-
-
-
-#%%
-# email_responses = {file:response_dt}
+#  = {file:response_dt}
 
 #Nov 2 to present (?) future
 tested_dates = {d:[] for d in datetimerange()}#date: time for test to finish
@@ -84,7 +82,7 @@ month_folders = os.listdir(folder_path)
 
 for f,res_dt in email_responses:
     #filter out previously seen
-    month_folder = [i for i in month_folders if str(res_dt.month ).upper() in i]
+    month_folder = [i for i in month_folders if str(res_dt.month).upper() in i]
     response_files = os.listdir("{folder_path}\{month_folder}")
     
 
