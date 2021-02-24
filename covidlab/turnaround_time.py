@@ -155,12 +155,16 @@ def make_plots(grp):
     daily_std = grp.apply(lambda g: g.astype(np.int64).mean())
     ax.scatter(daily_avg.index, daily_avg.values)
     ax.plot(daily_avg.index, daily_avg.values,  linewidth=3, label = "mean")
-    ax.plot(daily_avg.index, daily_avg.values -2*daily_std, 'r--', label = "lower 2SD")
+    ax.plot(daily_avg.index, 
+            [max(i,0) for i in daily_avg.values -2*daily_std],
+            'r--',
+            label = "lower 2SD")
     ax.plot(daily_avg.index, daily_avg.values + 2*daily_std, 'r--', label = "upper 2SD")
     ax.legend()
     ax.set_ylabel("time till completion")
     ax.set_xlabel("Test Collection Date")
-    
+    ax.set_ylim(max(0, ax.get_ylim()[0]))
+
     ax2.set_title("Percent of samples delayed by")
     daily_12hr =  grp.apply(lambda g: sum(g > timedelta(hours=12))/len(g))*100
     daily_24hr = grp.apply(lambda g: sum(g > timedelta(hours=24))/len(g))*100
@@ -169,7 +173,10 @@ def make_plots(grp):
     daily_72hr = grp.apply(lambda g: sum(g > timedelta(hours=72))/len(g))*100
     #groupby casts to object
     ix = date2num([n for n,_ in grp])
-    width = (ix[1] - ix[0])/6
+    try:#might only have 1 group
+        width = (ix[1] - ix[0])/6
+    except:
+        width = ix/6
     rects1 = ax2.bar(ix - width*2, daily_12hr.values, width, label='% >12 hours')
     rects2 = ax2.bar(ix - width, daily_24hr.values, width, label='% >24 hours')
     rects3 = ax2.bar(ix, daily_36hr.values, width, label='% >36 hours')
@@ -189,43 +196,65 @@ def make_plots(grp):
     per_80 =grp.apply(lambda g: np.quantile(g, 0.80))
     per_95 =grp.apply(lambda g: np.quantile(g, 0.95))
     per_99 =grp.apply(lambda g: np.quantile(g, 0.99))
-    ax3.plot(per_30, label = "30th percentile")
-    ax3.plot(per_80, label = "80th percentile")
-    ax3.plot(per_95, label = "95th percentile")
-    ax3.plot(per_99, label = "99th percentile")
+    plt.scatter(per_30.index.astype('str'), per_30 / np.timedelta64(1, 'D'), 
+              marker = "_", 
+              s= 999,
+              label = "30th percentile")
+    plt.scatter(per_80.index.astype('str'), per_80 / np.timedelta64(1, 'D'), 
+              marker = "_", 
+              s= 999,
+              label = "80th percentile")
+    plt.scatter(per_95.index.astype('str'), per_95 / np.timedelta64(1, 'D'), 
+              marker = "_", 
+              s= 999,
+              label = "95th percentile")
+    plt.scatter(per_99.index.astype('str'), per_99 / np.timedelta64(1, 'D'), 
+              marker = "_", 
+              s= 999,
+              label = "99th percentile")
     ax3.legend()
     ax3.set_ylabel("Days")
+    ax3.set_ylim(max(0, ax3.get_ylim()[0]))
     # fig.tight_layout()
     return fig
-    # plt.show()
 
-def weekly_plot(df, wk_end = None, mon_sun= False):
+def weekly_plot(df, wk_end = None, trailing7 = False):
     """
     plot values for 7 days preceding wk_end
         df: df['date'] is datetime.date object
-        mon_sun: if monday-sunday is true will cast to the monday-sunday interval 
-            that is inclusive of wk_end
+        trailing7: if False will cast to the monday-sunday interval that is inclusive of wk_end;
+            else graphs over preceiding 7 days
     """
     if wk_end is None:
         wk_end = datetime.today().date()
-    if mon_sun and wk_end.weekday() != 0:
-        wk_end = wk_end + timedelta(days = 7 - wk_end.weekday())
-        wk_start = wk_end - timedelta(days =wk_end.weekday())
+    if trailing7:# or wk_end.weekday() == 6:#.weekday() = 0 on Mon
+        wk_start = wk_end - timedelta(days=6)            
     else:
-        wk_start = wk_end - timedelta(days=7)            
+        wk_end = wk_end + timedelta(days = 6 - wk_end.weekday())
+        wk_start = wk_end - timedelta(days =wk_end.weekday() )
     wk_start, wk_end = wk_start.date(), wk_end.date()
+    # grp =  df[df['start_df'].between(wk_start, wk_end, inclusive=True)].groupby("start_dt")['duration']
     grp =  df[df['date'].between(wk_start, wk_end, inclusive=True)].groupby("date")['duration']
     fig = make_plots(grp)
-    fig.suptitle("Plots for week of f{wk_start}-{wk_end}")
+    fig.suptitle(f"Plots for week of {wk_start}-{wk_end}")
     fig.show()
 
-def daily_plot(df):
+def daily_plot(df, day = datetime(year=2021, month = 2, day=14).date()):
     "group by portion of day when submitted test"
-    pass
+    if str(type(day)) != "<class 'datetime.date'>":#imports bad so have to do this
+        day = day.date()
+    grp =  df[df['date'].between(day, day, inclusive=True)]
+    grp['initial_plate'] = grp['date'] - grp['duration']
+    grp = grp.groupby("initial_plate")['duration']
+    fig = make_plots(grp)
+    fig.suptitle(f"Plots by Plate for Day of {day}")
+    fig.show()
+
 # r_test_df['datetime'] = r_test_df.apply(lambda r: datetime.combine(r['date'], r['time']), axis=1)
-r_test_df['duration'] = r_test_df['datetime'] - min(r_test_df['datetime'])
-weekly_plot(r_test_df, wk_end = datetime(year=2021, month = 2, day=15))
-# fig.show()
+# r_test_df['duration'] = r_test_df['datetime'] - min(r_test_df['datetime'])
+r_test_df['duration'][:40] = max(r_test_df['datetime']) - r_test_df['datetime'][:40]
+# weekly_plot(r_test_df, wk_end = datetime(year=2021, month = 2, day=11), trailing7 = True)
+daily_plot(r_test_df)
 #%%bad order
 for f,res_dt in email_responses:
     #filter out previously seen
