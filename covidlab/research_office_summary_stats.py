@@ -182,7 +182,7 @@ if __name__ == '__main__':
     #Manage pword stuff here
     dir_path = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab\\hide"
     file_name = max([i for i in os.listdir(dir_path) if re.match("\A\d{4}-\d{2}-\d{2}",i)],
-                        key = lambda i: datetime.strptime(i[:10], "%Y-%m-%d") )
+                        key = lambda i: datetime.strptime(i[:10], "%Y-%m-%d"))
     file_path = dir_path + "\\" +file_name
     add_pword = False
     try:
@@ -195,7 +195,6 @@ if __name__ == '__main__':
     update_ro_weekly_sheet_summary(r_test_df, file_path)
     if add_pword:  
         add_password_xlsx(file_path, pword)
-    # os.remove(new_path)
 #%%
 
 
