@@ -2,13 +2,16 @@
 import os
 import mailbox
 from zipfile import ZipFile
-from datetime import datetime
+from datetime import datetime, timedelta
 from collections import namedtuple
 import re
 from pathlib import Path
 import pdb
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.dates import date2num
+import matplotlib.gridspec as gridspec
 #%%
 #response datetime; taking others from 'RAW FILE POST-PROCESS COUNTS'
 plate_results = namedtuple("emailed_plate_results", ['Datetime',
@@ -115,66 +118,114 @@ def get_plates(email_responses):
     return plates_df
 
 plates_df = get_plates(email_responses)
+
+#**is** what you want: what if Nov 3rd all plates are slow and spread out over the course of following week?
+#next couple days get increased 
 #%%
-import numpy as np
-# def make_plots(plates_df):
-# daily_result = plates_df.groupby("date")['duration'].mean()
+def _add_labels(ax, r_lst):
+    "to barplots"
+    # def _autolabel(rects):
+    for rects in r_lst:
+        # """Attach a text label above each bar in *rects*, displaying its height."""
+        for rect in rects:
+            height = rect.get_height()
+            if height >sum(ax.get_ylim())/2:
+                ax.annotate(f"{height:.0f}%",
+                            xy=(rect.get_x() + rect.get_width() / 2, height),
+                            xytext=(0, -height/8),  # 3 points vertical offset
+                            textcoords="offset points",
+                            ha='center',
+                            va='bottom', 
+                            color='w')
+            else:
+                ax.annotate(f"{height:.0f}%",
+                            xy=(rect.get_x() + rect.get_width() / 2, height),
+                            xytext=(0, 0),  # 3 points vertical offset
+                            textcoords="offset points",
+                            ha='center', va='bottom')   
+                    
+def make_plots(grp):
+    """Takes a groupby object on the date as index with timedelta values"""
+    fig, (ax, ax2, ax3) = plt.subplots(3,1, figsize = (20,12), constrained_layout=True)
+    # gs1 = gridspec.GridSpec(3, 1)
+    # gs1.update(hspace=0, wspace=0)
+    
+    ax.set_title("Daily Average Time to complete test")
+    daily_avg = grp.apply(lambda g: g.astype(np.int64).mean())
+    daily_std = grp.apply(lambda g: g.astype(np.int64).mean())
+    ax.scatter(daily_avg.index, daily_avg.values)
+    ax.plot(daily_avg.index, daily_avg.values,  linewidth=3, label = "mean")
+    ax.plot(daily_avg.index, daily_avg.values -2*daily_std, 'r--', label = "lower 2SD")
+    ax.plot(daily_avg.index, daily_avg.values + 2*daily_std, 'r--', label = "upper 2SD")
+    ax.legend()
+    ax.set_ylabel("time till completion")
+    ax.set_xlabel("Test Collection Date")
+    
+    ax2.set_title("Percent of samples delayed by")
+    daily_12hr =  grp.apply(lambda g: sum(g > timedelta(hours=12))/len(g))*100
+    daily_24hr = grp.apply(lambda g: sum(g > timedelta(hours=24))/len(g))*100
+    daily_36hr = grp.apply(lambda g: sum(g > timedelta(hours=36))/len(g))*100
+    daily_48hr = grp.apply(lambda g: sum(g > timedelta(hours=48))/len(g))*100
+    daily_72hr = grp.apply(lambda g: sum(g > timedelta(hours=72))/len(g))*100
+    #groupby casts to object
+    ix = date2num([n for n,_ in grp])
+    width = (ix[1] - ix[0])/6
+    rects1 = ax2.bar(ix - width*2, daily_12hr.values, width, label='% >12 hours')
+    rects2 = ax2.bar(ix - width, daily_24hr.values, width, label='% >24 hours')
+    rects3 = ax2.bar(ix, daily_36hr.values, width, label='% >36 hours')
+    rects4 = ax2.bar(ix + width, daily_48hr.values, width, label='% >48 hours')
+    rects5 = ax2.bar(ix + width*2, daily_72hr.values, width, label='% >72 hours')
+    
+    # Add some text for labels, title and custom x-axis tick labels, etc.
+    ax2.set_ylabel('Percent')
+    ax2.set_xticks(ix)
+    ax2.set_xticklabels([n for n,_ in grp])
+    ax2.legend()
+                 
+    _add_labels(ax2, [rects1, rects2, rects3, rects4, rects5])
+    #percentiles
+    ax3.set_title("Percentile time to completetion")
+    per_30 = grp.apply(lambda g: np.quantile(g, 0.30))
+    per_80 =grp.apply(lambda g: np.quantile(g, 0.80))
+    per_95 =grp.apply(lambda g: np.quantile(g, 0.95))
+    per_99 =grp.apply(lambda g: np.quantile(g, 0.99))
+    ax3.plot(per_30, label = "30th percentile")
+    ax3.plot(per_80, label = "80th percentile")
+    ax3.plot(per_95, label = "95th percentile")
+    ax3.plot(per_99, label = "99th percentile")
+    ax3.legend()
+    ax3.set_ylabel("Days")
+    # fig.tight_layout()
+    return fig
+    # plt.show()
 
+def weekly_plot(df, wk_end = None, mon_sun= False):
+    """
+    plot values for 7 days preceding wk_end
+        df: df['date'] is datetime.date object
+        mon_sun: if monday-sunday is true will cast to the monday-sunday interval 
+            that is inclusive of wk_end
+    """
+    if wk_end is None:
+        wk_end = datetime.today().date()
+    if mon_sun and wk_end.weekday() != 0:
+        wk_end = wk_end + timedelta(days = 7 - wk_end.weekday())
+        wk_start = wk_end - timedelta(days =wk_end.weekday())
+    else:
+        wk_start = wk_end - timedelta(days=7)            
+    wk_start, wk_end = wk_start.date(), wk_end.date()
+    grp =  df[df['date'].between(wk_start, wk_end, inclusive=True)].groupby("date")['duration']
+    fig = make_plots(grp)
+    fig.suptitle("Plots for week of f{wk_start}-{wk_end}")
+    fig.show()
+
+def daily_plot(df):
+    "group by portion of day when submitted test"
+    pass
 # r_test_df['datetime'] = r_test_df.apply(lambda r: datetime.combine(r['date'], r['time']), axis=1)
-# r_test_df['delta'] = r_test_df['datetime'] - min(r_test_df['datetime'])
-grp =  r_test_df.groupby("date").apply(lambda grp: grp['delta'].astype(np.int64))
-daily_avg = grp.groupby(level=0).mean()
-daily_std = grp.groupby(level=0).std()
-
-fig, (ax, ax2) = plt.subplots(2,1)
-ax.set_title("Daily Average Time to complete test")
-ax.scatter(daily_avg.index, daily_avg.values)
-ax.plot(daily_avg.index, daily_avg.values,  linewidth=3)
-ax.plot(daily_avg.index, daily_avg.values - 1.96*daily_std, 'r--', label = "lower 95%")
-ax.plot(daily_avg.index, daily_avg.values + 1.96*daily_std, 'r--', label = "upper 95%")
-ax.set_ylabel("of tests completed, how long ago were they started?")
-ax.set_xlabel("Date")
-
-ax2.set_title("Percent of samples delayed by")
-daily_12hr =  r_test_df.groupby("date")['delta'].apply(lambda g:
-                                    sum(g > timedelta(hours=12))/len(g))
-daily_24hr =  r_test_df.groupby("date")['delta'].apply(lambda g:
-                                    sum(g > timedelta(hours=24))/len(g))
-daily_36hr =  r_test_df.groupby("date")['delta'].apply(lambda g:
-                                    sum(g > timedelta(hours=36))/len(g))
-daily_48hr =  r_test_df.groupby("date")['delta'].apply(lambda g:
-                                    sum(g > timedelta(hours=48))/len(g))
-daily_72hr =  r_test_df.groupby("date")['delta'].apply(lambda g:
-                                    sum(g > timedelta(hours=72))/len(g))
-
-fig, ax = plt.subplots()
-rects1 = ax2.bar(x - width/2, men_means, width, label='Men')
-rects2 = ax2.bar(x + width/2, women_means, width, label='Women')
-# Add some text for labels, title and custom x-axis tick labels, etc.
-ax2.set_ylabel('Scores')
-ax2.set_xticks(x)
-ax2.set_xticklabels(labels)
-ax2.legend()
-
-
-def autolabel(rects):
-    """Attach a text label above each bar in *rects*, displaying its height."""
-    for rect in rects:
-        height = rect.get_height()
-        ax.annotate('{}'.format(height),
-                    xy=(rect.get_x() + rect.get_width() / 2, height),
-                    xytext=(0, 3),  # 3 points vertical offset
-                    textcoords="offset points",
-                    ha='center', va='bottom')
-
-autolabel(rects1)
-autolabel(rects2)
-
-fig.tight_layout()
-
-plt.show()
-
-
+r_test_df['duration'] = r_test_df['datetime'] - min(r_test_df['datetime'])
+weekly_plot(r_test_df, wk_end = datetime(year=2021, month = 2, day=15))
+# fig.show()
 #%%bad order
 for f,res_dt in email_responses:
     #filter out previously seen
