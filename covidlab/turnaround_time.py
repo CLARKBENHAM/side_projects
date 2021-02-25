@@ -109,7 +109,8 @@ def get_plates(email_responses):
                 plate['time'] = plate['start_dt'].apply(lambda i: i.time())
                 plate['date'] = plate['start_dt'].apply(lambda i: i.date())
                 plate['duration'] = plate['start_dt'].apply(lambda i: finished_dt - i)
-                plate = pd.concat({file: plate}, names=["file"])
+                # plate = pd.concat({file: plate}, names=["file"])#makes multiindex (don't want to deal)
+                plate['plate'] = file
                 # tested_dates[finished_dt] += [plate['duration'].mean()]
                 # plate.drop('start_dt', inplace=True)
                 every_plate += [plate]
@@ -130,22 +131,36 @@ def _add_labels(ax, r_lst):
         for rect in rects:
             height = rect.get_height()
             if height >sum(ax.get_ylim())/2:
-                ax.annotate(f"{height:.0f}%",
+                t = ax.annotate(f"{height:.0f}%",
                             xy=(rect.get_x() + rect.get_width() / 2, height),
                             xytext=(0, -height/8),  # 3 points vertical offset
                             textcoords="offset points",
                             ha='center',
                             va='bottom', 
+                            size = 10,
                             color='w')
             else:
-                ax.annotate(f"{height:.0f}%",
+                t = ax.annotate(f"{height:.0f}%",
                             xy=(rect.get_x() + rect.get_width() / 2, height),
                             xytext=(0, 0),  # 3 points vertical offset
                             textcoords="offset points",
-                            ha='center', va='bottom')   
+                            ha='center',
+                            va='bottom',
+                            size = 10)
+            #to not write if bars are too skinny
+            txt_w = t.get_window_extent(plt.gcf().canvas.get_renderer()).width
+            bar_w = rect.get_window_extent().width
+            if txt_w > bar_w:
+                if bar_w > txt_w/2:
+                    t.set_size(t.get_size() * bar_w/txt_w)
+                else:
+                    t.remove()
                     
 def make_plots(grp):
-    """Takes a groupby object on the date as index with timedelta values"""
+    """
+    Takes a groupby object with timedelta values and plots those against indicies
+    #format tick labels? eg. for datetime to ignore year for plates 
+    """
     fig, (ax, ax2, ax3) = plt.subplots(3,1, figsize = (20,12), constrained_layout=True)
     # gs1 = gridspec.GridSpec(3, 1)
     # gs1.update(hspace=0, wspace=0)
@@ -172,11 +187,14 @@ def make_plots(grp):
     daily_48hr = grp.apply(lambda g: sum(g > timedelta(hours=48))/len(g))*100
     daily_72hr = grp.apply(lambda g: sum(g > timedelta(hours=72))/len(g))*100
     #groupby casts to object
-    ix = date2num([n for n,_ in grp])
-    try:#might only have 1 group
-        width = (ix[1] - ix[0])/6
+    try:
+        ix = date2num([n for n,_ in grp])
     except:
-        width = ix/6
+        ix = np.arange(len(grp))#groupedby on non-dates
+    try:#might only have 1 group
+        width = (ix[1] - ix[0])/8
+    except:
+        width = ix/8
     rects1 = ax2.bar(ix - width*2, daily_12hr.values, width, label='% >12 hours')
     rects2 = ax2.bar(ix - width, daily_24hr.values, width, label='% >24 hours')
     rects3 = ax2.bar(ix, daily_36hr.values, width, label='% >36 hours')
@@ -218,20 +236,16 @@ def make_plots(grp):
     # fig.tight_layout()
     return fig
 
-def weekly_plot(df, wk_end = None, trailing7 = False):
+def weekly_plot(df, wk_end = None):
     """
-    plot values for 7 days preceding wk_end
+    plot values for  monday-sunday interval that is inclusive of wk_end
         df: df['date'] is datetime.date object
-        trailing7: if False will cast to the monday-sunday interval that is inclusive of wk_end;
-            else graphs over preceiding 7 days
+        if wk_end is none will plot for values thus far this week
     """
     if wk_end is None:
         wk_end = datetime.today().date()
-    if trailing7:# or wk_end.weekday() == 6:#.weekday() = 0 on Mon
-        wk_start = wk_end - timedelta(days=6)            
-    else:
-        wk_end = wk_end + timedelta(days = 6 - wk_end.weekday())
-        wk_start = wk_end - timedelta(days =wk_end.weekday() )
+    wk_end = wk_end + timedelta(days = 6 - wk_end.weekday())
+    wk_start = wk_end - timedelta(days =wk_end.weekday() )
     wk_start, wk_end = wk_start.date(), wk_end.date()
     # grp =  df[df['start_df'].between(wk_start, wk_end, inclusive=True)].groupby("start_dt")['duration']
     grp =  df[df['date'].between(wk_start, wk_end, inclusive=True)].groupby("date")['duration']
@@ -239,22 +253,41 @@ def weekly_plot(df, wk_end = None, trailing7 = False):
     fig.suptitle(f"Plots for week of {wk_start}-{wk_end}")
     fig.show()
 
-def daily_plot(df, day = datetime(year=2021, month = 2, day=14).date()):
-    "group by portion of day when submitted test"
+def trailing_plot(df, end_day = datetime(year=2021, month = 2, day=14).date(), n_trailing = 0):
+    """"group by day when submitted test
+        n_trailing: the number of days (inclusive) that occured before 
+            'end_day' to be included
+    """
     if str(type(day)) != "<class 'datetime.date'>":#imports bad so have to do this
-        day = day.date()
-    grp =  df[df['date'].between(day, day, inclusive=True)]
-    grp['initial_plate'] = grp['date'] - grp['duration']
-    grp = grp.groupby("initial_plate")['duration']
+        end_day = end_day.date()
+    start_day = end_day - timedelta(days = n_trailing)
+    grp =  df[df['date'].between(start_day, end_day, inclusive=True)]
+    grp = grp.groupby("date")['duration']
     fig = make_plots(grp)
-    fig.suptitle(f"Plots by Plate for Day of {day}")
+    fig.suptitle(f"Plots for {n_trailing} Days preceding {end_day}")
     fig.show()
+    
+def time_of_day(df, day = None, n_trailing = 0):
+    "segments by ~delivery batch"
+    if day is None:
+        day = datetime.today().date()
+    grp['initial_plate'] = grp['date'] + grp['duration']#datetime finalized
+    start_new_schedule = datetime(year=2021, month = 2, day=5).date()
+    df = df[df['date'].between(start_new_schedule, day, inclusive=True)]
+    #group by batch; but cast to the datetime recieved
+    grp = df.groupby(df['plate'].apply(lambda i: email_responses[i]))['duration']
+    fig = make_plots(grp)
+    fig.suptitle(f"Plots by ~Time of Day Deliever")
+    fig.show()    
 
 # r_test_df['datetime'] = r_test_df.apply(lambda r: datetime.combine(r['date'], r['time']), axis=1)
 # r_test_df['duration'] = r_test_df['datetime'] - min(r_test_df['datetime'])
-r_test_df['duration'][:40] = max(r_test_df['datetime']) - r_test_df['datetime'][:40]
+# r_test_df['duration'][:40] = max(r_test_df['datetime']) - r_test_df['datetime'][:40]
 # weekly_plot(r_test_df, wk_end = datetime(year=2021, month = 2, day=11), trailing7 = True)
-daily_plot(r_test_df)
+
+# f = grp.groupby(grp["computing_id"].apply(lambda i: i[0]))['duration']
+f = r_test_df.groupby("date")['duration']
+make_plots(f)
 #%%bad order
 for f,res_dt in email_responses:
     #filter out previously seen
