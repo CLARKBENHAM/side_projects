@@ -28,6 +28,7 @@ def remove_password_xlsx(file_path, pw_str):
     xcl.Quit()
 
 def remove_password_xlsx2(file_path, pw_str):
+    file_path = file_path.replace("/", "\\")
     xcl = win32com.client.Dispatch('Excel.Application')
     wb = xcl.Workbooks.Open(file_path)
     xcl.DisplayAlerts = False
@@ -37,6 +38,7 @@ def remove_password_xlsx2(file_path, pw_str):
     xcl.Quit()
     
 def add_password_xlsx(file_path, pw_str):   
+    file_path = file_path.replace("/", "\\")
     xlApp = EnsureDispatch("Excel.Application")
     xlwb = xlApp.Workbooks.Open(file_path)
     xlApp.DisplayAlerts = False
@@ -139,23 +141,33 @@ def get_result_aggregates_df(date = None, last_week = True):
         (eg. Today Fri -> gets Monday 12 days ago to sun 5 days go);
             today sun -> prev mon to today
         else returns all historical aggregates
+    NOTE: since file is on Linux, have to change paths to use `/` not `\`; os. ignores
     """
     i = "test results aggregate counts"
+    file_re = re.compile("(Copy of ){0,1}test_results_aggregate_counts_\d{8}.xlsx")
     if date is None:
         file = max([f for f in os.listdir(f"Z:\{i}")#doesn't work wo f-string ($#@!!!!)
-                    if re.match("(Copy of ){0,1}test_results_aggregate_counts_\d{8}.xlsx",f)],
+                    if re.match(file_re,f)],
                     key = lambda f: datetime.strptime(f[-13:-5], "%Y%m%d"))
         assert datetime.strptime(file[-13:-5], "%Y%m%d") \
                 > datetime.today() - timedelta(days = 7), "Regex might have changed; file is more than 7 days old"
     else:
-        date = datetime.strftime(date, "%Y%m%d") 
-        if f"test_results_aggregate_counts_{date}.xlsx" in  os.listdir(f"Z:\{i}"):
-            file = f"test_results_aggregate_counts_{date}.xlsx"
-        elif f"Copy of test_results_aggregate_counts_{date}.xlsx" in os.listdir(f"Z:\{i}"):
-            file = f"test_results_aggregate_counts_{date}.xlsx"
+        date_str = datetime.strftime(date, "%Y%m%d") 
+        if f"Copy of test_results_aggregate_counts_{date_str}.xlsx" in os.listdir(f"Z:\{i}"):
+            file = f"Copy of test_results_aggregate_counts_{date_str}.xlsx"
+        elif f"test_results_aggregate_counts_{date_str}.xlsx" in  os.listdir(f"Z:\{i}"):
+            file = f"test_results_aggregate_counts_{date_str}.xlsx"
         else:
-            assert False, "no aggreate file for that date"            
-    df = pd.read_excel(f"Z:\{i}\{file}",
+            closest = min([i for i in os.listdir(f"Z:\{i}") 
+                           if re.match(file_re,i) and i > date_str],
+                          key = lambda i: abs(date- datetime.strptime(i[-13:-5], 
+                                                                      "%Y%m%d")))
+            closest = datetime.strptime(closest[-13:-5], "%Y%m%d")
+            assert False, f"no aggreate file for {date.date()}, try: {closest.date()}?"
+    file_path = f"Z:\{i}\{file}"
+    if not os.path.exists(f"Z:\{i}\{file}"):
+        file_path = f"Z:/{i}/{file}"
+    df = pd.read_excel(file_path,
                         sheet_name = "ALL_COUNTS", 
                         header = 0, 
                         usecols = list(range(6)),
@@ -166,7 +178,10 @@ def get_result_aggregates_df(date = None, last_week = True):
                         names = ['Date', 'Positive', 'Negative', 'Inconclusive', 'Invalid', 'NotTested']
                         )
     if last_week:
-        wk_end = datetime.today()
+        if date is None:
+            wk_end = datetime.today()
+        else:
+            wk_end = date
         if wk_end.weekday() == 6:#sunday, inclusive
             wk_start = wk_end - timedelta(days=6)
         else:
@@ -211,19 +226,23 @@ def make_table_df(r_test_df, result_df):#confirm nessisary? #GRIB
     #                                       index= table_df.columns), 
     #                             ignore_index=True)
     # table_df.sort_values("Date", inplace=True, ascending=False, axis=0)
+    # prev_wk_wrap = lask_week_sun_wrap()
+    # table_df = table_df.append(pd.Series([table_df.iloc[-1,0], *prev_wk_wrap], 
+    #                                      index= table_df.columns), 
+    #                            ignore_index=True)
     return table_df
 
 
-def update_ro_weekly_sheet_summary(table_df, file_path):
+def update_ro_weekly_sheet_summary(table_df, file_path, extra_writes = [], r_offset = 0):
     """"writes to summary table, uses date *took* test 
         table_df: date (7) vs results [6 columns]
             last row has a repeated date and subtracts out last weeks values
+        extra_writes: [([sheet_name],CR#,value)] a list of tuples of 
+                        sheet name, where to write ('Z98'), what to write
+                        if sheet_name not included then uses 'Summary' tab,
+        r_offset: if the table should be shifted
        'Total' column is name for 'NotTested' results#** #what is 'Total' column?** 
     """
-    prev_wk_wrap = lask_week_sun_wrap()
-    table_df = table_df.append(pd.Series([table_df.iloc[-1,0], *prev_wk_wrap], 
-                                         index= table_df.columns), 
-                               ignore_index=True)
     if ".xlsm" in file_path:
         wb = openpyxl.load_workbook(filename=file_path, keep_vba=True, read_only=False)
         #might not work
@@ -231,31 +250,41 @@ def update_ro_weekly_sheet_summary(table_df, file_path):
         wb = openpyxl.load_workbook(filename=file_path, keep_vba=False)
     sh = wb['Summary']
     for r in range(8,15):
+        r += r_offset
+        r_ix = r-8 - r_offset
         for c in range(6):
-            if type(table_df.iloc[r-8,c]).__module__ == 'numpy':
-                sh[f"{chr(65+c)}{r}"] = int(table_df.iloc[r-8,c])
+            if type(table_df.iloc[r_ix,c]).__module__ == 'numpy':
+                sh[f"{chr(65+c)}{r}"] = int(table_df.iloc[r_ix,c])#can't write np datatypes
             else:
-                sh[f"{chr(65+c)}{r}"] = table_df.iloc[r-8,c]
-    r = 15
+                sh[f"{chr(65+c)}{r}"] = table_df.iloc[r_ix,c]
+    r = 15 + r_offset
     for c in range(1,6):
-        sh[f"{chr(65+c)}{r}"] = f"={chr(65+c)}{13}-{chr(65+c)}{14}"
-    r=16
+        sh[f"{chr(65+c)}{r}"] = f"={chr(65+c)}{r-2}-{chr(65+c)}{r-1}"
+    r=16 + r_offset
     for c in range(1,6):
-        sh[f"{chr(65+c)}{r}"] = f"=SUM({chr(65+c)}8:{chr(65+c)}13)"
+        sh[f"{chr(65+c)}{r}"] = f"=SUM({chr(65+c)}{r-8}:{chr(65+c)}{r-3})"
     #update total column?
+    if len(extra_writes)>0:
+        if len(extra_writes[0]) == 3:
+            for sh_n, pos, val in extra_writes:
+                if sh_n != 'Summary':
+                    sh =wb[sh_n]
+                sh[pos] = val
+        elif len(extra_writes[0]) == 2:
+            for pos, val in extra_writes:
+                sh[pos] = val        
+        else:
+            print("\n\nDid not include Extra writes, wrong format \n\n")
     wb.save(file_path)
 
-# file_path = "Z:/Research Testing/2021-02-22 Researcher COVID TestingCB - Copy.xlsx"
-# remove_password_xlsx(file_path, pword)
 #%%
 if __name__ == '__main__':
+    #pull in from individuals results; which currently don't have access to
     #Manage pword stuff here
-    # dir_path = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab\\hide"
-    # dir_path = "Z:\Research Testing"
-    # file_name = max([i for i in os.listdir(dir_path) if re.match("\A\d{4}-\d{2}-\d{2}",i)],
-    #                     key = lambda i: datetime.strptime(i[:10], "%Y-%m-%d"))
-    # file_path = dir_path + "\\" +file_name
-    file_path = 'C:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab\\hide\\2021-02-15 Researcher COVID TestingMH-for clark2 - Copy.xlsx'
+    dir_path = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab\\hide"
+    file_name = max([i for i in os.listdir(dir_path) if re.match("\A\d{4}-\d{2}-\d{2}",i)],
+                        key = lambda i: datetime.strptime(i[:10], "%Y-%m-%d"))
+    file_path = dir_path + "\\" +file_name
     add_pword = False
     try:
         r_test_df = import_ro_weekly_sheet(file_path)
@@ -265,13 +294,65 @@ if __name__ == '__main__':
         add_pword = True
         r_test_df = import_ro_weekly_sheet(file_path)
     result_df = get_result_df()    
-    # table_df = make_table_df(r_test_df, result_df)
-    table_df = get_result_aggregates_df(last_week = True)
-    #take from previous table
-    table_df.loc[7] = [datetime(year = 2021, month =2 , day = 15).date(), 3,	305,	1,	1,	10]
-    
+    table_df = make_table_df(r_test_df, result_df)    
     update_ro_weekly_sheet_summary(table_df, file_path)
     if add_pword:  
         add_password_xlsx(file_path, pword)
-#%%
+#%% 
+def update_sheet_wagg():
+    "updates the table w/o the sun-mon wrap; + ans week specific query"
+    def _numeric_query(update_sheet, info_sheet):
+        """Wanted to know number of researchers in ReviewFeb15.21.xlsx
+        update_sheet: the sheet to be modified
+        info_sheet: sheet to take UIDs from 
+        """
+        i = "Research Testing"
+        file_path = f"Z:\{i}\{info_sheet}"
+        try:
+            df = pd.read_excel(file_path,
+                            header = None, 
+                            usecols = list(range(3)),
+                            names = ['Barcode', 'Date', 'Plate']
+                            )
+        except:
+            pword = input("password string for query sheet: ")
+            remove_password_xlsx(file_path, pword)
+            df = pd.read_excel(file_path,
+                            header = None, 
+                            usecols = list(range(3)),
+                            names = ['Barcode', 'Date', 'Plate']
+                            )        
+            add_password_xlsx(file_path, pword)
+        uids = set(df['Barcode'].apply(lambda i: i.split("-")[1].lower()).unique())
+        compare_uids = pd.read_excel(update_sheet, 
+                                           sheet_name = "Approved & Pending", 
+                                           header = 1, 
+                                           usecols = [4])#5th
+        compare_uids = set(compare_uids['uid'].unique())
+        # n = len([i for i in uids if i in compare_uids])
+        pdb.set_trace()
+        return [("A10",len(uids.intersection(compare_uids)) )]
+        
+        
+    #update sheet as desires for 02/22
+    table_df = get_result_aggregates_df(date = datetime(year = 2021, month =2 , day = 24),last_week = True)
+    #taken from previous table
+    table_df.loc[1] = [datetime(year = 2021, month =2 , day = 21).date(), 0,	0,	0,	0,	0]
+    table_df.sort_values("Date", inplace=True, ascending=False, axis=0)
+    extra_w = [("H14", "unknown; not seperated in aggreagtes file")]
+    table_df.loc[7] = [datetime(year = 2021, month =2 , day = 15).date(), 3,	305,	1,	1,	10]
+    
+    file_path = "Z:/Research Testing/2021-02-22 Researcher COVID TestingCB - Copy.xlsx"
+    pword = input("password string for excel sheet: ")
+    remove_password_xlsx(file_path, pword)
+    extra_w += _numeric_query(update_sheet = file_path, info_sheet = "ReviewFeb15.21.xlsx")
+    
+    update_ro_weekly_sheet_summary(table_df, file_path, extra_writes = extra_w, r_offset = 6)
+    #doesn't work!!?!
+    try:
+        add_password_xlsx(file_path, pword)
+    except Exception as e:
+        print(e)
+        print("add password manually")
+
 

@@ -356,7 +356,12 @@ class plate_factory:
 with open("c:\\Users\\student.DESKTOP-UT02KBN\\Downloads\\credentials.json") as f:
     print(f.readlines())
 
-
+#%%
+def pred_test_response(admin_dt):
+    """given a datatime for when the test was administered predict when the result will be provided
+    """
+    
+    
  #%%
 class gmail_archive_extra_helpers: 
     def unmatched_plates(email_responses):
