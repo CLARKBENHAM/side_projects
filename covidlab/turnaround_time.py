@@ -70,16 +70,117 @@ def proc_gmail_export(email_dir):
             pass
     return emails
 
-base_dir = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab"
+# base_dir = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab"
+base_dir = "c:\\Users\\cb5ye\\Desktop\\side_projects\\covidlab"
 email_dir = max([i for i in os.listdir(base_dir) if 'takeout' in i],
                     key = lambda p: int(p[8:16]))
 response_emails = proc_gmail_export(email_dir)
-email_responses = {i.File: i.Datetime for i in response_emails}
+email_responses = {i.File.replace(".xlsx", ""): i.Datetime for i in response_emails}
 #%%
-def get_plates(email_responses):
+def _get_plate_files(folder_path = "Z:\ResearchData\BeSafeSaliva\BarcodeScan", prev_seen=set(), ending="."):
+    """returns full path to all files of interest
+    prev_seen: optional set of paths to be excluded
+    returns list of paths
+    ending: string to check that the path contains [doesn't acctualy check this is the ending vs in path]
     """
+    all_files = []
+    folder_date_re = re.compile('\d{2}\.\d{2}\.\d{4}\-\d{2}\.\d{2}\.\d{4}')
+    for f_name,*files in os.walk(folder_path):
+        if re.match(folder_date_re, f_name.split("\\")[-1]):
+            for f_lst in files:
+                if len(f_lst) > 0:
+                    all_files += [f"{f_name}\{f}" for f in f_lst if f not in prev_seen and ending in f]
+    return all_files
+
+path2file = lambda i: i.split("\\")[-1].replace(".csv", "")
+
+def email_response_file_mod(pretty = False):
+    """explores directory Z:\ResearchData\BeSafeSaliva\BarcodeScan and 
+        assigns file result time to when that plate was last modified.
+    Fake Data: but close enough for explory.
+    ?What is dif in .xlsm vs .csv? Seems to be none; will only use .csv
+    """    
+    print("FAKE DATA: email_response_file_mod")
+    if pretty:
+        return {path2file(p): datetime.fromtimestamp(os.stat(p).st_mtime) 
+                for p in _get_plate_files(ending=".csv")}
+    else:
+        return {p: datetime.fromtimestamp(os.stat(p).st_mtime) 
+                for p in _get_plate_files(ending=".csv")}
+    
+email_responses2 = email_response_file_mod()
+set(email_responses2.keys()).intersection(set(email_responses.keys())) #completely different format from described in email
+email_responses = email_responses2
+#%%
+barcode_re = re.compile("\d{9}-([A-Z0-9]+)-(\d{12})-\d{4}")
+
+#all barcodes are duplicated 4 times, one for each gene type in file
+def get_plate_barcodes(email_responses):
+    """
+    #email_repsonses: from email_response_file_mod
+
     gets tests corresponding to email_responses from the health directory
-        ??how to get health dir? (only on desktop? But got perm. to have on others?)??
+        can get health dir only on desktop
+    email_responses {file: Datetime recieved}
+    ret pd.Df [date, time] as when results Delievered
+        finished_dt = duration + start_dt
+    """    
+    every_plate = []
+
+    for path in _get_plate_files(ending=".csv"):
+        # try:
+        finished_dt = email_responses[path]
+        try:
+            plate = pd.read_csv(path, 
+                                header = 1, 
+                                ).dropna(how='all', axis=0
+                                ).rename({"Sample Name": "barcode"},
+                                          axis=1
+                                )[['barcode']]
+        except:#    NOTE: some files only have 1 column: the Barcode
+            try:
+                plate = pd.read_csv(path, 
+                                header=0,
+                                ).rename({ "BarCode Scan": "barcode", 
+                                          "Barcode": 'barcode'}, 
+                                          axis=1
+                                ).dropna(how='all', axis=0
+                                )[['barcode']]
+            except:
+                #theres lots of little exceptions: 10292020_430PM_JWEH_BABBBCBD.csv, 10052020_BA_JD_1205PM_HIS1_2.csv
+                plate = pd.read_csv(path, header=0)
+                ix = plate.iloc[3].apply(lambda i: 
+                                          re.match(barcode_re, str(i)) is not None)
+                plate = plate[plate.columns[ix]]
+                plate.columns = ['barcode']
+        # codes = pd.unique(plate)
+        plate = plate[plate['barcode'].apply(lambda i: 
+                                                re.match(barcode_re, str(i)) is not None
+                                                )][::4]
+        plate['start_dt'] = plate['barcode'].apply(lambda i:
+                                              datetime.strptime(i.split("-")[2],
+                                                                "%Y%m%d%H%M"))
+
+        plate['time'] = plate['start_dt'].apply(lambda i: i.time())
+        plate['date'] = plate['start_dt'].apply(lambda i: i.date())
+        plate['duration'] = plate['start_dt'].apply(lambda i: finished_dt - i)
+        plate['plate'] = path2file(path)
+        every_plate += [plate]                
+        # except:
+        #     # pdb.set_trace()
+        #     print(path)
+    plates_df = pd.concat(every_plate)
+    return plates_df
+
+plates_df = get_plate_barcodes(email_responses)
+plates_df.to_pickle("c:\\Users\\cb5ye\\Desktop\\side_projects\\covidlab\\plates_by_modify")
+#%%
+def get_plates2(email_responses):
+    """
+    Written w/o access, makes some assumptions that aren't true at the current moment; but may be with full data
+    #email_repsonses: from proc_gmail_export
+    gets tests corresponding to email_responses from the health directory
+        can get health dir only on desktop
     email_responses {file: Datetime recieved}
     ret pd.Df [date, time] as when results Delievered
         finished_dt = duration + start_dt
@@ -89,7 +190,7 @@ def get_plates(email_responses):
     # tested_dates = {earliest + timedelta(i):[]
     #                 for i in range((datetime.today().date() - earliest).days + 99)}
     # result_files = []
-    folder_path = "Z:\ResearchData\BeSafeSaliva\Reported_File"
+    folder_path = "Z:\ResearchData\BeSafeSaliva\BarcodeScan"
     try:
         month_folders = os.listdir(folder_path)
     except:

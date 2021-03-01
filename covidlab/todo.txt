@@ -1,8 +1,8 @@
 TODO: 
     Summary file:
-        get access to Folder
+        get access to results Folder
             vprewb-users(\\pi11admin.virginia.edu) U:\PVR
-        update to include info about 'total' column, run.
+        - update to include info about 'total' column (non-tests, see last col of aggregation sheets), run.
     Turnaround time:
         - Get access to health service folder
         get bruce to rexport flagged emails
