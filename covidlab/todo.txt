@@ -1,0 +1,24 @@
+TODO: 
+    Summary file:
+        get access to Folder
+            vprewb-users(\\pi11admin.virginia.edu) U:\PVR
+        update to include info about 'total' column, run.
+    Turnaround time:
+        - Get access to health service folder
+        get bruce to rexport flagged emails
+        run my results, make plots (email out?)
+        get myself access to this email chain
+        access gmail api to pull these email updates. 
+        
+        Want to make website displaying this information: 
+            
+            
+            
+            
+Done:
+    Excel mapings:
+        - make macro that changes name from 384 plate to 94 plate format
+        - sort for easier reading
+        
+Mapped both Research Office and Health Dir to Z drive?
+how to get health dir? (only on desktop? But got perm. to have on others?)

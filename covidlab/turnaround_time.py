@@ -78,9 +78,11 @@ email_responses = {i.File: i.Datetime for i in response_emails}
 #%%
 def get_plates(email_responses):
     """
-    gets tests corresponding to 
+    gets tests corresponding to email_responses from the health directory
+        ??how to get health dir? (only on desktop? But got perm. to have on others?)??
     email_responses {file: Datetime recieved}
-    ret pd.Df
+    ret pd.Df [date, time] as when results Delievered
+        finished_dt = duration + start_dt
     """
     # earliest = min([i.Datetime for i in response_emails]).date()
     # #date completed: average time for test to finish
@@ -88,9 +90,22 @@ def get_plates(email_responses):
     #                 for i in range((datetime.today().date() - earliest).days + 99)}
     # result_files = []
     folder_path = "Z:\ResearchData\BeSafeSaliva\Reported_File"
-    month_folders = os.listdir(folder_path)
-    every_plate = []
+    try:
+        month_folders = os.listdir(folder_path)
+    except:
+        print("WARING: SIMULATED DatA IS PROVIDED Based on r_test_df")# from import_ro_weekly_sheet(file_path)
+        r_test_df['start_dt'] = r_test_df.apply(lambda r: 
+                                                datetime.combine(r['date'], r['time']),
+                                                axis=1)
+        # r_test_df['time'] = r_test_df['start_dt'].apply(lambda i: i.time())
+        # r_test_df['date'] = r_test_df['start_dt'].apply(lambda i: i.date())
+        r_test_df['duration'] = max(r_test_df['start_dt']) + timedelta(hours=4) - r_test_df['start_dt']
+        plate1_sz = len(r_test_df)//2
+        r_test_df.iloc[:plate1_sz, df.columns.get_loc('duration')] += timedelta(hours=7)
+        r_test_df['plate'] = ["TEMP1"]*plate1_sz + ["TEMP2"]*len(r_test_df[plate1_sz:])
+        return r_test_df
     
+    every_plate = []
     for month in month_folders:
         response_files = os.listdir(f"{folder_path}\{month}")
         # result_files += [f"{folder_path}\{f}" for f in response_files]
@@ -112,19 +127,20 @@ def get_plates(email_responses):
                 # plate = pd.concat({file: plate}, names=["file"])#makes multiindex (don't want to deal)
                 plate['plate'] = file
                 # tested_dates[finished_dt] += [plate['duration'].mean()]
-                # plate.drop('start_dt', inplace=True)
                 every_plate += [plate]
                 
     plates_df = pd.concat(every_plate)
     return plates_df
 
 plates_df = get_plates(email_responses)
-
 #**is** what you want: what if Nov 3rd all plates are slow and spread out over the course of following week?
 #next couple days get increased 
 #%%
 def _add_labels(ax, r_lst):
-    "to barplots"
+    """to barplots 
+    ax: axis
+    r_lst: [ax.bar() object]
+    """
     # def _autolabel(rects):
     for rects in r_lst:
         # """Attach a text label above each bar in *rects*, displaying its height."""
@@ -236,21 +252,42 @@ def make_plots(grp):
     # fig.tight_layout()
     return fig
 
-def weekly_plot(df, wk_end = None):
+def _not_groupby(a):
+    assert not isinstance(a, pd.core.groupby.generic.SeriesGroupBy), \
+        "Given Series Groupby instead of df"
+    assert not isinstance(a, pd.core.groupby.generic.DataFrameGroupBy),\
+        "Given df.Groupby instead of df"
+    
+def weekly_plot(df, wk_end = None, plot_result_dates = False):
     """
     plot values for  monday-sunday interval that is inclusive of wk_end
-        df: df['date'] is datetime.date object
-        if wk_end is none will plot for values thus far this week
+        df: df['date'] is datetime object
+        if wk_end is none will plot for values thus far this 
+        plot_result_dates: plots based on date results found instead of collection date 
     """
+    _not_groupby(df)
     if wk_end is None:
-        wk_end = datetime.today().date()
+        wk_end = datetime.today()
+    if not isinstance(wk_end, datetime):#cast date to datetime
+        wk_end = datetime.combine(wk_end, datetime.min.time())
     wk_end = wk_end + timedelta(days = 6 - wk_end.weekday())
-    wk_start = wk_end - timedelta(days =wk_end.weekday() )
-    wk_start, wk_end = wk_start.date(), wk_end.date()
-    # grp =  df[df['start_df'].between(wk_start, wk_end, inclusive=True)].groupby("start_dt")['duration']
-    grp =  df[df['date'].between(wk_start, wk_end, inclusive=True)].groupby("date")['duration']
+    wk_start = wk_end - timedelta(days =wk_end.weekday())
+    if plot_result_dates:
+        # pdb.set_trace()
+        finished = df[df['start_dt'].between(wk_start, wk_end, inclusive=True)]
+        grp =  finished.groupby(finished.apply(lambda r: r['start_dt'] + r['duration'],
+                                               axis=1)
+                                )['duration']        
+    else:#collection date
+        wk_start, wk_end = wk_start.date(), wk_end.date()
+        grp =  df[df['date'].between(wk_start, wk_end, inclusive=True)
+                  ].groupby("date")['duration']        
     fig = make_plots(grp)
-    fig.suptitle(f"Plots for week of {wk_start}-{wk_end}")
+    if plot_result_dates:
+        fig.suptitle(f"Plots for week of {wk_start}-{wk_end}", size="xx-large")
+        fig.get_axes()[0].set_xlabel("Test Results Date")
+    else:
+        fig.suptitle(f"Plots for week of {wk_start}-{wk_end})", size="xx-large")
     fig.show()
 
 def trailing_plot(df, end_day = datetime(year=2021, month = 2, day=14).date(), n_trailing = 0):
@@ -258,44 +295,68 @@ def trailing_plot(df, end_day = datetime(year=2021, month = 2, day=14).date(), n
         n_trailing: the number of days (inclusive) that occured before 
             'end_day' to be included
     """
-    if str(type(day)) != "<class 'datetime.date'>":#imports bad so have to do this
+    _not_groupby(df)
+    if isinstance(end_day, datetime):
         end_day = end_day.date()
     start_day = end_day - timedelta(days = n_trailing)
     grp =  df[df['date'].between(start_day, end_day, inclusive=True)]
     grp = grp.groupby("date")['duration']
     fig = make_plots(grp)
-    fig.suptitle(f"Plots for {n_trailing} Days preceding {end_day}")
+    fig.suptitle(f"Plots for {n_trailing} Days preceding {end_day}", size="x-large")
     fig.show()
     
-def time_of_day(df, day = None, n_trailing = 0):
-    "segments by ~delivery batch"
+def time_of_day(df, day =  None, n_trailing = 0):
+    """"segments by ~delivery batch
+    # email_responses: {file_name: recievd_dt} for all files in df['plate']
+    makes plot with '11/19/20 18:13' type format
+   """
+    _not_groupby(df)
     if day is None:
         day = datetime.today().date()
-    grp['initial_plate'] = grp['date'] + grp['duration']#datetime finalized
-    start_new_schedule = datetime(year=2021, month = 2, day=5).date()
-    df = df[df['date'].between(start_new_schedule, day, inclusive=True)]
+    elif isinstance(day, datetime):#cast datetime to date
+        day = day.date()
+    df = df[df['date'].between(day, day, inclusive=True)]
     #group by batch; but cast to the datetime recieved
-    grp = df.groupby(df['plate'].apply(lambda i: email_responses[i]))['duration']
+    grp = df.groupby(df.apply(lambda r: r['start_dt'] + r['duration'],
+                              axis=1)
+                     )['duration']
     fig = make_plots(grp)
-    fig.suptitle(f"Plots by ~Time of Day Deliever")
+    fig.suptitle(f"Plots by Plate Completion Date", size="xx-large")#not centered, but don't know how to help
+    
+    fig.get_axes()[0].set_xlabel("Test Completion Date")
     fig.show()    
 
-# r_test_df['datetime'] = r_test_df.apply(lambda r: datetime.combine(r['date'], r['time']), axis=1)
-# r_test_df['duration'] = r_test_df['datetime'] - min(r_test_df['datetime'])
-# r_test_df['duration'][:40] = max(r_test_df['datetime']) - r_test_df['datetime'][:40]
-# weekly_plot(r_test_df, wk_end = datetime(year=2021, month = 2, day=11), trailing7 = True)
-
+plates_df = get_plates(email_responses)
 # f = grp.groupby(grp["computing_id"].apply(lambda i: i[0]))['duration']
-f = r_test_df.groupby("date")['duration']
-make_plots(f)
-#%%bad order
-for f,res_dt in email_responses:
-    #filter out previously seen
-    month_folder = [i for i in month_folders if str(res_dt.month).upper() in i]
-    response_files = os.listdir("{folder_path}\{month_folder}")            
-            
-            
-            
+f = plates_df.groupby("date")['duration']
+# make_plots(f)
+# weekly_plot(plates_df, 
+#             wk_end = datetime(year = 2021, month= 2, day = 14),
+#             plot_result_dates = False)
+# trailing_plot(df, end_day = datetime(year=2021, month = 2, day=14).date(), n_trailing = 2)
+# time_of_day(df, day = datetime(year=2021, month = 2, day=14))
+#%%
+class plate_factory:
+    
+    base_dir = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab"
+    def __init__(self, base_dir = base_dir):
+        if "results_df" not in os.listdir(base_dir):
+            #first time setup
+            response_emails = []
+            for email_dir in os.listdir(base_dir):
+                if 'takeout' in email_dir:
+                    response_emails += [proc_gmail_export(email_dir)]
+            email_responses = {i.File: i.Datetime for i in response_emails}
+            plates_df = get_plates(email_responses)
+            plates_df.to_pickle(f"{base_dir}\results_df")
+        else:
+            plates_df = pd.read_pickle(f"{base_dir}\results_df")
+        self.plates_df = plates_df
+
+with open("c:\\Users\\student.DESKTOP-UT02KBN\\Downloads\\credentials.json") as f:
+    print(f.readlines())
+
+
  #%%
 class gmail_archive_extra_helpers: 
     def unmatched_plates(email_responses):
