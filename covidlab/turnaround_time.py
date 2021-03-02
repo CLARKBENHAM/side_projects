@@ -89,10 +89,11 @@ def _get_plate_files(folder_path = "Z:\ResearchData\BeSafeSaliva\BarcodeScan", p
         if re.match(folder_date_re, f_name.split("\\")[-1]):
             for f_lst in files:
                 if len(f_lst) > 0:
+                    # print(f_lst[0])
                     all_files += [f"{f_name}\{f}" for f in f_lst if f not in prev_seen and ending in f]
     return all_files
 
-path2file = lambda i: i.split("\\")[-1].replace(".csv", "")
+path2file = lambda i: i.split("\\")[-1]#keep ending
 
 def email_response_file_mod(pretty = False):
     """explores directory Z:\ResearchData\BeSafeSaliva\BarcodeScan and 
@@ -112,8 +113,17 @@ email_responses2 = email_response_file_mod()
 set(email_responses2.keys()).intersection(set(email_responses.keys())) #completely different format from described in email
 email_responses = email_responses2
 #%%
+github_dir="c:\\Users\\cb5ye\\Desktop\\side_projects\\covidlab"
 barcode_re = re.compile("\d{9}-([A-Z0-9]+)-(\d{12})-\d{4}")
-
+def load_plate_barcodes(github_dir=github_dir):
+    try:
+        return pd.read_pickle(f"{github_dir}\plates_by_modify_dt")
+    except:
+        return pd.DataFrame(columns = ['barcode', 'start_dt', 'time', 'date', 'duration', 'plate'])
+    
+def save_plate_barcodes(df, github_dir=github_dir):
+    df.to_pickle(f"{github_dir}\plates_by_modify_dt")    
+    
 #all barcodes are duplicated 4 times, one for each gene type in file
 def get_plate_barcodes(email_responses):
     """
@@ -122,14 +132,22 @@ def get_plate_barcodes(email_responses):
     gets tests corresponding to email_responses from the health directory
         can get health dir only on desktop
     email_responses {file: Datetime recieved}
-    ret pd.Df [date, time] as when results Delievered
+    ret pd.Df  ['barcode', 'start_dt', 'time', 'date', 'duration', 'plate'] 
+        time,date when started    
         finished_dt = duration + start_dt
     """    
     every_plate = []
-
-    for path in _get_plate_files(ending=".csv"):
-        # try:
-        finished_dt = email_responses[path]
+    prev_df = load_plate_barcodes()
+    first_fail = True
+    for path in _get_plate_files(ending=".csv", prev_seen = set(prev_df['plate'].unique())):
+        try:
+            finished_dt = email_responses[path]
+        except:
+            if first_fail:
+                print("WARNING: email_responses is not up to date, missing:")
+                first_fail = False
+            print(path)
+            continue
         try:
             plate = pd.read_csv(path, 
                                 header = 1, 
@@ -153,7 +171,7 @@ def get_plate_barcodes(email_responses):
                                           re.match(barcode_re, str(i)) is not None)
                 plate = plate[plate.columns[ix]]
                 plate.columns = ['barcode']
-        # codes = pd.unique(plate)
+
         plate = plate[plate['barcode'].apply(lambda i: 
                                                 re.match(barcode_re, str(i)) is not None
                                                 )][::4]
@@ -166,14 +184,12 @@ def get_plate_barcodes(email_responses):
         plate['duration'] = plate['start_dt'].apply(lambda i: finished_dt - i)
         plate['plate'] = path2file(path)
         every_plate += [plate]                
-        # except:
-        #     # pdb.set_trace()
-        #     print(path)
-    plates_df = pd.concat(every_plate)
+    plates_df = prev_df.append(pd.concat(every_plate))
     return plates_df
 
 plates_df = get_plate_barcodes(email_responses)
-plates_df.to_pickle("c:\\Users\\cb5ye\\Desktop\\side_projects\\covidlab\\plates_by_modify")
+save_plate_barcodes(plates_df)
+# plates_df =  load_plate_barcodes()
 #%%
 def get_plates2(email_responses):
     """
@@ -426,23 +442,25 @@ def time_of_day(df, day =  None, n_trailing = 0):
     
     fig.get_axes()[0].set_xlabel("Test Completion Date")
     fig.show()    
+    
+def plates_per_day(df):
+    
+#modify axes to be more informative, grib
 
-plates_df = get_plates(email_responses)
-# f = grp.groupby(grp["computing_id"].apply(lambda i: i[0]))['duration']
-f = plates_df.groupby("date")['duration']
+# f = plates_df.groupby("date")['duration']
 # make_plots(f)
 # weekly_plot(plates_df, 
 #             wk_end = datetime(year = 2021, month= 2, day = 14),
 #             plot_result_dates = False)
-# trailing_plot(df, end_day = datetime(year=2021, month = 2, day=14).date(), n_trailing = 2)
-# time_of_day(df, day = datetime(year=2021, month = 2, day=14))
+# trailing_plot(plates_df, end_day = datetime(year=2021, month = 2, day=14).date(), n_trailing = 2)
+# time_of_day(plates_df, day = datetime(year=2021, month = 2, day=14))
 #%%
 class plate_factory:
     
     base_dir = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab"
     def __init__(self, base_dir = base_dir):
         if "results_df" not in os.listdir(base_dir):
-            #first time setup
+            #first time setup 
             response_emails = []
             for email_dir in os.listdir(base_dir):
                 if 'takeout' in email_dir:
@@ -457,12 +475,152 @@ class plate_factory:
 with open("c:\\Users\\student.DESKTOP-UT02KBN\\Downloads\\credentials.json") as f:
     print(f.readlines())
 
-#%%
 def pred_test_response(admin_dt):
     """given a datatime for when the test was administered predict when the result will be provided
     """
+    pass
+#%%
+df = plates_df
+from sklearn.preprocessing import OneHotEncoder, FunctionTransformer
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.pipeline import FeatureUnion
+from sklearn import svm
+from sklearn.model_selection import train_test_split, GridSearchCV
+
+y,X = df['duration'], df.drop(['duration', 'plate'], axis=1)
+y = y/ np.timedelta64(1, 'D')
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+
+#apply works on row. Have to return a df
+def day_of_week(dates, enc = OneHotEncoder()):
+    return enc.fit_transform(
+                        dates.apply(
+                                lambda r: r[0].weekday(), 
+                                axis=1
+                                ).values.reshape(-1,1)
+                            )
+
+def is_weekend(dates):
+    "1 if weekend"
+    # print(dates.apply(lambda r: int(r[0].weekday() >=5), axis=1).shape, "n\n\na\na\na\na")
+    return dates.apply(lambda r: int(r[0].weekday() >=5), axis=1).values.reshape(-1,1)
+           
+def got_machine(dates):
+    "Started using the machine on Feb 1st(?)"
+    if isinstance(dates.iloc[0], datetime):
+        when_machine = datetime(year=2021, month=2, day=1)
+    else:
+        when_machine = datetime(year=2021, month=2, day=1).date()
+    return dates.apply(lambda r: int(r[0] >= when_machine),
+                       axis=1
+                       ).values.reshape(-1,1)
+
+date_feats = FeatureUnion([
+                 ('day_of_week', FunctionTransformer(day_of_week)),
+                 ('is_weekend', FunctionTransformer(is_weekend)),
+                 ('got_machine', FunctionTransformer(got_machine)),
+                 ])
     
+def time2int(time):#int(r[0].strftime("%Y%m%d%H%M%S")
+    "cyclical in day"
+    # print(type(start_dt.iloc[0][0]))
+    return time.apply(lambda r: int(r[0].strftime("%H%M")), 
+                          axis=1
+                          ).values.reshape(-1,1)
+def is_2ndshift(time):
+    "1 if 2nd shift"
+    change_over = datetime(year=999, month=9, day=9, hour=13, minute = 30).time()
+    return time.apply(lambda r: int(r[0] >= change_over), 
+                       axis=1
+                       ).values.reshape(-1,1)
+
+time_feats = FeatureUnion([
+                 ('time2int', FunctionTransformer(time2int)),
+                 ('is_2ndshift', FunctionTransformer(is_2ndshift)),
+                 ])
+
+#want to append with which plate a batch got submitted to, drawing data from when the barcodes were scanned
+#but is that informative? Yes, could learn that plates get scanned @ 930, 11, 2, etc. and map forward
+#want mapping of time-> what # plate likely to be today
+#wait till have true result times and make modified times an extra column
+# def cutoff_time(times):
+#     "want to group by when people submit tests over the course of a week"
+
+def timestamp2int(start_dt):#int(r[0].strftime("%Y%m%d%H%M%S")
+    # print(type(start_dt.iloc[0][0]))
+    return start_dt.apply(lambda r: r[0].value, 
+                          axis=1
+                          ).values.reshape(-1,1)
+
+start_dt_feats = FeatureUnion([
+                        ('timestamp2int', FunctionTransformer(timestamp2int)),
+                        ])
+
+def barcode_endings(barcode, enc = OneHotEncoder()):
+    #['0104\', '0219e', '0101000', '0106q', '0218\', '9925', '0511ATCC(+)','7070', '0404] are few enough to be questionable
+    #not sure what endings mean, maybe collection point? 46 unique total 
+    endings = barcode.apply(lambda r: r[0].split("-")[-1], axis=1)
+    bad_endings = endings.value_counts()[endings.value_counts() < len(barcode)//1000]
+    endings = endings.apply(lambda i: 'mistake?' if i in bad_endings else i)
+    return enc.fit_transform(endings.values.reshape(-1,1))
+
+barcode_feats = FeatureUnion([
+                 ('barcode_endings', FunctionTransformer(barcode_endings)),
+                 ])
+
+class submit_wave:
+    submit_wave.m_knn = None
+    submit_wave.nm_knn = None
     
+    def fit(start_dt):
+        "want to group by when people submit tests over the course of a week"
+        ix = got_machine(start_dt['date'])
+        day_fraction = start_dt['time'].apply(lambda r: 
+                                              r.hour*3600 + r.minute*60 + r.second
+                                              ) / timedelta(days=1).total_seconds()
+        wk_tm = day_of_week(start_dt[['date']]) + day_fraction
+        #started making everyone get tested 1/wk when got machine
+        wm_tm = start_dt[ix]
+        wom_tm = start_dt[~ix]
+        
+        return start_dt#.values.reshape(-1,1)
+
+    def transform(start_dt):
+        pass
+        
+cols_sep = ColumnTransformer(
+                [('all_date_feats', date_feats, ['date']),
+                    ('all_time_feats', time_feats, ['time']),
+                   ('all_barcode_feats', barcode_feats, ['barcode']),
+                   ('all_start_dt_feats', start_dt_feats, ['start_dt']),
+                   # ('submit_wave_feat', submit_wave, ['date', 'time']),
+                 ],
+                remainder='drop'#'passthrough'
+                )
+
+pipe = Pipeline([
+            ("pre_procs", cols_sep),
+            ('svm', svm.SVR()),
+            ])
+out = pipe.fit_transform(X.head(1000))
+out[:5]
+#%%
+
+param_grid = dict(svm__degree=[1,2], svm__C=[0.01, 0.05, 0.1, 1, 10], svm__kernel=['rbf'])
+grid_search = GridSearchCV(pipe, param_grid=param_grid, cv=5, verbose=1)
+grid_search.fit(X_train, y_train)
+grid_search.score(X_test, y_test)
+#%%
+# model = svm.SVR()
+pipe.fit(X_train, y_train)
+pipe.score(X_test, y_test)
+#%%
+import pickle
+with open(f"{github_dir}\model.p", 'wb') as f:
+    pickle.dump(pipe, f)
+with open(f"{github_dir}\model.p", 'rb') as f:
+    pipe2 = pickle.load(f)
  #%%
 class gmail_archive_extra_helpers: 
     def unmatched_plates(email_responses):
