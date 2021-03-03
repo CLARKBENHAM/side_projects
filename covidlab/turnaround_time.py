@@ -16,6 +16,7 @@ import pickle
 from scipy.stats import invgauss
 
 #%%
+# github_dir="c:\\Users\\cb5ye\\Desktop\\side_projects\\covidlab"
 github_dir="c:\\Users\\cb5ye\\Desktop\\side_projects\\covidlab"
 
 #response datetime; taking others from 'RAW FILE POST-PROCESS COUNTS'
@@ -313,17 +314,23 @@ def _add_labels(ax, r_lst):
                     t.set_size(t.get_size() * bar_w/txt_w)
                 else:
                     t.remove()
-                    
+def _make_tick_labels(grp):
+    """
+    makes barplot and percentile plot's tick labels so they don't overlap
+    """                
+    tick_labels = [n for n,_ in grp]
+    # if len(tick_labels) > 15: #seems to start overlapping around that, a guess though
+    #     prev = None
+    return tick_labels
+
 def make_plots(grp):
     """
     Takes a groupby object with timedelta values and plots those against indicies
     #format tick labels? eg. for datetime to ignore year for plates 
     """
-    fig, (ax, ax2, ax3) = plt.subplots(3,1, figsize = (20,12), constrained_layout=True)
-    # gs1 = gridspec.GridSpec(3, 1)
-    # gs1.update(hspace=0, wspace=0)
-    
+    fig, (ax, ax2, ax3) = plt.subplots(3,1, figsize = (20,12), constrained_layout=True, sharex=True)    
     ax.set_title("Daily Average Time to complete test")
+
     daily_avg = grp.apply(lambda g: g.astype(np.int64).mean())
     daily_std = grp.apply(lambda g: g.astype(np.int64).mean())
     ax.scatter(daily_avg.index, daily_avg.values)
@@ -337,6 +344,7 @@ def make_plots(grp):
     ax.set_ylabel("time till completion")
     ax.set_xlabel("Test Collection Date")
     ax.set_ylim(max(0, ax.get_ylim()[0]))
+    ax.xaxis.set_tick_params(which='both', labelbottom=True)
 
     ax2.set_title("Percent of samples delayed by")
     daily_12hr =  grp.apply(lambda g: sum(g > timedelta(hours=12))/len(g))*100
@@ -353,45 +361,45 @@ def make_plots(grp):
         width = (ix[1] - ix[0])/8
     except:
         width = ix/8
+
     rects1 = ax2.bar(ix - width*2, daily_12hr.values, width, label='% >12 hours')
     rects2 = ax2.bar(ix - width, daily_24hr.values, width, label='% >24 hours')
     rects3 = ax2.bar(ix, daily_36hr.values, width, label='% >36 hours')
     rects4 = ax2.bar(ix + width, daily_48hr.values, width, label='% >48 hours')
     rects5 = ax2.bar(ix + width*2, daily_72hr.values, width, label='% >72 hours')
-    
-    # Add some text for labels, title and custom x-axis tick labels, etc.
-    ax2.set_ylabel('Percent')
-    ax2.set_xticks(ix)
-    ax2.set_xticklabels([n for n,_ in grp])
-    ax2.legend()
-                 
     _add_labels(ax2, [rects1, rects2, rects3, rects4, rects5])
+
+    ax2.set_ylabel('Percent')
+    ax2.xaxis.set_tick_params(which='both', labelbottom=True)
+    ax2.legend()
+
     #percentiles
     ax3.set_title("Percentile time to completetion")
     per_30 = grp.apply(lambda g: np.quantile(g, 0.30))
     per_80 =grp.apply(lambda g: np.quantile(g, 0.80))
     per_95 =grp.apply(lambda g: np.quantile(g, 0.95))
     per_99 =grp.apply(lambda g: np.quantile(g, 0.99))
-    plt.scatter(per_30.index.astype('str'), per_30 / np.timedelta64(1, 'D'), 
+    ax3.scatter(_make_tick_labels(grp), per_30 / np.timedelta64(1, 'D'), 
               marker = "_", 
               s= 999,
               label = "30th percentile")
-    plt.scatter(per_80.index.astype('str'), per_80 / np.timedelta64(1, 'D'), 
+    ax3.scatter(_make_tick_labels(grp), per_80 / np.timedelta64(1, 'D'), 
               marker = "_", 
               s= 999,
               label = "80th percentile")
-    plt.scatter(per_95.index.astype('str'), per_95 / np.timedelta64(1, 'D'), 
+    ax3.scatter(_make_tick_labels(grp), per_95 / np.timedelta64(1, 'D'), 
               marker = "_", 
               s= 999,
               label = "95th percentile")
-    plt.scatter(per_99.index.astype('str'), per_99 / np.timedelta64(1, 'D'), 
+    ax3.scatter(per_99.index.astype('str'), per_99 / np.timedelta64(1, 'D'), 
               marker = "_", 
               s= 999,
               label = "99th percentile")
     ax3.legend()
+    # ax3.set_xticks(ax.get_xticks())
     ax3.set_ylabel("Days")
     ax3.set_ylim(max(0, ax3.get_ylim()[0]))
-    # fig.tight_layout()
+
     return fig
 
 def _not_groupby(a):
@@ -426,10 +434,10 @@ def weekly_plot(df, wk_end = None, plot_result_dates = False):
                   ].groupby("date")['duration']        
     fig = make_plots(grp)
     if plot_result_dates:
-        fig.suptitle(f"Plots for week of {wk_start}-{wk_end}", size="xx-large")
+        fig.suptitle(f"Plots for week of {wk_start} to {wk_end}", size="xx-large")
         fig.get_axes()[0].set_xlabel("Test Results Date")
     else:
-        fig.suptitle(f"Plots for week of {wk_start}-{wk_end})", size="xx-large")
+        fig.suptitle(f"Plots for week of {wk_start} to {wk_end}", size="xx-large")
     fig.show()
 
 def trailing_plot(df, end_day = datetime(year=2021, month = 2, day=14).date(), n_trailing = 0):
@@ -471,10 +479,11 @@ def time_of_day(df, day =  None, n_trailing = 0):
 #modify axes to be more informative, grib
 
 f = plates_df.groupby("date")['duration']
-make_plots(f)
-# weekly_plot(plates_df, 
-#             wk_end = datetime(year = 2021, month= 2, day = 14),
-#             plot_result_dates = False)
+# make_plots(f)
+weekly_plot(plates_df, 
+            wk_end = datetime(year = 2021, month= 2, day = 14),
+            plot_result_dates = False)
+#these are funky
 # trailing_plot(plates_df, end_day = datetime(year=2021, month = 2, day=14).date(), n_trailing = 2)
 # time_of_day(plates_df, day = datetime(year=2021, month = 2, day=14))
 
@@ -489,14 +498,25 @@ from sklearn.linear_model import LinearRegression, TweedieRegressor
 
 def filter_outliers(df):
     """.2% >5 days duration; all of those in 2020
-    
+    1 plate had a time of < 0
     """
     biggest_2021 = max(df['duration'][df['start_dt'] >= datetime(year=2021, month=1, day=1)])
-    n_2020 = sum(df['duration'] >= biggest_2021)
-    print(f"Biggest in 2021: {biggest_2021}, of which there were {n_2020} in 2020")
-    ix = df['duration'] <= np.timedelta64(5, 'D')
+    if min(df['date']).year == 2020:
+        n_2020 = sum(df['duration'] >= biggest_2021) -1
+        print(f"Biggest in 2021: {biggest_2021}, of which there were {n_2020} in 2020")
+    else:
+        print(f"Biggest in 2021: {biggest_2021}")
+    ix = df['duration'] <= np.timedelta64(5, 'D') 
     print(f"removing {sum(~ix)} which were more than  5 days")
-    return df[ix]
+    
+    early_ix = plates_df['duration']/np.timedelta64(1, "D") < 0
+    bad_plates = set(plates_df[early_ix]['plate'])
+    bad_dates = [v for k,v in barcode_email_responses.items() for j in bad_plates if j in k]
+    if len(bad_dates) != 0:
+        print(f"the following plates were marked complete before the tests were administered: {bad_plates} across {bad_dates}")
+        if len(bad_dates) > 1:
+            print(f"\n\n\nWARNING!!!!! As of march 03, 2021 only 1 plate had this issue. it has now repeated. {sum(early_ix)} tests total\n\n\n")
+    return df[ix & ~early_ix]
     
 df = filter_outliers(plates_df)
 y,X = df['duration'], df.drop(['duration', 'plate'], axis=1)
@@ -646,6 +666,12 @@ pipe = Pipeline([
 
 # out = pipe.fit_transform(X.head(1000))
 # out[:5]
+pipe.fit(X_train, y_train)
+print(pipe.score(X_test, y_test))
+with open(f"{github_dir}\\robot_submit_model.p", 'wb') as f:
+    pickle.dump(pipe, f)
+
+#%%
 try:
     with open(f"{github_dir}\model.p", 'rb') as f:
         pipe = pickle.load(f)
@@ -699,6 +725,7 @@ def plot_pred_dist(dt=None, res = res[::10]):
     plt.title(f"Dist of Duration if tested at: {str(dt.strftime('%c'))[:-8]}")
     plt.xlabel("Days")
     plt.ylabel("Prob")
+    plt.show()
     return 
 plot_pred_dist()
 
