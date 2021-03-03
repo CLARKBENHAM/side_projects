@@ -188,70 +188,9 @@ def get_plate_barcodes(email_responses):
     return plates_df
 
 plates_df = get_plate_barcodes(email_responses)
-save_plate_barcodes(plates_df)
+# save_plate_barcodes(plates_df)
 # plates_df =  load_plate_barcodes()
-#%%
-def get_plates2(email_responses):
-    """
-    Written w/o access, makes some assumptions that aren't true at the current moment; but may be with full data
-    #email_repsonses: from proc_gmail_export
-    gets tests corresponding to email_responses from the health directory
-        can get health dir only on desktop
-    email_responses {file: Datetime recieved}
-    ret pd.Df [date, time] as when results Delievered
-        finished_dt = duration + start_dt
-    """
-    # earliest = min([i.Datetime for i in response_emails]).date()
-    # #date completed: average time for test to finish
-    # tested_dates = {earliest + timedelta(i):[]
-    #                 for i in range((datetime.today().date() - earliest).days + 99)}
-    # result_files = []
-    folder_path = "Z:\ResearchData\BeSafeSaliva\BarcodeScan"
-    try:
-        month_folders = os.listdir(folder_path)
-    except:
-        print("WARING: SIMULATED DatA IS PROVIDED Based on r_test_df")# from import_ro_weekly_sheet(file_path)
-        r_test_df['start_dt'] = r_test_df.apply(lambda r: 
-                                                datetime.combine(r['date'], r['time']),
-                                                axis=1)
-        # r_test_df['time'] = r_test_df['start_dt'].apply(lambda i: i.time())
-        # r_test_df['date'] = r_test_df['start_dt'].apply(lambda i: i.date())
-        r_test_df['duration'] = max(r_test_df['start_dt']) + timedelta(hours=4) - r_test_df['start_dt']
-        plate1_sz = len(r_test_df)//2
-        r_test_df.iloc[:plate1_sz, df.columns.get_loc('duration')] += timedelta(hours=7)
-        r_test_df['plate'] = ["TEMP1"]*plate1_sz + ["TEMP2"]*len(r_test_df[plate1_sz:])
-        return r_test_df
-    
-    every_plate = []
-    for month in month_folders:
-        response_files = os.listdir(f"{folder_path}\{month}")
-        # result_files += [f"{folder_path}\{f}" for f in response_files]
-        for file in response_files:
-            if file in email_responses:
-                finished_dt = email_responses[file]
-                plate = pd.read_excel(f"{folder_path}\{month}\{file}",
-                                       sheet_name = "Weekly Tests", 
-                                       header = 1, 
-                                       usecols = list(range(10))
-                                       )
-                plate['start_dt'] = plate['barcode'].apply(lambda i:
-                                              datetime.strptime(i.split("-")[2],
-                                                                "%Y%m%d%H%M"))
-                #not unique so can't make index
-                plate['time'] = plate['start_dt'].apply(lambda i: i.time())
-                plate['date'] = plate['start_dt'].apply(lambda i: i.date())
-                plate['duration'] = plate['start_dt'].apply(lambda i: finished_dt - i)
-                # plate = pd.concat({file: plate}, names=["file"])#makes multiindex (don't want to deal)
-                plate['plate'] = file
-                # tested_dates[finished_dt] += [plate['duration'].mean()]
-                every_plate += [plate]
-                
-    plates_df = pd.concat(every_plate)
-    return plates_df
 
-plates_df = get_plates(email_responses)
-#**is** what you want: what if Nov 3rd all plates are slow and spread out over the course of following week?
-#next couple days get increased 
 #%%
 def _add_labels(ax, r_lst):
     """to barplots 
@@ -442,9 +381,7 @@ def time_of_day(df, day =  None, n_trailing = 0):
     
     fig.get_axes()[0].set_xlabel("Test Completion Date")
     fig.show()    
-    
-def plates_per_day(df):
-    
+        
 #modify axes to be more informative, grib
 
 # f = plates_df.groupby("date")['duration']
@@ -479,28 +416,57 @@ def pred_test_response(admin_dt):
     """given a datatime for when the test was administered predict when the result will be provided
     """
     pass
+
+def plates_per_day(df):
+    pass
 #%%
-df = plates_df
-from sklearn.preprocessing import OneHotEncoder, FunctionTransformer
+from sklearn.preprocessing import OneHotEncoder, FunctionTransformer, StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.pipeline import FeatureUnion
 from sklearn import svm
 from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.linear_model import LinearRegression, TweedieRegressor
 
+def filter_outliers(df):
+    """.2% >5 days duration; all of those in 2020
+    
+    """
+    biggest_2021 = max(df['duration'][df['start_dt'] >= datetime(year=2021, month=1, day=1)])
+    n_2020 = sum(df['duration'] >= biggest_2021)
+    print(f"Biggest in 2021: {biggest_2021}, of which there were {n_2020} in 2020")
+    ix = df['duration'] <= np.timedelta64(5, 'D')
+    print(f"removing {sum(~ix)} which were more than  5 days")
+    return df[ix]
+    
+df = filter_outliers(plates_df)
 y,X = df['duration'], df.drop(['duration', 'plate'], axis=1)
 y = y/ np.timedelta64(1, 'D')
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 
-#apply works on row. Have to return a df
-def day_of_week(dates, enc = OneHotEncoder()):
-    return enc.fit_transform(
-                        dates.apply(
-                                lambda r: r[0].weekday(), 
+def encoder_wrapper(func):
+    #don't use as decorator since weirds syntax
+    """"have to define encoder outside the function so obj persists, 
+    will refit in the same manner; 
+        (eg. if fewer categories 2nd time still have to output og # columns)
+    """
+    return Pipeline([
+             ('func_endings', FunctionTransformer(func)),
+             ('func_onehot', OneHotEncoder()),
+             ])
+
+def day_of_week(dates):
+    return dates.apply(lambda r: r[0].weekday(), 
                                 axis=1
                                 ).values.reshape(-1,1)
-                            )
+    # return enc.fit_transform(
+    #                     dates.apply(
+    #                             lambda r: r[0].weekday(), 
+    #                             axis=1
+    #                             ).values.reshape(-1,1)
+    #                         )
 
+#apply works on row. Have to return a df
 def is_weekend(dates):
     "1 if weekend"
     # print(dates.apply(lambda r: int(r[0].weekday() >=5), axis=1).shape, "n\n\na\na\na\na")
@@ -517,7 +483,7 @@ def got_machine(dates):
                        ).values.reshape(-1,1)
 
 date_feats = FeatureUnion([
-                 ('day_of_week', FunctionTransformer(day_of_week)),
+                 ('day_of_week', encoder_wrapper(day_of_week)),
                  ('is_weekend', FunctionTransformer(is_weekend)),
                  ('got_machine', FunctionTransformer(got_machine)),
                  ])
@@ -557,64 +523,93 @@ start_dt_feats = FeatureUnion([
                         ('timestamp2int', FunctionTransformer(timestamp2int)),
                         ])
 
-def barcode_endings(barcode, enc = OneHotEncoder()):
+def barcode_endings(barcode):
     #['0104\', '0219e', '0101000', '0106q', '0218\', '9925', '0511ATCC(+)','7070', '0404] are few enough to be questionable
     #not sure what endings mean, maybe collection point? 46 unique total 
     endings = barcode.apply(lambda r: r[0].split("-")[-1], axis=1)
     bad_endings = endings.value_counts()[endings.value_counts() < len(barcode)//1000]
     endings = endings.apply(lambda i: 'mistake?' if i in bad_endings else i)
-    return enc.fit_transform(endings.values.reshape(-1,1))
+    return endings.values.reshape(-1,1)
 
 barcode_feats = FeatureUnion([
-                 ('barcode_endings', FunctionTransformer(barcode_endings)),
-                 ])
+                        # ('barcode_feats', barcode_feats3),
+                        ('barcode_feats', encoder_wrapper(barcode_endings)),
+                        ])
 
-class submit_wave:
-    submit_wave.m_knn = None
-    submit_wave.nm_knn = None
+# class submit_wave:
+#     m_knn = None
+#     nm_knn = None
     
-    def fit(start_dt):
-        "want to group by when people submit tests over the course of a week"
-        ix = got_machine(start_dt['date'])
-        day_fraction = start_dt['time'].apply(lambda r: 
-                                              r.hour*3600 + r.minute*60 + r.second
-                                              ) / timedelta(days=1).total_seconds()
-        wk_tm = day_of_week(start_dt[['date']]) + day_fraction
-        #started making everyone get tested 1/wk when got machine
-        wm_tm = start_dt[ix]
-        wom_tm = start_dt[~ix]
+#     def fit(start_dt):
+#         "want to group by when people submit tests over the course of a week"
+#         ix = got_machine(start_dt['date'])
+#         day_fraction = start_dt['time'].apply(lambda r: 
+#                                               r.hour*3600 + r.minute*60 + r.second
+#                                               ) / timedelta(days=1).total_seconds()
+#         wk_tm = day_of_week(start_dt[['date']]) + day_fraction #BAD? since decorated
+#         #started making everyone get tested 1/wk when got machine
+#         wm_tm = start_dt[ix]
+#         wom_tm = start_dt[~ix]
         
-        return start_dt#.values.reshape(-1,1)
+#         return start_dt#.values.reshape(-1,1)
 
-    def transform(start_dt):
-        pass
+#     def transform(start_dt):
+#         pass
         
 cols_sep = ColumnTransformer(
                 [('all_date_feats', date_feats, ['date']),
-                    ('all_time_feats', time_feats, ['time']),
-                   ('all_barcode_feats', barcode_feats, ['barcode']),
-                   ('all_start_dt_feats', start_dt_feats, ['start_dt']),
+                     ('all_time_feats', time_feats, ['time']),
+                    ('all_start_dt_feats', start_dt_feats, ['start_dt']),
+                     # ('all_barcode_feats', barcode_feats, ['barcode']),#3.6e-05 w/ vs. 0.03 wo
                    # ('submit_wave_feat', submit_wave, ['date', 'time']),
                  ],
                 remainder='drop'#'passthrough'
                 )
 
+# pipe = Pipeline([
+#             ("pre_procs", cols_sep),
+#             ('lin_reg', LinearRegression()),
+#             ])
+
 pipe = Pipeline([
             ("pre_procs", cols_sep),
-            ('svm', svm.SVR()),
+            ("center", StandardScaler()),
+            ('lin_reg', TweedieRegressor(power=3, max_iter=1000)),#using inverse noraml dist for glm
             ])
-out = pipe.fit_transform(X.head(1000))
-out[:5]
-#%%
 
-param_grid = dict(svm__degree=[1,2], svm__C=[0.01, 0.05, 0.1, 1, 10], svm__kernel=['rbf'])
-grid_search = GridSearchCV(pipe, param_grid=param_grid, cv=5, verbose=1)
-grid_search.fit(X_train, y_train)
-grid_search.score(X_test, y_test)
-#%%
-# model = svm.SVR()
+#Multiple comparisions alert
+#Tried svm grid search <0, lin w/ & wo/ barcodes ~0, tweedie ~0, and tweedie with standard scaler 0.25. Removing outliers (>5 days) is 0.27
+
+# param_grid = dict(svm__degree=[1,2], svm__C=[0.01, 0.05, 0.1, 1, 10], svm__kernel=['rbf'])
+# grid_search = GridSearchCV(pipe, param_grid=param_grid, cv=5, verbose=1)
+# grid_search.fit(X_train, y_train)
+# grid_search.score(X_test, y_test)
+# pipe.fit(X_train.head(200), y_train.head(200))
+# pipe.score(X_train.head(100), y_train.head(100))
+
+# pipe.fit(X_train, y_train)#0.037827532107559625
+# pipe.score(X_test, y_test)
+
+# out = pipe.fit_transform(X.head(1000))
+# out[:5]
 pipe.fit(X_train, y_train)
-pipe.score(X_test, y_test)
+print(pipe.score(X_test, y_test))
+#%% plots
+res = y_test.tail(100) - pipe.predict(X_test.tail(100))
+# plt.scatter(y_test.tail(100) * np.timedelta64(1, 'D'), res * np.timedelta64(1, 'D'))
+# plt.xlabel("True")
+# plt.ylabel("residual")
+
+# plt.scatter(y_test.tail(100) * np.timedelta64(1, 'D'), pipe.predict(X_test.tail(100)) * np.timedelta64(1, 'D'))
+# plt.xlabel("True")
+# plt.ylabel("predicted")
+# plt.show()
+
+plt.hist(pipe.predict(X_test), density=True)# * np.timedelta64(1, 'D'))
+plt.title("Predicted Dist")
+plt.ylabel("Prob")
+plt.xlabel("Pred Value")
+plt.show()
 #%%
 import pickle
 with open(f"{github_dir}\model.p", 'wb') as f:
@@ -715,4 +710,65 @@ class gmail_archive_extra_helpers:
                         
 # r_test_df['dateime'] = r_test_df.apply(lambda r: datetime.combine(r['date'], r['time']), axis=1)              
                         
-                        
+#%% old
+def get_plates2(email_responses):
+    """
+    Written w/o access, makes some assumptions that aren't true at the current moment; but may be with full data
+    #email_repsonses: from proc_gmail_export
+    gets tests corresponding to email_responses from the health directory
+        can get health dir only on desktop
+    email_responses {file: Datetime recieved}
+    ret pd.Df [date, time] as when results Delievered
+        finished_dt = duration + start_dt
+    """
+    # earliest = min([i.Datetime for i in response_emails]).date()
+    # #date completed: average time for test to finish
+    # tested_dates = {earliest + timedelta(i):[]
+    #                 for i in range((datetime.today().date() - earliest).days + 99)}
+    # result_files = []
+    folder_path = "Z:\ResearchData\BeSafeSaliva\BarcodeScan"
+    try:
+        month_folders = os.listdir(folder_path)
+    except:
+        print("WARING: SIMULATED DatA IS PROVIDED Based on r_test_df")# from import_ro_weekly_sheet(file_path)
+        r_test_df['start_dt'] = r_test_df.apply(lambda r: 
+                                                datetime.combine(r['date'], r['time']),
+                                                axis=1)
+        # r_test_df['time'] = r_test_df['start_dt'].apply(lambda i: i.time())
+        # r_test_df['date'] = r_test_df['start_dt'].apply(lambda i: i.date())
+        r_test_df['duration'] = max(r_test_df['start_dt']) + timedelta(hours=4) - r_test_df['start_dt']
+        plate1_sz = len(r_test_df)//2
+        r_test_df.iloc[:plate1_sz, df.columns.get_loc('duration')] += timedelta(hours=7)
+        r_test_df['plate'] = ["TEMP1"]*plate1_sz + ["TEMP2"]*len(r_test_df[plate1_sz:])
+        return r_test_df
+    
+    every_plate = []
+    for month in month_folders:
+        response_files = os.listdir(f"{folder_path}\{month}")
+        # result_files += [f"{folder_path}\{f}" for f in response_files]
+        for file in response_files:
+            if file in email_responses:
+                finished_dt = email_responses[file]
+                plate = pd.read_excel(f"{folder_path}\{month}\{file}",
+                                       sheet_name = "Weekly Tests", 
+                                       header = 1, 
+                                       usecols = list(range(10))
+                                       )
+                plate['start_dt'] = plate['barcode'].apply(lambda i:
+                                              datetime.strptime(i.split("-")[2],
+                                                                "%Y%m%d%H%M"))
+                #not unique so can't make index
+                plate['time'] = plate['start_dt'].apply(lambda i: i.time())
+                plate['date'] = plate['start_dt'].apply(lambda i: i.date())
+                plate['duration'] = plate['start_dt'].apply(lambda i: finished_dt - i)
+                # plate = pd.concat({file: plate}, names=["file"])#makes multiindex (don't want to deal)
+                plate['plate'] = file
+                # tested_dates[finished_dt] += [plate['duration'].mean()]
+                every_plate += [plate]
+                
+    plates_df = pd.concat(every_plate)
+    return plates_df
+
+# plates_df = get_plates(email_responses)
+#**is** what you want: what if Nov 3rd all plates are slow and spread out over the course of following week?
+#next couple days get increased 
