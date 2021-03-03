@@ -12,7 +12,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.dates import date2num
 import matplotlib.gridspec as gridspec
+import pickle
+from scipy.stats import invgauss
+
 #%%
+github_dir="c:\\Users\\cb5ye\\Desktop\\side_projects\\covidlab"
+
 #response datetime; taking others from 'RAW FILE POST-PROCESS COUNTS'
 plate_results = namedtuple("emailed_plate_results", ['Datetime',
                                                     'File',#day result name
@@ -44,8 +49,6 @@ def proc_gmail_export(email_dir):
         zf.close()
         os.remove(f'{base_dir}/{email_dir}')
         email_dir = email_dir[:-4]
-    mbox = mailbox.mbox(f"{base_dir}\{email_dir}\Takeout\Mail\covid_response_results.mbox")
-    
     file_re = re.compile("([a-zA-Z0-9\_]+\.xlsx) COVID test results counts")
     result_re = re.compile('Positive = (\d+)\n'\
                             'Negative = (\d+)\n'\
@@ -56,27 +59,50 @@ def proc_gmail_export(email_dir):
                             'Preliminary = (\d+)\n')
     #that result_re has fewer matches than file_re is correct, see: [c for c in content if len(re.findall(result_re, c)) ^ len(re.findall(file_re, c))]
     emails = []
-    for message in mbox:
-        content = get_email_body(message)
-        try:
-            dt = datetime.strptime(" ".join(message['date'].split(" ")[:5]),
-                                   "%a, %d %b %Y %X")
-            file = re.findall(file_re, content)[0]
-            values = re.findall(result_re, content)[0]
-            email = plate_results._make([dt, file, *map(int, values)])
-            emails += [email]
-        except Exception as e:
-            #non plate result emails 
-            pass
+    base_path = f"{base_dir}\{email_dir}\Takeout\Mail"
+    for mbox_name in os.listdir(base_path):#exports might be under multiple names
+        mbox = mailbox.mbox(f"{base_path}\{mbox_name}")
+        for message in mbox:
+            content = get_email_body(message)
+            try:
+                dt = datetime.strptime(" ".join(message['date'].split(" ")[:5]),
+                                       "%a, %d %b %Y %X")
+                file = re.findall(file_re, content)[0]
+                values = re.findall(result_re, content)[0]
+                email = plate_results._make([dt, file, *map(int, values)])
+                emails += [email]
+            except Exception as e:
+                #non plate result emails 
+                pass
     return emails
 
-# base_dir = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab"
-base_dir = "c:\\Users\\cb5ye\\Desktop\\side_projects\\covidlab"
-email_dir = max([i for i in os.listdir(base_dir) if 'takeout' in i],
-                    key = lambda p: int(p[8:16]))
-response_emails = proc_gmail_export(email_dir)
-email_responses = {i.File.replace(".xlsx", ""): i.Datetime for i in response_emails}
+def get_email_responses(github_dir=github_dir, newest = False, only_robot = True):
+    """"
+    newest: only return files from the most reccent takeout file
+    only_robot: When Got a robot on Jan 27, 21 the format for barcode files changed
+        only return the email responses for these files
+    """
+    if newest:
+        email_dir = max([i for i in os.listdir(base_dir) if 'takeout' in i],
+                        key = lambda p: int(p[8:16]))
+        response_emails = proc_gmail_export(email_dir)
+        email_responses = {i.File.replace(".xlsx", ""): i.Datetime for i in response_emails}
+    else:    
+        response_emails = []
+        for email_dir in [i for i in os.listdir(github_dir) if 'takeout' in i]:
+            response_emails += proc_gmail_export(email_dir)
+            email_responses = {i.File.replace(".xlsx", ""): i.Datetime for i in response_emails}
+    
+    if only_robot:
+        return {k:v for k,v in email_responses.items()
+                if v >= datetime(year=2021,month=1, day= 27)}
+    else:
+        print("WARNING: These files have a format that wont be adequalty mapped if use email_response2file_name")
+        return email_responses
+
+email_responses = get_email_responses()
 #%%
+folder_date_re = re.compile('\d{2}\.\d{2}\.\d{4}\-\d{2}\.\d{2}\.\d{4}')
 def _get_plate_files(folder_path = "Z:\ResearchData\BeSafeSaliva\BarcodeScan", prev_seen=set(), ending="."):
     """returns full path to all files of interest
     prev_seen: optional set of paths to be excluded
@@ -84,7 +110,6 @@ def _get_plate_files(folder_path = "Z:\ResearchData\BeSafeSaliva\BarcodeScan", p
     ending: string to check that the path contains [doesn't acctualy check this is the ending vs in path]
     """
     all_files = []
-    folder_date_re = re.compile('\d{2}\.\d{2}\.\d{4}\-\d{2}\.\d{2}\.\d{4}')
     for f_name,*files in os.walk(folder_path):
         if re.match(folder_date_re, f_name.split("\\")[-1]):
             for f_lst in files:
@@ -109,11 +134,72 @@ def email_response_file_mod(pretty = False):
         return {p: datetime.fromtimestamp(os.stat(p).st_mtime) 
                 for p in _get_plate_files(ending=".csv")}
     
-email_responses2 = email_response_file_mod()
-set(email_responses2.keys()).intersection(set(email_responses.keys())) #completely different format from described in email
-email_responses = email_responses2
+# email_responses2 = email_response_file_mod()
+# set(email_responses2.keys()).intersection(set(email_responses.keys())) #completely different format from described in email
+
+def email_responses2file_names(email_names, ret_path = True, base_dir = "Z:\ResearchData\BeSafeSaliva\BarcodeScan"):
+    """ dif formats for what is confirmed in email and what is saved in drive
+    map by the date of 
+    ret_path: if true returns full path, else just file name
+    Bad files: ['15_113344_Repeats_LB_M2', 'TR_2020_12_14_1112920_CRTDID_MH_CW', '2021_01_25_100905_REP_DL_M1', '02_112028_BABB_JH_M1_P3', '2021_02_02_141528_BABBBCBD_JH_M1_P5', 'TR_2021_0201_172136_BABBBCBD_JH_M1_P5', 'TR_2021_0201_192111_BABBBC_JH_M1_P7']
+    ret: {email_file_name: barcode_file_name}
+    """
+    #double check
+    # print(base_dir)
+    # print(1/0)
+    out = {}
+    for email_name in email_names:
+        path_dir = base_dir
+        try:
+            if email_name[:2] == "TR":
+                date = datetime.strptime("".join(email_name.split("_")[1:5]),
+                                         "%Y%m%d%H%M%S")
+                # return "".join(email_name.split("_")[5:])
+            else:
+                date = datetime.strptime("".join(email_name.split("_")[:4]),
+                                         "%Y%m%d%H%M%S")
+            plate_num = email_name[-1]#plate_num could be 'p' as part of a 'rep.csv'
+            if plate_num in ('W', 'H'):#every the ending for a valid barcode file
+                print("wont process since not an equivalent barcode file", email_name)
+                continue# return ""          
+                
+            if f"{date.year} all files and folders" in os.listdir(path_dir):
+                path_dir += f"\{date.year} all files and folders"
+            for wk_name in os.listdir(path_dir):
+                if re.match(folder_date_re, wk_name):
+                    start,end = [datetime.strptime(i, "%m.%d.%Y") 
+                                 for i in wk_name.split("-")]
+                    if start <= date and date <= end:
+                        path_dir += f"\{wk_name}"
+                        break
+            else:
+                print("No week folder for file: ", email_name)
+                continue    
+            for file in os.listdir(path_dir):
+                file_date = re.match("\A\d{4}_\d{2}_\d{2}", file)
+                # print(file_date, date)
+                if file_date and date.date() == datetime.strptime(file_date.group(),
+                                                           "%Y_%m_%d").date():
+                    if file.split(".")[0][-1] == plate_num:
+                        if ret_path:
+                            out[email_name] = f"{path_dir}\{file}"
+                        else:
+                            out[email_name] = file
+                        continue
+        except Exception as e:    
+            print("bad", email_name, e)
+            continue# return ""
+    return out
+
+d_email_responses2file_names = email_responses2file_names(email_responses)
+barcode_email_responses = {barcode: email_responses[email]
+                           for email, barcode in d_email_responses2file_names.items()}
+
+# valid_files = set(["".join(i.split("\\")[-1].split("_")[1:]).split(".")[0]  
+#                    for i in _get_plate_files()])
+# sum(email_response2file_name(i) in valid_files for i in email_responses.keys())
+# assert all(email_response2file_name(i) in valid_files for i in email_responses.keys()), "have files don't know how to map"
 #%%
-github_dir="c:\\Users\\cb5ye\\Desktop\\side_projects\\covidlab"
 barcode_re = re.compile("\d{9}-([A-Z0-9]+)-(\d{12})-\d{4}")
 def load_plate_barcodes(github_dir=github_dir):
     try:
@@ -187,7 +273,7 @@ def get_plate_barcodes(email_responses):
     plates_df = prev_df.append(pd.concat(every_plate))
     return plates_df
 
-plates_df = get_plate_barcodes(email_responses)
+plates_df = get_plate_barcodes(barcode_email_responses)
 # save_plate_barcodes(plates_df)
 # plates_df =  load_plate_barcodes()
 
@@ -384,41 +470,14 @@ def time_of_day(df, day =  None, n_trailing = 0):
         
 #modify axes to be more informative, grib
 
-# f = plates_df.groupby("date")['duration']
-# make_plots(f)
+f = plates_df.groupby("date")['duration']
+make_plots(f)
 # weekly_plot(plates_df, 
 #             wk_end = datetime(year = 2021, month= 2, day = 14),
 #             plot_result_dates = False)
 # trailing_plot(plates_df, end_day = datetime(year=2021, month = 2, day=14).date(), n_trailing = 2)
 # time_of_day(plates_df, day = datetime(year=2021, month = 2, day=14))
-#%%
-class plate_factory:
-    
-    base_dir = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab"
-    def __init__(self, base_dir = base_dir):
-        if "results_df" not in os.listdir(base_dir):
-            #first time setup 
-            response_emails = []
-            for email_dir in os.listdir(base_dir):
-                if 'takeout' in email_dir:
-                    response_emails += [proc_gmail_export(email_dir)]
-            email_responses = {i.File: i.Datetime for i in response_emails}
-            plates_df = get_plates(email_responses)
-            plates_df.to_pickle(f"{base_dir}\results_df")
-        else:
-            plates_df = pd.read_pickle(f"{base_dir}\results_df")
-        self.plates_df = plates_df
 
-with open("c:\\Users\\student.DESKTOP-UT02KBN\\Downloads\\credentials.json") as f:
-    print(f.readlines())
-
-def pred_test_response(admin_dt):
-    """given a datatime for when the test was administered predict when the result will be provided
-    """
-    pass
-
-def plates_per_day(df):
-    pass
 #%%
 from sklearn.preprocessing import OneHotEncoder, FunctionTransformer, StandardScaler
 from sklearn.compose import ColumnTransformer
@@ -566,11 +625,6 @@ cols_sep = ColumnTransformer(
                 remainder='drop'#'passthrough'
                 )
 
-# pipe = Pipeline([
-#             ("pre_procs", cols_sep),
-#             ('lin_reg', LinearRegression()),
-#             ])
-
 pipe = Pipeline([
             ("pre_procs", cols_sep),
             ("center", StandardScaler()),
@@ -592,30 +646,62 @@ pipe = Pipeline([
 
 # out = pipe.fit_transform(X.head(1000))
 # out[:5]
-pipe.fit(X_train, y_train)
-print(pipe.score(X_test, y_test))
+try:
+    with open(f"{github_dir}\model.p", 'rb') as f:
+        pipe = pickle.load(f)
+except:    
+    pipe.fit(X_train, y_train)
+    print(pipe.score(X_test, y_test))
+    with open(f"{github_dir}\model.p", 'wb') as f:
+        pickle.dump(pipe, f)
 #%% plots
-res = y_test.tail(100) - pipe.predict(X_test.tail(100))
+# res = y_test.tail(100) - pipe.predict(X_test.tail(100))
 # plt.scatter(y_test.tail(100) * np.timedelta64(1, 'D'), res * np.timedelta64(1, 'D'))
 # plt.xlabel("True")
 # plt.ylabel("residual")
+# plt.show()
 
 # plt.scatter(y_test.tail(100) * np.timedelta64(1, 'D'), pipe.predict(X_test.tail(100)) * np.timedelta64(1, 'D'))
 # plt.xlabel("True")
 # plt.ylabel("predicted")
 # plt.show()
 
-plt.hist(pipe.predict(X_test), density=True)# * np.timedelta64(1, 'D'))
-plt.title("Predicted Dist")
-plt.ylabel("Prob")
-plt.xlabel("Pred Value")
-plt.show()
-#%%
-import pickle
-with open(f"{github_dir}\model.p", 'wb') as f:
-    pickle.dump(pipe, f)
-with open(f"{github_dir}\model.p", 'rb') as f:
-    pipe2 = pickle.load(f)
+# plt.hist(pipe.predict(X_test), density=True)# * np.timedelta64(1, 'D'))
+# plt.title("Predicted Dist")
+# plt.ylabel("Prob")
+# plt.xlabel("Pred Value")
+# plt.show()
+
+res = y_test - pipe.predict(X_test)
+# plt.scatter(range(len(res)), sorted(res), s=0.1)
+# plt.show()
+ 
+def plot_pred_dist(dt=None, res = res[::10]):
+    "Monte carlos residuals and plots around mean of prediction"
+    if dt is None:
+        dt = datetime.now()
+    cur_x = pd.DataFrame({"barcode": ["nan"],
+                      "start_dt":[dt], 
+                      "time":[dt.time()],
+                      "date":[dt.date()], 
+                      })
+    loc = pipe.predict(cur_x)
+    #guessing here
+    mu = pipe['lin_reg'].get_params()['alpha']
+    plt.plot(loc, invgauss.pdf(loc, mu), 'r*')
+    # # x_axis = np.linspace(invgauss.ppf(0.01, mu),
+    # #                       invgauss.ppf(0.99, mu),
+    # #                       100)
+    # plt.plot(x_axis, invgauss.pdf(x_axis, mu),
+    #           'r-', lw=5, alpha=0.6, label='result pdf')
+    plt.hist(res + loc, density=True, bins=20)
+    plt.gca().set_xlim(0,5)
+    plt.title(f"Dist of Duration if tested at: {str(dt.strftime('%c'))[:-8]}")
+    plt.xlabel("Days")
+    plt.ylabel("Prob")
+    return 
+plot_pred_dist()
+
  #%%
 class gmail_archive_extra_helpers: 
     def unmatched_plates(email_responses):
@@ -772,3 +858,32 @@ def get_plates2(email_responses):
 # plates_df = get_plates(email_responses)
 #**is** what you want: what if Nov 3rd all plates are slow and spread out over the course of following week?
 #next couple days get increased 
+#%%
+class plate_factory:
+    
+    def __init__(self, base_dir = github_dir):
+        if "results_df" not in os.listdir(base_dir):
+            #first time setup 
+            response_emails = []
+            for email_dir in os.listdir(base_dir):
+                if 'takeout' in email_dir:
+                    response_emails += [proc_gmail_export(email_dir)]
+            email_responses = {i.File: i.Datetime for i in response_emails}
+            plates_df = get_plates(email_responses)
+            plates_df.to_pickle(f"{base_dir}\results_df")
+        else:
+            plates_df = pd.read_pickle(f"{base_dir}\results_df")
+        self.plates_df = plates_df
+
+with open("c:\\Users\\student.DESKTOP-UT02KBN\\Downloads\\credentials.json") as f:
+    print(f.readlines())
+
+def pred_test_response(admin_dt):
+    """given a datatime for when the test was administered predict when the result will be provided
+    """
+    pass
+
+def plates_per_day(df):
+    pass
+
+
