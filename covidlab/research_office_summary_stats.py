@@ -119,7 +119,11 @@ def get_result_df(researcher_names, n = 1600):
     Returns a DF of all tests
     """
     try:
-        pass
+        assert False, "There are no results for these researcher names"
+        fake_email_responses = email_response_file_mod(full_path = True)
+        result_df = get_plate_barcodes(fake_email_responses)
+        #have to attach results somehow here
+        #return result_df
     except:
         print("WARNING: RETURNING FAKE DATA! If this is expected only if not on a health systems desktop")
         result_df = r_test_df.head(n)[['barcode', 'date']].reset_index()
@@ -356,6 +360,7 @@ def _is_read_researchers():
         is_new_week = input("Should read or write to table sheet? (r/w):")
     return is_new_week in "Rr"
 
+#use update_sheet_w_agg if wanted to actually do this
 if __name__ == '__main__':
     #pull in from individuals results; which currently don't have access to
     #Manage pword stuff here
@@ -438,6 +443,7 @@ def update_sheet_w_agg():
     table_df.loc[1] = [datetime(year = 2021, month =2 , day = 21).date(), 0,	0,	0,	0,	0]
     table_df.sort_values("Date", inplace=True, ascending=False, axis=0)
     extra_w = [("H14", "unknown; not seperated in aggreagtes file")]
+    
     table_df.loc[7] = [datetime(year = 2021, month =2 , day = 15).date(), 3,	305,	1,	1,	10]
     
     file_path = "Z:/Research Testing/2021-02-22 Researcher COVID TestingCB - Copy.xlsx"

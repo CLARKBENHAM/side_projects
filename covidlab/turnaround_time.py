@@ -40,16 +40,16 @@ def get_email_body(message, decode=False):
         content = message.get_payload(decode=decode)
     return content
 
-def proc_gmail_export(email_dir):
+def proc_gmail_export(email_dir_name):
     "given directory to gmail exported archive of emails, "
     #Data is in the email body itself, not the attachments
     #max date takeout is taken
-    if email_dir[-4:] == ".zip":    
-        zf = ZipFile(f'{base_dir}/{email_dir}', 'r')
-        zf.extractall(f"{base_dir}/{email_dir[:-4]}")
+    if email_dir_name[-4:] == ".zip":    
+        zf = ZipFile(f'{github_dir}/{email_dir_name}', 'r')
+        zf.extractall(f"{github_dir}/{email_dir_name[:-4]}")
         zf.close()
-        os.remove(f'{base_dir}/{email_dir}')
-        email_dir = email_dir[:-4]
+        os.remove(f'{github_dir}/{email_dir_name}')
+        email_dir_name = email_dir_name[:-4]
     file_re = re.compile("([a-zA-Z0-9\_]+\.xlsx) COVID test results counts")
     result_re = re.compile('Positive = (\d+)\n'\
                             'Negative = (\d+)\n'\
@@ -60,7 +60,7 @@ def proc_gmail_export(email_dir):
                             'Preliminary = (\d+)\n')
     #that result_re has fewer matches than file_re is correct, see: [c for c in content if len(re.findall(result_re, c)) ^ len(re.findall(file_re, c))]
     emails = []
-    base_path = f"{base_dir}\{email_dir}\Takeout\Mail"
+    base_path = f"{github_dir}\{email_dir_name}\Takeout\Mail"
     for mbox_name in os.listdir(base_path):#exports might be under multiple names
         mbox = mailbox.mbox(f"{base_path}\{mbox_name}")
         for message in mbox:
@@ -84,7 +84,7 @@ def get_email_responses(github_dir=github_dir, newest = False, only_robot = True
         only return the email responses for these files
     """
     if newest:
-        email_dir = max([i for i in os.listdir(base_dir) if 'takeout' in i],
+        email_dir = max([i for i in os.listdir(github_dir) if 'takeout' in i],
                         key = lambda p: int(p[8:16]))
         response_emails = proc_gmail_export(email_dir)
         email_responses = {i.File.replace(".xlsx", ""): i.Datetime for i in response_emails}
@@ -101,7 +101,7 @@ def get_email_responses(github_dir=github_dir, newest = False, only_robot = True
         print("WARNING: These files have a format that wont be adequalty mapped if use email_response2file_name")
         return email_responses
 
-email_responses = get_email_responses()
+# email_responses = get_email_responses()
 #%%
 folder_date_re = re.compile('\d{2}\.\d{2}\.\d{4}\-\d{2}\.\d{2}\.\d{4}')
 def _get_plate_files(folder_path = "Z:\ResearchData\BeSafeSaliva\BarcodeScan", prev_seen=set(), ending="."):
@@ -121,23 +121,20 @@ def _get_plate_files(folder_path = "Z:\ResearchData\BeSafeSaliva\BarcodeScan", p
 
 path2file = lambda i: i.split("\\")[-1]#keep ending
 
-def email_response_file_mod(pretty = False):
+def email_response_file_mod(full_path = True):
     """explores directory Z:\ResearchData\BeSafeSaliva\BarcodeScan and 
         assigns file result time to when that plate was last modified.
     Fake Data: but close enough for explory.
     ?What is dif in .xlsm vs .csv? Seems to be none; will only use .csv
     """    
     print("FAKE DATA: email_response_file_mod")
-    if pretty:
+    if full_path:
+        return {p: datetime.fromtimestamp(os.stat(p).st_mtime) 
+                        for p in _get_plate_files(ending=".csv")}
+    else:
         return {path2file(p): datetime.fromtimestamp(os.stat(p).st_mtime) 
                 for p in _get_plate_files(ending=".csv")}
-    else:
-        return {p: datetime.fromtimestamp(os.stat(p).st_mtime) 
-                for p in _get_plate_files(ending=".csv")}
     
-# email_responses2 = email_response_file_mod()
-# set(email_responses2.keys()).intersection(set(email_responses.keys())) #completely different format from described in email
-
 def email_responses2file_names(email_names, ret_path = True, base_dir = "Z:\ResearchData\BeSafeSaliva\BarcodeScan"):
     """ dif formats for what is confirmed in email and what is saved in drive
     map by the date of 
@@ -192,9 +189,9 @@ def email_responses2file_names(email_names, ret_path = True, base_dir = "Z:\Rese
             continue# return ""
     return out
 
-d_email_responses2file_names = email_responses2file_names(email_responses)
-barcode_email_responses = {barcode: email_responses[email]
-                           for email, barcode in d_email_responses2file_names.items()}
+# d_email_responses2file_names = email_responses2file_names(email_responses)
+# barcode_email_responses = {barcode: email_responses[email]
+#                            for email, barcode in d_email_responses2file_names.items()}
 
 # valid_files = set(["".join(i.split("\\")[-1].split("_")[1:]).split(".")[0]  
 #                    for i in _get_plate_files()])
@@ -218,7 +215,7 @@ def get_plate_barcodes(email_responses):
 
     gets tests corresponding to email_responses from the health directory
         can get health dir only on desktop
-    email_responses {file: Datetime recieved}
+    email_responses {full_file_path: Datetime recieved}
     ret pd.Df  ['barcode', 'start_dt', 'time', 'date', 'duration', 'plate'] 
         time,date when started    
         finished_dt = duration + start_dt
@@ -244,7 +241,7 @@ def get_plate_barcodes(email_responses):
                                 )[['barcode']]
         except:#    NOTE: some files only have 1 column: the Barcode
             try:
-                plate = pd.read_csv(path, 
+                plate = pd.read_csv(path,  
                                 header=0,
                                 ).rename({ "BarCode Scan": "barcode", 
                                           "Barcode": 'barcode'}, 
@@ -274,10 +271,9 @@ def get_plate_barcodes(email_responses):
     plates_df = prev_df.append(pd.concat(every_plate))
     return plates_df
 
-plates_df = get_plate_barcodes(barcode_email_responses)
+# plates_df = get_plate_barcodes(barcode_email_responses)
 # save_plate_barcodes(plates_df)
 # plates_df =  load_plate_barcodes()
-
 #%%
 def _add_labels(ax, r_lst):
     """to barplots 
@@ -471,20 +467,31 @@ def time_of_day(df, day =  None, n_trailing = 0):
                               axis=1)
                      )['duration']
     fig = make_plots(grp)
-    fig.suptitle(f"Plots by Plate Completion Date", size="xx-large")#not centered, but don't know how to help
+    fig.suptitle(f"Plots by Plate Completion Date {day}", size="xx-large")#not centered, but don't know how to help
     
     fig.get_axes()[0].set_xlabel("Test Completion Date")
     fig.show()    
         
-#modify axes to be more informative, and to deal with grouping by hour. grib
-f = plates_df.groupby("date")['duration']
-# make_plots(f)
-weekly_plot(plates_df, 
-            wk_end = datetime(year = 2021, month= 2, day = 28),
-            plot_result_dates = False)
-#these are funky bc issue above
-# trailing_plot(plates_df, end_day = datetime(year=2021, month = 2, day=14).date(), n_trailing = 2)
-# time_of_day(plates_df, day = datetime(year=2021, month = 2, day=14))
+if __name__ == "main":
+    email_responses = get_email_responses()
+
+    d_email_responses2file_names = email_responses2file_names(email_responses)
+    barcode_email_responses = {barcode: email_responses[email]
+                               for email, barcode in d_email_responses2file_names.items()}
+    
+    plates_df = get_plate_barcodes(barcode_email_responses)
+    # save_plate_barcodes(plates_df)
+    # plates_df =  load_plate_barcodes()
+    
+    #modify axes to be more informative, and to deal with grouping by hour. grib
+    f = plates_df.groupby("date")['duration']
+    # make_plots(f)
+    weekly_plot(plates_df, 
+                wk_end = datetime(year = 2021, month= 2, day = 28),
+                plot_result_dates = False)
+    #these are funky bc issue above
+    # trailing_plot(plates_df, end_day = datetime(year=2021, month = 2, day=14).date(), n_trailing = 2)
+    # time_of_day(plates_df, day = datetime(year=2021, month = 2, day=14))
 
 #%%
 from sklearn.preprocessing import OneHotEncoder, FunctionTransformer, StandardScaler
@@ -789,7 +796,6 @@ class gmail_archive_extra_helpers:
         no .txt files exist without matching .xlsx file;
             .txt files weren't included until Dec 24th 2020
         """
-        #target_path = f'{base_dir}\{email_dir}'
         os.chdir(target_path)
         if "temp" not in target_path and "temp" not in os.listdir():
             os.mkdir("temp")
@@ -887,18 +893,18 @@ def get_plates2(email_responses):
 #%%
 class plate_factory:
     
-    def __init__(self, base_dir = github_dir):
-        if "results_df" not in os.listdir(base_dir):
+    def __init__(self):
+        if "results_df" not in os.listdir(github_dir):
             #first time setup 
             response_emails = []
-            for email_dir in os.listdir(base_dir):
+            for email_dir in os.listdir(github_dir):
                 if 'takeout' in email_dir:
                     response_emails += [proc_gmail_export(email_dir)]
             email_responses = {i.File: i.Datetime for i in response_emails}
             plates_df = get_plates(email_responses)
-            plates_df.to_pickle(f"{base_dir}\results_df")
+            plates_df.to_pickle(f"{github_dir}\results_df")
         else:
-            plates_df = pd.read_pickle(f"{base_dir}\results_df")
+            plates_df = pd.read_pickle(f"{github_dir}\results_df")
         self.plates_df = plates_df
 
 with open("c:\\Users\\student.DESKTOP-UT02KBN\\Downloads\\credentials.json") as f:
