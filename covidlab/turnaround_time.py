@@ -476,14 +476,13 @@ def time_of_day(df, day =  None, n_trailing = 0):
     fig.get_axes()[0].set_xlabel("Test Completion Date")
     fig.show()    
         
-#modify axes to be more informative, grib
-
+#modify axes to be more informative, and to deal with grouping by hour. grib
 f = plates_df.groupby("date")['duration']
 # make_plots(f)
 weekly_plot(plates_df, 
-            wk_end = datetime(year = 2021, month= 2, day = 14),
+            wk_end = datetime(year = 2021, month= 2, day = 28),
             plot_result_dates = False)
-#these are funky
+#these are funky bc issue above
 # trailing_plot(plates_df, end_day = datetime(year=2021, month = 2, day=14).date(), n_trailing = 2)
 # time_of_day(plates_df, day = datetime(year=2021, month = 2, day=14))
 
