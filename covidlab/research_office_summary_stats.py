@@ -345,9 +345,7 @@ def recieve(dir_path, pword, data_name = "uids.p"):
     
 dir_path = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab"
 send(dir_path, uids, pword)
-#temp
-
-# git_pull()
+git_pull()
 #%%   
 def _is_personal_laptop():
     return os.path.exists("c:\\Users\\student.DESKTOP-UT02KBN")
