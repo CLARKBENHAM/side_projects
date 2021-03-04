@@ -285,9 +285,8 @@ def update_ro_weekly_sheet_summary(table_df, file_path, extra_writes = [], r_off
 import git
 from git import Repo
 
-
+PATH_OF_GIT_REPO = r'C:\Users\student.DESKTOP-UT02KBN\Desktop\side_projects\.git'  # make sure .git folder is properly configured
 def git_push():
-    PATH_OF_GIT_REPO = r'C:\Users\student.DESKTOP-UT02KBN\Desktop\side_projects\.git'  # make sure .git folder is properly configured
     COMMIT_MESSAGE = 'comment from python script'
     try:
         repo = Repo(PATH_OF_GIT_REPO)
@@ -297,7 +296,16 @@ def git_push():
         origin.push()
     except:
         print('Some error occured while pushing the code') 
-        
+
+def git_pull():
+    try:
+        repo = Repo(PATH_OF_GIT_REPO)
+        # repo.git.pull(update=True)
+        # repo.index.commit(COMMIT_MESSAGE)
+        origin = repo.remote(name='origin')
+        origin.pull()
+    except:
+        print('Some error occured while pushing the code')    
 def send(dir_path, data, pword, data_name = "uids.p"):
     """
     Have to use a hack since have access on health data and researchers on diff computers
@@ -314,7 +322,6 @@ def send(dir_path, data, pword, data_name = "uids.p"):
         token = f.encrypt(data.encode("utf-8"))
         with open(dir_path + data_name, 'wb') as file:
             file.write(token)
-    # g = git.cmd.Git(dir_path)
     git_push()
     
 def recieve(dir_path, pword, data_name = "uids.p"):
@@ -323,8 +330,7 @@ def recieve(dir_path, pword, data_name = "uids.p"):
     dir_path: directory to save within
     data: string
     """
-    g = git.cmd.Git(dir_path)
-    g.pull()
+    git_pull()
     if pword == "":
         with open(f"{dir_path}\{data_name}", 'rb') as file:
                 out = pickle.load(file)
@@ -339,8 +345,8 @@ def recieve(dir_path, pword, data_name = "uids.p"):
     
 dir_path = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab"
 send(dir_path, uids, pword)
-g = git.cmd.Git(dir_path)
-g.push()
+
+# git_pull()
 #%%   
 def _is_personal_laptop():
     return os.path.exists("c:\\Users\\student.DESKTOP-UT02KBN")
