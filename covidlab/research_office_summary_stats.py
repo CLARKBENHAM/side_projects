@@ -14,9 +14,12 @@ import pandas as pd
 from datetime import timedelta
 
 import openpyxl
-
 from win32com.client.gencache import EnsureDispatch
 
+from cryptography.fernet import Fernet
+import base64
+import pickle
+#%%
 
 def remove_password_xlsx(file_path, pw_str):
     "wb.SaveAs doesn't work with / only \ as the seperator"
@@ -46,6 +49,7 @@ def add_password_xlsx(file_path, pw_str):
     xlwb.SaveAs(file_path, Password = pw_str)
     xlwb.Close()
     xlApp.Quit()
+   
     
 def import_ro_weekly_sheet(file_path, ret_filtered = True):
     """imports who has tested from the Research office's weekly excel sheet
@@ -110,27 +114,33 @@ def import_ro_weekly_sheet(file_path, ret_filtered = True):
     r_test_df = r_test_df[r_test_df['computing_id'].isin(valid_ids)]
     return r_test_df
     
-def get_result_df(n = 1600):
+def get_result_df(researcher_names, n = 1600):
     """TEMP. 
     Returns a DF of all tests
     """
-    result_df = r_test_df.head(n)[['barcode', 'date']].reset_index()
-    
-    result_df['result'] = pd.Series(["Positive"]*(n//10) 
-                                    + ['Invalid']*(n//10) 
-                                    + ['Negative']*(n*7//10) 
-                                    + ['Inconclusive']*(n//10))
-    result_df.loc[result_df['result'].isna(), 'result'] = 'Inconclusive'
-    result_df.index = result_df['barcode']
-    del result_df['barcode']
-    return result_df
+    try:
+        pass
+    except:
+        print("WARNING: RETURNING FAKE DATA! If this is expected only if not on a health systems desktop")
+        result_df = r_test_df.head(n)[['barcode', 'date']].reset_index()
+        
+        result_df['result'] = pd.Series(["Positive"]*(n//10) 
+                                        + ['Invalid']*(n//10) 
+                                        + ['Negative']*(n*7//10) 
+                                        + ['Inconclusive']*(n//10))
+        result_df.loc[result_df['result'].isna(), 'result'] = 'Inconclusive'
+        result_df.index = result_df['barcode']
+        del result_df['barcode']
+        return result_df
 
 def lask_week_sun_wrap():
     "the plate that was collected a week ago, but tested this weeks monday. Will be subtracted from this weeks total"           
+    print("INTRODUCING FAKE DATA, last_week_sun_wrap")       
     return [5,600,7,8]
     
 def next_week_sun_wrap():
-    "the plate that was collected this, but tested next this weeks monday. Will be add to this weeks total"           
+    "the plate that was collected this, but tested next this weeks monday. Will be add to this weeks total"    
+    print("INTRODUCING FAKE DATA, next_week_sun_wrap")       
     return [5,600,7,8]
 
 def get_result_aggregates_df(date = None, last_week = True):
@@ -191,21 +201,15 @@ def get_result_aggregates_df(date = None, last_week = True):
         df =  df[df['Date'].between(wk_start, wk_end, inclusive=True)]
     return df
 
-def make_table_df(r_test_df, result_df):#confirm nessisary? #GRIB
+def make_table_df(out_df):#confirm nessisary? #GRIB
     """merge to produce table with barcode of test and result df
     r_test_df: data about researcher imported from same sheet as will modify
     results_df: df[barcode] to uid research and df[result] to place in table
         results in ['Positive', 'Negative', 'Inconclusive', 'Invalid', 'NotTested']
     ret: table_df as should be written dates by results [cols]
         includes the offset/dealing with wrapping around sunday collection
-    """
-    out_df = r_test_df.merge(result_df, on="barcode", how='left').dropna(subset=["result"], axis=0)
-    #date_y is recieved results, date_x is took test
-    if len(out_df) < len(r_test_df):
-        # out_df.loc[out_df['result'].isna(), 'result'] = 'Notfound'
-        print(f"!!There are {len(r_test_df) - len(out_df)} missing tests!!")
-     
-    table_vals = out_df.loc[:,['result', 'date_y']].groupby(['result', 'date_y']).size()
+    """     
+    table_vals = out_df.loc[:,['result', 'date']].groupby(['result', 'date']).size()
     table_vals.index = table_vals.index.set_names(['result', 'date'])
     table_header = ['Positive', 'Negative', 'Invalid', 'Inconclusive', 'NotTested']
     table_rows = list(sorted(out_df.date_y.unique()))
@@ -250,8 +254,8 @@ def update_ro_weekly_sheet_summary(table_df, file_path, extra_writes = [], r_off
         wb = openpyxl.load_workbook(filename=file_path, keep_vba=False)
     sh = wb['Summary']
     for r in range(8,15):
-        r += r_offset
-        r_ix = r-8 - r_offset
+        r += r_offset#sheet
+        r_ix = r-8 - r_offset#df ix
         for c in range(6):
             if type(table_df.iloc[r_ix,c]).__module__ == 'numpy':
                 sh[f"{chr(65+c)}{r}"] = int(table_df.iloc[r_ix,c])#can't write np datatypes
@@ -278,28 +282,122 @@ def update_ro_weekly_sheet_summary(table_df, file_path, extra_writes = [], r_off
     wb.save(file_path)
 
 #%%
+import git
+from git import Repo
+
+PATH_OF_GIT_REPO = r'C:\Users\student.DESKTOP-UT02KBN\Desktop\side_projects\.git'  # make sure .git folder is properly configured
+def git_push():
+    COMMIT_MESSAGE = 'comment from python script'
+    try:
+        repo = Repo(PATH_OF_GIT_REPO)
+        repo.git.add(update=True)
+        repo.index.commit(COMMIT_MESSAGE)
+        origin = repo.remote(name='origin')
+        origin.push()
+    except:
+        print('Some error occured while pushing the code') 
+
+def git_pull():
+    try:
+        repo = Repo(PATH_OF_GIT_REPO)
+        # repo.git.pull(update=True)
+        # repo.index.commit(COMMIT_MESSAGE)
+        origin = repo.remote(name='origin')
+        origin.pull()
+    except:
+        print('Some error occured while pushing the code')    
+def send(dir_path, data, pword, data_name = "uids.p"):
+    """
+    Have to use a hack since have access on health data and researchers on diff computers
+    dir_path: directory to save within
+    data: string
+    """
+    if pword == "":
+        with open(f"{dir_path}\{data_name}", 'wb') as file:
+            pickle.dump(data, file)
+    else:
+        pword = "0"*(32-len(pword)) + pword
+        pword = base64.b64encode(pword.encode("utf-8"))
+        f = Fernet(pword)
+        token = f.encrypt(data.encode("utf-8"))
+        with open(dir_path + data_name, 'wb') as file:
+            file.write(token)
+    git_push()
+    
+def recieve(dir_path, pword, data_name = "uids.p"):
+    """
+    Have to use a hack since have access on health data and researchers on diff computers
+    dir_path: directory to save within
+    data: string
+    """
+    git_pull()
+    if pword == "":
+        with open(f"{dir_path}\{data_name}", 'rb') as file:
+                out = pickle.load(file)
+        return out
+    else:
+        pword = "0"*(32-len(pword)) + pword
+        pword = base64.b64encode(pword.encode("utf-8"))
+        f = Fernet(pword)
+        with open(dir_path + data_name, 'rb') as file:
+            token = file.read()
+        return f.decrypt(token)
+    
+dir_path = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab"
+send(dir_path, uids, pword)
+git_pull()
+#%%   
+def _is_personal_laptop():
+    return os.path.exists("c:\\Users\\student.DESKTOP-UT02KBN")
+
+def _is_read_researchers():
+    is_new_week = ""
+    while is_new_week not in "RrWw":
+        is_new_week = input("Should read or write to table sheet? (r/w):")
+    return is_new_week in "Rr"
+
 if __name__ == '__main__':
     #pull in from individuals results; which currently don't have access to
     #Manage pword stuff here
-    dir_path = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab\\hide"
-    file_name = max([i for i in os.listdir(dir_path) if re.match("\A\d{4}-\d{2}-\d{2}",i)],
-                        key = lambda i: datetime.strptime(i[:10], "%Y-%m-%d"))
-    file_path = dir_path + "\\" +file_name
-    add_pword = False
-    try:
-        r_test_df = import_ro_weekly_sheet(file_path)
-    except:
-        pword = input("password string for excel sheet: ")
-        remove_password_xlsx(file_path, pword)
-        add_pword = True
-        r_test_df = import_ro_weekly_sheet(file_path)
-    result_df = get_result_df()    
-    table_df = make_table_df(r_test_df, result_df)    
-    update_ro_weekly_sheet_summary(table_df, file_path)
-    if add_pword:  
-        add_password_xlsx(file_path, pword)
-#%% 
-def update_sheet_wagg():
+    is_laptop = _is_personal_laptop()
+    if is_laptop:
+        is_read = _is_read_researchers()
+        sheet_path = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab\\hide"
+        file_name = max([i for i in os.listdir(dir_path) if re.match("\A\d{4}-\d{2}-\d{2}",i)],
+                            key = lambda i: datetime.strptime(i[:10], "%Y-%m-%d"))
+        file_path = sheet_path + "\\" +file_name
+        dir_path = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab"
+        if is_read:        
+            pword = input("password string for excel sheet: ")
+            remove_password_xlsx(file_path, pword)
+            r_test_df = import_ro_weekly_sheet(file_path)
+            uids = " ".join(r_test_df['computing_id'].unique())
+            uid_pword = input("password for UIDs: ")
+            date = datetime.strptime(file_name[:10], "%Y-%m-%d")
+            date_range = (date - timedelta(days=7)).strftime("%Y-%m-%d") \
+                            + "," + date.strftime("%Y-%m-%d")
+            send(dir_path, uids + "}{" + date_range, uid_pword, data_name = "uids.p")
+        else:#is write
+            table_df = recieve(dir_path, "", data_name = "table_df")
+            update_ro_weekly_sheet_summary(table_df, file_path)
+            pword = input("adding back password string for excel sheet: ")
+            add_password_xlsx(file_path, pword)
+    else:
+        result_df = get_result_df()    
+        uid_pword = input("password for UIDs: ")
+        uids, date_range = recieve(dir_path, uids, uid_pword, data_name = "uids.p"
+                                   ).split("}{")
+        uids = set(uids.split(" "))
+        date_st, _ = (datetime.strptime(i, "%Y-%m-%d") 
+                             for i in date_range.split(","))#date test was submited
+        ix = result_df.apply(lambda r: r['uid'].upper() in uids 
+                                       and r['date'] >= date_st,#r['date'] is date test completed, 
+                            axis=1)
+        out_df = result_df[ix][['result', 'date']]
+        table_df = make_table_df(out_df)    
+        send(dir_path, table_df, "", data_name = "table_df")
+#%%
+def update_sheet_w_agg():
     "updates the table w/o the sun-mon wrap; + ans week specific query"
     def _numeric_query(update_sheet, info_sheet):
         """Wanted to know number of researchers in ReviewFeb15.21.xlsx
