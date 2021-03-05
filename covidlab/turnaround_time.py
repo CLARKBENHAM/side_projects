@@ -101,7 +101,7 @@ def get_email_responses(github_dir=github_dir, newest = False, only_robot = True
         print("WARNING: These files have a format that wont be adequalty mapped if use email_response2file_name")
         return email_responses
 
-# email_responses = get_email_responses()
+email_responses = get_email_responses()
 #%%
 folder_date_re = re.compile('\d{2}\.\d{2}\.\d{4}\-\d{2}\.\d{2}\.\d{4}')
 def _get_plate_files(folder_path = "Z:\ResearchData\BeSafeSaliva\BarcodeScan", prev_seen=set(), ending="."):
@@ -191,13 +191,13 @@ def email_responses2file_names(email_names, ret_path = True, base_dir = "Z:\Rese
 
 # d_email_responses2file_names = email_responses2file_names(email_responses)
 # barcode_email_responses = {barcode: email_responses[email]
-#                            for email, barcode in d_email_responses2file_names.items()}
+#                             for email, barcode in d_email_responses2file_names.items()}
 
 # valid_files = set(["".join(i.split("\\")[-1].split("_")[1:]).split(".")[0]  
-#                    for i in _get_plate_files()])
+#                     for i in _get_plate_files()])
 # sum(email_response2file_name(i) in valid_files for i in email_responses.keys())
 # assert all(email_response2file_name(i) in valid_files for i in email_responses.keys()), "have files don't know how to map"
-#%%
+
 barcode_re = re.compile("\d{9}-([A-Z0-9]+)-(\d{12})-\d{4}")
 def load_plate_barcodes(github_dir=github_dir):
     try:
@@ -272,7 +272,131 @@ def get_plate_barcodes(email_responses):
     return plates_df
 
 # plates_df = get_plate_barcodes(barcode_email_responses)
-# save_plate_barcodes(plates_df)
+#%%
+def sep_wkend(plates_df, email_responses, fixed_gap = True):
+    """
+    There's downtime over the weekend that we'd want to adjust for
+    fixed_gap: 3pm collection on Fri to 8 am Mon is 63 hours
+                5pm sat is 39 hours
+    ret (weekday plates, plates that are collected on Friday but then sit over the weekend)
+    #the collection time is Friday but was finished on (?monday, but sometimes on Saturday)
+    """    
+
+
+    # did_sit = plates_df.apply(lambda r: r['start_dt'] ,axis=1)
+    week_monday = plates_df.apply(lambda r: r['date'] - r['date'].weekday() ,axis=1)
+    fridays = plates_df[plates_df['date'].apply(weekday) == 5]#plates submitted Friday
+    # finished_dt = plates_df['duration'] + plates_df['start_dt']
+    last_friday_plates = fridays.groupby(week_monday
+                                         ).apply(lambda g: max(g,  
+                                                        key = lambda i: i['duration'] + i['start_dt']
+                                                            )['plate'])#1 sample could be finished much latter
+#but Feb 27th ran on saturday!?!, add check  
+#also missing 2 weekends
+email_responses = barcode_email_responses
+sorted_plates, _ = zip(*sorted(email_responses.items(), 
+                                key=lambda item: item[1]))
+fridays = pd.Series(dict(sorted([(k,v) for k,v in email_responses.items() 
+                               if v.weekday() == 5],
+                          key=lambda item: item[1])))
+last_friday_dates = fridays.groupby(
+                    fridays.apply(lambda i: i.date() - timedelta(days=i.weekday()))#group by week
+                            ).apply(max)
+last_fridays = last_friday_dates.apply(lambda i: 
+                                       fridays.index[fridays.apply(lambda j: j==i)][0])#[k for k,v in fridays.items() if v in last_friday_dates]
+after_friday = [sorted_plates[ix+1] 
+                for ix, plate in enumerate(sorted_plates)
+                if plate in last_fridays.values]
+
+plates2num = lambda k,k2: (email_responses[k] - email_responses[k2]).total_seconds()/(24*60*60)
+wkend_gaps = [plates2num(k1,k2)
+                  for k1,k2 in zip(last_fridays, after_friday)]
+all_gap = [plates2num(k2,k1)
+               for k1,k2 in zip(sorted_plates[:-1], sorted_plates[1:])
+               if email_responses[k1].date() < email_responses[k2].date()]
+avg_gap = (sum(all_gap) - sum(wkend_gaps))/(len(all_gap) - len(wkend_gaps))
+wkend_norm_gaps = [i - sum(wkend_gaps) + avg_gap for i in wkend_gaps]
+
+
+#most reccent sample collected for given plate
+latest_element = plates_df[['start_dt', 'plate']].groupby("plate").apply(max)
+latest_element_mo = latest_element[latest_element.apply(lambda r: r[0].weekday() == 0, axis=1)]
+#largest start_dt of earliest monday run plate with >=1 monday collection time
+new_wk_dates = latest_element_mo.groupby(
+                            latest_element_mo.apply(lambda i: i[0].date(),axis=1)
+                            ).apply(lambda g: min(g['start_dt']))
+#monday plates before this are wholly from other collections. 
+#Issue of combining samples from multiple days on 1 plate? do it by sample
+
+# new_wk_collection = latest_element[latest_element['start_dt'].isin(new_wk_dates.values)]['plate'].values
+plates2norm = [k for k,v in email_responses.items() 
+                   for ix in range(min(len(new_wk_dates), len(after_friday)))
+                       if v <= new_wk_dates[ix] and v >= after_friday[ix]]#wrong
+
+#Just use as dividers?
+#%%
+
+
+
+mon_by_wk = plates_df[plates_df.apply(lambda r: r['start_dt'].weekday() == 0,
+                                      axis=1)
+                      ].groupby("date")
+first_wk_collec = mon_by_wk['start_dt'].apply(min)#first collection dt of new week
+
+def _wk_st_partition(i):
+    """partitions by samples by the earliest sample collected on monday is start of new week"""
+    return sum(first_wk_collec.ge(i))
+
+plates_df_bywk = plates_df.groupby(
+                                plates_df['start_dt'].apply(_wk_st_partition)
+                                   )
+# n = len(plates_df_bywk) - 1
+# if len(plates_df_bywk[n]) <= 2:
+#     del plates_df_bywk.indices[m]
+
+#%%
+#doesn't work if have to find cutoff for this friday (there's no monday to make an end yet)
+new_week = plates_df_bywk.apply(lambda grp:
+                                grp.iloc[grp['start_dt'].values.argmin()])#non-unqiue index
+    #but index isn't unique!!
+plate_finish = lambda r: r['start_dt'] + r['duration']
+old_week_plate_max_finish = new_week.apply(lambda r: plate_finish(r) - timedelta(hours=10),
+                                           axis=1)
+# old_week_plate_max_finish.sort_values(ascending=True, inplace=True)       
+old_week_plate_max_finish.drop(len(old_week_plate_max_finish)-1, inplace=True)#smallest at largest ix
+#errors if the cutoff for this and last week should differ
+# print(old_week_plate_max_finish)
+old_week_plate_max_finish[-1] = max(old_week_plate_max_finish) + timedelta(days=7)
+
+
+# old_week_plate_max_finish.index = range(-1, len(old_week_plate_max_finish)-1)
+old_week_plate_finish = plates_df_bywk[:-1].apply(lambda grp: 
+                                             max(grp['start_dt']\
+                                                 [grp['start_dt'] + grp['duration'] <= old_week_plate_max_finish[grp.name-1]
+                                                  ]))
+
+#0 is oldest, hopefully
+# first_wk_collec.sort_values(ascending=False)
+
+def _wkend_st_partition(grp, is_weekend=True):
+    """returns 0 if during the week, 1 if after the weekend cutoff
+    any sample not making the last plate run at least 10 hours before 
+    the first plate of new week is part of the cutoff. 
+    (have to deal with possible sat's; monday plates including both Fri and Mon collections)
+    """
+    ix = grp.name
+    e = old_week_plate_finish[ix]
+    weekend = grp[grp['start_dt'] >= e]
+    weekday =  grp[grp['start_dt'] < e]
+    if is_weekend:
+        return weekend
+    else:
+        return weekday
+
+weekends = plates_df_bywk.apply(lambda grp: _wkend_st_partition(grp,
+                                                                is_weekend=True))
+weekdays = plates_df_bywk.apply(lambda grp: _wkend_st_partition(grp,
+                                                                is_weekend=False))# save_plate_barcodes(plates_df)
 # plates_df =  load_plate_barcodes()
 #%%
 def _add_labels(ax, r_lst):
@@ -472,7 +596,7 @@ def time_of_day(df, day =  None, n_trailing = 0):
     fig.get_axes()[0].set_xlabel("Test Completion Date")
     fig.show()    
         
-if __name__ == "main":
+if __name__ == "__main__":
     email_responses = get_email_responses()
 
     d_email_responses2file_names = email_responses2file_names(email_responses)
