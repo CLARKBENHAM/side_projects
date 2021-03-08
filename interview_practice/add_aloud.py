@@ -124,7 +124,7 @@ def hidden_math(argv, kwargs, num_qs = None, num_lines = 40):
 #                                     'difficulty': 'hard',
 #                                     'negatives': False,
 #                                     'num_decimal_digits': 0})
-hidden_math([(13, 99), (13, 99)], {'tp': ("*"), 'difficulty': 'hard'}, num_lines = 40)
+hidden_math([(13, 99), (13, 50)], {'tp': ("*"), 'difficulty': 'hard'}, num_lines = 40)
 
 # hidden_math([(13, 99), (13, 99)], {'tp': ("/"), 'difficulty': 'hard'}, num_qs = 3)
 #%%
