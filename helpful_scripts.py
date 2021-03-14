@@ -1,6 +1,7 @@
 """
 import .ipynb jupter notebooks from other directories: vk1
 encrypted and decrypt files, send and recieve with git: vk2
+
 """
 #vk1
 from IPython import get_ipython
