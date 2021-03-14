@@ -3,3 +3,6 @@
 **/gpt3_website
 **/temp
 **/hide
+#anything not in top level dir is personal data
+Self_Tracking/*.zip
+Self_Tracking/*/* 
