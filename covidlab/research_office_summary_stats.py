@@ -310,6 +310,7 @@ def git_pull():
         origin.pull()
     except:
         print('Some error occured while pushing the code')    
+        
 def send(dir_path, data, pword, data_name = "uids.p"):
     """
     Have to use a hack since have access on health data and researchers on diff computers
