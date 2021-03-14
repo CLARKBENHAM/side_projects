@@ -18,8 +18,6 @@ with open(f"{github_dir}\\Self_Tracking\\{cal_zip}",'rb') as f:
 pword = input("Pword to encrypt Calendar: ")
 enfolder = f"encrypt_calendar-{cal_zip.split('-')[1]}"
 data_path = f"{github_dir}\\Self_Tracking\\{enfolder}"
-# as_str = contents.decode('latin1') #grib, need to invert this step
-# as_str = contents.decode('utf-8') #grib, need to invert this step
 send(data_path, contents, pword, COMMIT_MESSAGE = 'calendar update')
 
 # encrypt(cal_zip)
@@ -31,31 +29,18 @@ defolder = f"calendar-{cal_zip.split('-')[1]}"
 data_path = f"{github_dir}\\Self_Tracking\\{enfolder}"
 with open(f"{github_dir}\\Self_Tracking\\{defolder}.zip",'wb') as f:
     zip_str = recieve(data_path, pword)
-    #zip_str.decode('utf-8') == str(contents)
-    f.write(zip_str) #invert back to as_str
+    f.write(zip_str)
     
 #%% process
 os.chdir(f"{github_dir}\\Self_Tracking")
-# shutil.unpack_archive(f"{defolder}.zip", "unzipped")
-# os.rename("unzipped\\Takeout\\Calendar", defolder)
+shutil.unpack_archive(f"{defolder}.zip", "unzipped")
+os.rename("unzipped\\Takeout\\Calendar", defolder)
 for f in os.listdir(defolder):
     print(f)
+#other proc
 shutil.rmtree("unzipped")
 shutil.rmtree(defolder)
 #%%
 
 
 
-
-
-del send
-github_dir = "c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects"
-os.chdir(github_dir)
-from helpful_scripts import *
-
-# pword = input("Pword to decrypt Calendar: ")
-# data_path = f"{github_dir}\\Self_Tracking\\{folder}"
-# with open(f"{github_dir}\\Self_Tracking\\{defolder}",'wb') as f:
-#     f.write(recieve(data_path, pword))
-    
-    
