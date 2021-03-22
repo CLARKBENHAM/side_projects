@@ -282,6 +282,7 @@ def get_plate_barcodes(email_responses):
         plate['date'] = plate['start_dt'].apply(lambda i: i.date())
         plate['duration'] = plate['start_dt'].apply(lambda i: finished_dt - i)
         plate['plate'] = path2file(path)
+        plate['finish_dt'] = finished_dt
         every_plate += [plate]                
     plates_df = prev_df.append(pd.concat(every_plate))
     bad_ix = plates_df['duration'] < timedelta(hours=0)
@@ -304,6 +305,8 @@ def sep_wkends(plates_df):
     but aren't processed till at least monday.
     ret(exlc, )
     """
+    if 'finish_dt' not in plates_df.columns:#side effecting
+        plates_df['finish_dt'] = plates_df['start_dt'] + plates_df['duration']
     make_mon = lambda i: i.date() - timedelta(days=i.date().weekday())
     is_wkend = plates_df.apply(lambda r: make_mon(r['finish_dt']) > make_mon(r['start_dt'])\
                                                  and r['start_dt'].weekday() not in (6,),
@@ -372,8 +375,8 @@ def make_plots(grp):
     ax.plot(daily_avg.index, 
             [max(i,0) for i in daily_avg.values -2*daily_std],
             'r--',
-            label = "lower 2SD of mean")
-    ax.plot(daily_avg.index, daily_avg.values + 2*daily_std, 'r--', label = "upper 2SD of mean")
+            label = "mean - 2SD of day")
+    ax.plot(daily_avg.index, daily_avg.values + 2*daily_std, 'r--', label = "mean + 2SD of day")
     ax.legend()
     ax.set_ylabel("days till completion")
     ax.set_xlabel("Test Collection Date")
@@ -511,9 +514,10 @@ def time_of_day(df, day =  None, n_trailing = 0):
     fig.get_axes()[0].set_xlabel("Test Completion Date")
     fig.show()   
     
-def _check_weekday_vs_end(weekends, weekdays):
-    "visual inspect seperation"
-    print(sum(weekends['duration'] < timedelta(hours=10)))
+def _check_weekday_vs_end(weekdays,weekends):
+    "visually inspect seperation"
+    print("Weekend samples w duration < 10 hours: ", 
+          sum(weekends['duration'] < timedelta(hours=10)))
     plt.scatter(weekends['start_dt'],
                 weekends['duration']/np.timedelta64(1,"D"),
                 label="weekends: samples held unprocessed")#s=0.3)
@@ -527,7 +531,9 @@ def _check_weekday_vs_end(weekends, weekdays):
         plt.axvline(x=date2num(d))
     plt.xlabel("collection date")
     plt.ylabel("days duration")
-    plt.suptitle("Collection Date vs. Duration")
+    plt.suptitle("Collection Date vs. Duration", size='xx-large')
+    plt.title("Collected on or before saturday but aren't processed till at least monday", 
+                 size="large")
     plt.legend()
     plt.show()
     
@@ -548,8 +554,12 @@ def plot_weekday_vs_end(weekdays, weekends):
     normalized = weekdays.append(weekends)
     fig_normalized = make_plots(normalized.groupby("date")['duration'])
     fig_normalized.suptitle("Duration with weekend samples normalized ", size="xx-large")
+    
     weekends['duration'] = dur
     fig_normalized.show()
+
+weekdays, weekends = sep_wkends(plates_df)
+_check_weekday_vs_end(weekdays, weekends)
 
 #%%
 if __name__ == "__main__":
@@ -573,7 +583,7 @@ if __name__ == "__main__":
     # trailing_plot(plates_df, end_day = datetime(year=2021, month = 2, day=14).date(), n_trailing = 2)
     # time_of_day(plates_df, day = datetime(year=2021, month = 2, day=14))
     weekdays, weekends = sep_wkends(plates_df)
-    _check_weekday_vs_end(weekends, weekdays)
+    _check_weekday_vs_end(weekdays, weekends)
     plot_weekday_vs_end(weekdays, weekends)
 #%%
 from sklearn.preprocessing import OneHotEncoder, FunctionTransformer, StandardScaler
