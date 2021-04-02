@@ -1,7 +1,7 @@
 """
 import .ipynb jupter notebooks from other directories: vk1
 encrypted and decrypt files, send and recieve with git: vk2
-
+memoize cache results, excluding unfilterable results: vk3
 """
 #vk1
 from IPython import get_ipython
@@ -98,4 +98,28 @@ def recieve(data_path, pword):
         return f.decrypt(token)#.decode('utf-8')
 #%%
 
+from functools import lru_cache#doesn't work for nonhashable fns
+import collections
 
+def memoize(func):
+    """incase potentially have unhashable inputs and need to filter out
+    """
+    mx_size = 32
+    cache = dict()
+    lru_l = []
+    def memoized_func(*args, **kwargs):
+        vrs_tup = tuple(list(args) + list(kwargs.keys()) + list(kwargs.values()))
+        if not all(isinstance(i, collections.Hashable) for i in vrs_tup):
+            return func(*args, **kwargs)
+        
+        if vrs_tup in cache:
+            return cache[vrs_tup]
+        result = func(*args, **kwargs)
+        cache[vrs_tup] = result
+        nonlocal lru_l, mx_size
+        lru_l += [vrs_tup]
+        if len(lru_l) > mx_size:
+            first = lru_l.pop(0)
+            del cache[first]
+        return result
+    return memoized_func 
