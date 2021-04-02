@@ -15,6 +15,8 @@ import matplotlib.gridspec as gridspec
 import pickle5 as pickle
 from scipy.stats import invgauss
 import random
+import matplotlib.dates as mdates
+from matplotlib.ticker import PercentFormatter
 
 #%%
 github_dir="c:\\Users\\student.DESKTOP-UT02KBN\\Desktop\\side_projects\\covidlab"
@@ -198,6 +200,9 @@ def email_responses2file_names(email_names, ret_path = True, base_dir = "Z:\Rese
 
 barcode_re = re.compile("\d{9}-([A-Z0-9]+)-(\d{12})-\d{4}")
 def load_plate_barcodes(github_dir=github_dir, fake=False):
+    """Warnig, some older commits include a plate with negative duration, 
+            but this was filtered going forward
+    """
     if fake:
         try:
             return pd.read_pickle(f"{github_dir}\\faked_plates_by_modify_dt")
@@ -365,7 +370,7 @@ def make_plots(grp):
     #format tick labels? eg. for datetime to ignore year for plates 
     """
     fig, (ax, ax2, ax3) = plt.subplots(3,1, figsize = (20,12), constrained_layout=True, sharex=True)    
-    ax.set_title("Daily Average Time to complete test")
+    ax.set_title("Average Time to complete test")
 
     daily_avg = grp.apply(lambda g: (g / np.timedelta64(1, 'D')).mean())
     daily_std = grp.apply(lambda g: (g / np.timedelta64(1, 'D')).std())
@@ -518,49 +523,146 @@ def _check_weekday_vs_end(weekdays,weekends):
     "visually inspect seperation"
     print("Weekend samples w duration < 10 hours: ", 
           sum(weekends['duration'] < timedelta(hours=10)))
-    plt.scatter(weekends['start_dt'],
+    fig, ax = plt.subplots(1,1)
+    ax.scatter(weekends['start_dt'],
                 weekends['duration']/np.timedelta64(1,"D"),
                 label="weekends: samples held unprocessed")#s=0.3)
-    plt.scatter(weekdays['start_dt'],
+    ax.scatter(weekdays['start_dt'],
                 weekdays['duration'] /np.timedelta64(1,"D"),
                 label="weekdays")# s=0.3)
     end_dt = [datetime(year=2021, month=1,day=2) + timedelta(days=7*i+2*j) 
               for i in range(3,5+len(plates_df['date'].unique())//7) 
               for j in range(2)]
     for d in end_dt:#weekend boundaries
-        plt.axvline(x=date2num(d))
-    plt.xlabel("collection date")
-    plt.ylabel("days duration")
-    plt.suptitle("Collection Date vs. Duration", size='xx-large')
-    plt.title("Collected on or before saturday but aren't processed till at least monday", 
+        ax.axvline(x=date2num(d))
+    ax.set_xlabel("collection date")
+    ax.set_ylabel("days duration")
+    fig.suptitle("Collection Date vs. Duration", size='xx-large')
+    ax.set_title("Collected on or before saturday but aren't processed till at least monday", 
                  size="large")
-    plt.legend()
-    plt.show()
+    ax.legend()
+    fig.show()
     
 def plot_weekday_vs_end(weekdays, weekends):
-    # fig_end = make_plots(weekends.groupby("date")['duration'])
-    # fig_day = make_plots(weekdays.groupby("date")['duration'])
-    # fig_end.suptitle(f"Plots for Samples held over weekend", size="xx-large")
-    # fig_day.suptitle(f"Plots for Samples ex-held over weekend", size="xx-large")
-    # fig_end.show()
-    # fig_day.show()
+    fig_end = make_plots(weekends.groupby("date")['duration'])
+    fig_day = make_plots(weekdays.groupby("date")['duration'])
+    fig_end.suptitle(f"Plots for Samples held over weekend", size="xx-large")
+    fig_day.suptitle(f"Plots for Samples ex-held over weekend", size="xx-large")
+    fig_end.show()
+    fig_day.show()
 
-    avg_diff = weekends['duration'].mean() - weekdays['duration'].mean()
+    #take average of values held overnight as else averaging different sets
+    #biased to lower friday's collection as that is only day where samples
+    #that take more than a day aren't included
+    weekday_overnight = weekdays[weekdays.apply(lambda r: (r['start_dt'] + 
+                                                           r['duration']).date()
+                                                         > r['date'], 
+                                                axis=1)]
+    avg_diff = weekends['duration'].mean() - weekday_overnight['duration'].mean()
     dur = weekends['duration'].copy()
     # weekends['duration'] -= avg_diff
+    replacement_for_neg = weekdays['duration'].quantile(0.1)#smallest 10th percent
     weekends['duration'] = weekends['duration'].apply(lambda i: 
                                                       max(i - avg_diff,
-                                                            weekdays['duration'].quantile(0.1)))
+                                                          replacement_for_neg))
     normalized = weekdays.append(weekends)
     fig_normalized = make_plots(normalized.groupby("date")['duration'])
-    fig_normalized.suptitle("Duration with weekend samples normalized ", size="xx-large")
-    
+    fig_normalized.suptitle("Duration with weekend samples normalized ", 
+                            size="xx-large")
     weekends['duration'] = dur
     fig_normalized.show()
 
-weekdays, weekends = sep_wkends(plates_df)
-_check_weekday_vs_end(weekdays, weekends)
+def plot_specific_date(df, date):
+    """
+    Parameters
+    ----------
+    df : pd.df
+    date :datetime.date
 
+    Returns
+    -------
+    None.
+
+    """
+    if isinstance(date, datetime):
+        date = date.date()
+    day = df[df['date'] == date]
+    # mpl_data = mdates.epoch2num(day['duration']/np.timedelta64(1, 'D'))
+
+    fig, ax = plt.subplots(1,1)
+    # ax.hist(mpl_data, bins=50, density = True, color='lightblue')
+    # ax.xaxis.set_major_locator(mdates.DayLocator())
+    # ax.xaxis.set_major_formatter(mdates.DateFormatter('%d, %b'))
+    # fig.show()
+    # return day
+    data = day['duration']/np.timedelta64(1, 'D')
+    ax.hist(data,
+             weights=np.ones(len(data)) / len(data),
+             bins=40)
+    ax.set_title(f"Test Duration for samples collected on {str(date.strftime('%c'))[:-14]}")
+    ax.yaxis.set_major_formatter(PercentFormatter(1))
+    ax.set_xlabel("Time for completion in days")
+    fig.show()
+    
+def plot_percent_same_day(df):
+    same_day = df[df.apply(lambda r: (r['start_dt'] + 
+                                      r['duration']).date()
+                                    > r['date'], 
+                                    axis=1)]
+    same_day = same_day.groupby("date")
+    all_days = df[df['date'].isin(same_day.indices.keys())
+                  ].groupby("date")
+    
+    fig,ax = plt.subplots()
+    ax.plot(same_day.count()/all_days.count())
+    # ax.plot([n.strftime("%b %d") for n,_ in same_day],
+    #         same_day.size()/all_days.size())
+    # ax.set_xticks(rotation=45)
+    fig.autofmt_xdate(rotation=45)
+    ax.set_title("% of samples collected & finished same day")
+    ax.yaxis.set_major_formatter(PercentFormatter(1))
+    ax.set_xlabel("date")
+    # ax.xaxis.set_tick_params(which='both', labelbottom=True)
+
+    # end_dt = [datetime(year=2021, month=1,day=2) + timedelta(days=7*i+2*j) 
+    #               for i in range(3,5+len(plates_df['date'].unique())//7) 
+    #               for j in range(2)]
+    sd, ed = min(same_day.indices.keys()), max(same_day.indices.keys())
+    end_dt = [sd + timedelta(days=i)
+              for i in range((ed-sd).days + 3)
+              if (sd + timedelta(days=i)).weekday() in (5,0)]
+    for d in end_dt:#weekend boundaries
+        ax.axvline(x=date2num(d))
+    fig.show()
+# plot_specific_date(plates_df, datetime(year=2021, month=2, day=28))
+# weekdays, weekends = sep_wkends(plates_df)
+# _check_weekday_vs_end(weekdays, weekends)
+# _check_weekday_vs_end(*sep_wkends(old_plates_df[old_plates_df['duration'] > np.timedelta64(0, 'D')]))
+# plot_weekday_vs_end(weekdays, weekends)
+plot_percent_same_day(plates_df)
+#%%
+fig,ax = plt.subplots()
+ax.plot(same_day.count()/all_days.count())
+# ax.plot([n.strftime("%b %d") for n,_ in same_day],
+#         same_day.size()/all_days.size())
+# ax.set_xticks(rotation=45)
+fig.autofmt_xdate(rotation=45)
+ax.set_title("% of samples collected, finished today")
+ax.yaxis.set_major_formatter(PercentFormatter(1))
+ax.set_xlabel("date")
+# ax.xaxis.set_tick_params(which='both', labelbottom=True)
+
+# end_dt = [datetime(year=2021, month=1,day=2) + timedelta(days=7*i+2*j) 
+#               for i in range(3,5+len(plates_df['date'].unique())//7) 
+#               for j in range(2)]
+sd, ed = min(same_day.indices.keys()), max(same_day.indices.keys())
+end_dt = [sd + timedelta(days=i)
+          for i in range((ed-sd).days + 3)
+          if (sd + timedelta(days=i)).weekday in (5,0)]
+print(end_dt)
+for d in end_dt:#weekend boundaries
+    ax.axvline(x=date2num(d))
+fig.show()
 #%%
 if __name__ == "__main__":
     email_responses = get_email_responses()
@@ -572,10 +674,16 @@ if __name__ == "__main__":
     plates_df = get_plate_barcodes(barcode_email_responses)
     # save_plate_barcodes(plates_df)
     # plates_df =  load_plate_barcodes()
-
+    
+    # #1 plate was 0; don't run this cause want to cach if happens again
+    #plates_df = plates_df[plates_df['duration'] > np.timedelta64(0, 'D')] 
+    # #the first date Jan 25, has only 1 sample, misleading
+    plates_df = plates_df[plates_df['date'] > 
+                          datetime(year=2021, month=1, day=25).date()]
+    
     #modify axes to be more informative, and to deal with grouping by hour. grib
     f = plates_df.groupby("date")['duration']
-    # make_plots(f)
+    make_plots(f)
     # weekly_plot(plates_df, 
     #             wk_end = datetime(year = 2021, month= 2, day = 28),
     #             plot_result_dates = False)
