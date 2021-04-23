@@ -2,6 +2,8 @@
 import .ipynb jupter notebooks from other directories: vk1
 encrypted and decrypt files, send and recieve with git: vk2
 memoize cache results, excluding unfilterable results: vk3
+total time in the copied results from google calendar: vk4
+Class to add get_feature_names() to FunctionTransformer: vk5
 """
 #vk1
 from IPython import get_ipython
@@ -96,7 +98,7 @@ def recieve(data_path, pword):
         with open(data_path, 'rb') as file:
             token = file.read()
         return f.decrypt(token)#.decode('utf-8')
-#%%
+#%% vk3
 
 from functools import lru_cache#doesn't work for nonhashable fns
 import collections
@@ -123,3 +125,69 @@ def memoize(func):
             del cache[first]
         return result
     return memoized_func 
+
+#%% vk4
+import re
+def total_time(s):
+    """Given the copied results of a google calendar in list view 
+    returns sum of time.
+    eg. 
+    'Algo
+    Clark Benham, Accepted
+    Friday, January 22, 2021
+    11:45pm – 2:15am
+    Finished Book: Algo
+    Clark Benham, Accepted
+    23
+    JAN 2021, SAT
+    11:45pm – 2:15am
+    Finished Book: Algo' -> 3.0
+    """
+    l = re.findall("\d+:{0,1}\d*(?:am|pm)* – \d+:{0,1}\d*(?:am|pm)*", s)
+    def t2int(t):
+        s,e = t.split(" – ")
+        def _mk_int(s):
+            st = re.findall("\d+", s)
+            if len(st) > 1:
+                st = int(st[0]) + int(st[1]) / 60
+            else:
+                st = int(st[0])
+            if st >= 12:
+                st -= 12
+            return st
+        
+        st,et = _mk_int(s), _mk_int(e)
+        if t.count('m') == 1:
+            return et-st
+        elif 'pm' in s:
+            return et + (12-st)
+        else:#pm in e
+            return et + 12 - st
+    # [i for i in l if t2int(i)  > 5]
+    return   sum([t2int(i) for i in l])
+        
+#%% vk5
+import numpy as np
+from sklearn.preprocessing import FunctionTransformer
+
+class FuncTrans_Named(FunctionTransformer):
+    def __init__(self, func, feat_name):
+        super().__init__(func)
+        self.feat_name = feat_name
+    
+    def get_feature_names(self):
+        return np.array([self.feat_name])
+    
+#eg. 
+# df2float = FuncTrans_Named(_df2float, "Linear_Date")
+# origin_enc = ColumnTransformer([
+#                             ("onehot", OneHotEncoder(drop='first'), ['came_from']),
+#                             ("dt", df2float, ['date']),
+#                                 ],
+#                                 remainder='passthrough')
+# origin_enc.get_feature_names()
+#%% vk6
+
+
+
+
