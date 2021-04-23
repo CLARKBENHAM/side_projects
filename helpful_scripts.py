@@ -4,6 +4,8 @@ encrypted and decrypt files, send and recieve with git: vk2
 memoize cache results, excluding unfilterable results: vk3
 total time in the copied results from google calendar: vk4
 Class to add get_feature_names() to FunctionTransformer: vk5
+add labels to each rect in a barplot along 1 axis: vk6 
+
 """
 #vk1
 from IPython import get_ipython
@@ -187,7 +189,48 @@ class FuncTrans_Named(FunctionTransformer):
 #                                 remainder='passthrough')
 # origin_enc.get_feature_names()
 #%% vk6
+import matplotlib.pyplot as plt
 
+def _add_barplot_labels(ax, r_lst, fmt = lambda h: f"{h:.0f}%"):
+    """label data within barplots 
+    ax: axis
+    r_lst: [ax.bar() object]
+    fmt: lambda to format height
+    """
+    bbox = ax.get_window_extent().transformed(
+                                    plt.gcf().dpi_scale_trans.inverted())
+    _, ax_h = bbox.width, bbox.height
+    ax_h *= plt.gcf().dpi
+    y_offset = ax_h/8
+    for rects in r_lst:
+        # """Attach a text label above each bar in *rects*, displaying its height."""
+        for rect in rects:
+            height = rect.get_height()
+            if height > sum(ax.get_ylim())/2:
+                t = ax.annotate(fmt(height), 
+                            xy=(rect.get_x() + rect.get_width() / 2, height),
+                            xytext=(0, -y_offset),
+                            textcoords="offset points",
+                            ha='center',
+                            va='bottom', 
+                            size = 15,
+                            color='w')
+            else:
+                #text on x-axis since plot small
+                t = ax.annotate(fmt(height),
+                            xy=(rect.get_x() + rect.get_width() / 2, height),
+                            xytext=(0, 0),  
+                            textcoords="offset points",
+                            ha='center',
+                            va='bottom',
+                            size = 15)
+            #to not write if bars are too skinny
+            txt_w = t.get_window_extent(plt.gcf().canvas.get_renderer()).width
+            bar_w = rect.get_window_extent().width
+            if txt_w > bar_w:
+                if bar_w > txt_w/2:
+                    t.set_size(t.get_size() * bar_w/txt_w)
+                else:
+                    t.remove()
 
-
-
+#%% vk7
