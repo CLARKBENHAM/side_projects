@@ -355,6 +355,7 @@ def _add_labels(ax, r_lst):
                     t.set_size(t.get_size() * bar_w/txt_w)
                 else:
                     t.remove()
+                    
 def _make_tick_labels(grp):
     """
     makes barplot and percentile plot's tick labels so they don't overlap

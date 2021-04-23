@@ -1,7 +1,9 @@
+#Written by Clark Benham for the Data Analyst role
 import numpy as np
 import pandas as pd
 from scipy import stats
 import os 
+import re
 import matplotlib.pyplot as plt
 from matplotlib.ticker import PercentFormatter
 import subprocess    
@@ -92,12 +94,18 @@ with open("insurance_corr.html", 'w') as f:
     f.write(html_corr)
 os.startfile("insurance_corr.html")
 
-#grib, write ans
+print(f"{insurance['is_smoker'].mean()*100:.0f}% Smokers")
+print(f"BMI Avg: {insurance['bmi'].mean():.0f}, Median: {insurance['bmi'].median():.0f}")
+sp_mn = insurance.loc[:,['age', 'children']].corr(method='spearman').iloc[0,1]
+print(f"Spearman's correlation between Age and # Kids: {sp_mn:.2f} ")
+#21% Smokers
+#BMI Avg: 31, Median: 30
+# Spearman's correlation between Age and # Kids: 0.05 
 
 #%%
 #3
 insurance.groupby('is_male')['age'].agg(['mean', 'std']).round(2)
-#there is no significant difference bewteen the ages of men and women
+#there is no significant difference between the ages of men and women
 #           mean    std
 # is_male              
 # 0        40.00  13.92
@@ -107,7 +115,7 @@ insurance.groupby('is_male')['age'].agg(['mean', 'std']).round(2)
 #4
 insurance['is_smoker'].groupby(insurance['children'] > 0
                                ).agg(['mean', 'std']).round(2)
-#there is no significant difference bewteen the fraction which smokes between 
+#there is no significant difference between the fraction which smokes between 
 # parents and non-parents
 #           mean   std
 # has_children            
@@ -170,8 +178,8 @@ import statsmodels.api as sm
 #Using a linear model as with high VIF for charges, will get high accuracy.
 #The colinearity of some factors suggests regularization, that some features 
 #seem correlated while no coefficents are expected to be 0 advocates ridge 
-#regression. The regularization factor will be set to both the default and to
-#whats suggested by a Bayesian approach.
+#regression. The regularization factor will be set to both the default and 
+#as suggested by a Bayesian approach.
 
 y_ix = arr_col_names.index("charges")
 y = X[:, y_ix]
@@ -205,7 +213,7 @@ print(coef_summary)
 # intercept                    -11947.28 -11917.47  3901.70
 
 #With such poor performance to the Bayesaian approach, it will be excluded. 
-#The realized coefficents for OLS and L2 Nrom appear similar so will use OLS 
+#The realized coefficents for OLS and L2 Norm appear similar so will use OLS 
 #going forward, to aid interpretability. 
 
 reg_X_int = np.append(reg_X, np.ones((len(reg_X),1)), axis=1)
@@ -246,10 +254,10 @@ ax2.axhline(y=50000, c='black')
 ax2.set_xlabel("Predicted Cost")
 fig.tight_layout()
 fig.show()
-#Looking at plots theres 2 distinct regimes: for predicted cost < 20k true costs
+#Looking at plots there’s 2 distinct regimes: for predicted cost < 20k true costs
 #are mostly linear with predicted costs, with right skewed residuals and with 
 #a hinge at 0 where negative costs are predicted. While for Predicted cost > 20k
-#theres 2 seperate ~linear groups. 
+#there’s 2 separate ~linear groups.
 
 hc_y = y[y>=20000]
 hc_X = reg_X_int[y>=20000]
@@ -278,7 +286,7 @@ print(hc_ols_result.summary(xname = list(coef_summary.index)))
 
 #6.1 The T-test fails to find an impact on charges from being Male vs. Female.
 #6.2 Being a Smoker has a highly significant increase in cost, $24k.
-#6.3 Being 1 year older has a statistifcally significant increase in cost, $260/year
+# 6.3 Being 1 year older has a statistically significant increase in cost, $260/year
 
 #%%
 #7 
@@ -295,7 +303,7 @@ print(f"Avg cost ${np.mean(hc_y[hc_pred_y >= hc_cutoff_pred_y]):,.2f} for exclud
 # 111 Values predicted >= 50k with OLS
 # Avg cost $37,940.03 for excluded values vs. $13,408.08 avg cost
 # 59 Values predicted >= 50k with OLS for High Cost group only
-# Avg cost $44,886.17 for excluded values vs. $34,182.07 for High Cost Group
+# Avg cost $44,886.17 for excluded values vs. $34,182.07 for High Cost Group as a whole
 
 #The naive logit glm function is either missing at least 25% of points >=25 
 #or would exclude >10% of the original data set. 
@@ -310,10 +318,11 @@ print(f"Avg cost ${np.mean(hc_y[hc_pred_y >= hc_cutoff_pred_y]):,.2f} for exclud
 #is not well defined/ given enough samples will be much larger than the emperical.
 
 #Looking solely at the regression for the high cost group (final model should be at least this accurate)
-#Assuming profits on premiums of 5% ($44.9k*0.05 = ~2.25k profit),  and that expected costs for those >=50k 
-#are 50% higher than the empierical average caueses a cost of $39.7k (sum((pred_y[y>=50000]))*1.5 -  44.9k*1.05)
-#gives a probability of being in high cost group of (1-p)*2.25 = p*39.7 implies
-#p=6% will make the costs from Type I and type II errors balance
+#Assuming profits on premiums of 5% ($34.1k*0.05 = ~1.7k profit),  and that expected costs for those >=50k 
+#are 50% higher than the empirical average causes a cost of $51k (np.mean((y[y>=50000]))*1.5 -  34.1k*1.05)
+#gives a probability of being in high cost group of (1-p)*1.7 = p*51 implies
+#p=3% will make the costs from Type I and type II errors balance
+
 
 n_hc = sum(hc_y >= 50000)
 t1l, t2l, t1c, t2c  = [], [], [], []
@@ -343,17 +352,23 @@ dis_df = pd.DataFrame(zip(t1l, t2l, t1c, t2c ),
                    columns = ['Type I%', 'Type II%', 'Type I Costs', 'Type II Costs'],
                    )
 dis_df['Total Costs'] = dis_df['Type I Costs'] + dis_df['Type II Costs']
-with pd.option_context('display.float_format', "${:,}".format):
+with pd.option_context('display.float_format', "${:,.0f}".format):
     print(dis_df.to_string(index=False))
 
-#Possible points in emperical trade-off
+#Possible points in empirical trade-off
 # Type I% Type II%  Type I Costs  Type II Costs  Total Costs
-#     93%       0%          $0.0     $123,750.0   $123,750.0
-#     93%      25%     $39,700.0      $87,750.0   $127,450.0
-#     94%      50%     $79,400.0      $67,500.0   $146,900.0
-#     50%      75%    $119,100.0       $2,250.0   $121,350.0
-#      0%     100%    $158,800.0           $0.0   $158,800.0
+#     93%       0%            $0       $123,750     $123,750
+#     93%      25%       $39,700        $87,750     $127,450
+#     94%      50%       $79,400        $67,500     $146,900
+#     50%      75%      $119,100         $2,250     $121,350
+#      0%     100%      $158,800             $0     $158,800
 #%%SECTION II
+from datetime import timedelta
+from datetime import date
+import matplotlib.dates as mdates
+
+new_feat_d = date(month=9, day=5, year=2018)
+
 conversion = pd.read_csv("data\conversion_rates.csv",
                          parse_dates = ['date'])
 
@@ -361,22 +376,13 @@ fig,ax = plt.subplots()
 ax.hist(conversion['date'])
 weekends = [d for d in conversion['date'] if d.weekday() in (5,6)]
 weekdays = [d for d in conversion['date'] if d.weekday() not in (5,6)]
-ax.axvline(x=min(weekdays), c='black')
-ax.axvline(x=max(weekdays), c='black')
-ax.set_title("Histogram of click dates vs. start-stop workweek")
+ax.axvline(x=new_feat_d, c='black')
+ax.set_title("Histogram of click dates vs. Introduction of new Feature")
+ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
 fig.show()
 
 X = conversion.drop(['reached_end'], axis=1)
 y = conversion['reached_end']
-
-def _dt2float(df):
-    "df: Series of datetime objects"
-    return (df['date'] - min(df['date']))/np.timestamp64(1, 'D')
-    return df.apply(lambda d: d.iloc[0].timestamp(), axis=1).values.reshape(-1,1)
-
-def _isweekend(df):
-    "df: Series of datetime objects"
-    return df.apply(lambda d: d.iloc[0].weekday() in (5,6), axis=1).values.reshape(-1,1)
 
 class FuncTrans_Named(FunctionTransformer):
     def __init__(self, func, feat_name = ''):
@@ -386,8 +392,23 @@ class FuncTrans_Named(FunctionTransformer):
     def get_feature_names(self):
         return np.array([self.feat_name])
     
+def _dt2float(df):
+    "df: Series of datetime objects"
+    return (df['date'] - min(df['date'])
+            ).apply(lambda i: i/timedelta(days=1)).values.reshape(-1,1)
+
+def _isweekend(df):
+    "df: Series of datetime objects"
+    return df.apply(lambda d: d.iloc[0].weekday() in (5,6), axis=1).values.reshape(-1,1)
+
+def _is_newfeat(df, new_feat_d  = new_feat_d):
+    "df: Series of datetime objects"
+    return df.apply(lambda d: d.iloc[0] >= new_feat_d, axis=1).values.reshape(-1,1)
+    
 date_feats = FeatureUnion([("Linear_Date", FuncTrans_Named(_dt2float)),
                             ("is_weekend", FuncTrans_Named(_isweekend)),                            
+                            ("has_new_feature", FuncTrans_Named(_is_newfeat,
+                                                                feat_name="    <--")),                            
                             ])
 
 origin_enc = ColumnTransformer([
@@ -398,32 +419,150 @@ origin_enc = ColumnTransformer([
 
 reg_X = origin_enc.fit_transform(X)
 reg_X = np.append(reg_X, np.ones((len(reg_X),1)), axis=1)
-ols = sm.OLS(y.values.reshape(-1, 1), reg_X)
-ols_result = ols.fit()
+logit = sm.Logit(y.values.reshape(-1, 1), reg_X)
+logit_result = logit.fit()
 col_names = origin_enc.get_feature_names() + ['intercept']
-print(ols_result.summary(xname = col_names))
+print(logit_result.summary(xname = col_names))
+#Based on high z-score for having a new feature, we reject the null that feature
+#has no impact at p=0.01 level; the positive coefficient means the feature change 
+#was helpful in improving conversion rates.
+# ================================================================================================
+#                                    coef    std err          z      P>|z|      [0.025      0.975]
+# ------------------------------------------------------------------------------------------------
+# onehot__x0_Insurance Site A      0.4721      0.395      1.194      0.232      -0.303       1.247
+# onehot__x0_Insurance Site B      0.6884      0.354      1.946      0.052      -0.005       1.382
+# onehot__x0_Insurance Site C      0.4225      0.333      1.268      0.205      -0.231       1.076
+# dt__Linear_Date__               -0.1232      0.128     -0.966      0.334      -0.373       0.127
+# dt__is_weekend__                -0.1898      0.274     -0.693      0.488      -0.727       0.347
+# dt__has_new_feature__    <--     1.4589      0.524      2.784      0.005       0.432       2.486
+# male                             0.1025      0.253      0.406      0.685      -0.393       0.598
+# age                             -0.0465      0.054     -0.864      0.387      -0.152       0.059
+# has_insurance                   -0.1870      0.255     -0.732      0.464      -0.688       0.314
+# intercept                        0.7140      1.762      0.405      0.685      -2.739       4.167
+# ================================================================================================
 
 vif_cols2 = pd.Series([variance_inflation_factor(reg_X, i) 
                           for i in range(reg_X.shape[1])],
                       index = col_names)
 print(vif_cols2)
+# onehot__x0_Insurance Site A       1.518568
+# onehot__x0_Insurance Site B       1.394263
+# onehot__x0_Insurance Site C       1.432960
+# dt__Linear_Date__                 4.382285
+# dt__is_weekend__                  1.043243
+# dt__has_new_feature__    <--      4.289369
+# male                              1.020866
+# age                               1.216348
+# has_insurance                     1.036128
+# intercept                       200.334371
+#The high VIF of intercept has inflated the R^2, but since intercept is 
+#uncorrelated with the conditional variable about when the new feature was 
+#introduced this has no effect on validity of coefficient t-test.
 
-#Dropping an encoded origin and including an intercept gave a huge intercept VIF;
-#but just encoding regions without an intercept gives colinear predictors. 
 
 #%%SECTION III
 names = pd.read_csv("data\\names_id_age.csv")
 lead = pd.read_csv("data\\lead_sale_stats.csv")
-lead['lead_type'] = lead['lead_id'].apply(lambda i: re.search("[a-c]", i).group()
-                                          if i is not np.nan else i)
-lead['Lead_ID'] = lead['lead_id'].apply(lambda i: re.search("\d+", i).group()
-                                          if i is not np.nan else i)
-lead.drop(['lead_id'], axis=1, inplace=True)
-df = names.join(lead, on='Lead_ID')
-df
-#%%
-for i in lead['lead_id']:
-    if i is not np.nan:
-        assert re.search("[a-c]", i).group(), i
-    else:
-        pass
+nl_drop = sum(lead['lead_id'].isna())
+lead = lead[~lead['lead_id'].isna()]
+lead['lead_type'] = lead['lead_id'].apply(lambda i: re.search("[a-c]", i
+                                                              ).group().upper())
+lead['lead_id'] = lead['lead_id'].apply(lambda i: int(re.search("\d+", i).group()))
+
+nn_drop = len(set(pd.unique(lead['lead_id'])) - set(pd.unique(names['lead_id'])))
+print(f"Dropped {nl_drop} rows from lead_sale_stats and {nn_drop} from names_id_age")
+# Dropped 4 rows from lead_sale_stats and 0 from names_id_age
+
+df = lead.merge(names, on='lead_id', how='left')
+for i in df.columns:
+    if i[-2:] == '_y':
+        dup = i[:-2] + "_x"
+        assert all(df[i] == df[dup]), f"{i}, {dup}"
+        df.drop(dup, inplace=True, axis=1)
+        df.rename({i:i[:-2]}, inplace=True, axis=1)
+
+def _add_barplot_labels(ax, r_lst, fmt = lambda h: f"{h:.0f}%"):
+    """label data within barplots 
+    ax: axis
+    r_lst: [ax.bar() object]
+    fmt: lambda to format height
+    """
+    bbox = ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
+    _, ax_h = bbox.width, bbox.height
+    ax_h *= fig.dpi
+    y_offset = ax_h/8
+    for rects in r_lst:
+        # """Attach a text label above each bar in *rects*, displaying its height."""
+        for rect in rects:
+            height = rect.get_height()
+            if height > sum(ax.get_ylim())/2:
+                t = ax.annotate(fmt(height), 
+                            xy=(rect.get_x() + rect.get_width() / 2, height),
+                            xytext=(0, -y_offset),
+                            textcoords="offset points",
+                            ha='center',
+                            va='bottom', 
+                            size = 15,
+                            color='w')
+            else:
+                #text on x-axis since plot small
+                t = ax.annotate(fmt(height),
+                            xy=(rect.get_x() + rect.get_width() / 2, height),
+                            xytext=(0, 0),  
+                            textcoords="offset points",
+                            ha='center',
+                            va='bottom',
+                            size = 15)
+            #to not write if bars are too skinny
+            txt_w = t.get_window_extent(plt.gcf().canvas.get_renderer()).width
+            bar_w = rect.get_window_extent().width
+            if txt_w > bar_w:
+                if bar_w > txt_w/2:
+                    t.set_size(t.get_size() * bar_w/txt_w)
+                else:
+                    t.remove()
+                    
+per_closed = df.groupby('lead_type')['bought_policy'].mean() * 100
+avg_sale = df.groupby('lead_type')['policy_amount'].mean()
+
+fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2)
+fig.suptitle("Increase sales by focusing on type 'C' Leads", size=20)
+
+colors =['gold', 'darkorange', 'orangered'] 
+rect1 = ax1.bar(per_closed.index, per_closed.values, color=colors)
+_add_barplot_labels(ax1, [rect1], fmt = lambda h: f"{h:.0f}%")
+
+ax1.set_ylabel("% BUY")
+ax1.set_xlabel("LEAD TYPE")
+ax1.set_title("Conversion % by Lead Type")
+
+rect2 = ax2.bar(avg_sale.index, avg_sale.values, color=colors)
+_add_barplot_labels(ax2, [rect2], fmt = lambda h: f"${h:,.0f}")
+ax2.set_ylabel("EXPECTED SALE $")
+ax2.set_xlabel("LEAD TYPE")
+ax2.set_title("Average Sales Amount by Lead Type")
+
+fig.show()
+#It turns out that type ‘C’ leads are the most profitable leads.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
