@@ -1,0 +1,28 @@
+ Volume in drive C has no label.
+ Volume Serial Number is EEC4-9114
+
+ Directory of C:\Users\student.DESKTOP-UT02KBN\Desktop\Stone_Presidio\Data
+
+04/29/2021  04:57 PM    <DIR>          .
+04/29/2021  04:57 PM    <DIR>          ..
+08/02/2020  06:51 PM        16,580,244 16.16 Historical Commodity Price Data.xlsx
+06/09/2020  04:45 PM        16,822,277 31E53820
+06/11/2020  11:24 AM        16,580,179 BC11E200
+06/19/2020  02:30 PM           238,187 cotton-prices-historical-chart-data.csv
+06/09/2020  12:17 PM           358,798 eia renewable fuels, All Tables in One.xlsx
+06/01/2020  09:35 AM    <DIR>          FFIEC CDR Call Bulk All Schedules 03312020
+06/01/2020  02:01 PM    <DIR>          FFIEC CDR Call Bulk Subset of Schedules 2019
+06/22/2020  05:46 PM    <DIR>          MacroTrends
+06/04/2020  01:08 PM            94,208 Oils and fats supply and prices, marketing year, table 7 19Q4.xls
+08/02/2020  06:04 PM    <DIR>          pickled_data
+04/29/2021  04:57 PM               150 presidio_data_list
+04/29/2021  05:00 PM                 0 presidio_data_list.txt
+06/19/2020  02:55 PM           295,280 price request 6_19.csv
+06/19/2020  07:50 PM           319,673 price request 6_19.xlsx
+06/22/2020  07:04 PM           178,373 price request 6_22.csv
+06/22/2020  07:04 PM           175,607 price request 6_22.xlsx
+06/03/2020  10:21 PM            30,815 rin_separatetransaction_apr2020.txt
+06/04/2020  01:07 PM            95,232 soybean oil supply share of biodiesel use, table06_Q120.xls
+06/22/2020  05:38 PM           100,352 weekly_US_No2_Retail_diesel.xls
+              15 File(s)     51,869,375 bytes
+               6 Dir(s)  17,105,711,104 bytes free
