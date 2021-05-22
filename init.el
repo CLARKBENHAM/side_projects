@@ -106,3 +106,8 @@
 
 C:/Users/Clark Benham/AppData/Roaming/.emacs.d/init.el
 (global-set-key (kbd "C-; p") 'show-file-name)
+
+(global-linum-mode t)
+(global-set-key (kbd "C-' i") 'indent-region)
+(global-set-key (kbd "C-' l") 'indent-ridgidly)
+(global-set-key (kbd "C-' u") 'uncomment-region)
