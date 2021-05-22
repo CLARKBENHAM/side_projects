@@ -1,0 +1,65 @@
+TODO:        
+    Turnaround time:
+        - Get access to health service folder
+        - get bruce to rexport flagged emails
+        - run my results, make plots (email out?)
+        get myself access to this email chain
+        access gmail api to pull these email updates. 
+        
+        Want to make website displaying this information: 
+            
+            
+            
+            
+Done:
+    Excel mapings:
+        - make macro that changes name from 384 plate to 94 plate format
+        - sort for easier reading
+
+   Summary file:
+        - adding/removing passwords on excel files
+        - pulls in data on personal laptop
+        - automate sending/recieving encrypted data with github
+        - makes results table (if add access to results on health desktop) else Faked
+        - combines into a summary table and writes to output file
+        - get access to results Folder
+            vprewb-users(\\pi11admin.virginia.edu) U:\PVR
+        - update to include info about 'total' column (non-tests, see last col of aggregation sheets), run.
+
+     
+Mapped both Research Office and Health Dir to Z drive?
+how to get health dir? (only on desktop? But got perm. to have on others?)
+
+#%%
+Dean Evasius Notes
+ex-NSA
+
+co's that do Ram's work (digital science[dimensions]; elsiver[sciVal])
+scival 
+    researh topics and clusters
+    see top institutions
+    eg. 
+    
+try to be data resource from grounds from VPR faculty, school deans, 
+type of Q:
+     collaberatoin networks (visuzliations for)
+        eg. 
+            subfield which good at, how to know better 
+            (like who, vis if faculty interact or bunch of lone wolfs)
+            Draw collaberation group, for past 5yrs DAG for how see how connected
+            Papers, citations, 
+            He'd suggest shorterm combined to long term: 
+                pick 2-3 subfields which good at, how to tell story and what means to be improved in
+                    eg. faculty hiring, (more strategic thean improveing average)
+                Sociological aspect of how collaberation works 
+                    speak w/ others
+            Ans: What decision will be made?
+                VPR, provost: what to invest in project & people
+
+A week or so
+Cheryl Wagner- physical office
+    
+Dean on Remote: adjusted, but misses unscheduled things
+
+Tools: extent to which want to use them (need requests ) ut balance vs principle first thinking
+    could design soup to nuts

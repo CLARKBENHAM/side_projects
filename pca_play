@@ -52,4 +52,8 @@ pca.fit_transform(X_cen)
 print(pca.transform(C), '\n', C @ PC_vec)
 print("++++++++++++++++++")
 print(pca.transform(X_cen), X_cen @ PC_vec, sep='\n')
-#isssue with changing cordinates
+#isssue with changing from right- to left- cordinates
+
+#How to get from eigenvectors of covariance matrix to the scores for the given data points in new basis?
+
+#SD of points on a loading
