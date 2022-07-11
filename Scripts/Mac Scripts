@@ -1,0 +1,6 @@
+#To start a new terminal tab and goto a dir by ssh
+osascript -e 'tell application "Terminal" to activate' \
+  -e 'tell application "Terminal" to do script "bst" in selected tab of the front window' \
+  -e 'tell application "Terminal" to do script "ssh hadoop02.o7.castle.fm" in selected tab of the front window' \
+  -e 'tell application "Terminal" to do script "sudo su hdoop" in selected tab of the front window' \
+  -e 'tell application "Terminal" to do script "cd ~/hadoop-3.2.1" in selected tab of the front window' \
