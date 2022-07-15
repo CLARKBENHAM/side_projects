@@ -48,7 +48,7 @@ decorator==4.4.2
 defusedxml==0.6.0
 diff-match-patch==20181111
 distlib==0.3.1
-distributed==2.18.0
+distributed==2021.10.0
 Django==3.0.8
 docutils==0.16
 entrypoints==0.3
