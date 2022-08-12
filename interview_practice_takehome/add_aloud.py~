@@ -1,9 +1,0 @@
-import pyttsx
-engine = pyttsx.init()
-import random
-while True:
-    a = random.randint(400,800)
-    b = random.randint(800, 8800)
-    ans = a+b
-    engine.say('Good morning.')
-engine.runAndWait()
