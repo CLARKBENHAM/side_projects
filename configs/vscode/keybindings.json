@@ -1,0 +1,35 @@
+// Place your key bindings in this file to override the defaults
+// Have to have both jj jor Fj 
+[
+
+// VS code use  fj to exist normal mode. The exentsion makes ff also exit
+	{
+	"command": "vscode-neovim.compositeEscape1",
+	"key": "f",
+	"when": "neovim.mode != normal && editorTextFocus",
+	"args": "f"
+},
+	{
+    "command": "vscode-neovim.compositeEscape2",
+    "key": "j",
+    "when": "neovim.mode ==insert && editorTextFocus",
+    "args": "j"
+},
+
+//Switch between tabs in terminal
+{
+    "key": "cmd+pagedown",
+    "command": "workbench.action.terminal.focusNext",
+    "when": "terminalFocus"
+},
+{
+    "key": "cmd+pageup",
+    "command": "workbench.action.terminal.focusPrevious",
+    "when": "terminalFocus"
+},
+{
+	"key": "cmd+j cmd+p",
+	"command": "workbench.view.extension.jupyter-variables"
+},
+
+]

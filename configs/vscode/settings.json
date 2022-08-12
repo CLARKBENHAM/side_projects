@@ -1,0 +1,89 @@
+{
+  "docker.host": "tcp://172.18.16.101:2375",
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "editor.minimap.enabled": false,
+  "editor.tabSize": 2,
+  "editor.fontSize": 11.5,
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": false,
+  "vim.useSystemClipboard": true,
+  "search.showLineNumbers": true,
+  "editor.lineNumbers": "off",
+  "editor.folding": false,
+	"editor.glyphMargin": false,
+  "eslint.workingDirectories": [],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "html",
+    "typescriptreact",
+    "node",
+    "nodejs"
+  ],
+  "notebook.editorOptionsCustomizations": {},
+  "diffEditor.codeLens": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  	"editor.formatOnSave": true
+	},
+  "[nodejs]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  	"editor.formatOnSave": true
+	},
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  	"editor.formatOnSave": true
+	},
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  	"editor.formatOnSave": true
+	},
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true
+	},
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true
+  },
+  "prettier.configPath": "/Users/clarkbenham/fde-utils-v2/.prettierrc",
+  "prettier.semi": false,
+  "prettier.requireConfig": true,
+	"editor.fontLigatures": false,
+	"vim.vimrc.enable": true,
+	"vim.vimrc.path": "$HOME/.vimrc",
+	"vim.enableNeovim": true,
+	"vim.neovimConfigPath": "/usr/local/Cellar/neovim/0.7.0/share/nvim/runtime",
+	"vim.handleKeys": {
+    "<C-c>": false,
+	},
+	"vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+	"editor.scrollBeyondLastLine": false,
+	"workbench.list.automaticKeyboardNavigation": false,
+	"window.zoomLevel": -1,
+	"notebook.lineNumbers": "on",
+	"files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/.firebase": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true
+  },
+	"notebook.output.textLineLimit": 100,
+	"python.linting.flake8Enabled": true,
+	"python.linting.enabled": true,
+	"python.defaultInterpreterPath": "/Users/clarkbenham/miniconda3/envs/pytorch/bin/python",
+	"terminal.integrated.enableMultiLinePasteWarning": false
+}
