@@ -1,0 +1,114 @@
+{
+  "root": true,
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false
+  },
+  "extends": ["airbnb-base", "plugin:flowtype/recommended"],
+  "plugins": ["snakecasejs", "flowtype" ],
+  "settings": {
+    "prettier/prettier": ["error"],
+    "snakecasejs/filter": [
+      "FunctionDeclaration",
+      "NewExpression",
+      "MemberExpression",
+      "ClassDeclaration",
+      "ClassExpression",
+      "ClassImplements",
+      "TypeAlias",
+      "GenericTypeAnnotation",
+      "ImportSpecifier",
+      "InterfaceDeclaration",
+      "OpaqueType"
+    ],
+    "snakecasejs/whitelist": [
+      "afterEach",
+      "ApiError",
+      "beforeEach",
+      "maxPriority",
+      "OAuthError",
+      "S3Error",
+      "ValidationError",
+      "BaseStatusHandler",
+      "getS3Client",
+      "subClass",
+      "secretAccessKey",
+      "accessKeyId",
+      "ContentLength",
+      "ContentType",
+      "ContentDisposition",
+      "CacheControl",
+      "noAck",
+      "Prefix",
+      "StartAfter",
+      "chromaSubsampling",
+      "PgError",
+      "PgConnectionHangingError",
+      "PgUniqueViolationError",
+      "PgForeignKeyViolationError",
+      "PgNotNullViolationError",
+      "PgLockNotAvailableError",
+      "PgConnectionRefusedError",
+      "promiseLib",
+      "RabbitMQ",
+      "StartAfter",
+      "noAck",
+      "promiseLib",
+      "maxBuffer",
+      "imageMagick"
+    ]
+  },
+  "rules": {
+    "camelcase": "off",
+    "max-len": [
+      "error",
+      {
+        "code": 120,
+        "ignoreTemplateLiterals": true,
+        "ignoreStrings": true,
+        "ignoreRegExpLiterals": true
+      }
+    ],
+    "func-names": ["error", "as-needed"],
+    "semi": "off",
+    "no-underscore-dangle": "off",
+    "radix": ["error", "as-needed"],
+    "class-methods-use-this": "off",
+    "no-restricted-syntax": ["off", "ForOfStatement"],
+    "no-else-return": "off",
+    "import/no-useless-path-segments": "off",
+    "import/no-dynamic-require": "off",
+    "snakecasejs/snakecasejs": "error",
+    "no-unused-expressions": ["error", { "allowTernary": true }],
+    "lines-between-class-members": "off",
+    "no-plusplus": "warn",
+    "no-await-in-loop": "warn",
+    "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "only-multiline"
+      }
+    ],
+    "linebreak-style": ["error", "unix"],
+    "prefer-template": "error",
+    "brace-style": ["error", "1tbs"],
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+    "block-spacing": "error",
+    "keyword-spacing": ["error", { "before": true, "after": true }],
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "eol-last": ["error", "always"],
+    "no-console": "off",
+    "no-bitwise": "off",
+    "no-use-before-define": "off"
+  },
+  "overrides": [
+  ],
+  "env": {
+    "mocha": true
+  }
+}

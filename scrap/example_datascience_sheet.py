@@ -1,4 +1,4 @@
-#Written by Clark Benham for the Data Analyst role
+#Written by Clark Benham 
 import numpy as np
 import pandas as pd
 from scipy import stats
@@ -544,25 +544,5 @@ ax2.set_title("Average Sales Amount by Lead Type")
 
 fig.show()
 #It turns out that type ‘C’ leads are the most profitable leads.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

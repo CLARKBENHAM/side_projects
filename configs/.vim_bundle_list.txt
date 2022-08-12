@@ -1,0 +1,9 @@
+Align
+ale
+copilot.vim
+eslint
+fzf.vim
+syntastic
+vim-import-js
+vim-jsdoc
+vim-pug
