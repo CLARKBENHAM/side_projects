@@ -1,0 +1,18 @@
+{
+  "jupyter.notebookFileRoot": "${workspaceFolder}",
+  "python.pythonPath": "${workspaceFolder}/.venv/bin/python",
+  "python.venvPath": "${workspaceFolder}/.venv",
+  "python.envFile": "${workspaceFolder}/.env",
+  "python.analysis.extraPaths": [
+      "data2/Users/clark/HarmBench"
+  ],
+
+  "python.testing.pytestArgs": [
+    "tests/",
+    "-W",
+    "ignore::DeprecationWarning",
+    "-n4",
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true,
+}
