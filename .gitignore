@@ -10,5 +10,6 @@ __pycache__
 **/gpt3_website
 **/temp
 **/hide
+**/interview_notes_transcripts
 
 Self_Tracking/*.zip
