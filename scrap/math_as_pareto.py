@@ -1,5 +1,8 @@
 # %%
 """
+https://chatgpt.com/c/67cb8388-7750-8004-be75-8c6249735430
+probably a better version
+
 https://threadreaderapp.com/thread/1816459931995840984.html
 argues that
 "we observate high level math to be pareto distributed (eg. Terrance Tao v everyone"), if math was mostly genetic it'd be normal (there's few major genes, just small linear additive effects), therefore high level math isn't mostly genetic"
