@@ -109,7 +109,7 @@ if __name__ == "__main__":
         # Transcribe each chunk
         full_transcription = ""
         for idx, chunk in enumerate(chunks):
-            chunk_path = f"temp_chunk_{idx}.wav"
+            chunk_path = f"/tmp/temp_chunk_{idx}.wav"
             chunk.export(chunk_path, format="wav")
             result = model.transcribe(chunk_path)
             full_transcription += result["text"] + "\n"
