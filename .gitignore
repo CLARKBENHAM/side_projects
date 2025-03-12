@@ -11,6 +11,7 @@ __pycache__
 **/temp
 **/hide
 **/interview_notes_transcripts
+data/**
 
 Self_Tracking/*.zip
 interview_notes/*
