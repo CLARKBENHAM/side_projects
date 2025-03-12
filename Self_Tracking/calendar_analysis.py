@@ -1,3 +1,4 @@
+# %%
 import os
 import pandas as pd
 import numpy as np
@@ -10,6 +11,9 @@ import re
 import json
 from pathlib import Path
 
+CONSISTENT_LABELED_AFTER = datetime(2021, 5, 24)
+CONSISTENT_LABELED_BEFORE = datetime.today().date()
+
 
 # Function to parse .ics files and create a DataFrame
 def parse_ics_files(directory):
@@ -19,7 +23,10 @@ def parse_ics_files(directory):
     directory = os.path.expanduser(directory)
     ics_files = [f for f in os.listdir(directory) if f.endswith(".ics")]
 
-    for ics_file in ics_files:
+    events_count = 0
+    canceled_count = 0
+    for ics_file in ics_files[3:4]:
+        print("GRIB!!!")
         calendar_name = os.path.splitext(ics_file)[0]  # Get calendar name without extension
         file_path = os.path.join(directory, ics_file)
 
@@ -27,53 +34,92 @@ def parse_ics_files(directory):
             with open(file_path, "rb") as f:
                 cal = Calendar.from_ical(f.read())
 
+                file_events = 0
+                file_canceled = 0
+
                 for component in cal.walk():
                     if component.name == "VEVENT":
+                        # Check if event is canceled
+                        status = component.get("status")
+                        if status and str(status).upper() == "CANCELLED":
+                            canceled_count += 1
+                            file_canceled += 1
+                            continue  # Skip canceled events
+
                         event_name = str(component.get("summary", "No Title"))
-                        start_time = component.get("dtstart").dt
-                        end_time = component.get("dtend").dt
 
-                        # Convert to datetime if it's a date
-                        if not isinstance(start_time, datetime):
-                            start_time = datetime.combine(start_time, datetime.min.time())
-                        if not isinstance(end_time, datetime):
-                            end_time = datetime.combine(end_time, datetime.min.time())
+                        try:
+                            start = component.get("dtstart")
+                            end = component.get("dtend")
 
-                        # Calculate duration in hours
-                        duration = (end_time - start_time).total_seconds() / 3600
+                            if start is None:
+                                print(f"Skipping event with no start time: {event_name}")
+                                continue
 
-                        # Extract color if available
-                        color = None
-                        for key in component:
-                            if "COLOR" in key or "color" in key.lower():
-                                color = str(component[key])
-                                break
+                            start_time = start.dt
+                            end_time = end.dt if end is not None else start_time
 
-                        # Store other metadata
-                        metadata = {}
-                        for key in component:
-                            if key not in ["SUMMARY", "DTSTART", "DTEND"]:
-                                metadata[key] = str(component[key])
+                            # Convert to datetime if it's a date
+                            if not isinstance(start_time, datetime):
+                                start_time = datetime.combine(start_time, datetime.min.time())
+                            if not isinstance(end_time, datetime):
+                                end_time = datetime.combine(end_time, datetime.min.time())
 
-                        all_events.append(
-                            {
-                                "event_name": event_name,
-                                "calendar_name": calendar_name,
-                                "start_time": start_time,
-                                "end_time": end_time,
-                                "duration": duration,
-                                "color": color,
-                                "metadata": metadata,
-                            }
-                        )
+                            # Calculate duration in hours
+                            duration = (end_time - start_time).total_seconds() / 3600
 
-            print(f"Processed {ics_file} - found {len(all_events)} events")
+                            # Extract color if available
+                            color = None
+                            for key in component:
+                                if "COLOR" in key or "color" in key.lower():
+                                    color = str(component[key])
+                                    break
+
+                            # Store other metadata
+                            metadata = {}
+                            for key in component:
+                                if key not in ["SUMMARY", "DTSTART", "DTEND"]:
+                                    metadata[key] = str(component[key])
+
+                            all_events.append(
+                                {
+                                    "event_name": event_name,
+                                    "calendar_name": calendar_name,
+                                    "start_time": start_time,
+                                    "end_time": end_time,
+                                    "duration": duration,
+                                    "color": color,
+                                    "metadata": metadata,
+                                }
+                            )
+                            events_count += 1
+                            file_events += 1
+                        except Exception as event_error:
+                            print(f"Error processing event '{event_name}': {event_error}")
+
+            print(
+                f"Processed {ics_file} - found {file_events} events (skipped"
+                f" {file_canceled} canceled events)"
+            )
 
         except Exception as e:
             print(f"Error processing {ics_file}: {e}")
 
+    print(f"Total events processed: {events_count} (skipped {canceled_count} canceled events)")
+
     # Convert to DataFrame
     df = pd.DataFrame(all_events)
+
+    # Ensure datetime columns are properly formatted
+    for col in ["start_time", "end_time"]:
+        print(df[col].isna().sum())
+        if col in df.columns:
+            # Convert any strings to datetime
+            if not pd.api.types.is_datetime64_any_dtype(df[col]):
+                df[col] = pd.to_datetime(df[col], utc=True)
+
+    # Only return After data was labeled consistently
+    df = df[df["start_time"] >= pd.Timestamp(CONSISTENT_LABELED_AFTER, tz="UTC")]
     return df
 
 
@@ -89,49 +135,49 @@ def transform_data(df):
     sleep_entries = []
     print("Processing sleep entries...")
 
-    # Group by date to handle sleep entries
-    for date, day_df in df_copy.groupby("date"):
-        # Get 'bed' entries for this day
-        bed_entries = day_df[day_df["event_name"].str.lower() == "bed"].copy()
+    # Get all bed and wakeup entries
+    bed_entries = (
+        df_copy[df_copy["event_name"].str.lower() == "bed"].copy().sort_values("start_time")
+    )
+    woke_up_entries = (
+        df_copy[df_copy["event_name"].str.lower() == "woke up"].copy().sort_values("start_time")
+    )
 
-        if not bed_entries.empty:
-            # Get all 'Woke up' entries from this day and the next day
-            next_day = date + timedelta(days=1)
-            woke_up_entries = df_copy[
-                (df_copy["event_name"].str.contains("Woke up", case=False, na=False))
-                & ((df_copy["date"] == date) | (df_copy["date"] == next_day))
-            ].copy()
+    print(f"Found {len(bed_entries)} bed entries and {len(woke_up_entries)} woke up entries")
 
-            # Process each bed entry
-            for _, bed_row in bed_entries.iterrows():
-                bed_time = bed_row["start_time"]
+    # Process each bed entry
+    for _, bed_row in bed_entries.iterrows():
+        bed_time = bed_row["start_time"]
 
-                # Find the next 'Woke up' entry after this bed time
-                next_woke_ups = woke_up_entries[
-                    woke_up_entries["start_time"] > bed_time
-                ].sort_values("start_time")
+        # Find the next 'Woke up' entry after this bed time
+        next_woke_ups = woke_up_entries[woke_up_entries["start_time"] > bed_time]
 
-                if not next_woke_ups.empty:
-                    next_woke_up = next_woke_ups.iloc[0]
-                    woke_up_time = next_woke_up["start_time"]
-                    sleep_duration = (woke_up_time - bed_time).total_seconds() / 3600
+        if not next_woke_ups.empty:
+            next_woke_up = next_woke_ups.iloc[0]
+            woke_up_time = next_woke_up["start_time"]
 
-                    # Create a new sleep entry
-                    sleep_entry = {
-                        "event_name": "sleep",
-                        "calendar_name": "Meals, Supplements, Sleep",
-                        "start_time": bed_time,
-                        "end_time": woke_up_time,
-                        "duration": sleep_duration,
-                        "color": "green",
-                        "metadata": {
-                            "original_bed": bed_row["event_name"],
-                            "original_woke_up": next_woke_up["event_name"],
-                        },
-                        "date": bed_time.date(),
-                    }
+            # Safety check - don't create sleep entries longer than 24 hours
+            sleep_duration = (woke_up_time - bed_time).total_seconds() / 3600
+            if 0 < sleep_duration <= 24:
+                # Create a new sleep entry
+                sleep_entry = {
+                    "event_name": "sleep",
+                    "calendar_name": "Meals, Supplements, Sleep",
+                    "start_time": bed_time,
+                    "end_time": woke_up_time,
+                    "duration": sleep_duration,
+                    "color": "green",
+                    "metadata": {
+                        "original_bed": bed_row["event_name"],
+                        "original_woke_up": next_woke_up["event_name"],
+                    },
+                    "date": bed_time.date(),
+                }
 
-                    sleep_entries.append(sleep_entry)
+                sleep_entries.append(sleep_entry)
+
+                # Remove this woke up entry so it doesn't get matched with another bed
+                woke_up_entries = woke_up_entries.drop(next_woke_up.name)
 
     # Remove 'bed' and 'Woke up' entries
     print(f"Removing {len(df_copy[df_copy['event_name'].str.lower() == 'bed'])} bed entries")
@@ -193,39 +239,17 @@ def transform_data(df):
             split_df = pd.DataFrame(split_events)
             df_copy = pd.concat([df_copy, split_df], ignore_index=True)
 
-    # 1e. Handle book entries
-    print("Processing book entries...")
-    # First, create a mapping of first letter abbreviations to full titles
-    book_mapping = {}
-
-    # Find full book titles
-    for idx, row in df_copy.iterrows():
-        event_name = row["event_name"]
-        if isinstance(event_name, str) and event_name.startswith("book:"):
-            full_title = event_name.replace("book:", "").strip()
-            if full_title:
-                first_letter = full_title[0].lower()
-                book_mapping[first_letter] = full_title
-
-    # Transform book entries
-    for idx, row in df_copy.iterrows():
-        event_name = row["event_name"]
-        if isinstance(event_name, str):
-            # Look for abbreviations like '12rfl'
-            match = re.match(r"^([a-zA-Z]).*?$", event_name)
-            if match and match.group(1).lower() in book_mapping:
-                first_letter = match.group(1).lower()
-                full_title = book_mapping[first_letter]
-                df_copy.at[idx, "event_name"] = f"book: {first_letter}"
-
-                if isinstance(row["metadata"], dict):
-                    row["metadata"]["full_book_title"] = full_title
-                    df_copy.at[idx, "metadata"] = row["metadata"]
-                else:
-                    df_copy.at[idx, "metadata"] = {"full_book_title": full_title}
-
     print(f"Transformation complete. Final dataframe has {len(df_copy)} entries.")
     return df_copy
+
+
+calendar_dir = "data/Calendar Takeout/Calendar/"
+df = parse_ics_files(calendar_dir)
+df_copy = df.copy()
+t_df = transform_data(df)
+plt.hist(t_df.query('event_name=="Sleep"')["start_time"])
+
+# %%
 
 
 # Analysis functions
@@ -242,6 +266,13 @@ def analyze_time_by_calendar(df, start_date, end_date, period="week"):
             filtered_df.groupby(["year", "week", "calendar_name"])["duration"].sum().reset_index()
         )
         result = result.sort_values(["year", "week", "duration"], ascending=[True, True, False])
+
+        # Print summary stats
+        print(
+            f"Weekly analysis: Found data for {result['year'].nunique()} years and"
+            f" {result['week'].nunique()} weeks"
+        )
+
     elif period == "month":
         filtered_df["month"] = filtered_df["start_time"].dt.month
         filtered_df["year"] = filtered_df["start_time"].dt.year
@@ -249,9 +280,26 @@ def analyze_time_by_calendar(df, start_date, end_date, period="week"):
             filtered_df.groupby(["year", "month", "calendar_name"])["duration"].sum().reset_index()
         )
         result = result.sort_values(["year", "month", "duration"], ascending=[True, True, False])
+
+        # Print summary stats
+        print(
+            f"Monthly analysis: Found data for {result['year'].nunique()} years and"
+            f" {result['month'].nunique()} months"
+        )
+
     else:  # all time
         result = filtered_df.groupby(["calendar_name"])["duration"].sum().reset_index()
         result = result.sort_values("duration", ascending=False)
+
+        # Print summary stats
+        print(f"All-time analysis: Found data for {len(result)} calendars")
+
+    # Debug info
+    if result.empty:
+        print(f"WARNING: No data found for {period} analysis")
+    else:
+        print(f"First few rows of {period} analysis result:")
+        print(result.head(3))
 
     return result
 
@@ -313,14 +361,35 @@ def plot_calendar_scatter(df, calendar_name, start_date, end_date):
         (df["calendar_name"] == calendar_name)
         & (df["start_time"] >= start_date)
         & (df["start_time"] <= end_date)
+        & (df["start_time"] <= datetime.now())
     ].copy()
+
+    print(f"Plotting calendar scatter for {calendar_name}: {len(filtered_df)} events")
+
+    if filtered_df.empty:
+        # Create an empty plot with a message if no data
+        fig, ax = plt.subplots(figsize=(12, 8))
+        ax.text(
+            0.5,
+            0.5,
+            f"No data for {calendar_name} in selected date range",
+            horizontalalignment="center",
+            verticalalignment="center",
+            transform=ax.transAxes,
+            fontsize=14,
+        )
+        ax.set_title(f"Time Spent on {calendar_name} Events")
+        ax.set_xlabel("Date")
+        ax.set_ylabel("Duration (hours)")
+        plt.tight_layout()
+        return fig
 
     filtered_df["date"] = filtered_df["start_time"].dt.date
 
     # Aggregate by date and event name
     agg_df = filtered_df.groupby(["date", "event_name"])["duration"].sum().reset_index()
 
-    plt.figure(figsize=(12, 8))
+    fig, ax = plt.subplots(figsize=(12, 8))
     scatter = sns.scatterplot(
         data=agg_df,
         x="date",
@@ -329,11 +398,12 @@ def plot_calendar_scatter(df, calendar_name, start_date, end_date):
         size="duration",
         sizes=(20, 200),
         alpha=0.7,
+        ax=ax,
     )
 
-    plt.title(f"Time Spent on {calendar_name} Events")
-    plt.xlabel("Date")
-    plt.ylabel("Duration (hours)")
+    ax.set_title(f"Time Spent on {calendar_name} Events")
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Duration (hours)")
     plt.xticks(rotation=45)
 
     # If there are too many unique event names, limit the legend
@@ -342,10 +412,10 @@ def plot_calendar_scatter(df, calendar_name, start_date, end_date):
         top_events = agg_df.groupby("event_name")["duration"].sum().nlargest(15).index
         legend_handles = [h for h, l in zip(handles, labels) if l in top_events]
         legend_labels = [l for l in labels if l in top_events]
-        plt.legend(legend_handles, legend_labels, title="Top 15 Events")
+        ax.legend(legend_handles, legend_labels, title="Top 15 Events")
 
     plt.tight_layout()
-    return plt
+    return fig
 
 
 def plot_drink_count(df, start_date, end_date):
@@ -367,14 +437,14 @@ def plot_drink_count(df, start_date, end_date):
     # Merge with date range to include zeros
     drink_counts = date_df.merge(drink_counts, on="date", how="left").fillna(0)
 
-    plt.figure(figsize=(12, 6))
-    plt.bar(drink_counts["date"], drink_counts["count"])
-    plt.title("Number of Drink Entries per Day")
-    plt.xlabel("Date")
-    plt.ylabel("Count")
+    fig, ax = plt.subplots(figsize=(12, 6))
+    ax.bar(drink_counts["date"], drink_counts["count"])
+    ax.set_title("Number of Drink Entries per Day")
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Count")
     plt.xticks(rotation=45)
     plt.tight_layout()
-    return plt
+    return fig
 
 
 def plot_waste_time_days(df, start_date, end_date):
@@ -422,14 +492,14 @@ def plot_waste_time_days(df, start_date, end_date):
     all_dates_df["wasted"] = all_dates_df["date"].isin(waste_days).astype(int)
 
     # Plot
-    plt.figure(figsize=(12, 6))
-    plt.bar(all_dates_df["date"], all_dates_df["wasted"], width=1.0)
-    plt.title("Days with >4 Hours of Continuous Waste Time")
-    plt.xlabel("Date")
-    plt.ylabel("Wasted (1=Yes, 0=No)")
-    plt.yticks([0, 1])
+    fig, ax = plt.subplots(figsize=(12, 6))
+    ax.bar(all_dates_df["date"], all_dates_df["wasted"], width=1.0)
+    ax.set_title("Days with >4 Hours of Continuous Waste Time")
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Wasted (1=Yes, 0=No)")
+    ax.set_yticks([0, 1])
     plt.tight_layout()
-    return plt
+    return fig
 
 
 def plot_sleep_and_naps(df, start_date, end_date):
@@ -465,17 +535,17 @@ def plot_sleep_and_naps(df, start_date, end_date):
     merged_df["total_rest"] = merged_df["sleep_hours"] + merged_df["nap_hours"]
 
     # Plot
-    plt.figure(figsize=(12, 8))
-    plt.plot(merged_df["date"], merged_df["sleep_hours"], label="Sleep", linewidth=2)
-    plt.plot(merged_df["date"], merged_df["nap_hours"], label="Naps", linewidth=2)
-    plt.plot(merged_df["date"], merged_df["total_rest"], label="Total Rest", linewidth=2.5)
-    plt.title("Sleep and Rest Time")
-    plt.xlabel("Date")
-    plt.ylabel("Hours")
-    plt.legend()
-    plt.grid(True, alpha=0.3)
+    fig, ax = plt.subplots(figsize=(12, 8))
+    ax.plot(merged_df["date"], merged_df["sleep_hours"], label="Sleep", linewidth=2)
+    ax.plot(merged_df["date"], merged_df["nap_hours"], label="Naps", linewidth=2)
+    ax.plot(merged_df["date"], merged_df["total_rest"], label="Total Rest", linewidth=2.5)
+    ax.set_title("Sleep and Rest Time")
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Hours")
+    ax.legend()
+    ax.grid(True, alpha=0.3)
     plt.tight_layout()
-    return plt
+    return fig
 
 
 def plot_gym_entries(df, start_date, end_date):
@@ -517,9 +587,9 @@ def plot_gym_entries(df, start_date, end_date):
     ax2.plot(gym_counts["date"], gym_counts["duration"], color=color, linewidth=2)
     ax2.tick_params(axis="y", labelcolor=color)
 
-    plt.title("Gym Entries and Duration")
+    ax1.set_title("Gym Entries and Duration")
     plt.tight_layout()
-    return plt
+    return fig
 
 
 # Function to save all plots
@@ -527,11 +597,27 @@ def save_plots(plots_dict, output_dir):
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    for name, plot in plots_dict.items():
-        filename = output_dir / f"{name}.png"
-        plot.savefig(filename)
-        plt.close(plot.figure)
-        print(f"Saved {filename}")
+    for name, plot_or_fig in plots_dict.items():
+        try:
+            filename = output_dir / f"{name}.png"
+
+            if callable(plot_or_fig):
+                # If it's a function, call it to get the figure
+                fig = plot_or_fig()
+                fig.savefig(filename)
+                plt.close(fig)
+            elif hasattr(plot_or_fig, "figure"):
+                # If it has a figure attribute (like Axes)
+                plot_or_fig.figure.savefig(filename)
+                plt.close(plot_or_fig.figure)
+            else:
+                # Assume it's a figure directly
+                plot_or_fig.savefig(filename)
+                plt.close(plot_or_fig)
+
+            print(f"Saved {filename}")
+        except Exception as e:
+            print(f"Error saving plot {name}: {e}")
 
 
 # Main function to run the analysis
@@ -545,20 +631,75 @@ def analyze_calendar_data(directory, start_date, end_date, output_dir="./calenda
     - end_date: End date for analysis (datetime object)
     - output_dir: Directory to save output plots and data
     """
+    # Define a fixed start date for consistent analysis - May 24, 2021
+    CONSISTENT_START = datetime(2021, 5, 24)
+    if start_date < CONSISTENT_START:
+        print(
+            f"Adjusting start date from {start_date} to {CONSISTENT_START} for consistent tracking"
+        )
+        start_date = CONSISTENT_START
+
     print(f"Analyzing calendar data from {start_date} to {end_date}")
+
+    # Verify directory path
+    directory = os.path.expanduser(directory)
+    if not os.path.exists(directory):
+        raise FileNotFoundError(f"Directory not found: {directory}")
+
+    print(f"Reading calendar files from: {directory}")
 
     # Create output directory
     output_dir = os.path.expanduser(output_dir)
     os.makedirs(output_dir, exist_ok=True)
+    print(f"Output will be saved to: {output_dir}")
 
     # Parse .ics files
     df = parse_ics_files(directory)
+
+    # Convert date columns to datetime if necessary
+    for col in ["start_time", "end_time"]:
+        if col in df.columns and not pd.api.types.is_datetime64_any_dtype(df[col]):
+            print(f"Converting {col} to datetime...")
+            df[col] = pd.to_datetime(df[col], errors="coerce")
+
+    # Print basic info
+    print(f"Parsed {len(df)} total events")
+    if not df.empty:
+        print(f"Full date range: {df['start_time'].min()} to {df['start_time'].max()}")
+    print(f"Calendars: {df['calendar_name'].unique()}")
+
+    # Filter events by date range - apply the consistent start date
+    print(f"Filtering events to date range {start_date} to {end_date}...")
+    before_count = len(df)
+    df = df[(df["start_time"] >= start_date) & (df["start_time"] <= end_date)]
+    after_count = len(df)
+    print(
+        f"Filtered from {before_count} to {after_count} events"
+        f" ({before_count - after_count} removed)"
+    )
+
+    if df.empty:
+        print("WARNING: No events found in the specified date range!")
+        print("Please check your date inputs and calendar data.")
+        return {
+            "dataframe": pd.DataFrame(),
+            "weekly_time": pd.DataFrame(),
+            "monthly_time": pd.DataFrame(),
+            "all_time": pd.DataFrame(),
+            "top_events_weekly": pd.DataFrame(),
+            "top_events_monthly": pd.DataFrame(),
+            "top_events_all": pd.DataFrame(),
+            "plots": {},
+        }
 
     # Save raw data
     df.to_csv(os.path.join(output_dir, "raw_calendar_data.csv"), index=False)
 
     # Apply transformations
     transformed_df = transform_data(df)
+
+    # Save transformed data
+    transformed_df.to_csv(os.path.join(output_dir, "transformed_calendar_data.csv"), index=False)
 
     # Save transformed data
     transformed_df.to_csv(os.path.join(output_dir, "transformed_calendar_data.csv"), index=False)
@@ -650,15 +791,16 @@ def analyze_calendar_data(directory, start_date, end_date, output_dir="./calenda
 # Example usage:
 if __name__ == "__main__":
     # Replace with actual directory path
-    calendar_dir = "~/Downloads/calendar-takeout-20250217T231511Z-001/Calendar/"
+    calendar_dir = "data/Calendar Takeout/Calendar/"
+    # df = parse_ics_files(calendar_dir)
 
     # Set your date range
     start_date = datetime(2023, 1, 1)
-    end_date = datetime(2025, 2, 17)
+    end_date = datetime(2025, 3, 10)
 
     # Run the analysis
     results = analyze_calendar_data(
-        calendar_dir, start_date, end_date, output_dir="~/calendar_analysis_results"
+        calendar_dir, start_date, end_date, output_dir="data/calendar_analysis_results"
     )
 
     print("Analysis complete!")
