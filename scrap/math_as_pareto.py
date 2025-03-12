@@ -35,11 +35,11 @@ import matplotlib.pyplot as plt
 from scipy.stats import norm, pareto, lognorm, cramervonmises
 
 np.random.seed(0)
-# N = 4_000_000 # math BAs
-N = 80_000  # professional mathematicians
+N = 4_000_000  # math BAs
+# N = 80_000  # professional mathematicians
 p_cutoff = 0.05
 cant_reject = []
-top_percent = 10
+top_percent = 1
 
 for cov in [0.2, 0.5, 0.7]:
     dims = np.unique(np.round(np.logspace(np.log10(2), np.log10(15), num=5)).astype(int))
