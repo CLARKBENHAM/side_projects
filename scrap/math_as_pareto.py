@@ -7,7 +7,7 @@ https://threadreaderapp.com/thread/1816459931995840984.html
 argues that
 "we observate high level math to be pareto distributed (eg. Terrance Tao v everyone"), if math was mostly genetic it'd be normal (there's few major genes, just small linear additive effects), therefore high level math isn't mostly genetic"
 
-The problem is looking at the top 10% or top 1% it's hard to distinguish a pareto from a log-normal distribution, and the assumption is' pareto is suspect.
+The problem is looking at the top 10% or top 1% it's hard to distinguish a pareto from a log-normal distribution, and the assumption its pareto is suspect.
 
 Eg if we assume high level math performance is the product of 3-7 features each correlated at 0.2-0.7, and we only care about top 10% then it's basically pareto.
 We can't tell the difference with the number of datapoints available to us.
@@ -35,12 +35,11 @@ import matplotlib.pyplot as plt
 from scipy.stats import norm, pareto, lognorm, cramervonmises
 
 np.random.seed(0)
-N = 4_000_000  # math BAs
-# N = 80_000  # professional mathematicians
-p_cutoff = 0.05
+# N = 4_000_000  # math BAs
+N = 80_000  # professional mathematicians
+p_cutoff = 0.1  # p-value above which can't prove they're different so generate graphs
+top_percent = 30  # what % of ability to graph
 cant_reject = []
-top_percent = 1
-
 for cov in [0.2, 0.5, 0.7]:
     dims = np.unique(np.round(np.logspace(np.log10(2), np.log10(15), num=5)).astype(int))
     std = 0.1
