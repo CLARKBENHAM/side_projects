@@ -37,8 +37,8 @@ from scipy.stats import norm, pareto, lognorm, cramervonmises
 np.random.seed(0)
 # N = 4_000_000  # math BAs
 N = 80_000  # professional mathematicians
-p_cutoff = 0.1  # p-value above which can't prove they're different so generate graphs
-top_percent = 30  # what % of ability to graph
+p_cutoff = 0.05  # p-value above which can't prove they're different so generate graphs
+top_percent = 50  # what % of ability to graph
 cant_reject = []
 for cov in [0.2, 0.5, 0.7]:
     dims = np.unique(np.round(np.logspace(np.log10(2), np.log10(15), num=5)).astype(int))
@@ -101,23 +101,41 @@ for cov in [0.2, 0.5, 0.7]:
         pdf_pareto = pareto.pdf(x, pareto_shape, loc=pareto_loc, scale=pareto_scale)
         pdf_lognorm = lognorm.pdf(x, lognorm_shape, loc=lognorm_loc, scale=lognorm_scale)
 
-        # Plot histogram and fitted PDFs.
-        plt.figure(figsize=(10, 6))
-        plt.hist(top10, bins=50, density=True, alpha=0.5, label=f"Top {top_percent}% Data")
-        plt.plot(x, pdf_norm, "r-", label=f"Normal fit\nμ={norm_mu:.2f}, σ={norm_sigma:.2f}")
-        plt.plot(x, pdf_pareto, "g-", label=f"Pareto fit\nshape={pareto_shape:.2f}")
-        plt.plot(
+        # Plot histogram and fitted PDFs with white background and dark text.
+        fig, ax = plt.subplots(figsize=(10, 6), facecolor="white")
+        ax.set_facecolor("white")
+
+        # Use a light gray color for the histogram bars so that text and lines stand out.
+        ax.hist(
+            top10,
+            bins=50,
+            density=True,
+            alpha=0.5,
+            label=f"Top {top_percent}% Data",
+            color="lightgray",
+            edgecolor="black",
+        )
+        ax.plot(x, pdf_norm, "r-", label=f"Normal fit\nμ={norm_mu:.2f}, σ={norm_sigma:.2f}")
+        ax.plot(x, pdf_pareto, "g-", label=f"Pareto fit\nshape={pareto_shape:.2f}")
+        ax.plot(
             x,
             pdf_lognorm,
             "b-",
             label=f"Lognormal fit\nshape={lognorm_shape:.2f}, scale={lognorm_scale:.2f}",
         )
-        plt.xlabel("Ability")
-        plt.ylabel("Density")
-        plt.title(
+
+        # Set labels and title with dark text.
+        ax.set_xlabel("Ability", color="black")
+        ax.set_ylabel("Density", color="black")
+        ax.set_title(
             f"Fitted Distributions for Top {top_percent}% Ability\n(Product of {d},"
-            f" {cov} Correlated Normals)"
+            f" {cov} Correlated Normals)",
+            color="black",
         )
-        plt.legend()
+
+        # Use a legend with a white background and dark border.
+        leg = ax.legend(facecolor="white", edgecolor="black")
+        plt.tight_layout()
         plt.show()
-    print([f"cov={i[0]}, dim={i[1]}" for i in cant_reject])
+
+        print([f"cov={i[0]}, dim={i[1]}" for i in cant_reject])
