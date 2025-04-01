@@ -1662,7 +1662,7 @@ if __name__ == "__main__":
         # Use the predefined variables if running in a notebook where they're already defined
         calendar_df = df.copy()
         work_df = work_data.copy()
-        phrase_list = ["gym", "chores", "porn", "jack", "friend"]
+        phrase_list = ["gym", "chores", "friend"]
 
         model, merged_data = regression_predict_work_sleep_breakpoints(
             calendar_df=calendar_df,

@@ -281,6 +281,7 @@ def compute_clark_duration_by_sleep_partition(calendar_df):
 # --- Usage ---
 # Compute Clark's daily duration using sleep partitions.
 calendar_df = df.copy()
+work_df = work_data.copy()
 clark_df = compute_clark_duration_by_sleep_partition(calendar_df)
 
 # Ensure work_df dates are date objects.
