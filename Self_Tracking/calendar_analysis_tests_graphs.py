@@ -240,3 +240,72 @@ def debug_sleep_patterns(df):
                 print(f"  {month}: {avg_gap:.2f} days")
 
     return {"consecutive_beds": consecutive_beds, "orphaned_beds": orphaned_beds}
+
+
+# %% Correlation between calendar and daily work tracker
+def partition_calendar_by_sleep_with_boundaries(df):
+    df = df.sort_values("start_time").reset_index(drop=True)
+    sleep_mask = df["event_name"].str.lower() == "sleep"
+    if not sleep_mask.any():
+        return []
+    sleep_indices = df.loc[sleep_mask].index.tolist()
+    partitions = []
+    for i, idx in enumerate(sleep_indices):
+        start_time = df.loc[idx, "start_time"]
+        sleep_date = start_time.date()
+        if i < len(sleep_indices) - 1:
+            end_time = df.loc[sleep_indices[i + 1], "start_time"]
+        else:
+            end_time = df["start_time"].max() + pd.Timedelta(seconds=1)
+        block = df[(df["start_time"] >= start_time) & (df["start_time"] < end_time)]
+        partitions.append(
+            {"date": sleep_date, "start_time": start_time, "end_time": end_time, "block": block}
+        )
+    return partitions
+
+
+def compute_clark_duration_by_sleep_partition(calendar_df):
+    partitions = partition_calendar_by_sleep_with_boundaries(calendar_df)
+    rows = []
+    for part in partitions:
+        d = part["date"]
+        block = part["block"]
+        # Sum duration for events in the Clark calendar
+        clark_duration = block.loc[
+            block["calendar_name"].str.lower() == "clark.benham@gmail.com", "duration"
+        ].sum()
+        rows.append({"date": d, "clark_duration": clark_duration})
+    return pd.DataFrame(rows)
+
+
+# --- Usage ---
+# Compute Clark's daily duration using sleep partitions.
+calendar_df = df.copy()
+clark_df = compute_clark_duration_by_sleep_partition(calendar_df)
+
+# Ensure work_df dates are date objects.
+work_df["date"] = pd.to_datetime(work_df["date"]).dt.date
+
+# Merge on the partition 'date'
+merged = pd.merge(work_df, clark_df, on="date", how="inner")
+
+# Compute the correlation between Clark's duration and Hours Working.
+correlation = merged["clark_duration"].corr(merged["Hours Working"])
+print("Correlation between Clark event duration (split by sleep) and Hours Working:", correlation)
+
+plt.title("difference in worksheet vs hours there")
+plt.hist(merged["clark_duration"] - merged["Hours Working"])
+print("More than 5 hours wrong")
+print(merged[(merged["clark_duration"] - merged["Hours Working"]) > 5])
+print(merged[(merged["clark_duration"] - merged["Hours Working"]) < -1])
+
+calendar_df["start_date"] = pd.to_datetime(calendar_df["start_time"])
+# Define the target date
+target_date = pd.to_datetime("2024-03-19").date()
+# Filter for calendar entries on March 19, 2024
+entries_mar19 = calendar_df[calendar_df["start_date"].dt.date == target_date]
+
+print(entries_mar19.query("calendar_name=='clark.benham@gmail.com'"))
+
+target_date = pd.to_datetime("2023-07-10").date()
+work_df[work_df["date"] == target_date]
