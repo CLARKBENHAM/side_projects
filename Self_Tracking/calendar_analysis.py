@@ -872,7 +872,6 @@ def load_work_summary(csv_file):
     return df
 
 
-# graph_activity_breakdown(df, average_for=28)
 if __name__ == "__main__":
     # Run tests.
     # run_tests()
@@ -928,12 +927,11 @@ if __name__ == "__main__":
     graph_sleep_nap(df, average_for=120)
 
     graph_gym_count(df, average_for=7)
-    graph_gym_count(df, average_for=28)
+    gym_data = graph_gym_count(df, average_for=28)
     graph_gym_count(df, average_for=100)
 
     # Most and least ever worked out and slept in a month
     # For Gym – using graph_gym_count
-    gym_data = graph_gym_count(df, average_for=28)
     most_worked_out = gym_data.loc[gym_data["count"].idxmax()]
     least_worked_out = gym_data.loc[gym_data["count"].idxmin()]
 
@@ -952,6 +950,7 @@ if __name__ == "__main__":
     print("Least slept month (28-day average) – based on total rest:")
     print(least_slept)
 
+    graph_activity_breakdown(df, average_for=28)
 
 # %%
 # Graphs including info from work tracking csv
@@ -1549,6 +1548,15 @@ def regression_predict_work_sleep_breakpoints(
     work_df_with_prev["last_week_productivity"] = work_df_with_prev["last_week_date"].map(
         date_to_productivity
     )
+    # date cutoffs featuers
+    threshold_date = pd.Timestamp("2023-07-22").date()
+    work_df_with_prev["after_hive"] = work_df_with_prev["date"].apply(
+        lambda d: 1 if d >= threshold_date else 0
+    )
+    threshold_date = pd.Timestamp("2024-08-24").date()
+    work_df_with_prev["after_mats"] = work_df_with_prev["date"].apply(
+        lambda d: 1 if d >= threshold_date else 0
+    )
     # Replace work_df with the enhanced version
     work_df = work_df_with_prev
 
@@ -1626,6 +1634,7 @@ def regression_predict_work_sleep_breakpoints(
         features.append(f"prev_{p}_count")
     features.append("book_over_1")
     features.append("prev_book_over_1")  # Include this since we added it
+    features += ["after_hive", "after_mats"]
 
     # Check all features exist
     missing_features = [f for f in features if f not in filtered.columns]
@@ -1662,7 +1671,7 @@ if __name__ == "__main__":
         # Use the predefined variables if running in a notebook where they're already defined
         calendar_df = df.copy()
         work_df = work_data.copy()
-        phrase_list = ["gym", "chores", "friend"]
+        phrase_list = ["gym", "chores", "friend", "drink"]
 
         model, merged_data = regression_predict_work_sleep_breakpoints(
             calendar_df=calendar_df,
