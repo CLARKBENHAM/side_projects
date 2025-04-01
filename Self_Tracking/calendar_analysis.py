@@ -866,7 +866,10 @@ if __name__ == "__main__":
     # Example usage (comment out tests if processing real calendar data)
     calendar_dir = "data/Calendar Takeout/Calendar/"
     start_date = datetime(2021, 5, 24)
-    end_date = datetime.combine(datetime.today(), datetime.max.time())
+    end_date = datetime(2025, 3, 11)
+    today_date = datetime.combine(datetime.today(), datetime.max.time())
+    if end_date != today_date:
+        print(f"INFO: Date cutoff  {end_date} is before today {today_date}")
     df = parse_ics_files(calendar_dir, start_date, end_date)
     _df = df.copy()
     # r = debug_sleep_patterns(df)
@@ -1392,3 +1395,285 @@ if __name__ == "__main__":
             plt.scatter(weekday_start[c2], weekday_start[c1], color=colors)
             plt.title(f"{c1}- {c2}")
             plt.show()
+
+# %% Regression prediction
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+from datetime import timedelta
+
+
+def regression_predict_work_sleep_breakpoints(
+    calendar_df,
+    work_df,
+    phrase_list=["gym", "jack", "porn"],
+    use_prev_day=True,
+    min_weekly_hours=10,
+):
+    """
+    Create a regression model to predict work productivity using calendar and work data.
+    Uses sleep events to split days.
+
+    Parameters:
+    -----------
+    calendar_df : DataFrame
+        Processed calendar data with events.
+    work_df : DataFrame
+        Work data with productivity values.
+    phrase_list : list of str
+        List of phrases to count in calendar events.
+    use_prev_day : bool
+        Whether to include previous day's features.
+    min_weekly_hours : float
+        Minimum hours worked in a week to include in analysis.
+
+    Returns:
+    --------
+    model : statsmodels.regression.linear_model.RegressionResultsWrapper
+        The fitted regression model.
+    merged : DataFrame
+        The merged data used for training.
+    """
+    # Make copies to avoid modifying original data
+    calendar_df = calendar_df.copy()
+    work_df = work_df.copy()
+
+    print(f"Calendar data shape: {calendar_df.shape}")
+    print(f"Work data shape: {work_df.shape}")
+
+    # First, ensure we have a date column that's properly normalized
+    if "date" not in calendar_df.columns:
+        calendar_df["date"] = pd.to_datetime(calendar_df["start_time"]).dt.date
+    else:
+        calendar_df["date"] = pd.to_datetime(calendar_df["date"]).dt.date
+
+    # Normalize work_df dates to ensure proper merging
+    work_df["date"] = pd.to_datetime(work_df["date"]).dt.date
+
+    # Add yesterday's productivity to work_df
+    work_df_with_prev = work_df.copy()
+    work_df_with_prev["yesterday_date"] = work_df_with_prev["date"] - timedelta(days=1)
+    # Create a mapping of date to productivity
+    date_to_productivity = dict(zip(work_df["date"], work_df["work_productivity"]))
+    # Add yesterday's productivity
+    work_df_with_prev["yesterday_productivity"] = work_df_with_prev["yesterday_date"].map(
+        date_to_productivity
+    )
+    # Replace work_df with the enhanced version
+    work_df = work_df_with_prev
+
+    # Check for sleep events
+    sleep_events = calendar_df[calendar_df["event_name"].str.lower() == "sleep"]
+    print(f"Found {len(sleep_events)} sleep events in calendar")
+
+    def partition_calendar_by_sleep(df, phrases):
+        """
+        Partition the calendar data by sleep times and extract features.
+        """
+        df = df.sort_values("start_time").reset_index(drop=True)
+
+        # Create a mask for sleep events
+        sleep_mask = df["event_name"].str.lower() == "sleep"
+
+        # If no sleep events found, return an empty dataframe with expected columns
+        if not sleep_mask.any():
+            print("No sleep events found in calendar data")
+            col_list = ["date"] + [f"{p}_count" for p in phrases] + ["book_over_1", "sleep_hours"]
+            return pd.DataFrame(columns=col_list)
+
+        # Get indices of sleep events
+        sleep_indices = df.loc[sleep_mask].index.tolist()
+        print(f"Processing {len(sleep_indices)} sleep events")
+
+        # Create partitions between consecutive sleep events
+        partitions = []
+        for i, idx in enumerate(sleep_indices):
+            # Use the date of the sleep event as the partition date
+            sleep_date = df.loc[idx, "start_time"].date()
+
+            # If this is the last sleep event, use all remaining data
+            if i == len(sleep_indices) - 1:
+                next_start = df["start_time"].max() + pd.Timedelta(seconds=1)
+            else:
+                next_start = df.loc[sleep_indices[i + 1], "start_time"]
+
+            # Get all events in this partition (including the sleep event itself)
+            start_time = df.loc[idx, "start_time"]
+            block = df[(df["start_time"] >= start_time) & (df["start_time"] < next_start)]
+
+            partitions.append({"date": sleep_date, "block": block})
+
+        # Extract features from each partition
+        rows = []
+        for part in partitions:
+            events = part["block"]
+            d = part["date"]
+            row = {"date": d}
+
+            # Add weekend indicator
+            row["is_weekend"] = 1 if pd.to_datetime(d).weekday() >= 5 else 0
+
+            # Count occurrences of each phrase
+            for phrase in phrases:
+                row[f"{phrase}_count"] = int(  # actually has
+                    events["event_name"].str.lower().str.contains(phrase.lower(), na=False).sum()
+                    > 0
+                )
+
+            # Check for book events over 1 hour
+            mask_book = events["event_name"].str.lower().str.contains("book:|read:", na=False)
+            book_duration = events.loc[mask_book, "duration"].sum() if mask_book.any() else 0
+            row["book_over_1"] = 1 if book_duration > 1 else 0
+
+            # Get sleep hours
+            mask_sleep = events["event_name"].str.lower() == "sleep"
+            row["sleep_hours"] = events.loc[mask_sleep, "duration"].sum() if mask_sleep.any() else 0
+
+            rows.append(row)
+
+        result_df = pd.DataFrame(rows)
+        print(f"Created {len(result_df)} day partitions from sleep events")
+        return result_df
+
+    # Extract calendar features
+    print("Extracting calendar features using sleep breakpoints...")
+    cal_features = partition_calendar_by_sleep(calendar_df, phrase_list)
+    print(cal_features.columns)
+
+    # Include previous day's features if requested
+    if use_prev_day and not cal_features.empty:
+        print("Adding previous day features...")
+        # Create a copy of features with dates shifted forward by 1 day
+        prev = cal_features.copy()
+        prev["date"] = prev["date"].apply(lambda d: (pd.to_datetime(d) + timedelta(days=1)).date())
+        # Rename columns for previous day
+        rename = {f"{p}_count": f"prev_{p}_count" for p in phrase_list}
+        rename["book_over_1"] = "prev_book_over_1"  # Add this to avoid duplicate
+        rename["sleep_hours"] = "prev_sleep_hours"
+        # Don't include is_weekend in previous day features
+        if "is_weekend" in prev.columns:
+            prev = prev.drop(columns=["is_weekend"])
+        prev = prev.rename(columns=rename)
+
+        print(prev.columns)
+        print(["date"] + list(rename.values()))
+        # Merge with current day features
+        cal_features = pd.merge(
+            cal_features, prev[["date"] + list(rename.values())], on="date", how="left"
+        )
+        cal_features.fillna(0, inplace=True)
+
+    # Merge calendar features with work data
+    print(f"Calendar features shape: {cal_features.shape}, Work data shape: {work_df.shape}")
+    merged = pd.merge(work_df, cal_features, on="date", how="inner")
+    print(f"Merged data shape: {merged.shape}")
+
+    # If merged data is empty, return early
+    if merged.empty:
+        print("ERROR: No matching dates between calendar features and work data")
+        print("Date range in work data:", min(work_df["date"]), "to", max(work_df["date"]))
+        if not cal_features.empty:
+            print(
+                "Date range in calendar features:",
+                min(cal_features["date"]),
+                "to",
+                max(cal_features["date"]),
+            )
+        return
+
+    # Add week column and filter by weekly hours threshold
+    merged["week"] = pd.to_datetime(merged["date"]).dt.to_period("W")
+    weekly_hours = merged.groupby("week")["Hours Working"].transform("sum")
+    filtered = merged[(merged["work_productivity"] > 0) & (weekly_hours >= min_weekly_hours)]
+
+    if filtered.empty:
+        print(
+            f"ERROR: No data points left after filtering for weeks with {min_weekly_hours}+ hours"
+        )
+        return None, merged
+
+    print(f"Filtered data shape: {filtered.shape}")
+
+    # Build feature list (avoiding duplicates)
+    features = ["sleep_hours", "prev_sleep_hours", "is_weekend"]
+    if "yesterday_productivity" in filtered.columns:
+        features.append("yesterday_productivity")
+    for p in phrase_list:
+        features.append(f"{p}_count")
+        features.append(f"prev_{p}_count")
+    features.append("book_over_1")
+    features.append("prev_book_over_1")  # Include this since we added it
+
+    # Check all features exist
+    missing_features = [f for f in features if f not in filtered.columns]
+    if missing_features:
+        print(f"WARNING: Missing features: {missing_features}")
+        features = [f for f in features if f in filtered.columns]
+
+    # Print feature list for debugging
+    print(f"Using features: {features}")
+
+    # Create model
+    X = filtered[features].copy()
+    nan_rows = X[X.isna().any(axis=1)]
+    print("Rows with NaN values:")
+    print(nan_rows)
+    # Replace NaN values with the mean of each column, eg start of previous days
+    X = X.fillna(X.mean())
+
+    X = sm.add_constant(X)
+    for y_col in ["Hours Working", "work_productivity"]:
+        print(f"Prediction for {y_col}")
+        y = filtered[y_col]
+        model = sm.OLS(y, X).fit()
+        # Print summary and return results
+        print(model.summary())
+    return model, filtered
+
+
+# Example usage
+if __name__ == "__main__":
+    # This section will run when the script is executed directly
+
+    try:
+        # Use the predefined variables if running in a notebook where they're already defined
+        calendar_df = df.copy()
+        work_df = work_data.copy()
+        phrase_list = ["gym", "chores", "friend"]
+
+        model, merged_data = regression_predict_work_sleep_breakpoints(
+            calendar_df=calendar_df,
+            work_df=work_df,
+            phrase_list=phrase_list,
+            use_prev_day=True,
+            min_weekly_hours=10,
+        )
+
+        if model is not None:
+            # The coefficients tell you how much each feature affects productivity
+            print("\nFeature Importance:")
+            for feature, coef in zip(model.params.index, model.params):
+                if feature != "const":
+                    sign = "+" if coef > 0 else ""
+                    print(f"{feature}: {sign}{coef:.4f}")
+
+            # Sort features by absolute importance
+            feature_importance = {
+                feature: coef
+                for feature, coef in zip(model.params.index, model.params)
+                if feature != "const"
+            }
+            sorted_features = sorted(
+                feature_importance.items(), key=lambda x: abs(x[1]), reverse=True
+            )
+
+            print("\nFeatures Ranked by Importance (absolute value):")
+            for feature, coef in sorted_features:
+                sign = "+" if coef > 0 else ""
+                print(f"{feature}: {sign}{coef:.4f}")
+
+    except NameError:
+        print(
+            "Run this in a context where 'df' and 'work_data' are defined, or modify the code to"
+            " load your data first."
+        )
