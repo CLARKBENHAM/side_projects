@@ -191,6 +191,7 @@ def process_overlaps(df):
                 alloc[j] += share
     events["adjusted_duration"] = alloc
     events["duration"] = events["adjusted_duration"]
+    del events["adjusted_duration"]
     return events
 
 
@@ -1537,17 +1538,23 @@ def regression_predict_work_sleep_breakpoints(
 
     # Add yesterday's productivity to work_df
     work_df_with_prev = work_df.copy()
-    work_df_with_prev["yesterday_date"] = work_df_with_prev["date"] - timedelta(days=1)
-    work_df_with_prev["last_week_date"] = work_df_with_prev["date"] - timedelta(days=7)
-    # Create a mapping of date to productivity
     date_to_productivity = dict(zip(work_df["date"], work_df["work_productivity"]))
-    # Add yesterday's productivity
-    work_df_with_prev["yesterday_productivity"] = work_df_with_prev["yesterday_date"].map(
-        date_to_productivity
-    )
-    work_df_with_prev["last_week_productivity"] = work_df_with_prev["last_week_date"].map(
-        date_to_productivity
-    )
+    for i in range(1, 8):
+        work_df_with_prev[f"{i}_days_ago"] = work_df_with_prev["date"] - timedelta(days=i)
+        work_df_with_prev[f"{i}_days_ago_prod"] = work_df_with_prev[f"{i}_days_ago"].map(
+            date_to_productivity
+        )
+        # work_df_with_prev["yesterday_date"] = work_df_with_prev["date"] - timedelta(days=1)
+        # work_df_with_prev["last_week_date"] = work_df_with_prev["date"] - timedelta(days=7)
+        # # Create a mapping of date to productivity
+        # date_to_productivity = dict(zip(work_df["date"], work_df["work_productivity"]))
+        # # Add yesterday's productivity
+        # work_df_with_prev["yesterday_productivity"] = work_df_with_prev["yesterday_date"].map(
+        #     date_to_productivity
+        # )
+        # work_df_with_prev["last_week_productivity"] = work_df_with_prev["last_week_date"].map(
+        #     date_to_productivity
+        # )
     # date cutoffs featuers
     threshold_date = pd.Timestamp("2023-07-22").date()
     work_df_with_prev["after_hive"] = work_df_with_prev["date"].apply(
@@ -1614,47 +1621,66 @@ def regression_predict_work_sleep_breakpoints(
     merged["week"] = pd.to_datetime(merged["date"]).dt.to_period("W")
     weekly_hours = merged.groupby("week")["Hours Working"].transform("sum")
     filtered = merged[(merged["work_productivity"] > 0) & (weekly_hours >= min_weekly_hours)]
+    duplicate_columns = merged.columns[merged.T.duplicated()]
+    print(f"Duplicate columns (keeping first): {list(duplicate_columns)}")
+    filtered = filtered.loc[:, ~filtered.columns.duplicated(keep="first")]
 
     if filtered.empty:
         print(
             f"ERROR: No data points left after filtering for weeks with {min_weekly_hours}+ hours"
         )
         return None, merged
-
     print(f"Filtered data shape: {filtered.shape}")
+    print(filtered.columns)
 
-    # Build feature list (avoiding duplicates)
-    features = ["sleep_hours", "prev_sleep_hours", "is_weekend"]
-    if "yesterday_productivity" in filtered.columns:
-        features.append("yesterday_productivity")
-    if "last_week_productivity" in filtered.columns:
-        features.append("last_week_productivity")
-    for p in phrase_list:
-        features.append(f"{p}_count")
-        features.append(f"prev_{p}_count")
-    features.append("book_over_1")
-    features.append("prev_book_over_1")  # Include this since we added it
-    features += ["after_hive", "after_mats"]
+    # # Build feature list (avoiding duplicates)
+    # features = ["sleep_hours", "prev_sleep_hours", "is_weekend"]
+    # if "yesterday_productivity" in filtered.columns:
+    #     features.append("yesterday_productivity")
+    # if "last_week_productivity" in filtered.columns:
+    #     features.append("last_week_productivity")
+    # for p in phrase_list:
+    #     features.append(f"{p}_count")
+    #     features.append(f"prev_{p}_count")
+    # features.append("book_over_1")
+    # features.append("prev_book_over_1")  # Include this since we added it
+    # features += ["after_hive", "after_mats"]
 
-    # Check all features exist
-    missing_features = [f for f in features if f not in filtered.columns]
-    if missing_features:
-        print(f"WARNING: Missing features: {missing_features}")
-        features = [f for f in features if f in filtered.columns]
+    # # Check all features exist
+    # missing_features = [f for f in features if f not in filtered.columns]
+    # if missing_features:
+    #     print(f"WARNING: Missing features: {missing_features}")
+    #     features = [f for f in features if f in filtered.columns]
 
-    # Print feature list for debugging
-    print(f"Using features: {features}")
+    # # Print feature list for debugging
+    # print(f"Using features: {features}")
 
     # Create model
-    X = filtered[features].copy()
+    X = filtered.select_dtypes(include=np.number)  # [features].copy()
+    print(X.columns)
+    print("Col not in regression", set(filtered.columns) - set(X.columns))
+
     nan_rows = X[X.isna().any(axis=1)]
     print("Rows with NaN values:")
     print(nan_rows)
     # Replace NaN values with the mean of each column, eg start of previous days
     X = X.fillna(X.mean())
 
+    pred_cols = ["Hours Working", "work_productivity"]
+    X = X.drop(columns=pred_cols + ["Value"])
+    numeric_df = X.select_dtypes(include=np.number)
+    corr_matrix = numeric_df.corr()
+    print(corr_matrix)
+    epsilon = 1e-10
+    regularized_corr = corr_matrix + np.eye(corr_matrix.shape[0]) * epsilon
+    inverse_corr = np.linalg.inv(regularized_corr)
+    print(
+        "var unexplained by other entries: ",
+        [(c, f"{1/i:.2f}") for c, i in zip(regularized_corr.columns, np.diag(inverse_corr))],
+    )
+
     X = sm.add_constant(X)
-    for y_col in ["Hours Working", "work_productivity"]:
+    for y_col in pred_cols:
         print(f"Prediction for {y_col}")
         y = filtered[y_col]
         model = sm.OLS(y, X).fit()
@@ -1671,13 +1697,13 @@ if __name__ == "__main__":
         # Use the predefined variables if running in a notebook where they're already defined
         calendar_df = df.copy()
         work_df = work_data.copy()
-        phrase_list = ["gym", "chores", "friend", "drink"]
+        phrase_list = ["gym", "chores", "friend"]
 
         model, merged_data = regression_predict_work_sleep_breakpoints(
             calendar_df=calendar_df,
             work_df=work_df,
             phrase_list=phrase_list,
-            use_prev_day=True,
+            use_prev_day=False,
             min_weekly_hours=10,
         )
 
