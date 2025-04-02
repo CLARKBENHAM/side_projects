@@ -1229,7 +1229,7 @@ if __name__ == "__main__":
     merged_data = scatter_sleep_vs_work_aggregated(sleep_data, work_data)
 
     # Only from tue or wed start of aggr
-    weekday_start = merged_data[merged_data["date"].dt.dayofweek.isin([1, 2])]
+    weekday_start = merged_data  # [merged_data["date"].dt.dayofweek.isin([1, 2])]
     for c1 in ["avg_work_productivity", "avg_hours_working"]:
         for c2 in ["total_rest", "sleep_time"]:
             plt.scatter(weekday_start[c2], weekday_start[c1])
@@ -1491,7 +1491,66 @@ def partition_calendar_by_sleep(df, phrases):
     return result_df
 
 
-def regression_predict_work_sleep_breakpoints(
+# Add to the imports at the top of your file
+from scipy.optimize import minimize_scalar
+import numpy as np
+
+
+def add_optimal_period_feature(df, date_column="date", y_col="work_productivity"):
+    """
+    Find the optimal period for a sine wave feature and add it to the dataframe.
+        (Didn't help with all other varian)
+    Parameters:
+    -----------
+    df : DataFrame
+        The dataframe containing the date column.
+    date_column : str
+        The name of the date column in the dataframe.
+
+    Returns:
+    --------
+    DataFrame
+        The dataframe with the added periodic features.
+    float
+        The optimal period found.
+    """
+    # Convert date to numeric (days since the earliest date)
+    df = df.copy()
+    df["day_number"] = (
+        pd.to_datetime(df[date_column]) - pd.to_datetime(df[date_column]).min()
+    ).dt.days
+
+    y = df[y_col]
+
+    # Function to evaluate period quality (negative R²)
+    def evaluate_period(period):
+        # Create sine and cosine features with the given period
+        df["sin_term"] = np.cos(2 * np.pi * df["day_number"] / period)
+        # df["cos_term"] = np.cos(2 * np.pi * df["day_number"] / period)
+
+        # Simple linear regression with these features
+        # X = sm.add_constant(df[["sin_term", "cos_term"]])
+        X = sm.add_constant(df[["sin_term"]])
+        model = sm.OLS(y, X).fit()
+
+        # Return negative R² (for minimization)
+        return -model.rsquared
+
+    # Search for optimal period between 1 and 365 days
+    result = minimize_scalar(evaluate_period, bounds=(1, 365), method="bounded")
+    # result = minimize_scalar(evaluate_period, bounds=(1, 50), method="bounded")
+    optimal_period = result.x
+
+    print(f"Optimal period found: {optimal_period:.2f} days R^2={-result.fun}")
+
+    # Add the final sine and cosine features with optimal period
+    df["sin_term"] = np.sin(2 * np.pi * df["day_number"] / optimal_period)
+    # df["cos_term"] = np.cos(2 * np.pi * df["day_number"] / optimal_period)
+
+    return df, optimal_period
+
+
+def regression_predict_work_from_sleep_breakpoints(
     calendar_df,
     work_df,
     phrase_list=["gym"],
@@ -1546,18 +1605,19 @@ def regression_predict_work_sleep_breakpoints(
         work_df_with_prev[f"{i}_days_ago_prod"] = work_df_with_prev[f"{i}_days_ago"].map(
             date_to_productivity
         )
-        # work_df_with_prev["yesterday_date"] = work_df_with_prev["date"] - timedelta(days=1)
-        # work_df_with_prev["last_week_date"] = work_df_with_prev["date"] - timedelta(days=7)
-        # # Create a mapping of date to productivity
-        # date_to_productivity = dict(zip(work_df["date"], work_df["work_productivity"]))
-        # # Add yesterday's productivity
-        # work_df_with_prev["yesterday_productivity"] = work_df_with_prev["yesterday_date"].map(
-        #     date_to_productivity
-        # )
-        # work_df_with_prev["last_week_productivity"] = work_df_with_prev["last_week_date"].map(
-        #     date_to_productivity
-        # )
-    # date cutoffs featuers
+    # work_df_with_prev["yesterday_date"] = work_df_with_prev["date"] - timedelta(days=1)
+    # work_df_with_prev["last_week_date"] = work_df_with_prev["date"] - timedelta(days=7)
+    # # Create a mapping of date to productivity
+    # date_to_productivity = dict(zip(work_df["date"], work_df["work_productivity"]))
+    # # Add yesterday's productivity
+    # work_df_with_prev["yesterday_productivity"] = work_df_with_prev["yesterday_date"].map(
+    #     date_to_productivity
+    # )
+    # work_df_with_prev["last_week_productivity"] = work_df_with_prev["last_week_date"].map(
+    #     date_to_productivity
+    # )
+
+    # date cutoffs features
     threshold_date = pd.Timestamp("2023-07-22").date()
     work_df_with_prev["after_hive"] = work_df_with_prev["date"].apply(
         lambda d: 1 if d >= threshold_date else 0
@@ -1635,27 +1695,9 @@ def regression_predict_work_sleep_breakpoints(
     print(f"Filtered data shape: {filtered.shape}")
     print(filtered.columns)
 
-    # # Build feature list (avoiding duplicates)
-    # features = ["sleep_hours", "prev_sleep_hours", "is_weekend"]
-    # if "yesterday_productivity" in filtered.columns:
-    #     features.append("yesterday_productivity")
-    # if "last_week_productivity" in filtered.columns:
-    #     features.append("last_week_productivity")
-    # for p in phrase_list:
-    #     features.append(f"{p}_count")
-    #     features.append(f"prev_{p}_count")
-    # features.append("book_over_1")
-    # features.append("prev_book_over_1")  # Include this since we added it
-    # features += ["after_hive", "after_mats"]
-
-    # # Check all features exist
-    # missing_features = [f for f in features if f not in filtered.columns]
-    # if missing_features:
-    #     print(f"WARNING: Missing features: {missing_features}")
-    #     features = [f for f in features if f in filtered.columns]
-
-    # # Print feature list for debugging
-    # print(f"Using features: {features}")
+    # # add periodic column term
+    # filtered, optimal_period = add_optimal_period_feature(filtered)
+    # print(f"Added periodic features with period of {optimal_period:.2f} days")
 
     # Create model
     X = filtered.select_dtypes(include=np.number)  # [features].copy()
@@ -1663,23 +1705,26 @@ def regression_predict_work_sleep_breakpoints(
     print("Col not in regression", set(filtered.columns) - set(X.columns))
 
     nan_rows = X[X.isna().any(axis=1)]
-    print("Rows with NaN values:")
-    print(nan_rows)
+    # print("Rows with NaN values:")
+    # print(nan_rows)
     # Replace NaN values with the mean of each column, eg start of previous days
     X = X.fillna(X.mean())
 
     pred_cols = ["Hours Working", "work_productivity"]
     X = X.drop(columns=pred_cols + ["Value"])
-    numeric_df = X.select_dtypes(include=np.number)
-    corr_matrix = numeric_df.corr()
-    print(corr_matrix)
-    epsilon = 1e-10
-    regularized_corr = corr_matrix + np.eye(corr_matrix.shape[0]) * epsilon
-    inverse_corr = np.linalg.inv(regularized_corr)
-    print(
-        "var unexplained by other entries: ",
-        [(c, f"{1/i:.2f}") for c, i in zip(regularized_corr.columns, np.diag(inverse_corr))],
-    )
+
+    print_var = False
+    if print_var:
+        numeric_df = X.select_dtypes(include=np.number)
+        corr_matrix = numeric_df.corr()
+        print(corr_matrix)
+        epsilon = 1e-10
+        regularized_corr = corr_matrix + np.eye(corr_matrix.shape[0]) * epsilon
+        inverse_corr = np.linalg.inv(regularized_corr)
+        print(
+            "var unexplained by other entries: ",
+            [(c, f"{1/i:.2f}") for c, i in zip(regularized_corr.columns, np.diag(inverse_corr))],
+        )
 
     X = sm.add_constant(X)
     for y_col in pred_cols:
@@ -1699,9 +1744,9 @@ if __name__ == "__main__":
         # Use the predefined variables if running in a notebook where they're already defined
         calendar_df = df.copy()
         work_df = work_data.copy()
-        phrase_list = ["gym", "chores", "friend"]
+        phrase_list = ["gym", "chores", "friend", "porn", "jack", "book", "twitter"]
 
-        model, merged_data = regression_predict_work_sleep_breakpoints(
+        model, merged_data = regression_predict_work_from_sleep_breakpoints(
             calendar_df=calendar_df,
             work_df=work_df,
             phrase_list=phrase_list,
