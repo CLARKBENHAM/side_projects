@@ -1222,7 +1222,7 @@ def scatter_sleep_vs_work_aggregated(sleep_data, work_data):
 
 
 if __name__ == "__main__":
-    sleep_data = graph_sleep_nap(df, average_for=3)
+    sleep_data = graph_sleep_nap(df, average_for=14)
     scatter_total_rest_vs_nap(sleep_data)
     scatter_total_rest_vs_clark(df, sleep_data)
 
@@ -1234,6 +1234,8 @@ if __name__ == "__main__":
         for c2 in ["total_rest", "sleep_time"]:
             plt.scatter(weekday_start[c2], weekday_start[c1])
             plt.title(f"{c1}- {c2}")
+            plt.xlabel(c2)
+            plt.ylabel(c1)
             plt.show()
 
 
