@@ -1600,7 +1600,8 @@ def regression_predict_work_from_sleep_breakpoints(
     # Add yesterday's productivity to work_df
     work_df_with_prev = work_df.copy()
     date_to_productivity = dict(zip(work_df["date"], work_df["work_productivity"]))
-    for i in range(1, 8):
+    # for i in range(1, 25):
+    for i in [1, 7]:
         work_df_with_prev[f"{i}_days_ago"] = work_df_with_prev["date"] - timedelta(days=i)
         work_df_with_prev[f"{i}_days_ago_prod"] = work_df_with_prev[f"{i}_days_ago"].map(
             date_to_productivity
@@ -1731,7 +1732,6 @@ def regression_predict_work_from_sleep_breakpoints(
         print(f"Prediction for {y_col}")
         y = filtered[y_col]
         model = sm.OLS(y, X).fit()
-        # Print summary and return results
         print(model.summary())
     return model, filtered
 
@@ -1744,7 +1744,16 @@ if __name__ == "__main__":
         # Use the predefined variables if running in a notebook where they're already defined
         calendar_df = df.copy()
         work_df = work_data.copy()
-        phrase_list = ["gym", "chores", "friend", "porn", "jack", "book", "twitter"]
+        phrase_list = [
+            # "gym",
+            # "chores",
+            "drink",  #
+            # "friend",
+            # "book",
+            "twitter",
+            "insta",
+            "meditation",  # seems wrong I do 1h less of work when I meditate, not sure what's happening.
+        ]
 
         model, merged_data = regression_predict_work_from_sleep_breakpoints(
             calendar_df=calendar_df,
@@ -1754,7 +1763,38 @@ if __name__ == "__main__":
             min_weekly_hours=10,
         )
 
-        if model is not None:
+        print("\n### Regression by Week  ###\n")
+        merged_data.drop(
+            columns=["is_weekend", "book_over_1"]
+            + [c for c in merged_data.columns if "days_ago" in c],
+            inplace=True,
+        )
+        agg_funcs = {}
+        for col in merged_data.columns:
+            if col == "week":
+                continue
+            elif col == "date":
+                agg_funcs[col] = "last"  # Take the last date of the week
+            elif col in ("after_hive", "after_mats", "value"):
+                # single var is more interpretable, also doesn't change with number of days
+                agg_funcs[col] = "mean"
+            else:
+                # number of days where counts >1
+                agg_funcs[col] = "sum"
+        # Apply the aggregation
+        weekly_data = merged_data.groupby("week").agg(agg_funcs).reset_index()
+        print(f"Weekly aggregated data shape: {weekly_data.shape}")
+        X = weekly_data.select_dtypes(include=np.number)  # [features].copy()
+        pred_cols = ["Hours Working", "work_productivity"]
+        X = X.drop(columns=pred_cols + ["Value"])
+        X = sm.add_constant(X)
+        for y_col in pred_cols:
+            print(f"Prediction for {y_col}")
+            y = weekly_data[y_col]
+            model = sm.OLS(y, X).fit()
+            print(model.summary())
+
+        if False and model is not None:
             # The coefficients tell you how much each feature affects productivity
             print("\nFeature Importance:")
             for feature, coef in zip(model.params.index, model.params):
@@ -1852,5 +1892,62 @@ if result is not None:
     print("10th percentile:", result["10th_percentile"])
     print("Median:", result["median"])
 
+
 # %%
-# Grouped by
+# Calculate the maximum number of days worked and maximum hours worked in any 2-week period from the work data.
+def analyze_work_intensity(work_df, window=14):
+    # Ensure date is datetime format
+    work_df = work_df.copy()
+    work_df["date"] = pd.to_datetime(work_df["date"])
+
+    # Create a day indicator column (1 for each day with work)
+    work_df["worked_day"] = (work_df["Hours Working"] >= 2).astype(int)
+
+    # Sort by date
+    work_df = work_df.sort_values("date")
+
+    # Create a date range covering the entire period
+    date_range = pd.date_range(start=work_df["date"].min(), end=work_df["date"].max(), freq="D")
+
+    # Create a complete daily dataframe with zeros for missing days
+    daily_df = pd.DataFrame({"date": date_range})
+    daily_df = daily_df.merge(
+        work_df[["date", "Hours Working", "worked_day"]], on="date", how="left"
+    ).fillna(0)
+
+    # Set up 14-day rolling windows (2 weeks)
+    rolling_days = daily_df["worked_day"].rolling(window=window).sum()
+    rolling_hours = daily_df["Hours Working"].rolling(window=window).sum()
+
+    # Find maximum values
+    max_days_worked = rolling_days.max()
+    max_hours_worked = rolling_hours.max()
+
+    # Find when these maximums occurred
+    max_days_date = daily_df.iloc[rolling_days.argmax()]["date"]
+    max_hours_date = daily_df.iloc[rolling_hours.argmax()]["date"]
+
+    return {
+        "max_days_worked": max_days_worked,
+        "max_days_period_end": max_days_date,
+        "max_days_period_start": max_days_date - pd.Timedelta(days=window + 1),
+        "max_hours_worked": max_hours_worked,
+        "max_hours_period_end": max_hours_date,
+        "max_hours_period_start": max_hours_date - pd.Timedelta(days=window + 1),
+    }
+
+
+# To use this function:
+window = 35
+results = analyze_work_intensity(work_df.tail(700), window)
+print(f"Maximum days worked in any {window}-day period: {results['max_days_worked']}")
+print(
+    f"This occurred in the period: {results['max_days_period_start']} to"
+    f" {results['max_days_period_end']}"
+)
+print(f"Maximum hours worked in any {window}-day period: {results['max_hours_worked']:.1f}")
+print(
+    f"This occurred in the period: {results['max_hours_period_start']} to"
+    f" {results['max_hours_period_end']}"
+)
+# %%
