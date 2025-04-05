@@ -279,34 +279,37 @@ def compute_clark_duration_by_sleep_partition(calendar_df):
 
 
 # --- Usage ---
-# Compute Clark's daily duration using sleep partitions.
-calendar_df = df.copy()
-work_df = work_data.copy()
-clark_df = compute_clark_duration_by_sleep_partition(calendar_df)
+if __name__ == "__main__":
+    # Compute Clark's daily duration using sleep partitions.
+    calendar_df = df.copy()
+    work_df = work_data.copy()
+    clark_df = compute_clark_duration_by_sleep_partition(calendar_df)
 
-# Ensure work_df dates are date objects.
-work_df["date"] = pd.to_datetime(work_df["date"]).dt.date
+    # Ensure work_df dates are date objects.
+    work_df["date"] = pd.to_datetime(work_df["date"]).dt.date
 
-# Merge on the partition 'date'
-merged = pd.merge(work_df, clark_df, on="date", how="inner")
+    # Merge on the partition 'date'
+    merged = pd.merge(work_df, clark_df, on="date", how="inner")
 
-# Compute the correlation between Clark's duration and Hours Working.
-correlation = merged["clark_duration"].corr(merged["Hours Working"])
-print("Correlation between Clark event duration (split by sleep) and Hours Working:", correlation)
+    # Compute the correlation between Clark's duration and Hours Working.
+    correlation = merged["clark_duration"].corr(merged["Hours Working"])
+    print(
+        "Correlation between Clark event duration (split by sleep) and Hours Working:", correlation
+    )
 
-plt.title("difference in worksheet vs hours there")
-plt.hist(merged["clark_duration"] - merged["Hours Working"])
-print("More than 5 hours wrong")
-print(merged[(merged["clark_duration"] - merged["Hours Working"]) > 5])
-print(merged[(merged["clark_duration"] - merged["Hours Working"]) < -1])
+    plt.title("difference in worksheet vs hours there")
+    plt.hist(merged["clark_duration"] - merged["Hours Working"])
+    print("More than 5 hours wrong")
+    print(merged[(merged["clark_duration"] - merged["Hours Working"]) > 5])
+    print(merged[(merged["clark_duration"] - merged["Hours Working"]) < -1])
 
-calendar_df["start_date"] = pd.to_datetime(calendar_df["start_time"])
-# Define the target date
-target_date = pd.to_datetime("2024-03-19").date()
-# Filter for calendar entries on March 19, 2024
-entries_mar19 = calendar_df[calendar_df["start_date"].dt.date == target_date]
+    calendar_df["start_date"] = pd.to_datetime(calendar_df["start_time"])
+    # Define the target date
+    target_date = pd.to_datetime("2024-03-19").date()
+    # Filter for calendar entries on March 19, 2024
+    entries_mar19 = calendar_df[calendar_df["start_date"].dt.date == target_date]
 
-print(entries_mar19.query("calendar_name=='clark.benham@gmail.com'"))
+    print(entries_mar19.query("calendar_name=='clark.benham@gmail.com'"))
 
-target_date = pd.to_datetime("2023-07-10").date()
-work_df[work_df["date"] == target_date]
+    target_date = pd.to_datetime("2023-07-10").date()
+    work_df[work_df["date"] == target_date]
