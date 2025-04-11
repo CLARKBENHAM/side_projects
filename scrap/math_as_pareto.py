@@ -28,6 +28,10 @@ Not really.
 
 So while the argument works for ruling out the effect of the predictiveness of general intelligence, it doesn't rule out genes.
 It started by falsely assuming math talent is pareto distributed when it could actually be log-normal.
+
+But use https://arxiv.org/abs/0706.1062 for fitting to power law data instead?
+https://gwern.net/doc/iq/ses/1957-shockley.pdf example of multiplication of abilities. But difference in "research value" and "raw math problem solving value"
+
 """
 
 import numpy as np
