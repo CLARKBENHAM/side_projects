@@ -1,4 +1,4 @@
-# %%
+# %% use conda env: new_base
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -19,7 +19,7 @@ color_map = {
     "Meals, Supplements, Sleep": "green",
     "Waste Time": "red",
     "clark.benham@gmail.com": "blue",
-    "cb5ye@virginia.edu": "blue",
+    "cb5ye@virginia.edu": "blue",  # anki used to be here but was moved over
 }
 
 
@@ -206,7 +206,7 @@ def _utc_date(dt):
     return dt
 
 
-def overall_time_summary(df, start_date, end_date):
+def overall_time_summary(df, start_date, end_date, split_on_colon=False):
     start_date = _utc_date(start_date)
     end_date = _utc_date(end_date)
 
@@ -214,17 +214,24 @@ def overall_time_summary(df, start_date, end_date):
     df_filtered = df[(df["start_time"] >= start_date) & (df["end_time"] <= end_date)].copy()
 
     # Optionally, filter out implausible book events.
-    # For example, if a book event lasts more than 2 hours, it is likely an error.
+    # For example, if a book event lasts more than 7 hours, it is likely an error.
     df_filtered = df_filtered[
         ~(
             (df_filtered["event_name"].str.lower().str.startswith("book:"))
-            & (df_filtered["duration"] > 2)
+            & (df_filtered["duration"] > 7)
         )
     ]
 
     # Group by event_name and compute total time and count of separate entries.
+    if split_on_colon:
+        df_filtered["event_name_lower"] = (
+            df["event_name"].str.lower().apply(lambda s: s.split(":")[0])
+        )
+    else:
+        df_filtered["event_name_lower"] = df_filtered["event_name"].str.lower()
+
     summary = (
-        df_filtered.groupby("event_name")
+        df_filtered.groupby("event_name_lower")
         .agg(total_time=("duration", "sum"), count=("duration", "count"))
         .reset_index()
     )
@@ -236,11 +243,11 @@ def overall_time_summary(df, start_date, end_date):
 
     print("Overall Time Summary (Top 20 by Hours):")
     for _, row in summary_hours.iterrows():
-        print(f"  {row['event_name']}: {row['total_time']:.2f} hours, {row['count']} entries")
+        print(f"  {row['event_name_lower']}: {row['total_time']:.2f} hours, {row['count']} entries")
 
     print("\nOverall Time Summary (Top 20 by Entry Count):")
     for _, row in summary_count.iterrows():
-        print(f"  {row['event_name']}: {row['count']} entries, {row['total_time']:.2f} hours")
+        print(f"  {row['event_name_lower']}: {row['count']} entries, {row['total_time']:.2f} hours")
 
     return summary_hours, summary_count
 
