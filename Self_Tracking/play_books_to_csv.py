@@ -117,7 +117,7 @@ def save_to_csv(
     with open(output_file, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
-        writer.writerows(books)
+        writer.writerows([{k: re.sub("\s+", " ", v) for k, v in d.items()} for d in books])
 
     print(f"Found {len(books)} finished books. Information saved to {output_file}")
 
@@ -133,3 +133,32 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+def f():
+"""Extract info from google inspect page directly; but note it mixes up titles and authors:
+
+(() => {
+  const csv = prompt('Paste your CSV (including header) here');
+  if (!csv) return;
+  const lines = csv.trim().split('\n').filter(Boolean);
+  const header = lines[0].match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+  const titleIdx = header.indexOf('title');
+  const csvTitles = new Set(
+    lines.slice(1).map(line => {
+      const cols = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+      return cols[titleIdx].replace(/^"|"$/g, '').trim();
+    })
+  );
+  const uiBooks = Array.from(document.querySelectorAll('a.title')).map((t, i) => {
+    const title = t.getAttribute('title').trim();
+    const authorEl = document.querySelectorAll('a.author.ng-star-inserted')[i];
+    const author = authorEl?.getAttribute('title').trim() || '';
+    return { title, author };
+  });
+  const missing = uiBooks.filter(b => !csvTitles.has(b.title));
+  console.table(missing);
+  copy(JSON.stringify(missing));
+  console.log(`Copied ${missing.length} missing books as JSON`);
+})();
+"""
+    pass
