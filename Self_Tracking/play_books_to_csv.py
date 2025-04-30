@@ -31,8 +31,25 @@ def extract_book_info(html_file):
     )
 
     # Extract bookshelf
-    bookshelf_elems = soup.select("h2 + div")
-    bookshelf = bookshelf_elems[-1].text.strip() if bookshelf_elems else "Unknown Shelf"
+    multi_shelves = ("Great Books", "Bad Books")  # don't want this as single category
+    bookshelf = "Unknown Shelf"
+    target_h2 = soup.find("h2", string="Custom shelves with this book")
+    if target_h2:
+        # Start from the h2 element and look for following siblings
+        current_element = target_h2.next_sibling
+        while current_element:
+            # Check if it's a div
+            if current_element.name == "div":
+                # Add the text content of this div
+                if current_element.get_text(strip=True) not in multi_shelves:
+                    bookshelf = current_element.get_text(strip=True)
+                    break
+            elif current_element.name is not None and current_element.name != "div":
+                # If we encounter any non-div element (apart from navigable strings), break
+                break
+
+            # Move to the next element
+            current_element = current_element.next_sibling
 
     # Extract modification timestamps
     timestamps = []
@@ -53,7 +70,6 @@ def extract_book_info(html_file):
 
     earliest_timestamp = min(timestamps) if timestamps else None
     latest_timestamp = max(timestamps) if timestamps else None
-
     return {
         "title": title,
         "author": author,
@@ -134,31 +150,32 @@ def main():
 if __name__ == "__main__":
     main()
 
-def f():
-"""Extract info from google inspect page directly; but note it mixes up titles and authors:
 
-(() => {
-  const csv = prompt('Paste your CSV (including header) here');
-  if (!csv) return;
-  const lines = csv.trim().split('\n').filter(Boolean);
-  const header = lines[0].match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
-  const titleIdx = header.indexOf('title');
-  const csvTitles = new Set(
-    lines.slice(1).map(line => {
-      const cols = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
-      return cols[titleIdx].replace(/^"|"$/g, '').trim();
-    })
-  );
-  const uiBooks = Array.from(document.querySelectorAll('a.title')).map((t, i) => {
-    const title = t.getAttribute('title').trim();
-    const authorEl = document.querySelectorAll('a.author.ng-star-inserted')[i];
-    const author = authorEl?.getAttribute('title').trim() || '';
-    return { title, author };
-  });
-  const missing = uiBooks.filter(b => !csvTitles.has(b.title));
-  console.table(missing);
-  copy(JSON.stringify(missing));
-  console.log(`Copied ${missing.length} missing books as JSON`);
-})();
-"""
+def f():
+    """Extract info from google inspect page directly; but note it mixes up titles and authors:
+
+    (() => {
+      const csv = prompt('Paste your CSV (including header) here');
+      if (!csv) return;
+      const lines = csv.trim().split('\n').filter(Boolean);
+      const header = lines[0].match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+      const titleIdx = header.indexOf('title');
+      const csvTitles = new Set(
+        lines.slice(1).map(line => {
+          const cols = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+          return cols[titleIdx].replace(/^"|"$/g, '').trim();
+        })
+      );
+      const uiBooks = Array.from(document.querySelectorAll('a.title')).map((t, i) => {
+        const title = t.getAttribute('title').trim();
+        const authorEl = document.querySelectorAll('a.author.ng-star-inserted')[i];
+        const author = authorEl?.getAttribute('title').trim() || '';
+        return { title, author };
+      });
+      const missing = uiBooks.filter(b => !csvTitles.has(b.title));
+      console.table(missing);
+      copy(JSON.stringify(missing));
+      console.log(`Copied ${missing.length} missing books as JSON`);
+    })();
+    """
     pass
