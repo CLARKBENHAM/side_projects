@@ -1586,30 +1586,24 @@ def average_over_percentile_range(X, y, l1=20, h1=40, l2=60, h2=80):
 
     # Print comparison
     print("Average values comparison:")
-    print("-" * 70)
+    print("-" * 90)
     print(
-        f"{'Variable':<20} {f'{l1}-{h1}th %ile':<15} {f'{l2}-{h2}th %ile':<15} {'Difference':<15}"
+        f"{'Variable':<20} {f'{l1}-{h1}th %ile':<15} {f'{l2}-{h2}th %ile':<15} {'Difference':<15} {'% Change':<10}"
     )
-    print("-" * 70)
+    print("-" * 90)
 
     for i, col in enumerate(column_names):
         val_1 = means_1[i]
         val_2 = means_2[i]
         diff = val_2 - val_1
-        print(f"{col:<20} {val_1:<15.3f} {val_2:<15.3f} {diff:<15.3f}")
-
-    # Calculate percentage changes
-    print(f"\nPercentage changes from {l1}-{h1}th to {l2}-{h2}th percentile:")
-    print("-" * 70)
-    for i, col in enumerate(column_names):
-        val_1 = means_1[i]
-        val_2 = means_2[i]
 
         if val_1 != 0:
             pct_change = ((val_2 - val_1) / abs(val_1)) * 100
-            print(f"{col:<20} {pct_change:>10.1f}%")
+            pct_str = f"{pct_change:.1f}%"
         else:
-            print(f"{col:<20} {'N/A':>10}")
+            pct_str = "N/A"
+
+        print(f"{col:<20} {val_1:<15.3f} {val_2:<15.3f} {diff:<15.3f} {pct_str:<10}")
 
 
 def regression_predict_work_from_sleep_breakpoints(
@@ -1793,10 +1787,9 @@ def regression_predict_work_from_sleep_breakpoints(
     for y_col in pred_cols:
         print(f"Prediction for {y_col}")
         y = filtered[y_col]
-        # model = sm.OLS(y, X).fit()
-        model = sm.QuantReg(y, X).fit(q=0.5)  # equiv to min l1 norm
+        model = sm.OLS(y, X).fit()
+        # model = sm.QuantReg(y, X).fit(q=0.5)  # equiv to min l1 norm the median day
         # model = sm.QuantReg(y, X).fit(q=0.75)  # what predicts a 75th  percentile day?
-        # model = smf.quantreg('work_hours ~ sleep + exercise + ...', data=df)
         print(model.summary())
     return model, filtered
 
@@ -1836,7 +1829,6 @@ if __name__ == "__main__":
             print("\n" + y_name + "\n")
             average_over_percentile_range(X, merged_data[y_name], l1=20, h1=40, l2=60, h2=80)
             average_over_percentile_range(X, merged_data[y_name], l1=10, h1=20, l2=80, h2=90)
-    # %%
     print("\n### Regression by Week  ###\n")
     merged_data.drop(
         columns=["is_weekend", "book_over_1"] + [c for c in merged_data.columns if "days_ago" in c],
@@ -1864,9 +1856,9 @@ if __name__ == "__main__":
     for y_col in pred_cols:
         print(f"Prediction for {y_col}")
         y = weekly_data[y_col]
-        # model = sm.OLS(y, X).fit()  # l2
-        model = sm.QuantReg(y, X).fit(q=0.5)  # l1
-        # print(model.summary())
+        model = sm.OLS(y, X).fit()  # l2
+        # model = sm.QuantReg(y, X).fit(q=0.5)  # median
+        print(model.summary())
 
     if False and model is not None:
         # The coefficients tell you how much each feature affects productivity
