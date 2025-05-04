@@ -1557,6 +1557,61 @@ def add_optimal_period_feature(df, date_column="date", y_col="work_productivity"
     return df, optimal_period
 
 
+def average_over_percentile_range(X, y, l1=20, h1=40, l2=60, h2=80):
+    # Calculate percentiles for y
+    p_l1 = np.percentile(y, l1)
+    p_h1 = np.percentile(y, h1)
+    p_l2 = np.percentile(y, l2)
+    p_h2 = np.percentile(y, h2)
+
+    # Create masks for the two percentile ranges
+    mask_1 = (y >= p_l1) & (y <= p_h1)
+    mask_2 = (y >= p_l2) & (y <= p_h2)
+
+    # Filter data for each range
+    X_1 = X[mask_1]
+    y_1 = y[mask_1]
+    X_2 = X[mask_2]
+    y_2 = y[mask_2]
+
+    # Calculate means for each column in X and y
+    means_1 = np.append(X_1.mean(axis=0), y_1.mean())
+    means_2 = np.append(X_2.mean(axis=0), y_2.mean())
+
+    # If X has column names (e.g., if it's a DataFrame), use them; otherwise use indices
+    if hasattr(X, "columns"):
+        column_names = list(X.columns) + ["y"]
+    else:
+        column_names = [f"X{i}" for i in range(X.shape[1])] + ["y"]
+
+    # Print comparison
+    print("Average values comparison:")
+    print("-" * 70)
+    print(
+        f"{'Variable':<20} {f'{l1}-{h1}th %ile':<15} {f'{l2}-{h2}th %ile':<15} {'Difference':<15}"
+    )
+    print("-" * 70)
+
+    for i, col in enumerate(column_names):
+        val_1 = means_1[i]
+        val_2 = means_2[i]
+        diff = val_2 - val_1
+        print(f"{col:<20} {val_1:<15.3f} {val_2:<15.3f} {diff:<15.3f}")
+
+    # Calculate percentage changes
+    print(f"\nPercentage changes from {l1}-{h1}th to {l2}-{h2}th percentile:")
+    print("-" * 70)
+    for i, col in enumerate(column_names):
+        val_1 = means_1[i]
+        val_2 = means_2[i]
+
+        if val_1 != 0:
+            pct_change = ((val_2 - val_1) / abs(val_1)) * 100
+            print(f"{col:<20} {pct_change:>10.1f}%")
+        else:
+            print(f"{col:<20} {'N/A':>10}")
+
+
 def regression_predict_work_from_sleep_breakpoints(
     calendar_df,
     work_df,
@@ -1712,7 +1767,7 @@ def regression_predict_work_from_sleep_breakpoints(
     print(X.columns)
     print("Col not in regression", set(filtered.columns) - set(X.columns))
 
-    nan_rows = X[X.isna().any(axis=1)]
+    # nan_rows = X[X.isna().any(axis=1)]
     # print("Rows with NaN values:")
     # print(nan_rows)
     # Replace NaN values with the mean of each column, eg start of previous days
@@ -1738,7 +1793,10 @@ def regression_predict_work_from_sleep_breakpoints(
     for y_col in pred_cols:
         print(f"Prediction for {y_col}")
         y = filtered[y_col]
-        model = sm.OLS(y, X).fit()
+        # model = sm.OLS(y, X).fit()
+        model = sm.QuantReg(y, X).fit(q=0.5)  # equiv to min l1 norm
+        # model = sm.QuantReg(y, X).fit(q=0.75)  # what predicts a 75th  percentile day?
+        # model = smf.quantreg('work_hours ~ sleep + exercise + ...', data=df)
         print(model.summary())
     return model, filtered
 
@@ -1747,88 +1805,90 @@ def regression_predict_work_from_sleep_breakpoints(
 if __name__ == "__main__":
     # This section will run when the script is executed directly
 
-    try:
-        # Use the predefined variables if running in a notebook where they're already defined
-        calendar_df = df.copy()
-        work_df = work_data.copy()
-        phrase_list = [
-            # "gym",
-            # "chores",
-            "drink",  #
-            # "friend",
-            # "book",
-            "twitter",
-            "insta",
-            "meditation",  # seems wrong I do 1h less of work when I meditate, not sure what's happening.
-        ]
+    # Use the predefined variables if running in a notebook where they're already defined
+    calendar_df = df.copy()
+    work_df = work_data.copy()
+    phrase_list = [
+        "gym",
+        "chores",
+        "drink",  #
+        "friend",
+        "book",
+        "twitter",
+        "insta",
+        "jack",
+        "porn",
+        "meditation",  # seems wrong I do 1h less of work when I meditate, not sure what's happening.
+    ]
 
-        model, merged_data = regression_predict_work_from_sleep_breakpoints(
-            calendar_df=calendar_df,
-            work_df=work_df,
-            phrase_list=phrase_list,
-            use_prev_day=False,
-            min_weekly_hours=10,
-        )
-
-        print("\n### Regression by Week  ###\n")
-        merged_data.drop(
-            columns=["is_weekend", "book_over_1"]
-            + [c for c in merged_data.columns if "days_ago" in c],
-            inplace=True,
-        )
-        agg_funcs = {}
-        for col in merged_data.columns:
-            if col == "week":
-                continue
-            elif col == "date":
-                agg_funcs[col] = "last"  # Take the last date of the week
-            elif col in ("after_hive", "after_mats", "value"):
-                # single var is more interpretable, also doesn't change with number of days
-                agg_funcs[col] = "mean"
-            else:
-                # number of days where counts >1
-                agg_funcs[col] = "sum"
-        # Apply the aggregation
-        weekly_data = merged_data.groupby("week").agg(agg_funcs).reset_index()
-        print(f"Weekly aggregated data shape: {weekly_data.shape}")
-        X = weekly_data.select_dtypes(include=np.number)  # [features].copy()
+    model, merged_data = regression_predict_work_from_sleep_breakpoints(
+        calendar_df=calendar_df,
+        work_df=work_df,
+        phrase_list=phrase_list,
+        use_prev_day=True,
+        min_weekly_hours=10,
+    )
+    if False:  # average differences of X values for each percentile chunk
+        X = merged_data.select_dtypes(include=np.number)  # [features].copy()
         pred_cols = ["Hours Working", "work_productivity"]
         X = X.drop(columns=pred_cols + ["Value"])
-        X = sm.add_constant(X)
-        for y_col in pred_cols:
-            print(f"Prediction for {y_col}")
-            y = weekly_data[y_col]
-            model = sm.OLS(y, X).fit()
-            print(model.summary())
+        for y_name in pred_cols:
+            print("\n" + y_name + "\n")
+            average_over_percentile_range(X, merged_data[y_name], l1=20, h1=40, l2=60, h2=80)
+            average_over_percentile_range(X, merged_data[y_name], l1=10, h1=20, l2=80, h2=90)
+    # %%
+    print("\n### Regression by Week  ###\n")
+    merged_data.drop(
+        columns=["is_weekend", "book_over_1"] + [c for c in merged_data.columns if "days_ago" in c],
+        inplace=True,
+    )
+    agg_funcs = {}
+    for col in merged_data.columns:
+        if col == "week":
+            continue
+        elif col == "date":
+            agg_funcs[col] = "last"  # Take the last date of the week
+        elif col in ("after_hive", "after_mats", "value"):
+            # single var is more interpretable, also doesn't change with number of days
+            agg_funcs[col] = "mean"
+        else:
+            # number of days where counts >1
+            agg_funcs[col] = "sum"
+    # Apply the aggregation
+    weekly_data = merged_data.groupby("week").agg(agg_funcs).reset_index()
+    print(f"Weekly aggregated data shape: {weekly_data.shape}")
+    X = weekly_data.select_dtypes(include=np.number)  # [features].copy()
+    pred_cols = ["Hours Working", "work_productivity"]
+    X = X.drop(columns=pred_cols + ["Value"])
+    X = sm.add_constant(X)
+    for y_col in pred_cols:
+        print(f"Prediction for {y_col}")
+        y = weekly_data[y_col]
+        # model = sm.OLS(y, X).fit()  # l2
+        model = sm.QuantReg(y, X).fit(q=0.5)  # l1
+        # print(model.summary())
 
-        if False and model is not None:
-            # The coefficients tell you how much each feature affects productivity
-            print("\nFeature Importance:")
-            for feature, coef in zip(model.params.index, model.params):
-                if feature != "const":
-                    sign = "+" if coef > 0 else ""
-                    print(f"{feature}: {sign}{coef:.4f}")
-
-            # Sort features by absolute importance
-            feature_importance = {
-                feature: coef
-                for feature, coef in zip(model.params.index, model.params)
-                if feature != "const"
-            }
-            sorted_features = sorted(
-                feature_importance.items(), key=lambda x: abs(x[1]), reverse=True
-            )
-
-            print("\nFeatures Ranked by Importance (absolute value):")
-            for feature, coef in sorted_features:
+    if False and model is not None:
+        # The coefficients tell you how much each feature affects productivity
+        print("\nFeature Importance:")
+        for feature, coef in zip(model.params.index, model.params):
+            if feature != "const":
                 sign = "+" if coef > 0 else ""
                 print(f"{feature}: {sign}{coef:.4f}")
 
-    except NameError:
-        print(
-            "Run this in a context where 'df' and 'work_data' are defined, or modify the code to"
-            " load your data first."
-        )
+        # Sort features by absolute importance
+        feature_importance = {
+            feature: coef
+            for feature, coef in zip(model.params.index, model.params)
+            if feature != "const"
+        }
+        sorted_features = sorted(feature_importance.items(), key=lambda x: abs(x[1]), reverse=True)
+
+        print("\nFeatures Ranked by Importance (absolute value):")
+        for feature, coef in sorted_features:
+            sign = "+" if coef > 0 else ""
+            print(f"{feature}: {sign}{coef:.4f}")
+
 
 # %%
 import pandas as pd
