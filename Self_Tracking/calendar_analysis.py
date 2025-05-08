@@ -886,8 +886,9 @@ if __name__ == "__main__":
 
     # Example usage (comment out tests if processing real calendar data)
     calendar_dir = "data/Calendar Takeout/Calendar/"
+    calendar_dir = "/Users/clarkbenham/Downloads/calendar exports 05_08_25"
     start_date = datetime(2021, 5, 24)
-    end_date = datetime(2025, 3, 11)
+    end_date = datetime(2025, 5, 7)
     today_date = datetime.combine(datetime.today(), datetime.max.time())
     if end_date != today_date:
         print(f"INFO: Date cutoff  {end_date} is before today {today_date}")
@@ -918,8 +919,10 @@ if __name__ == "__main__":
         # filtered_df = df.query("start_time >= @start_date")
         filtered_df = df
         graph_activity_breakdown(filtered_df, average_for=28)
-
     work_data = load_work_summary("data/Work Summary  - Daily Summary.csv")
+    # df.to_csv("data/calendar_analysis.csv", index=True)
+    df.drop(columns="metadata").to_csv("data/calendar_analysis.txt", sep="\t", index=False)
+    work_data.to_csv("data/work_analysis.txt", sep="\t", index=False)
     # %%
     # 2. Top-N events per week and month.
     weekly_top_events(df, start_date, end_date, top_n=10)
