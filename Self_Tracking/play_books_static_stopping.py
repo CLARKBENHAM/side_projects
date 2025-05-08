@@ -289,3 +289,202 @@ fig.subplots_adjust(top=0.94)  # Adjust top margin (decrease to reduce space bel
 plt.show()
 
 print("Finished computation.")
+
+# %%
+# Explciitly compute the optimal stopping fraction for each category at each reading fraction
+import pandas as pd
+import numpy as np
+from pathlib import Path
+from typing import Dict, List
+
+# ---------------- Parameters ----------------
+READ_TIME_HOURS = 4.0
+SEARCH_COST_HOURS = 0.25
+PARTIAL_RATING_PENALTY = 0.25
+VALUE_BASE = 1.75
+
+F_GRID = np.arange(0.01, 1.01, 0.10)  # reading fractions
+D_GRID = np.arange(0.00, 0.31, 0.01)  # cumulative drops (share of initial)
+
+N_SIM = 200  # MC replications
+
+
+# ---------------- Utility helpers ----------------
+def utility_value(r):
+    """Transform rating (0‑5) into cardinal utility."""
+    return VALUE_BASE**r
+
+
+def error_sigma(f):
+    """Error half‑width at progress f of uniform noise"""
+    return max(2.5 - 4 * f, 0.5)  # ±2.5 at start → ±0.5 by halfway
+
+
+# Not sure which to go with
+def utility_value2(r):
+    return r**VALUE_BASE
+
+
+def error_sigma2(f):
+    return 1.5 * (1 - f**0.5)
+
+
+def simulate_estimates(true_ratings: np.ndarray) -> np.ndarray:
+    """
+    Simulate noisy rating estimates for each book × each f in F_GRID using an AR(1) process.
+    The noise variance decreases as reading progress increases.
+
+    Args:
+        true_ratings: True ratings for each book (shape: n_books)
+
+    Returns:
+        Array of estimated ratings (shape: n_books, len(F_GRID))
+    """
+    n_books = true_ratings.shape[0]
+    est = np.zeros((n_books, len(F_GRID)))
+    sigmas = np.array([error_sigma(f) for f in F_GRID])
+    rho = 0.9  # autocorrelation coefficient
+
+    # Initial error using uniform noise to match original implementation
+    e_prev = np.random.uniform(-sigmas[0], sigmas[0], size=n_books)
+    est[:, 0] = np.clip(true_ratings + e_prev, 0, 5)
+
+    # Subsequent errors with autocorrelation
+    for j in range(1, len(F_GRID)):
+        # Scale previous error by rho
+        scale_factor = sigmas[j] / sigmas[j-1] if sigmas[j-1] > 0 else 0
+        e_autocorr = rho * e_prev * scale_factor
+
+        # Add innovation term scaled by sqrt(1-rho^2) to maintain variance
+        e_innovation = np.sqrt(1 - rho**2) * sigmas[j] * np.random.normal(0, 1, size=n_books)
+        e_current = e_autocorr + e_innovation
+
+        est[:, j] = np.clip(true_ratings + e_current, 0, 5)
+        e_prev = e_current
+
+    return est
+
+
+# ---------------- Core optimiser ----------------
+def optimise_schedule(true_ratings: np.ndarray) -> Dict[str, np.ndarray]:
+    n_books = len(true_ratings)
+    val_full = utility_value(true_ratings)
+    val_partial = utility_value(np.maximum(true_ratings - PARTIAL_RATING_PENALTY, 0))
+    hourly_opportunity = np.percentile(val_full, 30) / (READ_TIME_HOURS + SEARCH_COST_HOURS)
+
+    best_cum_drop = np.zeros(len(F_GRID))
+    best_cutoffs = np.zeros(len(F_GRID))
+
+    active_mask = np.ones(n_books, dtype=bool)  # books still being read
+
+    est_matrix = simulate_estimates(true_ratings)  # initial estimates
+
+    for idx_f, f in enumerate(F_GRID):
+        est_now = est_matrix[:, idx_f]
+
+        # Only evaluate books still active
+        active_idx = np.where(active_mask)[0]
+        if active_idx.size == 0:
+            best_cum_drop[idx_f:] = best_cum_drop[idx_f - 1]  # nothing left
+            best_cutoffs[idx_f:] = best_cutoffs[idx_f - 1]
+            break
+
+        a_true_full = val_full[active_idx]
+        a_true_part = val_partial[active_idx]
+        a_est_full = utility_value(est_now[active_idx])
+        a_est_partial = utility_value(np.maximum(est_now[active_idx] - PARTIAL_RATING_PENALTY, 0))
+
+        # Hourly utilities
+        u_continue_est = a_est_full / (READ_TIME_HOURS + SEARCH_COST_HOURS)
+        u_stop_est = (f * a_est_partial) / (f * READ_TIME_HOURS + SEARCH_COST_HOURS) + (
+            1 - f
+        ) * hourly_opportunity
+
+        # Difference (negative ⇒ look worse than switching)
+        diff = u_continue_est - u_stop_est
+        sort_idx = np.argsort(diff)  # ascending: worst first
+
+        best_u = -np.inf
+        best_d = 0.0
+        best_cut = diff[sort_idx[int(0)]]  # initialise
+
+        for d in D_GRID:
+            k_drop = int(np.floor(d * n_books))
+            drop_set = sort_idx[:k_drop]
+
+            keep_mask_local = np.ones(active_idx.shape[0], dtype=bool)
+            keep_mask_local[drop_set] = False
+
+            # Compute real utility realised
+            util_keep = val_full[active_idx][keep_mask_local] / (
+                READ_TIME_HOURS + SEARCH_COST_HOURS
+            )
+            util_drop = (f * val_partial[active_idx][~keep_mask_local]) / (
+                f * READ_TIME_HOURS + SEARCH_COST_HOURS
+            ) + (1 - f) * hourly_opportunity
+
+            total_u = util_keep.sum() + util_drop.sum()
+            if total_u > best_u:
+                best_u = total_u
+                best_d = d
+                if k_drop > 0:
+                    best_cut = diff[sort_idx[k_drop - 1]]
+                else:
+                    best_cut = diff[sort_idx[0]]
+
+        # record
+        best_cum_drop[idx_f] = best_d
+        best_cutoffs[idx_f] = best_cut
+
+        # update active mask: drop the chosen set
+        k_drop = int(np.floor(best_d * n_books))
+        drop_global_idx = active_idx[sort_idx[:k_drop]]
+        active_mask[drop_global_idx] = False
+
+    return {"cum_drop": best_cum_drop, "cutoffs": best_cutoffs}
+
+
+# -------------- Wrapper per category --------------
+def simulate_category(df_cat: pd.DataFrame, rating_col: str) -> Dict[str, np.ndarray]:
+    true_ratings = df_cat[rating_col].values
+    cum_drop_acc = np.zeros(len(F_GRID))
+    cutoff_acc = np.zeros(len(F_GRID))
+
+    for _ in range(N_SIM):
+        res = optimise_schedule(true_ratings)
+        cum_drop_acc += res["cum_drop"]
+        cutoff_acc += res["cutoffs"]
+
+    cum_drop_acc /= N_SIM
+    cutoff_acc /= N_SIM
+    return {"cum_drop": cum_drop_acc, "cutoffs": cutoff_acc}
+
+
+# ---------------- Main ----------------
+def main():
+    DATA_PATH = Path("data/Books Read and their effects - Play Export.csv")
+    if not DATA_PATH.exists():
+        print("CSV not found – replace DATA_PATH with your local file path.")
+        return
+    df = pd.read_csv(DATA_PATH)
+    df["Bookshelf"] = df["Bookshelf"].str.strip().str.replace("/", ",").str.replace("&", "and")
+
+    shelves = df["Bookshelf"].unique()
+    out = {}
+
+    for shelf in shelves:
+        sub = df[df["Bookshelf"] == shelf]
+        if sub.empty:
+            continue
+        print(f"Optimising schedule for: {shelf}")
+        out[shelf] = simulate_category(sub, "Usefulness /5 to Me")
+        print(f"{shelf} cumulative drop (avg over sims) at F_GRID:")
+        for f, d in zip(F_GRID, out[shelf]["cum_drop"]):
+            print(f"  f={f:.2f}  drop={d:.3f}")
+
+    # Example: print Business cum_drop
+    if "Business, management" in out:
+
+
+if __name__ == "__main__":
+    main()
