@@ -895,6 +895,16 @@ if __name__ == "__main__":
     df = parse_ics_files(calendar_dir, start_date, end_date)
     _df = df.copy()
     # r = debug_sleep_patterns(df)
+    # Rename calendar columns to remove extra identifiers
+    df["calendar_name"] = df["calendar_name"].replace(
+        {
+            "Waste Time_d96ngv72j0b35hggvsjj1i8rf8@group.calendar.google.com": "Waste Time",
+            "Meals, Supplements, Sleep_i740223r4sepqshulbhc8qques@group.calendar.google.com": (
+                "Meals, Supplements, Sleep"
+            ),
+            "Things_f8243s41ks1occsl85o25hrf24@group.calendar.google.com": "Things",
+        }
+    )
 
     df = process_sleep_events(df)
     df = process_slash_events(df)
