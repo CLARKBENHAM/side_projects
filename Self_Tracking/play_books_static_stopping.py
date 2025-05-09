@@ -429,7 +429,7 @@ def optimise_schedule_greedy(
 
     book_time = READ_TIME_HOURS + SEARCH_COST_HOURS
     if not hourly_opportunity:
-        hourly_opportunity = np.percentile(val_full, 30) / book_time  # TODO dynamically update
+        hourly_opportunity = np.percentile(val_full, 50) / book_time  # TODO dynamically update
 
     best_cum_drop = np.zeros(len(F_GRID))
     best_cutoffs = np.zeros(len(F_GRID))
@@ -705,48 +705,33 @@ if __name__ == "__main__":
     shelves = df["Bookshelf"].unique()
     out = {}
 
+    # Find indices closest to 10%, 30%, and 50% of reading
+    target_fractions = [0.1, 0.3, 0.5]
+    milestone_indices = [np.abs(F_GRID - target).argmin() for target in target_fractions]
+
     for shelf in shelves:
         sub = df[df["Bookshelf"] == shelf]
         if sub.empty:
             continue
+        out[shelf] = simulate_category(sub, "Usefulness /5 to Me")
+
         print(f"\n{'='*80}")
         print(f"Optimising schedule for: {shelf}")
         print(f"{'='*80}")
 
-        out[shelf] = simulate_category(sub, "Usefulness /5 to Me")
-
         # Get the optimal path (path with highest final utility)
         optimal_idx = np.argmax(out[shelf]["true_avg_utils"][:, -1])
-        optimal_drops = out[shelf]["cur_drop_path"][optimal_idx]
-
-        # Calculate cumulative drops for the optimal path
-        cumulative_drops = np.zeros_like(optimal_drops)
-        cumulative = 0
-        for i, drop_frac in enumerate(optimal_drops):
-            cumulative += drop_frac
-            cumulative_drops[i] = cumulative
-
-        # Find indices closest to 10%, 30%, and 50% of reading
-        target_fractions = [0.1, 0.3, 0.5]
-        milestone_indices = [np.abs(F_GRID - target).argmin() for target in target_fractions]
+        out[shelf]["optimal_drops"] = out[shelf]["cur_drop_path"][optimal_idx]
+        out[shelf]["cumulative_drop"] = 1 - np.cumprod(1 - out[shelf]["optimal_drops"])
 
         print("\nOptimal Drop Schedule:")
         print(f"{'Fraction Read':>12} {'Instant Drop %':>15} {'Cumulative Drop %':>20}")
         print("-" * 50)
-        for i, (f, drop, cum_drop) in enumerate(zip(F_GRID, optimal_drops, cumulative_drops)):
+        for i, (f, drop, cum_drop) in enumerate(
+            zip(F_GRID, out[shelf]["optimal_drops"], out[shelf]["cumulative_drop"])
+        ):
             if i in milestone_indices or i % 10 == 0:  # Print every 10th point plus milestones
-                print(f"{f:>12.2f} {drop*100:>15.1f} {cum_drop*100:>20.1f}")
-
-        print("\nKey Milestones:")
-        print(f"{'Fraction Read':>12} {'Instant Drop %':>15} {'Cumulative Drop %':>20}")
-        print("-" * 50)
-        for target, idx in zip(target_fractions, milestone_indices):
-            print(
-                f"{F_GRID[idx]:>12.2f} {optimal_drops[idx]*100:>15.1f} {cumulative_drops[idx]*100:>20.1f}"
-            )
-
-        print(f"\nFinal cumulative drop: {cumulative_drops[-1]*100:.1f}%")
-        print(f"Final utility: {out[shelf]['true_avg_utils'][optimal_idx, -1]:.2f}")
+                print(f"{f:>12.2f} {drop*100:>15.2f} {cum_drop*100:>20.2f}")
 
         # Plot simulation paths for this shelf
         plot_simulation_paths(
@@ -756,6 +741,14 @@ if __name__ == "__main__":
             f"Simulation Paths - {shelf}",
         )
 
+    for shelf in shelves:
+        print(f"\n{shelf}")
+        print(f"{'Fraction Read':>12} {'Cumulative Drop %':>20}")
+        print("-" * 50)
+        for target, idx in zip(target_fractions, milestone_indices):
+            print(f"{F_GRID[idx]:>12.2f} {out[shelf]['cumulative_drop'][idx]*100:>20.2f}")
+        print(f"Final cumulative drop: {out[shelf]['cumulative_drop'][-1]*100:.1f}%")
+        print(f"Final utility: {out[shelf]['true_avg_utils'][optimal_idx, -1]:.2f}")
 # %%
 # Dynamic where check all options: D^F: 100B here
 F_GRID = np.concatenate(
