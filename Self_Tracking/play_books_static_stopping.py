@@ -330,7 +330,7 @@ def utility_value(r):
 
 def error_sigma(f):
     """Error half‑width at progress f of uniform noise"""
-    return max(2.5 - 4 * f, 0.3)  # ±2.5 at start → ±0.5 by halfway
+    return max(2 - 3 * f, 0.3)  # ±2.5 at start → ±0.5 by halfway
 
 
 # Not sure which to go with
@@ -339,7 +339,7 @@ def utility_value2(r):
 
 
 def error_sigma2(f):
-    return 1.5 * (1 - f**0.5)
+    return 1 - f**0.5
 
 
 def simulate_estimates(true_ratings: np.ndarray) -> np.ndarray:
@@ -389,27 +389,14 @@ def _check_error_graph():
     plt.show()
 
     # Check dispersion
-    plt.plot(
-        F_GRID,
-        [p for ix, p in enumerate(simulate_estimates(np.array([3] * 30)).T)],
-        alpha=0.2,
-    )
-    plt.title("True Value 3")
-    plt.show()
-    plt.plot(
-        F_GRID,
-        [p for ix, p in enumerate(simulate_estimates(np.array([4] * 30)).T)],
-        alpha=0.2,
-    )
-    plt.title("True Value 4")
-    plt.show()
-    plt.plot(
-        F_GRID,
-        [p for ix, p in enumerate(simulate_estimates(np.array([5] * 30)).T)],
-        alpha=0.2,
-    )
-    plt.title("True Value 5")
-    plt.show()
+    for i in [1, 3, 4, 5]:
+        plt.plot(
+            F_GRID,
+            [p for ix, p in enumerate(simulate_estimates(np.array([i] * 30)).T)],
+            alpha=0.2,
+        )
+        plt.title(f"True Value {i}")
+        plt.show()
 
 
 _check_error_graph()
@@ -421,7 +408,8 @@ def optimise_schedule_greedy(
     true_ratings: np.ndarray, hourly_opportunity=None
 ) -> Dict[str, np.ndarray]:
     """
-    Optimise the schedule for a given true ratings array using a greedy approach.
+    Using greedy approach at each time step find the drop fraction of estimated books that maximize
+    the true final utility.
     returns what fraction of books remaining to drop at each reading fraction f
     Args:
         true_ratings: Array of true ratings for each book
@@ -431,26 +419,27 @@ def optimise_schedule_greedy(
         best_cutoffs: what rating cutoff to use for each f
         true_avg_utils: average utility from following current strategy and dropping no more books in future
             (dropped books replaced with hourly opportunity cost)
+            this is the total util over book_time hours
     """
 
     n_books = len(true_ratings)
     true_ratings = np.sort(true_ratings)  # easier to debug
     val_full = utility_value(true_ratings)
-    val_partial = utility_value(np.maximum(true_ratings - PARTIAL_RATING_PENALTY, 0))
+    val_partial = utility_value(np.maximum(true_ratings - PARTIAL_RATING_PENALTY, 1))
+
+    book_time = READ_TIME_HOURS + SEARCH_COST_HOURS
     if not hourly_opportunity:
-        hourly_opportunity = np.percentile(val_full, 30) / (
-            READ_TIME_HOURS + SEARCH_COST_HOURS
-        )  # TODO dynamically update
+        hourly_opportunity = np.percentile(val_full, 30) / book_time  # TODO dynamically update
 
     best_cum_drop = np.zeros(len(F_GRID))
     best_cutoffs = np.zeros(len(F_GRID))
     true_avg_utils = np.zeros(len(F_GRID))
-
-    active_mask = np.ones(n_books, dtype=bool)  # books still being read
-    est_matrix = simulate_estimates(true_ratings)  # initial estimates
     dropped_books_utils = np.zeros(
         len(F_GRID)
     )  # Track cumulative projected utility of dropped books and replacment with hourly opportunity
+
+    active_mask = np.ones(n_books, dtype=bool)  # books still being read
+    est_matrix = simulate_estimates(true_ratings)  # initial estimates
 
     for idx_f, f in enumerate(F_GRID):
         est_now = est_matrix[:, idx_f]
@@ -459,7 +448,7 @@ def optimise_schedule_greedy(
         if active_mask.sum() == 0:
             print("WARNING: No active books left")
             best_cum_drop[idx_f:] = 1  # nothing left to drop, keep dropping all
-            best_cutoffs[idx_f:] = best_cutoffs[idx_f - 1]
+            best_cutoffs[idx_f:] = 0
             true_avg_utils[idx_f:] = true_avg_utils[idx_f - 1]
             break
 
@@ -467,11 +456,11 @@ def optimise_schedule_greedy(
         a_est_full = utility_value(est_now[active_mask])
         a_est_partial = utility_value(np.maximum(est_now[active_mask] - PARTIAL_RATING_PENALTY, 1))
 
-        # Hourly utilities
-        u_continue_est = a_est_full / (READ_TIME_HOURS + SEARCH_COST_HOURS)
+        # Estimated Hourly utilities for remaining books
+        u_continue_est = a_est_full / book_time
         cum_value = f * a_est_partial  # if stop
         new_value = (1 - f) * READ_TIME_HOURS * hourly_opportunity
-        u_stop_est = (cum_value + new_value) / (READ_TIME_HOURS + SEARCH_COST_HOURS)
+        u_stop_est = (cum_value + new_value) / book_time
 
         # Difference (negative ⇒ look worse than switching)
         diff = u_continue_est - u_stop_est
@@ -481,13 +470,23 @@ def optimise_schedule_greedy(
         #     f" {a_est_full[sort_idx]} , u_stop_est: {est_now[active_mask][sort_idx]}"
         # )
 
-        best_u = -np.inf
-        best_drop = 0.0
-        best_rating_cut = est_now[sort_idx[0]] - 0.01  # initialize below worst book
-        best_drop_u = 0
-
+        # True Hourly utilities of remaining books
         active_true_full = val_full[active_mask]
         active_true_part = val_partial[active_mask]
+        h_util_keep = active_true_full / book_time
+        util_till_drop = f * active_true_part
+        util_after_drop = (1 - f) * READ_TIME_HOURS * hourly_opportunity
+        h_util_drop = (util_till_drop + util_after_drop) / book_time
+
+        # values if no dropping
+        best_drop = 0.0
+        best_rating_cut = 0
+        if idx_f > 0:
+            best_u = true_avg_utils[idx_f - 1]
+            best_drop_u = dropped_books_utils[idx_f - 1]
+        else:
+            best_u = val_full.sum()
+            best_drop_u = 0
 
         for d in D_GRID:
             k_drop = int(np.floor(d * active_mask.sum()))  # number of books to drop
@@ -496,20 +495,18 @@ def optimise_schedule_greedy(
             drop_set = sort_idx[:k_drop]
             keep_mask = np.ones(len(sort_idx), dtype=bool)
             keep_mask[drop_set] = False
-
-            # Compute true utilities
-            h_util_keep = active_true_full[keep_mask] / (READ_TIME_HOURS + SEARCH_COST_HOURS)
-            util_till_drop = f * active_true_part[~keep_mask]
-            util_after_drop = (1 - f) * READ_TIME_HOURS * hourly_opportunity
-            h_util_drop = (util_till_drop + util_after_drop) / (READ_TIME_HOURS + SEARCH_COST_HOURS)
-
             # include utility from previously dropped books
-            total_u = h_util_keep.sum() + h_util_drop.sum() + dropped_books_utils[idx_f]
+
+            h_total_u = h_util_keep[keep_mask].sum() + h_util_drop[~keep_mask].sum()
+            total_u = h_total_u * book_time + dropped_books_utils[idx_f - 1]
             if total_u > best_u:
                 best_u = total_u
                 best_drop = d
                 best_rating_cut = est_now[active_mask][sort_idx[k_drop - 1]]
-                best_drop_u = (util_till_drop + util_after_drop).sum() + dropped_books_utils[idx_f]
+                # util of now dropped books plus util of replacing them with hourly opportunity
+                best_drop_u = (
+                    h_util_drop[~keep_mask].sum() * book_time + dropped_books_utils[idx_f - 1]
+                )
 
         best_cum_drop[idx_f] = best_drop  # of books that remain
         best_cutoffs[idx_f] = best_rating_cut
@@ -519,25 +516,27 @@ def optimise_schedule_greedy(
         # Update active mask: drop the chosen set
         k_drop = int(np.floor(best_drop * active_mask.sum()))
         if k_drop > 0:
-            print(f"Dropping {k_drop} books at f={f:.2f} , d={best_drop:.2f} , best_u={best_u:.2f}")
+            # print(f"Dropping {k_drop} books at f={f:.2f} , d={best_drop:.2f} , best_u={best_u:.2f}")
             drop_global_idx = np.where(active_mask)[0][sort_idx[:k_drop]]
-            print(f"Dropping books: {drop_global_idx}")
             active_mask[drop_global_idx] = False
 
-        if True:  # idx_f == 0:  # Print values for first step
+        if False:  # idx_f == 0:  # Print values for first step
             print(f"\nDebug - First step utilities:")
             print(f"Continue: {u_continue_est[:5]}")
             print(f"Stop: {u_stop_est[:5]}")
             print(f"Best drop fraction: {best_drop}")
             print(f"Best cut: {best_rating_cut}")
 
-    print(best_cum_drop, best_cutoffs, true_avg_utils, dropped_books_utils)
+    # print(best_cum_drop, best_cutoffs, true_avg_utils, dropped_books_utils, sep="\n")
     true_avg_utils /= len(true_ratings)
     assert true_avg_utils[-1] >= val_full.mean(), (
         "Optimal strategy is worse than just reading all books"
         f" {true_avg_utils[-1]} {val_full.mean()}"
     )
-    return {"cum_drop": best_cum_drop, "cutoffs": best_cutoffs, "true_utils": true_avg_utils}
+    assert np.allclose(
+        true_avg_utils, np.maximum.accumulate(true_avg_utils)
+    ), "getting worse over time"
+    return {"cum_drop": best_cum_drop, "cutoffs": best_cutoffs, "true_avg_utils": true_avg_utils}
 
 
 # -------------- Wrapper per category --------------
@@ -552,13 +551,13 @@ def simulate_category(df_cat: pd.DataFrame, rating_col: str) -> Dict[str, np.nda
     all_cutoffs = []
     all_true_utils = []
 
-    for i in range(2):  # N_SIM):
+    for i in range(N_SIM):
         res = optimise_schedule_greedy(true_ratings)
         cum_drop_acc += res["cum_drop"]
         cutoff_acc += res["cutoffs"]
         all_drop_paths.append(res["cum_drop"])
         all_cutoffs.append(res["cutoffs"])
-        all_true_utils.append(res["true_utils"])
+        all_true_utils.append(res["true_avg_utils"])
 
     cum_drop_acc /= N_SIM
     cutoff_acc /= N_SIM
@@ -567,7 +566,7 @@ def simulate_category(df_cat: pd.DataFrame, rating_col: str) -> Dict[str, np.nda
         "cutoffs": cutoff_acc,
         "cur_drop_path": np.array(all_drop_paths),
         "cutoffs_all": np.array(all_cutoffs),
-        "true_utils": np.array(all_true_utils),
+        "true_avg_utils": np.array(all_true_utils),
     }
 
 
@@ -603,6 +602,21 @@ def plot_simulation_paths(
             remaining *= 1 - drop_frac  # Multiply by fraction kept
             remaining_books[i, j] = remaining
 
+    # Normalize final utilities for line colors
+    norm_final = (final_values - final_values.min()) / (final_values.max() - final_values.min())
+
+    # Normalize instantaneous utilities for scatter colors
+    norm_instant = (true_utils - true_utils.min()) / (true_utils.max() - true_utils.min())
+    instant_colors = plt.cm.RdYlGn(norm_instant)
+
+    # Plot each path
+    for i, (path, utils) in enumerate(zip(drop_paths, true_utils)):
+        # Color line based on final utility
+        line_color = plt.cm.RdYlGn(norm_final[i])
+        plt.plot(f_grid, path, color=line_color, alpha=0.3, linewidth=1)
+        # Color scatter points based on instantaneous utility
+        plt.scatter(f_grid, path, c=instant_colors[i], alpha=0.1, s=10)
+
     # Plot mean path with dotted line
     mean_path = drop_paths.mean(axis=0)
     plt.plot(f_grid, mean_path, "k--", linewidth=2, label="Mean Path", alpha=0.7)
@@ -612,25 +626,11 @@ def plot_simulation_paths(
     optimal_path = drop_paths[optimal_idx]
     plt.plot(f_grid, optimal_path, "k-", linewidth=2, label="Optimal Path")
 
-    # Normalize final utilities for line colors
-    norm_final = (final_values - final_values.min()) / (final_values.max() - final_values.min())
-
-    # Normalize instantaneous utilities for scatter colors
-    norm_instant = (true_utils - true_utils.min()) / (true_utils.max() - true_utils.min())
-    instant_colors = plt.cm.RdYlGn(norm_instant)
-
     plt.title(title)
     plt.xlabel("Fraction Read")
     plt.ylabel("Instant Drop Fraction")
     plt.grid(True, alpha=0.3)
     plt.legend()
-    for i, (path, utils) in enumerate(zip(drop_paths, true_utils)):
-        # Color line based on final utility
-        line_color = plt.cm.RdYlGn(norm_final[i])
-        plt.plot(f_grid, path, color=line_color, alpha=0.3, linewidth=1)
-        # Color scatter points based on instantaneous utility
-        plt.scatter(f_grid, path, c=instant_colors[i], alpha=0.1, s=10)
-
     plt.show()
 
     # Plot true utilities with same coloring scheme
@@ -649,6 +649,47 @@ def plot_simulation_paths(
     plt.title(f"{title} - True Utilities")
     plt.xlabel("Fraction Read")
     plt.ylabel("True Utility")
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+    plt.show()
+
+    # Plot cumulative drop function
+    plt.figure(figsize=(10, 6))
+    cumulative_drops = np.zeros_like(drop_paths)
+    for i, path in enumerate(drop_paths):
+        # Calculate cumulative drop at each step
+        cumulative = 0
+        for j, drop_frac in enumerate(path):
+            cumulative += drop_frac
+            cumulative_drops[i, j] = cumulative
+
+    for i, (cum_drop, utils) in enumerate(zip(cumulative_drops, true_utils)):
+        # Color line based on final utility
+        line_color = plt.cm.RdYlGn(norm_final[i])
+        plt.plot(f_grid, cum_drop, color=line_color, alpha=0.3, linewidth=1)
+
+        # Color scatter points based on instantaneous utility
+        plt.scatter(f_grid, cum_drop, c=instant_colors[i], alpha=0.1, s=10)
+
+    plt.plot(
+        f_grid,
+        cumulative_drops.mean(axis=0),
+        "k--",
+        linewidth=2,
+        label="Mean Cumulative Drop",
+        alpha=0.7,
+    )
+    plt.plot(
+        f_grid,
+        cumulative_drops[optimal_idx],
+        "k-",
+        linewidth=2,
+        label="Optimal Path Cumulative Drop",
+    )
+
+    plt.title(f"{title} - Cumulative Drop")
+    plt.xlabel("Fraction Read")
+    plt.ylabel("Cumulative Drop Fraction")
     plt.grid(True, alpha=0.3)
     plt.legend()
     plt.show()
@@ -681,10 +722,9 @@ if __name__ == "__main__":
         plot_simulation_paths(
             out[shelf]["cur_drop_path"],
             F_GRID,
-            out[shelf]["true_utils"],
+            out[shelf]["true_avg_utils"],
             f"Simulation Paths - {shelf}",
         )
-        break
 # %%
 # Dynamic where check all options: D^F: 100B here
 F_GRID = np.concatenate(
