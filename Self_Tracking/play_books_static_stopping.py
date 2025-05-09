@@ -1,5 +1,5 @@
 # %%
-
+# first cell computes the stopping fraction given the assumed utility function, estimates, etc
 import pandas as pd
 import numpy as np
 import os
@@ -329,9 +329,9 @@ def utility_value(r):
     return VALUE_BASE**r
 
 
-def error_sigma(f):
-    """Error half‑width at progress f of uniform noise"""
-    return max(2 - 2 * f, 0.3)  # ±2.5 at start → ±0.5 by halfway
+def inverse_utility_value(u):
+    """Transform utility into rating."""
+    return np.log(u) / np.log(VALUE_BASE)
 
 
 # Not sure which to go with
@@ -339,11 +339,30 @@ def utility_value2(r):
     return r**VALUE_BASE
 
 
+def inverse_utility_value2(u):
+    return u ** (1 / VALUE_BASE)
+
+
+# had 4/207 books I'd say were "average" at 1/3 (or 1/2 way thru?) and 5 at end;
+# z=2.07 and mean of 2.5 implies at half way sd=(5-2.5)/z =1.21 or 1.45 if use mean =2
+# at 0.95 I'd say 0.25 is correct noise, my own ratings aren't even that good
+# at 0 2.25 is correct noise, I generally have a bit of info after decising to pick book
+#   and need to adjust for general range restrictions around means?
+# assume has power law form
+# 1.21  = 2 * ((1 - 1/3) ** k) + 0.25
+# np.log(((1.21-0.25)/2))/np.log(0.667) = 1.8
+# np.log(((1.21-0.25)/2))/np.log(0.5) = 1.06
+def error_sigma(f):
+    """Error half‑width at progress f of uniform noise"""
+    return 2 * (1 - f) ** 1.8 + 0.25
+    # return max(1 - 2 * f, 0.3)  # ±2.5 at start → ±0.3 by halfway
+
+
 def error_sigma2(f):
     return 1 - f**0.5
 
 
-def simulate_estimates(true_ratings: np.ndarray) -> np.ndarray:
+def simulate_estimates(true_ratings: np.ndarray, error_fn=error_sigma, rho=0.9) -> np.ndarray:
     """
     Simulate noisy rating estimates for each book × each f in F_GRID using an AR(1) process.
     The noise variance decreases as reading progress increases.
@@ -356,8 +375,8 @@ def simulate_estimates(true_ratings: np.ndarray) -> np.ndarray:
     """
     n_books = true_ratings.shape[0]
     est = np.zeros((n_books, len(F_GRID)))
-    sigmas = np.array([error_sigma(f) for f in F_GRID])
-    rho = 0.9  # autocorrelation coefficient
+    sigmas = np.array([error_fn(f) for f in F_GRID])
+    # autocorrelation coefficient
 
     # Generate all random numbers upfront for each book
     # This ensures each book has its own independent sequence
@@ -367,7 +386,7 @@ def simulate_estimates(true_ratings: np.ndarray) -> np.ndarray:
     e_prev = np.random.uniform(-sigmas[0], sigmas[0], size=n_books)
     est[:, 0] = np.clip(true_ratings + e_prev, 1, 5)
 
-    # Subsequent errors with autocorrelation
+    # Subsequent errors with autocorrelatio9n
     for j in range(1, len(F_GRID)):
         # Scale previous error by rho
         scale_factor = sigmas[j] / sigmas[j - 1] if sigmas[j - 1] > 0 else 0
@@ -405,7 +424,8 @@ def _check_error_graph():
 
 # ---------------- Core optimiser ----------------
 def optimise_schedule_greedy(
-    true_ratings: np.ndarray, hourly_opportunity=None
+    true_ratings: np.ndarray,
+    hourly_opportunity=utility_value(2) / (READ_TIME_HOURS + SEARCH_COST_HOURS),
 ) -> Dict[str, np.ndarray]:
     """
     Using greedy approach at each time step find the drop fraction of estimated books that maximize
@@ -502,7 +522,10 @@ def optimise_schedule_greedy(
             if total_u > best_u:
                 best_u = total_u
                 best_drop = d
-                best_rating_cut = est_now[active_mask][sort_idx[k_drop - 1]]
+                if active_mask.sum() >= k_drop:
+                    best_rating_cut = est_now[active_mask][sort_idx[k_drop - 1]]
+                else:
+                    best_rating_cut = 5  # dropping more books than have left
                 # util of now dropped books plus util of replacing them with hourly opportunity
                 best_drop_u = (
                     h_util_drop[~keep_mask].sum() * book_time + dropped_books_utils[idx_f - 1]
@@ -702,18 +725,19 @@ if __name__ == "__main__":
     df = pd.read_csv(DATA_PATH)
     df["Bookshelf"] = df["Bookshelf"].str.strip().str.replace("/", ",").str.replace("&", "and")
 
-    shelves = df["Bookshelf"].unique()
+    shelf_counts = df["Bookshelf"].value_counts()
+    shelves = shelf_counts[shelf_counts > 10].index.tolist()
     out = {}
 
     # Find indices closest to 10%, 30%, and 50% of reading
     target_fractions = [0.1, 0.3, 0.5]
     milestone_indices = [np.abs(F_GRID - target).argmin() for target in target_fractions]
-
+    rating_col = "Usefulness /5 to Me"
     for shelf in shelves:
         sub = df[df["Bookshelf"] == shelf]
         if sub.empty:
             continue
-        out[shelf] = simulate_category(sub, "Usefulness /5 to Me")
+        out[shelf] = simulate_category(sub, rating_col)
 
         print(f"\n{'='*80}")
         print(f"Optimising schedule for: {shelf}")
@@ -748,7 +772,14 @@ if __name__ == "__main__":
         for target, idx in zip(target_fractions, milestone_indices):
             print(f"{F_GRID[idx]:>12.2f} {out[shelf]['cumulative_drop'][idx]*100:>20.2f}")
         print(f"Final cumulative drop: {out[shelf]['cumulative_drop'][-1]*100:.1f}%")
-        print(f"Final utility: {out[shelf]['true_avg_utils'][optimal_idx, -1]:.2f}")
+        best_u = out[shelf]["true_avg_utils"][optimal_idx, -1]
+        best_r = inverse_utility_value(best_u)
+        current_u = utility_value(df[df["Bookshelf"] == shelf][rating_col]).mean()
+        current_r = inverse_utility_value(
+            current_u
+        )  # convex fn so must be calculated in the same way
+        print(f"Final utility: {best_u:.2f} , current: {current_u:.2f}")
+        print(f"Final Rating: {best_r:.2f} , current: {current_r:.2f}")
 # %%
 # Dynamic where check all options: D^F: 100B here
 F_GRID = np.concatenate(
