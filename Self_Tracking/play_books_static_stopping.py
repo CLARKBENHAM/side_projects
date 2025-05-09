@@ -7,11 +7,12 @@ from pathlib import Path
 import numpy.random as rnd
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
+from typing import Dict, List
 
 # Parameters
-READ_TIME_HOURS = 4.0  # full reading time, in units of lost utility
-SEARCH_COST_HOURS = 0.25  # discovery cost, in units of lost utility
-PARTIAL_RATING_PENALTY = 0.5  # rating loss when abandoning, assumed utility lose linear
+READ_TIME_HOURS = 4.0  # full reading time
+SEARCH_COST_HOURS = 0.25  # discovery cost of getting a new book
+PARTIAL_RATING_PENALTY = 0.1  # rating loss when abandoning, assumed utility lose linear
 VALUE_BASE = 2  # utility = VALUE_BASE ** rating
 F_GRID = np.arange(0.01, 1.01, 0.01)
 
@@ -292,6 +293,7 @@ print("Finished computation.")
 
 # %%
 # Explciitly compute the optimal stopping fraction for each category at each reading fraction
+# GREEDY CUTS AT EACH STAGE
 import pandas as pd
 import numpy as np
 from pathlib import Path
@@ -300,11 +302,22 @@ from typing import Dict, List
 # ---------------- Parameters ----------------
 READ_TIME_HOURS = 4.0
 SEARCH_COST_HOURS = 0.25
-PARTIAL_RATING_PENALTY = 0.25
+PARTIAL_RATING_PENALTY = 0.1
 VALUE_BASE = 1.75
 
-F_GRID = np.arange(0.01, 1.01, 0.10)  # reading fractions
-D_GRID = np.arange(0.00, 0.31, 0.01)  # cumulative drops (share of initial)
+# Static: O(D*F)
+F_GRID = np.concatenate(
+    [
+        np.arange(0.01, 0.4, 0.02),  # more precise in first half
+        np.arange(0.4, 1.01, 0.1),  # less precise in second half
+    ]
+)
+D_GRID = np.concatenate(
+    [
+        np.arange(0.00, 0.10, 0.01),  # dropping up to 30% in 1 step. Depends on F_GRID size
+        np.arange(0.10, 0.31, 0.07),
+    ]
+)
 
 N_SIM = 200  # MC replications
 
@@ -317,7 +330,7 @@ def utility_value(r):
 
 def error_sigma(f):
     """Error half‑width at progress f of uniform noise"""
-    return max(2.5 - 4 * f, 0.5)  # ±2.5 at start → ±0.5 by halfway
+    return max(2.5 - 4 * f, 0.3)  # ±2.5 at start → ±0.5 by halfway
 
 
 # Not sure which to go with
@@ -345,127 +358,309 @@ def simulate_estimates(true_ratings: np.ndarray) -> np.ndarray:
     sigmas = np.array([error_sigma(f) for f in F_GRID])
     rho = 0.9  # autocorrelation coefficient
 
-    # Initial error using uniform noise to match original implementation
+    # Generate all random numbers upfront for each book
+    # This ensures each book has its own independent sequence
+    innovations = np.random.normal(0, 1, size=(n_books, len(F_GRID)))
+
+    # Initial error using uniform noise
     e_prev = np.random.uniform(-sigmas[0], sigmas[0], size=n_books)
-    est[:, 0] = np.clip(true_ratings + e_prev, 0, 5)
+    est[:, 0] = np.clip(true_ratings + e_prev, 1, 5)
 
     # Subsequent errors with autocorrelation
     for j in range(1, len(F_GRID)):
         # Scale previous error by rho
-        scale_factor = sigmas[j] / sigmas[j-1] if sigmas[j-1] > 0 else 0
+        scale_factor = sigmas[j] / sigmas[j - 1] if sigmas[j - 1] > 0 else 0
         e_autocorr = rho * e_prev * scale_factor
 
         # Add innovation term scaled by sqrt(1-rho^2) to maintain variance
-        e_innovation = np.sqrt(1 - rho**2) * sigmas[j] * np.random.normal(0, 1, size=n_books)
+        e_innovation = np.sqrt(1 - rho**2) * sigmas[j] * innovations[:, j]
         e_current = e_autocorr + e_innovation
 
-        est[:, j] = np.clip(true_ratings + e_current, 0, 5)
+        est[:, j] = np.clip(true_ratings + e_current, 1, 5)
         e_prev = e_current
 
     return est
 
 
+def _check_error_graph():
+    plt.plot(F_GRID, np.array([error_sigma(f) for f in F_GRID]), label="sigma")
+    plt.plot(F_GRID, np.array([error_sigma2(f) for f in F_GRID]), label="sigma2")
+    plt.legend()
+    plt.show()
+
+    # Check dispersion
+    plt.plot(
+        F_GRID,
+        [p for ix, p in enumerate(simulate_estimates(np.array([3] * 30)).T)],
+        alpha=0.2,
+    )
+    plt.title("True Value 3")
+    plt.show()
+    plt.plot(
+        F_GRID,
+        [p for ix, p in enumerate(simulate_estimates(np.array([4] * 30)).T)],
+        alpha=0.2,
+    )
+    plt.title("True Value 4")
+    plt.show()
+    plt.plot(
+        F_GRID,
+        [p for ix, p in enumerate(simulate_estimates(np.array([5] * 30)).T)],
+        alpha=0.2,
+    )
+    plt.title("True Value 5")
+    plt.show()
+
+
+_check_error_graph()
+
+
+# %%
 # ---------------- Core optimiser ----------------
-def optimise_schedule(true_ratings: np.ndarray) -> Dict[str, np.ndarray]:
+def optimise_schedule_greedy(
+    true_ratings: np.ndarray, hourly_opportunity=None
+) -> Dict[str, np.ndarray]:
+    """
+    Optimise the schedule for a given true ratings array using a greedy approach.
+    returns what fraction of books remaining to drop at each reading fraction f
+    Args:
+        true_ratings: Array of true ratings for each book
+        hourly_opportunity: utility per hour of the marginal book
+    returns
+        best_cum_drop: fraction of currently active books to drop at each reading fraction f
+        best_cutoffs: what rating cutoff to use for each f
+        true_avg_utils: average utility from following current strategy and dropping no more books in future
+            (dropped books replaced with hourly opportunity cost)
+    """
+
     n_books = len(true_ratings)
+    true_ratings = np.sort(true_ratings)  # easier to debug
     val_full = utility_value(true_ratings)
     val_partial = utility_value(np.maximum(true_ratings - PARTIAL_RATING_PENALTY, 0))
-    hourly_opportunity = np.percentile(val_full, 30) / (READ_TIME_HOURS + SEARCH_COST_HOURS)
+    if not hourly_opportunity:
+        hourly_opportunity = np.percentile(val_full, 30) / (
+            READ_TIME_HOURS + SEARCH_COST_HOURS
+        )  # TODO dynamically update
 
     best_cum_drop = np.zeros(len(F_GRID))
     best_cutoffs = np.zeros(len(F_GRID))
+    true_avg_utils = np.zeros(len(F_GRID))
 
     active_mask = np.ones(n_books, dtype=bool)  # books still being read
-
     est_matrix = simulate_estimates(true_ratings)  # initial estimates
+    dropped_books_utils = np.zeros(
+        len(F_GRID)
+    )  # Track cumulative projected utility of dropped books and replacment with hourly opportunity
 
     for idx_f, f in enumerate(F_GRID):
         est_now = est_matrix[:, idx_f]
 
         # Only evaluate books still active
-        active_idx = np.where(active_mask)[0]
-        if active_idx.size == 0:
-            best_cum_drop[idx_f:] = best_cum_drop[idx_f - 1]  # nothing left
+        if active_mask.sum() == 0:
+            print("WARNING: No active books left")
+            best_cum_drop[idx_f:] = 1  # nothing left to drop, keep dropping all
             best_cutoffs[idx_f:] = best_cutoffs[idx_f - 1]
+            true_avg_utils[idx_f:] = true_avg_utils[idx_f - 1]
             break
 
-        a_true_full = val_full[active_idx]
-        a_true_part = val_partial[active_idx]
-        a_est_full = utility_value(est_now[active_idx])
-        a_est_partial = utility_value(np.maximum(est_now[active_idx] - PARTIAL_RATING_PENALTY, 0))
+        # Get estimated utilities for active books
+        a_est_full = utility_value(est_now[active_mask])
+        a_est_partial = utility_value(np.maximum(est_now[active_mask] - PARTIAL_RATING_PENALTY, 1))
 
         # Hourly utilities
         u_continue_est = a_est_full / (READ_TIME_HOURS + SEARCH_COST_HOURS)
-        u_stop_est = (f * a_est_partial) / (f * READ_TIME_HOURS + SEARCH_COST_HOURS) + (
-            1 - f
-        ) * hourly_opportunity
+        cum_value = f * a_est_partial  # if stop
+        new_value = (1 - f) * READ_TIME_HOURS * hourly_opportunity
+        u_stop_est = (cum_value + new_value) / (READ_TIME_HOURS + SEARCH_COST_HOURS)
 
         # Difference (negative ⇒ look worse than switching)
         diff = u_continue_est - u_stop_est
         sort_idx = np.argsort(diff)  # ascending: worst first
+        # print(
+        #     f"Sort idx: {sort_idx} , diff: {diff[sort_idx]} , u_continue_est:"
+        #     f" {a_est_full[sort_idx]} , u_stop_est: {est_now[active_mask][sort_idx]}"
+        # )
 
         best_u = -np.inf
-        best_d = 0.0
-        best_cut = diff[sort_idx[int(0)]]  # initialise
+        best_drop = 0.0
+        best_rating_cut = est_now[sort_idx[0]] - 0.01  # initialize below worst book
+        best_drop_u = 0
+
+        active_true_full = val_full[active_mask]
+        active_true_part = val_partial[active_mask]
 
         for d in D_GRID:
-            k_drop = int(np.floor(d * n_books))
+            k_drop = int(np.floor(d * active_mask.sum()))  # number of books to drop
+
+            # Get indices of books to keep and drop
             drop_set = sort_idx[:k_drop]
+            keep_mask = np.ones(len(sort_idx), dtype=bool)
+            keep_mask[drop_set] = False
 
-            keep_mask_local = np.ones(active_idx.shape[0], dtype=bool)
-            keep_mask_local[drop_set] = False
+            # Compute true utilities
+            h_util_keep = active_true_full[keep_mask] / (READ_TIME_HOURS + SEARCH_COST_HOURS)
+            util_till_drop = f * active_true_part[~keep_mask]
+            util_after_drop = (1 - f) * READ_TIME_HOURS * hourly_opportunity
+            h_util_drop = (util_till_drop + util_after_drop) / (READ_TIME_HOURS + SEARCH_COST_HOURS)
 
-            # Compute real utility realised
-            util_keep = val_full[active_idx][keep_mask_local] / (
-                READ_TIME_HOURS + SEARCH_COST_HOURS
-            )
-            util_drop = (f * val_partial[active_idx][~keep_mask_local]) / (
-                f * READ_TIME_HOURS + SEARCH_COST_HOURS
-            ) + (1 - f) * hourly_opportunity
-
-            total_u = util_keep.sum() + util_drop.sum()
+            # include utility from previously dropped books
+            total_u = h_util_keep.sum() + h_util_drop.sum() + dropped_books_utils[idx_f]
             if total_u > best_u:
                 best_u = total_u
-                best_d = d
-                if k_drop > 0:
-                    best_cut = diff[sort_idx[k_drop - 1]]
-                else:
-                    best_cut = diff[sort_idx[0]]
+                best_drop = d
+                best_rating_cut = est_now[active_mask][sort_idx[k_drop - 1]]
+                best_drop_u = (util_till_drop + util_after_drop).sum() + dropped_books_utils[idx_f]
 
-        # record
-        best_cum_drop[idx_f] = best_d
-        best_cutoffs[idx_f] = best_cut
+        best_cum_drop[idx_f] = best_drop  # of books that remain
+        best_cutoffs[idx_f] = best_rating_cut
+        true_avg_utils[idx_f] = best_u
+        dropped_books_utils[idx_f] = best_drop_u
 
-        # update active mask: drop the chosen set
-        k_drop = int(np.floor(best_d * n_books))
-        drop_global_idx = active_idx[sort_idx[:k_drop]]
-        active_mask[drop_global_idx] = False
+        # Update active mask: drop the chosen set
+        k_drop = int(np.floor(best_drop * active_mask.sum()))
+        if k_drop > 0:
+            print(f"Dropping {k_drop} books at f={f:.2f} , d={best_drop:.2f} , best_u={best_u:.2f}")
+            drop_global_idx = np.where(active_mask)[0][sort_idx[:k_drop]]
+            print(f"Dropping books: {drop_global_idx}")
+            active_mask[drop_global_idx] = False
 
-    return {"cum_drop": best_cum_drop, "cutoffs": best_cutoffs}
+        if True:  # idx_f == 0:  # Print values for first step
+            print(f"\nDebug - First step utilities:")
+            print(f"Continue: {u_continue_est[:5]}")
+            print(f"Stop: {u_stop_est[:5]}")
+            print(f"Best drop fraction: {best_drop}")
+            print(f"Best cut: {best_rating_cut}")
+
+    print(best_cum_drop, best_cutoffs, true_avg_utils, dropped_books_utils)
+    true_avg_utils /= len(true_ratings)
+    assert true_avg_utils[-1] >= val_full.mean(), (
+        "Optimal strategy is worse than just reading all books"
+        f" {true_avg_utils[-1]} {val_full.mean()}"
+    )
+    return {"cum_drop": best_cum_drop, "cutoffs": best_cutoffs, "true_utils": true_avg_utils}
 
 
 # -------------- Wrapper per category --------------
 def simulate_category(df_cat: pd.DataFrame, rating_col: str) -> Dict[str, np.ndarray]:
     true_ratings = df_cat[rating_col].values
+
     cum_drop_acc = np.zeros(len(F_GRID))
     cutoff_acc = np.zeros(len(F_GRID))
 
-    for _ in range(N_SIM):
-        res = optimise_schedule(true_ratings)
+    # Store individual simulation paths and their true utilities
+    all_drop_paths = []  # of books remaining, drop fraction at each step
+    all_cutoffs = []
+    all_true_utils = []
+
+    for i in range(2):  # N_SIM):
+        res = optimise_schedule_greedy(true_ratings)
         cum_drop_acc += res["cum_drop"]
         cutoff_acc += res["cutoffs"]
+        all_drop_paths.append(res["cum_drop"])
+        all_cutoffs.append(res["cutoffs"])
+        all_true_utils.append(res["true_utils"])
 
     cum_drop_acc /= N_SIM
     cutoff_acc /= N_SIM
-    return {"cum_drop": cum_drop_acc, "cutoffs": cutoff_acc}
+    return {
+        "cum_drop": cum_drop_acc,
+        "cutoffs": cutoff_acc,
+        "cur_drop_path": np.array(all_drop_paths),
+        "cutoffs_all": np.array(all_cutoffs),
+        "true_utils": np.array(all_true_utils),
+    }
+
+
+def plot_simulation_paths(
+    drop_paths: np.ndarray,
+    f_grid: np.ndarray,
+    true_utils: np.ndarray,
+    title: str = "Simulation Paths",
+):
+    """
+    Plot all simulation paths with scatter points colored by instantaneous utility
+    and lines colored by final utility. True utilities are normalized per book.
+
+    Args:
+        drop_paths: Array of shape (n_simulations, n_points) containing all simulation paths
+        f_grid: Array of x-axis values (fraction read)
+        true_utils: Array of shape (n_simulations, n_points) containing true utilities
+        title: Plot title
+    """
+    plt.figure(figsize=(10, 6))
+
+    # Calculate final values for coloring
+    final_values = true_utils[:, -1]
+    plt.hist(final_values)
+    plt.show()
+
+    # Calculate remaining books at each timestep
+    remaining_books = np.zeros_like(drop_paths)
+    for i, path in enumerate(drop_paths):
+        # Start with 1 (all books)
+        remaining = 1.0
+        for j, drop_frac in enumerate(path):
+            remaining *= 1 - drop_frac  # Multiply by fraction kept
+            remaining_books[i, j] = remaining
+
+    # Plot mean path with dotted line
+    mean_path = drop_paths.mean(axis=0)
+    plt.plot(f_grid, mean_path, "k--", linewidth=2, label="Mean Path", alpha=0.7)
+
+    # Plot optimal path (path with highest final utility) with solid line
+    optimal_idx = np.argmax(final_values)
+    optimal_path = drop_paths[optimal_idx]
+    plt.plot(f_grid, optimal_path, "k-", linewidth=2, label="Optimal Path")
+
+    # Normalize final utilities for line colors
+    norm_final = (final_values - final_values.min()) / (final_values.max() - final_values.min())
+
+    # Normalize instantaneous utilities for scatter colors
+    norm_instant = (true_utils - true_utils.min()) / (true_utils.max() - true_utils.min())
+    instant_colors = plt.cm.RdYlGn(norm_instant)
+
+    plt.title(title)
+    plt.xlabel("Fraction Read")
+    plt.ylabel("Instant Drop Fraction")
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+    for i, (path, utils) in enumerate(zip(drop_paths, true_utils)):
+        # Color line based on final utility
+        line_color = plt.cm.RdYlGn(norm_final[i])
+        plt.plot(f_grid, path, color=line_color, alpha=0.3, linewidth=1)
+        # Color scatter points based on instantaneous utility
+        plt.scatter(f_grid, path, c=instant_colors[i], alpha=0.1, s=10)
+
+    plt.show()
+
+    # Plot true utilities with same coloring scheme
+    plt.figure(figsize=(10, 6))
+    for i, utils in enumerate(true_utils):
+        # Color line based on final utility
+        line_color = plt.cm.RdYlGn(norm_final[i])
+        plt.plot(f_grid, utils, color=line_color, alpha=0.3, linewidth=1)
+
+        # Color scatter points based on instantaneous utility
+        plt.scatter(f_grid, utils, c=instant_colors[i], alpha=0.1, s=10)
+
+    plt.plot(f_grid, true_utils.mean(axis=0), "k--", linewidth=2, label="Mean Utility", alpha=0.7)
+    plt.plot(f_grid, true_utils[optimal_idx], "k-", linewidth=2, label="Optimal Path Utility")
+
+    plt.title(f"{title} - True Utilities")
+    plt.xlabel("Fraction Read")
+    plt.ylabel("True Utility")
+    plt.grid(True, alpha=0.3)
+    plt.legend()
+    plt.show()
 
 
 # ---------------- Main ----------------
-def main():
+if __name__ == "__main__":
+    # Then run the main simulation
     DATA_PATH = Path("data/Books Read and their effects - Play Export.csv")
     if not DATA_PATH.exists():
         print("CSV not found – replace DATA_PATH with your local file path.")
-        return
+        exit()
     df = pd.read_csv(DATA_PATH)
     df["Bookshelf"] = df["Bookshelf"].str.strip().str.replace("/", ",").str.replace("&", "and")
 
@@ -482,9 +677,25 @@ def main():
         for f, d in zip(F_GRID, out[shelf]["cum_drop"]):
             print(f"  f={f:.2f}  drop={d:.3f}")
 
-    # Example: print Business cum_drop
-    if "Business, management" in out:
-
-
-if __name__ == "__main__":
-    main()
+        # Plot simulation paths for this shelf
+        plot_simulation_paths(
+            out[shelf]["cur_drop_path"],
+            F_GRID,
+            out[shelf]["true_utils"],
+            f"Simulation Paths - {shelf}",
+        )
+        break
+# %%
+# Dynamic where check all options: D^F: 100B here
+F_GRID = np.concatenate(
+    [
+        np.arange(0.01, 0.4, 0.08),  # more precise in first half
+        np.arange(0.4, 1, 0.15),  # less precise in second half
+    ]
+)
+D_GRID = np.concatenate(
+    [
+        np.arange(0.00, 0.10, 0.02),  # dropping up to 30% in 1 step. Depends on F_GRID size
+        np.arange(0.10, 0.31, 0.07),
+    ]
+)
