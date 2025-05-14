@@ -2040,48 +2040,106 @@ print(
 )
 # %%
 
+
 # Quiting twitter Natural Experiment
-
-
-def analyze_twitter_vs_time(df, hide_hours=False):
+def analyze_twitter_vs_time(df, work_data, hide_hours=False):
     """
     Analyzes Twitter usage vs both waste time and useful time during quit and non-quit periods
 
     Parameters:
+    df: calendar events dataframe
+    work_data: dataframe with daily work hours and productivity
     hide_hours (bool): If True, hides hour values on y-axis for social media sharing
     """
+    # Convert work_data date to datetime for matching
+    work_data["date"] = pd.to_datetime(work_data["date"])
+    work_data["month"] = work_data["date"].dt.to_period("M")
+    work_data["month_str"] = work_data["month"].astype(str)
+
     # Filter for Twitter events
     twitter_df = df[df["event_name"].str.lower().str.contains("twitter")].copy()
     twitter_df["start_time"] = pd.to_datetime(twitter_df["start_time"])
+    twitter_df["date"] = twitter_df["start_time"].dt.date
     twitter_df["month"] = twitter_df["start_time"].dt.to_period("M")
 
     # Filter for Waste Time events
     waste_df = df[df["calendar_name"] == "Waste Time"].copy()
     waste_df["start_time"] = pd.to_datetime(waste_df["start_time"])
+    waste_df["date"] = waste_df["start_time"].dt.date
     waste_df["month"] = waste_df["start_time"].dt.to_period("M")
 
     # Filter for Useful Time events (work)
-    work_df = df[df["calendar_name"] == "clark.benham@gmail.com"].copy()
-    work_df["start_time"] = pd.to_datetime(work_df["start_time"])
-    work_df["month"] = work_df["start_time"].dt.to_period("M")
+    useful_df = df[df["calendar_name"] == "clark.benham@gmail.com"].copy()
+    useful_df["start_time"] = pd.to_datetime(useful_df["start_time"])
+    useful_df["date"] = useful_df["start_time"].dt.date
+    useful_df["month"] = useful_df["start_time"].dt.to_period("M")
 
-    # Group by month for all three
+    # Get unique dates with events for each month
+    all_events_df = pd.concat([twitter_df, waste_df, useful_df])
+    all_events_df["date"] = pd.to_datetime(all_events_df["date"])
+    all_events_df["month"] = all_events_df["date"].dt.to_period("M")
+
+    # Count actual days with events per month
+    days_with_events = all_events_df.groupby("month")["date"].nunique().reset_index()
+    days_with_events.columns = ["month", "active_days"]
+    days_with_events["month_str"] = days_with_events["month"].astype(str)
+
+    # Group by month for all three event types
     monthly_twitter = twitter_df.groupby("month")["duration"].sum().reset_index()
     monthly_twitter["month_str"] = monthly_twitter["month"].astype(str)
 
     monthly_waste = waste_df.groupby("month")["duration"].sum().reset_index()
     monthly_waste["month_str"] = monthly_waste["month"].astype(str)
 
-    monthly_work = work_df.groupby("month")["duration"].sum().reset_index()
-    monthly_work["month_str"] = monthly_work["month"].astype(str)
+    monthly_useful = useful_df.groupby("month")["duration"].sum().reset_index()
+    monthly_useful["month_str"] = monthly_useful["month"].astype(str)
+
+    # Group work_data by month
+    monthly_work_hours = work_data.groupby("month_str")["Hours Working"].sum().reset_index()
+    monthly_work_productivity = (
+        work_data.groupby("month_str")["work_productivity"].sum().reset_index()
+    )
 
     # Merge all the data
     monthly_combined = pd.merge(
         monthly_twitter, monthly_waste, on="month_str", how="outer", suffixes=("_twitter", "_waste")
     )
-    monthly_combined = pd.merge(monthly_combined, monthly_work, on="month_str", how="outer")
-    monthly_combined.rename(columns={"duration": "duration_work"}, inplace=True)
+    monthly_combined = pd.merge(monthly_combined, monthly_useful, on="month_str", how="outer")
+    monthly_combined.rename(columns={"duration": "duration_useful"}, inplace=True)
+
+    # Add days with events
+    monthly_combined = pd.merge(
+        monthly_combined, days_with_events[["month_str", "active_days"]], on="month_str", how="left"
+    )
+
+    # Add work hours and productivity
+    monthly_combined = pd.merge(monthly_combined, monthly_work_hours, on="month_str", how="left")
+    monthly_combined = pd.merge(
+        monthly_combined, monthly_work_productivity, on="month_str", how="left"
+    )
+
     monthly_combined.fillna(0, inplace=True)
+
+    # Convert monthly hours to daily hours using actual active days
+    monthly_combined["daily_twitter"] = (
+        monthly_combined["duration_twitter"] / monthly_combined["active_days"]
+    )
+    monthly_combined["daily_waste"] = (
+        monthly_combined["duration_waste"] / monthly_combined["active_days"]
+    )
+    monthly_combined["daily_useful"] = (
+        monthly_combined["duration_useful"] / monthly_combined["active_days"]
+    )
+    monthly_combined["daily_work_hours"] = (
+        monthly_combined["Hours Working"] / monthly_combined["active_days"]
+    )
+    monthly_combined["daily_work_productivity"] = (
+        monthly_combined["work_productivity"] / monthly_combined["active_days"]
+    )
+
+    # Replace NaN with 0 for months with no active days
+    monthly_combined = monthly_combined.replace([np.inf, -np.inf], 0)
+    monthly_combined = monthly_combined.fillna(0)
 
     # Define quit periods based on your data
     quit_periods = [
@@ -2110,24 +2168,29 @@ def analyze_twitter_vs_time(df, hide_hours=False):
 
         twitter_hours = period_data["duration_twitter"].sum()
         waste_hours = period_data["duration_waste"].sum()
-        work_hours = period_data["duration_work"].sum()
+        useful_hours = period_data["duration_useful"].sum()
+        work_hours = period_data["Hours Working"].sum()
+        work_productivity = period_data["work_productivity"].sum()
         months_count = len(period_data)
 
-        # Calculate days in period
-        days_count = sum(
-            pd.Period(month_str).days_in_month for month_str in period_data["month_str"]
-        )
+        # Calculate days in period using actual active days
+        days_count = period_data["active_days"].sum()
 
         quit_stats.append(
             {
                 "Period": label,
                 "Twitter Total": twitter_hours,
                 "Waste Total": waste_hours,
-                "Work Total": work_hours,
+                "Useful Total": useful_hours,
+                "Work Hours Total": work_hours,
+                "Work Productivity Total": work_productivity,
                 "Twitter/Day": twitter_hours / days_count if days_count > 0 else 0,
                 "Waste/Day": waste_hours / days_count if days_count > 0 else 0,
-                "Work/Day": work_hours / days_count if days_count > 0 else 0,
+                "Useful/Day": useful_hours / days_count if days_count > 0 else 0,
+                "Work Hours/Day": work_hours / days_count if days_count > 0 else 0,
+                "Work Productivity/Day": work_productivity / days_count if days_count > 0 else 0,
                 "Months": months_count,
+                "Active Days": days_count,
             }
         )
 
@@ -2139,24 +2202,29 @@ def analyze_twitter_vs_time(df, hide_hours=False):
 
         twitter_hours = period_data["duration_twitter"].sum()
         waste_hours = period_data["duration_waste"].sum()
-        work_hours = period_data["duration_work"].sum()
+        useful_hours = period_data["duration_useful"].sum()
+        work_hours = period_data["Hours Working"].sum()
+        work_productivity = period_data["work_productivity"].sum()
         months_count = len(period_data)
 
-        # Calculate days in period
-        days_count = sum(
-            pd.Period(month_str).days_in_month for month_str in period_data["month_str"]
-        )
+        # Calculate days in period using actual active days
+        days_count = period_data["active_days"].sum()
 
         active_stats.append(
             {
                 "Period": label,
                 "Twitter Total": twitter_hours,
                 "Waste Total": waste_hours,
-                "Work Total": work_hours,
+                "Useful Total": useful_hours,
+                "Work Hours Total": work_hours,
+                "Work Productivity Total": work_productivity,
                 "Twitter/Day": twitter_hours / days_count if days_count > 0 else 0,
                 "Waste/Day": waste_hours / days_count if days_count > 0 else 0,
-                "Work/Day": work_hours / days_count if days_count > 0 else 0,
+                "Useful/Day": useful_hours / days_count if days_count > 0 else 0,
+                "Work Hours/Day": work_hours / days_count if days_count > 0 else 0,
+                "Work Productivity/Day": work_productivity / days_count if days_count > 0 else 0,
                 "Months": months_count,
+                "Active Days": days_count,
             }
         )
 
@@ -2179,15 +2247,17 @@ def analyze_twitter_vs_time(df, hide_hours=False):
         ]
     )
 
-    # Summary statistics (convert to daily)
-    quit_days = sum(pd.Period(month_str).days_in_month for month_str in all_quit_data["month_str"])
-    active_days = sum(
-        pd.Period(month_str).days_in_month for month_str in all_active_data["month_str"]
-    )
+    # Summary statistics (convert to daily using actual active days)
+    quit_days = all_quit_data["active_days"].sum()
+    active_days = all_active_data["active_days"].sum()
 
     quit_twitter_avg = all_quit_data["duration_twitter"].sum() / quit_days if quit_days > 0 else 0
     quit_waste_avg = all_quit_data["duration_waste"].sum() / quit_days if quit_days > 0 else 0
-    quit_work_avg = all_quit_data["duration_work"].sum() / quit_days if quit_days > 0 else 0
+    quit_useful_avg = all_quit_data["duration_useful"].sum() / quit_days if quit_days > 0 else 0
+    quit_work_hours_avg = all_quit_data["Hours Working"].sum() / quit_days if quit_days > 0 else 0
+    quit_work_productivity_avg = (
+        all_quit_data["work_productivity"].sum() / quit_days if quit_days > 0 else 0
+    )
 
     active_twitter_avg = (
         all_active_data["duration_twitter"].sum() / active_days if active_days > 0 else 0
@@ -2195,24 +2265,32 @@ def analyze_twitter_vs_time(df, hide_hours=False):
     active_waste_avg = (
         all_active_data["duration_waste"].sum() / active_days if active_days > 0 else 0
     )
-    active_work_avg = all_active_data["duration_work"].sum() / active_days if active_days > 0 else 0
+    active_useful_avg = (
+        all_active_data["duration_useful"].sum() / active_days if active_days > 0 else 0
+    )
+    active_work_hours_avg = (
+        all_active_data["Hours Working"].sum() / active_days if active_days > 0 else 0
+    )
+    active_work_productivity_avg = (
+        all_active_data["work_productivity"].sum() / active_days if active_days > 0 else 0
+    )
 
-    # Calculate correlations
-    valid_data = monthly_combined[
-        (monthly_combined["duration_twitter"] > 0)
-        | (monthly_combined["duration_waste"] > 0)
-        | (monthly_combined["duration_work"] > 0)
-    ]
-    waste_correlation = valid_data["duration_twitter"].corr(valid_data["duration_waste"])
-    work_correlation = valid_data["duration_twitter"].corr(valid_data["duration_work"])
+    # Calculate correlations using daily values
+    valid_data = monthly_combined[monthly_combined["active_days"] > 0]
+    waste_correlation = valid_data["daily_twitter"].corr(valid_data["daily_waste"])
+    useful_correlation = valid_data["daily_twitter"].corr(valid_data["daily_useful"])
+    work_hours_correlation = valid_data["daily_twitter"].corr(valid_data["daily_work_hours"])
+    work_productivity_correlation = valid_data["daily_twitter"].corr(
+        valid_data["daily_work_productivity"]
+    )
 
     # Create separate waste time figure
     fig1, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 10))
 
-    # Plot 1: Twitter and Waste Time over time
+    # Plot 1: Twitter and Waste Time over time (in hours/day)
     ax1.plot(
         monthly_combined["month_str"],
-        monthly_combined["duration_twitter"],
+        monthly_combined["daily_twitter"],
         label="Twitter",
         marker="o",
         color="red",
@@ -2220,7 +2298,7 @@ def analyze_twitter_vs_time(df, hide_hours=False):
     )
     ax1.plot(
         monthly_combined["month_str"],
-        monthly_combined["duration_waste"],
+        monthly_combined["daily_waste"],
         label="Total Waste Time",
         marker="s",
         color="orange",
@@ -2242,7 +2320,7 @@ def analyze_twitter_vs_time(df, hide_hours=False):
 
     ax1.set_title("Twitter Usage vs Total Time Wasted Over Time", fontsize=16)
     ax1.set_xlabel("Month", fontsize=12)
-    ax1.set_ylabel("Hours", fontsize=12)
+    ax1.set_ylabel("Hours/Day", fontsize=12)
     ax1.legend(fontsize=12)
     ax1.grid(True, alpha=0.3)
 
@@ -2254,16 +2332,16 @@ def analyze_twitter_vs_time(df, hide_hours=False):
     if hide_hours:
         ax1.set_yticklabels([])
 
-    # Plot 2: Scatter plot Twitter vs Waste
+    # Plot 2: Scatter plot Twitter vs Waste (in hours/day)
     ax2.scatter(
-        monthly_combined["duration_twitter"],
-        monthly_combined["duration_waste"],
+        monthly_combined["daily_twitter"],
+        monthly_combined["daily_waste"],
         color="orange",
         s=60,
         alpha=0.7,
     )
-    ax2.set_xlabel("Twitter Hours/Month", fontsize=12)
-    ax2.set_ylabel("Total Waste Hours/Month", fontsize=12)
+    ax2.set_xlabel("Twitter Hours/Day", fontsize=12)
+    ax2.set_ylabel("Total Waste Hours/Day", fontsize=12)
     ax2.set_title(
         f"Twitter vs Total Waste Time (Correlation: {waste_correlation:.3f})", fontsize=16
     )
@@ -2277,13 +2355,13 @@ def analyze_twitter_vs_time(df, hide_hours=False):
     plt.savefig("twitter_vs_waste_time.png", dpi=300, bbox_inches="tight")
     plt.show()
 
-    # Create separate work time figure
+    # Create separate useful events figure
     fig2, (ax3, ax4) = plt.subplots(2, 1, figsize=(14, 10))
 
-    # Plot 3: Twitter and Work Time over time
+    # Plot 3: Twitter and Useful Events over time (in hours/day)
     ax3.plot(
         monthly_combined["month_str"],
-        monthly_combined["duration_twitter"],
+        monthly_combined["daily_twitter"],
         label="Twitter",
         marker="o",
         color="red",
@@ -2291,8 +2369,8 @@ def analyze_twitter_vs_time(df, hide_hours=False):
     )
     ax3.plot(
         monthly_combined["month_str"],
-        monthly_combined["duration_work"],
-        label="Work Time",
+        monthly_combined["daily_useful"],
+        label="Total Useful Events",
         marker="d",
         color="green",
         linewidth=2,
@@ -2311,9 +2389,9 @@ def analyze_twitter_vs_time(df, hide_hours=False):
                 label="Twitter Quit Period",
             )
 
-    ax3.set_title("Twitter Usage vs Work Time Over Time", fontsize=16)
+    ax3.set_title("Twitter Usage vs Total Useful Events Over Time", fontsize=16)
     ax3.set_xlabel("Month", fontsize=12)
-    ax3.set_ylabel("Hours", fontsize=12)
+    ax3.set_ylabel("Hours/Day", fontsize=12)
     ax3.legend(fontsize=12)
     ax3.grid(True, alpha=0.3)
 
@@ -2324,17 +2402,19 @@ def analyze_twitter_vs_time(df, hide_hours=False):
     if hide_hours:
         ax3.set_yticklabels([])
 
-    # Plot 4: Scatter plot Twitter vs Work
+    # Plot 4: Scatter plot Twitter vs Useful Events (in hours/day)
     ax4.scatter(
-        monthly_combined["duration_twitter"],
-        monthly_combined["duration_work"],
+        monthly_combined["daily_twitter"],
+        monthly_combined["daily_useful"],
         color="green",
         s=60,
         alpha=0.7,
     )
-    ax4.set_xlabel("Twitter Hours/Month", fontsize=12)
-    ax4.set_ylabel("Work Hours/Month", fontsize=12)
-    ax4.set_title(f"Twitter vs Work Time (Correlation: {work_correlation:.3f})", fontsize=16)
+    ax4.set_xlabel("Twitter Hours/Day", fontsize=12)
+    ax4.set_ylabel("Total Useful Events Hours/Day", fontsize=12)
+    ax4.set_title(
+        f"Twitter vs Total Useful Events (Correlation: {useful_correlation:.3f})", fontsize=16
+    )
     ax4.grid(True, alpha=0.3)
 
     if hide_hours:
@@ -2342,7 +2422,136 @@ def analyze_twitter_vs_time(df, hide_hours=False):
         ax4.set_yticklabels([])
 
     plt.tight_layout()
-    plt.savefig("twitter_vs_work_time.png", dpi=300, bbox_inches="tight")
+    plt.savefig("twitter_vs_useful_events.png", dpi=300, bbox_inches="tight")
+    plt.show()
+
+    # Create work hours and productivity figure
+    fig3, ((ax5, ax6), (ax7, ax8)) = plt.subplots(2, 2, figsize=(16, 12))
+
+    # Plot 5: Twitter and Work Hours over time
+    ax5.plot(
+        monthly_combined["month_str"],
+        monthly_combined["daily_twitter"],
+        label="Twitter",
+        marker="o",
+        color="red",
+        linewidth=2,
+    )
+    ax5.plot(
+        monthly_combined["month_str"],
+        monthly_combined["daily_work_hours"],
+        label="Work Hours",
+        marker="^",
+        color="blue",
+        linewidth=2,
+    )
+
+    # Highlight quit periods
+    for start, end, _ in quit_periods:
+        mask = (monthly_combined["month_str"] >= start) & (monthly_combined["month_str"] <= end)
+        quit_months = monthly_combined[mask]["month_str"]
+        if len(quit_months) > 0:
+            ax5.axvspan(
+                quit_months.iloc[0],
+                quit_months.iloc[-1],
+                alpha=0.8,
+                color="lightblue",
+                label="Twitter Quit Period",
+            )
+
+    ax5.set_title("Twitter Usage vs Work Hours Over Time", fontsize=16)
+    ax5.set_xlabel("Month", fontsize=12)
+    ax5.set_ylabel("Hours/Day", fontsize=12)
+    ax5.legend(fontsize=12)
+    ax5.grid(True, alpha=0.3)
+    ax5.set_xticks(x_positions[::3])
+    ax5.set_xticklabels(monthly_combined["month_str"].iloc[::3], rotation=45, ha="right")
+
+    if hide_hours:
+        ax5.set_yticklabels([])
+
+    # Plot 6: Scatter plot Twitter vs Work Hours
+    ax6.scatter(
+        monthly_combined["daily_twitter"],
+        monthly_combined["daily_work_hours"],
+        color="blue",
+        s=60,
+        alpha=0.7,
+    )
+    ax6.set_xlabel("Twitter Hours/Day", fontsize=12)
+    ax6.set_ylabel("Work Hours/Day", fontsize=12)
+    ax6.set_title(f"Twitter vs Work Hours (Correlation: {work_hours_correlation:.3f})", fontsize=16)
+    ax6.grid(True, alpha=0.3)
+
+    if hide_hours:
+        ax6.set_xticklabels([])
+        ax6.set_yticklabels([])
+
+    # Plot 7: Twitter and Work Productivity over time
+    ax7.plot(
+        monthly_combined["month_str"],
+        monthly_combined["daily_twitter"],
+        label="Twitter",
+        marker="o",
+        color="red",
+        linewidth=2,
+    )
+    ax7.plot(
+        monthly_combined["month_str"],
+        monthly_combined["daily_work_productivity"]
+        / monthly_combined["daily_work_productivity"].mean(),
+        label="Work Productivity",
+        marker="h",
+        color="purple",
+        linewidth=2,
+    )
+
+    # Highlight quit periods
+    for start, end, _ in quit_periods:
+        mask = (monthly_combined["month_str"] >= start) & (monthly_combined["month_str"] <= end)
+        quit_months = monthly_combined[mask]["month_str"]
+        if len(quit_months) > 0:
+            ax7.axvspan(
+                quit_months.iloc[0],
+                quit_months.iloc[-1],
+                alpha=0.8,
+                color="lightblue",
+                label="Twitter Quit Period",
+            )
+
+    ax7.set_title("Twitter Usage vs Work Productivity Over Time", fontsize=16)
+    ax7.set_xlabel("Month", fontsize=12)
+    ax7.set_ylabel("Units/Day", fontsize=12)
+    ax7.legend(fontsize=12)
+    ax7.grid(True, alpha=0.3)
+    ax7.set_xticks(x_positions[::3])
+    ax7.set_xticklabels(monthly_combined["month_str"].iloc[::3], rotation=45, ha="right")
+
+    if hide_hours:
+        ax7.set_yticklabels([])
+
+    # Plot 8: Scatter plot Twitter vs Work Productivity
+    ax8.scatter(
+        monthly_combined["daily_twitter"],
+        monthly_combined["daily_work_productivity"],
+        color="purple",
+        s=60,
+        alpha=0.7,
+    )
+    ax8.set_xlabel("Twitter Hours/Day", fontsize=12)
+    ax8.set_ylabel("Work Productivity/Day", fontsize=12)
+    ax8.set_title(
+        f"Twitter vs Work Productivity (Correlation: {work_productivity_correlation:.3f})",
+        fontsize=16,
+    )
+    ax8.grid(True, alpha=0.3)
+
+    if hide_hours:
+        ax8.set_xticklabels([])
+        ax8.set_yticklabels([])
+
+    plt.tight_layout()
+    plt.savefig("twitter_vs_work_metrics.png", dpi=300, bbox_inches="tight")
     plt.show()
 
     # Print the formatted summary
@@ -2361,11 +2570,24 @@ def analyze_twitter_vs_time(df, hide_hours=False):
         f" {quit_waste_avg:.2f} h/day when I quit Twitter."
     )
     print(
-        f"Work time was {active_work_avg:.2f} h/day normally and {quit_work_avg:.2f} h/day when I"
-        " quit Twitter."
+        f"Total Useful Events was {active_useful_avg:.2f} h/day normally and"
+        f" {quit_useful_avg:.2f} h/day when I quit Twitter."
+    )
+    print(
+        f"Work hours was {active_work_hours_avg:.2f} h/day normally and"
+        f" {quit_work_hours_avg:.2f} h/day when I quit Twitter."
+    )
+    print(
+        f"Work productivity was {active_work_productivity_avg:.1f}/day normally and"
+        f" {quit_work_productivity_avg:.1f}/day when I quit Twitter."
     )
     print(f"\nCorrelation between Twitter usage and total hours wasted is {waste_correlation:.3f}.")
-    print(f"Correlation between Twitter usage and work hours is {work_correlation:.3f}.")
+    print(f"Correlation between Twitter usage and useful events is {useful_correlation:.3f}.")
+    print(f"Correlation between Twitter usage and work hours is {work_hours_correlation:.3f}.")
+    print(
+        "Correlation between Twitter usage and work productivity is"
+        f" {work_productivity_correlation:.3f}."
+    )
     print("(But I'd default more to natural experiment of quitting Twitter).")
 
     # Detailed breakdown
@@ -2377,23 +2599,47 @@ def analyze_twitter_vs_time(df, hide_hours=False):
         print(f"\n{stats['Period']}:")
         print(f"  Twitter: {stats['Twitter Total']:.1f} total ({stats['Twitter/Day']:.2f} h/day)")
         print(f"  Waste: {stats['Waste Total']:.1f} total ({stats['Waste/Day']:.2f} h/day)")
-        print(f"  Work: {stats['Work Total']:.1f} total ({stats['Work/Day']:.2f} h/day)")
-        print(f"  Months: {stats['Months']}")
+        print(f"  Useful: {stats['Useful Total']:.1f} total ({stats['Useful/Day']:.2f} h/day)")
+        print(
+            f"  Work Hours: {stats['Work Hours Total']:.1f} total"
+            f" ({stats['Work Hours/Day']:.2f} h/day)"
+        )
+        print(
+            f"  Work Productivity: {stats['Work Productivity Total']:.1f} total"
+            f" ({stats['Work Productivity/Day']:.1f}/day)"
+        )
+        print(f"  Months: {stats['Months']}, Active Days: {stats['Active Days']}")
 
     print("\n\nACTIVE PERIODS:")
     for stats in active_stats:
         print(f"\n{stats['Period']}:")
         print(f"  Twitter: {stats['Twitter Total']:.1f} total ({stats['Twitter/Day']:.2f} h/day)")
         print(f"  Waste: {stats['Waste Total']:.1f} total ({stats['Waste/Day']:.2f} h/day)")
-        print(f"  Work: {stats['Work Total']:.1f} total ({stats['Work/Day']:.2f} h/day)")
-        print(f"  Months: {stats['Months']}")
+        print(f"  Useful: {stats['Useful Total']:.1f} total ({stats['Useful/Day']:.2f} h/day)")
+        print(
+            f"  Work Hours: {stats['Work Hours Total']:.1f} total"
+            f" ({stats['Work Hours/Day']:.2f} h/day)"
+        )
+        print(
+            f"  Work Productivity: {stats['Work Productivity Total']:.1f} total"
+            f" ({stats['Work Productivity/Day']:.1f}/day)"
+        )
+        print(f"  Months: {stats['Months']}, Active Days: {stats['Active Days']}")
 
-    return monthly_combined, waste_correlation, work_correlation
+    return (
+        monthly_combined,
+        waste_correlation,
+        useful_correlation,
+        work_hours_correlation,
+        work_productivity_correlation,
+    )
 
 
 # Example usage:
 # To create normal graphs with hours shown:
-combined_data, waste_corr, work_corr = analyze_twitter_vs_time(df, hide_hours=True)
+combined_data, waste_corr, useful_corr, work_hours_corr, work_productivity_corr = (
+    analyze_twitter_vs_time(df, work_data, hide_hours=False)
+)
 
 # To create graphs for social media (without hour values):
-# combined_data, waste_corr, work_corr = analyze_twitter_vs_time(df, hide_hours=True)
+# combined_data, waste_corr, useful_corr, work_hours_corr, work_productivity_corr = analyze_twitter_vs_time(df, work_data, hide_hours=True)
