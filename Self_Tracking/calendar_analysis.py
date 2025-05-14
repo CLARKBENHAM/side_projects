@@ -1771,6 +1771,21 @@ def regression_predict_work_from_sleep_breakpoints(
 
     # Create model
     X = filtered.select_dtypes(include=np.number)  # [features].copy()
+    # oringally had abs(t) <=0.9 on full daily work hours regression. But some I'll just keep in
+    X = X.drop(
+        columns=[
+            "prev_sleep_hours",
+            # "after_hive",
+            # "insta_count",
+            # "jack_count",
+            "prev_gym_count",
+            "prev_chores_count",
+            "prev_book_count",
+            "prev_twitter_count",
+            "prev_insta_count",
+            "prev_porn_count",
+        ]
+    )
     print(X.columns)
     print("Col not in regression", set(filtered.columns) - set(X.columns))
 
@@ -1819,6 +1834,7 @@ if __name__ == "__main__":
         "chores",
         "drink",  #
         "friend",
+        "blogs",
         "book",
         "twitter",
         "insta",
