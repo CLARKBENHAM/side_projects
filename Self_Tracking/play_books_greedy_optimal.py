@@ -16,10 +16,25 @@ import matplotlib.gridspec as gridspec
 from typing import Dict, List
 
 # ---------------- Parameters ----------------
-READ_TIME_HOURS = 3.5
-SEARCH_COST_HOURS = 0.25
-PARTIAL_RATING_PENALTY = 0.2
-VALUE_BASE = 1.75
+READ_TIME_HOURS = 3.5  # full reading time
+SEARCH_COST_HOURS = 0.25  # discovery cost of getting a new book
+PARTIAL_RATING_PENALTY = 0.1  # rating loss when abandoning, assumed utility loss linear
+VALUE_BASE = 1.75  # utility = VALUE_BASE ** rating
+
+# Quit levels
+QUIT_TABLE = {  # might 28, wont 39 is slightly off from other time I did counts but I'm exactly sure on number anyway
+    "Business, management": {"finished": 44, "might finish": 5, "wont finish": 6},
+    "Computer Science": {"finished": 14, "might finish": 6, "wont finish": 10},
+    "fiction": {"finished": 51, "might finish": 0, "wont finish": 6},
+    "General Reading": {"finished": 40, "might finish": 5, "wont finish": 7},
+    "Literature": {"finished": 50, "might finish": 3, "wont finish": 6},
+    "Machine Learning": {"finished": 5, "might finish": 3, "wont finish": 2},
+    "Math": {"finished": 3, "might finish": 6, "wont finish": 2},
+}
+QUIT_USEFULNESS = 1.2
+QUIT_ENJOYMENT = 1.4
+# I quit some books since mid or bored, not because I hated them
+QUIT_AT_FRACTION = 0.15  # but this would vary a lot?
 
 # Static: O(D*F)
 F_GRID = np.concatenate(
@@ -74,7 +89,11 @@ def error_sigma(f):
 
 
 def error_sigma2(f):
-    return 1 - f**0.5
+    # return 1 - f**0.5
+    # if had as much info at 1/3 as do at end
+    # m =(0.6-2.5)/f
+    return max(2.5 - 5.7 * f, 0.6)
+    # but how does this interact with the AR(1) process?
 
 
 def simulate_estimates(true_ratings: np.ndarray, error_fn=error_sigma, rho=0.9) -> np.ndarray:
@@ -496,7 +515,7 @@ if __name__ == "__main__":
         print(f"Final utility: {best_u:.2f} , current: {current_u:.2f}")
         print(f"Final Rating: {best_r:.2f} , current: {current_r:.2f}")
 # %%
-# Dynamic where check all options: D^F: 100B here
+# Dynamic where check all options: D^F: 100M here at 8**9
 F_GRID = np.concatenate(
     [
         np.arange(0.01, 0.4, 0.08),  # more precise in first half
@@ -506,6 +525,6 @@ F_GRID = np.concatenate(
 D_GRID = np.concatenate(
     [
         np.arange(0.00, 0.10, 0.02),  # dropping up to 30% in 1 step. Depends on F_GRID size
-        np.arange(0.10, 0.31, 0.07),
+        np.arange(0.0, 0.21, 0.07),
     ]
 )
