@@ -2638,7 +2638,9 @@ def analyze_twitter_vs_time(df, work_data, hide_hours=False):
 # Example usage:
 # To create normal graphs with hours shown:
 combined_data, waste_corr, useful_corr, work_hours_corr, work_productivity_corr = (
-    analyze_twitter_vs_time(df.query("start_time >= '2022-01-01'"), work_data, hide_hours=False)
+    analyze_twitter_vs_time(
+        df.query("start_time >= '2022-01-01T00:00:00+00:00'"), work_data, hide_hours=False
+    )
 )
 
 # To create graphs for social media (without hour values):
