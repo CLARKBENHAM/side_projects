@@ -32,10 +32,20 @@ QUIT_TABLE = {
     "Machine Learning": {"finished": 5, "might finish": 3, "wont finish": 2},
     "Math": {"finished": 3, "might finish": 6, "wont finish": 2},
 }
+FINISHED_TO_STARTED_RATIO = {
+    k: (
+        (v["finished"] + 0.5 * v["might finish"])
+        / (v["finished"] + v["might finish"] + v["wont finish"])
+    )
+    for k, v in QUIT_TABLE.items()
+}
+STARTED_TO_FINISHED_RATIO = {k: 1 / v for k, v in FINISHED_TO_STARTED_RATIO.items()}
+
 QUIT_USEFULNESS = 1.2
 QUIT_ENJOYMENT = 1.4
 # I quit some books since mid or bored, not because I hated them
 QUIT_AT_FRACTION = 0.15  # but this would vary a lot?
+
 
 # Static: O(D*F)
 F_GRID = np.concatenate(
@@ -184,7 +194,7 @@ def optimise_schedule_greedy(
 
     book_time = READ_TIME_HOURS + SEARCH_COST_HOURS
     if not hourly_opportunity:
-        hourly_opportunity = np.percentile(val_full, 50) / book_time  # TODO dynamically update
+        hourly_opportunity = np.percentile(val_full, 30) / book_time
 
     best_cum_drop = np.zeros(len(F_GRID))
     best_cutoffs = np.zeros(len(F_GRID))
@@ -305,19 +315,47 @@ def optimise_schedule_greedy(
     return {"cur_drop": best_cum_drop, "cutoffs": best_cutoffs, "true_avg_utils": true_avg_utils}
 
 
+def quit_u_h(df_cat: pd.DataFrame, rating_col: str) -> float:
+    category_quit_counts = dict(df_cat["Bookshelf"].value_counts())
+    expected_num_quit = sum(
+        [(STARTED_TO_FINISHED_RATIO[k] - 1) * v for k, v in category_quit_counts.items()]
+    )
+    if rating_col == "Usefulness /5 to Me":
+        quit_u = utility_value(QUIT_USEFULNESS)
+    else:
+        quit_u = utility_value(QUIT_ENJOYMENT)
+    quit_u *= expected_num_quit
+    quit_h = expected_num_quit * (QUIT_AT_FRACTION * READ_TIME_HOURS + SEARCH_COST_HOURS)
+    return quit_u, quit_h
+
+
+def current_hourly_u(df_cat: pd.DataFrame, rating_col: str) -> float:
+    true_ratings_original = df_cat[rating_col].values  # Original ratings for the category, finished
+    assert np.all(
+        true_ratings_original >= 1
+    ), f"some books are rated below 1 {true_ratings_original}"
+    assert np.all(
+        true_ratings_original <= 5
+    ), f"some books are rated above 5 {true_ratings_original}"
+
+    finished_u = np.sum(utility_value(true_ratings_original))
+    finished_h = len(true_ratings_original) * (READ_TIME_HOURS + SEARCH_COST_HOURS)
+
+    quit_u, quit_h = quit_u_h(df_cat, rating_col)
+    hourly_u = (finished_u + quit_u) / (finished_h + quit_h)
+    return hourly_u
+
+
 # -------------- Wrapper per category --------------
 def simulate_category(df_cat: pd.DataFrame, rating_col: str) -> Dict[str, np.ndarray]:
-    """ """
-    N_FOR_BASELINE_U = 5  # Run multiple times to get true values for baseline utility
-
-    true_ratings_original = df_cat[rating_col].values  # Original ratings for the category
-    current_u = np.mean(utility_value(true_ratings_original)) / (
-        READ_TIME_HOURS + SEARCH_COST_HOURS
-    )
-
-    # if rating_col == "Usefulness /5 to Me":
-    #    QUIT_TABLE
-    # TODO handle already dropped books
+    """df_cat: dataframe of books FINISHED in category
+    rating_col: column name of rating, e.g. "Usefulness /5 to Me" or "Enjoyment /5 to Me"
+    baseline hourly u is the current hourly u of the category, then 30th percentile of hourly u of the end of the simulation
+    """
+    N_FOR_BASELINE_U = 10  # Run multiple times to get true values for baseline utility
+    true_ratings_original = df_cat[rating_col].values  # Original ratings for the category, finished
+    baseline_hourly_u = current_hourly_u(df_cat, rating_col)
+    quit_u, quit_h = quit_u_h(df_cat, rating_col)
 
     for j in range(N_FOR_BASELINE_U):
         # Store individual simulation paths and their true utilities
@@ -337,18 +375,31 @@ def simulate_category(df_cat: pd.DataFrame, rating_col: str) -> Dict[str, np.nda
                 bootstrapped_ratings = np.random.choice(
                     true_ratings_original, size=len(true_ratings_original), replace=True
                 )
-            res = optimise_schedule_greedy(bootstrapped_ratings, hourly_opportunity=current_u)
+            res = optimise_schedule_greedy(
+                bootstrapped_ratings, hourly_opportunity=baseline_hourly_u
+            )
             cur_drop_acc += res["cur_drop"]
             cutoff_acc += res["cutoffs"]
             all_drop_paths.append(res["cur_drop"])
             all_cutoffs.append(res["cutoffs"])
             all_true_utils.append(res["true_avg_utils"])
-        avg_of_optimal_path = np.mean([i[-1] for i in all_true_utils])
-        current_u = avg_of_optimal_path
 
+        # keeps growing since as drop more books less time is spent but dont' account for that
+        new_baseline_u = np.percentile([i[-1] for i in all_true_utils], 30)
+        new_baseline_r = inverse_utility_value(new_baseline_u)
+        d = df_cat.copy()
+        d[rating_col] = new_baseline_r
+        hourly_avg_u = current_hourly_u(d, rating_col)
+        # hourly_avg_u = (new_baseline_u * len(all_true_utils) + quit_u) / (
+        #    (READ_TIME_HOURS + SEARCH_COST_HOURS) + quit_h
+        # )
+
+        print(hourly_avg_u, new_baseline_u, quit_u, quit_h, READ_TIME_HOURS + SEARCH_COST_HOURS)
         cur_drop_acc /= N_SIM
         cutoff_acc /= N_SIM
-        print(current_u, avg_of_optimal_path, np.mean(cur_drop_acc), np.mean(cutoff_acc))
+        print("end", baseline_hourly_u, hourly_avg_u, np.mean(cur_drop_acc), np.mean(cutoff_acc))
+        baseline_hourly_u = hourly_avg_u
+
     return {
         "cur_drop": cur_drop_acc,
         "cutoffs": cutoff_acc,
