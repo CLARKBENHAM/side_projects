@@ -18,7 +18,7 @@ from typing import Dict, List
 # ---------------- Parameters ----------------
 READ_TIME_HOURS = 3.5  # full reading time
 SEARCH_COST_HOURS = 0.25  # discovery cost of getting a new book
-PARTIAL_RATING_PENALTY = 0.1  # rating loss when abandoning, assumed utility loss linear
+PARTIAL_RATING_PENALTY = 0.05  # rating loss when abandoning, assumed utility loss linear
 VALUE_BASE = 1.75  # utility = VALUE_BASE ** rating
 
 # Quit levels
@@ -46,12 +46,11 @@ QUIT_ENJOYMENT = 1.4
 # I quit some books since mid or bored, not because I hated them
 QUIT_AT_FRACTION = 0.15  # but this would vary a lot?
 
-
 # Static: O(D*F)
 F_GRID = np.concatenate(
     [
         np.arange(0.01, 0.4, 0.02),  # more precise in first half
-        np.arange(0.4, 1.01, 0.1),  # less precise in second half
+        np.arange(0.4, 1.01, 0.1),  # less precise in second half, f=1 as temp hack for graphs
     ]
 )
 D_GRID = np.concatenate(
@@ -315,21 +314,54 @@ def optimise_schedule_greedy(
     return {"cur_drop": best_cum_drop, "cutoffs": best_cutoffs, "true_avg_utils": true_avg_utils}
 
 
+def avg_hours_reading(cur_drop):
+    """Expected Hours of reading if I follow the current instant drop schedule for 1 book"""
+    # cum_drop = 1 - np.prod(1 - cur_drop)
+    if len(cur_drop.shape) == 1:
+        have = np.concatenate([[1], np.cumprod(1 - cur_drop)])
+    else:
+        # 2d, each row is a different run. Take average number remaining at each step
+        have = np.concatenate([[1], np.mean(np.cumprod(1 - cur_drop, axis=1), axis=0)])
+    n_dropped_at_step = [i - j for i, j in zip(have[:-1], have[1:])]
+    assert np.isclose(F_GRID[-1], 1), "last fraction read is 1"
+    assert len(n_dropped_at_step) == len(
+        F_GRID
+    ), f"n_dropped_at_step {len(n_dropped_at_step)} , F_GRID {len(F_GRID)}"
+    n_dropped_at_step[-1] = 1 - np.sum(
+        n_dropped_at_step[:-1]
+    )  # last entry is fraction of 1, finished whole thing
+    o = (
+        np.sum([d * f * READ_TIME_HOURS for d, f in zip(n_dropped_at_step, F_GRID)])
+        + SEARCH_COST_HOURS
+    )
+    assert o <= READ_TIME_HOURS + SEARCH_COST_HOURS, o
+    return o
+
+
 def quit_u_h(df_cat: pd.DataFrame, rating_col: str) -> float:
+    """Total Hours and utility of books I never finsihed reading originally for category(s)
+    problem is if quit at F=0.01 then because base utility =1
+    I get way more utility from quiting many books faster
+    so the utility is hourly rate of a book with that utility if read whole thing * hours actually read
+    """
     category_quit_counts = dict(df_cat["Bookshelf"].value_counts())
     expected_num_quit = sum(
         [(STARTED_TO_FINISHED_RATIO[k] - 1) * v for k, v in category_quit_counts.items()]
     )
     if rating_col == "Usefulness /5 to Me":
-        quit_u = utility_value(QUIT_USEFULNESS)
+        quit_u_if_read = utility_value(QUIT_USEFULNESS)
     else:
-        quit_u = utility_value(QUIT_ENJOYMENT)
-    quit_u *= expected_num_quit
+        quit_u_if_read = utility_value(QUIT_ENJOYMENT)
+    quit_hourly_rate = quit_u_if_read / (READ_TIME_HOURS + SEARCH_COST_HOURS)
     quit_h = expected_num_quit * (QUIT_AT_FRACTION * READ_TIME_HOURS + SEARCH_COST_HOURS)
+    quit_u = quit_hourly_rate * quit_h
     return quit_u, quit_h
 
 
-def current_hourly_u(df_cat: pd.DataFrame, rating_col: str) -> float:
+def current_hourly_u(df_cat: pd.DataFrame, rating_col: str, cur_drop=None) -> float:
+    """Utility per hour of current reading habits, including books I never finished
+    Can't include cur_drop since then utility depents on which specific books I drop
+    """
     true_ratings_original = df_cat[rating_col].values  # Original ratings for the category, finished
     assert np.all(
         true_ratings_original >= 1
@@ -339,11 +371,20 @@ def current_hourly_u(df_cat: pd.DataFrame, rating_col: str) -> float:
     ), f"some books are rated above 5 {true_ratings_original}"
 
     finished_u = np.sum(utility_value(true_ratings_original))
-    finished_h = len(true_ratings_original) * (READ_TIME_HOURS + SEARCH_COST_HOURS)
+    if cur_drop is None:
+        finished_h = len(true_ratings_original) * (READ_TIME_HOURS + SEARCH_COST_HOURS)
+    else:
+        assert (
+            False
+        ), "Can't include cur_drop since then utility depents on which specific books I drop"
+        finished_h = len(true_ratings_original) * avg_hours_reading(cur_drop)
 
     quit_u, quit_h = quit_u_h(df_cat, rating_col)
     hourly_u = (finished_u + quit_u) / (finished_h + quit_h)
     return hourly_u
+
+
+# %%
 
 
 # -------------- Wrapper per category --------------
@@ -367,7 +408,7 @@ def simulate_category(df_cat: pd.DataFrame, rating_col: str) -> Dict[str, np.nda
         all_true_utils = []
 
         for i in range(N_SIM):
-            if True:  # j == 0 and i == 0:
+            if False:  # j == 0 and i == 0:
                 # on first run, use original ratings to match emperical utility from real number of books dropped
                 # this prevents error correction?
                 bootstrapped_ratings = true_ratings_original
@@ -383,20 +424,15 @@ def simulate_category(df_cat: pd.DataFrame, rating_col: str) -> Dict[str, np.nda
             all_drop_paths.append(res["cur_drop"])
             all_cutoffs.append(res["cutoffs"])
             all_true_utils.append(res["true_avg_utils"])
-
-        # keeps growing since as drop more books less time is spent but dont' account for that
-        new_baseline_u = np.percentile([i[-1] for i in all_true_utils], 30)
-        new_baseline_r = inverse_utility_value(new_baseline_u)
-        d = df_cat.copy()
-        d[rating_col] = new_baseline_r
-        hourly_avg_u = current_hourly_u(d, rating_col)
-        # hourly_avg_u = (new_baseline_u * len(all_true_utils) + quit_u) / (
-        #    (READ_TIME_HOURS + SEARCH_COST_HOURS) + quit_h
-        # )
-
-        print(hourly_avg_u, new_baseline_u, quit_u, quit_h, READ_TIME_HOURS + SEARCH_COST_HOURS)
         cur_drop_acc /= N_SIM
         cutoff_acc /= N_SIM
+
+        # slight bias in that we're saying we can do better than 20th of previous last run, (var from sampling)
+        # but since we're held by quits that prevents from spiralying
+        new_baseline_u = np.percentile([i[-1] for i in all_true_utils], 20)
+        hourly_avg_u = (len(true_ratings_original) * new_baseline_u + quit_u) / (
+            len(true_ratings_original) * (READ_TIME_HOURS + SEARCH_COST_HOURS) + quit_h
+        )
         print("end", baseline_hourly_u, hourly_avg_u, np.mean(cur_drop_acc), np.mean(cutoff_acc))
         baseline_hourly_u = hourly_avg_u
 
@@ -555,13 +591,76 @@ def plot_simulation_paths(
     plt.show()
 
 
+# ---------------- Result Printing Functions ----------------
+def print_drop_schedule_table(
+    shelf_name: str,
+    f_grid: np.ndarray,
+    avg_instant_drops: np.ndarray,
+    avg_cumulative_drop: np.ndarray,
+    milestone_indices: List[int],
+    # cumulative_drop: np.ndarray, # No longer needed as input
+):
+    """Prints the average drop schedule for a given shelf, where each step was greddily optimised"""
+    print(f"\nAverage Optimal Drop Schedule for: {shelf_name}")  # Title updated
+    print(
+        f"{'Fraction Read':>12} {'Avg Instant Drop %':>20} {'Avg Cumulative Drop %':>25}"
+    )  # Header updated
+
+    print("-" * 60)  # Adjusted width
+    for i, (f_val, avg_drop_val, avg_cum_drop_val) in enumerate(
+        zip(f_grid, avg_instant_drops, avg_cumulative_drop)
+    ):
+        if i in milestone_indices or i % 10 == 0:  # Print every 10th point plus milestones
+            print(f"{f_val:>12.2f} {avg_drop_val*100:>20.2f} {avg_cum_drop_val*100:>25.2f}")
+
+
+def print_all_shelves_summary(
+    shelves: List[str],
+    out_results: Dict,
+    f_grid: np.ndarray,
+    milestone_indices: List[int],
+    target_fractions: List[float],
+    df_all_books: pd.DataFrame,
+    rating_col_name: str,
+):
+    """Prints a summary of results across all shelves."""
+    print("\n\n" + "=" * 30 + " FINAL SUMMARY " + "=" * 30)
+    for shelf in shelves:
+        if shelf not in out_results:
+            continue
+        shelf_data = out_results[shelf]
+        print(f"\nSummary for: {shelf}")
+        print(f"{'Fraction Read':>12} {'Cumulative Drop %':>20}")
+        print("-" * 50)
+        for target, idx in zip(target_fractions, milestone_indices):
+            print(f"{f_grid[idx]:>12.2f} {shelf_data['cumulative_drop'][idx]*100:>20.2f}")
+        print(f"Final cumulative drop: {shelf_data['cumulative_drop'][-1]*100:.1f}%")
+
+        median_idx = shelf_data.get(
+            "median_idx",
+            np.argsort(shelf_data["true_avg_utils"][:, -1])[len(shelf_data["true_avg_utils"]) // 2],
+        )
+
+        median_u = shelf_data["true_avg_utils"][median_idx, -1]
+        median_r = inverse_utility_value(median_u)
+        mean_u = shelf_data["true_avg_utils"][:, -1].mean()
+        mean_r = inverse_utility_value(mean_u)
+
+        current_shelf_df = df_all_books[df_all_books["Bookshelf"] == shelf]
+        current_u = utility_value(current_shelf_df[rating_col_name]).mean()
+        current_r = inverse_utility_value(current_u)
+
+        print(f"Median Final Utility (simulated): {median_u:.2f} (Rating: {median_r:.2f})")
+        print(f"Mean Final Utility (simulated): {mean_u:.2f} (Rating: {mean_r:.2f})")
+        print(f"Current Avg Utility (empirical): {current_u:.2f} (Rating: {current_r:.2f})")
+
+
 # ---------------- Main ----------------
 if __name__ == "__main__":
-    # Then run the main simulation
+    rating_col = "Usefulness /5 to Me"
     DATA_PATH = Path("data/Books Read and their effects - Play Export.csv")
     if not DATA_PATH.exists():
         print("CSV not found – replace DATA_PATH with your local file path.")
-        exit()
     df = pd.read_csv(DATA_PATH)
     df["Bookshelf"] = df["Bookshelf"].str.strip().str.replace("/", ",").str.replace("&", "and")
 
@@ -572,65 +671,42 @@ if __name__ == "__main__":
     # Find indices closest to 10%, 30%, and 50% of reading
     target_fractions = [0.1, 0.3, 0.5]
     milestone_indices = [np.abs(F_GRID - target).argmin() for target in target_fractions]
-    rating_col = "Usefulness /5 to Me"
+
     for shelf in shelves:
         sub = df[df["Bookshelf"] == shelf]
         if sub.empty:
             continue
         out[shelf] = simulate_category(sub, rating_col)
 
-        print(f"\n{'=' * 80}")
-        print(f"Optimising schedule for: {shelf}")
-        print(f"{'=' * 80}")
-
         # Get the optimal path (path with highest final utility)
-        optimal_idx = np.argmax(out[shelf]["true_avg_utils"][:, -1])
-        out[shelf]["optimal_drops"] = out[shelf]["cur_drop_path"][optimal_idx]
-        # Get the median path
-        median_idx = np.argsort(out[shelf]["true_avg_utils"][:, -1])[
-            len(out[shelf]["true_avg_utils"]) // 2
-        ]
-        out[shelf]["median_drops"] = out[shelf]["cur_drop_path"][median_idx]
-        out[shelf]["cumulative_drop"] = 1 - np.cumprod(1 - out[shelf]["optimal_drops"])
+        shelf_results = out[shelf]
+        # Calculate average cummulative remaining at each fraction read
+        shelf_results["avg_cumulative_drop"] = 1 - np.mean(
+            np.cumprod(1 - shelf_results["cur_drop_path"], axis=1), axis=0
+        )
+        # dont care about the specific path that got a specific utility, but what's best drop path
 
-        print("\nOptimal Drop Schedule:")
-        print(f"{'Fraction Read':>12} {'Instant Drop %':>15} {'Cumulative Drop %':>20}")
-        print("-" * 50)
-        for i, (f, drop, cum_drop) in enumerate(
-            zip(F_GRID, out[shelf]["optimal_drops"], out[shelf]["cumulative_drop"])
-        ):
-            if i in milestone_indices or i % 10 == 0:  # Print every 10th point plus milestones
-                print(f"{f:>12.2f} {drop*100:>15.2f} {cum_drop*100:>20.2f}")
+        print_drop_schedule_table(
+            shelf_name=shelf,
+            f_grid=F_GRID,
+            avg_instant_drops=shelf_results["cur_drop_path"],
+            avg_cumulative_drop=shelf_results["avg_cumulative_drop"],
+            milestone_indices=milestone_indices,
+        )
 
         # Plot simulation paths for this shelf
         plot_simulation_paths(
-            out[shelf]["cur_drop_path"],
+            shelf_results["cur_drop_path"],
             F_GRID,
-            out[shelf]["true_avg_utils"],
-            out[shelf]["cutoffs_all"],
+            shelf_results["true_avg_utils"],
+            shelf_results["cutoffs_all"],
             f"Simulation Paths - {shelf}",
         )
+    print_all_shelves_summary(
+        shelves, out, F_GRID, milestone_indices, target_fractions, df, rating_col
+    )
 
-    for shelf in shelves:
-        print(f"\n{shelf}")
-        print(f"{'Fraction Read':>12} {'Cumulative Drop %':>20}")
-        print("-" * 50)
-        for target, idx in zip(target_fractions, milestone_indices):
-            print(f"{F_GRID[idx]:>12.2f} {out[shelf]['cumulative_drop'][idx]*100:>20.2f}")
-        print(f"Final cumulative drop: {out[shelf]['cumulative_drop'][-1]*100:.1f}%")
-        best_u = out[shelf]["true_avg_utils"][optimal_idx, -1]
-        best_r = inverse_utility_value(best_u)
-        median_idx = np.argsort(out[shelf]["true_avg_utils"][:, -1])[
-            len(out[shelf]["true_avg_utils"]) // 2
-        ]
-        median_u = out[shelf]["true_avg_utils"][median_idx, -1]
-        median_r = inverse_utility_value(median_u)
-        current_u = utility_value(df[df["Bookshelf"] == shelf][rating_col]).mean()
-        current_r = inverse_utility_value(
-            current_u
-        )  # convex fn so must be calculated in the same way
-        print(f"Final utility: {median_u:.2f} , current: {current_u:.2f}")
-        print(f"Final Rating: {median_r:.2f} , current: {current_r:.2f}")
+
 # %%
 # Dynamic where check all options: D^F: 100M here at 8**9
 F_GRID = np.concatenate(
