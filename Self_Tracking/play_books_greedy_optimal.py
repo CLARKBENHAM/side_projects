@@ -22,7 +22,8 @@ PARTIAL_RATING_PENALTY = 0.1  # rating loss when abandoning, assumed utility los
 VALUE_BASE = 1.75  # utility = VALUE_BASE ** rating
 
 # Quit levels
-QUIT_TABLE = {  # might 28, wont 39 is slightly off from other time I did counts but I'm exactly sure on number anyway
+QUIT_TABLE = {
+    # might 28, wont 39 is slightly off from other time I did counts but I'm not sure which I'll finish
     "Business, management": {"finished": 44, "might finish": 5, "wont finish": 6},
     "Computer Science": {"finished": 14, "might finish": 6, "wont finish": 10},
     "fiction": {"finished": 51, "might finish": 0, "wont finish": 6},
@@ -306,26 +307,48 @@ def optimise_schedule_greedy(
 
 # -------------- Wrapper per category --------------
 def simulate_category(df_cat: pd.DataFrame, rating_col: str) -> Dict[str, np.ndarray]:
-    true_ratings = df_cat[rating_col].values
+    """ """
+    N_FOR_BASELINE_U = 5  # Run multiple times to get true values for baseline utility
 
-    cur_drop_acc = np.zeros(len(F_GRID))
-    cutoff_acc = np.zeros(len(F_GRID))
+    true_ratings_original = df_cat[rating_col].values  # Original ratings for the category
+    current_u = np.mean(utility_value(true_ratings_original)) / (
+        READ_TIME_HOURS + SEARCH_COST_HOURS
+    )
 
-    # Store individual simulation paths and their true utilities
-    all_drop_paths = []  # of books remaining, drop fraction at each step
-    all_cutoffs = []
-    all_true_utils = []
+    # if rating_col == "Usefulness /5 to Me":
+    #    QUIT_TABLE
+    # TODO handle already dropped books
 
-    for i in range(N_SIM):
-        res = optimise_schedule_greedy(true_ratings)
-        cur_drop_acc += res["cur_drop"]
-        cutoff_acc += res["cutoffs"]
-        all_drop_paths.append(res["cur_drop"])
-        all_cutoffs.append(res["cutoffs"])
-        all_true_utils.append(res["true_avg_utils"])
+    for j in range(N_FOR_BASELINE_U):
+        # Store individual simulation paths and their true utilities
+        cur_drop_acc = np.zeros(len(F_GRID))
+        cutoff_acc = np.zeros(len(F_GRID))
 
-    cur_drop_acc /= N_SIM
-    cutoff_acc /= N_SIM
+        all_drop_paths = []  # of books remaining, drop fraction at each step
+        all_cutoffs = []
+        all_true_utils = []
+
+        for i in range(N_SIM):
+            if True:  # j == 0 and i == 0:
+                # on first run, use original ratings to match emperical utility from real number of books dropped
+                # this prevents error correction?
+                bootstrapped_ratings = true_ratings_original
+            else:
+                bootstrapped_ratings = np.random.choice(
+                    true_ratings_original, size=len(true_ratings_original), replace=True
+                )
+            res = optimise_schedule_greedy(bootstrapped_ratings, hourly_opportunity=current_u)
+            cur_drop_acc += res["cur_drop"]
+            cutoff_acc += res["cutoffs"]
+            all_drop_paths.append(res["cur_drop"])
+            all_cutoffs.append(res["cutoffs"])
+            all_true_utils.append(res["true_avg_utils"])
+        avg_of_optimal_path = np.mean([i[-1] for i in all_true_utils])
+        current_u = avg_of_optimal_path
+
+        cur_drop_acc /= N_SIM
+        cutoff_acc /= N_SIM
+        print(current_u, avg_of_optimal_path, np.mean(cur_drop_acc), np.mean(cutoff_acc))
     return {
         "cur_drop": cur_drop_acc,
         "cutoffs": cutoff_acc,
@@ -339,19 +362,22 @@ def plot_simulation_paths(
     drop_paths: np.ndarray,
     f_grid: np.ndarray,
     true_utils: np.ndarray,
+    cutoffs: np.ndarray,
     title: str = "Simulation Paths",
 ):
     """
-    Plot simulation paths with two subplots:
+    Plot simulation paths with three subplots:
     1. True Utilities over time
     2. Cumulative Drop Fraction over time
+    3. Rating Cutoffs over time
 
-    Both plots include colorbars for utility values.
+    All plots include colorbars for utility values.
 
     Args:
         drop_paths: Array of shape (n_simulations, n_points) containing all simulation paths
         f_grid: Array of x-axis values (fraction read)
         true_utils: Array of shape (n_simulations, n_points) containing true utilities
+        cutoffs: Array of shape (n_simulations, n_points) containing rating cutoffs
         title: Plot title
     """
     # Calculate final values for coloring
@@ -369,25 +395,32 @@ def plot_simulation_paths(
     # Normalize final utilities for line colors
     norm_final = (final_values - final_values.min()) / (final_values.max() - final_values.min())
 
-    # Normalize instantaneous utilities for scatter colors
-    norm_instant = (true_utils - true_utils.min()) / (true_utils.max() - true_utils.min())
+    # Normalize instantaneous utilities for scatter colors using global min/max
+    global_min = true_utils.min()
+    global_max = true_utils.max()
+    norm_instant = (true_utils - global_min) / (global_max - global_min)
     instant_colors = plt.cm.RdYlGn(norm_instant)
 
-    # Create a figure with two subplots side by side
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 8))
+    # Create a figure with three subplots side by side
+    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(20, 8))
 
     # Plot true utilities on the first subplot
     for i, utils in enumerate(true_utils):
-        # Color line based on final utility
-        line_color = plt.cm.RdYlGn(norm_final[i])
-        ax1.plot(f_grid, utils, color=line_color, alpha=0.3, linewidth=1)
-        # Color scatter points based on instantaneous utility
-        ax1.scatter(f_grid, utils, c=instant_colors[i], alpha=0.1, s=10)
+        # Plot each line segment with its own color based on instantaneous utility
+        for j in range(len(f_grid) - 1):
+            ax1.plot(
+                f_grid[j : j + 2],
+                utils[j : j + 2],
+                color=plt.cm.RdYlGn(norm_instant[i, j]),
+                alpha=0.3,
+                linewidth=1,
+            )
+        # Add scatter points
+        ax1.scatter(f_grid, utils, c=utils, alpha=0.1, s=10)
 
-    # Plot mean and optimal paths
-    optimal_idx = np.argmax(final_values)
+    # Plot mean and median paths
     ax1.plot(f_grid, true_utils.mean(axis=0), "k--", linewidth=2, label="Mean Utility", alpha=0.7)
-    ax1.plot(f_grid, true_utils[optimal_idx], "k-", linewidth=2, label="Optimal Path Utility")
+    ax1.plot(f_grid, np.median(true_utils, axis=0), "k-", linewidth=2, label="Median Utility")
 
     ax1.set_title(f"{title} - True Utilities")
     ax1.set_xlabel("Fraction Read")
@@ -396,9 +429,7 @@ def plot_simulation_paths(
     ax1.legend()
 
     # Add colorbar for instantaneous utility (scatter colors)
-    sm1 = plt.cm.ScalarMappable(
-        cmap=plt.cm.RdYlGn, norm=plt.Normalize(true_utils.min(), true_utils.max())
-    )
+    sm1 = plt.cm.ScalarMappable(cmap=plt.cm.RdYlGn, norm=plt.Normalize(global_min, global_max))
     plt.colorbar(sm1, ax=ax1, label="Instantaneous Utility")
 
     # Calculate cumulative drops
@@ -427,10 +458,10 @@ def plot_simulation_paths(
     )
     ax2.plot(
         f_grid,
-        cumulative_drops[optimal_idx],
+        np.median(cumulative_drops, axis=0),
         "k-",
         linewidth=2,
-        label="Optimal Path Cumulative Drop",
+        label="Median Cumulative Drop",
     )
 
     ax2.set_title(f"{title} - Cumulative Drop")
@@ -439,11 +470,35 @@ def plot_simulation_paths(
     ax2.grid(True, alpha=0.3)
     ax2.legend()
 
-    # Add colorbar for final utility (line colors)
-    sm2 = plt.cm.ScalarMappable(
-        cmap=plt.cm.RdYlGn, norm=plt.Normalize(final_values.min(), final_values.max())
+    # Plot rating cutoffs on the third subplot
+    for i, (cutoff, utils) in enumerate(zip(cutoffs, true_utils)):
+        # Color line based on final utility
+        line_color = plt.cm.RdYlGn(norm_final[i])
+        ax3.plot(f_grid, cutoff, color=line_color, alpha=0.3, linewidth=1)
+        # Color scatter points based on instantaneous utility
+        ax3.scatter(f_grid, cutoff, c=norm_instant[i], cmap=plt.cm.RdYlGn, alpha=0.1, s=10)
+
+    ax3.plot(
+        f_grid,
+        cutoffs.mean(axis=0),
+        "k--",
+        linewidth=2,
+        label="Mean Cutoff",
+        alpha=0.7,
     )
-    plt.colorbar(sm2, ax=ax2, label="Final Utility")
+    ax3.plot(
+        f_grid,
+        np.median(cutoffs, axis=0),
+        "k-",
+        linewidth=2,
+        label="Median Cutoff",
+    )
+
+    ax3.set_title(f"{title} - Rating Cutoffs")
+    ax3.set_xlabel("Fraction Read")
+    ax3.set_ylabel("Rating Cutoff")
+    ax3.grid(True, alpha=0.3)
+    ax3.legend()
 
     plt.tight_layout()
     plt.show()
@@ -473,13 +528,18 @@ if __name__ == "__main__":
             continue
         out[shelf] = simulate_category(sub, rating_col)
 
-        print(f"\n{'='*80}")
+        print(f"\n{'=' * 80}")
         print(f"Optimising schedule for: {shelf}")
-        print(f"{'='*80}")
+        print(f"{'=' * 80}")
 
         # Get the optimal path (path with highest final utility)
         optimal_idx = np.argmax(out[shelf]["true_avg_utils"][:, -1])
         out[shelf]["optimal_drops"] = out[shelf]["cur_drop_path"][optimal_idx]
+        # Get the median path
+        median_idx = np.argsort(out[shelf]["true_avg_utils"][:, -1])[
+            len(out[shelf]["true_avg_utils"]) // 2
+        ]
+        out[shelf]["median_drops"] = out[shelf]["cur_drop_path"][median_idx]
         out[shelf]["cumulative_drop"] = 1 - np.cumprod(1 - out[shelf]["optimal_drops"])
 
         print("\nOptimal Drop Schedule:")
@@ -496,6 +556,7 @@ if __name__ == "__main__":
             out[shelf]["cur_drop_path"],
             F_GRID,
             out[shelf]["true_avg_utils"],
+            out[shelf]["cutoffs_all"],
             f"Simulation Paths - {shelf}",
         )
 
@@ -508,12 +569,17 @@ if __name__ == "__main__":
         print(f"Final cumulative drop: {out[shelf]['cumulative_drop'][-1]*100:.1f}%")
         best_u = out[shelf]["true_avg_utils"][optimal_idx, -1]
         best_r = inverse_utility_value(best_u)
+        median_idx = np.argsort(out[shelf]["true_avg_utils"][:, -1])[
+            len(out[shelf]["true_avg_utils"]) // 2
+        ]
+        median_u = out[shelf]["true_avg_utils"][median_idx, -1]
+        median_r = inverse_utility_value(median_u)
         current_u = utility_value(df[df["Bookshelf"] == shelf][rating_col]).mean()
         current_r = inverse_utility_value(
             current_u
         )  # convex fn so must be calculated in the same way
-        print(f"Final utility: {best_u:.2f} , current: {current_u:.2f}")
-        print(f"Final Rating: {best_r:.2f} , current: {current_r:.2f}")
+        print(f"Final utility: {median_u:.2f} , current: {current_u:.2f}")
+        print(f"Final Rating: {median_r:.2f} , current: {current_r:.2f}")
 # %%
 # Dynamic where check all options: D^F: 100M here at 8**9
 F_GRID = np.concatenate(
