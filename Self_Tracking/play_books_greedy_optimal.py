@@ -65,7 +65,9 @@ N_SIM = 200  # MC replications
 
 # ---------------- Utility helpers ----------------
 def utility_value(r):
-    """Transform rating (1‑5) into cardinal utility."""
+    """Transform rating (1‑5) into cardinal utility; make sure min util is <= 0
+    else benifits to quitting as many books as fast as possible.
+    """
     return VALUE_BASE ** (r - 1) - 1
 
 
@@ -74,22 +76,22 @@ def inverse_utility_value(u):
     return np.log(u + 1) / np.log(VALUE_BASE) + 1
 
 
-def util_if_stop(u, f):
-    """Utility if I stop reading now, given that search costs are fixed.
-
-    But I haven't standardized on  what hourly util means, if it includes search costs or not"""
-    hourly_u = u / (READ_TIME_HOURS + SEARCH_COST_HOURS)
-    hourly_u_while_reading = u / READ_TIME_HOURS
-    return (1 - f) * READ_TIME_HOURS * hourly_u
-
-
-# Not sure which to go with
-def utility_value2(r):
-    return r**VALUE_BASE
+# def util_if_stop(u, f):
+#     """Utility if I stop reading now, given that search costs are fixed.
+#
+#     But I haven't standardized on  what hourly util means, if it includes search costs or not"""
+#     hourly_u = u / (READ_TIME_HOURS + SEARCH_COST_HOURS)
+#     hourly_u_while_reading = u / READ_TIME_HOURS
+#     return (1 - f) * READ_TIME_HOURS * hourly_u
 
 
-def inverse_utility_value2(u):
-    return u ** (1 / VALUE_BASE)
+# # Not sure which to go with
+# def utility_value2(r):
+#     return r**VALUE_BASE
+#
+#
+# def inverse_utility_value2(u):
+#     return u ** (1 / VALUE_BASE)
 
 
 # had 4/207 books I'd say were "average" at 1/3 (or 1/2 way thru?) and 5 at end;
@@ -161,9 +163,9 @@ def optimise_schedule_greedy(
     hourly_opportunity=utility_value(2) / (READ_TIME_HOURS + SEARCH_COST_HOURS),
 ) -> Dict[str, np.ndarray]:
     """
-    Using greedy approach at each time step find the drop fraction of estimated books that maximize
+    Using greedy approach at each time step of estimate of book marginal utils
+    find the drop fraction of estimated books that maximize
     the true final utility.
-    returns what fraction of books remaining to drop at each reading fraction f
     Args:
         true_ratings: Array of true ratings for each book
         hourly_opportunity: utility per hour of the marginal book (includes search costs and quit rate)
@@ -221,6 +223,8 @@ def optimise_schedule_greedy(
         finish_u = a_est_full
         est_marginal_hourly_u = (finish_u - current_u) / remaining_t
 
+        sort_idx = np.argsort(est_marginal_hourly_u)  # ascending: worst first
+
         # Old version where hourly opportunity represented average util of replacement book
         # not marginal util
         # u_continue_est = (
@@ -232,22 +236,14 @@ def optimise_schedule_greedy(
         # )  # hourly opportunity includes search costs
         # u_stop_est = (cum_value + new_value) / book_time
 
-        sort_idx = np.argsort(est_marginal_hourly_u)  # ascending: worst first
         # print(
         #     f"Sort idx: {sort_idx} , diff: {diff[sort_idx]} , u_continue_est:"
         #     f" {a_est_full[sort_idx]} , u_stop_est: {est_now[active_mask][sort_idx]}"
         # )
-        # True marginal Hourly utilities of remaining books
+        # # True marginal Hourly utilities of remaining books # don't care, only true ending util
         active_true_full = val_full[active_mask]
         active_true_part = val_partial[active_mask]
-
         current_u = f * active_true_part
-        finish_u = active_true_full
-        h_util_keep = (finish_u - current_u) / remaining_t
-
-        # util_after_drop = remaining_t * hourly_opportunity
-        # h_util_drop = (current_u + util_after_drop) / book_time
-        h_util_drop = hourly_opportunity
 
         # values if no dropping
         best_drop = 0.0
@@ -260,17 +256,22 @@ def optimise_schedule_greedy(
             best_u = true_avg_utils[idx_f - 1]
             best_drop_u = dropped_books_utils[idx_f - 1]
 
+        # based on estimate of maringal util, which d maximizes estimated final util?
         for d in D_GRID:
             k_drop = int(np.floor(d * active_mask.sum()))  # number of books to drop
 
-            # Get indices of books to keep and drop
             drop_set = sort_idx[:k_drop]
             keep_mask = np.ones(len(sort_idx), dtype=bool)
             keep_mask[drop_set] = False
             # include utility from previously dropped books
-
-            h_total_u = h_util_keep[keep_mask].sum() + h_util_drop * k_drop
-            total_u = h_total_u * remaining_t + dropped_books_utils[idx_f - 1]
+            total_util_from_kept = active_true_full[keep_mask].sum()
+            total_util_from_dropped = (  # what have so far + replacement with baseline
+                current_u[~keep_mask].sum() + hourly_opportunity * remaining_t * k_drop
+            )
+            total_util_from_dropped += dropped_books_utils[
+                idx_f - 1
+            ]  # accumulate from already dropped before now
+            total_u = total_util_from_kept + total_util_from_dropped
             if total_u > best_u:
                 best_u = total_u
                 best_drop = d
@@ -279,7 +280,7 @@ def optimise_schedule_greedy(
                 else:
                     best_rating_cut = 5  # dropping more books than have left
                 # util of now dropped books plus util of replacing them with hourly opportunity
-                best_drop_u = current_u[~keep_mask].sum() + h_util_drop * remaining_t * k_drop
+                best_drop_u = total_util_from_dropped
 
         best_spot_drop[idx_f] = best_drop  # of books that remain
         best_cutoffs[idx_f] = best_rating_cut
@@ -289,9 +290,22 @@ def optimise_schedule_greedy(
         # Update active mask: drop the chosen set
         k_drop = int(np.floor(best_drop * active_mask.sum()))
         if k_drop > 0:
-            # print(f"Dropping {k_drop} books at f={f:.2f} , d={best_drop:.2f} , best_u={best_u:.2f}")
             drop_global_idx = np.where(active_mask)[0][sort_idx[:k_drop]]
+            keep_global_idx = np.where(active_mask)[0][sort_idx[k_drop:]]
+
             active_mask[drop_global_idx] = False
+            # print(f"Dropping {k_drop} books at f={f:.2f} , d={best_drop:.2f} , best_u={best_u:.2f}")
+            # print(val_full[active_mask].mean(), val_full.mean(), val_full[~drop_global_idx].mean())
+            assert est_now[~active_mask].mean() <= est_now[active_mask].mean(), (
+                "Total Mask is selecting wrong subset",
+                est_now[~active_mask].mean(),
+                est_now[active_mask].mean(),
+            )
+            assert est_now[drop_global_idx].mean() <= est_now[keep_global_idx].mean(), (
+                "Newest changes",
+                est_now[drop_global_idx].mean(),
+                est_now[keep_global_idx].mean(),
+            )
 
     # print(best_cum_drop, best_cutoffs, true_avg_utils, dropped_books_utils, sep="\n")
     true_avg_utils /= len(true_ratings)
@@ -299,19 +313,28 @@ def optimise_schedule_greedy(
         "Optimal strategy is worse than just reading all books"
         f" {true_avg_utils[-1]} {val_full.mean()}"
     )
+    assert np.allclose(
+        true_avg_utils, np.maximum.accumulate(true_avg_utils)
+    ), f"getting worse over time, {true_avg_utils}"
+
+    final_hourly_u = true_avg_utils[-1] / book_time
+    # assert final_hourly_u >= hourly_opportunity, (
+    #     "Doing worse than replacement util; is okay if bootstraping samples: could have samples that're all bad",
+    #     final_hourly_u,
+    #     hourly_opportunity,
+    # )
     cum_drop = np.prod(1 - best_spot_drop)
     n_keep = math.ceil(len(val_full) * cum_drop)
     if n_keep > 0:
         u_if_drop_best = np.sort(val_full)[-n_keep:].mean()
-        print(true_avg_utils)
-        print(best_spot_drop)
+        # print(true_avg_utils)
+        # print(best_spot_drop)
         assert true_avg_utils[-1] <= u_if_drop_best + 1e-06, (
             "Optimal strategy is better than reading optimal number of books initially"
-            f" {true_avg_utils[-1]} {u_if_drop_best} {n_keep}/{len(val_full)}"
+            f" {true_avg_utils[-1]} {u_if_drop_best} {n_keep}/{len(val_full)} baseline:"
+            f" {hourly_opportunity}; avg_true_utils: {true_avg_utils} \naverage_dropped_u:"
+            f" {dropped_books_utils/len(true_ratings)}"
         )
-    assert np.allclose(
-        true_avg_utils, np.maximum.accumulate(true_avg_utils)
-    ), "getting worse over time"
     return {"cur_drop": best_spot_drop, "cutoffs": best_cutoffs, "true_avg_utils": true_avg_utils}
 
 
@@ -345,17 +368,17 @@ def quit_u_h(df_cat: pd.DataFrame, rating_col: str) -> float:
     I get way more utility from quiting many books faster
     so the utility is hourly rate of a book with that utility if read whole thing * hours actually read
     """
-    category_quit_counts = dict(df_cat["Bookshelf"].value_counts())
+    category_ct = dict(df_cat["Bookshelf"].value_counts())
     expected_num_quit = sum(
-        [(STARTED_TO_FINISHED_RATIO[k] - 1) * v for k, v in category_quit_counts.items()]
+        [(STARTED_TO_FINISHED_RATIO[k] - 1) * v for k, v in category_ct.items()]
     )
     if rating_col == "Usefulness /5 to Me":
         quit_u_if_read = utility_value(QUIT_USEFULNESS)
     else:
         quit_u_if_read = utility_value(QUIT_ENJOYMENT)
-    quit_hourly_rate = quit_u_if_read / (READ_TIME_HOURS + SEARCH_COST_HOURS)
+
     quit_h = expected_num_quit * (QUIT_AT_FRACTION * READ_TIME_HOURS + SEARCH_COST_HOURS)
-    quit_u = quit_hourly_rate * quit_h
+    quit_u = QUIT_AT_FRACTION * quit_u_if_read
     return quit_u, quit_h
 
 
@@ -381,6 +404,11 @@ def current_hourly_u(df_cat: pd.DataFrame, rating_col: str, cur_drop=None) -> fl
         finished_h = len(true_ratings_original) * avg_hours_reading(cur_drop)
 
     quit_u, quit_h = quit_u_h(df_cat, rating_col)
+    assert finished_u / finished_h > quit_u / quit_h, (
+        "Higher util rate from quit books",
+        (finished_u, finished_h),
+        (quit_u, quit_h),
+    )
     hourly_u = (finished_u + quit_u) / (finished_h + quit_h)
     return hourly_u
 
@@ -400,15 +428,15 @@ def simulate_category(df_cat: pd.DataFrame, rating_col: str) -> Dict[str, np.nda
 
     for j in range(N_FOR_BASELINE_U):
         # Store individual simulation paths and their true utilities
-        cur_drop_acc = np.zeros(len(F_GRID))
-        cutoff_acc = np.zeros(len(F_GRID))
+        drop_at_f = np.zeros(len(F_GRID))
+        cutoff_at_f = np.zeros(len(F_GRID))
 
         all_drop_paths = []  # of books remaining, drop fraction at each step
         all_cutoffs = []
         all_true_utils = []
 
         for i in range(N_SIM):
-            if False:  # j == 0 and i == 0:
+            if True:  # j == 0 and i == 0:
                 # on first run, use original ratings to match emperical utility from real number of books dropped
                 # this prevents error correction?
                 bootstrapped_ratings = true_ratings_original
@@ -419,31 +447,37 @@ def simulate_category(df_cat: pd.DataFrame, rating_col: str) -> Dict[str, np.nda
             res = optimise_schedule_greedy(
                 bootstrapped_ratings, hourly_opportunity=baseline_hourly_u
             )
-            cur_drop_acc += res["cur_drop"]
-            cutoff_acc += res["cutoffs"]
+            drop_at_f += res["cur_drop"]
+            cutoff_at_f += res["cutoffs"]
             all_drop_paths.append(res["cur_drop"])
             all_cutoffs.append(res["cutoffs"])
             all_true_utils.append(res["true_avg_utils"])
-        cur_drop_acc /= N_SIM
-        cutoff_acc /= N_SIM
+        drop_at_f /= N_SIM
+        cutoff_at_f /= N_SIM
 
         # really we'd set the baseline as the average expected utility of following current strategy
         # , adjusting for already quit books, but better to be conservative
         new_baseline_u = np.percentile([i[-1] for i in all_true_utils], 20)
-        hourly_avg_u = (len(true_ratings_original) * new_baseline_u + quit_u) / (
-            len(true_ratings_original) * (READ_TIME_HOURS + SEARCH_COST_HOURS) + quit_h
+        finished_u = len(true_ratings_original) * new_baseline_u
+        finished_h = len(true_ratings_original) * (READ_TIME_HOURS + SEARCH_COST_HOURS)
+        hourly_avg_u = (finished_u + quit_u) / (finished_h + quit_h)
+        print(
+            "end",
+            baseline_hourly_u,
+            hourly_avg_u,
+            # 1 - np.cumprod(1 - drop_at_f),  # average at each time path
+            np.mean(cutoff_at_f),
         )
-        print("end", baseline_hourly_u, hourly_avg_u, np.mean(cur_drop_acc), np.mean(cutoff_acc))
         baseline_hourly_u = hourly_avg_u
 
-        if baseline_hourly_u >= np.mean(utility_value(true_ratings_original)) / (
+        if baseline_hourly_u >= np.mean(utility_value(bootstrapped_ratings)) / (
             READ_TIME_HOURS + SEARCH_COST_HOURS
         ):
-            print("WARNING: hourly_opportunity is greater than the mean utility of completedbooks")
+            print("WARNING: hourly_opportunity is greater than the mean utility of completed books")
 
     return {
-        "cur_drop": cur_drop_acc,
-        "cutoffs": cutoff_acc,
+        "cur_drop": drop_at_f,  # taking mean in wrong order, TODO
+        "cutoffs": cutoff_at_f,
         "cur_drop_path": np.array(all_drop_paths),
         "cutoffs_all": np.array(all_cutoffs),
         "true_avg_utils": np.array(all_true_utils),
@@ -638,8 +672,8 @@ def print_all_shelves_summary(
         print(f"{'Fraction Read':>12} {'Cumulative Drop %':>20}")
         print("-" * 50)
         for target, idx in zip(target_fractions, milestone_indices):
-            print(f"{f_grid[idx]:>12.2f} {shelf_data['cumulative_drop'][idx]*100:>20.2f}")
-        print(f"Final cumulative drop: {shelf_data['cumulative_drop'][-1]*100:.1f}%")
+            print(f"{f_grid[idx]:>12.2f} {shelf_data['avg_cumulative_drop'][idx]*100:>20.2f}")
+        print(f"Final cumulative drop: {shelf_data['avg_cumulative_drop'][-1]*100:.1f}%")
 
         median_idx = shelf_data.get(
             "median_idx",
