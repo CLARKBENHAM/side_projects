@@ -49,6 +49,8 @@ QUIT_AT_FRACTION = 0.15  # but this would vary a lot?
 # Static: O(D*F)
 F_GRID = np.concatenate(
     [
+        #        np.arange(0.01, 0.3, 0.03),  # more precise in first half
+        #        np.arange(0.3, 1.01, 0.1),  # less precise in second half, f=1 as temp hack for graphs
         np.arange(0.01, 0.4, 0.02),  # more precise in first half
         np.arange(0.4, 1.01, 0.1),  # less precise in second half, f=1 as temp hack for graphs
     ]
@@ -56,7 +58,7 @@ F_GRID = np.concatenate(
 D_GRID = np.concatenate(
     [
         np.arange(0.00, 0.10, 0.01),  # dropping up to 30% in 1 step. Depends on F_GRID size
-        np.arange(0.10, 0.31, 0.07),
+        np.arange(0.10, 0.31, 0.05),
     ]
 )
 
@@ -507,10 +509,7 @@ def plot_simulation_paths(
         cutoffs: Array of shape (n_simulations, n_points) containing rating cutoffs
         title: Plot title
     """
-    # Calculate final values for coloring
-    final_values = true_utils[:, -1]
-
-    # have to use same color scheme for points and line, but makes it confusing.
+    # have to use same color scheme for points and line, but compresses range
     _min = true_utils.min()
     global_max = true_utils.max()
     norm_instant = (true_utils - _min) / (global_max - _min)
@@ -521,7 +520,7 @@ def plot_simulation_paths(
     # want to use the same color scheme for both lines and points
 
     # Create a figure with three subplots side by side
-    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(20, 8))
+    fig, (ax1, ax2, ax3, ax4) = plt.subplots(1, 4, figsize=(25, 8))
 
     # Plot true utilities on the first subplot
     for i, utils in enumerate(true_utils):
@@ -599,9 +598,10 @@ def plot_simulation_paths(
     ax2.legend()
 
     # Plot rating cutoffs, eg "2.5" but too hard too see
+    cutoffs_filtered = np.maximum(cutoffs, 0.9 * np.ones(cutoffs.shape))
     ax3.plot(
         f_grid,
-        cutoffs.mean(axis=0),
+        cutoffs_filtered.mean(axis=0),
         "k--",
         linewidth=2,
         label="Mean Cutoff",
@@ -609,39 +609,49 @@ def plot_simulation_paths(
     )
     ax3.plot(
         f_grid,
-        np.median(cutoffs, axis=0),
+        np.median(cutoffs_filtered, axis=0),
         "k-",
         linewidth=2,
         label="Median Cutoff",
     )
-    # violin_width_val = np.min(np.diff(f_grid)) * 0.8
-    # violin_data_cutoffs = [cutoffs[:, i] for i in range(cutoffs.shape[1])]
-    # parts = ax3.violinplot(
-    #     violin_data_cutoffs,
-    #     positions=f_grid,
-    #     widths=violin_width_val,
-    #     showmeans=False,
-    #     showmedians=False,
-    #     showextrema=False,
-    # )
-    # for pc in parts["bodies"]:
-    #     pc.set_facecolor("skyblue")
-    #     pc.set_edgecolor("black")
-    #     pc.set_alpha(0.7)
-
-    cutoffs_filtered = np.maximum(cutoffs, np.ones(cutoffs.shape))
     for i, (cutoff, utils) in enumerate(zip(cutoffs_filtered, true_utils)):
-        # Color line based on final utility
-        # line_color = plt.cm.RdYlGn(norm_final[i])
-        # ax3.plot(f_grid, cutoff, color=final_colors[i], alpha=0.3, linewidth=1)
         # Color scatter points based on instantaneous utility
-        ax3.scatter(f_grid, cutoff, c=instant_colors[i, :], alpha=0.5, marker="_", s=50)
+        # squares so get mini-heatmap graph. Violin plots are too narrow
+        ax3.scatter(f_grid, cutoff, c=instant_colors[i, :], alpha=0.3, marker="s", s=50)
     ax3.set_title(f"{title} - Rating Cutoffs")
     ax3.set_xlabel("Fraction Read")
     ax3.set_ylabel("Rating Cutoff")
     ax3.grid(True, alpha=0.3)
     ax3.set_ylim(1, 5)
     ax3.legend()
+
+    # for i in range(4):
+    #     ax4.hist(remaining_fraction[2*i,-1])
+    #     ax4.set_title(f"{title} - Total Dropped {F_GRID[i]:.2f}% Through Books ")
+
+    # Create 2x2 grid of subplots within ax4
+
+    # --- New 2x2 Grid of Histograms for ax4 ---
+    ax4.axis("off")
+    ax4_host_subplotspec = ax4.get_subplotspec()
+    gs_ax4 = gridspec.GridSpecFromSubplotSpec(
+        2, 2, subplot_spec=ax4_host_subplotspec, wspace=0.3, hspace=0.4
+    )
+
+    f_indices_for_hist = [1, 4, 7, 12]
+    blue_map = plt.colormaps["Blues"]
+    for i, f_grid_idx_val in enumerate(f_indices_for_hist):
+        f = f_grid[f_grid_idx_val]
+        row = i // 2
+        col = i % 2
+        hist_ax = fig.add_subplot(gs_ax4[row, col])
+        data_for_hist = remaining_fraction[:, f_grid_idx_val]
+        hist_ax.hist(data_for_hist, bins=10, alpha=0.75, color=blue_map(f), edgecolor="black")
+        hist_ax.set_title(f"Cum. Drop Dist. @ f={f:.2f}", fontsize=10)
+        hist_ax.set_xlabel("Cumulative Drop Fraction", fontsize=9)
+        hist_ax.set_ylabel("Frequency", fontsize=9)
+        hist_ax.tick_params(axis="both", which="major", labelsize=8)
+        hist_ax.grid(True, linestyle="--", alpha=0.5)
 
     plt.tight_layout()
     plt.show()
