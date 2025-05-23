@@ -206,7 +206,7 @@ def optimise_schedule_greedy(
             print("WARNING: No active books left")
             while idx_f < len(F_GRID):
                 best_spot_drop[idx_f:] = 1  # nothing left to drop, keep dropping all
-                best_cutoffs[idx_f:] = 0
+                best_cutoffs[idx_f:] = 1
                 true_avg_utils[idx_f:] = true_avg_utils[idx_f - 1]
                 idx_f += 1
             break
@@ -246,9 +246,9 @@ def optimise_schedule_greedy(
         current_u = f * active_true_part
 
         # values if no dropping
-        best_drop = 0.0
+        best_drop_d = 0.0
         best_u = 0.0
-        best_rating_cut = 0
+        best_rating_cut = 0  # to distinguish dropping none vs dropping min element
         if idx_f == 0:
             best_u = val_full.sum()
             best_drop_u = 0
@@ -274,7 +274,7 @@ def optimise_schedule_greedy(
             total_u = total_util_from_kept + total_util_from_dropped
             if total_u > best_u:
                 best_u = total_u
-                best_drop = d
+                best_drop_d = d
                 if active_mask.sum() >= k_drop:
                     best_rating_cut = est_now[active_mask][sort_idx[k_drop - 1]]
                 else:
@@ -282,13 +282,13 @@ def optimise_schedule_greedy(
                 # util of now dropped books plus util of replacing them with hourly opportunity
                 best_drop_u = total_util_from_dropped
 
-        best_spot_drop[idx_f] = best_drop  # of books that remain
+        best_spot_drop[idx_f] = best_drop_d  # of books that remain
         best_cutoffs[idx_f] = best_rating_cut
         true_avg_utils[idx_f] = best_u
         dropped_books_utils[idx_f] = best_drop_u
 
         # Update active mask: drop the chosen set
-        k_drop = int(np.floor(best_drop * active_mask.sum()))
+        k_drop = int(np.floor(best_drop_d * active_mask.sum()))
         if k_drop > 0:
             drop_global_idx = np.where(active_mask)[0][sort_idx[:k_drop]]
             keep_global_idx = np.where(active_mask)[0][sort_idx[k_drop:]]
@@ -317,7 +317,7 @@ def optimise_schedule_greedy(
         true_avg_utils, np.maximum.accumulate(true_avg_utils)
     ), f"getting worse over time, {true_avg_utils}"
 
-    final_hourly_u = true_avg_utils[-1] / book_time
+    # final_hourly_u = true_avg_utils[-1] / book_time
     # assert final_hourly_u >= hourly_opportunity, (
     #     "Doing worse than replacement util; is okay if bootstraping samples: could have samples that're all bad",
     #     final_hourly_u,
@@ -470,10 +470,11 @@ def simulate_category(df_cat: pd.DataFrame, rating_col: str) -> Dict[str, np.nda
         )
         baseline_hourly_u = hourly_avg_u
 
-        if baseline_hourly_u >= np.mean(utility_value(bootstrapped_ratings)) / (
-            READ_TIME_HOURS + SEARCH_COST_HOURS
-        ):
-            print("WARNING: hourly_opportunity is greater than the mean utility of completed books")
+        # should expect to keep improving since there's big gains to stopping 80% of books
+        # if baseline_hourly_u >= np.mean(utility_value(bootstrapped_ratings)) / (
+        #     READ_TIME_HOURS + SEARCH_COST_HOURS
+        # ):
+        #     print("WARNING: hourly_opportunity is greater than the mean utility of completed books")
 
     return {
         "cur_drop": drop_at_f,  # taking mean in wrong order, TODO
@@ -509,40 +510,46 @@ def plot_simulation_paths(
     # Calculate final values for coloring
     final_values = true_utils[:, -1]
 
-    # Calculate remaining books at each timestep
-    remaining_books = np.zeros_like(drop_paths)
-    for i, path in enumerate(drop_paths):
-        # Start with 1 (all books)
-        remaining = 1.0
-        for j, drop_frac in enumerate(path):
-            remaining *= 1 - drop_frac  # Multiply by fraction kept
-            remaining_books[i, j] = remaining
-
-    # Normalize final utilities for line colors
-    norm_final = (final_values - final_values.min()) / (final_values.max() - final_values.min())
-
-    # Normalize instantaneous utilities for scatter colors using global min/max
-    global_min = true_utils.min()
+    # have to use same color scheme for points and line, but makes it confusing.
+    _min = true_utils.min()
     global_max = true_utils.max()
-    norm_instant = (true_utils - global_min) / (global_max - global_min)
+    norm_instant = (true_utils - _min) / (global_max - _min)
     instant_colors = plt.cm.RdYlGn(norm_instant)
+    final_colors = instant_colors[:, -1]
+    # norm_final = (final_values - final_values.min()) / (final_values.max() - final_values.min())
+    # instant_colors = # plt.cm.RdYlGn((final_values - global_min) / (global_max - global_min))
+    # want to use the same color scheme for both lines and points
 
     # Create a figure with three subplots side by side
     fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(20, 8))
 
     # Plot true utilities on the first subplot
     for i, utils in enumerate(true_utils):
-        # Plot each line segment with its own color based on instantaneous utility
-        for j in range(len(f_grid) - 1):
-            ax1.plot(
-                f_grid[j : j + 2],
-                utils[j : j + 2],
-                color=plt.cm.RdYlGn(norm_instant[i, j]),
-                alpha=0.3,
-                linewidth=1,
-            )
-        # Add scatter points
-        ax1.scatter(f_grid, utils, c=utils, alpha=0.1, s=10)
+        # Plot each line segment with its own color based on final utility
+        ax1.plot(
+            f_grid,
+            utils,
+            # color=instant_colors[i, j],  # plt.cm.RdYlGn(norm_instant[i, j]), # instant utils
+            color=final_colors[i],
+            alpha=0.1,
+            linewidth=0.1,
+        )
+        # Add scatter points with instant utils
+        ax1.scatter(f_grid, utils, c=instant_colors[i, :], alpha=0.2, s=20)
+    # # Plot true utilities on the first subplot
+    # for i, utils in enumerate(true_utils):
+    #     # Plot each line segment with its own color based on final utility
+    #     for j in range(len(f_grid) - 1):
+    #         ax1.plot(
+    #             f_grid[j : j + 2],
+    #             utils[j : j + 2],
+    #             # color=instant_colors[i, j],  # plt.cm.RdYlGn(norm_instant[i, j]), # instant utils
+    #             color=final_colors[i],
+    #             alpha=0.1,
+    #             linewidth=1,
+    #         )
+    #     # Add scatter points with instant utils
+    #     ax1.scatter(f_grid, utils, c=utils, alpha=0.3, s=20)
 
     # Plot mean and median paths
     ax1.plot(f_grid, true_utils.mean(axis=0), "k--", linewidth=2, label="Mean Utility", alpha=0.7)
@@ -551,32 +558,26 @@ def plot_simulation_paths(
     ax1.set_title(f"{title} - True Utilities")
     ax1.set_xlabel("Fraction Read")
     ax1.set_ylabel("True Utility")
+    # ax1.set_ylim(1, 5) # too compressed, only expect about 1pt increase
     ax1.grid(True, alpha=0.3)
     ax1.legend()
 
     # Add colorbar for instantaneous utility (scatter colors)
-    sm1 = plt.cm.ScalarMappable(cmap=plt.cm.RdYlGn, norm=plt.Normalize(global_min, global_max))
+    sm1 = plt.cm.ScalarMappable(cmap=plt.cm.RdYlGn, norm=plt.Normalize(_min, global_max))
     plt.colorbar(sm1, ax=ax1, label="Instantaneous Utility")
 
-    # Calculate cumulative drops
-    cumulative_drops = np.zeros_like(drop_paths)
-    for i, path in enumerate(drop_paths):
-        cumulative = 0
-        for j, drop_frac in enumerate(path):
-            cumulative += drop_frac
-            cumulative_drops[i, j] = cumulative
-
     # Plot cumulative drops on the second subplot
-    for i, (cum_drop, utils) in enumerate(zip(cumulative_drops, true_utils)):
+    remaining_fraction = 1 - np.cumprod(1 - drop_paths, axis=1)
+    for i, (cum_drop, utils) in enumerate(zip(remaining_fraction, true_utils)):
         # Color line based on final utility
-        line_color = plt.cm.RdYlGn(norm_final[i])
-        ax2.plot(f_grid, cum_drop, color=line_color, alpha=0.3, linewidth=1)
+        # line_color = plt.cm.RdYlGn(norm_final[i])
+        ax2.plot(f_grid, cum_drop, color=final_colors[i], alpha=0.1, linewidth=1)
         # Color scatter points based on instantaneous utility
-        ax2.scatter(f_grid, cum_drop, c=instant_colors[i], alpha=0.1, s=10)
+        ax2.scatter(f_grid, cum_drop, c=instant_colors[i, :], alpha=0.3, s=5)
 
     ax2.plot(
         f_grid,
-        cumulative_drops.mean(axis=0),
+        remaining_fraction.mean(axis=0),
         "k--",
         linewidth=2,
         label="Mean Cumulative Drop",
@@ -584,7 +585,7 @@ def plot_simulation_paths(
     )
     ax2.plot(
         f_grid,
-        np.median(cumulative_drops, axis=0),
+        np.median(remaining_fraction, axis=0),
         "k-",
         linewidth=2,
         label="Median Cumulative Drop",
@@ -593,17 +594,11 @@ def plot_simulation_paths(
     ax2.set_title(f"{title} - Cumulative Drop")
     ax2.set_xlabel("Fraction Read")
     ax2.set_ylabel("Cumulative Drop Fraction")
+    ax2.set_ylim(0, 1)
     ax2.grid(True, alpha=0.3)
     ax2.legend()
 
-    # Plot rating cutoffs on the third subplot
-    for i, (cutoff, utils) in enumerate(zip(cutoffs, true_utils)):
-        # Color line based on final utility
-        line_color = plt.cm.RdYlGn(norm_final[i])
-        ax3.plot(f_grid, cutoff, color=line_color, alpha=0.3, linewidth=1)
-        # Color scatter points based on instantaneous utility
-        ax3.scatter(f_grid, cutoff, c=norm_instant[i], cmap=plt.cm.RdYlGn, alpha=0.1, s=10)
-
+    # Plot rating cutoffs, eg "2.5" but too hard too see
     ax3.plot(
         f_grid,
         cutoffs.mean(axis=0),
@@ -619,11 +614,33 @@ def plot_simulation_paths(
         linewidth=2,
         label="Median Cutoff",
     )
+    # violin_width_val = np.min(np.diff(f_grid)) * 0.8
+    # violin_data_cutoffs = [cutoffs[:, i] for i in range(cutoffs.shape[1])]
+    # parts = ax3.violinplot(
+    #     violin_data_cutoffs,
+    #     positions=f_grid,
+    #     widths=violin_width_val,
+    #     showmeans=False,
+    #     showmedians=False,
+    #     showextrema=False,
+    # )
+    # for pc in parts["bodies"]:
+    #     pc.set_facecolor("skyblue")
+    #     pc.set_edgecolor("black")
+    #     pc.set_alpha(0.7)
 
+    cutoffs_filtered = np.maximum(cutoffs, np.ones(cutoffs.shape))
+    for i, (cutoff, utils) in enumerate(zip(cutoffs_filtered, true_utils)):
+        # Color line based on final utility
+        # line_color = plt.cm.RdYlGn(norm_final[i])
+        # ax3.plot(f_grid, cutoff, color=final_colors[i], alpha=0.3, linewidth=1)
+        # Color scatter points based on instantaneous utility
+        ax3.scatter(f_grid, cutoff, c=instant_colors[i, :], alpha=0.5, marker="_", s=50)
     ax3.set_title(f"{title} - Rating Cutoffs")
     ax3.set_xlabel("Fraction Read")
     ax3.set_ylabel("Rating Cutoff")
     ax3.grid(True, alpha=0.3)
+    ax3.set_ylim(1, 5)
     ax3.legend()
 
     plt.tight_layout()
@@ -694,9 +711,19 @@ def print_all_shelves_summary(
         print(f"Current Avg Utility (empirical): {current_u:.2f} (Rating: {current_r:.2f})")
 
 
+plot_simulation_paths(
+    shelf_results["cur_drop_path"],
+    F_GRID,
+    shelf_results["true_avg_utils"],
+    np.maximum(shelf_results["cutoffs_all"], np.ones(shelf_results["cutoffs_all"].shape)),
+    f"Simulation Paths - {shelf}",
+)
+# Why red at start?
+# %%
 # ---------------- Main ----------------
 if __name__ == "__main__":
-    rating_col = "Usefulness /5 to Me"
+    # rating_col = "Usefulness /5 to Me"
+    rating_col = "Enjoyment (/5)"
     DATA_PATH = Path("data/Books Read and their effects - Play Export.csv")
     if not DATA_PATH.exists():
         print("CSV not found – replace DATA_PATH with your local file path.")
