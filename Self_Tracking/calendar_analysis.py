@@ -393,14 +393,18 @@ def graph_gym_count(df, average_for=1):
 
 
 def graph_drink_count(df):
+    return graph_str_count(df, s="drink")
+
+
+def graph_str_count(df, s):
     df = df.copy()
-    mask = df["event_name"].str.lower().str.contains("drink")
+    mask = df["event_name"].str.lower().str.contains(s)
     df_drink = df[mask]
     df_drink["date"] = df_drink["start_time"].dt.date
     daily_count = df_drink.groupby("date").size().reset_index(name="count")
     plt.figure(figsize=(10, 5))
-    plt.bar(daily_count["date"], daily_count["count"] > 0)
-    plt.title("Daily 'Drink' Entry Count")
+    plt.bar(daily_count["date"], daily_count["count"])
+    plt.title(f"Daily '{s}' Entry Count")
     plt.xlabel("Date")
     plt.ylabel("Count")
     plt.xticks(rotation=45)
@@ -889,6 +893,8 @@ if __name__ == "__main__":
     calendar_dir = "/Users/clarkbenham/Downloads/calendar exports 05_08_25"
     start_date = datetime(2021, 5, 24)
     end_date = datetime(2025, 5, 7)
+    calendar_dir = "/Users/clarkbenham/Downloads/Takeout 3/Calendar"
+    end_date = datetime(2025, 6, 23)
     today_date = datetime.combine(datetime.today(), datetime.max.time())
     if end_date != today_date:
         print(f"INFO: Date cutoff  {end_date} is before today {today_date}")
@@ -2645,3 +2651,48 @@ combined_data, waste_corr, useful_corr, work_hours_corr, work_productivity_corr 
 
 # To create graphs for social media (without hour values):
 # combined_data, waste_corr, useful_corr, work_hours_corr, work_productivity_corr = analyze_twitter_vs_time(df, work_data, hide_hours=True)
+
+
+# %%
+def amelia_fights(df):
+    "Cumulative count and duration of fights"
+
+    target_timestamp = pd.Timestamp("2024-01-01 00:00:00").tz_localize("UTC")
+    filtered_df = df.query("start_time >= @target_timestamp")
+
+    section = filtered_df[
+        filtered_df["event_name"].str.lower().str.contains("amelia talk")
+        | filtered_df["event_name"].str.lower().str.contains("amelia argue")
+    ].copy()
+
+    section = section.sort_values("start_time").reset_index(drop=True)
+    section["cumulative_count"] = range(1, len(section) + 1)
+    section["cumulative_duration"] = section["duration"].cumsum()
+
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10))
+
+    ax1.plot(section["start_time"], section["cumulative_count"], "b-", linewidth=2)
+    ax1.set_ylabel("Cumulative Event Count")
+    ax1.set_title("Cumulative Number of Amelia Events Over Time")
+    ax1.grid(True, alpha=0.3)
+    ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
+    ax1.xaxis.set_major_locator(mdates.MonthLocator(interval=6))
+
+    ax2.plot(section["start_time"], section["cumulative_duration"], "r-", linewidth=2)
+    ax2.set_ylabel("Cumulative Duration")
+    ax2.set_xlabel("Date")
+    ax2.set_title("Cumulative Time Spent on Amelia Events")
+    ax2.grid(True, alpha=0.3)
+    ax2.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
+    ax2.xaxis.set_major_locator(mdates.MonthLocator(interval=6))
+
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()
+
+    print(f"Total events: {len(section)}")
+    print(f"Total duration: {section['duration'].sum()}")
+    print(f"Date range: {section['start_time'].min()} to {section['start_time'].max()}")
+
+
+amelia_fights(df)
