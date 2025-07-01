@@ -298,11 +298,12 @@ def optimise_schedule_greedy(
             active_mask[drop_global_idx] = False
             # print(f"Dropping {k_drop} books at f={f:.2f} , d={best_drop:.2f} , best_u={best_u:.2f}")
             # print(val_full[active_mask].mean(), val_full.mean(), val_full[~drop_global_idx].mean())
-            assert est_now[~active_mask].mean() <= est_now[active_mask].mean(), (
-                "Total Mask is selecting wrong subset",
-                est_now[~active_mask].mean(),
-                est_now[active_mask].mean(),
-            )
+            # # this assertion wrong since estimates not constant, dropped at 5% but estimate at 30% of the way through is improved
+            # assert est_now[~active_mask].mean() <= est_now[active_mask].mean(), (
+            #     "Total Mask is selecting wrong subset",
+            #     est_now[~active_mask].mean(),
+            #     est_now[active_mask].mean(),
+            # )
             assert est_now[drop_global_idx].mean() <= est_now[keep_global_idx].mean(), (
                 "Newest changes",
                 est_now[drop_global_idx].mean(),
@@ -499,6 +500,7 @@ def plot_simulation_paths(
     1. True Utilities over time
     2. Cumulative Drop Fraction over time
     3. Rating Cutoffs over time
+    4. 2x2 of Histograms of cumulative drop distribution at fraction read
 
     All plots include colorbars for utility values.
 
@@ -565,7 +567,7 @@ def plot_simulation_paths(
     sm1 = plt.cm.ScalarMappable(cmap=plt.cm.RdYlGn, norm=plt.Normalize(_min, global_max))
     plt.colorbar(sm1, ax=ax1, label="Instantaneous Utility")
 
-    # Plot cumulative drops on the second subplot
+    # -- Plot2 cumulative drops --
     remaining_fraction = 1 - np.cumprod(1 - drop_paths, axis=1)
     for i, (cum_drop, utils) in enumerate(zip(remaining_fraction, true_utils)):
         # Color line based on final utility
@@ -597,41 +599,82 @@ def plot_simulation_paths(
     ax2.grid(True, alpha=0.3)
     ax2.legend()
 
-    # Plot rating cutoffs, eg "2.5" but too hard too see
-    cutoffs_filtered = np.maximum(cutoffs, 0.9 * np.ones(cutoffs.shape))
+    # -- Plot 3: rating cutoffs - group by 10% chunks and use median non-zero ratings --
+    # need since at any given point in time if I split up F too much most F pieces are 0
+    bins = np.arange(
+        0, 1, 0.1
+    )  # 10% bins: [0, 0.1, 0.2, ..., 0.9] where values are to the right of bin but less than ext
+    bin_indices = np.digitize(f_grid, bins) - 1  # which bin each f_grid point belongs to
+
+    # Create smoothed cutoffs using median non-zero for each 10% chunk
+    cutoffs_binned = np.zeros((cutoffs.shape[0], len(bins)))
+    for bin_idx in range(len(bins)):
+        # Find all cutoffs in this 10% bin
+        mask = bin_indices == bin_idx
+        for sim_idx in range(cutoffs.shape[0]):
+            if mask.sum() > 0:
+                bin_cutoffs = cutoffs[sim_idx, mask]
+                # set bin as median of non-zero cutoffs for bin values
+                non_zero_cutoffs = bin_cutoffs[bin_cutoffs > 0]
+                if len(non_zero_cutoffs) > 0:
+                    median_cutoff = np.median(non_zero_cutoffs)
+                else:
+                    median_cutoff = 0
+
+                cutoffs_binned[sim_idx, bin_idx] = median_cutoff
+    # no drops counted as 0.98 to show on graph, but low
+    cutoffs_filtered = np.where(cutoffs_binned == 0, 0.9, cutoffs_binned)
     ax3.plot(
-        f_grid,
+        bins,
         cutoffs_filtered.mean(axis=0),
-        "k--",
+        "k-",
         linewidth=2,
         label="Mean Cutoff",
         alpha=0.7,
     )
     ax3.plot(
-        f_grid,
+        bins,
         np.median(cutoffs_filtered, axis=0),
-        "k-",
+        "k--",
         linewidth=2,
         label="Median Cutoff",
     )
-    for i, (cutoff, utils) in enumerate(zip(cutoffs_filtered, true_utils)):
+    ax3.plot(
+        bins,
+        np.percentile(cutoffs_filtered, 75, axis=0),
+        "g:",
+        linewidth=2,
+        label="75th Percentile",
+        alpha=0.8,
+    )
+    ax3.plot(
+        bins,
+        np.percentile(cutoffs_filtered, 90, axis=0),
+        "g--",
+        linewidth=2,
+        label="90th Percentile",
+        alpha=0.8,
+    )
+    for i, cutoff in enumerate(cutoffs_binned):
         # Color scatter points based on instantaneous utility
         # squares so get mini-heatmap graph. Violin plots are too narrow
-        ax3.scatter(f_grid, cutoff, c=instant_colors[i, :], alpha=0.3, marker="s", s=50)
+        colors = np.array(
+            [
+                np.median(instant_colors[i, bin_indices == b_ix, :], axis=0)
+                for b_ix in range(len(bins))
+            ]
+        )
+        assert colors.shape == (len(bins), 4), str(colors.shape)
+        ax3.scatter(bins, cutoff, c=colors, alpha=0.3, marker="s", s=50)
     ax3.set_title(f"{title} - Rating Cutoffs")
     ax3.set_xlabel("Fraction Read")
     ax3.set_ylabel("Rating Cutoff")
     ax3.grid(True, alpha=0.3)
-    ax3.set_ylim(1, 5)
+    ax3.axhline(y=1, color="grey", linestyle="--", alpha=0.4)
+    ax3.set_ylim(0, 5)
     ax3.legend()
 
-    # for i in range(4):
-    #     ax4.hist(remaining_fraction[2*i,-1])
-    #     ax4.set_title(f"{title} - Total Dropped {F_GRID[i]:.2f}% Through Books ")
-
-    # Create 2x2 grid of subplots within ax4
-
-    # --- New 2x2 Grid of Histograms for ax4 ---
+    # --- Plot 4: 2x2 Grid of Histograms ---
     ax4.axis("off")
     ax4_host_subplotspec = ax4.get_subplotspec()
     gs_ax4 = gridspec.GridSpecFromSubplotSpec(
@@ -667,6 +710,7 @@ def print_drop_schedule_table(
     # cumulative_drop: np.ndarray, # No longer needed as input
 ):
     """Prints the average drop schedule for a given shelf, where each step was greddily optimised"""
+    # TODO don't want average drop schedule but median drop schedule
     print(f"\nAverage Optimal Drop Schedule for: {shelf_name}")  # Title updated
     print(
         f"{'Fraction Read':>12} {'Avg Instant Drop %':>20} {'Avg Cumulative Drop %':>25}"
@@ -725,7 +769,7 @@ plot_simulation_paths(
     shelf_results["cur_drop_path"],
     F_GRID,
     shelf_results["true_avg_utils"],
-    np.maximum(shelf_results["cutoffs_all"], np.ones(shelf_results["cutoffs_all"].shape)),
+    shelf_results["cutoffs_all"],
     f"Simulation Paths - {shelf}",
 )
 # Why red at start?
