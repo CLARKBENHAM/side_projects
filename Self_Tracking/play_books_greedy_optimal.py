@@ -425,6 +425,7 @@ def simulate_category(df_cat: pd.DataFrame, rating_col: str) -> Dict[str, np.nda
     N_FOR_BASELINE_U = (
         7  # Run multiple times to get true values for baseline utility, generally converges here
     )
+    N_BOOK_SAMPLES = 5000  # taken with replacement, just needs to be high enough so drop percentage isn't 0. 400 same as 4k but super quick
     true_ratings_original = df_cat[rating_col].values  # Original ratings for the category, finished
     baseline_hourly_u = current_hourly_u(df_cat, rating_col)
     quit_u, quit_h = quit_u_h(df_cat, rating_col)
@@ -445,7 +446,9 @@ def simulate_category(df_cat: pd.DataFrame, rating_col: str) -> Dict[str, np.nda
                 bootstrapped_ratings = true_ratings_original
             else:
                 bootstrapped_ratings = np.random.choice(
-                    true_ratings_original, size=len(true_ratings_original), replace=True
+                    true_ratings_original,
+                    size=N_BOOK_SAMPLES,  # len(true_ratings_original),
+                    replace=True,
                 )
             res = optimise_schedule_greedy(
                 bootstrapped_ratings, hourly_opportunity=baseline_hourly_u
@@ -765,15 +768,15 @@ def print_all_shelves_summary(
         print(f"Current Avg Utility (empirical): {current_u:.2f} (Rating: {current_r:.2f})")
 
 
-plot_simulation_paths(
-    shelf_results["cur_drop_path"],
-    F_GRID,
-    shelf_results["true_avg_utils"],
-    shelf_results["cutoffs_all"],
-    f"Simulation Paths - {shelf}",
-)
-# Why red at start?
-# %%
+# plot_simulation_paths(
+#     shelf_results["cur_drop_path"],
+#     F_GRID,
+#     shelf_results["true_avg_utils"],
+#     shelf_results["cutoffs_all"],
+#     f"Simulation Paths - {shelf}",
+# )
+# # Why red at start?
+# # %%
 # ---------------- Main ----------------
 if __name__ == "__main__":
     # rating_col = "Usefulness /5 to Me"
