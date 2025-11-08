@@ -1,5 +1,6 @@
 # %% use conda env: new_base
 import os
+import re
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
@@ -889,12 +890,13 @@ if __name__ == "__main__":
     # run_tests()
 
     # Example usage (comment out tests if processing real calendar data)
-    calendar_dir = "data/Calendar Takeout/Calendar/"
-    calendar_dir = "/Users/clarkbenham/Downloads/calendar exports 05_08_25"
+    # calendar_dir = "data/Calendar Takeout/Calendar/"
+    # calendar_dir = "/Users/clarkbenham/Downloads/calendar exports 05_08_25"
+    # calendar_dir = "/Users/clarkbenham/Downloads/Takeout 3/Calendar"
+    calendar_dir = "/Users/clarkbenham/Downloads/Takeout 5 11_08_2025/Calendar/"
     start_date = datetime(2021, 5, 24)
     end_date = datetime(2025, 5, 7)
-    calendar_dir = "/Users/clarkbenham/Downloads/Takeout 3/Calendar"
-    end_date = datetime(2025, 6, 23)
+    end_date = datetime(2025, 11, 7)
     today_date = datetime.combine(datetime.today(), datetime.max.time())
     if end_date != today_date:
         print(f"INFO: Date cutoff  {end_date} is before today {today_date}")
@@ -2654,45 +2656,227 @@ combined_data, waste_corr, useful_corr, work_hours_corr, work_productivity_corr 
 
 
 # %%
-def amelia_fights(df):
+def amelia_fights(df, print_table=False):
     "Cumulative count and duration of fights"
 
-    target_timestamp = pd.Timestamp("2024-01-01 00:00:00").tz_localize("UTC")
+    target_timestamp = pd.Timestamp("2024-01-01 00:00:00").tz_localize("UTC")  # noqa: F841
     filtered_df = df.query("start_time >= @target_timestamp")
 
-    section = filtered_df[
-        filtered_df["event_name"].str.lower().str.contains("amelia talk")
-        | filtered_df["event_name"].str.lower().str.contains("amelia argue")
+    # All Amelia entries (base set)
+    all_amelia = filtered_df[
+        filtered_df["event_name"].str.contains("amelia", case=False, na=False)
     ].copy()
 
-    section = section.sort_values("start_time").reset_index(drop=True)
-    section["cumulative_count"] = range(1, len(section) + 1)
-    section["cumulative_duration"] = section["duration"].cumsum()
+    if all_amelia.empty:
+        print("No Amelia events found for the selected period.")
+        return
 
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10))
+    # Regex patterns for interaction categorization
+    negative_keywords = ["argue", "fight", "rant", "tiff", "yell", "scream", "flip", "stern"]
+    relationship_keywords = [
+        "talk",
+        "talked",
+        "talking",
+        "talks",
+        "notes",
+        "journal",
+        "blogs",
+        "made up",
+        "silence",
+        "silience",
+        "discussion",
+        "write",
+        "think",
+        "seethe",
+        "ruminate",
+        "type",
+        "writing",
+    ]
+    negative_pattern = (
+        r"(?<!\w)(" + "|".join(re.escape(keyword) for keyword in negative_keywords) + r")(?!\w)"
+    )
+    relationship_work_pattern = (
+        r"(?<!\w)(" + "|".join(re.escape(keyword) for keyword in relationship_keywords) + r")(?!\w)"
+    )
+    negative_mask = all_amelia["event_name"].str.contains(
+        negative_pattern, case=False, regex=True, na=False
+    )
 
-    ax1.plot(section["start_time"], section["cumulative_count"], "b-", linewidth=2)
+    negative_section = all_amelia[negative_mask].copy()
+
+    relationship_work_section = all_amelia[
+        all_amelia["event_name"].str.contains(
+            relationship_work_pattern,
+            case=False,
+            regex=True,
+            na=False,
+        )
+        & ~negative_mask
+    ].copy()
+
+    # Prepare cumulative data for negative interactions
+    negative_section = negative_section.sort_values("start_time").reset_index(drop=True)
+    negative_section["cumulative_count"] = range(1, len(negative_section) + 1)
+    negative_section["cumulative_duration"] = negative_section["duration"].cumsum()
+
+    # Create monthly aggregations
+    all_amelia["year_month"] = all_amelia["start_time"].dt.to_period("M")
+    negative_section["year_month"] = negative_section["start_time"].dt.to_period("M")
+    relationship_work_section["year_month"] = relationship_work_section["start_time"].dt.to_period(
+        "M"
+    )
+
+    monthly_all = all_amelia.groupby("year_month")["duration"].sum()
+    period_index = monthly_all.index
+
+    monthly_negative = (
+        negative_section.groupby("year_month")["duration"].sum().reindex(period_index, fill_value=0)
+    )
+    monthly_relationship_work = (
+        relationship_work_section.groupby("year_month")["duration"]
+        .sum()
+        .reindex(period_index, fill_value=0)
+    )
+    monthly_other = (monthly_all - monthly_negative - monthly_relationship_work).clip(lower=0)
+
+    monthly_daily_avg = pd.DataFrame(
+        {
+            "Negative Interactions": monthly_negative,
+            "Relationship Work": monthly_relationship_work,
+            "Positive Amelia Events (other)": monthly_other,
+        },
+        index=period_index,
+    )
+    days_in_month = pd.Series(period_index.days_in_month, index=period_index, dtype=float)
+    latest_timestamp = all_amelia["start_time"].max()
+    latest_period = latest_timestamp.to_period("M")
+    if latest_period in days_in_month.index:
+        if latest_timestamp.tzinfo is None:
+            latest_ts_utc = latest_timestamp.tz_localize("UTC")
+        else:
+            latest_ts_utc = latest_timestamp.tz_convert("UTC")
+        start_of_latest = latest_period.to_timestamp().tz_localize("UTC")
+        days_elapsed = (latest_ts_utc.normalize() - start_of_latest).days + 1
+        days_in_month.loc[latest_period] = max(
+            1, min(days_in_month.loc[latest_period], days_elapsed)
+        )
+    monthly_daily_avg = monthly_daily_avg.div(days_in_month, axis=0)
+    monthly_daily_avg.index = monthly_daily_avg.index.to_timestamp()
+
+    # Create plots
+    fig = plt.figure(figsize=(14, 12))
+    gs = fig.add_gridspec(3, 1, hspace=0.3)
+
+    # Plot 1: Cumulative count
+    ax1 = fig.add_subplot(gs[0, 0])
+    ax1.plot(
+        negative_section["start_time"],
+        negative_section["cumulative_count"],
+        "b-",
+        linewidth=2,
+    )
     ax1.set_ylabel("Cumulative Event Count")
-    ax1.set_title("Cumulative Number of Amelia Events Over Time")
+    ax1.set_title("Cumulative Number of Amelia Negative Events Over Time")
     ax1.grid(True, alpha=0.3)
     ax1.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
     ax1.xaxis.set_major_locator(mdates.MonthLocator(interval=6))
 
-    ax2.plot(section["start_time"], section["cumulative_duration"], "r-", linewidth=2)
-    ax2.set_ylabel("Cumulative Duration")
-    ax2.set_xlabel("Date")
-    ax2.set_title("Cumulative Time Spent on Amelia Events")
+    # Plot 2: Cumulative duration
+    ax2 = fig.add_subplot(gs[1, 0])
+    ax2.plot(
+        negative_section["start_time"],
+        negative_section["cumulative_duration"],
+        "r-",
+        linewidth=2,
+    )
+    ax2.set_ylabel("Cumulative Duration (hours)")
+    ax2.set_title("Cumulative Time Spent on Amelia Negative Events")
     ax2.grid(True, alpha=0.3)
     ax2.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
     ax2.xaxis.set_major_locator(mdates.MonthLocator(interval=6))
 
-    plt.xticks(rotation=45)
+    # Plot 3: Monthly average daily hours stacked bar
+    ax3 = fig.add_subplot(gs[2, 0])
+    monthly_dates = monthly_daily_avg.index
+    negative_values = monthly_daily_avg["Negative Interactions"]
+    relationship_values = monthly_daily_avg["Relationship Work"]
+    other_values = monthly_daily_avg["Positive Amelia Events (other)"]
+
+    ax3.bar(
+        monthly_dates,
+        negative_values,
+        width=20,
+        label="Negative Interactions",
+        color="#d62728",
+    )
+    ax3.bar(
+        monthly_dates,
+        relationship_values,
+        bottom=negative_values,
+        width=20,
+        label="Relationship Work",
+        color="#1f77b4",
+    )
+    ax3.bar(
+        monthly_dates,
+        other_values,
+        bottom=negative_values + relationship_values,
+        width=20,
+        label="Positive Amelia Events (other)",
+        color="#2ca02c",
+    )
+    ax3.set_ylabel("Average Daily Hours")
+    ax3.set_xlabel("Date")
+    ax3.set_title("Average Daily Hours by Category (Monthly)")
+    ax3.set_ylim(0, 2.5)
+    ax3.legend(loc="best")
+    ax3.grid(True, alpha=0.3)
+    ax3.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
+    ax3.xaxis.set_major_locator(mdates.MonthLocator(interval=1))
+    plt.setp(ax3.xaxis.get_majorticklabels(), rotation=45, ha="right")
+
     plt.tight_layout()
     plt.show()
 
-    print(f"Total events: {len(section)}")
-    print(f"Total duration: {section['duration'].sum()}")
-    print(f"Date range: {section['start_time'].min()} to {section['start_time'].max()}")
+    print(f"Total all Amelia events: {len(all_amelia)}")
+    print(f"Total all Amelia duration: {all_amelia['duration'].sum():.2f} hours")
+    print(f"Total negative events: {len(negative_section)}")
+    print(f"Total negative duration: {negative_section['duration'].sum():.2f} hours")
+    print(f"Total relationship work events: {len(relationship_work_section)}")
+    print(
+        f"Total relationship work duration: {relationship_work_section['duration'].sum():.2f} hours"
+    )
+    date_range = f"{negative_section['start_time'].min()} to {negative_section['start_time'].max()}"
+    print(f"Date range: {date_range}")
+
+    # Create monthly table of unique events with total hours
+    # (year_month already created above for monthly aggregations)
+    # Normalize event names to lowercase for grouping
+    if print_table:
+        all_amelia_copy = all_amelia.copy()
+        all_amelia_copy["event_name_lower"] = all_amelia_copy["event_name"].str.lower()
+        monthly_event_hours = (
+            all_amelia_copy.groupby(["year_month", "event_name_lower"])["duration"]
+            .sum()
+            .reset_index()
+        )
+        monthly_event_hours = monthly_event_hours.rename(columns={"event_name_lower": "event_name"})
+        monthly_event_hours["year_month"] = monthly_event_hours["year_month"].astype(str)
+
+        print("\n" + "=" * 80)
+        print("Monthly Breakdown: Total Hours per Unique Event")
+        print("=" * 80)
+        for month in sorted(monthly_event_hours["year_month"].unique()):
+            month_data = monthly_event_hours[monthly_event_hours["year_month"] == month]
+            month_data = month_data.sort_values("duration", ascending=False)
+            print(f"\n{month}:")
+            print("-" * 80)
+            print(
+                month_data[["event_name", "duration"]].to_string(
+                    index=False, float_format=lambda x: f"{x:.2f}"
+                )
+            )
+            print(f"Total for month: {month_data['duration'].sum():.2f} hours")
 
 
 amelia_fights(df)
