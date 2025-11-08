@@ -1,0 +1,68 @@
+name: side_projects
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+
+  # Core scientific computing
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - statsmodels
+
+  # Plotting and visualization
+  - matplotlib
+  - seaborn
+
+  # Web scraping and HTTP
+  - requests
+  - beautifulsoup4
+  - selenium
+  - urllib3
+
+  # Document processing
+  - python-docx
+  - openpyxl
+  - xlrd
+  - xlwt
+
+  # Calendar and datetime
+  - icalendar
+  - pytz
+  - python-dateutil
+
+  # PDF processing
+  - tika
+
+  # Testing
+  - pytest
+
+  # Code quality
+  - flake8
+  - black
+
+  # Cryptography
+  - cryptography
+
+  # Jupyter and notebooks
+  - jupyter
+  - notebook
+  - jupyterlab
+  - ipython
+  - ipykernel
+
+  # XML processing
+  - xmltodict
+
+  # Audio processing dependencies (via pip)
+  - pip
+  - pip:
+    - recurring-ical-events
+    - pydub
+    - whisper
+    - torch
+    - torchaudio
+    - pyannote.audio
+    - gitpython
