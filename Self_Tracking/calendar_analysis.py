@@ -394,13 +394,19 @@ def graph_gym_count(df, average_for=1):
 
 
 def graph_drink_count(df):
-    return graph_str_count(df, s="drink")
+    return graph_str_count(df, s="drink", exact_match=True)
 
 
-def graph_str_count(df, s):
+def graph_str_count(df, s, exact_match=False):
     df = df.copy()
-    mask = df["event_name"].str.lower().str.contains(s)
+    if exact_match:
+        mask = df["event_name"].str.lower() == s.lower()
+    else:
+        mask = df["event_name"].str.lower().str.contains(s, na=False)
     df_drink = df[mask]
+    if df_drink.empty:
+        print(f"No events matched '{s}'.")
+        return
     df_drink["date"] = df_drink["start_time"].dt.date
     daily_count = df_drink.groupby("date").size().reset_index(name="count")
     plt.figure(figsize=(10, 5))
