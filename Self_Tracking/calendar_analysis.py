@@ -2769,12 +2769,46 @@ def amelia_fights(df, print_table=False):
     monthly_daily_avg = monthly_daily_avg.div(days_in_month, axis=0)
     monthly_daily_avg.index = monthly_daily_avg.index.to_timestamp()
 
-    # Create plots
-    fig = plt.figure(figsize=(14, 12))
-    gs = fig.add_gridspec(3, 1, hspace=0.3)
+    # Calculate % of days with events per month
+    negative_section["date"] = negative_section["start_time"].dt.date
+    relationship_work_section["date"] = relationship_work_section["start_time"].dt.date
+
+    # Convert dates to actual datetime.date for set operations
+    negative_section["date"] = negative_section["start_time"].dt.date
+    relationship_work_section["date"] = relationship_work_section["start_time"].dt.date
+
+    # Prepare per-month day sets
+    negative_days_per_month = (
+        negative_section.groupby("year_month")["date"]
+        .apply(lambda x: set(x))
+        .reindex(period_index, fill_value=set())
+    )
+    relationship_days_per_month = (
+        relationship_work_section.groupby("year_month")["date"]
+        .apply(lambda x: set(x))
+        .reindex(period_index, fill_value=set())
+    )
+
+    # Split day counts into exclusive categories
+    negative_only_counts = []
+    both_counts = []
+    relationship_only_counts = []
+
+    for month in period_index:
+        neg_days = negative_days_per_month.loc[month]
+        rel_days = relationship_days_per_month.loc[month]
+        both = neg_days & rel_days
+        negative_only = neg_days - rel_days
+        relationship_only = rel_days - neg_days
+
+        negative_only_counts.append(len(negative_only))
+        both_counts.append(len(both))
+        relationship_only_counts.append(len(relationship_only))
+
+    # ---------- Figure 1: Cumulative plots ----------
+    fig_cumulative, (ax1, ax2) = plt.subplots(2, 1, figsize=(14, 10), sharex=True)
 
     # Plot 1: Cumulative count
-    ax1 = fig.add_subplot(gs[0, 0])
     ax1.plot(
         negative_section["start_time"],
         negative_section["cumulative_count"],
@@ -2788,7 +2822,6 @@ def amelia_fights(df, print_table=False):
     ax1.xaxis.set_major_locator(mdates.MonthLocator(interval=6))
 
     # Plot 2: Cumulative duration
-    ax2 = fig.add_subplot(gs[1, 0])
     ax2.plot(
         negative_section["start_time"],
         negative_section["cumulative_duration"],
@@ -2800,48 +2833,96 @@ def amelia_fights(df, print_table=False):
     ax2.grid(True, alpha=0.3)
     ax2.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
     ax2.xaxis.set_major_locator(mdates.MonthLocator(interval=6))
+    plt.setp(ax2.xaxis.get_majorticklabels(), rotation=45, ha="right")
+
+    fig_cumulative.tight_layout()
+    plt.show()
+
+    # ---------- Figure 2: Monthly bar plots ----------
+    fig_monthly, (ax3, ax4) = plt.subplots(2, 1, figsize=(14, 12), sharex=True)
 
     # Plot 3: Monthly average daily hours stacked bar
-    ax3 = fig.add_subplot(gs[2, 0])
-    monthly_dates = monthly_daily_avg.index
-    negative_values = monthly_daily_avg["Negative Interactions"]
-    relationship_values = monthly_daily_avg["Relationship Work"]
-    other_values = monthly_daily_avg["Positive Amelia Events (other)"]
+    month_positions = np.arange(len(period_index))
+    month_labels = [idx.strftime("%Y-%m") for idx in period_index]
+    bar_width = 0.6
+
+    negative_values = monthly_daily_avg["Negative Interactions"].values
+    relationship_values = monthly_daily_avg["Relationship Work"].values
+    other_values = monthly_daily_avg["Positive Amelia Events (other)"].values
 
     ax3.bar(
-        monthly_dates,
+        month_positions,
         negative_values,
-        width=20,
+        width=bar_width,
         label="Negative Interactions",
         color="#d62728",
     )
     ax3.bar(
-        monthly_dates,
+        month_positions,
         relationship_values,
         bottom=negative_values,
-        width=20,
+        width=bar_width,
         label="Relationship Work",
         color="#1f77b4",
     )
     ax3.bar(
-        monthly_dates,
+        month_positions,
         other_values,
         bottom=negative_values + relationship_values,
-        width=20,
+        width=bar_width,
         label="Positive Amelia Events (other)",
         color="#2ca02c",
     )
     ax3.set_ylabel("Average Daily Hours")
-    ax3.set_xlabel("Date")
     ax3.set_title("Average Daily Hours by Category (Monthly)")
     ax3.set_ylim(0, 2.5)
     ax3.legend(loc="best")
     ax3.grid(True, alpha=0.3)
-    ax3.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
-    ax3.xaxis.set_major_locator(mdates.MonthLocator(interval=1))
-    plt.setp(ax3.xaxis.get_majorticklabels(), rotation=45, ha="right")
+    ax3.set_xticks(month_positions)
+    ax3.set_xticklabels([])
 
-    plt.tight_layout()
+    # Plot 4: Days with events per month (stacked bar chart)
+    neg_only_arr = np.array(negative_only_counts)
+    both_arr = np.array(both_counts)
+    rel_only_arr = np.array(relationship_only_counts)
+
+    ax4.bar(
+        month_positions,
+        neg_only_arr,
+        width=bar_width,
+        label="Negative Only",
+        color="#d62728",
+        alpha=0.8,
+    )
+    ax4.bar(
+        month_positions,
+        both_arr,
+        bottom=neg_only_arr,
+        width=bar_width,
+        label="Negative + Relationship",
+        color="#9467bd",
+        alpha=0.8,
+    )
+    ax4.bar(
+        month_positions,
+        rel_only_arr,
+        bottom=neg_only_arr + both_arr,
+        width=bar_width,
+        label="Relationship Only",
+        color="#1f77b4",
+        alpha=0.8,
+    )
+
+    ax4.set_ylabel("Number of Days")
+    ax4.set_xlabel("Month")
+    ax4.set_title("Days with Amelia Events per Month")
+    ax4.legend(loc="best")
+    ax4.grid(True, alpha=0.3, axis="y")
+    ax4.set_ylim(0, (neg_only_arr + both_arr + rel_only_arr).max() + 2)
+    ax4.set_xticks(month_positions)
+    ax4.set_xticklabels(month_labels, rotation=45, ha="right")
+
+    fig_monthly.tight_layout()
     plt.show()
 
     print(f"Total all Amelia events: {len(all_amelia)}")
