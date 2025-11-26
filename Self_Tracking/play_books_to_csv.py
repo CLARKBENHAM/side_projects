@@ -1,11 +1,11 @@
 # %%
-import os
-import re
 import csv
 import glob
+import os
+import re
 from datetime import datetime
+
 from bs4 import BeautifulSoup
-from pathlib import Path
 
 
 def extract_book_info(html_file):
@@ -15,10 +15,10 @@ def extract_book_info(html_file):
 
     soup = BeautifulSoup(content, "html.parser")
 
-    # Check if book is finished
+    finished = True
     finished_text = soup.select_one(".meta-entry")
     if not finished_text or "finished this book" not in finished_text.text:
-        return None  # Skip books that are not finished
+        finished = False
 
     # Extract title
     title_elem = soup.select_one("h1")
@@ -66,7 +66,8 @@ def extract_book_info(html_file):
                 print("Skipping. ", e)
                 continue
         else:
-            print("didn't finished", html_file)
+            if finished:
+                print("Warn: didn't finished but thinks did", html_file)
 
     earliest_timestamp = min(timestamps) if timestamps else None
     latest_timestamp = max(timestamps) if timestamps else None
@@ -81,12 +82,14 @@ def extract_book_info(html_file):
             latest_timestamp.strftime("%Y-%m-%d %H:%M:%S") if latest_timestamp else ""
         ),
         "filename": os.path.basename(html_file),
+        "finished": finished,
     }
 
 
 def process_google_books_exports(directory_pattern):
     """Process all Google Play Books HTML exports (and mis-labeled small PDFs) recursively."""
     results = []
+    titles = set()
 
     matching_dirs = glob.glob(directory_pattern)
     if not matching_dirs:
@@ -108,7 +111,8 @@ def process_google_books_exports(directory_pattern):
 
             for export_file in exports:
                 book_info = extract_book_info(export_file)
-                if book_info:  # Only include finished books
+                if book_info and book_info["title"] not in titles:
+                    titles.add(book_info["title"])
                     results.append(book_info)
     return results
 
@@ -133,9 +137,9 @@ def save_to_csv(
     with open(output_file, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
-        writer.writerows([{k: re.sub("\s+", " ", v) for k, v in d.items()} for d in books])
+        writer.writerows([{k: re.sub("\s+", " ", d[k]) for k in fieldnames} for d in books])
 
-    print(f"Found {len(books)} finished books. Information saved to {output_file}")
+    print(f"Found {len(books)} books. Information saved to {output_file}")
 
 
 def main():
@@ -144,7 +148,13 @@ def main():
     pattern = os.path.join(home_dir, "Downloads", "Play Books Takeout*")
 
     books = process_google_books_exports(pattern)
-    save_to_csv(books)
+    finished_books = [b for b in books if b["finished"]]
+    save_to_csv(finished_books)
+    unfinished_books = [b for b in books if not b["finished"]]
+    save_to_csv(
+        unfinished_books,
+        output_file=os.path.join(os.path.expanduser("~"), "Downloads", "finished_books.csv"),
+    )
 
 
 if __name__ == "__main__":
