@@ -153,7 +153,7 @@ def main():
     unfinished_books = [b for b in books if not b["finished"]]
     save_to_csv(
         unfinished_books,
-        output_file=os.path.join(os.path.expanduser("~"), "Downloads", "finished_books.csv"),
+        output_file=os.path.join(os.path.expanduser("~"), "Downloads", "unfinished_books.csv"),
     )
 
 
