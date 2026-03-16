@@ -10,5 +10,6 @@
   ],
   "jupyter.kernels.trusted": [
     "side_projects"
-  ]
+  ],
+ "python.defaultInterpreterPath": "/Users/clarkbenham/miniconda3"
 }
