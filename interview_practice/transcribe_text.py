@@ -1,5 +1,9 @@
 #!/Users/clarkbenham/miniconda3/bin/python
 import os
+
+# Avoid duplicate OpenMP runtime on macOS when PyTorch/Whisper load libomp
+os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
+
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 import whisper
