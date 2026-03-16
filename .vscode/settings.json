@@ -2,12 +2,6 @@
   "jupyter.notebookFileRoot": "${workspaceFolder}",
   "python.defaultInterpreterPath": "${env:CONDA_PREFIX}/bin/python",
   "python.terminal.activateEnvironment": true,
-  "jupyter.kernels.filter": [
-    {
-      "type": "python",
-      "path": "${env:CONDA_PREFIX}/bin/python"
-    }
-  ],
   "jupyter.kernels.trusted": [
     "side_projects"
   ],
