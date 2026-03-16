@@ -1,19 +1,15 @@
 # %% use conda env: new_base
 import os
 import re
-import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-import numpy as np
-from icalendar import Calendar
 from datetime import datetime, timedelta
-import recurring_ical_events
-import pytz
 
-from Self_Tracking.calendar_analysis_tests_graphs import (
-    debug_sleep_patterns,
-    run_tests,
-)  # ; run_tests(); debug_sleep_patterns(df)
+import matplotlib.dates as mdates
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import pytz
+import recurring_ical_events
+from icalendar import Calendar
 
 color_map = {
     "Things": "grey",
@@ -448,8 +444,8 @@ def scatter_calendar_time(df, average_for=1):
 
 
 def graph_sleep_nap(df, average_for=1):
-    import pandas as pd
     import matplotlib.pyplot as plt
+    import pandas as pd
 
     df = df.copy()
     # Ensure date is a proper datetime (date only)
@@ -627,9 +623,9 @@ def graph_activity_breakdown(df, average_for=1):
     Bars are sorted by duration and plotted with no gaps. Text is added directly on each
     segment if the average is >=0.5 hours (30 minutes).
     """
-    import pandas as pd
-    import numpy as np
     import matplotlib.pyplot as plt
+    import numpy as np
+    import pandas as pd
 
     # Fixed color mapping for calendar names
     color_map = {
@@ -899,10 +895,12 @@ if __name__ == "__main__":
     # calendar_dir = "data/Calendar Takeout/Calendar/"
     # calendar_dir = "/Users/clarkbenham/Downloads/calendar exports 05_08_25"
     # calendar_dir = "/Users/clarkbenham/Downloads/Takeout 3/Calendar"
-    calendar_dir = "/Users/clarkbenham/Downloads/Takeout 5 11_08_2025/Calendar/"
+    # calendar_dir = "/Users/clarkbenham/Downloads/Takeout 5 11_08_2025/Calendar/"
+    calendar_dir = "data/Takeout 5/Calendar/"
     start_date = datetime(2021, 5, 24)
     end_date = datetime(2025, 5, 7)
     end_date = datetime(2025, 11, 7)
+    end_date = datetime(2026, 3, 14)
     today_date = datetime.combine(datetime.today(), datetime.max.time())
     if end_date != today_date:
         print(f"INFO: Date cutoff  {end_date} is before today {today_date}")
@@ -1450,10 +1448,7 @@ if __name__ == "__main__":
             plt.show()
 
 # %% Regression prediction
-import pandas as pd
-import numpy as np
 import statsmodels.api as sm
-from datetime import timedelta
 
 
 def partition_calendar_by_sleep(df, phrases):
@@ -1527,7 +1522,6 @@ def partition_calendar_by_sleep(df, phrases):
 
 # Add to the imports at the top of your file
 from scipy.optimize import minimize_scalar
-import numpy as np
 
 
 def add_optimal_period_feature(df, date_column="date", y_col="work_productivity"):
@@ -1926,7 +1920,6 @@ if __name__ == "__main__":
 
 
 # %%
-import pandas as pd
 import numpy as np
 
 
@@ -2572,8 +2565,8 @@ def analyze_twitter_vs_time(df, work_data, hide_hours=False):
     print("TWITTER QUIT ANALYSIS")
     print("=" * 50)
     print(
-        f"\nI basically quit Twitter in Jan 2022, from Jan 2024 to Aug 2024, and Jan 2025 to Feb"
-        f" 2025."
+        "\nI basically quit Twitter in Jan 2022, from Jan 2024 to Aug 2024, and Jan 2025 to Feb"
+        " 2025."
     )
     print(
         f"\nDaily Twitter usage was {active_twitter_avg:.2f} h/day outside those periods,"
