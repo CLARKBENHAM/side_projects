@@ -86,5 +86,37 @@
       "Bash(* --force)"
     ],
     "ask": []
+  },
+  "hooks": {
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/precompact_backup.py"
+          },
+          {
+            "type": "command",
+            "command": "bash -lc 'ping_now \"Claude compaction\" \"PreCompact: backing up transcript\"'"
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/hooks/postcompact_save_summary.py"
+          },
+          {
+            "type": "command",
+            "command": "bash -lc 'ping_now \"Claude compaction\" \"PostCompact: summary saved\"'"
+          }
+        ]
+      }
+    ]
   }
 }
