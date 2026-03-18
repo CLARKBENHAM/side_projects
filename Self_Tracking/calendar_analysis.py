@@ -1,4 +1,5 @@
 # %% use conda env: new_base
+# ai continuations of this got moved to Self_Tracking/ai_calendar
 import os
 import re
 from datetime import datetime, timedelta
@@ -102,6 +103,29 @@ def process_sleep_events(df):
     df = df[~df["event_name"].str.lower().isin(["bed", "woke up"])]
     sleep_df = pd.DataFrame(sleep_events)
     df = pd.concat([df, sleep_df], ignore_index=True)
+
+    # Smallest logic to merge near-contiguous sleep/nap events
+    all_rest = df[df["event_name"].str.lower().isin(["sleep", "nap"])].sort_values("start_time")
+    if not all_rest.empty:
+        merged = []
+        curr = all_rest.iloc[0].to_dict()
+        for i in range(1, len(all_rest)):
+            nxt = all_rest.iloc[i].to_dict()
+            if (nxt["start_time"] - curr["end_time"]).total_seconds() <= 1800:  # 30 min
+                curr["end_time"] = max(curr["end_time"], nxt["end_time"])
+                curr["duration"] = (curr["end_time"] - curr["start_time"]).total_seconds() / 3600
+                if nxt["event_name"].lower() == "sleep":
+                    curr["event_name"] = "sleep"
+                df.drop(all_rest.index[i], inplace=True)
+                df.drop(all_rest.index[i - 1], inplace=True, errors="ignore")  # Avoid double drop
+            else:
+                merged.append(curr)
+                curr = nxt
+        merged.append(curr)
+        df = pd.concat(
+            [df[~df["event_name"].str.lower().isin(["sleep", "nap"])], pd.DataFrame(merged)],
+            ignore_index=True,
+        )
     return df
 
 
