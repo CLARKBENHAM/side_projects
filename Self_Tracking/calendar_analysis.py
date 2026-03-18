@@ -30,6 +30,9 @@ def parse_ics_files(directory, start_date, end_date):
     ]
     for ics_file in ics_files:
         calendar_name = os.path.splitext(ics_file)[0]
+        # to skip. Not sure why this is here
+        if calendar_name in ("cb5ye@virginia.edu.appointment_schedule.ics"):
+            continue
         file_path = os.path.join(directory, ics_file)
         try:
             with open(file_path, "rb") as f:
