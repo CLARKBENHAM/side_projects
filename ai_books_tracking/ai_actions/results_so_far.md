@@ -1,7 +1,8 @@
 # Book Selection Analysis: Results Summary
 
-Generated 2026-03-22. Based on 268 books (200 historical Jan 2019-Mar 2025 + 68 holdout rated 2026).
+Generated 2026-03-23. Based on 268 books (200 historical Jan 2019-Mar 2025 + 68 holdout rated 2026).
 Full script outputs: `results_so_far_everything.txt`.
+Sections 11–13 added 2026-03-23: model specs, power analysis, validation set design.
 
 ---
 
@@ -324,3 +325,92 @@ Goodreads dominates. OpenLibrary adds slight signal for enjoyment only. Amazon a
 9. **The stopping rule model needs mid-read ratings to calibrate.** Current model disagrees with "15 pages" intuition by 12x. Collecting mid-read ratings (at 5%, 33%, 67%) would resolve this.
 
 10. **Data quality matters more than model complexity.** Fixing 19 wrong-book Goodreads matches improved enjoyment R by +0.106 (more than any model change).
+
+---
+
+## 11. Model Specifications
+
+Three models score unread books. Full details in `results_so_far_everything.txt`.
+
+| Model | Features | Holdout rho (enjoy / useful) | Implementation |
+|-------|----------|------------------------------|----------------|
+| **RF** | category + GR (conservative, count≥100) | 0.236 / 0.441 | `future_prediction_evaluation.py` → `RandomForestRegressor(n_estimators=200, max_depth=5)` |
+| **GBM** | same as RF | 0.149 / **0.563** | same file → `GradientBoostingRegressor(n_estimators=120, lr=0.05, max_depth=3)` |
+| **Ridge** | GR + AMZ + log counts + category | **0.300** / 0.521 | `final_decision_model.py` → `Ridge(alpha=1.0)` |
+
+Scoring script: `score_unread_books.py` → `ai_actions/unread_book_scores.csv` (RF/GBM); `validation_book_selection.py` adds Ridge.
+
+### Ridge coefficients (trained on 268 books)
+```
+Enjoyment:  E = -1.241 + 0.602*GR + 0.350*AMZ + 0.149*log_GR_count - 0.085*log_AMZ_count
+  Category offsets: Gen Reading +0.402, Math +0.527, CS -0.684, Lit -0.061
+
+Usefulness: U = -3.446 + 0.624*GR + 0.559*AMZ - 0.268*log_GR_count + 0.315*log_AMZ_count
+  Category offsets: Math +0.197, Gen Reading -0.060, Lit -0.065
+```
+
+Key model differences: RF/GBM use only GR + category and shrink toward the mean on unread books (pred std=0.21). Ridge adds Amazon/counts and discriminates more (std=0.46). Within each category, RF correlates rho=0.65–0.76 with GR — it's largely a GR proxy. Ridge is better for enjoyment ranking; GBM is better for usefulness ranking.
+
+---
+
+## 12. Power Analysis: How Many Books to Validate
+
+From `power_analysis_simulation.py` (10K sims). Pick top N from ~140 unread Gen Reading + Business books by composite (2.5×useful + enjoy), read at ~5 hrs each, one-sided t-test vs category historical mean.
+
+### Same-quality pool (algorithm helps by filtering)
+
+| N | Hours | Enjoy lift | Enjoy power (α=.05) | Useful lift | Useful power (α=.05) |
+|---|-------|-----------|--------------------|-----------|--------------------|
+| 5 | 25 | +0.42 | 27% | +0.89 | 57% |
+| **10** | **50** | **+0.37** | **36%** | **+0.78** | **81%** |
+| 20 | 100 | +0.30 | 43% | +0.65 | 94% |
+
+### Degraded pool (unread books 0.2 points worse)
+
+| N | Hours | Enjoy lift | Enjoy power (α=.05) | Useful lift | Useful power (α=.05) |
+|---|-------|-----------|--------------------|-----------|--------------------|
+| 10 | 50 | +0.20 | 18% | +0.59 | 61% |
+| 20 | 100 | +0.13 | 16% | +0.46 | 72% |
+
+**Bottom line**: Usefulness is detectable at 10 books (81% power). Enjoyment needs >30 books — signal too weak relative to noise. Track usefulness for the fastest answer.
+
+---
+
+## 13. Validation: What to Read and What to Expect
+
+### Consensus top picks (all 3 models agree, Gen Reading + Business + CS)
+
+A Pattern Language (GR 4.4), Wages of Destruction (4.5), Mastery (4.3, started), The Power Law (4.4), The Dream Machine (4.5), Mark Manson - Models (4.3, started), The Strangest Secret (4.4, started), Knuth Vol 2–3 (4.4), Elements of Statistical Learning (4.4).
+
+### Biggest model disagreements (most informative to read)
+
+Intro to Statistical Learning (Ridge rank 4, RF rank 285), ergodicity_economics (Ridge 23, RF 303), Mastering Technical Sales (Ridge 2, RF 278, started). Pattern: Ridge loves high-GR + high-AMZ books that RF/GBM rank low since they only see category + GR.
+
+### 10-book stratified validation set
+
+4 from top quintile (Knuth Vol 2–3, From Third World to First, Hard Landing), 2 from Q4 (Masters of Doom [started], High Output Management), 2 from Q3 (Global Logistics and Strategy, Little Book of Semaphores), 1 from Q2 (Seven Habits), 1 from Q1 (The Essence of Software). Mix of representative picks and model-disagreement books. Full predictions in `ai_actions/validation_book_selection_{10,15,20}_with_started.csv`.
+
+### What to expect
+
+**If it works** (rho ~0.30 enjoy, ~0.52 useful): after 5 books, useful mean should be ~2.9–3.1 vs historical 2.18. After 10, usefulness p < 0.05 (~80% prob), expected lift +0.78. Enjoyment lift +0.37 but likely not significant. Q5 books should average ~0.3–0.5 points above Q1.
+
+**If it doesn't work**: ratings scatter around category mean (enjoy ~3.5, useful ~2.2) with no quintile trend. Spearman rho ≈ 0.
+
+**Sequential decision rules**: after 3+ books, useful mean > 2.5 is encouraging. After 5, compute rho — if > 0.4 for usefulness, model works. After 7, if useful p > 0.20, fall back to GR ≥ 4.2. After 10, horse-race all models on MAE/rho and drop losers.
+
+### Information gain by source
+
+| Source | Effort | Info gain |
+|--------|--------|-----------|
+| Existing 68-book holdout | 0 hrs | High (rho=0.30–0.56 already measured; single test set limitation) |
+| 10-book stratified validation | 50 hrs | Medium (80% power for usefulness; enjoyment noisy) |
+| 20-book validation | 100 hrs | Medium-high (diminishing returns; enjoy power 36→43%) |
+| Finishing started books | 15–30 hrs | Medium (cheap, but selection bias) |
+| GR ≥ 4.2 baseline | 0 hrs | Already have: lifts enjoy +0.36, useful +0.52 |
+
+### Key scripts and outputs
+
+- `power_analysis_simulation.py` → `ai_actions/power_analysis_results.csv`, `power_analysis_curves.png`
+- `validation_book_selection.py` → `ai_actions/validation_book_selection_*_with_started.csv`
+- `score_unread_books.py` → `ai_actions/unread_book_scores.csv`
+- `final_decision_model.py` → `ALL_BOOKS_PREDICTIONS.csv`

@@ -3862,3 +3862,211 @@ These scripts failed because they expect columns produced by data-build steps th
   4. compare_gold_vs_old.py — missing 'ratings' column
   5. full_error_analysis.py — missing 'ratings' column
   6. generate_review_report.py — missing 'author' column
+
+================================================================================
+  POWER ANALYSIS SIMULATION
+  Script: power_analysis_simulation.py
+  Added: Mon Mar 23 2026
+================================================================================
+
+Setup: pick top N books by composite ranking (2.5*useful + enjoy)
+from ~140-200 unread General Reading / Business / CS books.
+Read them (~5h each), rate, then one-sided t-test vs historical mean.
+Algorithm signal: rho=0.30 (enjoy), rho=0.52 (useful)
+Rating noise: SD=0.66 (enjoy), SD=0.59 (useful)
+Simulations: 10,000 per scenario
+Seed: 42
+
+CATEGORY CONFIGS:
+  Gen Reading + Business:
+    hist_enjoy=3.516  hist_useful=2.183  pool_size=140
+  Gen Reading + Business + CS:
+    hist_enjoy=3.402  hist_useful=2.237  pool_size=200
+
+POOL SHIFTS: 0.0 (same quality), -0.2 (remaining books slightly worse)
+ALPHA LEVELS: 0.05, 0.10, 0.20
+
+─── PRIMARY SCENARIO: Gen Reading + Business, same pool, vs category historical ───
+
+ENJOYMENT (historical ref = 3.52)
+   N   hrs  E[mean]  E[lift]       lift CI80   %pos  pow.05  pow.10  pow.20   med p
+   3    15    3.977   +0.461  [-0.21, +1.09]   82.1   20.4%   32.8%   50.6%   0.196
+   5    25    3.939   +0.423  [-0.10, +0.92]   85.3   26.9%   39.7%   57.5%   0.154
+   7    35    3.916   +0.400  [-0.03, +0.81]   88.1   30.4%   44.4%   62.5%   0.126
+  10    50    3.885   +0.369  [+0.00, +0.72]   90.2   35.8%   50.0%   66.5%   0.100
+  15    75    3.847   +0.331  [+0.04, +0.62]   92.5   40.2%   54.5%   71.1%   0.082
+  20   100    3.821   +0.305  [+0.05, +0.56]   93.3   43.3%   57.8%   73.8%   0.071
+  25   125    3.797   +0.281  [+0.05, +0.51]   93.9   45.4%   59.5%   75.4%   0.064
+  30   150    3.775   +0.259  [+0.05, +0.47]   94.1   45.8%   60.3%   75.9%   0.061
+
+USEFULNESS (historical ref = 2.18)
+   N   hrs  E[mean]  E[lift]       lift CI80   %pos  pow.05  pow.10  pow.20   med p
+   3    15    3.147   +0.964  [+0.31, +1.62]   97.1   34.1%   56.4%   79.6%   0.083
+   5    25    3.073   +0.890  [+0.37, +1.40]   98.9   56.5%   74.7%   89.7%   0.039
+   7    35    3.022   +0.839  [+0.41, +1.27]   99.4   69.9%   84.7%   94.5%   0.022
+  10    50    2.966   +0.783  [+0.42, +1.14]   99.8   81.5%   91.7%   97.3%   0.010
+  15    75    2.893   +0.710  [+0.41, +1.01]   99.9   90.4%   96.0%   98.8%   0.004
+  20   100    2.837   +0.654  [+0.40, +0.91]  100.0   94.3%   97.7%   99.4%   0.002
+  25   125    2.789   +0.606  [+0.38, +0.83]  100.0   95.6%   98.2%   99.5%   0.001
+  30   150    2.750   +0.567  [+0.36, +0.77]  100.0   96.7%   98.7%   99.6%   0.001
+
+─── DEGRADED POOL: Gen Reading + Business, pool -0.2, vs category historical ───
+
+ENJOYMENT (historical ref = 3.52)
+   N   hrs  E[mean]  E[lift]       lift CI80   %pos  pow.05  pow.10  pow.20   med p
+  10    50    3.715   +0.199  [-0.18, +0.57]   76.1   17.6%   27.6%   43.7%   0.246
+  15    75    3.677   +0.161  [-0.15, +0.46]   75.3   16.8%   27.3%   43.3%   0.248
+  20   100    3.646   +0.130  [-0.13, +0.39]   74.0   16.2%   26.0%   42.0%   0.263
+  30   150    3.598   +0.082  [-0.14, +0.30]   68.8   13.0%   21.8%   36.3%   0.314
+
+USEFULNESS (historical ref = 2.18)
+   N   hrs  E[mean]  E[lift]       lift CI80   %pos  pow.05  pow.10  pow.20   med p
+  10    50    2.773   +0.590  [+0.23, +0.95]   98.4   61.1%   76.3%   89.2%   0.031
+  15    75    2.703   +0.520  [+0.23, +0.81]   99.1   69.3%   82.8%   92.5%   0.020
+  20   100    2.643   +0.460  [+0.21, +0.71]   99.1   72.0%   84.3%   93.2%   0.016
+  30   150    2.560   +0.377  [+0.18, +0.58]   99.4   74.2%   86.0%   93.8%   0.013
+
+KEY TAKEAWAYS:
+  vs category historical mean (same quality):
+    enjoyment: >30 books needed for 80% power at α=0.05
+    usefulness: 10 books (50 hrs) for 80% power at α=0.05
+  vs category historical mean (pool -0.2):
+    enjoyment: essentially undetectable (<22% power at 30 books)
+    usefulness: 15 books (75 hrs) for 80% power at α=0.10
+
+  Usefulness is much easier to detect because algorithm signal is
+  stronger (rho=0.52 vs 0.30) and composite ranking weights it 2.5x.
+
+  Full results: ai_actions/power_analysis_results.csv
+  Plots: ai_actions/power_analysis_curves.png
+         ai_actions/power_analysis_effects.png
+         ai_actions/power_analysis_alpha_tradeoff.png
+
+================================================================================
+  VALIDATION BOOK SELECTION
+  Script: validation_book_selection.py
+  Added: Mon Mar 23 2026
+================================================================================
+
+RIDGE COEFFICIENTS (trained on 268 books, applied to 541 unread):
+
+  Ridge avg_enjoyment:
+    gr_rating                      +0.602
+    amz_rating                     +0.350
+    log_gr_count                   +0.149
+    log_amz_count                  -0.085
+    category_General Reading       +0.402
+    category_Math                  +0.527
+    category_Computer Science      -0.684
+    category_Literature            -0.061
+    intercept                      -1.241
+
+  Ridge avg_usefulness:
+    gr_rating                      +0.624
+    amz_rating                     +0.559
+    log_gr_count                   -0.268
+    log_amz_count                  +0.315
+    category_Math                  +0.197
+    category_General Reading       -0.060
+    category_Literature            -0.065
+    intercept                      -3.446
+
+─── TOP 15 CONSENSUS BOOKS (all 3 models agree, Gen Reading + Business + CS) ───
+
+Title                                              Cat            GR   RF  GBM  Rdg Spread Started
+A_Pattern_Language by Christopher Alexander        General Re    4.4    4    6   38     34    N
+The Wages of Destruction                           General Re    4.5   23   15   11     12    N
+Mastery                                            Business      4.3   19   12   19      7    Y
+The Power Law                                      Business      4.4    3   14   42     39    N
+The Dream Machine                                  Business      4.5   25   16   25      9    N
+Mark Manson - Models                               General Re    4.3    1    4   63     62    Y
+The Strangest Secret                               General Re    4.4   65    3    9     62    Y
+Knuth Vol 2                                        CS            4.4   10    2   75     74    N
+Knuth Vol 3                                        CS            4.4   12    2   74     72    N
+Elements of Statistical Learning                   CS            4.4    5   26   62     57    N
+Hoover: An Extraordinary Life                      General Re    4.3   15   63   18     48    N
+Mindstorms                                         Business      4.3   29   23   53     30    N
+Designing Data-Intensive Applications              CS            4.7   53   45    7     46    Y
+The Age of Revolution                              General Re    4.3    2   20   87     85    N
+Knuth Vol 4A                                       CS            4.7   42   38   30     12    N
+
+─── HIGHEST MODEL DISAGREEMENT (most informative for validation) ───
+
+Title                                              Cat            GR   RF  GBM  Rdg Spread Started
+Intro to Statistical Learning                      CS            4.7  285  324    4    320    N
+ergodicity_economics.pdf                           CS            4.5  303  328   23    305    N
+Frank Fairlegh                                     General Re    4.2  316  305   16    300    N
+What Every Programmer Should Know About Memory     CS            4.7  286  324   26    298    Y
+Stochastic Calculus                                Business      4.5  278  309   12    297    N
+Mastering Technical Sales                          Business      4.8  278  234    2    276    Y
+
+Pattern: Ridge loves high-GR + high-AMZ books (especially CS/Math) that RF/GBM
+rank low because they only see category + GR. These disagreements are driven by
+Amazon ratings and review counts that Ridge incorporates but RF/GBM ignore.
+
+─── 10-BOOK STRATIFIED VALIDATION SET (with started books eligible) ───
+
+Quintile     Title                                          Cat        GR  E(RF) U(RF) E(Rdg) U(Rdg) Spread  Started Why
+Q5 (high)    Knuth Vol 2                                    CS        4.4  3.41  2.59   2.58   2.02     74   N       Representative
+Q5 (high)    Knuth Vol 3                                    CS        4.4  3.40  2.59   2.62   2.01     72   N       Representative
+Q5 (high)    From Third World to First                      Gen       4.5  3.54  2.44   3.77   2.10     84   N       Disagreement
+Q5 (high)    Hard Landing                                   Bus       4.4  3.52  2.60   3.27   1.78     89   N       Disagreement
+Q4           Masters of Doom                                Bus       4.3  3.41  2.50   3.15   1.37    222   Y       Disagreement
+Q4           High Output Management                         Bus       4.3  3.39  2.51   3.15   1.36    220   N       Representative
+Q3           Global Logistics and Strategy                  Gen       4.3  2.98  1.99   3.44   1.85    140   N       Representative
+Q3           Little Book of Semaphores                      CS        4.4  2.86  2.15   2.47   2.07    241   N       Disagreement
+Q2           Seven Habits of Highly Effective People        Bus       4.1  3.10  2.02   3.31   0.81    272   N       Representative
+Q1 (low)     The Essence of Software                        CS        4.2  2.79  1.73   2.37   2.03    261   N       Representative
+
+─── DIAGNOSTICS ───
+
+WITHIN-CATEGORY RF vs GOODREADS CORRELATION:
+  Computer Science          (n= 78): enjoy rho=0.693, useful rho=0.740
+  General Reading           (n=119): enjoy rho=0.743, useful rho=0.795
+  Business, management      (n=122): enjoy rho=0.645, useful rho=0.748
+
+  Interpretation: RF predictions correlate 0.65-0.80 with GR within category.
+  Not redundant (rho < 0.9) but GR does most of the work. The model adds
+  ~10-20% of ranking signal beyond GR alone.
+
+PREDICTION VARIANCE (shrinkage check):
+  pred_enjoy_rf             unread std = 0.214
+  pred_useful_rf            unread std = 0.276
+  pred_enjoy_ridge          unread std = 0.479
+  pred_useful_ridge         unread std = 0.328
+
+  RF predictions cluster tightly (low discrimination). Ridge spreads more,
+  which is better for calibration testing but may overfit noise.
+
+─── WHAT TO EXPECT READING THE VALIDATION SET ───
+
+IF THE ALGORITHM WORKS (rho ~0.30 enjoy, ~0.52 useful):
+  After 5 books: useful mean should be ~2.9-3.1 (vs historical 2.18)
+  After 10 books: useful mean statistically above 2.18 (p < 0.05, ~80% prob)
+    Expected usefulness lift: +0.78 rating points
+    Expected enjoyment lift: +0.37 (but likely not significant, p ~0.10)
+  Q5 books should average ~0.3-0.5 points higher than Q1 on both dimensions
+
+IF THE ALGORITHM DOESN'T WORK:
+  Ratings scatter around category mean (enjoy ~3.5, useful ~2.2)
+  No trend across quintiles
+  Spearman rho near 0 (95% CI includes 0)
+
+SEQUENTIAL DECISION RULES:
+  After each book: update running mean. If useful mean > 2.5 after 3+, encouraging.
+  After 5 books: compute Spearman rho. If rho > 0.4 for useful, model works.
+  After 7 books: if useful p-value > 0.20, switch to "just use GR >= 4.2."
+  After 10 books: final horse race (MAE/RMSE/rho). Loser models get dropped.
+
+INFORMATION GAIN BY SOURCE:
+  Existing holdout (68 books, 0 hrs):     HIGH — already shows rho=0.30-0.56
+  10-book validation (50 hrs):            MEDIUM — 80% power for usefulness, noisy for enjoyment
+  20-book validation (100 hrs):           MEDIUM-HIGH — diminishing returns, helps enjoyment 36%→43%
+  Finishing started books (15-30 hrs):    MEDIUM — cheap per-book, but selection bias
+  GR >= 4.2 baseline (0 hrs):            Already available: lifts enjoy +0.36, useful +0.52
+
+Output CSVs:
+  ai_actions/validation_book_selection_10_with_started.csv
+  ai_actions/validation_book_selection_15_with_started.csv
+  ai_actions/validation_book_selection_20_with_started.csv
+  ai_actions/validation_book_selection_10_unstarted.csv
