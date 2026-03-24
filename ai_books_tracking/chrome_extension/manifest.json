@@ -20,6 +20,17 @@
   "background": {
     "service_worker": "background.js"
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.goodreads.com/book/show/*",
+        "https://www.amazon.com/*",
+        "https://www.amazon.co.uk/*"
+      ],
+      "js": ["predict.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ],
   "web_accessible_resources": [
     {
       "resources": ["models.json"],

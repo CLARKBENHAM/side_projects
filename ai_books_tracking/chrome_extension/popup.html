@@ -5,24 +5,26 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      width: 420px;
+      width: 540px;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      font-size: 13px;
+      font-size: 14px;
       color: #1a1a1a;
       background: #fafafa;
-      padding: 12px;
+      padding: 14px;
+      max-height: 600px;
+      overflow-y: auto;
     }
     h1 {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       color: #333;
     }
     .section {
       background: #fff;
       border: 1px solid #e0e0e0;
       border-radius: 6px;
-      padding: 10px;
+      padding: 10px 12px;
       margin-bottom: 8px;
     }
     .section-title {
@@ -33,46 +35,91 @@
       letter-spacing: 0.5px;
       margin-bottom: 6px;
     }
+    /* Title and Author: horizontal label: value */
     .data-row {
       display: flex;
       justify-content: space-between;
       padding: 2px 0;
-      font-size: 12px;
+      font-size: 13px;
     }
     .data-label { color: #666; }
-    .data-value { font-weight: 600; }
+    .data-value { font-weight: 600; max-width: 380px; text-align: right; }
     .data-value.missing { color: #c00; font-style: italic; }
+    /* Stats grid: vertical label-over-value in a row */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+      margin-top: 4px;
+    }
+    .stat-cell {
+      text-align: center;
+    }
+    .stat-cell .stat-label {
+      font-size: 10px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .stat-cell .stat-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a1a1a;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-cell .stat-value.missing { color: #c00; font-style: italic; font-size: 12px; }
+    /* Results grid */
     .results-grid {
       display: grid;
       grid-template-columns: auto 1fr 1fr;
-      gap: 3px 12px;
-      font-size: 12px;
+      gap: 2px 16px;
+      font-size: 13px;
+      align-items: baseline;
     }
     .results-grid .header {
       font-weight: 700;
+      font-size: 12px;
       color: #444;
-      padding-bottom: 3px;
+      padding-bottom: 4px;
       border-bottom: 1px solid #e0e0e0;
     }
     .results-grid .model-name {
       font-weight: 600;
       color: #333;
+      padding-top: 4px;
     }
     .results-grid .score {
       text-align: right;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 16px;
       font-variant-numeric: tabular-nums;
+      padding-top: 4px;
     }
     .score.good { color: #1a7f37; }
     .score.mid { color: #b35900; }
     .score.low { color: #c00; }
+    .interval-row {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.4;
+      padding-bottom: 2px;
+    }
+    .interval-row .pi-line {
+      display: block;
+      font-size: 11px;
+    }
+    .interval-row .pi-label { color: #999; }
+    .interval-row .pi-range { color: #666; font-weight: 500; }
+    .interval-row .pi-line.band85 .pi-label { color: #bbb; }
+    .interval-row .pi-line.band85 .pi-range { color: #999; }
+    /* Category buttons */
     .category-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
       gap: 4px;
     }
     .cat-btn {
-      padding: 6px 8px;
+      padding: 6px 4px;
       border: 1px solid #ccc;
       border-radius: 4px;
       background: #f5f5f5;
@@ -88,27 +135,13 @@
       border-color: #1a73e8;
     }
     .status {
-      font-size: 11px;
+      font-size: 12px;
       color: #666;
       margin: 4px 0;
       min-height: 16px;
     }
     .status.error { color: #c00; }
     .status.searching { color: #1a73e8; }
-    button.action-btn {
-      width: 100%;
-      padding: 8px;
-      background: #1a73e8;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-      margin-top: 6px;
-    }
-    button.action-btn:hover { background: #1557b0; }
-    button.action-btn:disabled { background: #ccc; cursor: default; }
     .search-section { margin-top: 4px; }
     .note {
       font-size: 10px;
@@ -135,11 +168,16 @@
       border-radius: 3px;
       margin-bottom: 3px;
       cursor: pointer;
-      font-size: 11px;
+      font-size: 12px;
     }
     .search-result:hover { background: #e8f0fe; }
     .search-result .sr-title { font-weight: 600; }
-    .search-result .sr-meta { color: #666; font-size: 10px; }
+    .search-result .sr-meta { color: #666; font-size: 11px; }
+    .model-sep {
+      grid-column: 1 / -1;
+      border-top: 1px solid #f0f0f0;
+      margin: 2px 0;
+    }
   </style>
 </head>
 <body>
@@ -155,25 +193,27 @@
       <span class="data-label">Author:</span>
       <span class="data-value" id="author">—</span>
     </div>
-    <div class="data-row">
-      <span class="data-label">GR Rating:</span>
-      <span class="data-value" id="gr-rating">—</span>
-    </div>
-    <div class="data-row">
-      <span class="data-label">GR Count:</span>
-      <span class="data-value" id="gr-count">—</span>
-    </div>
-    <div class="data-row">
-      <span class="data-label">AMZ Rating:</span>
-      <span class="data-value" id="amz-rating">—</span>
-    </div>
-    <div class="data-row">
-      <span class="data-label">AMZ Count:</span>
-      <span class="data-value" id="amz-count">—</span>
-    </div>
-    <div class="data-row">
-      <span class="data-label">Pages:</span>
-      <span class="data-value" id="pages">—</span>
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <div class="stat-label">GR Rating</div>
+        <div class="stat-value" id="gr-rating">—</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">GR Count</div>
+        <div class="stat-value" id="gr-count">—</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">AMZ Rating</div>
+        <div class="stat-value" id="amz-rating">—</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">AMZ Count</div>
+        <div class="stat-value" id="amz-count">—</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Pages</div>
+        <div class="stat-value" id="pages">—</div>
+      </div>
     </div>
   </div>
 
@@ -188,10 +228,8 @@
     <div class="category-grid" id="category-grid"></div>
   </div>
 
-  <button class="action-btn" id="predict-btn" disabled>Select a category to predict</button>
-
   <div id="results" class="section" style="display:none;">
-    <div class="section-title">Predictions (1-5 scale)</div>
+    <div class="section-title">Predictions (1–5 scale)</div>
     <div class="results-grid">
       <span class="header">Model</span>
       <span class="header" style="text-align:right">Enjoyment</span>
@@ -200,26 +238,37 @@
       <span class="model-name">Ridge</span>
       <span class="score" id="ridge-enjoy">—</span>
       <span class="score" id="ridge-useful">—</span>
+      <span></span>
+      <span class="interval-row" id="ridge-enjoy-pi"></span>
+      <span class="interval-row" id="ridge-useful-pi"></span>
 
-      <span class="model-name">Random Forest</span>
+      <div class="model-sep"></div>
+
+      <span class="model-name">RF</span>
       <span class="score" id="rf-enjoy">—</span>
       <span class="score" id="rf-useful">—</span>
+      <span></span>
+      <span class="interval-row" id="rf-enjoy-pi"></span>
+      <span class="interval-row" id="rf-useful-pi"></span>
+
+      <div class="model-sep"></div>
 
       <span class="model-name">GBM</span>
       <span class="score" id="gbm-enjoy">—</span>
       <span class="score" id="gbm-useful">—</span>
+      <span></span>
+      <span class="interval-row" id="gbm-enjoy-pi"></span>
+      <span class="interval-row" id="gbm-useful-pi"></span>
     </div>
     <div class="threshold-note">
-      <strong>Thresholds:</strong> Enjoyment &ge; 3.9 = keep, Usefulness &ge; 2.5 = keep.
-      GR &ge; 4.2 is a decent standalone filter.
+      <strong>Thresholds:</strong> Enjoy &ge; 3.9 = keep, Useful &ge; 2.5 = keep. GR &ge; 4.2 standalone.<br>
+      <strong>PI:</strong> 50%/85% prediction intervals (conformal, n=68 holdout).
     </div>
   </div>
 
   <div class="status" id="global-status"></div>
-  <div class="note">
-    Ridge uses GR + AMZ + log counts + category. RF/GBM use GR + category + book metadata (defaults for unavailable features).
-  </div>
 
+  <script src="predict.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

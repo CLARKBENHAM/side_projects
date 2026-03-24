@@ -5,6 +5,18 @@ const CATEGORIES = [
 
 let pageData = {};
 let selectedCategory = null;
+let modelsCache = null;
+
+async function getModels() {
+  if (modelsCache) return modelsCache;
+  const url = chrome.runtime.getURL("models.json");
+  const resp = await fetch(url);
+  modelsCache = await resp.json();
+  return modelsCache;
+}
+
+// Start loading models immediately (don't wait for DOMContentLoaded)
+getModels();
 
 function $(id) { return document.getElementById(id); }
 
@@ -21,6 +33,13 @@ function scoreClass(val, type) {
 
 function formatScore(val) {
   return val != null ? val.toFixed(2) : "—";
+}
+
+function formatInterval(iv) {
+  if (!iv) return "";
+  const f = v => v.toFixed(1);
+  return `<span class="pi-line band50"><span class="pi-label">50%:</span> <span class="pi-range">${f(iv.asym50_lo)}–${f(iv.asym50_hi)}</span></span>`
+       + `<span class="pi-line band85"><span class="pi-label">85%:</span> <span class="pi-range">${f(iv.asym85_lo)}–${f(iv.asym85_hi)}</span></span>`;
 }
 
 function setField(id, val, missing) {
@@ -44,8 +63,7 @@ function initCategoryButtons() {
       document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("selected"));
       btn.classList.add("selected");
       selectedCategory = cat;
-      $("predict-btn").disabled = false;
-      $("predict-btn").textContent = `Predict for "${cat}"`;
+      runPrediction();
     });
     grid.appendChild(btn);
   }
@@ -116,7 +134,6 @@ function extractAmazonData() {
   const authorEl = document.querySelector(".author a, .contributorNameID, #bylineInfo a.a-link-normal");
   if (authorEl) data.author = authorEl.textContent.trim();
 
-  // Rating - try multiple selectors
   const ratingSelectors = [
     '#acrPopover span.a-size-base.a-color-base',
     '#acrPopover .a-icon-alt',
@@ -132,7 +149,6 @@ function extractAmazonData() {
     }
   }
 
-  // Rating count
   const countSelectors = ['#acrCustomerReviewCount', '#acrCustomerReviewText'];
   for (const sel of countSelectors) {
     const el = document.querySelector(sel);
@@ -143,12 +159,10 @@ function extractAmazonData() {
     }
   }
 
-  // Page count - scan all detail sections
   const allText = document.body.innerText;
   const pageMatch = allText.match(/(\d+)\s*pages/i);
   if (pageMatch) data.pageCount = parseInt(pageMatch[1], 10);
 
-  // Publication year from detail bullets
   const detailItems = document.querySelectorAll('#detailBullets_feature_div li, .detail-bullet-list .a-list-item, #productDetailsTable td, table.a-keyvalue td');
   for (const item of detailItems) {
     const text = item.textContent;
@@ -179,7 +193,6 @@ async function extractCurrentPage() {
   }
 
   const url = tab.url || "";
-  $("global-status").textContent = "Tab URL: " + url.substring(0, 60) + "...";
 
   let site = null;
   let func = null;
@@ -191,7 +204,7 @@ async function extractCurrentPage() {
     site = "amazon";
     func = extractAmazonData;
   } else {
-    $("global-status").textContent = "Not a Goodreads or Amazon page: " + url.substring(0, 60);
+    $("global-status").textContent = "Not a Goodreads or Amazon page";
     $("global-status").className = "status error";
     return null;
   }
@@ -205,12 +218,12 @@ async function extractCurrentPage() {
     if (results && results[0] && results[0].result) {
       return { site, data: results[0].result };
     } else {
-      $("global-status").textContent = "executeScript returned empty: " + JSON.stringify(results);
+      $("global-status").textContent = "Could not extract page data";
       $("global-status").className = "status error";
       return null;
     }
   } catch (err) {
-    $("global-status").textContent = "executeScript error: " + err.message;
+    $("global-status").textContent = "Script error: " + err.message;
     $("global-status").className = "status error";
     return null;
   }
@@ -239,7 +252,6 @@ async function searchGoodreads(title, author) {
       return;
     }
 
-    // Parse the search results HTML
     const parser = new DOMParser();
     const doc = parser.parseFromString(resp.html, "text/html");
     const results = [];
@@ -295,13 +307,11 @@ async function fetchGRDetails(result) {
   $("search-status").className = "status searching";
   $("search-results").innerHTML = "";
 
-  // Use search result data directly (fetching the page from background often gets blocked)
   pageData.grRating = result.rating;
   pageData.grCount = result.count;
   setField("gr-rating", result.rating);
   setField("gr-count", result.count?.toLocaleString());
 
-  // Try to fetch the full page for extra details
   try {
     const resp = await chrome.runtime.sendMessage({ type: "FETCH_GR_PAGE", url: result.href });
     if (resp && resp.success) {
@@ -336,9 +346,12 @@ async function fetchGRDetails(result) {
     // Fine, we already have search result data
   }
 
-  $("search-status").textContent = `GR: ${result.title} (${pageData.grRating} ★, ${(pageData.grCount || 0).toLocaleString()} ratings)`;
+  $("search-status").textContent = `GR: ${result.title} (${pageData.grRating} ★, ${(pageData.grCount || 0).toLocaleString()})`;
   $("search-status").className = "status";
   $("search-label").textContent = "Goodreads Match";
+
+  // Re-run prediction if a category is already selected
+  if (selectedCategory) runPrediction();
 }
 
 async function searchAmazon(title, author) {
@@ -389,9 +402,12 @@ async function searchAmazon(title, author) {
     pageData.amzCount = best.count;
     setField("amz-rating", best.rating);
     setField("amz-count", best.count?.toLocaleString());
-    $("search-status").textContent = `AMZ: "${best.title.substring(0, 50)}" (${best.rating} ★, ${(best.count || 0).toLocaleString()} ratings)`;
+    $("search-status").textContent = `AMZ: "${best.title.substring(0, 40)}" (${best.rating} ★, ${(best.count || 0).toLocaleString()})`;
     $("search-status").className = "status";
     $("search-label").textContent = "Cross-Site Match";
+
+    // Re-run prediction if a category is already selected
+    if (selectedCategory) runPrediction();
   } catch (err) {
     $("search-status").textContent = "Amazon search error: " + err.message;
     $("search-status").className = "status error";
@@ -399,61 +415,47 @@ async function searchAmazon(title, author) {
 }
 
 async function runPrediction() {
-  $("predict-btn").disabled = true;
-  $("predict-btn").textContent = "Predicting...";
-  $("global-status").textContent = "";
+  if (!selectedCategory) return;
 
   try {
-    const resp = await chrome.runtime.sendMessage({
-      type: "GET_PREDICTIONS",
-      pageData,
-      category: selectedCategory,
-    });
-
-    if (!resp || !resp.success) {
-      $("global-status").textContent = "Prediction error: " + (resp?.error || "no response");
-      $("global-status").className = "status error";
-      $("predict-btn").disabled = false;
-      $("predict-btn").textContent = `Predict for "${selectedCategory}"`;
-      return;
-    }
-
-    const r = resp.results;
+    const models = await getModels();
+    const r = runAllPredictions(models, pageData, selectedCategory);
     $("results").style.display = "block";
 
-    for (const [id, val, type] of [
-      ["ridge-enjoy", r.ridge_enjoy, "enjoy"],
-      ["ridge-useful", r.ridge_useful, "useful"],
-      ["rf-enjoy", r.rf_enjoy, "enjoy"],
-      ["rf-useful", r.rf_useful, "useful"],
-      ["gbm-enjoy", r.gbm_enjoy, "enjoy"],
-      ["gbm-useful", r.gbm_useful, "useful"],
+    for (const [id, val, type, intervalKey] of [
+      ["ridge-enjoy", r.ridge_enjoy, "enjoy", "ridge_enjoy"],
+      ["ridge-useful", r.ridge_useful, "useful", "ridge_useful"],
+      ["rf-enjoy", r.rf_enjoy, "enjoy", "rf_enjoy"],
+      ["rf-useful", r.rf_useful, "useful", "rf_useful"],
+      ["gbm-enjoy", r.gbm_enjoy, "enjoy", "gbm_enjoy"],
+      ["gbm-useful", r.gbm_useful, "useful", "gbm_useful"],
     ]) {
       const el = $(id);
       el.textContent = formatScore(val);
       el.className = `score ${scoreClass(val, type)}`;
+
+      const piEl = $(id + "-pi");
+      if (piEl && r.intervals && r.intervals[intervalKey]) {
+        piEl.innerHTML = formatInterval(r.intervals[intervalKey]);
+      }
     }
 
-    $("predict-btn").disabled = false;
-    $("predict-btn").textContent = `Predict for "${selectedCategory}"`;
+    $("global-status").textContent = "";
   } catch (err) {
     $("global-status").textContent = "Error: " + err.message;
     $("global-status").className = "status error";
-    $("predict-btn").disabled = false;
-    $("predict-btn").textContent = `Predict for "${selectedCategory}"`;
   }
 }
 
 async function init() {
   initCategoryButtons();
-  $("predict-btn").addEventListener("click", runPrediction);
 
   $("global-status").textContent = "Extracting page data...";
   $("global-status").className = "status searching";
 
   const extracted = await extractCurrentPage();
   if (!extracted || !extracted.data) {
-    $("global-status").textContent = "Could not extract data. Make sure you're on a Goodreads or Amazon book page, then reopen this popup.";
+    $("global-status").textContent = "Could not extract data. Make sure you're on a Goodreads or Amazon book page.";
     $("global-status").className = "status error";
     return;
   }
