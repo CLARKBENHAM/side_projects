@@ -59,6 +59,10 @@ Sections 11–13 added 2026-03-23: model specs, power analysis, validation set d
 
 Simple models with multi-source ratings **rank better** than complex RF/GBM for enjoyment (rho 0.30-0.39 vs 0.15-0.24). For usefulness, all models cluster around rho 0.42-0.57. Adding Amazon and OL ratings helps the simpler models despite OL being weak standalone.
 
+But once remove count of authors book read so far, all rankings are ~0.45 rho on holdout set. The R^2 is often negative since the means of the periods are changing too much.
+
+Simple heuristics might get more than anything else.
+
 #### Simple Ridge coefficients
 - **Enjoyment**: `E = -2.12 + 0.76*GR + 0.37*AMZ + 0.08*OL + 0.10*log_count + category_offsets`
   - Category: Math +0.59, General Reading +0.15, Literature +0.10, Business +0.04, fiction -0.12, ML -0.19, **CS -0.58**
@@ -414,3 +418,543 @@ Intro to Statistical Learning (Ridge rank 4, RF rank 285), ergodicity_economics 
 - `validation_book_selection.py` → `ai_actions/validation_book_selection_*_with_started.csv`
 - `score_unread_books.py` → `ai_actions/unread_book_scores.csv`
 - `final_decision_model.py` → `ALL_BOOKS_PREDICTIONS.csv`
+
+---
+
+## 14. Prediction Interval Analysis
+
+Added 2026-03-23. Simulation comparing methods for constructing prediction intervals around point predictions. Script: `prediction_interval_simulation.py`. Full output: `ai_actions/prediction_interval_simulation_results.txt`.
+
+### Method comparison (200 sims, enjoyment, rho=0.35 ~ empirical Ridge)
+
+| Method | 50% coverage | 85% coverage | 85% width | Notes |
+|--------|-------------|-------------|-----------|-------|
+| **Conformal** (recommended) | 51% | **86%** | 3.0 | Guaranteed coverage; constant-width |
+| Empirical residual | 48% | 82% | 2.8 | Slightly undercovers (~3% below nominal) |
+| Quantile regression (GBM) | 43% | 77–83% | 2.6–3.4 | Undercovers at 50%; at 85% depends strongly on heteroscedasticity |
+| Bootstrap (model only) | **7%** | **14%** | 0.2 | Captures model instability only, NOT a prediction interval |
+| Bootstrap + residual | 48% | 82% | 2.8 | Matches empirical residual; more expensive |
+| Adaptive conformal | 52% | **73%** | 2.7 | Overfits residual-magnitude model at n=50 cal |
+
+### Key findings
+
+1. **Conformal prediction is the winner.** Mean coverage sits on or slightly above nominal across Ridge/RF/GBM in the sim; construction is k = ceil((n+1)·level) on sorted |calibration residuals|. Assumes exchangeability between calibration and future books.
+
+2. **Intervals are wide because R² is low.** The 85% PI for enjoyment spans ~3.0 rating points (e.g., 1.8–4.8 for a book predicted at 3.3). This is honest — with R²≈0.10, most of the 1–5 scale is genuinely uncertain per book.
+
+3. **Bootstrap alone is NOT a prediction interval.** It only measures "how much does my prediction shift if I resample training data?" — ignores irreducible noise. Results in 7% coverage at 50% nominal. Useful as a stability diagnostic only.
+
+4. **Adaptive conformal fails at our sample size.** Needs >100 calibration points to reliably model heteroscedastic residuals; we have 68. Stick with constant-width conformal.
+
+5. **Heteroscedasticity is not the binding constraint.** Even with strong heteroscedasticity, conformal coverage only drops 1–2%. The irreducible noise (R²=0.10–0.30) dominates.
+
+6. **Calibration set of 68 holdout books is sufficient.** Coverage is stable from n_cal=20 to 100. Variance decreases modestly with more calibration data.
+
+### Practical implementation for Chrome extension
+
+Use split conformal with the 68-book holdout as calibration:
+- Compute |residual| = |actual - predicted| for each holdout book per model
+- Sort the 68 |residuals|
+- 50% PI: 35th sorted |residual| → symmetric band around point pred
+- 85% PI: 59th sorted |residual| → symmetric band around point pred
+- Example: predicted enjoyment 3.8, q85 = 1.5 → "3.8 [2.3 – 5.0] (85% PI)"
+
+### Model × interval interaction
+
+| Base model | Conformal 85% coverage | Width |
+|-----------|----------------------|-------|
+| Ridge | 85.5% | 3.28 |
+| RF | 86.5% | 3.43 |
+| GBM | 86.4% | 3.50 |
+
+All base models achieve target coverage. RF and GBM have slightly wider intervals (larger residuals on calibration set).
+
+---
+
+## 15. Updated Chrome Extension Models (2026-03-24)
+
+### Changes from previous extension models
+
+**Old pipeline (Sections 2, 11):**
+- Single pooled Ridge across all categories (category dummies as features)
+- 6 features: `gr_rating`, `ol_rating`, `amz_rating`, `log_gr_count`, `log_ol_count`, `log_amz_count`
+- Data source: `master_book_metadata_cleaned.csv`, OL/AMZ imputed from GR via linear regression
+- RF/GBM included `author_target_mean_hist` and `author_book_count_hist` features
+- Bugs found: missing `gr_rating.notna()` filter on Ridge training (5 books with gr_rating=0 corrupted coefficients), "Histories" mapped to "General Reading" instead of keeping as separate category
+
+**New pipeline:**
+- **Ridge: 3 group-specific models** from `golden_master_multi_source.csv` (verified GR ratings)
+  - Groups: Business/Histories/General, Fiction/Literature, Technical/Other
+  - 3 features only: raw GR, OL, AMZ ratings (no log counts, no category dummies)
+  - Cross-source imputation per group (OL imputed from GR+AMZ within group)
+  - Per-group conformal intervals (wider for Fiction/Literature)
+- **RF/GBM: author features removed** (always unknown for new books, added noise)
+
+### Holdout performance comparison (Spearman rho on 68 holdout books)
+
+| Model | Target | Old rho | New rho | Change |
+|-------|--------|---------|---------|--------|
+| Ridge | Enjoyment | 0.090* | 0.292 | +0.202 |
+| Ridge | Usefulness | 0.382* | 0.459 | +0.077 |
+| RF | Enjoyment | 0.236 | 0.238 | +0.002 |
+| RF | Usefulness | 0.441 | 0.552 | +0.111 |
+| GBM | Enjoyment | 0.149 | 0.080 | -0.069 |
+| GBM | Usefulness | 0.563 | 0.557 | -0.006 |
+
+*Old Ridge rho was degraded by the gr_rating=0 bug. Original correct Ridge (before export) was ~0.287/0.457.
+
+Key findings:
+- **Ridge enjoy**: fixed bug + group-specific models → rho from 0.090 to 0.292
+- **RF useful**: removing author features *improved* rho from 0.441 to 0.552
+- **GBM enjoy**: rho dropped to 0.080 (p=0.52, not significant) — GBM overfits for enjoyment
+- All models overpredict by +0.19 to +0.46 (captured by asymmetric conformal intervals)
+
+### Per-group conformal intervals (asymmetric, from holdout residuals)
+
+| Group | Target | n | 50% [lo, hi] | 85% [lo, hi] |
+|-------|--------|---|--------------|---------------|
+| Business/Hist/General | Enjoy | 48 | [-0.79, -0.07] | [-1.31, +0.56] |
+| Business/Hist/General | Useful | 48 | [-0.77, +0.08] | [-1.07, +0.84] |
+| Fiction/Literature | Enjoy | 15 | [-1.17, +0.08] | [-1.40, +1.03] |
+| Fiction/Literature | Useful | 15 | [-0.67, -0.29] | [-0.76, -0.15] |
+| Pooled fallback | Enjoy | 68 | [-0.90, -0.07] | [-1.41, +0.72] |
+| Pooled fallback | Useful | 68 | [-0.78, -0.01] | [-1.08, +0.65] |
+
+Fiction/Literature intervals are wider (less predictable) and Fiction/Lit useful intervals are entirely below the prediction (strong overprediction for that group).
+
+### Overfitting check: per-group vs pooled Ridge
+
+Splitting into 3 groups (4 parameters each) vs 1 pooled model (3 parameters) on same holdout:
+- Enjoy rho: 0.279 (pooled) → 0.303 (per-group) — modest improvement
+- Useful rho: 0.207 (pooled) → 0.457 (per-group) — large improvement from group-specific intercepts
+
+The usefulness gain is real: fiction books have fundamentally different base rates for usefulness.
+
+### Plot
+
+See `plots/holdout_pred_vs_actual.png` — predicted vs actual for all 6 model×target combinations, colored by group.
+
+### Exact deployed Ridge coefficients (raw 3-source models)
+
+These are the exact `Ridge(alpha=1.0)` coefficients currently exported to the extension JSON and used for the Ridge panels in `plots/holdout_pred_vs_actual.png`. Predictions are clipped to `[1, 5]` after the linear formula.
+
+| Group | Target | Intercept | GR | OL | AMZ |
+|-------|--------|-----------|----|----|-----|
+| Business/Hist/General | Enjoy | -0.6056 | +0.6358 | +0.2897 | +0.0691 |
+| Business/Hist/General | Useful | -2.0925 | +0.6079 | +0.1458 | +0.2436 |
+| Fiction/Literature | Enjoy | -3.3826 | +0.6723 | -0.0456 | +0.9320 |
+| Fiction/Literature | Useful | -3.2443 | +0.4821 | -0.0538 | +0.6519 |
+| Technical/Other | Enjoy | +2.2820 | +0.8362 | -0.1587 | -0.4546 |
+| Technical/Other | Useful | +1.2503 | +0.9703 | +0.0115 | -0.5813 |
+
+### Exact imputation rules used before those coefficients
+
+The extension only passes Goodreads and Amazon. Open Library is always missing on-page, so it is first imputed within group using:
+
+| Group | OL imputation used when GR and AMZ both present |
+|-------|-----------------------------------------------|
+| Business/Hist/General | `OL = 1.8081 + 0.5791*GR - 0.0167*AMZ` |
+| Fiction/Literature | `OL = 0.2631 + 0.6155*GR + 0.2699*AMZ` |
+| Technical/Other | `OL = 2.3022 + 0.3504*GR + 0.0736*AMZ` |
+
+One-source fallbacks in the extension are:
+- Business/Hist/General: `OL = 1.7501 + 0.5743*GR`; `OL = 3.0636 + 0.2254*AMZ`
+- Fiction/Literature: `OL = 1.0668 + 0.7215*GR`; `OL = 1.0585 + 0.6363*AMZ`
+- Technical/Other: `OL = 2.6395 + 0.3521*GR`; `OL = 3.7500 + 0.0833*AMZ`
+
+If both sources are missing, the target-specific fills are:
+- Business/Hist/General: `GR=4.12`, `OL=4.10`, `AMZ=4.6428`
+- Fiction/Literature: `GR=4.01`, `OL=4.00`, `AMZ=4.60`
+- Technical/Other: `GR=4.245`, `OL=4.1196`, `AMZ=4.6898`
+
+### The actual 2-coefficient rules to do in your head
+
+Because OL is not scraped by the extension, the most relevant deployed rule is after substituting the OL imputation above into the ridge:
+
+| Group | Target | Formula when GR and AMZ are both present |
+|-------|--------|-------------------------------------------|
+| Business/Hist/General | Enjoy | `pred = clip(-0.0819 + 0.8036*GR + 0.0643*AMZ)` |
+| Business/Hist/General | Useful | `pred = clip(-1.8288 + 0.6923*GR + 0.2412*AMZ)` |
+| Fiction/Literature | Enjoy | `pred = clip(-3.3946 + 0.6442*GR + 0.9196*AMZ)` |
+| Fiction/Literature | Useful | `pred = clip(-3.2585 + 0.4490*GR + 0.6374*AMZ)` |
+| Technical/Other | Enjoy | `pred = clip(1.9166 + 0.7805*GR - 0.4663*AMZ)` |
+| Technical/Other | Useful | `pred = clip(1.2767 + 0.9743*GR - 0.5804*AMZ)` |
+
+So yes, in the normal extension case you are basically using only **two slopes**: Goodreads and Amazon, plus an intercept, with OL folded in implicitly.
+
+If only one source is available, the exact deployed rules become:
+
+| Group | Target | GR-only | AMZ-only | Neither source |
+|-------|--------|---------|----------|----------------|
+| Business/Hist/General | Enjoy | `0.1410 + 0.8221*GR` | `1.6603 + 0.4002*AMZ` | `3.5223` |
+| Business/Hist/General | Useful | `-0.9920 + 0.7618*GR` | `-0.3278 + 0.5306*AMZ` | `2.1410` |
+| Fiction/Literature | Enjoy | `-0.5144 + 0.9684*GR` | `-2.5621 + 1.3032*AMZ` | `3.4179` |
+| Fiction/Literature | Useful | `-1.2613 + 0.6734*GR` | `-2.6782 + 0.9047*AMZ` | `1.4726` |
+| Technical/Other | Enjoy | `-0.2208 + 0.7701*GR` | `5.1415 - 0.4445*AMZ` | `3.0457` |
+| Technical/Other | Useful | `-1.3841 + 0.9612*GR` | `5.3021 - 0.5533*AMZ` | `2.6903` |
+
+### How similar are the six ridge models?
+
+Short answer: **not very**, except that Goodreads is always positive.
+
+- Stable pattern across all 6: Goodreads is always positive and usually the biggest weight.
+- Unstable pattern across groups: Amazon is positive for Business/Histories/General and Fiction/Literature, but **negative** for Technical/Other for both targets.
+- Open Library direct weight is small or near zero in 4 of the 6 models; most of its effect is indirect through the imputation step.
+- Within a given group, enjoy/useful have very similar slope direction:
+  - Business cosine similarity on `(GR, AMZ)` = `0.968`
+  - Fiction cosine similarity = `1.000`
+  - Technical cosine similarity = `1.000`
+- Across groups, slope direction is only moderately aligned except for Fiction vs Technical, which is basically orthogonal:
+  - Enjoyment: Business vs Fiction `0.637`, Business vs Technical `0.815`, Fiction vs Technical `0.073`
+  - Usefulness: Business vs Fiction `0.813`, Business vs Technical `0.643`, Fiction vs Technical `0.076`
+
+Interpretation: there is **not** one universal ridge rule hiding underneath. There are really three group-specific rules, and the biggest disagreement is how much to trust Amazon relative to Goodreads.
+
+### Should the extension add log-count, date, or log-pages features?
+
+For this comparison I kept the current 3-group ridge recipe fixed and only added one extra feature family at a time on `golden_master_multi_source.csv`. For `date` I used `book_age` from `pub_year`, since future finish date is not knowable at scoring time.
+
+| Variant | Enjoy rho | Enjoy MAE | Useful rho | Useful MAE |
+|--------|-----------|-----------|------------|------------|
+| Current 3-rating group ridge | 0.292 | 0.702 | 0.459 | 0.620 |
+| + Goodreads log rating count | 0.332 | 0.672 | 0.506 | 0.613 |
+| + Goodreads log review count | 0.332 | 0.666 | 0.513 | 0.612 |
+| + book age | 0.305 | 0.710 | 0.468 | 0.612 |
+| + log pages | 0.290 | 0.703 | 0.461 | 0.616 |
+| + review-count + book-age + log-pages | **0.340** | **0.678** | **0.517** | **0.607** |
+
+Recommendation:
+- **Worth adding:** a Goodreads count feature. It gives the clearest consistent gain for both targets.
+- **Probably not worth adding alone:** `book_age`. Tiny effect.
+- **Not worth adding alone:** `log_pages`. Essentially no gain.
+- **If you want one minimal upgrade:** add only `log10(1 + Goodreads count)` and keep the rest of the ridge simple.
+- **If you want the best of these simple ridge variants:** add count + `book_age` + `log_pages`, but the incremental gain over count-alone is modest, especially for usefulness.
+
+## Extension-safe numeric model comparison and temporal CV
+
+I compared the exact requested extension-safe model families on the same `golden_master_multi_source.csv` frame using:
+- full `Holdout 2026`
+- leave-one-year-out CV aggregated over all predictions
+- leave-one-half-year-out CV aggregated over all predictions
+
+The compared models were:
+- old pooled ridge with category dummies + counts
+- current grouped ridge
+- grouped ridge + counts
+- grouped ridge + counts + book meta
+- richer RF extension-safe
+- richer GBM extension-safe
+
+I also included a fuller pooled ridge candidate with category dummies + counts + book meta.
+
+### Results summary
+
+#### Enjoyment
+
+| Model | Holdout R² | Holdout MAE | Holdout rho | Year agg R² | Halfyear agg R² |
+|------|------------|-------------|-------------|-------------|-----------------|
+| Grouped ridge + counts | -0.228 | 0.704 | 0.291 | 0.001 | 0.013 |
+| Current grouped ridge | -0.232 | 0.702 | 0.292 | **0.033** | **0.033** |
+| Grouped ridge + counts + book meta | -0.242 | 0.711 | 0.294 | -0.038 | -0.035 |
+| Old pooled ridge + counts | -0.251 | 0.697 | 0.294 | -0.005 | 0.000 |
+| Pooled full ridge | -0.260 | 0.700 | 0.288 | -0.019 | -0.015 |
+| RF extension-safe | -0.261 | **0.689** | 0.304 | 0.016 | 0.018 |
+| GBM extension-safe | -0.328 | 0.713 | **0.343** | -0.060 | -0.062 |
+
+#### Usefulness
+
+| Model | Holdout R² | Holdout MAE | Holdout rho | Year agg R² | Halfyear agg R² |
+|------|------------|-------------|-------------|-------------|-----------------|
+| GBM extension-safe | **0.039** | **0.578** | 0.462 | 0.100 | 0.097 |
+| Old pooled ridge + counts | 0.009 | 0.594 | 0.447 | 0.176 | 0.175 |
+| Pooled full ridge | 0.005 | 0.594 | 0.449 | **0.181** | **0.176** |
+| RF extension-safe | -0.015 | 0.601 | **0.477** | 0.136 | 0.143 |
+| Grouped ridge + counts | -0.068 | 0.636 | 0.468 | 0.123 | 0.159 |
+| Grouped ridge + counts + book meta | -0.071 | 0.637 | 0.464 | 0.109 | 0.130 |
+| Current grouped ridge | -0.088 | 0.620 | 0.459 | 0.147 | 0.148 |
+
+### Interpretation
+
+- For **numeric usefulness**, the current grouped ridge is no longer the best choice.
+- If you optimize for the single 2026 holdout, **GBM extension-safe** is best (`R² = 0.039`, `MAE = 0.578`).
+- If you optimize for more stable time-split generalization, the best linear option is the **pooled full ridge** and the very close simpler option is **old pooled ridge + counts**.
+- For **numeric enjoyment**, none of these models are genuinely good. Every candidate has negative holdout `R²`.
+- The least-bad enjoyment models depend on what you care about:
+  - **MAE:** RF extension-safe
+  - **Holdout R²:** grouped ridge + counts
+  - **Temporal stability:** current grouped ridge
+
+### Recommendation for the extension
+
+- Keep the existing grouped ridge for continuity and interpretability.
+- Add a second **Full Ridge** model for numeric prediction: pooled ridge with category dummies + GR/OL/AMZ + Goodreads/Amazon counts + `log_pages` + `book_age`.
+- For usefulness, if you want the best raw holdout numeric predictor, prefer the richer **GBM**.
+- For enjoyment, treat all numeric predictions as rough filtering signals rather than calibrated point estimates.
+
+This fuller pooled ridge is now exported in `chrome_extension/models.json` as:
+- `ridge_full_enjoy`
+- `ridge_full_useful`
+
+## Calibrated probability recommendation for the extension
+
+I ran a calibration audit using:
+- train-year out-of-fold predictions on finished-book training data
+- fixed calibration applied to the 2026 holdout
+- nested leave-one-year-out with calibration re-fit only on the outer-train slice
+
+Key files:
+- `ai_actions/probability_calibration_report.md`
+- `ai_actions/probability_calibration_summary.csv`
+- `ai_actions/probability_calibration_reliability.csv`
+- `ai_actions/probability_calibration_band_summary.csv`
+- full notes copied into `ai_actions/results_so_far_everything.txt`
+
+### Main recommendation
+
+If the extension needs **one output that maps to a decision**, the best current choice is:
+- **Primary output:** `P(avg_usefulness >= 2.0)`
+- **Model:** `gbm_extension_safe`
+
+Why:
+- **Holdout 2026:** `Brier = 0.201`, `AUC = 0.730`
+- **Nested year-LOO:** `Brier = 0.199`, `AUC = 0.719`
+
+This is not perfectly calibrated, but it is clearly better than:
+- enjoyment probabilities
+- raw score outputs
+- percentile remappings pretending to be confidence
+
+### Important caveat
+
+`P(avg_usefulness >= 2.0)` is **not** the same question as the old plots where:
+- x-axis = drop the bottom `X%` of books
+- y-axis = gain in average usefulness / enjoyment
+
+Those old plots were mostly testing **ranking / screening power**.
+This new audit is testing **absolute decision calibration**.
+
+So the fact that the old work often looked best around “drop the bottom 70-80%” does **not** mean the calibrated threshold should be near `0.7` or `0.8`.
+It just means the models may still be better at screening a large pool than at saying “this specific book clears an absolute bar.”
+
+### Practical interpretation
+
+Recommended UI:
+- `Chance this book will be useful: XX%`
+
+Suggested action mapping:
+- `< 20%`: `Probably skip`
+- `20% to < 40%`: `Low priority`
+- `40% to < 60%`: `Worth considering`
+- `>= 60%`: `Promising`
+
+Do **not** show:
+- enjoyment probabilities as the main number
+- score percentiles as if they were calibrated
+- `P(avg_usefulness >= 2.5)` as the main number
+- any `80% likely` or `high confidence` badge
+
+Why not the `80%` band:
+- on nested year-LOO for `P(avg_usefulness >= 2.0)`, the `~80%` bucket had only `n = 9` and realized at `0.444`
+- so it is too sparse / unstable to present as a strong claim
+
+### Plots to look at
+
+Absolute-bar calibration:
+- `plots/probability_calibration_holdout_2026_avg_usefulness_ge_2p0.png`
+- `plots/probability_calibration_loo_year_nested_avg_usefulness_ge_2p0.png`
+
+Ranking-style calibration:
+- `plots/probability_calibration_holdout_2026_avg_usefulness_top_10pct_within_year.png`
+- `plots/probability_calibration_holdout_2026_avg_usefulness_top_20pct_within_year.png`
+- `plots/probability_calibration_loo_year_nested_avg_usefulness_top_10pct_within_year.png`
+- `plots/probability_calibration_loo_year_nested_avg_usefulness_top_20pct_within_year.png`
+
+Enjoyment comparison:
+- `plots/probability_calibration_holdout_2026_avg_enjoyment_ge_3p5.png`
+
+### What this means
+
+- If the extension should answer “is this book likely useful in an absolute sense?”, use `P(avg_usefulness >= 2.0)`.
+- If the extension should mimic the old “screen out the bottom chunk” workflow, a better **secondary** output is `P(top 10% usefulness within year)` or another ranking-style standout signal.
+- The fiction concern is real: `avg_usefulness >= 2.0` is an absolute bar, not category-adjusted, so a fiction-heavy pool may look low even when the model is still ranking fiction books correctly within fiction.
+- So the cleanest current setup is:
+  - one main calibrated usefulness probability
+  - optionally one separate shortlist / standout signal for large-pool ranking
+
+### Predicted-score ridge threshold plots
+
+Added two new ridge-threshold plots with the x-axis as the predicted score cutoff:
+- `ai_actions/standardized_threshold_plots_fixed_predicted_all_data.png`
+- `ai_actions/standardized_threshold_plots_fixed_predicted_holdout.png`
+
+## Deep dive: what's actually true about model performance (2026-03-26)
+
+Comprehensive audit of all prediction pipelines — permutation tests, feature ablation, bootstrap coefficient stability, bias-corrected R², LOO-CV, and full code verification.
+
+Key files produced:
+- `plots/deep_dive_model_analysis.py` — the full analysis script
+- `plots/ablation_results.csv`
+- `plots/bootstrap_ridge_coefficients.csv`
+- `plots/bias_corrected_r2.csv`
+- `plots/loo_cv_ridge.csv`
+- `plots/holdout_pred_vs_actual.png` (updated with R² and MAE by category)
+- `plots/train_pred_vs_actual.png` (new)
+
+### Is rho=0.55 real?
+
+Yes. Permutation test (5000 shuffles) confirms:
+
+| Model | Target | Holdout rho | Permutation p | Scipy p |
+|-------|--------|-------------|---------------|---------|
+| RF | Usefulness | 0.552 | 0.0000 | 0.0000 |
+| GBM | Usefulness | 0.557 | 0.0000 | 0.0000 |
+| RF | Enjoyment | 0.238 | 0.0460 | 0.0504 |
+| GBM | Enjoyment | 0.080 | 0.5060 | 0.5151 |
+
+Usefulness ranking is highly significant. Enjoyment is borderline for RF, not significant for GBM.
+
+### But most of the signal is just category
+
+Feature ablation on RF usefulness (holdout):
+
+| Ablation | Holdout rho | Delta vs FULL |
+|----------|-------------|---------------|
+| FULL (all features) | 0.552 | baseline |
+| drop goodreads_rating | 0.579 | +0.027 (!) |
+| drop goodreads_log_count | 0.549 | -0.003 |
+| drop log_pages | 0.552 | +0.000 |
+| drop year_finished | 0.549 | -0.003 |
+| drop book_age | 0.536 | -0.016 |
+| GR features only (+ category) | 0.538 | -0.014 |
+| CATEGORY ONLY | 0.463 | -0.089 |
+
+Category alone gives rho=0.463 — that's 84% of the full model's 0.552. The models are primarily learning "technical/business books are more useful than fiction." Dropping GR rating actually *improves* RF usefulness slightly, suggesting it adds noise for this target.
+
+For enjoyment, category alone gives rho=-0.048 (useless). GR features are the entire signal (rho=0.238), but it's barely significant (p=0.05).
+
+### Ridge coefficient robustness (500 bootstraps)
+
+| Group | Feature | Full coef | 95% CI | Sign stability |
+|-------|---------|-----------|--------|----------------|
+| Business/Hist/General | GR | +0.636 | [+0.30, +0.95] | 99.8% |
+| Business/Hist/General | OL | +0.290 | [-0.15, +0.76] | 90.4% |
+| Business/Hist/General | AMZ | +0.069 | [-0.39, +0.53] | 58.0% |
+| Fiction/Literature | GR | +0.672 | [-0.31, +1.67] | 90.2% |
+| Fiction/Literature | AMZ | +0.932 | [+0.16, +1.83] | 98.8% |
+| Technical/Other | GR | +0.836 | [+0.18, +1.54] | 98.0% |
+| Technical/Other | AMZ | -0.455 | [-1.10, +0.12] | 93.4% |
+
+Goodreads is the only consistently stable positive coefficient across all groups. OpenLibrary is noise (sign stability 52-90%). Amazon is group-dependent — positive for Fiction (99%), negative for Technical (93%), coin-flip for Business (58%).
+
+Critically, **Fiction/Literature Ridge is systematically anti-predictive on holdout**: across 500 bootstrap resamples, P(holdout rho > 0) = 0.0% for enjoyment, 1.4% for usefulness. The fiction Ridge model *never* produces positive holdout correlation.
+
+### The negative R² is mostly distribution shift
+
+After bias-correcting (subtracting mean over/underprediction) for Ridge:
+
+| Group/Target | n | R² raw | R² corrected | Pearson r | Bias |
+|---|---|---|---|---|---|
+| Business enjoy | 48 | -0.15 | **+0.17** | 0.41 | +0.39 |
+| Business useful | 48 | -0.07 | **+0.03** | 0.19 | +0.28 |
+| Fiction enjoy | 15 | -0.66 | -0.37 | -0.38 | -0.24 |
+| Fiction useful | 15 | -1.11 | -0.42 | -0.22 | -0.51 |
+| Technical enjoy | 5 | -0.84 | **+0.17** | 0.44 | +0.47 |
+| Technical useful | 5 | -35.2 | -0.11 | 0.50 | +1.11 |
+
+Business/Hist/General has real signal (Pearson r=0.41 for enjoyment). The negative R² comes from the holdout mean being 0.39 points lower than training — pure distribution shift. Technical has promising correlation (r=0.44-0.50) but only n=5 so unreliable. Fiction is genuinely anti-predictive even after bias correction.
+
+### LOO-CV reveals per-group Ridge fragility
+
+| Group/Target | n | In-sample rho | LOO-CV rho | Overfit gap |
+|---|---|---|---|---|
+| Business enjoy | 114 | 0.252 | 0.116 | 0.136 |
+| Business useful | 114 | 0.276 | 0.090 | 0.187 |
+| Fiction enjoy | 71 | 0.379 | 0.294 | 0.085 |
+| Fiction useful | 71 | 0.214 | 0.112 | 0.102 |
+| Technical enjoy | 22 | 0.401 | **-0.026** | **0.428** |
+| Technical useful | 22 | 0.428 | **-0.292** | **0.720** |
+
+Technical_Other (n=22) completely overfits — LOO-CV shows zero or negative signal. Even Business Ridge LOO-CV rho is only 0.09-0.12. The honest in-sample Ridge performance with 3 correlated rating features is very weak.
+
+### Training vs holdout overfit comparison
+
+| | Ridge train R² | Ridge holdout R² | RF train R² | RF holdout R² | GBM train R² | GBM holdout R² |
+|---|---|---|---|---|---|---|
+| Enjoyment | 0.13 | -0.23 | 0.41 | -0.21 | 0.62 | -0.61 |
+| Usefulness | 0.23 | -0.09 | 0.53 | 0.01 | 0.73 | 0.13 |
+
+GBM overfits the most (train R²=0.73 → holdout R²=0.13 for usefulness). Ridge overfits the least but is just weak. RF is middle ground — the only model with non-negative holdout R² for usefulness.
+
+### Code verification: no bugs found
+
+- Ridge pipeline: manual predictions match sklearn `predict()`, no NaNs after imputation, no out-of-range values
+- Tree pipeline: data counts match (207 train, 68 holdout), feature specs correct
+- 2 holdout title format mismatches between Ridge and Tree pipelines (truncated vs full titles): cosmetic only, doesn't affect predictions
+- All rho numbers in Section 15 are exactly reproducible
+- One real code bug in `new_books_to_rate_analysis.py`: `requested_utility()` uses `base^(r-1)-1` with base=1.3 for enjoyment, while `goodreads_followup_analysis.py` uses `(r-1)^1.3` (power transform). Different functions. This only affects utility-weighted policy evaluation, not any model predictions or rho/R²/MAE numbers reported anywhere in this document.
+
+### Bottom line
+
+- **Usefulness ranking works** because "category predicts usefulness" is a strong, robust signal (rho=0.46 from category alone). External ratings add ~0.09 rho on top.
+- **GR rating adds marginal signal** beyond category for usefulness. For enjoyment, GR is the entire signal (~0.25 rho) but it's barely significant.
+- **Ridge with 3 correlated ratings** per group is too weak (LOO-CV R²≈0). The features are too correlated to learn separate slopes reliably.
+- **Fiction models are anti-predictive** on holdout — external ratings correlate negatively with personal fiction preferences. This is consistent across all bootstrap resamples.
+- **The old pooled Ridge** (Section 15 table, rho=0.521 useful) was a different model with more features (log counts + category dummies). The per-group switch traded some usefulness performance for interpretability and group-specific intercepts.
+- **Technical_Other is too small** (n=22 train, n=5 holdout) for a separate model — LOO-CV shows it completely overfits. Should use pooled fallback.
+- **Negative holdout R² is mostly distribution shift**, not garbage models. After bias correction, Business/Hist/General Ridge has R²=+0.17 for enjoyment (Pearson r=0.41).
+
+Main read:
+- enjoyment is stable: all-data `rho = 0.290` vs holdout `rho = 0.292`
+- usefulness is somewhat optimistic in-sample: all-data `rho = 0.551` vs holdout `rho = 0.459`
+- dropping `50%` to `70%` still looks reasonable on holdout, but `80%` to `90%` dropped for usefulness is too optimistic in-sample
+
+More detail, filenames, and line references are in `ai_actions/results_so_far_everything.txt`.
+
+
+3 models each pretty simple
+/Users/clarkbenham/side_projects/ai_books_tracking/ai_actions/combined_target_threshold_holdout.png
+  - Business (n=48): Solid upward trend — dropping the bottom 50-70% gains ~0.2-0.4 rating points on combined, enjoyment, and usefulness. Bootstrap bands stay above zero.
+  - Fiction (n=15): Flat or negative. The model can't rank Fiction books on holdout.
+  - Technical (n=5): Steep gains but bootstrap bands are massive with n=5.
+so varies a lot by type in how predictable it is.
+
+high rho is mostly just categories having different means
+
+ 1. GBM BASE_PLUS_AMZN_NO_BOOK_AGE wins at holdout rho=0.524, usefulness rho=0.603. Dropping book_age helps (0.524 vs 0.484).
+  2. Adding goodreads_rating consistently hurts GBM holdout (0.471 vs 0.484). Same pattern as the per-group Ridge analysis.
+  3. FULL model is worst for GBM holdout (0.416) despite best train rho (0.858). Classic overfit — train rho 0.86 vs CV 0.39.
+  4. Ridge GR_AMZ_RATINGS_ONLY has the best CV-5 (0.413) and nearly matches holdout (0.413) — most honest model. But GBM with amazon metadata beats it on holdout because the nonlinear model extracts signal from amazon_log_count and
+  year_finished that Ridge can't.
+
+Goodreads actually harms performance on holdout. Coef is still positive but on both codex and claude it reduces performance when it's removed.
+
+
+
+# Best I could do
+ai_books_tracking/ai_actions/oracle_plots/1st_rating_predicts_2nd_rating_all_data.png
+ploting rating 1 against rating 2 gets like a point, 1.25pts per category keeping 30ish of books.
+With perfect on all data it's 1.5+, but all the books are there and a question of how many I'd want to keep reading.
+With 0.3 it's ~1.5 ai_books_tracking/ai_actions/oracle_plots/oracle_threshold_plots_0.3_all_data.png only dropping 60-70% of books.
+ai_books_tracking/ai_actions/oracle_plots/oracle_threshold_plots_0.9_all_data.png looks better than the other plots I have: 0.5 enjoyment gains and 1pt+usefulness
+So model holdout is a big problem.
+
+Using uniform noise [-0.9,0.9] ai_books_tracking/ai_actions/human_limits_plots/human_limit_plots_noise_0.9_holdout.png
+gives 1pt enjoyment, 1.5 for usefulness.
+When I combine them weighted I get 1-1.25pts bettter if drop 75-80%.
+
+ai_books_tracking/ai_actions/human_limits_plots/human_limit_combined_plots_all_data.png
+So gains of 0.5 rating point while dropping 60-80% would be quite good.
+
+doubling my own rating error brings limits to 0.5-0.75 except for computer science (+1.5) and general reading (1-1.2).
+ai_books_tracking/ai_actions/human_limits_plots/human_limit_combined_doubled_error_plots_all_data.png
+Thats because usefulness is more predictable/consistent and those categories have more usefulness variance
+ai_books_tracking/ai_actions/human_limits_plots/human_limit_separate_doubled_error_plots_all_data.png
+
+MAE is 0.45-0.5 for enjoyment and 0.33-0.4 for usefulness across categories. Except for fiction which is 0.37 and 0.14.
+So I'm actually more consistent on fiction even though it's hard to predict out of sample
+
+
+
+
+
+
