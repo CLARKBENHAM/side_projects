@@ -4070,3 +4070,279 @@ Output CSVs:
   ai_actions/validation_book_selection_15_with_started.csv
   ai_actions/validation_book_selection_20_with_started.csv
   ai_actions/validation_book_selection_10_unstarted.csv
+
+
+===============================================================================
+PROBABILITY CALIBRATION AUDIT FOR EXTENSION OUTPUTS
+2026-03-24
+===============================================================================
+
+Question:
+  If the extension needs one number that maps directly to a decision, what
+  should that number be?
+
+Important distinction:
+  Old "drop the bottom X%" plots measured ranking/screening power.
+  This audit measures calibration for absolute or top-k events.
+  Those are related but not the same.
+
+Evaluation design:
+  - train_oof_year:
+      leave-one-year-out predictions on non-holdout finished books
+  - holdout_2026:
+      fit calibrator on train_oof_year, apply to 2026 holdout
+  - loo_year_nested:
+      outer leave-one-year-out across all labeled books, with inner year-OOF
+      calibration fit only on the outer-train slice
+
+Files:
+  ai_actions/probability_calibration_report.md
+  ai_actions/probability_calibration_summary.csv
+  ai_actions/probability_calibration_reliability.csv
+  ai_actions/probability_calibration_band_summary.csv
+  ai_actions/probability_calibration_predictions.csv
+
+Plots:
+  plots/probability_calibration_holdout_2026_avg_usefulness_ge_2p0.png
+  plots/probability_calibration_loo_year_nested_avg_usefulness_ge_2p0.png
+  plots/probability_calibration_holdout_2026_avg_usefulness_top_10pct_within_year.png
+  plots/probability_calibration_holdout_2026_avg_usefulness_top_20pct_within_year.png
+  plots/probability_calibration_loo_year_nested_avg_usefulness_top_10pct_within_year.png
+  plots/probability_calibration_loo_year_nested_avg_usefulness_top_20pct_within_year.png
+  plots/probability_calibration_holdout_2026_avg_enjoyment_ge_3p5.png
+
+-------------------------------------------------------------------------------
+MAIN RECOMMENDATION
+-------------------------------------------------------------------------------
+
+Use as the primary extension output:
+  P(avg_usefulness >= 2.0)
+  model = gbm_extension_safe
+
+Why:
+  Holdout 2026:
+    Brier = 0.201
+    AUC   = 0.730
+  Nested year-LOO:
+    Brier = 0.199
+    AUC   = 0.719
+
+This is the cleanest target/model pair in the audit.
+
+Do NOT use as the primary extension output:
+  - enjoyment probabilities
+  - raw scores
+  - percentile remappings presented as calibrated confidence
+  - P(avg_usefulness >= 2.5)
+  - any "80% likely" or "high confidence" badge
+
+Recommended UI mapping:
+  < 20%           Probably skip
+  20% to < 40%   Low priority
+  40% to < 60%   Worth considering
+  >= 60%         Promising
+
+-------------------------------------------------------------------------------
+KEY HOLDOUT RESULTS
+-------------------------------------------------------------------------------
+
+avg_usefulness, event = ge_2p0, holdout_2026
+  gbm_extension_safe            Brier 0.201  AUC 0.730  mean_pred 0.421  event_rate 0.338
+  rf_extension_safe             Brier 0.206  AUC 0.685  mean_pred 0.404  event_rate 0.338
+  current_grouped_ridge         Brier 0.227  AUC 0.672  mean_pred 0.442  event_rate 0.338
+  pooled_full_ridge             Brier 0.230  AUC 0.595  mean_pred 0.418  event_rate 0.338
+  old_pooled_ridge_cat_counts   Brier 0.231  AUC 0.614  mean_pred 0.432  event_rate 0.338
+  grouped_ridge_counts_bookmeta Brier 0.232  AUC 0.613  mean_pred 0.444  event_rate 0.338
+  grouped_ridge_counts          Brier 0.233  AUC 0.620  mean_pred 0.442  event_rate 0.338
+
+avg_usefulness, event = ge_2p5, holdout_2026
+  rf_extension_safe             Brier 0.131  AUC 0.645  mean_pred 0.247  event_rate 0.132
+  gbm_extension_safe            Brier 0.132  AUC 0.699  mean_pred 0.266  event_rate 0.132
+  old_pooled_ridge_cat_counts   Brier 0.133  AUC 0.568  mean_pred 0.253  event_rate 0.132
+  pooled_full_ridge             Brier 0.138  AUC 0.509  mean_pred 0.255  event_rate 0.132
+  grouped_ridge_counts_bookmeta Brier 0.139  AUC 0.586  mean_pred 0.274  event_rate 0.132
+  grouped_ridge_counts          Brier 0.139  AUC 0.608  mean_pred 0.281  event_rate 0.132
+  current_grouped_ridge         Brier 0.143  AUC 0.587  mean_pred 0.276  event_rate 0.132
+
+avg_usefulness, event = top_10pct_within_year, holdout_2026
+  gbm_extension_safe            Brier 0.082  AUC 0.784  mean_pred 0.171  event_rate 0.088
+  pooled_full_ridge             Brier 0.083  AUC 0.692  mean_pred 0.157  event_rate 0.088
+  old_pooled_ridge_cat_counts   Brier 0.085  AUC 0.656  mean_pred 0.159  event_rate 0.088
+  rf_extension_safe             Brier 0.086  AUC 0.708  mean_pred 0.156  event_rate 0.088
+  current_grouped_ridge         Brier 0.086  AUC 0.712  mean_pred 0.174  event_rate 0.088
+  grouped_ridge_counts_bookmeta Brier 0.087  AUC 0.692  mean_pred 0.176  event_rate 0.088
+  grouped_ridge_counts          Brier 0.088  AUC 0.722  mean_pred 0.151  event_rate 0.088
+
+avg_usefulness, event = top_20pct_within_year, holdout_2026
+  grouped_ridge_counts          Brier 0.163  AUC 0.617  mean_pred 0.275  event_rate 0.191
+  current_grouped_ridge         Brier 0.163  AUC 0.646  mean_pred 0.284  event_rate 0.191
+  grouped_ridge_counts_bookmeta Brier 0.165  AUC 0.608  mean_pred 0.276  event_rate 0.191
+  rf_extension_safe             Brier 0.166  AUC 0.608  mean_pred 0.279  event_rate 0.191
+  gbm_extension_safe            Brier 0.167  AUC 0.621  mean_pred 0.281  event_rate 0.191
+  pooled_full_ridge             Brier 0.170  AUC 0.561  mean_pred 0.277  event_rate 0.191
+  old_pooled_ridge_cat_counts   Brier 0.172  AUC 0.554  mean_pred 0.275  event_rate 0.191
+
+avg_enjoyment, event = ge_3p5, holdout_2026
+  grouped_ridge_counts_bookmeta Brier 0.254  AUC 0.601  mean_pred 0.524  event_rate 0.309
+  rf_extension_safe             Brier 0.257  AUC 0.652  mean_pred 0.534  event_rate 0.309
+  pooled_full_ridge             Brier 0.257  AUC 0.620  mean_pred 0.539  event_rate 0.309
+  grouped_ridge_counts          Brier 0.258  AUC 0.599  mean_pred 0.525  event_rate 0.309
+  old_pooled_ridge_cat_counts   Brier 0.260  AUC 0.682  mean_pred 0.542  event_rate 0.309
+  gbm_extension_safe            Brier 0.261  AUC 0.614  mean_pred 0.536  event_rate 0.309
+  current_grouped_ridge         Brier 0.267  AUC 0.634  mean_pred 0.562  event_rate 0.309
+
+Interpretation:
+  enjoyment probabilities are systematically too high and are not good enough
+  to be the main decision-facing extension number.
+
+-------------------------------------------------------------------------------
+BAND CHECKS
+-------------------------------------------------------------------------------
+
+Chosen primary output:
+  avg_usefulness, event = ge_2p0, model = gbm_extension_safe
+
+Holdout 2026:
+  25% band: predicted 0.285, actual 0.118, n = 34
+  55% band: predicted 0.558, actual 0.559, n = 34
+
+Nested year-LOO:
+  25% band: predicted 0.203, actual 0.181, n = 144
+  55% band: predicted 0.509, actual 0.545, n = 121
+  80% band: predicted 0.738, actual 0.444, n = 9
+
+Interpretation:
+  - 55% band is the most defensible
+  - 25% band is directionally useful
+  - 80% band is too sparse and unstable to show as a strong-confidence claim
+
+-------------------------------------------------------------------------------
+HOW THIS RELATES TO THE OLD "DROP BOTTOM X%" PLOTS
+-------------------------------------------------------------------------------
+
+The old plots asked:
+  "If we discard the bottom X% by model rank, how much does average usefulness
+   / enjoyment improve among the kept books?"
+
+That is a ranking/screening question.
+
+This new audit asks:
+  "Can we show one number that means something like 'chance this book clears a
+   usefulness bar'?"
+
+That is a calibration question.
+
+So these two can both be true at once:
+  - the model is useful for screening, and the biggest gains come from removing
+    a large bottom chunk
+  - the model is only moderately good at calibrated absolute probabilities
+
+This is why:
+  - P(avg_usefulness >= 2.0) is recommended as the best current *single number*
+  - P(top 10% usefulness within year) is still a good *secondary shortlist*
+    signal if the goal is to triage very large pools
+
+Category caveat:
+  avg_usefulness >= 2.0 is an absolute bar, not category-adjusted.
+  So a fiction-heavy pool can look "low" in absolute probability even if the
+  model still ranks fiction books correctly relative to other fiction books.
+
+-------------------------------------------------------------------------------
+2026-03-25 PREDICTED-SCORE RIDGE THRESHOLD PLOTS
+-------------------------------------------------------------------------------
+
+New outputs:
+  ai_books_tracking/ai_actions/standardized_threshold_plots_fixed_predicted_all_data.png
+  ai_books_tracking/ai_actions/standardized_threshold_plots_fixed_predicted_holdout.png
+  ai_books_tracking/ai_actions/predicted_score_accuracy_summary.csv
+  ai_books_tracking/ai_actions/predicted_score_drop_gain_differences.csv
+  ai_books_tracking/ai_actions/predicted_score_model_coef_differences.csv
+  ai_books_tracking/ai_actions/predicted_score_threshold_curves_all_data.csv
+  ai_books_tracking/ai_actions/predicted_score_threshold_curves_holdout.csv
+  ai_books_tracking/ai_actions/predicted_score_threshold_summary.md
+
+Main implementation:
+  ai_books_tracking/scripts/temp/predicted_score_threshold_analysis.py
+    lines 77-80   split train vs Holdout 2026
+    lines 158-212 fit per-group Ridge models on imputed GR / OL / Amazon ratings
+    lines 215-241 score evaluation frames with those fitted models
+    lines 244-362 bootstrap train-fit coefficients and holdout rho
+    lines 365-421 bootstrap fixed-drop gain uncertainty
+    lines 424-467 build gain-vs-predicted-cutoff curves
+    lines 476-501 choose in-sample / reasonable / 1-SE cutoff markers
+    lines 534-620 draw the predicted-score threshold panels
+    lines 623-662 write the all-data and holdout plots
+    lines 682-704 build the coefficient difference table
+    lines 707-778 merge all-data / train / holdout accuracy with bootstrap holdout bounds
+    lines 781-817 build all-data vs holdout gain-difference table
+    lines 820-867 write the markdown summary
+    lines 870-942 run the full pipeline and save outputs
+
+Focused tests:
+  ai_books_tracking/tests/test_predicted_score_threshold_analysis.py
+    lines 25-37   split uses only source == Holdout 2026
+    lines 40-59   cutoff curve uses predicted cutoff and gain correctly
+    lines 62-78   1-SE cutoff prefers the lower reasonable cutoff
+    lines 81-121  coefficient diff table correctly flags bootstrap inclusion
+    lines 124-161 drop-gain table correctly checks all-data vs holdout band
+
+Overall accuracy:
+  ai_books_tracking/ai_actions/predicted_score_accuracy_summary.csv
+    line 8  overall enjoyment:
+            rho all-data = 0.290331
+            rho holdout  = 0.291613
+            bootstrap holdout 95% = [0.036445, 0.395125]
+            gap all-data - holdout = -0.001282
+            interpretation: essentially no degradation
+    line 9  overall usefulness:
+            rho all-data = 0.551260
+            rho holdout  = 0.459407
+            bootstrap holdout 95% = [0.312210, 0.523051]
+            gap all-data - holdout = +0.091853
+            interpretation: clear in-sample optimism for usefulness
+
+How close coefficients are:
+  ai_books_tracking/ai_actions/predicted_score_model_coef_differences.csv
+    lines 2-25  all coefficient comparisons
+    every row has all_data_within_train_bootstrap = True
+    biggest visible shifts:
+      line 8  Fiction_Literature enjoyment intercept:
+              all-data -1.280206 vs train-only -3.382612, delta +2.102406
+      line 20 Fiction_Literature usefulness intercept:
+              all-data -2.117289 vs train-only -3.244306, delta +1.127017
+      line 2  Business_Histories_General enjoyment Amazon coef:
+              all-data 0.246893 vs train-only 0.069093, delta +0.177800
+      line 14 Business_Histories_General usefulness Amazon coef:
+              all-data 0.386886 vs train-only 0.243616, delta +0.143270
+    interpretation:
+      coefficients move, but none moved outside the train-only bootstrap interval
+
+Difference in gain if dropping X% of books:
+  ai_books_tracking/ai_actions/predicted_score_drop_gain_differences.csv
+    enjoyment overall rows:
+      line 88  50% dropped: all-data +0.228953 vs holdout +0.128676, delta +0.100276, in holdout 10-90 band = True
+      line 90  60% dropped: all-data +0.243182 vs holdout +0.163866, delta +0.079316, in band = True
+      line 92  70% dropped: all-data +0.296331 vs holdout +0.125175, delta +0.171156, in band = False
+      line 94  80% dropped: all-data +0.227273 vs holdout +0.083508, delta +0.143764, in band = True
+      line 96  90% dropped: all-data +0.289123 vs holdout +0.315651, delta -0.026528, in band = True
+    usefulness overall rows:
+      line 107 50% dropped: all-data +0.347121 vs holdout +0.295956, delta +0.051165, in band = True
+      line 109 60% dropped: all-data +0.465682 vs holdout +0.312763, delta +0.152919, in band = False
+      line 111 70% dropped: all-data +0.505756 vs holdout +0.425858, delta +0.079898, in band = True
+      line 113 80% dropped: all-data +0.575909 vs holdout +0.134191, delta +0.441718, in band = False
+      line 115 90% dropped: all-data +0.716169 vs holdout +0.116334, delta +0.599835, in band = False
+    interpretation:
+      enjoyment is fairly stable between all-data and holdout
+      usefulness is still positive on holdout, but 80-90% dropped is substantially overstated in-sample
+
+Short markdown summary:
+  ai_books_tracking/ai_actions/predicted_score_threshold_summary.md
+    lines 7-9   overall accuracy summary
+    lines 11-21 fixed-drop gain comparison summary
+
+Bottom line:
+  predicted-score thresholds look valid as a way to restate the Ridge model in
+  the same visual language as the old threshold plots
+  enjoyment generalizes about as well as the full-data view suggests
+  usefulness keeps real signal on holdout, but aggressive filtering is notably
+  more optimistic in-sample than on holdout
