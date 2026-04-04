@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quit Books: Optimize Your Reading Utility</title>
+    <!-- SEO meta tags -->
+    <meta name="description" content="Upload your reading history CSV to see how your enjoyment increases if you drop the worst books. Advanced predictive models available.">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="ambient-background"></div>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="gradient-text">When to Quit Books</h1>
+            <p class="subtitle">Upload your reading history to see how filtering books before reading could improve quality.</p>
+            <a href="https://clarkbenham.github.io/posts/quit-books/" target="_blank" class="btn btn-primary">Read the Research</a>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Upload Section -->
+        <section class="card upload-card" id="upload-zone" aria-labelledby="upload-heading">
+            <div class="drop-zone" id="drop-area" role="button" tabindex="0"
+                 aria-label="Drag and drop CSV file here or click to browse">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="upload-icon" aria-hidden="true">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <h2 id="upload-heading">Upload your Data</h2>
+                <p>Drag & Drop your book ratings CSV here.</p>
+                <div class="column-info small-text text-muted">
+                    <p><strong>Required:</strong> <code>avg_enjoyment</code> or <code>avg_usefulness</code> (your 1-5 ratings), plus at least one of <code>goodreads_rating</code> or <code>amazon_rating</code></p>
+                    <p><strong>Optional (enables more models):</strong> <code>goodreads_rating_count</code>, <code>amazon_review_count_consensus</code>, <code>page_count</code>, <code>pub_year</code>, <code>Bookshelf</code> (category)</p>
+                    <p class="text-muted" style="font-size:0.78rem;">Ridge models need only ratings. RF/GBM additionally use page count, year, and review counts.</p>
+                </div>
+                <input type="file" id="csv-file" accept=".csv" class="hidden-input" aria-label="Upload CSV file" />
+                <label for="csv-file" class="btn btn-secondary">Browse Files</label>
+            </div>
+            <div id="file-error" class="error-msg hidden" role="alert" aria-live="polite"></div>
+        </section>
+
+        <!-- Column Mapping Section -->
+        <section class="card glass-card hidden" id="mapper-zone" aria-labelledby="mapper-heading">
+            <h2 id="mapper-heading" class="chart-title">Map Your CSV Columns</h2>
+            <p class="chart-desc">Your CSV has <strong id="total-rows">0</strong> rows. Map your column names to the expected fields below. At least one target (enjoyment or usefulness) and one rating source (Goodreads or Amazon) are required.</p>
+
+            <div class="mapper-grid">
+                <div class="mapper-section">
+                    <h3 class="mapper-section-title">Target Columns (at least one required)</h3>
+                    <div class="mapper-row">
+                        <label for="map-enjoyment" class="mapper-label">Enjoyment Rating (1-5)</label>
+                        <select id="map-enjoyment" class="mapper-select"></select>
+                    </div>
+                    <div class="mapper-row">
+                        <label for="map-usefulness" class="mapper-label">Usefulness Rating (1-5)</label>
+                        <select id="map-usefulness" class="mapper-select"></select>
+                    </div>
+                </div>
+
+                <div class="mapper-section">
+                    <h3 class="mapper-section-title">Feature Columns (at least one rating required)</h3>
+                    <div class="mapper-row">
+                        <label for="map-gr-rating" class="mapper-label">Goodreads Rating</label>
+                        <select id="map-gr-rating" class="mapper-select"></select>
+                    </div>
+                    <div class="mapper-row">
+                        <label for="map-amz-rating" class="mapper-label">Amazon Rating</label>
+                        <select id="map-amz-rating" class="mapper-select"></select>
+                    </div>
+                    <div class="mapper-row">
+                        <label for="map-gr-count" class="mapper-label">Goodreads Rating Count <span class="mapper-optional">(optional)</span></label>
+                        <select id="map-gr-count" class="mapper-select"></select>
+                    </div>
+                    <div class="mapper-row">
+                        <label for="map-amz-count" class="mapper-label">Amazon Review Count <span class="mapper-optional">(optional)</span></label>
+                        <select id="map-amz-count" class="mapper-select"></select>
+                    </div>
+                    <div class="mapper-row">
+                        <label for="map-page-count" class="mapper-label">Page Count <span class="mapper-optional">(optional)</span></label>
+                        <select id="map-page-count" class="mapper-select"></select>
+                    </div>
+                    <div class="mapper-row">
+                        <label for="map-pub-year" class="mapper-label">Publication Year <span class="mapper-optional">(optional)</span></label>
+                        <select id="map-pub-year" class="mapper-select"></select>
+                    </div>
+                </div>
+
+                <div class="mapper-section">
+                    <h3 class="mapper-section-title">Metadata Columns (all optional)</h3>
+                    <div class="mapper-row">
+                        <label for="map-category" class="mapper-label">Category/Genre <span class="mapper-optional">(optional)</span></label>
+                        <select id="map-category" class="mapper-select"></select>
+                    </div>
+                    <div class="mapper-row">
+                        <label for="map-source" class="mapper-label">Source/Holdout Split <span class="mapper-optional">(optional)</span></label>
+                        <select id="map-source" class="mapper-select"></select>
+                    </div>
+                    <div class="mapper-row">
+                        <label for="map-title" class="mapper-label">Book Title <span class="mapper-optional">(optional)</span></label>
+                        <select id="map-title" class="mapper-select"></select>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="btn btn-primary" onclick="handleAnalyzeClick()">Analyze Data</button>
+            </div>
+        </section>
+
+        <!-- Loading State -->
+        <div id="loading" class="hidden loading-state" role="status" aria-live="polite">
+            <div class="spinner" aria-hidden="true"></div>
+            <p>Loading ML models & simulating drop policies...</p>
+        </div>
+
+        <!-- Results Section -->
+        <section id="results" class="results-section hidden" aria-labelledby="results-heading">
+            <h2 id="results-heading" class="sr-only">Analysis Results</h2>
+            <div class="metrics-grid" role="region" aria-label="Summary Statistics">
+                <div class="metric-card glass">
+                    <div class="metric-label">Books Analyzed</div>
+                    <div class="metric-value font-outfit" id="total-books" aria-label="Total books analyzed">0</div>
+                </div>
+                <div class="metric-card glass">
+                    <div class="metric-label">Baseline Enjoyment</div>
+                    <div class="metric-value font-outfit" id="base-enjoy" aria-label="Baseline enjoyment rating">0.00</div>
+                    <div class="metric-sublabel">out of 5.0</div>
+                </div>
+                <div class="metric-card glass">
+                    <div class="metric-label">Baseline Usefulness</div>
+                    <div class="metric-value font-outfit" id="base-useful" aria-label="Baseline usefulness rating">0.00</div>
+                    <div class="metric-sublabel">out of 5.0</div>
+                </div>
+            </div>
+
+            <div id="subset-toggle" class="subset-toggle hidden" role="group" aria-label="Data subset selection">
+                <button class="toggle-btn active" data-subset="all">All Data — In-Sample</button>
+                <button class="toggle-btn" data-subset="holdout">Holdout — Out-of-Sample</button>
+            </div>
+
+            <div class="weight-slider-section glass-card" id="weight-controls">
+                <h3 class="chart-title" style="margin-bottom: 0.5rem; text-align: center;">Target Optimization Tradeoff</h3>
+                <div class="slider-container">
+                    <span class="slider-label">Usefulness</span>
+                    <input type="range" id="weight-slider" class="weight-slider" min="0" max="1" step="0.05" value="0.5" aria-label="Enjoyment vs Usefulness weighting">
+                    <span class="slider-label">Enjoyment</span>
+                </div>
+                <div class="weight-display" id="weight-display">50% Enjoyment | 50% Usefulness</div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-wrapper glass-card">
+                    <h3 class="chart-title">Enjoyment Gain by Drop %</h3>
+                    <p class="chart-desc">Expected rating gain if you drop the bottom X% of books according to each strategy. <strong>Grey bands show 80% CI from Monte Carlo simulation (500 iterations)</strong>: we add Gaussian noise (MAE 0.46 for enjoyment, 0.34 for usefulness) to your ratings to simulate measurement error, then measure how much the Oracle's sort order degrades. This shows the uncertainty in gains due to rating noise.</p>
+                    <div class="chart-container">
+                        <canvas id="enjoyChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-wrapper glass-card">
+                    <h3 class="chart-title">Usefulness Gain by Drop %</h3>
+                    <p class="chart-desc">Expected rating gain if you drop the bottom X% of books according to each strategy. <strong>Grey bands show 80% CI from Monte Carlo simulation (500 iterations)</strong>: we add Gaussian noise (MAE 0.46 for enjoyment, 0.34 for usefulness) to your ratings to simulate measurement error, then measure how much the Oracle's sort order degrades. This shows the uncertainty in gains due to rating noise.</p>
+                    <div class="chart-container">
+                        <canvas id="usefulChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-wrapper glass-card">
+                    <h3 class="chart-title">Enjoyment: Bootstrap Uncertainty</h3>
+                    <p class="chart-desc"><strong>Bootstrap resampling (2,000 iterations)</strong>: we sample your N books with replacement, re-sort by predicted score, and compute gain curves. The 80% CI shows sampling uncertainty: would a different set of N books give similar results?</p>
+                    <div class="chart-container">
+                        <canvas id="enjoyBootstrapChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-wrapper glass-card">
+                    <h3 class="chart-title">Usefulness: Bootstrap Uncertainty</h3>
+                    <p class="chart-desc"><strong>Bootstrap resampling (2,000 iterations)</strong>: we sample your N books with replacement, re-sort by predicted score, and compute gain curves. The 80% CI shows sampling uncertainty: would a different set of N books give similar results?</p>
+                    <div class="chart-container">
+                        <canvas id="usefulBootstrapChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <details class="glass-card methodology-section">
+                <summary class="chart-title" style="cursor:pointer; padding: 1rem;">How uncertainty is calculated</summary>
+                <div style="padding: 0 1.5rem 1.5rem;">
+                    <p class="chart-desc"><strong>Monte Carlo noise bands</strong> (grey, top charts): Simulates what happens if your 1-5 ratings have measurement error. The Oracle's sort order degrades because you can't perfectly know which books you'd rate highest. ML models are also affected because the "true" labels are noisy.</p>
+                    <p class="chart-desc"><strong>Bootstrap bands</strong> (colored, bottom charts): Simulates sampling uncertainty. If you had a different set of N books from the same distribution, would you see the same gain curve?</p>
+                    <p class="chart-desc"><strong>Interpretation</strong>: If both bands are tight, the gain is reliable. If bootstrap bands are wide but rating-noise bands are tight, you need more books. If rating-noise bands dominate, the gain is real but your ratings are noisy.</p>
+                </div>
+            </details>
+
+            <!-- Books Dropped Section -->
+            <div class="dropped-books-section" id="dropped-books-container">
+                <div class="dropped-header">
+                    <h3 class="chart-title" style="margin-bottom: 0;">Explore Individual Books</h3>
+                    <div class="header-controls">
+                        <div class="drop-dropdown-wrapper">
+                            <span>Drop Threshold</span>
+                            <select id="drop-percent-select" class="drop-select" aria-label="Drop Percentage">
+                                <option value="0">0%</option>
+                                <option value="10">10%</option>
+                                <option value="20">20%</option>
+                                <option value="30">30%</option>
+                                <option value="40">40%</option>
+                                <option value="50" selected>50%</option>
+                                <option value="60">60%</option>
+                                <option value="70">70%</option>
+                                <option value="80">80%</option>
+                                <option value="90">90%</option>
+                            </select>
+                        </div>
+                        <div class="drop-dropdown-wrapper">
+                            <span>Scoring Model</span>
+                            <select id="model-select" class="drop-select" aria-label="Model Selection">
+                                <option value="oracle" selected>Oracle (Perfect Sort)</option>
+                                <option value="ridge">Ridge Regression</option>
+                                <option value="rf">Random Forest</option>
+                                <option value="heuristic">Simple Heuristic</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <p class="chart-desc">All evaluated books. Rows that fall below the Drop Threshold according to the chosen Scoring Model are struck out. The <b>Weighted Prediction</b> is the final score the model assigned to the book (blending Enjoyment and Usefulness predictions per your slider).</p>
+                
+                <div class="table-container">
+                    <table class="dropped-books-table">
+                        <thead>
+                            <tr>
+                                <th data-sort="title" class="sortable">Title <span class="sort-icon"></span></th>
+                                <th data-sort="category" class="sortable">Category <span class="sort-icon"></span></th>
+                                <th class="num-col sortable" data-sort="trueEnjoy">True Enjoy <span class="sort-icon"></span></th>
+                                <th class="num-col sortable" data-sort="trueUseful">True Useful <span class="sort-icon"></span></th>
+                                <th class="num-col sortable" data-sort="predEnjoy" title="Isolated model prediction for Enjoyment">Pred Enjoy <span class="sort-icon"></span></th>
+                                <th class="num-col sortable" data-sort="predUseful" title="Isolated model prediction for Usefulness">Pred Useful <span class="sort-icon"></span></th>
+                                <th class="num-col sortable" data-sort="wtPred" title="Combined prediction based on slider weight">Wt. Prediction <span class="sort-icon"></span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="dropped-books-tbody" class="table-body">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chrome Extension Section -->
+        <section class="card glass-card extension-section">
+            <div class="extension-content">
+                <h2>Model Architecture & Extension</h2>
+                <p>The models grading your reads (Ridge Regression, Random Forests, GBMs) are heavily engineered and exported fully to JSON. This means no backends, no python instances. Just drop into any javascript context.</p>
+                <div class="btn-group">
+                    <a href="models.json" target="_blank" download="models.json" class="btn btn-outline">Download <code>models.json</code></a>
+                    <a href="predict.js" target="_blank" download="predict.js" class="btn btn-outline">Download <code>predict.js</code></a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Application Logic -->
+    <script src="predict.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
