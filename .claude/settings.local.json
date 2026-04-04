@@ -43,12 +43,9 @@
       "Bash(/Users/clarkbenham/miniforge3/envs/side_projects/bin/python -c \"import pandas; print\\(''pandas OK''\\)\")",
       "Bash(/Users/clarkbenham/miniforge3/envs/side_projects/bin/python -c \":*)",
       "Bash(/Users/clarkbenham/miniforge3/envs/side_projects/bin/python scripts/download_naip_eval_set.py)",
-
       "Bash(/Users/clarkbenham/miniforge3/envs/side_projects/bin/pip install google-generativeai deepforest)",
-
       "Bash(/Users/clarkbenham/miniforge3/envs/side_projects/bin/pip list)",
       "Bash(/Users/clarkbenham/miniforge3/envs/side_projects/bin/python -m json.tool)",
-
       "Bash(/Users/clarkbenham/miniforge3/envs/side_projects/bin/pip install streamlit)",
       "Bash(for f in scripts/eval/build_dataset.py scripts/eval/label_ui.py scripts/eval/models/gemini_eval.py scripts/eval/run_eval.py)",
       "Bash(do echo \"=== $f ===\")",
@@ -61,11 +58,9 @@
       "Bash(/Users/clarkbenham/miniforge3/envs/side_projects/bin/ruff check --fix scripts/eval/label_ui.py)",
       "Bash(curl -s --connect-timeout 10 \"https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/OPR/Projects/CA_LosAngeles_B23/CA_LosAngeles_1_B23/0_file_download_links.txt\")",
       "Bash(timeout 15 curl -s --connect-timeout 10 \"https://rockyweb.usgs.gov/vdelivery/Datasets/Staged/Elevation/LPC/Projects/CA_LosAngeles_B23/CA_LosAngeles_1_B23/0_file_download_links.txt\")",
-
       "Bash(/Users/clarkbenham/miniforge3/envs/side_projects/bin/python -m black tree_leads/la_lidar_render.py scripts/eval/generate_la_lidar_renders.py)",
       "Bash(/Users/clarkbenham/miniforge3/envs/side_projects/bin/ruff check --fix tree_leads/la_lidar_render.py scripts/eval/generate_la_lidar_renders.py)",
       "Bash(/Users/clarkbenham/miniforge3/envs/side_projects/bin/ruff check --fix tree_leads/la_lidar_render.py)",
-
       "Bash(black:*)",
       "Bash(flake8:*)",
       "Bash(python3 -m black:*)",
@@ -75,7 +70,9 @@
       "Bash(conda run:*)",
       "Bash(for dir in ~/Documents/Books/eleven_upload/*/)",
       "Bash(done)",
-      "Bash(for dir in */)"
+      "Bash(for dir in */)",
+      "Bash(node -e \":*)",
+      "mcp__chrome-devtools__list_pages"
     ],
     "deny": [
       "Bash(rm **)",
