@@ -12,7 +12,7 @@ if str(ROOT) not in sys.path:
 
 
 def _cache_row_to_match_result(entry: Any, row: dict[str, object]) -> Any:
-    from tree_leads.movie_rt_analysis import MatchResult
+    from analysis_core.movie_rt_analysis import MatchResult
 
     return MatchResult(
         entry=entry,
@@ -20,7 +20,9 @@ def _cache_row_to_match_result(entry: Any, row: dict[str, object]) -> Any:
         media_type=str(row["media_type"]),
         rt_url=str(row["rt_url"]),
         critic_score=None if row["critic_score"] is None else int(row["critic_score"]),
-        audience_score=None if row["audience_score"] is None else int(row["audience_score"]),
+        audience_score=(
+            None if row["audience_score"] is None else int(row["audience_score"])
+        ),
         release_year=None if row["release_year"] is None else int(row["release_year"]),
         match_confidence=float(row["match_confidence"]),
         query=str(row["query"]),
@@ -41,15 +43,18 @@ def _match_result_to_cache_row(result: Any) -> dict[str, object]:
 
 
 def main() -> None:
-    from tree_leads.movie_rt_analysis import (
+    from analysis_core.movie_rt_analysis import (
         build_disagreement_tables,
         build_ratings_dataframe,
         build_session,
+        cross_validate_models,
         create_model_comparison_plot,
         create_rt_scatter_plot,
         evaluate_models,
+        evaluate_threshold_baselines,
         fetch_match_result,
         parse_movie_entries,
+        simulate_data_quality_impact,
         summarize_analysis,
     )
 
@@ -81,6 +86,9 @@ def main() -> None:
 
     df = build_ratings_dataframe(matches)
     model_results = evaluate_models(df)
+    threshold_results = evaluate_threshold_baselines(df)
+    cv_results = cross_validate_models(df)
+    data_quality_results = simulate_data_quality_impact(df)
     disagreements = build_disagreement_tables(model_results["full_predictions"])
 
     csv_path = output_dir / "movie_rt_scores.csv"
@@ -93,6 +101,9 @@ def main() -> None:
 
     holdout_csv_path = output_dir / "movie_rt_holdout_predictions.csv"
     model_results["holdout_predictions"].to_csv(holdout_csv_path, index=False)
+
+    threshold_csv_path = output_dir / "movie_rt_threshold_rules.csv"
+    threshold_results.to_csv(threshold_csv_path, index=False)
 
     for name, table in disagreements.items():
         table.head(15).to_csv(output_dir / f"{name}.csv", index=False)
@@ -119,15 +130,34 @@ def main() -> None:
     }
     metrics_path.write_text(json.dumps(metrics_payload, indent=2) + "\n")
 
+    cv_metrics_path = output_dir / "movie_rt_cv_metrics.json"
+    cv_metrics_payload = {
+        "n_splits": cv_results["n_splits"],
+        "n_repeats": cv_results["n_repeats"],
+        "regression_summary": cv_results["regression_summary"].to_dict(
+            orient="records"
+        ),
+        "classification_summary": cv_results["classification_summary"].to_dict(
+            orient="records"
+        ),
+    }
+    cv_metrics_path.write_text(json.dumps(cv_metrics_payload, indent=2) + "\n")
+
+    data_quality_path = output_dir / "movie_rt_data_quality_sensitivity.json"
+    data_quality_path.write_text(json.dumps(data_quality_results, indent=2) + "\n")
+
     print(summary_text)
     print()
     print(f"CSV: {csv_path}")
     print(f"Detailed CSV: {detailed_csv_path}")
     print(f"Holdout predictions: {holdout_csv_path}")
+    print(f"Threshold rules: {threshold_csv_path}")
     print(f"Plot: {plot_path}")
     print(f"Model plot: {model_plot_path}")
     print(f"Summary: {summary_path}")
     print(f"Metrics JSON: {metrics_path}")
+    print(f"Cross-validation JSON: {cv_metrics_path}")
+    print(f"Data quality sensitivity JSON: {data_quality_path}")
 
 
 if __name__ == "__main__":
