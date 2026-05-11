@@ -1,21 +1,28 @@
-# Local agent/editor state
-.gemini/
-.ruff_cache/
-.mplconfig/
-.DS_Store
-
-# Python runtime artifacts
+# Python/tool caches
 __pycache__/
 *.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mpl-cache/
 
-# API/search/scrape caches and run logs
-*_cache.json
+# Generated data exports
+chrome_daily_features.csv
+microdata_daily_features.csv
+journal_outputs/
+
+# Generated plots
+*.png
+*.svg
+
+#intermediate data
+*.csv
+*.json
+*.txt
+*.html
 *.log
-logs/
-ai_actions/logs/
 
-# Personal exports, backups, and row-level scraped datasets
-backup*.csv
-takeout_play_books_*
-*_scraped_backup_*.csv
-goodread_emperical_dist/data/
+# writeups
+*.md
+
+
+#!ai_books_tracking/chrome_extension/models.json
