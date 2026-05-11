@@ -34,7 +34,7 @@ from dataclasses import dataclass
 from typing import Iterable, List, Optional, Set, Tuple
 
 """Most annotations only via tablet and not in play books
-/Users/clarkbenham/Documents/Books/Every Man for Himself and God Against All.md
+    Local Markdown export for Every Man for Himself and God Against All.
 
 
 # passage of power has 836 yellow in play books vs 141 in tablet
@@ -54,7 +54,10 @@ dark sun 172 yellow (201 total) vs
 
 # Titles to export. Keep these as lowercase substrings for easy edits.
 TARGET_TITLE_SUBSTRINGS = [
+    "walking with destiny",
     "the world crisis",
+    "great contemporaries",
+    "second world war",
     "prime movers",
     "business adventures",
     "vibe coding",
@@ -65,6 +68,7 @@ TARGET_TITLE_SUBSTRINGS = [
     "six",
     "my early life",
     "systems performance",
+    "richard nixon",
     # "man for himself",
     "dark sun",
     "improve your marriage",
@@ -73,10 +77,9 @@ TARGET_TITLE_SUBSTRINGS = [
     "passage of",
     "AI Engineering",
     "Practical ML",
-    # "Passage of Power",
-    # "Master of the Senate",
-    # "Path to Power",
-    # "Means of Ascent",
+    "master of the senate",
+    "path to power",
+    "means of ascent",
     "apple in china",
     "building microservices",
     "linux kernel",
@@ -86,7 +89,11 @@ TARGET_TITLE_SUBSTRINGS = [
 
 
 def run(
-    cmd: List[str], check: bool = True, capture: bool = True, text: bool = True, timeout: int = 30
+    cmd: List[str],
+    check: bool = True,
+    capture: bool = True,
+    text: bool = True,
+    timeout: int = 30,
 ) -> subprocess.CompletedProcess:
     return subprocess.run(
         cmd,
@@ -105,13 +112,17 @@ def ensure_adb_ok() -> None:
     try:
         p = adb(["devices"])
     except FileNotFoundError:
-        print("ERROR: adb not found in PATH. Install Android platform-tools.", file=sys.stderr)
+        print(
+            "ERROR: adb not found in PATH. Install Android platform-tools.",
+            file=sys.stderr,
+        )
         sys.exit(1)
 
     lines = [ln.strip() for ln in p.stdout.splitlines() if ln.strip()]
     if len(lines) < 2:
         print(
-            "ERROR: No devices detected. Check USB cable + USB debugging prompt.", file=sys.stderr
+            "ERROR: No devices detected. Check USB cable + USB debugging prompt.",
+            file=sys.stderr,
         )
         sys.exit(1)
     if any("\tunauthorized" in ln for ln in lines[1:]):
@@ -178,7 +189,9 @@ def iter_nodes(xml: str) -> Iterable[UiNode]:
         cls = elem.attrib.get("class", "") or ""
         desc = elem.attrib.get("content-desc", "") or ""
         bounds = parse_bounds(elem.attrib.get("bounds", "") or "")
-        yield UiNode(text=text, resource_id=rid, class_name=cls, content_desc=desc, bounds=bounds)
+        yield UiNode(
+            text=text, resource_id=rid, class_name=cls, content_desc=desc, bounds=bounds
+        )
 
 
 # Heuristics: what "looks like highlight text"
@@ -245,6 +258,21 @@ def book_key(title: str) -> str:
     return normalize_text(title).lower()
 
 
+def configured_title_substrings(args: argparse.Namespace) -> List[str]:
+    extras = [
+        normalize_text(item).lower()
+        for item in getattr(args, "include_title", []) or []
+    ]
+    return TARGET_TITLE_SUBSTRINGS + [item for item in extras if item]
+
+
+def title_is_selected(title: str, args: argparse.Namespace) -> bool:
+    if getattr(args, "no_title_filter", False):
+        return True
+    t = normalize_text(title).lower()
+    return any(substr in t for substr in configured_title_substrings(args))
+
+
 def tap(x: int, y: int) -> None:
     adb(["shell", "input", "tap", str(x), str(y)])
 
@@ -252,6 +280,27 @@ def tap(x: int, y: int) -> None:
 def tap_bounds(bounds: Tuple[int, int, int, int]) -> None:
     left, top, right, bottom = bounds
     tap((left + right) // 2, (top + bottom) // 2)
+
+
+def long_press_bounds(
+    bounds: Tuple[int, int, int, int], duration_ms: int = 700
+) -> None:
+    left, top, right, bottom = bounds
+    x = (left + right) // 2
+    y = (top + bottom) // 2
+    adb(
+        [
+            "shell",
+            "input",
+            "swipe",
+            str(x),
+            str(y),
+            str(x),
+            str(y),
+            str(duration_ms),
+        ]
+    )
+    time.sleep(UI_WAIT_MED)
 
 
 def press_back() -> None:
@@ -361,7 +410,9 @@ def detect_book_title(xml: str, screen_height: int) -> Optional[str]:
     return candidates[0][2]
 
 
-def find_library_books(xml: str, screen_height: int) -> List[Tuple[str, Tuple[int, int, int, int]]]:
+def find_library_books(
+    xml: str, screen_height: int
+) -> List[Tuple[str, Tuple[int, int, int, int]]]:
     candidates: List[Tuple[int, str, Tuple[int, int, int, int]]] = []
     id_candidates: List[Tuple[int, str, Tuple[int, int, int, int]]] = []
     for n in iter_nodes(xml):
@@ -373,7 +424,9 @@ def find_library_books(xml: str, screen_height: int) -> List[Tuple[str, Tuple[in
         cy = center_y(n.bounds)
         if cy < int(screen_height * 0.2):
             continue
-        if n.resource_id.endswith(":id/title") or n.resource_id.endswith(":id/volume_title"):
+        if n.resource_id.endswith(":id/title") or n.resource_id.endswith(
+            ":id/volume_title"
+        ):
             id_candidates.append((cy, txt, n.bounds))
             continue
         # Fallback: accept reasonable-looking titles even without known IDs
@@ -385,12 +438,31 @@ def find_library_books(xml: str, screen_height: int) -> List[Tuple[str, Tuple[in
     return [(txt, bounds) for _, txt, bounds in picked]
 
 
+def find_library_book_bounds(
+    xml: str, screen_height: int, target_title: str
+) -> Optional[Tuple[int, int, int, int]]:
+    target = book_key(target_title)
+    candidates: List[Tuple[int, Tuple[int, int, int, int]]] = []
+    for title, bounds in find_library_books(xml, screen_height):
+        title_key = book_key(title)
+        if target == title_key:
+            return bounds
+        if target in title_key or title_key in target:
+            candidates.append((abs(len(title_key) - len(target)), bounds))
+    if not candidates:
+        return None
+    candidates.sort(key=lambda item: item[0])
+    return candidates[0][1]
+
+
 def ensure_notes_list(width: int, height: int, max_tries: int = 4) -> Optional[str]:
     for _ in range(max_tries):
         xml = uiautomator_dump_xml()
         if is_notes_list_screen(xml):
             return xml
-        if tap_by_text_or_desc(xml, ["Notes", "Notes & highlights", "Notes and highlights"]):
+        if tap_by_text_or_desc(
+            xml, ["Notes", "Notes & highlights", "Notes and highlights"]
+        ):
             time.sleep(UI_WAIT_MED)
             continue
         if tap_by_text_or_desc(xml, ["Table of contents", "Contents", "TOC"]):
@@ -494,6 +566,70 @@ def maybe_jiggle_scroll(width: int, height: int) -> None:
     time.sleep(0.4)
 
 
+REMOVE_DOWNLOAD_LABELS = (
+    "remove download",
+    "remove from device",
+    "remove downloaded",
+    "delete download",
+    "delete from device",
+)
+MORE_OPTIONS_LABELS = ("more options", "options", "menu")
+
+
+def maybe_remove_download(
+    book_title: str,
+    width: int,
+    height: int,
+    max_tries: int = 2,
+) -> bool:
+    xml = ensure_library_screen(width, height)
+    if not xml:
+        print(
+            f"WARN: could not return to Library to remove download for {book_title!r}."
+        )
+        return False
+
+    bounds = find_library_book_bounds(xml, height, book_title)
+    if not bounds:
+        print(f"WARN: could not find {book_title!r} in Library to remove download.")
+        return False
+
+    for attempt in range(max_tries):
+        long_press_bounds(bounds)
+        xml = uiautomator_dump_xml()
+        if tap_by_text_or_desc_contains(xml, REMOVE_DOWNLOAD_LABELS):
+            time.sleep(UI_WAIT_MED)
+            xml_confirm = uiautomator_dump_xml()
+            tap_by_text_or_desc(xml_confirm, ["Remove", "Delete", "OK"])
+            time.sleep(UI_WAIT_MED)
+            print(f"Removed local download for {book_title!r}.")
+            return True
+        if tap_by_text_or_desc_contains(xml, MORE_OPTIONS_LABELS):
+            time.sleep(UI_WAIT_MED)
+            xml_menu = uiautomator_dump_xml()
+            if tap_by_text_or_desc_contains(xml_menu, REMOVE_DOWNLOAD_LABELS):
+                time.sleep(UI_WAIT_MED)
+                xml_confirm = uiautomator_dump_xml()
+                tap_by_text_or_desc(xml_confirm, ["Remove", "Delete", "OK"])
+                time.sleep(UI_WAIT_MED)
+                print(f"Removed local download for {book_title!r}.")
+                return True
+        press_back()
+        time.sleep(UI_WAIT_SHORT)
+        xml = ensure_library_screen(width, height)
+        if not xml:
+            break
+        bounds = find_library_book_bounds(xml, height, book_title)
+        if not bounds:
+            break
+
+    print(
+        f"WARN: could not find a remove-download action for {book_title!r}. "
+        "Check the Play Books UI wording on the device."
+    )
+    return False
+
+
 def write_outputs(book: str, outdir: str, items: List[ExtractedItem]) -> None:
     os.makedirs(outdir, exist_ok=True)
 
@@ -548,7 +684,9 @@ def extract_book_highlights(
         xml = initial_xml if swipe_i == 0 and initial_xml else uiautomator_dump_xml()
 
         if args.debug_dumps:
-            dump_path = os.path.join(outdir, f"{safe_filename(book)}__dump_{swipe_i:04d}.xml")
+            dump_path = os.path.join(
+                outdir, f"{safe_filename(book)}__dump_{swipe_i:04d}.xml"
+            )
             with open(dump_path, "w", encoding="utf-8") as f:
                 f.write(xml)
 
@@ -562,7 +700,9 @@ def extract_book_highlights(
                 all_highlights.append(it)
                 new_count += 1
 
-        print(f"[{swipe_i:03d}] +{new_count} new (total {len(all_highlights)}), stalls={stalls}")
+        print(
+            f"[{swipe_i:03d}] +{new_count} new (total {len(all_highlights)}), stalls={stalls}"
+        )
 
         if new_count == 0:
             stalls += 1
@@ -604,7 +744,7 @@ def run_all_books(args: argparse.Namespace, width: int, height: int) -> None:
             seen_titles.add(book_key(title))
         new_books: List[Tuple[str, Tuple[int, int, int, int], str]] = []
         for title, bounds in books:
-            if not title_matches_target(title):
+            if not title_is_selected(title, args):
                 continue
             key = book_key(title)
             if key in seen_targets:
@@ -637,7 +777,9 @@ def run_all_books(args: argparse.Namespace, width: int, height: int) -> None:
 
             book_title = detect_book_title(xml_notes, height) or title
             seen_targets.add(book_key(book_title))
-            items = extract_book_highlights(args, width, height, book_title, initial_xml=xml_notes)
+            items = extract_book_highlights(
+                args, width, height, book_title, initial_xml=xml_notes
+            )
             if items:
                 write_outputs(book_title, outdir, items)
             else:
@@ -650,6 +792,8 @@ def run_all_books(args: argparse.Namespace, width: int, height: int) -> None:
             tap_by_text_or_desc(uiautomator_dump_xml(), ["Library"])
             time.sleep(UI_WAIT_SHORT)
             ensure_library_screen(width, height)
+            if args.remove_downloads:
+                maybe_remove_download(book_title, width, height)
 
         swipe_scroll(width, height)
 
@@ -657,16 +801,38 @@ def run_all_books(args: argparse.Namespace, width: int, height: int) -> None:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--book", help="Book title (used for output filenames)")
-    ap.add_argument("--all-books", action="store_true", help="Auto-open each book from Library")
+    ap.add_argument(
+        "--all-books", action="store_true", help="Auto-open each book from Library"
+    )
+    ap.add_argument(
+        "--include-title",
+        action="append",
+        default=[],
+        help="Extra lowercase or mixed-case title substring to include with --all-books. Repeatable.",
+    )
+    ap.add_argument(
+        "--no-title-filter",
+        action="store_true",
+        help="With --all-books, process every visible library title instead of only configured substrings.",
+    )
     ap.add_argument("--out", default="playbooks_export", help="Output directory")
-    ap.add_argument("--max-swipes", type=int, default=500, help="Hard cap to avoid infinite loops")
+    ap.add_argument(
+        "--max-swipes", type=int, default=500, help="Hard cap to avoid infinite loops"
+    )
     ap.add_argument(
         "--stall-pages",
         type=int,
         default=6,
         help="Stop after this many consecutive swipes with no new highlights",
     )
-    ap.add_argument("--debug-dumps", action="store_true", help="Save raw UI XML dumps (large)")
+    ap.add_argument(
+        "--debug-dumps", action="store_true", help="Save raw UI XML dumps (large)"
+    )
+    ap.add_argument(
+        "--remove-downloads",
+        action="store_true",
+        help="With --all-books, try to remove each book's local download after export.",
+    )
     args = ap.parse_args()
 
     ensure_adb_ok()
