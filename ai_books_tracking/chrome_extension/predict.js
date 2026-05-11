@@ -56,7 +56,7 @@ function predictGBM(modelSpec, features) {
   return Math.max(1.0, Math.min(5.0, pred));
 }
 
-function predictGroupRidge(groupSpec, targetSpec, grRating, amzRating) {
+function imputeRidgeRatings(groupSpec, grRating, amzRating) {
   const imp = groupSpec.imputation;
   const ratings = {
     goodreads_rating_raw: grRating,
@@ -79,11 +79,42 @@ function predictGroupRidge(groupSpec, targetSpec, grRating, amzRating) {
     ratings[feat] = imputed ?? imp.medians[feat];
   }
   for (const feat of ["goodreads_rating_raw", "openlibrary_rating_raw", "amazon_rating_raw"]) {
-    if (ratings[feat] == null) ratings[feat] = targetSpec.fill_values[feat];
+    if (ratings[feat] == null) ratings[feat] = imp.medians[feat];
   }
+  return ratings;
+}
+
+function predictGroupRidge(groupSpec, targetSpec, grRating, amzRating) {
+  const ratings = imputeRidgeRatings(groupSpec, grRating, amzRating);
   let pred = targetSpec.intercept;
   for (const feat of ["goodreads_rating_raw", "openlibrary_rating_raw", "amazon_rating_raw"]) {
     pred += targetSpec.coefficients[feat] * ratings[feat];
+  }
+  return Math.max(1.0, Math.min(5.0, pred));
+}
+
+function predictPooledRidge(modelSpec, groupSpec, pageData, displayCategory) {
+  if (!modelSpec || !groupSpec) return null;
+  const ratings = imputeRidgeRatings(groupSpec, pageData.grRating, pageData.amzRating);
+  const pooledCategory = mapToRFCategory(displayCategory);
+  const numericValues = {
+    goodreads_rating_raw: ratings.goodreads_rating_raw,
+    openlibrary_rating_raw: ratings.openlibrary_rating_raw,
+    amazon_rating_raw: ratings.amazon_rating_raw,
+    goodreads_log_count: pageData.grCount != null ? Math.log10(1 + pageData.grCount) : null,
+    amazon_log_count: pageData.amzCount != null ? Math.log10(1 + pageData.amzCount) : null,
+    log_pages: pageData.pageCount != null && pageData.pageCount > 0 ? Math.log10(pageData.pageCount) : null,
+    book_age: pageData.pubYear != null ? 2026 - pageData.pubYear : null,
+  };
+
+  let pred = modelSpec.intercept;
+  for (const feat of modelSpec.numeric_features) {
+    const val = numericValues[feat];
+    pred += modelSpec.coefficients[feat] * (val == null || isNaN(val) ? modelSpec.fill_values[feat] : val);
+  }
+  for (const feat of modelSpec.category_features || []) {
+    const active = feat === `category_${pooledCategory}` ? 1.0 : 0.0;
+    pred += (modelSpec.coefficients[feat] || 0.0) * active;
   }
   return Math.max(1.0, Math.min(5.0, pred));
 }
@@ -133,6 +164,84 @@ function mapToRFCategory(displayCat) {
   return map[displayCat] || "General Reading";
 }
 
+function valueToPercentile(value, percentileMapping) {
+  if (!percentileMapping || value === null || value === undefined || isNaN(value)) {
+    return null;
+  }
+
+  const values = percentileMapping.values || [];
+  const percentiles = percentileMapping.percentiles || [];
+  if (values.length === 0 || percentiles.length === 0) return null;
+  if (value <= values[0]) return percentiles[0];
+
+  for (let i = 0; i < values.length - 1; i++) {
+    if (value <= values[i + 1]) {
+      const span = values[i + 1] - values[i];
+      const ratio = span === 0 ? 0 : (value - values[i]) / span;
+      return percentiles[i] + ratio * (percentiles[i + 1] - percentiles[i]);
+    }
+  }
+  return percentiles[percentiles.length - 1];
+}
+
+function intervalToPercentiles(intervalSpec, percentileMapping) {
+  if (!intervalSpec || !percentileMapping) return null;
+  return {
+    asym50_lo: valueToPercentile(intervalSpec.asym50_lo, percentileMapping),
+    asym50_hi: valueToPercentile(intervalSpec.asym50_hi, percentileMapping),
+    asym85_lo: valueToPercentile(intervalSpec.asym85_lo, percentileMapping),
+    asym85_hi: valueToPercentile(intervalSpec.asym85_hi, percentileMapping),
+  };
+}
+
+function getPercentileCategory(percentile) {
+  if (percentile == null) return "unknown";
+  if (percentile < 10) return "very_poor";
+  if (percentile < 25) return "poor"; 
+  if (percentile < 40) return "below_average";
+  if (percentile < 60) return "average";
+  if (percentile < 75) return "above_average";
+  if (percentile < 90) return "good";
+  return "excellent";
+}
+
+function getSimpleHeuristic(pageData) {
+  const gr = pageData.grRating;
+  const amz = pageData.amzRating;
+  const hasGR = gr != null && !isNaN(gr);
+  const hasAMZ = amz != null && !isNaN(amz);
+
+  if (hasGR && hasAMZ) {
+    const sum = gr + amz;
+    if (sum >= 9) return "prefer";
+    if (sum < 8) return "avoid";
+  }
+
+  if (hasGR) {
+    if (gr >= 4.1) return "prefer";
+    if (gr < 3.7) return "avoid";
+  }
+
+  if (hasAMZ) {
+    if (amz >= 4.3) return "prefer";
+    if (amz < 3.8) return "avoid";
+  }
+
+  return "neutral";
+}
+
+function computeExternalScore(pageData) {
+  const gr = pageData.grRating;
+  const amz = pageData.amzRating;
+  const hasGR = gr != null && !isNaN(gr);
+  const hasAMZ = amz != null && !isNaN(amz);
+
+  if (hasGR && hasAMZ) return gr + amz;
+  if (hasGR) return gr * 2;
+  if (hasAMZ) return amz * 2;
+  return 0;
+}
+
 function runAllPredictions(models, pageData, category) {
   const rfCategory = mapToRFCategory(category);
   const group = mapToGroup(category);
@@ -157,17 +266,42 @@ function runAllPredictions(models, pageData, category) {
     gbm_useful: predictGBM(models.gbm_useful, rfFeatures),
     ridge_enjoy: groupSpec ? predictGroupRidge(groupSpec, groupSpec.enjoy, pageData.grRating, pageData.amzRating) : null,
     ridge_useful: groupSpec ? predictGroupRidge(groupSpec, groupSpec.useful, pageData.grRating, pageData.amzRating) : null,
+    ridge_full_enjoy: groupSpec ? predictPooledRidge(models.ridge_full_enjoy, groupSpec, pageData, category) : null,
+    ridge_full_useful: groupSpec ? predictPooledRidge(models.ridge_full_useful, groupSpec, pageData, category) : null,
   };
 
+  // Convert predictions to percentiles using training target distributions.
+  const percentiles = {};
+  const categories = {};
+  const percentileMaps = models.percentile_maps || {};
+  for (const key of Object.keys(preds)) {
+    percentiles[key] = valueToPercentile(preds[key], percentileMaps[key]);
+    categories[key] = getPercentileCategory(percentiles[key]);
+  }
+
   const intervals = {};
-  for (const key of ["rf_enjoy", "rf_useful", "gbm_enjoy", "gbm_useful"]) {
+  const intervalPercentiles = {};
+  for (const key of ["rf_enjoy", "rf_useful", "gbm_enjoy", "gbm_useful", "ridge_full_enjoy", "ridge_full_useful"]) {
     intervals[key] = computeIntervals(preds[key], conf[key]);
+    intervalPercentiles[key] = intervalToPercentiles(intervals[key], percentileMaps[key]);
   }
   for (const target of ["enjoy", "useful"]) {
     const ridgeKey = `ridge_${target}`;
     const confSpec = conf[`ridge_${group}_${target}`] || conf[`ridge_pooled_${target}`] || null;
     intervals[ridgeKey] = preds[ridgeKey] != null ? computeIntervals(preds[ridgeKey], confSpec) : null;
+    intervalPercentiles[ridgeKey] = intervalToPercentiles(intervals[ridgeKey], percentileMaps[ridgeKey]);
   }
 
-  return { ...preds, intervals };
+  // Add simple heuristic
+  const heuristic = getSimpleHeuristic(pageData);
+  
+  return { 
+    ...preds, 
+    intervals, 
+    intervalPercentiles,
+    percentiles, 
+    categories, 
+    heuristic,
+    external_sum: computeExternalScore(pageData)
+  };
 }

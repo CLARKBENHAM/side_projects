@@ -24,6 +24,16 @@
   let selectedCategory = null;
   let modelsCache = null;
 
+  function cleanSearchTitle(title) {
+    return title
+      .replace(/,?\s*\b(\d+)(st|nd|rd|th)\s+edition\b/gi, "")
+      .replace(/,?\s*\b(first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth)\s+edition\b/gi, "")
+      .replace(/,?\s*\bedition\b/gi, "")
+      .replace(/\s*\([^)]*(?:press|publisher|publishing|edition)[^)]*\)/gi, "")
+      .replace(/\s{2,}/g, " ")
+      .trim();
+  }
+
   async function getModels() {
     if (modelsCache) return modelsCache;
     const url = chrome.runtime.getURL("models.json");
@@ -187,9 +197,13 @@
       .mn { font-weight: 600; font-size: 11px; color: #555; padding-top: 2px; }
       .pred-cell { text-align: right; }
       .pred-cell .pv { font-weight: 700; font-size: 15px; font-variant-numeric: tabular-nums; }
-      .pred-cell .pv.good { color: #1a7f37; }
-      .pred-cell .pv.mid { color: #b35900; }
-      .pred-cell .pv.low { color: #c00; }
+      .pred-cell .pv.excellent { color: #1a7f37; }
+      .pred-cell .pv.good { color: #2d8f40; }
+      .pred-cell .pv.above_average { color: #b35900; }
+      .pred-cell .pv.average { color: #666; }
+      .pred-cell .pv.below_average { color: #d73a49; }
+      .pred-cell .pv.poor { color: #c00; }
+      .pred-cell .pv.very_poor { color: #8b0000; }
       .pred-cell .pi { font-size: 9px; color: #999; font-variant-numeric: tabular-nums; line-height: 1.4; }
       .pred-cell .pi.b85 { color: #bbb; }
       .pred-hdr { font-weight: 700; font-size: 10px; color: #888; text-align: right; padding-bottom: 2px; }
@@ -218,9 +232,14 @@
             <span></span><span class="pred-hdr">Enjoyment</span><span class="pred-hdr">Usefulness</span>
           </div>
           <div class="model-row">
-            <span class="mn">Ridge</span>
+            <span class="mn">Group Ridge</span>
             <div class="pred-cell" id="wr-re"></div>
             <div class="pred-cell" id="wr-ru"></div>
+          </div>
+          <div class="model-row">
+            <span class="mn">Full Ridge</span>
+            <div class="pred-cell" id="wr-fre"></div>
+            <div class="pred-cell" id="wr-fru"></div>
           </div>
           <div class="model-row">
             <span class="mn">RF</span>
@@ -242,20 +261,28 @@
     return shadow;
   }
 
-  function scoreClass(val, type) {
-    if (type === "enjoy") {
-      if (val >= 3.9) return "good";
-      if (val >= 3.3) return "mid";
-      return "low";
-    }
-    if (val >= 2.5) return "good";
-    if (val >= 1.8) return "mid";
-    return "low";
+  function percentileClass(percentile) {
+    if (percentile == null) return "";
+    if (percentile >= 90) return "excellent";
+    if (percentile >= 75) return "good";
+    if (percentile >= 60) return "above_average";
+    if (percentile >= 40) return "average";
+    if (percentile >= 25) return "below_average";
+    if (percentile >= 10) return "poor";
+    return "very_poor";
   }
 
-  function renderPredCell(cell, val, type, iv) {
-    const f = v => v.toFixed(1);
-    let html = `<div class="pv ${scoreClass(val, type)}">${val.toFixed(2)}</div>`;
+  function formatPercentile(percentile) {
+    if (percentile == null) return "—";
+    return percentile.toFixed(0) + "%";
+  }
+
+  function renderPredCell(cell, val, percentile, iv) {
+    const f = v => `${Math.round(v)}%`;
+    const pctClass = percentileClass(percentile);
+    const pctText = formatPercentile(percentile);
+    
+    let html = `<div class="pv ${pctClass}">${pctText}</div>`;
     if (iv) {
       html += `<div class="pi">50%: ${f(iv.asym50_lo)}–${f(iv.asym50_hi)}</div>`;
       html += `<div class="pi b85">85%: ${f(iv.asym85_lo)}–${f(iv.asym85_hi)}</div>`;
@@ -332,7 +359,7 @@
   if (site === "goodreads" && pageData.title) {
     statusEl.textContent = "Searching Amazon...";
     statusEl.className = "status-line srch";
-    chrome.runtime.sendMessage({ type: "SEARCH_AMAZON", title: pageData.title, author: pageData.author || "" }, resp => {
+    chrome.runtime.sendMessage({ type: "SEARCH_AMAZON", title: cleanSearchTitle(pageData.title), author: pageData.author || "" }, resp => {
       if (!resp || !resp.success) { statusEl.textContent = "AMZ search failed"; statusEl.className = "status-line err"; return; }
       const parser = new DOMParser();
       const doc = parser.parseFromString(resp.html, "text/html");
@@ -356,7 +383,7 @@
   } else if (site === "amazon" && pageData.title) {
     statusEl.textContent = "Searching Goodreads...";
     statusEl.className = "status-line srch";
-    chrome.runtime.sendMessage({ type: "SEARCH_GOODREADS", title: pageData.title, author: pageData.author || "" }, resp => {
+    chrome.runtime.sendMessage({ type: "SEARCH_GOODREADS", title: cleanSearchTitle(pageData.title), author: pageData.author || "" }, resp => {
       if (!resp || !resp.success) { statusEl.textContent = "GR search failed"; statusEl.className = "status-line err"; return; }
       const parser = new DOMParser();
       const doc = parser.parseFromString(resp.html, "text/html");
@@ -390,12 +417,15 @@
       const r = runAllPredictions(models, pageData, selectedCategory);
       q("#w-results").style.display = "block";
 
-      renderPredCell(q("#wr-re"), r.ridge_enjoy, "enjoy", r.intervals?.ridge_enjoy);
-      renderPredCell(q("#wr-ru"), r.ridge_useful, "useful", r.intervals?.ridge_useful);
-      renderPredCell(q("#wr-rfe"), r.rf_enjoy, "enjoy", r.intervals?.rf_enjoy);
-      renderPredCell(q("#wr-rfu"), r.rf_useful, "useful", r.intervals?.rf_useful);
-      renderPredCell(q("#wr-ge"), r.gbm_enjoy, "enjoy", r.intervals?.gbm_enjoy);
-      renderPredCell(q("#wr-gu"), r.gbm_useful, "useful", r.intervals?.gbm_useful);
+      // Use percentiles for display
+      renderPredCell(q("#wr-re"), r.ridge_enjoy, r.percentiles?.ridge_enjoy, r.intervalPercentiles?.ridge_enjoy);
+      renderPredCell(q("#wr-ru"), r.ridge_useful, r.percentiles?.ridge_useful, r.intervalPercentiles?.ridge_useful);
+      renderPredCell(q("#wr-fre"), r.ridge_full_enjoy, r.percentiles?.ridge_full_enjoy, r.intervalPercentiles?.ridge_full_enjoy);
+      renderPredCell(q("#wr-fru"), r.ridge_full_useful, r.percentiles?.ridge_full_useful, r.intervalPercentiles?.ridge_full_useful);
+      renderPredCell(q("#wr-rfe"), r.rf_enjoy, r.percentiles?.rf_enjoy, r.intervalPercentiles?.rf_enjoy);
+      renderPredCell(q("#wr-rfu"), r.rf_useful, r.percentiles?.rf_useful, r.intervalPercentiles?.rf_useful);
+      renderPredCell(q("#wr-ge"), r.gbm_enjoy, r.percentiles?.gbm_enjoy, r.intervalPercentiles?.gbm_enjoy);
+      renderPredCell(q("#wr-gu"), r.gbm_useful, r.percentiles?.gbm_useful, r.intervalPercentiles?.gbm_useful);
 
       statusEl.textContent = "";
     } catch (err) {

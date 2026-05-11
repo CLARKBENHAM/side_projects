@@ -95,8 +95,18 @@
       font-variant-numeric: tabular-nums;
       padding-top: 4px;
     }
-    .score.good { color: #1a7f37; }
-    .score.mid { color: #b35900; }
+    .score.excellent { color: #1a7f37; }
+    .score.good { color: #2d8f40; }
+    .score.above_average { color: #b35900; }
+    .score.average { color: #666; }
+    .score.below_average { color: #d73a49; }
+    .score.poor { color: #c00; }
+    .score.very_poor { color: #8b0000; }
+    
+    /* Heuristic recommendation colors */
+    .data-value.prefer { color: #1a7f37; font-weight: 700; }
+    .data-value.avoid { color: #d73a49; font-weight: 700; }
+    .data-value.neutral { color: #b35900; font-weight: 700; }
     .score.low { color: #c00; }
     .interval-row {
       text-align: right;
@@ -228,14 +238,29 @@
     <div class="category-grid" id="category-grid"></div>
   </div>
 
+  <div id="heuristic" class="section" style="display:none;">
+    <div class="section-title">Quick Assessment</div>
+    <div class="data-row">
+      <span class="data-label">External Rating Sum:</span>
+      <span class="data-value" id="external-sum">—</span>
+    </div>
+    <div class="data-row">
+      <span class="data-label">Recommendation:</span>
+      <span class="data-value" id="heuristic-rec">—</span>
+    </div>
+    <div style="font-size: 11px; color: #666; margin-top: 6px;">
+      ≥9: Prefer • 8-9: Neutral • &lt;8: Avoid
+    </div>
+  </div>
+
   <div id="results" class="section" style="display:none;">
-    <div class="section-title">Predictions (1–5 scale)</div>
+    <div class="section-title">Model Predictions (Percentiles)</div>
     <div class="results-grid">
       <span class="header">Model</span>
       <span class="header" style="text-align:right">Enjoyment</span>
       <span class="header" style="text-align:right">Usefulness</span>
 
-      <span class="model-name">Ridge</span>
+      <span class="model-name">Group Ridge</span>
       <span class="score" id="ridge-enjoy">—</span>
       <span class="score" id="ridge-useful">—</span>
       <span></span>
@@ -244,16 +269,7 @@
 
       <div class="model-sep"></div>
 
-      <span class="model-name">RF</span>
-      <span class="score" id="rf-enjoy">—</span>
-      <span class="score" id="rf-useful">—</span>
-      <span></span>
-      <span class="interval-row" id="rf-enjoy-pi"></span>
-      <span class="interval-row" id="rf-useful-pi"></span>
-
-      <div class="model-sep"></div>
-
-      <span class="model-name">GBM</span>
+      <span class="model-name">GBM (Best)</span>
       <span class="score" id="gbm-enjoy">—</span>
       <span class="score" id="gbm-useful">—</span>
       <span></span>
@@ -261,8 +277,9 @@
       <span class="interval-row" id="gbm-useful-pi"></span>
     </div>
     <div class="threshold-note">
-      <strong>Thresholds:</strong> Enjoy &ge; 3.9 = keep, Useful &ge; 2.5 = keep. GR &ge; 4.2 standalone.<br>
-      <strong>PI:</strong> 50%/85% prediction intervals (conformal, n=68 holdout).
+      <strong>Percentiles:</strong> 75th+ = Good, 60th-75th = Above Avg, 40th-60th = Average, &lt;25th = Poor<br>
+      <strong>Ranges:</strong> 50% and 85% bands are shown in percentile space.<br>
+      <strong>Note:</strong> Use percentiles for relative ranking, not absolute quality prediction.
     </div>
   </div>
 

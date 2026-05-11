@@ -14,30 +14,30 @@ async function getModels() {
   modelsCache = await resp.json();
   return modelsCache;
 }
-
-// Start loading models immediately (don't wait for DOMContentLoaded)
+// Start loading models immediately
 getModels();
 
 function $(id) { return document.getElementById(id); }
 
-function scoreClass(val, type) {
-  if (type === "enjoy") {
-    if (val >= 3.9) return "good";
-    if (val >= 3.3) return "mid";
-    return "low";
-  }
-  if (val >= 2.5) return "good";
-  if (val >= 1.8) return "mid";
-  return "low";
+function percentileClass(percentile) {
+  if (percentile == null) return "";
+  if (percentile >= 90) return "excellent";
+  if (percentile >= 75) return "good";
+  if (percentile >= 60) return "above_average";
+  if (percentile >= 40) return "average";
+  if (percentile >= 25) return "below_average";
+  if (percentile >= 10) return "poor";
+  return "very_poor";
 }
 
-function formatScore(val) {
-  return val != null ? val.toFixed(2) : "—";
+function formatPercentile(percentile) {
+  if (percentile == null) return "—";
+  return percentile.toFixed(0) + "%";
 }
 
 function formatInterval(iv) {
   if (!iv) return "";
-  const f = v => v.toFixed(1);
+  const f = v => `${Math.round(v)}%`;
   return `<span class="pi-line band50"><span class="pi-label">50%:</span> <span class="pi-range">${f(iv.asym50_lo)}–${f(iv.asym50_hi)}</span></span>`
        + `<span class="pi-line band85"><span class="pi-label">85%:</span> <span class="pi-range">${f(iv.asym85_lo)}–${f(iv.asym85_hi)}</span></span>`;
 }
@@ -235,6 +235,17 @@ function escapeHtml(str) {
   return d.innerHTML;
 }
 
+function cleanSearchTitle(title) {
+  // Strip edition info that kills Goodreads search
+  return title
+    .replace(/,?\s*\b(\d+)(st|nd|rd|th)\s+edition\b/gi, "")
+    .replace(/,?\s*\b(first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth)\s+edition\b/gi, "")
+    .replace(/,?\s*\bedition\b/gi, "")
+    .replace(/\s*\([^)]*(?:press|publisher|publishing|edition)[^)]*\)/gi, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
 async function searchGoodreads(title, author) {
   $("cross-search").style.display = "block";
   $("search-label").textContent = "Searching Goodreads...";
@@ -243,7 +254,7 @@ async function searchGoodreads(title, author) {
 
   try {
     const resp = await chrome.runtime.sendMessage({
-      type: "SEARCH_GOODREADS", title, author,
+      type: "SEARCH_GOODREADS", title: cleanSearchTitle(title), author,
     });
 
     if (!resp || !resp.success) {
@@ -362,7 +373,7 @@ async function searchAmazon(title, author) {
 
   try {
     const resp = await chrome.runtime.sendMessage({
-      type: "SEARCH_AMAZON", title, author,
+      type: "SEARCH_AMAZON", title: cleanSearchTitle(title), author,
     });
 
     if (!resp || !resp.success) {
@@ -420,23 +431,38 @@ async function runPrediction() {
   try {
     const models = await getModels();
     const r = runAllPredictions(models, pageData, selectedCategory);
+    
+    // Show heuristic section
+    $("heuristic").style.display = "block";
+    $("external-sum").textContent = r.external_sum ? r.external_sum.toFixed(1) : "—";
+    const heuristicEl = $("heuristic-rec");
+    heuristicEl.textContent = r.heuristic ? r.heuristic.toUpperCase() : "—";
+    heuristicEl.className = `data-value ${r.heuristic || ""}`;
+    
     $("results").style.display = "block";
 
-    for (const [id, val, type, intervalKey] of [
-      ["ridge-enjoy", r.ridge_enjoy, "enjoy", "ridge_enjoy"],
-      ["ridge-useful", r.ridge_useful, "useful", "ridge_useful"],
-      ["rf-enjoy", r.rf_enjoy, "enjoy", "rf_enjoy"],
-      ["rf-useful", r.rf_useful, "useful", "rf_useful"],
-      ["gbm-enjoy", r.gbm_enjoy, "enjoy", "gbm_enjoy"],
-      ["gbm-useful", r.gbm_useful, "useful", "gbm_useful"],
+    // Show only the best models with percentiles
+    for (const [id, type, percentileKey] of [
+      ["ridge-enjoy", "enjoy", "ridge_enjoy"],
+      ["ridge-useful", "useful", "ridge_useful"], 
+      ["gbm-enjoy", "enjoy", "gbm_enjoy"],
+      ["gbm-useful", "useful", "gbm_useful"],
     ]) {
       const el = $(id);
-      el.textContent = formatScore(val);
-      el.className = `score ${scoreClass(val, type)}`;
+      const percentile = r.percentiles ? r.percentiles[percentileKey] : null;
+      
+      if (percentile != null) {
+        el.textContent = formatPercentile(percentile);
+        el.className = `score ${percentileClass(percentile)}`;
+      } else {
+        el.textContent = "—";
+        el.className = "score";
+      }
 
+      // Keep prediction intervals if available
       const piEl = $(id + "-pi");
-      if (piEl && r.intervals && r.intervals[intervalKey]) {
-        piEl.innerHTML = formatInterval(r.intervals[intervalKey]);
+      if (piEl && r.intervalPercentiles && r.intervalPercentiles[percentileKey]) {
+        piEl.innerHTML = formatInterval(r.intervalPercentiles[percentileKey]);
       }
     }
 
