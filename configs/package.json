@@ -17,8 +17,7 @@
   "homepage": "",
   "dependencies": {
     "amqplib": "^0.8.0",
-    "aws-sdk": "^2.1046.0",
-    "axios": "^0.27.2",
+    "axios": "^1.16.0",
     "bluebird": "^3.7.2",
     "calipers-pdf": "^2.2.2",
     "check-word": "^1.1.0",
@@ -37,11 +36,11 @@
     "path": "^0.12.7",
     "pdf-lib": "^1.17.1",
     "pdf2pic": "^2.1.4",
-    "pg-promise": "^10.11.1",
+    "pg-promise": "^12.6.2",
     "pgp": "^0.1.0",
     "request": "^2.88.2",
     "scissors": "^0.3.0",
-    "sharp": "^0.30.7",
+    "sharp": "^0.34.5",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
