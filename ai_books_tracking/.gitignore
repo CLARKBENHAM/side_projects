@@ -1,0 +1,21 @@
+# Local agent/editor state
+.gemini/
+.ruff_cache/
+.mplconfig/
+.DS_Store
+
+# Python runtime artifacts
+__pycache__/
+*.py[cod]
+
+# API/search/scrape caches and run logs
+*_cache.json
+*.log
+logs/
+ai_actions/logs/
+
+# Personal exports, backups, and row-level scraped datasets
+backup*.csv
+takeout_play_books_*
+*_scraped_backup_*.csv
+goodread_emperical_dist/data/
