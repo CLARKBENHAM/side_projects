@@ -1,0 +1,5 @@
+model,response_column,predictor,n_books,coefficient_wpm_per_log1p_unit,intercept_or_baseline,r_squared,p25_predictor,p75_predictor,estimated_wpm_change_p75_to_p25
+unadjusted,wpm_first_pass_primary,highlight_count_per_page,119,-43.171275479945635,343.35803016704796,0.0029357959457317895,0.0,0.4197290718867279,15.130066777889624
+category_fixed_effects,wpm_first_pass_primary,highlight_count_per_page,119,-80.57581007273802,374.2576826230472,0.021080568672796618,0.0,0.4197290718867279,28.239086603994238
+unadjusted,wpm_first_pass_primary,my_note_words_per_page,119,21.741509165795158,332.21628972954346,0.0017662623121119658,0.0,0.28082393579325227,-5.38110115059595
+category_fixed_effects,wpm_first_pass_primary,my_note_words_per_page,119,4.051915122567879,354.3117734814787,0.01304079955927473,0.0,0.28082393579325227,-1.002863460944557

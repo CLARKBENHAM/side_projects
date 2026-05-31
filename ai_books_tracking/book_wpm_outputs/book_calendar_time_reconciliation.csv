@@ -1,0 +1,7 @@
+metric,events,calendar_analysis_minutes,wall_clock_minutes
+explicit_includable_book_time,2163,105812.96666666666,111152.49999999999
+assigned_to_finished_books,1521,84164.03333333334,88557.50000000001
+unmatched_explicit_book_time,642,21648.933333333334,22595.0
+generic_temporal_not_counted,119,2942.5000000000005,3070.0000000000005
+bare_finished_marker_not_counted,0,0.0,0.0
+assigned_plus_unmatched_minus_explicit_total,,1.4551915228366852e-11,2.9103830456733704e-11

@@ -1,0 +1,9 @@
+| cohort | n_books | total_words | total_primary_minutes | aggregate_primary_wpm | median_primary_wpm | mean_primary_wpm | total_full_wall_clock_minutes | aggregate_full_wall_clock_wpm | audio_dominant_books | gt600_books | gt900_books | aggregate_visual_after_audio_350wpm | median_visual_after_audio_350wpm | delta_vs_base_aggregate_primary_wpm | pct_delta_vs_base_aggregate_primary_wpm |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| base_first_reads_gt90m | 121 | 17917255.00 | 58405.00 | 306.78 | 308.55 | 337.20 | 59687.50 | 300.18 | 5 | 6 | 2 | 304.75 | 308.55 | 0.00 | 0.00 |
+| base_excluding_gt600_wpm | 115 | 16362515.00 | 56237.50 | 290.95 | 304.61 | 312.24 | 57317.50 | 285.47 | 3 | 0 | 0 | 289.35 | 304.61 | -15.82 | -5.16 |
+| base_excluding_gt900_wpm | 119 | 17521250.00 | 58045.00 | 301.86 | 308.04 | 324.55 | 59282.50 | 295.56 | 5 | 4 | 0 | 299.58 | 308.04 | -4.92 | -1.60 |
+| base_excluding_audio_dominant | 116 | 16774020.00 | 55532.50 | 302.06 | 307.42 | 332.69 | 56687.50 | 295.90 | 0 | 4 | 2 | 301.21 | 307.42 | -4.72 | -1.54 |
+| visual_after_audio_excluding_audio_dominant | 116 | 16774020.00 | 55532.50 | 302.06 | 307.42 | 332.69 | 56687.50 | 295.90 | 0 | 4 | 2 | 301.21 | 307.42 | -4.72 | -1.54 |
+| visual_after_audio_excluding_audio_dominant_gt600 | 112 | 16084951.00 | 54767.50 | 293.70 | 303.25 | 311.95 | 55847.50 | 288.02 | 0 | 0 | 0 | 292.69 | 303.25 | -13.08 | -4.26 |
+| high_confidence_first_reads_gt90m | 90 | 14872730.00 | 47432.50 | 313.56 | 324.32 | 346.85 | 48655.00 | 305.68 | 5 | 5 | 1 | 311.43 | 322.23 | 6.78 | 2.21 |

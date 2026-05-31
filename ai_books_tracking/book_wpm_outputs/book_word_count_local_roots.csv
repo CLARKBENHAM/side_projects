@@ -1,0 +1,5 @@
+root,exists,is_dir,can_iterate,visible_entry_count,error
+/Users/clarkbenham/side_projects/data/Books,True,True,True,492,
+/Users/clarkbenham/side_projects/data/Books/eleven_upload,True,True,True,12,
+/Users/clarkbenham/Documents/Books,True,True,False,0,PermissionError: [Errno 1] Operation not permitted: '/Users/clarkbenham/Documents/Books'
+/Users/clarkbenham/Documents/Books/eleven_upload,True,True,False,0,PermissionError: [Errno 1] Operation not permitted: '/Users/clarkbenham/Documents/Books/eleven_upload'

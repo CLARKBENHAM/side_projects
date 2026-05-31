@@ -4,6 +4,8 @@ Generated 2026-03-23. Based on 268 books (200 historical Jan 2019-Mar 2025 + 68 
 Full script outputs: `results_so_far_everything.txt`.
 Sections 11–13 added 2026-03-23: model specs, power analysis, validation set design.
 
+2026-05-31: Finished-book WPM/calendar/highlight analysis is documented separately in `ai_books_tracking/ai_actions/2026-05-31_wpm_analysis_summary.md`, with generated outputs in `ai_books_tracking/book_wpm_outputs/`.
+
 ---
 
 ## 1. Current Best Decision Rules
@@ -952,7 +954,6 @@ ai_books_tracking/ai_actions/human_limits_plots/human_limit_separate_doubled_err
 
 MAE is 0.45-0.5 for enjoyment and 0.33-0.4 for usefulness across categories. Except for fiction which is 0.37 and 0.14.
 So I'm actually more consistent on fiction even though it's hard to predict out of sample
-
 
 
 

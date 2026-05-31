@@ -1,0 +1,1 @@
+2026-05-31: Finished-book WPM/calendar/highlight analysis is documented separately in ai_books_tracking/ai_actions/2026-05-31_wpm_analysis_summary.md, with generated outputs in ai_books_tracking/book_wpm_outputs/.
