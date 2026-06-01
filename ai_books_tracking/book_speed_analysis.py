@@ -62,6 +62,7 @@ def build_speed_analysis(
         "word_count_confidence",
         "local_file_path",
         "local_file_match_score",
+        "local_file_match_hint",
         "local_file_word_count",
         "local_raw_word_count",
         "local_excluded_word_count",

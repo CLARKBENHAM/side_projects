@@ -7,14 +7,19 @@ import pandas as pd
 
 from ai_books_tracking.book_word_counts import (
     LocalBookFile,
+    LocalTextAudit,
     add_full_finished_projection_columns,
     build_projection_metric_summary,
     build_word_count_outputs,
     classify_body_section,
+    first_clean_value,
+    iter_book_files,
+    local_file_hints_for_title,
     propagate_epub_back_matter_categories,
     repair_all_excluded_epub_body,
     score_file_match,
 )
+from ai_books_tracking import book_word_counts as book_word_counts_module
 from ai_books_tracking.book_speed_analysis import build_speed_analysis
 from ai_books_tracking.book_wpm_calendar_notes import normalize_title
 
@@ -45,6 +50,13 @@ def test_score_file_match_rejects_short_title_substring_false_positives() -> Non
     assert score_file_match("Dune Messiah", "", dune_messiah) >= 90
 
 
+def test_score_file_match_rejects_full_title_initial_collision() -> None:
+    discovery = make_local_book_file(Path("The Discovery of France.epub"))
+
+    assert score_file_match("the Dark Forrest", "", discovery) < 70
+    assert score_file_match("tdf", "", discovery) >= 70
+
+
 def test_score_file_match_accepts_real_initialism() -> None:
     rlhf = make_local_book_file(
         Path(
@@ -54,6 +66,252 @@ def test_score_file_match_accepts_real_initialism() -> None:
     )
 
     assert score_file_match("rlhf", "", rlhf) >= 70
+
+
+def test_local_file_hints_use_finish_date_for_short_calendar_refs() -> None:
+    hints = pd.DataFrame(
+        [
+            {
+                "hint_title": "Open_ An Autobiography-Andre Agassi -Vintage (2010).pdf",
+                "hint_filename": "Open_ An Autobiography-Andre Agassi -Vintage (2.pdf",
+                "hint_finish_date": "2021-10-23",
+            },
+            {
+                "hint_title": "The Architecture of Open Source Applications",
+                "hint_filename": "The Architecture of Open Source Applications.pdf",
+                "hint_finish_date": "2024-01-01",
+            },
+        ]
+    )
+
+    result = local_file_hints_for_title(hints, "Open", "Open", finish_date="2021-10-23")
+
+    assert result[0] == "Open_ An Autobiography-Andre Agassi -Vintage (2.pdf"
+    assert "The Architecture of Open Source Applications.pdf" not in result
+
+
+def test_local_file_hints_reject_short_title_prefix_without_date_match() -> None:
+    hints = pd.DataFrame(
+        [
+            {
+                "hint_title": "Dune Messiah",
+                "hint_filename": "Dune Messiah.epub",
+                "hint_finish_date": "2022-02-19",
+            }
+        ]
+    )
+
+    assert local_file_hints_for_title(hints, "Dune", "Dune", "2022-02-15") == []
+
+
+def test_local_file_hints_reject_unsafe_short_title_prefix_with_date_match() -> None:
+    hints = pd.DataFrame(
+        [
+            {
+                "hint_title": "Dune Messiah",
+                "hint_filename": "Dune Messiah.epub",
+                "hint_finish_date": "2022-02-19",
+            }
+        ]
+    )
+
+    assert local_file_hints_for_title(hints, "Dune", "Dune", "2022-02-16") == []
+
+
+def test_local_file_hints_preserve_volume_numbers() -> None:
+    hints = pd.DataFrame(
+        [
+            {
+                "hint_title": "The World Crisis",
+                "hint_filename": "The World Crisis.epub",
+                "hint_finish_date": "2025-01-01",
+            },
+            {
+                "hint_title": "The World Crisis, Vol. 4",
+                "hint_filename": "The World Crisis, Vol. 4.html",
+                "hint_finish_date": "2025-01-02",
+            },
+        ]
+    )
+
+    assert (
+        local_file_hints_for_title(
+            hints,
+            "The World Crisis Volume 2",
+            "The World Crisis Volume 2",
+            "2025-01-01",
+        )
+        == []
+    )
+
+
+def test_local_file_hints_reject_numbered_volume_for_generic_title() -> None:
+    hints = pd.DataFrame(
+        [
+            {
+                "hint_title": "The World Crisis, Vol. 2",
+                "hint_filename": "The World Crisis, Vol. 2.html",
+                "hint_finish_date": "2025-01-01",
+            }
+        ]
+    )
+
+    assert local_file_hints_for_title(hints, "The World Crisis", "", "2025-01-01") == []
+
+
+def test_local_file_hints_return_only_specific_matched_hint_value() -> None:
+    hints = pd.DataFrame(
+        [
+            {
+                "hint_title": "The World Crisis",
+                "hint_filename": "The World Crisis, Vol. 2.html",
+                "hint_finish_date": "2025-01-01",
+            }
+        ]
+    )
+
+    assert local_file_hints_for_title(
+        hints, "The World Crisis Volume 2", "", "2025-01-01"
+    ) == ["The World Crisis, Vol. 2.html"]
+
+
+def test_local_file_hints_reject_wrong_volume_even_with_part_number_overlap() -> None:
+    hints = pd.DataFrame(
+        [
+            {
+                "hint_title": "The World Crisis, Vol. 3 Part 1 and Part 2",
+                "hint_filename": "The World Crisis, Vol. 3 Part 1 and Part 2.epub",
+                "hint_finish_date": "2025-01-01",
+            },
+            {
+                "hint_title": "The World Crisis, Vol. 2",
+                "hint_filename": "The World Crisis, Vol. 2.epub",
+                "hint_finish_date": "2025-01-01",
+            },
+        ]
+    )
+
+    assert local_file_hints_for_title(
+        hints, "The World Crisis Volume 2", "", "2025-01-01"
+    ) == ["The World Crisis, Vol. 2.epub", "The World Crisis, Vol. 2"]
+
+
+def test_local_file_hints_match_digit_title_to_number_word_export() -> None:
+    hints = pd.DataFrame(
+        [
+            {
+                "hint_title": "Sixteen Ways to Defend a Walled City",
+                "hint_filename": "Sixteen Ways to Defend a Walled City.epub",
+                "hint_finish_date": "2023-01-01",
+            }
+        ]
+    )
+
+    assert local_file_hints_for_title(
+        hints, "16 ways to defend a walled city", "", "2023-01-01"
+    ) == [
+        "Sixteen Ways to Defend a Walled City.epub",
+        "Sixteen Ways to Defend a Walled City",
+    ]
+
+
+def test_local_file_hints_use_date_bounded_overlap_for_minor_title_typo() -> None:
+    hints = pd.DataFrame(
+        [
+            {
+                "hint_title": "The Dark Forest (Remembrance of Earth's Past)",
+                "hint_filename": "The Dark Forest (Remembrance of Earth_s Past).html",
+                "hint_finish_date": "2022-12-27",
+            }
+        ]
+    )
+
+    assert (
+        local_file_hints_for_title(hints, "the Dark Forrest", "tdf", "2022-12-27")[0]
+        == "The Dark Forest (Remembrance of Earth_s Past).html"
+    )
+
+
+def test_local_file_hints_do_not_use_shared_series_word_as_typo_match() -> None:
+    hints = pd.DataFrame(
+        [
+            {
+                "hint_title": "Dune Messiah",
+                "hint_filename": "Dune Messiah.epub",
+                "hint_finish_date": "2022-02-19",
+            }
+        ]
+    )
+
+    assert local_file_hints_for_title(hints, "Children of Dune", "", "2022-02-22") == []
+
+
+def test_local_file_hints_do_not_mix_ref_matches_when_title_matches() -> None:
+    hints = pd.DataFrame(
+        [
+            {
+                "hint_title": "[Hyperion 1] Dan Simmons - Hyperion-Saga 1_ Hyperion",
+                "hint_filename": "[Hyperion 1] Dan Simmons - Hyperion-Saga 1_ Hyp.pdf",
+                "hint_finish_date": "2026-03-09",
+            },
+            {
+                "hint_title": "Hyperion Cantos [02] - The Fall of Hyperion",
+                "hint_filename": "Hyperion Cantos [02] - The Fall of Hyperion.epub",
+                "hint_finish_date": "2026-03-11",
+            },
+        ]
+    )
+
+    assert local_file_hints_for_title(
+        hints,
+        "[Hyperion 1] Dan Simmons - Hyperion-Saga 1_ Hyperion (1990)",
+        "Hyperion",
+        "2026-03-09",
+    ) == [
+        "[Hyperion 1] Dan Simmons - Hyperion-Saga 1_ Hyp.pdf",
+        "[Hyperion 1] Dan Simmons - Hyperion-Saga 1_ Hyperion",
+    ]
+
+
+def test_local_file_hints_allow_repeated_single_word_export_with_date_match() -> None:
+    hints = pd.DataFrame(
+        [
+            {
+                "hint_title": "Frank Herbert - Dune 1 - Dune.pdf",
+                "hint_filename": "Frank Herbert - Dune 1 - Dune(1).pdf",
+                "hint_finish_date": "2022-02-16",
+            }
+        ]
+    )
+
+    assert (
+        local_file_hints_for_title(hints, "Dune", "Dune", "2022-02-16")[0]
+        == "Frank Herbert - Dune 1 - Dune(1).pdf"
+    )
+
+
+def test_first_clean_value_skips_empty_pandas_values() -> None:
+    assert first_clean_value(pd.NA, float("nan"), "", "2022-02-16") == "2022-02-16"
+
+
+def test_iter_book_files_skips_google_play_notes_html(tmp_path: Path) -> None:
+    google_play = tmp_path / "Google Play Books" / "Example"
+    google_play.mkdir(parents=True)
+    (google_play / "Example.html").write_text("<html>notes</html>", encoding="utf-8")
+    (google_play / "Notes.pdf").write_text("<?xml version='1.0'?>", encoding="utf-8")
+    (google_play / "Example.epub").write_text("fake epub", encoding="utf-8")
+    regular = tmp_path / "Books"
+    regular.mkdir()
+    (regular / "Local.html").write_text("<html>book</html>", encoding="utf-8")
+    (regular / "Local.pdf").write_bytes(b"%PDF-1.7\n")
+
+    paths = {item.path.name for item in iter_book_files([tmp_path])}
+
+    assert "Example.html" not in paths
+    assert "Notes.pdf" not in paths
+    assert "Example.epub" in paths
+    assert "Local.html" in paths
+    assert "Local.pdf" in paths
 
 
 def test_build_word_count_outputs_prefers_local_text_over_online_count(
@@ -100,6 +358,51 @@ def test_build_word_count_outputs_prefers_local_text_over_online_count(
     assert row["word_count_source"] == "local_file_word_count"
     assert row["online_error_rate_vs_local"] == 1.5
     assert (output_dir / "book_word_count_online_error_rates.png").exists()
+
+
+def test_build_word_count_outputs_rejects_low_text_pdf_extract(
+    tmp_path: Path, monkeypatch
+) -> None:
+    book_root = tmp_path / "books"
+    output_dir = tmp_path / "outputs"
+    book_root.mkdir()
+    (book_root / "DFW_TV.pdf").write_bytes(b"%PDF-1.7\n")
+
+    def fake_local_text_audit(path: Path, title: str) -> LocalTextAudit:
+        return LocalTextAudit(
+            raw_word_count=21,
+            reading_word_count=21,
+            method="pdf_repeated_header_footer_body_pages",
+            warning="",
+            section_rows=[],
+        )
+
+    monkeypatch.setattr(
+        book_word_counts_module, "local_text_audit", fake_local_text_audit
+    )
+    titles = pd.DataFrame(
+        [
+            {
+                "finish_id": "finish_0001",
+                "title": "DFW_TV.pdf",
+                "finish_date": "2026-01-01",
+                "page_count": 407,
+            }
+        ]
+    )
+
+    result = build_word_count_outputs(
+        titles=titles,
+        output_dir=output_dir,
+        book_roots=[book_root],
+        word_source_csv=None,
+    )
+
+    row = result.iloc[0]
+    assert pd.isna(row["local_file_word_count"])
+    assert row["local_raw_word_count"] == 21
+    assert row["local_file_error"] == "insufficient_pdf_text_extracted: 21 words"
+    assert row["word_count_source"] == "metadata_pages_x_words_per_page"
 
 
 def test_full_finished_projection_uses_local_calibration_before_mean_imputation() -> (

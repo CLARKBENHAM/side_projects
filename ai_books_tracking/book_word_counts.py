@@ -16,6 +16,7 @@ import sys
 import tempfile
 import urllib.request
 from dataclasses import dataclass
+from difflib import SequenceMatcher
 from pathlib import Path
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile
@@ -37,6 +38,7 @@ from ai_books_tracking.book_wpm_calendar_notes import (  # noqa: E402
     find_metadata_record,
     load_metadata_records,
     normalize_title,
+    title_match_score,
     titles_match,
 )
 
@@ -44,8 +46,18 @@ from ai_books_tracking.book_wpm_calendar_notes import (  # noqa: E402
 DEFAULT_BOOK_ROOTS = [
     REPO_ROOT / "data" / "Books",
     REPO_ROOT / "data" / "Books" / "eleven_upload",
+    REPO_ROOT / "data" / "Takeout_Play_books_03_16_25_pt1" / "Google Play Books",
+    REPO_ROOT / "data" / "Takeout_Play_books_03_16_25_pt2" / "Google Play Books",
     Path("/Users/clarkbenham/Documents/Books"),
     Path("/Users/clarkbenham/Documents/Books/eleven_upload"),
+]
+DEFAULT_FILE_HINT_CSVS = [
+    REPO_ROOT / "data" / "finished_books_2025_03_16.csv",
+    REPO_ROOT
+    / "data"
+    / "Books Read and their effects - master_book_metadata_cleaned_final.csv",
+    REPO_ROOT / "ai_books_tracking" / "master_book_metadata_cleaned.csv",
+    REPO_ROOT / "ai_books_tracking" / "golden_master_multi_source.csv",
 ]
 DEFAULT_WORD_SOURCE_CSV = DEFAULT_OUTPUT_DIR / "book_word_count_sources.csv"
 WORD_SOURCE_COLUMNS = [
@@ -67,6 +79,38 @@ DOCX_EXTENSIONS = {".docx"}
 PDF_EXTENSIONS = {".pdf"}
 EPUB_EXTENSIONS = {".epub"}
 CALIBRE_EXTENSIONS = {".mobi", ".azw3", ".lit"}
+SAFE_SINGLE_WORD_PREFIX_HINTS = {"open"}
+MIN_LOCAL_PDF_READING_WORDS = 1_000
+NUMBER_WORDS = {
+    "0": "zero",
+    "1": "one",
+    "2": "two",
+    "3": "three",
+    "4": "four",
+    "5": "five",
+    "6": "six",
+    "7": "seven",
+    "8": "eight",
+    "9": "nine",
+    "10": "ten",
+    "11": "eleven",
+    "12": "twelve",
+    "13": "thirteen",
+    "14": "fourteen",
+    "15": "fifteen",
+    "16": "sixteen",
+    "17": "seventeen",
+    "18": "eighteen",
+    "19": "nineteen",
+    "20": "twenty",
+    "30": "thirty",
+    "40": "forty",
+    "50": "fifty",
+    "60": "sixty",
+    "70": "seventy",
+    "80": "eighty",
+    "90": "ninety",
+}
 
 
 @dataclass(frozen=True)
@@ -105,6 +149,7 @@ def iter_book_files(roots: list[Path]) -> list[LocalBookFile]:
                     should_skip_book_path(path)
                     or not path.is_file()
                     or path.suffix.lower() not in allowed
+                    or not has_supported_book_signature(path)
                 ):
                     continue
             except OSError:
@@ -129,9 +174,21 @@ def should_skip_book_path(path: Path) -> bool:
         return True
     if "highlights" in parts or "play books notes" in parts:
         return True
+    if path.suffix.lower() in HTML_EXTENSIONS and "google play books" in parts:
+        return True
     if path.suffix.lower() in {".crdownload", ".jsonl", ".xml"}:
         return True
     return False
+
+
+def has_supported_book_signature(path: Path) -> bool:
+    if path.suffix.lower() not in PDF_EXTENSIONS:
+        return True
+    try:
+        with path.open("rb") as handle:
+            return handle.read(5) == b"%PDF-"
+    except OSError:
+        return False
 
 
 def inspect_book_roots(roots: list[Path]) -> pd.DataFrame:
@@ -178,7 +235,9 @@ def score_file_match(title: str, filename: str, file: LocalBookFile) -> float:
             and candidate_words[0] in file.stem_norm.split()
         ):
             score = max(score, 82.0)
-        elif abbreviation_matches_title(candidate, file.stem_norm):
+        elif looks_like_abbreviation_candidate(
+            candidate
+        ) and abbreviation_matches_title(candidate, file.stem_norm):
             score = max(score, 82.0)
         elif titles_match(candidate, file.stem_norm):
             score = max(score, 85.0)
@@ -200,15 +259,33 @@ def score_file_match(title: str, filename: str, file: LocalBookFile) -> float:
 
 
 def candidate_numbers_match(candidate: str, file_stem: str) -> bool:
+    candidate_volume_numbers = numbered_marker_numbers(candidate, {"vol", "volume"})
+    file_volume_numbers = numbered_marker_numbers(file_stem, {"vol", "volume"})
+    if candidate_volume_numbers and file_volume_numbers:
+        if not candidate_volume_numbers & file_volume_numbers:
+            return False
     candidate_numbers = set(re.findall(r"\d+", candidate))
     if not candidate_numbers:
         return True
     file_numbers = set(re.findall(r"\d+", file_stem))
-    return candidate_numbers.issubset(file_numbers)
+    file_words = set(file_stem.split())
+    return all(
+        number in file_numbers or NUMBER_WORDS.get(number, "") in file_words
+        for number in candidate_numbers
+    )
 
 
 def looks_like_initialism_token(token: str) -> bool:
     return 2 <= len(token) <= 8 and not re.search(r"[aeiou]", token)
+
+
+def looks_like_abbreviation_candidate(candidate_norm: str) -> bool:
+    return (
+        " " not in candidate_norm
+        and 2 <= len(candidate_norm) <= 12
+        and bool(re.fullmatch(r"[a-z0-9]+", candidate_norm))
+        and not candidate_norm.isdigit()
+    )
 
 
 def phrase_contains(longer: str, shorter: str) -> bool:
@@ -239,6 +316,22 @@ def find_local_file(
         return None, 0.0
     scored.sort(key=lambda item: (-item[0], len(str(item[1]))))
     return scored[0][1], scored[0][0]
+
+
+def find_local_file_with_hints(
+    title: str, filenames: list[str], local_files: list[LocalBookFile]
+) -> tuple[Path | None, float, str]:
+    scored: list[tuple[float, Path, str]] = []
+    for filename in dict.fromkeys(value for value in filenames if str(value).strip()):
+        for file in local_files:
+            score = score_file_match(title, filename, file)
+            if score >= 70:
+                scored.append((score, file.path, filename))
+    if not scored:
+        return None, 0.0, ""
+    scored.sort(key=lambda item: (-item[0], len(str(item[1]))))
+    score, path, hint = scored[0]
+    return path, score, hint
 
 
 def text_from_path(path: Path) -> str:
@@ -731,6 +824,273 @@ def load_word_count_sources(path: Path | None) -> pd.DataFrame:
     return frame[WORD_SOURCE_COLUMNS]
 
 
+def load_local_file_hints(paths: list[Path] | None = None) -> pd.DataFrame:
+    hint_rows: list[dict[str, object]] = []
+    for path in paths or DEFAULT_FILE_HINT_CSVS:
+        if not path.exists():
+            continue
+        frame = pd.read_csv(path)
+        if "title" not in frame.columns and "original_title" not in frame.columns:
+            continue
+        for _, row in frame.iterrows():
+            title = clean_source_value(row.get("title", row.get("original_title", "")))
+            filename = clean_source_value(row.get("filename", ""))
+            if not title and not filename:
+                continue
+            hint_rows.append(
+                {
+                    "hint_title": title,
+                    "hint_filename": filename,
+                    "hint_title_norm": normalize_title(title),
+                    "hint_filename_norm": normalize_title(filename),
+                    "hint_author": clean_source_value(
+                        row.get(
+                            "author",
+                            row.get(
+                                "corrected_author",
+                                row.get(
+                                    "canonical_author",
+                                    row.get("author(old and wrong)", ""),
+                                ),
+                            ),
+                        )
+                    ),
+                    "hint_finish_date": clean_source_value(
+                        row.get(
+                            "finished_date",
+                            row.get(
+                                "estimated_finish",
+                                row.get(
+                                    "latest_modified", row.get("earliest_modified", "")
+                                ),
+                            ),
+                        )
+                    ),
+                    "hint_finish_date_parsed": pd.to_datetime(
+                        row.get(
+                            "finished_date",
+                            row.get(
+                                "estimated_finish",
+                                row.get(
+                                    "latest_modified",
+                                    row.get("earliest_modified", ""),
+                                ),
+                            ),
+                        ),
+                        errors="coerce",
+                    ),
+                    "hint_source": str(path.relative_to(REPO_ROOT)),
+                }
+            )
+    return pd.DataFrame(hint_rows)
+
+
+def local_file_hints_for_title(
+    hints: pd.DataFrame, title: str, ref: str = "", finish_date: object = ""
+) -> list[str]:
+    if hints.empty:
+        return []
+    candidate_groups = [[title], [ref]]
+    target_date = pd.to_datetime(finish_date, errors="coerce")
+    for candidates in candidate_groups:
+        output = local_file_hints_for_candidates(hints, candidates, target_date)
+        if output:
+            return output
+    return []
+
+
+def local_file_hints_for_candidates(
+    hints: pd.DataFrame, candidates: list[str], target_date: object
+) -> list[str]:
+    output: list[str] = []
+    for _, row in hints.iterrows():
+        hint_title = str(row.get("hint_title", "") or "")
+        hint_filename = str(row.get("hint_filename", "") or "")
+        if not hint_title and not hint_filename:
+            continue
+        date_bonus = False
+        hint_date = row.get("hint_finish_date_parsed", pd.NaT)
+        if pd.isna(hint_date):
+            hint_date = pd.to_datetime(row.get("hint_finish_date", ""), errors="coerce")
+        if pd.notna(target_date) and pd.notna(hint_date):
+            date_bonus = abs((target_date.date() - hint_date.date()).days) <= 3
+        for candidate in candidates:
+            if not candidate:
+                continue
+            if hint_value_matches_candidate(
+                candidate,
+                hint_filename,
+                date_bonus,
+                str(row.get("hint_filename_norm", "") or ""),
+            ):
+                output.append(hint_filename)
+            if hint_value_matches_candidate(
+                candidate,
+                hint_title,
+                date_bonus,
+                str(row.get("hint_title_norm", "") or ""),
+            ):
+                output.append(hint_title)
+    return [value for value in dict.fromkeys(output) if value]
+
+
+def hint_matches_candidate(
+    candidate: str,
+    hint_title: str,
+    hint_filename: str,
+    date_bonus: bool,
+    hint_title_norm: str = "",
+    hint_filename_norm: str = "",
+) -> bool:
+    return any(
+        hint_value_matches_candidate(candidate, hint_value, date_bonus, hint_norm)
+        for hint_value, hint_norm in [
+            (hint_title, hint_title_norm or normalize_title(hint_title)),
+            (hint_filename, hint_filename_norm or normalize_title(hint_filename)),
+        ]
+    )
+
+
+def hint_value_matches_candidate(
+    candidate: str,
+    hint_value: str,
+    date_bonus: bool,
+    hint_norm: str = "",
+) -> bool:
+    candidate_norm = normalize_title(candidate)
+    hint_norm = hint_norm or normalize_title(hint_value)
+    if not candidate_norm or not hint_norm:
+        return False
+    if not hint_numbers_compatible(candidate_norm, hint_norm):
+        return False
+    if not should_score_hint_candidate(candidate_norm, hint_norm, date_bonus):
+        return False
+    if titles_match(candidate, hint_value) or (
+        looks_like_abbreviation_candidate(candidate_norm)
+        and abbreviation_matches_title(candidate_norm, hint_norm)
+    ):
+        return True
+    score = title_match_score(candidate, hint_value)
+    if score >= 78 or (date_bonus and score >= 60):
+        return True
+    if date_bonus and fuzzy_meaningful_overlap_ratio(candidate_norm, hint_norm) >= 0.8:
+        return True
+    if date_bonus and single_word_prefix_match(candidate_norm, hint_norm):
+        return True
+    if date_bonus and repeated_single_word_match(candidate_norm, hint_norm):
+        return True
+    return False
+
+
+def hint_numbers_compatible(candidate_norm: str, hint_norm: str) -> bool:
+    if not candidate_numbers_match(candidate_norm, hint_norm):
+        return False
+    candidate_numbers = set(re.findall(r"\d+", candidate_norm))
+    if not candidate_numbers and numbered_volume_marker(hint_norm):
+        return False
+    return True
+
+
+def numbered_volume_marker(text: str) -> bool:
+    return bool(numbered_marker_numbers(text, {"vol", "volume", "book", "part"}))
+
+
+def numbered_marker_numbers(text: str, markers: set[str]) -> set[str]:
+    marker_pattern = "|".join(sorted(markers, key=len, reverse=True))
+    return set(re.findall(rf"\b(?:{marker_pattern})\s+(\d+)\b", text))
+
+
+def should_score_hint_candidate(
+    candidate_norm: str, hint_norm: str, date_bonus: bool
+) -> bool:
+    if candidate_norm == hint_norm:
+        return True
+    if date_bonus and single_word_prefix_match(candidate_norm, hint_norm):
+        return True
+    if date_bonus and repeated_single_word_match(candidate_norm, hint_norm):
+        return True
+    candidate_all_words = candidate_norm.split()
+    if len(candidate_all_words) == 1 and candidate_norm in hint_norm:
+        return False
+    if candidate_norm in hint_norm:
+        return True
+    if looks_like_abbreviation_candidate(candidate_norm):
+        return True
+    candidate_words = meaningful_hint_words(candidate_norm)
+    hint_words = meaningful_hint_words(hint_norm)
+    if not candidate_words or not hint_words:
+        return False
+    overlap = len(candidate_words & hint_words) / min(
+        len(candidate_words), len(hint_words)
+    )
+    return overlap >= (0.34 if date_bonus else 0.5)
+
+
+def meaningful_overlap_ratio(left: str, right: str) -> float:
+    left_words = meaningful_hint_words(left)
+    right_words = meaningful_hint_words(right)
+    if not left_words or not right_words:
+        return 0.0
+    return len(left_words & right_words) / min(len(left_words), len(right_words))
+
+
+def fuzzy_meaningful_overlap_ratio(left: str, right: str) -> float:
+    left_words = meaningful_hint_words(left)
+    right_words = meaningful_hint_words(right)
+    if not left_words or not right_words:
+        return 0.0
+    matched_right: set[str] = set()
+    matches = 0
+    for left_word in left_words:
+        best_word = ""
+        best_ratio = 0.0
+        for right_word in right_words - matched_right:
+            ratio = (
+                1.0
+                if left_word == right_word
+                else word_similarity(left_word, right_word)
+            )
+            if ratio > best_ratio:
+                best_ratio = ratio
+                best_word = right_word
+        if best_ratio >= 0.83:
+            matches += 1
+            matched_right.add(best_word)
+    return matches / min(len(left_words), len(right_words))
+
+
+def word_similarity(left: str, right: str) -> float:
+    if min(len(left), len(right)) < 5:
+        return 0.0
+    return SequenceMatcher(None, left, right).ratio()
+
+
+def meaningful_hint_words(text: str) -> set[str]:
+    return {
+        word
+        for word in text.split()
+        if word not in {"the", "a", "an", "of", "and", "in", "on", "for", "to", "by"}
+    }
+
+
+def single_word_prefix_match(candidate_norm: str, hint_norm: str) -> bool:
+    words = candidate_norm.split()
+    return (
+        len(words) == 1
+        and words[0] in SAFE_SINGLE_WORD_PREFIX_HINTS
+        and hint_norm.startswith(words[0])
+    )
+
+
+def repeated_single_word_match(candidate_norm: str, hint_norm: str) -> bool:
+    words = candidate_norm.split()
+    return (
+        len(words) == 1
+        and len(words[0]) >= 4
+        and hint_norm.split().count(words[0]) >= 2
+    )
+
+
 def source_rows_for_title(sources: pd.DataFrame, title: str) -> pd.DataFrame:
     if sources.empty:
         return sources
@@ -756,6 +1116,14 @@ def clean_source_value(value: object) -> str:
     except TypeError:
         pass
     return str(value).strip()
+
+
+def first_clean_value(*values: object) -> str:
+    for value in values:
+        text = clean_source_value(value)
+        if text and text.lower() not in {"nan", "nat", "none"}:
+            return text
+    return ""
 
 
 def _markdown_table(df: pd.DataFrame) -> str:
@@ -827,14 +1195,34 @@ def build_word_count_outputs(
     metadata_records = load_metadata_records([])
     manual = load_manual_word_counts(manual_word_counts)
     sources = load_word_count_sources(word_source_csv)
+    file_hints = load_local_file_hints()
     rows: list[dict[str, object]] = []
     audit_rows: list[dict[str, object]] = []
     local_text_audit_rows: list[dict[str, object]] = []
     local_section_audit_rows: list[dict[str, object]] = []
-    for _, title_row in titles.iterrows():
-        title = str(title_row["title"])
-        filename = str(
-            title_row.get("filename", "") or title_row.get("calendar_finish_ref", "")
+    local_text_cache: dict[tuple[Path, str], LocalTextAudit] = {}
+    show_progress = len(titles) > 20
+    for row_number, (_, title_row) in enumerate(titles.iterrows(), start=1):
+        title = first_clean_value(title_row["title"])
+        filename = first_clean_value(
+            title_row.get("filename", ""), title_row.get("calendar_finish_ref", "")
+        )
+        finish_date = first_clean_value(
+            title_row.get("finish_date", ""), title_row.get("matched_finish_date", "")
+        )
+        filename_hints = [
+            title,
+            filename,
+            first_clean_value(title_row.get("calendar_finish_ref", "")),
+            first_clean_value(title_row.get("cal_ref", "")),
+        ]
+        filename_hints.extend(
+            local_file_hints_for_title(
+                file_hints,
+                title,
+                filename,
+                finish_date,
+            )
         )
         manual_match = manual[
             manual["title"].map(lambda value: titles_match(str(value), title))
@@ -849,8 +1237,11 @@ def build_word_count_outputs(
         ]
         local_path = explicit_local_paths[0] if explicit_local_paths else None
         local_score = 100.0 if local_path else 0.0
+        local_hint = str(local_path) if local_path else ""
         if local_path is None:
-            local_path, local_score = find_local_file(title, filename, local_files)
+            local_path, local_score, local_hint = find_local_file_with_hints(
+                title, filename_hints, local_files
+            )
         local_word_count = None
         local_raw_word_count = None
         local_excluded_word_count = None
@@ -858,7 +1249,16 @@ def build_word_count_outputs(
         local_error = ""
         if local_path is not None:
             try:
-                local_audit = local_text_audit(local_path, title)
+                if show_progress:
+                    print(
+                        f"Extracting local text {row_number}/{len(titles)}: "
+                        f"{title} <- {local_path}",
+                        flush=True,
+                    )
+                cache_key = (local_path.resolve(), normalize_title(title))
+                if cache_key not in local_text_cache:
+                    local_text_cache[cache_key] = local_text_audit(local_path, title)
+                local_audit = local_text_cache[cache_key]
                 local_word_count = local_audit.reading_word_count
                 local_raw_word_count = local_audit.raw_word_count
                 local_excluded_word_count = (
@@ -868,6 +1268,13 @@ def build_word_count_outputs(
                 local_error = local_audit.warning
                 if local_word_count <= 0:
                     local_error = "no_text_extracted"
+                elif (
+                    local_word_count_method == "pdf_repeated_header_footer_body_pages"
+                    and local_word_count < MIN_LOCAL_PDF_READING_WORDS
+                ):
+                    local_error = (
+                        "insufficient_pdf_text_extracted:" f" {local_word_count} words"
+                    )
                 category_counts = section_category_counts(local_audit.section_rows)
                 local_text_audit_rows.append(
                     {
@@ -891,6 +1298,8 @@ def build_word_count_outputs(
                             **section,
                         }
                     )
+                if local_error.startswith("insufficient_pdf_text_extracted"):
+                    local_word_count = None
             except Exception as exc:
                 local_error = f"{type(exc).__name__}: {exc}"
             audit_rows.append(
@@ -987,10 +1396,11 @@ def build_word_count_outputs(
             {
                 "finish_id": title_row.get("finish_id", ""),
                 "title": title,
-                "finish_date": title_row.get("finish_date", ""),
+                "finish_date": finish_date,
                 "calendar_finish_ref": title_row.get("calendar_finish_ref", ""),
                 "local_file_path": str(local_path) if local_path else "",
                 "local_file_match_score": local_score,
+                "local_file_match_hint": local_hint,
                 "local_file_word_count": local_word_count,
                 "local_raw_word_count": local_raw_word_count,
                 "local_excluded_word_count": local_excluded_word_count,
