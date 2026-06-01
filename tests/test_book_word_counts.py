@@ -7,6 +7,8 @@ import pandas as pd
 
 from ai_books_tracking.book_word_counts import (
     LocalBookFile,
+    add_full_finished_projection_columns,
+    build_projection_metric_summary,
     build_word_count_outputs,
     classify_body_section,
     propagate_epub_back_matter_categories,
@@ -98,6 +100,62 @@ def test_build_word_count_outputs_prefers_local_text_over_online_count(
     assert row["word_count_source"] == "local_file_word_count"
     assert row["online_error_rate_vs_local"] == 1.5
     assert (output_dir / "book_word_count_online_error_rates.png").exists()
+
+
+def test_full_finished_projection_uses_local_calibration_before_mean_imputation() -> (
+    None
+):
+    projection = add_full_finished_projection_columns(
+        pd.DataFrame(
+            [
+                {
+                    "title": "Local Pair",
+                    "local_file_word_count": 1000,
+                    "metadata_page_count": 10,
+                    "external_word_count": 500,
+                    "chosen_word_count": 1000,
+                    "word_count_confidence": "high",
+                },
+                {
+                    "title": "Page Only",
+                    "local_file_word_count": None,
+                    "metadata_page_count": 5,
+                    "external_word_count": None,
+                    "chosen_word_count": 1375,
+                    "word_count_confidence": "medium",
+                },
+                {
+                    "title": "External Only",
+                    "local_file_word_count": None,
+                    "metadata_page_count": None,
+                    "external_word_count": 250,
+                    "chosen_word_count": 250,
+                    "word_count_confidence": "medium",
+                },
+                {
+                    "title": "No Inputs",
+                    "local_file_word_count": None,
+                    "metadata_page_count": None,
+                    "external_word_count": None,
+                    "chosen_word_count": None,
+                    "word_count_confidence": "low",
+                },
+            ]
+        ),
+        words_per_page=275,
+    ).set_index("title")
+
+    assert projection.loc["Page Only", "projected_word_count"] == 500
+    assert projection.loc["External Only", "projected_word_count"] == 500
+    assert projection.loc["No Inputs", "projected_word_count"] == 1000
+    assert (
+        projection.loc["No Inputs", "projected_word_count_method"]
+        == "global_mean_local_file_word_count_imputation"
+    )
+    summary = build_projection_metric_summary(projection.reset_index())
+    metrics = summary.set_index("metric")["value"]
+    assert metrics["finished_rows"] == 4
+    assert metrics["projected_total_words"] == 3000
 
 
 def test_build_word_count_outputs_uses_epub_body_count_and_audits_exclusions(

@@ -74,6 +74,12 @@ def build_speed_analysis(
         "online_minus_local_words",
         "online_error_rate_vs_local",
         "online_abs_error_rate_vs_local",
+        "projected_word_count",
+        "projected_word_count_method",
+        "projected_word_count_confidence",
+        "projection_is_observed_or_feature_based",
+        "current_chosen_minus_projected_words",
+        "current_chosen_vs_projected_error_rate",
     ]
     merged = time_df.merge(
         words_df[[column for column in word_columns if column in words_df.columns]],

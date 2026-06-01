@@ -1027,6 +1027,12 @@ def build_word_count_outputs(
     )
     write_online_error_outputs(result, output_dir)
     write_validation_summary(result, output_dir)
+    write_full_finished_projection_outputs(
+        result,
+        output_dir,
+        output_stem="book_word_count_current_finished_projection",
+        words_per_page=words_per_page,
+    )
     return result
 
 
@@ -1094,6 +1100,227 @@ def write_validation_summary(result: pd.DataFrame, output_dir: Path) -> None:
         frame[columns],
         output_dir / "book_word_count_validation_summary.md",
     )
+
+
+def add_full_finished_projection_columns(
+    result: pd.DataFrame, *, words_per_page: int = DEFAULT_WORDS_PER_PAGE
+) -> pd.DataFrame:
+    """Project a word count for every finished row, preserving source quality."""
+    frame = result.copy()
+    local = pd.to_numeric(frame.get("local_file_word_count"), errors="coerce")
+    pages = pd.to_numeric(frame.get("metadata_page_count"), errors="coerce")
+    external = pd.to_numeric(frame.get("external_word_count"), errors="coerce")
+    chosen = pd.to_numeric(frame.get("chosen_word_count"), errors="coerce")
+
+    local_page_mask = local.gt(0) & pages.gt(0)
+    if local_page_mask.any() and pages[local_page_mask].sum() > 0:
+        calibrated_words_per_page = float(
+            local[local_page_mask].sum() / pages[local_page_mask].sum()
+        )
+    else:
+        calibrated_words_per_page = float(words_per_page)
+
+    local_external_mask = local.gt(0) & external.gt(0)
+    if local_external_mask.any() and external[local_external_mask].sum() > 0:
+        online_to_local_scale = float(
+            local[local_external_mask].sum() / external[local_external_mask].sum()
+        )
+    else:
+        online_to_local_scale = 1.0
+
+    known_for_mean = local[local.gt(0)]
+    if known_for_mean.empty:
+        known_for_mean = chosen[chosen.gt(0)]
+    global_mean_words = (
+        float(known_for_mean.mean()) if not known_for_mean.empty else float("nan")
+    )
+
+    frame["projection_local_calibrated_words_per_page"] = calibrated_words_per_page
+    frame["projection_online_to_local_scale_factor"] = online_to_local_scale
+    frame["projection_global_mean_words"] = global_mean_words
+    frame["projected_word_count"] = np.nan
+    frame["projected_word_count_method"] = ""
+    frame["projected_word_count_confidence"] = "low"
+    frame["projection_is_observed_or_feature_based"] = False
+
+    local_mask = local.gt(0)
+    page_mask = ~local_mask & pages.gt(0)
+    external_mask = ~local_mask & ~page_mask & external.gt(0)
+    chosen_mask = ~local_mask & ~page_mask & ~external_mask & chosen.gt(0)
+    mean_mask = (
+        ~local_mask
+        & ~page_mask
+        & ~external_mask
+        & ~chosen_mask
+        & pd.notna(global_mean_words)
+    )
+
+    frame.loc[local_mask, "projected_word_count"] = local[local_mask]
+    frame.loc[local_mask, "projected_word_count_method"] = "audited_local_file_text"
+    frame.loc[local_mask, "projected_word_count_confidence"] = "high"
+    frame.loc[local_mask, "projection_is_observed_or_feature_based"] = True
+
+    frame.loc[page_mask, "projected_word_count"] = (
+        pages[page_mask] * calibrated_words_per_page
+    )
+    frame.loc[page_mask, "projected_word_count_method"] = (
+        "metadata_pages_x_local_calibrated_words_per_page"
+    )
+    frame.loc[page_mask, "projected_word_count_confidence"] = "medium"
+    frame.loc[page_mask, "projection_is_observed_or_feature_based"] = True
+
+    frame.loc[external_mask, "projected_word_count"] = (
+        external[external_mask] * online_to_local_scale
+    )
+    frame.loc[external_mask, "projected_word_count_method"] = (
+        "external_word_count_scaled_to_local_bias"
+    )
+    frame.loc[external_mask, "projected_word_count_confidence"] = "medium_low"
+    frame.loc[external_mask, "projection_is_observed_or_feature_based"] = True
+
+    frame.loc[chosen_mask, "projected_word_count"] = chosen[chosen_mask]
+    frame.loc[chosen_mask, "projected_word_count_method"] = (
+        "existing_chosen_word_count_no_local_calibration"
+    )
+    frame.loc[chosen_mask, "projected_word_count_confidence"] = frame.loc[
+        chosen_mask, "word_count_confidence"
+    ].fillna("low")
+    frame.loc[chosen_mask, "projection_is_observed_or_feature_based"] = True
+
+    frame.loc[mean_mask, "projected_word_count"] = global_mean_words
+    frame.loc[mean_mask, "projected_word_count_method"] = (
+        "global_mean_local_file_word_count_imputation"
+    )
+    frame.loc[mean_mask, "projected_word_count_confidence"] = "low"
+
+    missing_mask = frame["projected_word_count"].isna()
+    frame.loc[missing_mask, "projected_word_count_method"] = (
+        "missing_all_word_count_inputs"
+    )
+    frame["projected_word_count"] = frame["projected_word_count"].round()
+    frame["current_chosen_minus_projected_words"] = (
+        chosen - frame["projected_word_count"]
+    )
+    frame["current_chosen_vs_projected_error_rate"] = (
+        frame["current_chosen_minus_projected_words"] / frame["projected_word_count"]
+    ).where(frame["projected_word_count"].gt(0) & chosen.notna())
+    return frame
+
+
+def build_projection_metric_summary(projection: pd.DataFrame) -> pd.DataFrame:
+    projected = pd.to_numeric(projection["projected_word_count"], errors="coerce")
+    chosen = pd.to_numeric(projection.get("chosen_word_count"), errors="coerce")
+    local = pd.to_numeric(projection.get("local_file_word_count"), errors="coerce")
+    pages = pd.to_numeric(projection.get("metadata_page_count"), errors="coerce")
+    observed_or_feature = projection["projection_is_observed_or_feature_based"].fillna(
+        False
+    )
+    metrics = {
+        "finished_rows": len(projection),
+        "unique_normalized_titles": projection["title"]
+        .map(lambda value: normalize_title(str(value)))
+        .nunique(),
+        "rows_with_current_chosen_word_count": int(chosen.gt(0).sum()),
+        "rows_with_local_file_word_count": int(local.gt(0).sum()),
+        "rows_with_metadata_pages": int(pages.gt(0).sum()),
+        "rows_projected_from_observed_or_feature_inputs": int(
+            observed_or_feature.sum()
+        ),
+        "rows_low_confidence_global_mean_imputed": int(
+            projection["projected_word_count_method"]
+            .eq("global_mean_local_file_word_count_imputation")
+            .sum()
+        ),
+        "current_chosen_total_words": float(chosen.sum()),
+        "projected_total_words": float(projected.sum()),
+        "projected_delta_words_vs_current_chosen": float(
+            projected.sum() - chosen.sum()
+        ),
+        "projected_delta_pct_vs_current_chosen": (
+            float((projected.sum() - chosen.sum()) / chosen.sum() * 100)
+            if chosen.sum() > 0
+            else np.nan
+        ),
+        "projected_low_confidence_global_mean_words": float(
+            projected[
+                projection["projected_word_count_method"].eq(
+                    "global_mean_local_file_word_count_imputation"
+                )
+            ].sum()
+        ),
+        "local_calibrated_words_per_page": (
+            float(projection["projection_local_calibrated_words_per_page"].iloc[0])
+            if not projection.empty
+            else np.nan
+        ),
+        "online_to_local_scale_factor": (
+            float(projection["projection_online_to_local_scale_factor"].iloc[0])
+            if not projection.empty
+            else np.nan
+        ),
+        "global_mean_local_words": (
+            float(projection["projection_global_mean_words"].iloc[0])
+            if not projection.empty
+            else np.nan
+        ),
+    }
+    return pd.DataFrame(
+        [{"metric": metric, "value": value} for metric, value in metrics.items()]
+    )
+
+
+def build_projection_method_summary(projection: pd.DataFrame) -> pd.DataFrame:
+    if projection.empty:
+        return pd.DataFrame(
+            columns=[
+                "projected_word_count_method",
+                "rows",
+                "projected_total_words",
+                "current_chosen_total_words",
+                "projected_delta_words_vs_current_chosen",
+            ]
+        )
+    frame = projection.copy()
+    frame["projected_word_count"] = pd.to_numeric(
+        frame["projected_word_count"], errors="coerce"
+    )
+    frame["chosen_word_count"] = pd.to_numeric(
+        frame.get("chosen_word_count"), errors="coerce"
+    )
+    grouped = (
+        frame.groupby("projected_word_count_method", dropna=False)
+        .agg(
+            rows=("title", "size"),
+            projected_total_words=("projected_word_count", "sum"),
+            current_chosen_total_words=("chosen_word_count", "sum"),
+        )
+        .reset_index()
+    )
+    grouped["projected_delta_words_vs_current_chosen"] = (
+        grouped["projected_total_words"] - grouped["current_chosen_total_words"]
+    )
+    return grouped.sort_values("rows", ascending=False).reset_index(drop=True)
+
+
+def write_full_finished_projection_outputs(
+    result: pd.DataFrame,
+    output_dir: Path,
+    *,
+    output_stem: str,
+    words_per_page: int = DEFAULT_WORDS_PER_PAGE,
+) -> pd.DataFrame:
+    projection = add_full_finished_projection_columns(
+        result, words_per_page=words_per_page
+    )
+    summary = build_projection_metric_summary(projection)
+    methods = build_projection_method_summary(projection)
+    projection.to_csv(output_dir / f"{output_stem}.csv", index=False)
+    summary.to_csv(output_dir / f"{output_stem}_summary.csv", index=False)
+    methods.to_csv(output_dir / f"{output_stem}_methods.csv", index=False)
+    _write_markdown_table(projection, output_dir / f"{output_stem}.md")
+    _write_markdown_table(summary, output_dir / f"{output_stem}_summary.md")
+    _write_markdown_table(methods, output_dir / f"{output_stem}_methods.md")
+    return projection
 
 
 def validation_note(row: pd.Series) -> str:
