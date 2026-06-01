@@ -1,107 +1,127 @@
 finish_id,title,source_type,source,word_count,status,error,notes
-finish_0002,Open,local_file,/Users/clarkbenham/side_projects/data/Books/The Architecture of Open Source Applications 2.pdf,169047,ok,,
-finish_0007,Writing That Works: Third Edition,local_file,"/Users/clarkbenham/side_projects/data/Books/Writing That Works_ How to Communicate Effectively In Business-Kenneth Roman, Joel Raphaelson - Collins Reference (2000).epub",45497,ok,,
-finish_0010,kim,local_file,/Users/clarkbenham/side_projects/data/Books/Kim Ji Young Born 1982 - Cho Nam-Joo.pdf,37985,ok,,
-finish_0012,Dune,local_file,/Users/clarkbenham/side_projects/data/Books/(Dune Chronicles volume 2) Frank Herbert - Dune Messiah-Ace Books (2008).epub,77551,ok,,
-finish_0013,Dune Messiah,local_file,/Users/clarkbenham/side_projects/data/Books/(Dune Chronicles volume 2) Frank Herbert - Dune Messiah-Ace Books (2008).epub,77551,ok,,
-finish_0018,"Sadly, Porn",local_file,"/Users/clarkbenham/side_projects/data/Books/Sadly, Porn (2021) - Edward Teach.epub",299625,ok,,
-finish_0021,screwtape letters,local_file,/Users/clarkbenham/side_projects/data/Books/The Screwtape Letters-C. S. Lewis -#keep#.epub,31324,ok,,
-finish_0033,pragmatic programmer,local_file,"/Users/clarkbenham/side_projects/data/Books/The Pragmatic Programmer_ From Journeyman to Master-Andrew Hunt, David Thomas - Addison-Wesley Professional (1999).pdf",92108,ok,,
-finish_0050,screwtape letters,local_file,/Users/clarkbenham/side_projects/data/Books/The Screwtape Letters-C. S. Lewis -#keep#.epub,31324,ok,,
-finish_0052,starship troopers,local_file,/Users/clarkbenham/side_projects/data/Books/Starship Troopers Robert A. Heinlein - (1987).pdf,86665,ok,,
-finish_0053,Stranger in a Strange Land,local_file,/Users/clarkbenham/side_projects/data/Books/Stranger in a strange land -Robert A. Heinlein - Ace Books (1961).pdf,169473,ok,,
-finish_0055,The Moon Is A Harsh Mistress,local_file,/Users/clarkbenham/side_projects/data/Books/The Moon Is a Harsh Mistress - Robert A. Heinlein - (1987).pdf,120394,ok,,
-finish_0057,Player of Games,local_file,/Users/clarkbenham/side_projects/data/Books/The Player of Games - Iain M. Banks - Orbit (2008).epub,116433,ok,,
-finish_0063,out of the silent planet,local_file,data/Books/Out of the Silent Planet by CS Lewis.pdf,59569,ok,,
+finish_0007,Writing That Works: Third Edition,local_file,"/Users/clarkbenham/side_projects/data/Books/Writing That Works_ How to Communicate Effectively In Business-Kenneth Roman, Joel Raphaelson - Collins Reference (2000).epub",44795,ok,,epub_spine_body_sections
+finish_0013,Dune Messiah,local_file,/Users/clarkbenham/side_projects/data/Books/(Dune Chronicles volume 2) Frank Herbert - Dune Messiah-Ace Books (2008).epub,77540,ok,,epub_spine_body_sections
+finish_0013,Dune Messiah,web_count,https://www.readinglength.com/book/BX9oRzY,64000,ok,,ReadingLength online-search estimate; rough guess.
+finish_0018,"Sadly, Porn",local_file,"/Users/clarkbenham/side_projects/data/Books/Sadly, Porn (2021) - Edward Teach.epub",299624,ok,,epub_spine_body_sections
+finish_0021,screwtape letters,local_file,/Users/clarkbenham/side_projects/data/Books/The Screwtape Letters-C. S. Lewis -#keep#.epub,31129,ok,,epub_spine_body_sections
+finish_0021,screwtape letters,web_count,https://www.readinglength.com/work/WPCt7r2,40000,ok,,ReadingLength online-search estimate; rough guess.
+finish_0033,pragmatic programmer,local_file,"/Users/clarkbenham/side_projects/data/Books/The Pragmatic Programmer_ From Journeyman to Master-Andrew Hunt, David Thomas - Addison-Wesley Professional (1999).pdf",91862,ok,,pdf_repeated_header_footer_body_pages
+finish_0033,pragmatic programmer,web_count,https://www.readinglength.com/book/BSC5ung,88000,ok,,ReadingLength online-search estimate; rough guess; 20th anniversary edition may differ from the local PDF.
+finish_0050,screwtape letters,local_file,/Users/clarkbenham/side_projects/data/Books/The Screwtape Letters-C. S. Lewis -#keep#.epub,31129,ok,,epub_spine_body_sections
+finish_0050,screwtape letters,web_count,https://www.readinglength.com/work/WPCt7r2,40000,ok,,ReadingLength online-search estimate; rough guess.
+finish_0052,starship troopers,local_file,/Users/clarkbenham/side_projects/data/Books/Starship Troopers Robert A. Heinlein - (1987).pdf,86699,ok,,pdf_repeated_header_footer_body_pages
+finish_0052,starship troopers,web_count,https://www.readinglength.com/book/BstO0A6,52000,ok,,ReadingLength online-search estimate; rough guess.
+finish_0053,Stranger in a Strange Land,local_file,/Users/clarkbenham/side_projects/data/Books/Stranger in a strange land -Robert A. Heinlein - Ace Books (1961).pdf,167906,ok,,pdf_repeated_header_footer_body_pages
+finish_0053,Stranger in a Strange Land,web_count,https://www.readinglength.com/book/BtRmrhy,109500,ok,,ReadingLength online-search estimate; rough guess.
+finish_0055,The Moon Is A Harsh Mistress,local_file,/Users/clarkbenham/side_projects/data/Books/The Moon Is a Harsh Mistress - Robert A. Heinlein - (1987).pdf,120469,ok,,pdf_repeated_header_footer_body_pages
+finish_0055,The Moon Is A Harsh Mistress,web_count,https://www.readinglength.com/book/BKfozRz,95500,ok,,ReadingLength online-search estimate; rough guess.
+finish_0057,Player of Games,local_file,/Users/clarkbenham/side_projects/data/Books/The Player of Games - Iain M. Banks - Orbit (2008).epub,116409,ok,,epub_spine_body_sections
+finish_0063,out of the silent planet,local_file,data/Books/Out of the Silent Planet by CS Lewis.pdf,59431,ok,,pdf_repeated_header_footer_body_pages
 finish_0063,out of the silent planet,manual_count,https://www.gutenberg.ca/ebooks/lewiscs-outofthesilentplanet/lewiscs-outofthesilentplanet-00-h.html,57757,ok,,User-provided Gutenberg check: 58557 total words minus 174-word header and 626-word footer; local PDF clipboard count was 60636; Drive first-80-page extrapolation was about 57k.
 finish_0063,out of the silent planet,web_html,https://www.gutenberg.ca/ebooks/lewiscs-outofthesilentplanet/lewiscs-outofthesilentplanet-00-h.html,59031,ok,,Programmatic HTML text count bounded to the novel body; retained as a secondary check because tokenizer/page-number handling differs from wc -w.
-finish_0064,Perelandra by CS Lewis book 2.pdf,local_file,/Users/clarkbenham/side_projects/data/Books/Perelandra by CS Lewis book 2.pdf,86635,ok,,
-finish_0065,that hideous strength,local_file,/Users/clarkbenham/side_projects/data/Books/That Hideous Strength by CS Lewis.pdf,159432,ok,,
-finish_0066,The Screwtape Letters,local_file,/Users/clarkbenham/side_projects/data/Books/The Screwtape Letters-C. S. Lewis -#keep#.epub,31324,ok,,
-finish_0071,how to win friends and influence people,local_file,"/Users/clarkbenham/side_projects/data/Books/How to Win Friends and Influence People -- Carnegie, Dale -- 2009 -- Simon and Schuster.epub",80457,ok,,
-finish_0075,The Checklist Manifesto,local_file,"/Users/clarkbenham/side_projects/data/Books/The Checklist Manifesto- How to Get Things Right - Gawande, Atul.epub",58116,ok,,
-finish_0081,Methuselah's Children,local_file,"/Users/clarkbenham/side_projects/data/Books/Methuselah's Children - Heinlein, Robert Anson.epub",67250,ok,,
-finish_0084,50 essays by george orwell,local_file,/Users/clarkbenham/side_projects/data/Books/ 50 Essays by George Orwell.lit,232021,ok,,
-finish_0088,what is man and other essays,local_file,"/Users/clarkbenham/side_projects/data/Books/What is Man_ and Other Essays, by Mark Twain.pdf",107358,ok,,
-finish_0094,The Oxford Book of Short Stories,local_file,/Users/clarkbenham/side_projects/data/Books/The Oxford Book of Short Stories - V. S. Pritchett.epub,231363,ok,,
-finish_0095,Red Plenty,local_file,"/Users/clarkbenham/side_projects/data/Books/Red Plenty - F Spufford - (2010, Faber and Faber).epub",172213,ok,,
-finish_0096,The innocence of Father Brown,local_file,/Users/clarkbenham/side_projects/data/Books/The innocence of Father Brown by G. K. Chesterton.epub,83772,ok,,
-finish_0098,Brief Interviews with Hideous Men,local_file,"/Users/clarkbenham/side_projects/data/Books/Brief Interviews with Hideous Men - Wallace, David Foster (1999).epub",109940,ok,,
-finish_0100,self help is like a vaccine,local_file,/Users/clarkbenham/side_projects/data/Books/Self-Help Is Like a Vaccine- Essays on Living Better  by Bryan Caplan.epub,34712,ok,,
-finish_0101,the goal,local_file,"/Users/clarkbenham/side_projects/data/Books/The goal_ a process of ongoing improvement  -Eliyahu M. Goldratt, Jeff Cox - North River Press 2004.epub",143785,ok,,
-finish_0103,The Doomsday Machine,local_file,"/Users/clarkbenham/side_projects/data/Books/The Doomsday Machine_ Confessions of a Nuclear War Planner - Daniel Ellsberg -  (2017, Bloomsbury USA).epub",170821,ok,,
-finish_0105,How to Fail at Almost Everything and Still Win Big,local_file,"/Users/clarkbenham/side_projects/data/Books/How to fail at almost everything and still win big _ kind of the story of my life - Adams, Scott - Penguin Books Ltd_Portfolio_Penguin (2013).epub",88975,ok,,
-finish_0107,IMPRO Improvisation and the Theatre,local_file,"/Users/clarkbenham/side_projects/data/Books/Impro_ Improvisation and the Theatre - Keith Johnstone - (2016, Bloomsbury).epub",86503,ok,,
-finish_0108,Downfall,local_file,"/Users/clarkbenham/side_projects/data/Books/ Downfall_ Prigozhin, Putin, and the New Fight for the Future of Russia - Anna Arutunyan_ Mark Galeotti - (2024, Ebury Publishing).epub",66362,ok,,
-finish_0109,Designing Machine Learning Systems,local_file,"/Users/clarkbenham/side_projects/data/Books/Designing Machine Learning Systems_ An Iterative Process for Production-Ready Applications - Chip Huyen -  (2022, O'Reilly Media).epub",138130,ok,,
-finish_0110,"Declare_ A novel - Powers, Tim.pdf",local_file,"/Users/clarkbenham/side_projects/data/Books/Declare_ A novel - Powers, Tim.pdf",212503,ok,,
-finish_0112,machine learning engineering,local_file,/Users/clarkbenham/side_projects/data/Books/Machine Learning Engineering - Andriy Burkov - (2020).pdf,107231,ok,,
-finish_0113,nonviolent communication,local_file,/Users/clarkbenham/side_projects/data/Books/Nonviolent Communication_ A Language of Life_ Life-Changing -- Marshall B_ Rosenberg -- 2015 -- Puddledancer Press.epub,77612,ok,,
-finish_0114,the art of military innovation,local_file,"/Users/clarkbenham/side_projects/data/Books/The Art of Military Innovation_ Lessons from the Israel Defense Forces - Edward N. Luttwak_ Eitan Shamir - (2023, Harvard University Press) [10.4159_9780674295148].pdf",116766,ok,,
-finish_0117,Apollo: The Race to the Moon,local_file,"/Users/clarkbenham/side_projects/data/Books/Apollo_ The Race to the Moon - Murray, Charles _ Cox, Catherine Bly - (1989, Simon & Schuster).epub",201859,ok,,
-finish_0118,best of Isaac Asimov,local_file,/Users/clarkbenham/side_projects/data/Books/The Best of Isaac Asimov - Isaac Asimov - (2005).epub,113962,ok,,
-finish_0119,parkinson's law,local_file,"/Users/clarkbenham/side_projects/data/Books/Parkinson’s Law, and Other Studies in Administration-Cyril Northcote Parkinson - Houghton Mifflin (1957).pdf",28624,ok,,
-finish_0120,how to succeed at business without really trying,local_file,"/Users/clarkbenham/side_projects/data/Books/How to Succeed in Business Without Really Trying - Shepherd Mead - (1952, Simon and Schuster).pdf",21917,ok,,
-finish_0121,Life and Fate,local_file,"/Users/clarkbenham/side_projects/data/Books/Life And Fate - Grossman, Vasily - (Orange Inheritance Edition) (2011, Random House).epub",337300,ok,,
-finish_0122,Monday Starts on Saturday,local_file,"/Users/clarkbenham/side_projects/data/Books/Monday Starts on Saturday - Strugatsky, Boris - (2017, Chicago Review Press).epub",87094,ok,,
-finish_0123,Kelly my share of it all,local_file,"/Users/clarkbenham/side_projects/data/Books/Kelly_ More Than My Share of It All -- Clarence L_ Johnson, Maggie Smith -- 2012.epub",69433,ok,,
-finish_0124,Atomic Habits,local_file,"/Users/clarkbenham/side_projects/data/Books/Atomic habits_ an easy and proven way to build good habits and break bad ones - Clear, James - (2018, Random House Business Books).epub",80712,ok,,
-finish_0125,rlhf,local_file,/Users/clarkbenham/side_projects/data/Books/Reinforcement Learning from Human Feedback_ jun 11_ A short introduction to RLHF and post-training focused on language models - Nathan Lambert.pdf,48307,ok,,
-finish_0128,screwtape letters,local_file,/Users/clarkbenham/side_projects/data/Books/The Screwtape Letters-C. S. Lewis -#keep#.epub,31324,ok,,
-finish_0130,the pale king,local_file,"/Users/clarkbenham/side_projects/data/Books/The Pale King- An Unfinished Novel - Wallace, David Foster - (2011, Little, Brown and Company).epub",213241,ok,,
-finish_0131,the Oxford book of essays,local_file,/Users/clarkbenham/side_projects/data/Books/The Oxford Book of Essays-John J. Gross - Oxford University Press (1991).pdf,284080,ok,,
-finish_0132,12 rules for life,local_file,"/Users/clarkbenham/side_projects/data/Books/12 Rules for Life [Hardcover] and Maps of Meaning) 12 Rules for Life_ An Antidote to Ch - Jordan B. Peterson - (2018, Penguin Books Ltd_ Allen Lane).epub",151490,ok,,
-finish_0133,the pentagon wars,local_file,"/Users/clarkbenham/side_projects/data/Books/The Pentagon Wars_ Reformers Challenge the Old Guard - James G. Burton - (2014, US Naval Institute Press).epub",135747,ok,,
-finish_0134,you just dont understand,local_file,"/Users/clarkbenham/side_projects/data/Books/You Just Don't Understand - Tannen, Deborah.epub",108821,ok,,
-finish_0135,on China,local_file,"/Users/clarkbenham/side_projects/data/Books/On China - Kissinger, Henry.epub",188154,ok,,
-finish_0136,The Path to Power: The Years of Lyndon Johnson I,local_file,"/Users/clarkbenham/side_projects/data/Books/The Path to Power_ The Years of Lyndon Johnson vol I - Robert A. Caro -  (2011, Knopf Doubleday Publishing Group).epub",465435,ok,,
-finish_0137,means of ascent,local_file,"/Users/clarkbenham/side_projects/data/Books/Means of ascent v2 - Caro, Robert A - (2009, Knopf Doubleday Publishing Group).epub",282854,ok,,
-finish_0138,man’s search for meaning,local_file,/Users/clarkbenham/side_projects/data/Books/Man’s Search for Meaning - Viktor E. Frankl_ Harold S. Kushner_ William J. Winslade_ Isle Lasch - Beacon Press (2006).epub,45193,ok,,
-finish_0139,master of the senate,local_file,"/Users/clarkbenham/side_projects/data/Books/Master of the Senate v3 - Caro, Robert A.epub",616427,ok,,
-finish_0140,the passage of power,local_file,"/Users/clarkbenham/side_projects/data/Books/The Passage of Power_ The Years of Lyndon Johnson v4- Robert A. Caro - (2012, Knopf).epub",405253,ok,,
-finish_0142,racing for the bomb,local_file,"/Users/clarkbenham/side_projects/data/Books/Racing for the Bomb_ General Leslie R. Groves, the Manhattan Project's Indispensable Man - Robert S. Norris - (2002, Steerforth Pr).pdf",0,error,no_text_extracted,
-finish_0143,Kissinger,local_file,"/Users/clarkbenham/side_projects/data/Books/On China - Kissinger, Henry.epub",188154,ok,,
-finish_0144,bureaucracy,local_file,/Users/clarkbenham/side_projects/data/Books/Bureaucracy _ what government agencies do and why they do it - James Q. Wilson - (2000).epub,189570,ok,,
-finish_0145,theory and practice of gamesmanship,local_file,"/Users/clarkbenham/side_projects/data/Books/The Theory and Practice of Gamesmanship_ Or, the Art of Winning Games Without Actually Cheating - Stephen Potter - (2015, Pickle Partners Publishing).epub",22518,ok,,
-finish_0147,how to improve your marriage without talking about it,local_file,"/Users/clarkbenham/side_projects/data/Books/How to Improve Your Marriage Without Talking About It - Patricia Love, Steven Stosny - (2008, Harmony).epub",63296,ok,,
-finish_0149,Mathematics for Machine Learning,local_file,/Users/clarkbenham/side_projects/data/Books/Mathematics for Machine Learning Soln.pdf,21167,ok,,
-finish_0151,reading asme y14.41,local_file,/Users/clarkbenham/side_projects/data/Books/ASME-Y14-41-2012-Digital-Product-Definition (0)- ASME.pdf,0,error,no_text_extracted,
-finish_0153,failure is not an option,local_file,/Users/clarkbenham/side_projects/data/Books/Failure Is Not an Option_ Mission Control from Mercury to Apollo 13 and Beyond - Gene Kranz - Simon & Schuster (2000).epub,164489,ok,,
-finish_0152,blueprint reading: construction drawings for the building trade,local_file,"/Users/clarkbenham/side_projects/data/Books/Blueprint reading _ construction drawings for the building trades (2008, McGraw-Hill Companies, Inc.) - [McGraw Hill professional] Sam A. A. Kubba - [10.1036_0071549862].pdf",93071,ok,,
-finish_0155,age of ambition,local_file,"/Users/clarkbenham/side_projects/data/Books/Age of Ambition_ Chasing Fortune, Truth, and Faith in the New China - Osnos, Evan - (2014, Farrar, Straus and Giroux).epub",154934,ok,,
-finish_0156,Apple in China,local_file,"/Users/clarkbenham/side_projects/data/Books/Apple in China - Patrick McGee - (2025, Simon & Schuster UK).epub",145857,ok,,
-finish_0157,the price of victory,local_file,"/Users/clarkbenham/side_projects/data/Books/The Price of Victory - Rodger, N A M - (2024, Penguin Books Ltd).epub",444030,ok,,
-finish_0159,Richard Nixon the Life,local_file,"/Users/clarkbenham/side_projects/data/Books/Richard Nixon_ The Life - Farrell, John Aloysius_Nixon, Richard Milhous - (2017, Knopf Doubleday Publishing Group).epub",326023,ok,,
-finish_0161,high intensity training the mike mentzer way,local_file,/Users/clarkbenham/side_projects/data/Books/HIGH-INTENSITY TRAINING the Mike Mentzer Way by Mike Mentzer with John Little.pdf,71430,ok,,
-finish_0166,my early life,local_file,/Users/clarkbenham/side_projects/data/Books/My Early Life  1872 to 1904 - Churchill.epub,124256,ok,,
-finish_0167,the second world war,local_file,"/Users/clarkbenham/side_projects/data/Books/The Second World War_ Abridged Edition, With an Epilogue on the Years 1945 to 1957 - Churchill.epub",462971,ok,,
-finish_0168,six crises,local_file,"/Users/clarkbenham/side_projects/data/Books/Six Crises -  Nixon, Richard - (Simon & Schuster).epub",207429,ok,,
-finish_0170,thoughts and adventures,local_file,/Users/clarkbenham/side_projects/data/Books/Thoughts and Adventures by Winston Churchill.epub,86189,ok,,
-finish_0171,revolt in the desert,local_file,/Users/clarkbenham/side_projects/data/Books/ Revolt in the Desert by T E Lawrence.epub,134335,ok,,
-finish_0174,the power broker,local_file,/Users/clarkbenham/side_projects/data/Books/The Power Broker_ Robert Moses and the Fall of New York  -Robert A. Caro -1975.epub,697127,ok,,
-finish_0175,Shape Up Stop Running in Circles and Ship Work that Matters,local_file,/Users/clarkbenham/side_projects/data/Books/Shape Up_ Stop Running in Circles and Ship Work that Matters -  Ryan Singer - (2019).pdf,32398,ok,,
-finish_0176,to say nothing of the dog,local_file,"/Users/clarkbenham/side_projects/data/Books/To say nothing of the dog, or, How we found the bishop's -- Oxford Time Travel  02 -- Connie Willis 1998 -- Bantam Books .epub",186975,ok,,
-finish_0177,art and fear,local_file,"/Users/clarkbenham/side_projects/data/Books/Art & fear _ observations on the perils (and rewards) of artmaking - Orland, Ted_ Bayles, David - (1993, Turtleback Books_Distributed by Consortium Book Sales & Distribution, Image Continuum Press).pdf",27656,ok,,
-finish_0178,the world crisis,local_file,/Users/clarkbenham/side_projects/data/Books/the world crisis abriged - Winston Churchill.epub,210877,ok,,
-finish_0179,the world crisis volume 2,local_file,/Users/clarkbenham/side_projects/data/Books/The World Crisis - Churchill Winston - Volume 3_ 1916-1918.mobi,203721,ok,,
-finish_0180,the world crisis vol 3,local_file,/Users/clarkbenham/side_projects/data/Books/The World Crisis - Churchill Winston - Volume 3_ 1916-1918.mobi,203721,ok,,
-finish_0181,the world crisis volume 4,local_file,/Users/clarkbenham/side_projects/data/Books/The World Crisis. Volume 4_ The Aftermath - Churchill Winston.mobi,164311,ok,,
-finish_0182,the history of the English speaking peoples volume 4,local_file,"data/Books/The Great Democracies_ A History of the English-Speaking Peoples, Volume IV - Churchill, Winston Spencer - (2005, Barnes & Noble).epub",124300,ok,,
-finish_0183,going postal,local_file,"/Users/clarkbenham/side_projects/data/Books/Going Postal [Discworld 33] - Terry Pratchett - (2009, HarperCollins).epub",121922,ok,,
-finish_0184,Now It Can Be Told,local_file,"/Users/clarkbenham/side_projects/data/Books/Now it can be told _ the story of the Manhattan Project - Groves , Leslie R - (1983, Da Capo Press).epub",168544,ok,,
-finish_0186,it's better to be feared,local_file,"/Users/clarkbenham/side_projects/data/Books/It's Better to Be Feared_ The New England Patriots Dynasty and the Pursuit of Greatness - Seth Wickersham - (2021, Liveright).epub",193830,ok,,
-finish_0187,the effective executive,local_file,"/Users/clarkbenham/side_projects/data/Books/The Effective Executive_ The Definitive Guide to Getting the Right Things Done - Peter F. Drucker, Jim Collins - (2017, HarperBusiness).epub",66884,ok,,
-finish_0188,the best and brightest,local_file,"/Users/clarkbenham/side_projects/data/Books/The Best and the Brightest - David Halberstam - (2001, Modern Library).epub",352433,ok,,
-finish_0189,good omens,local_file,"/Users/clarkbenham/side_projects/data/Books/Good Omens - Pratchett, Terry _ Gaiman, Neil.pdf",108262,ok,,
-finish_0190,prime movers of globalization,local_file,"/Users/clarkbenham/side_projects/data/Books/eleven_upload/Business, management/Prime Movers of Globalization.epub",89140,ok,,
-finish_0191,shoe dog,local_file,"/Users/clarkbenham/side_projects/data/Books/Shoe Dog_ A Memoir by the Creator of Nike - Nike (Firm)_Knight, Philip H - (2018_2016, Scribner).epub",126187,ok,,
-finish_0192,the billionaire and the mechanic,local_file,"/Users/clarkbenham/side_projects/data/Books/The billionaire and the mechanic_ how Larry Ellison and a car mechanic teamed up to win sailing's greatest race, the America's -  Bajurin, Norbert_Ellison, Larry_Guthrie, Julian - (2014, Grove Atlantic_Grove Press).epub",142997,ok,,
-finish_0194,memos from the chairman,local_file,"/Users/clarkbenham/side_projects/data/Books/Memos from the Chairman - Alan C. Greenberg - (2016, Workman Publishing).epub",32590,ok,,
-finish_0195,night watch,local_file,"/Users/clarkbenham/side_projects/data/Books/Night Watch [Discworld 29 ] - Terry, Pratchett (2010).epub",114186,ok,,
-finish_0197,fall of Hyperion,local_file,"/Users/clarkbenham/side_projects/data/Books/Hyperion Cantos [02] - The Fall of Hyperion - [Hyperion Cantos _2] Simmons, Dan - (1990, Spectra).epub",190753,ok,,
-finish_0198,thoughts and adventures,local_file,/Users/clarkbenham/side_projects/data/Books/Thoughts and Adventures by Winston Churchill.epub,86189,ok,,
-finish_0199,my early life,local_file,/Users/clarkbenham/side_projects/data/Books/My Early Life  1872 to 1904 - Churchill.epub,124256,ok,,
-finish_0201,Churchill: Walking with Destiny,local_file,"/Users/clarkbenham/side_projects/data/Books/Churchill_ Walking with Destiny - Andrew Roberts - (2018, Allen Lane).epub",513344,ok,,
-finish_0202,churchill the power of words,local_file,"/Users/clarkbenham/side_projects/data/Books/Churchill _ the power of words _ his remarkable life recounted through his writings and speeches _ 200 readings - Churchill, Winston S_ Gilbert, Martin (Editor) - (2014, Da Capo Press_Bantam Press).epub",175294,ok,,
-finish_0203,the nvidia way,local_file,"/Users/clarkbenham/side_projects/data/Books/The Nvidia Way_ Jensen Huang and the Making of a Tech Giant - Tae Kim - (2024, W. W. Norton & Company).epub",86380,ok,,
-finish_0204,managing the professional services firm,local_file,"/Users/clarkbenham/side_projects/data/Books/Managing the professional service firm - Maister, David H. - (2014, Free Press).epub",118025,ok,,
+finish_0064,Perelandra by CS Lewis book 2.pdf,local_file,/Users/clarkbenham/side_projects/data/Books/Perelandra by CS Lewis book 2.pdf,86344,ok,,pdf_repeated_header_footer_body_pages
+finish_0065,that hideous strength,local_file,/Users/clarkbenham/side_projects/data/Books/That Hideous Strength by CS Lewis.pdf,159372,ok,,pdf_repeated_header_footer_body_pages
+finish_0066,The Screwtape Letters,local_file,/Users/clarkbenham/side_projects/data/Books/The Screwtape Letters-C. S. Lewis -#keep#.epub,31129,ok,,epub_spine_body_sections
+finish_0066,The Screwtape Letters,web_count,https://www.readinglength.com/work/WPCt7r2,40000,ok,,ReadingLength online-search estimate; rough guess.
+finish_0071,how to win friends and influence people,local_file,"/Users/clarkbenham/side_projects/data/Books/How to Win Friends and Influence People -- Carnegie, Dale -- 2009 -- Simon and Schuster.epub",80456,ok,,epub_spine_body_sections
+finish_0071,how to win friends and influence people,web_count,https://www.readinglength.com/book/B13Et31,72000,ok,,ReadingLength online-search estimate; rough guess.
+finish_0075,The Checklist Manifesto,local_file,"/Users/clarkbenham/side_projects/data/Books/The Checklist Manifesto- How to Get Things Right - Gawande, Atul.epub",56909,ok,,epub_spine_body_sections
+finish_0075,The Checklist Manifesto,web_count,https://www.readinglength.com/work/WmSu2Qp,60000,ok,,ReadingLength online-search estimate; rough guess.
+finish_0081,Methuselah's Children,local_file,"/Users/clarkbenham/side_projects/data/Books/Methuselah's Children - Heinlein, Robert Anson.epub",67250,ok,,epub_spine_body_sections
+finish_0084,50 essays by george orwell,local_file,/Users/clarkbenham/side_projects/data/Books/ 50 Essays by George Orwell.lit,232021,ok,no_section_level_body_filter_available,lit_raw_text
+finish_0088,what is man and other essays,local_file,"/Users/clarkbenham/side_projects/data/Books/What is Man_ and Other Essays, by Mark Twain.pdf",101021,ok,,pdf_repeated_header_footer_body_pages
+finish_0094,The Oxford Book of Short Stories,local_file,/Users/clarkbenham/side_projects/data/Books/The Oxford Book of Short Stories - V. S. Pritchett.epub,231362,ok,all_non_front_sections_reclassified_as_body,epub_spine_body_sections
+finish_0095,Red Plenty,local_file,"/Users/clarkbenham/side_projects/data/Books/Red Plenty - F Spufford - (2010, Faber and Faber).epub",141066,ok,,epub_spine_body_sections
+finish_0096,The innocence of Father Brown,local_file,/Users/clarkbenham/side_projects/data/Books/The innocence of Father Brown by G. K. Chesterton.epub,83563,ok,,epub_spine_body_sections
+finish_0098,Brief Interviews with Hideous Men,local_file,"/Users/clarkbenham/side_projects/data/Books/Brief Interviews with Hideous Men - Wallace, David Foster (1999).epub",109804,ok,,epub_spine_body_sections
+finish_0100,self help is like a vaccine,local_file,/Users/clarkbenham/side_projects/data/Books/Self-Help Is Like a Vaccine- Essays on Living Better  by Bryan Caplan.epub,34342,ok,,epub_spine_body_sections
+finish_0101,the goal,local_file,"/Users/clarkbenham/side_projects/data/Books/The goal_ a process of ongoing improvement  -Eliyahu M. Goldratt, Jeff Cox - North River Press 2004.epub",143587,ok,,epub_spine_body_sections
+finish_0101,the goal,web_count,https://www.readinglength.com/work/WbLKyCZ,102000,ok,,ReadingLength online-search estimate; rough guess; 25th anniversary edition may differ from the local EPUB.
+finish_0103,The Doomsday Machine,local_file,"/Users/clarkbenham/side_projects/data/Books/The Doomsday Machine_ Confessions of a Nuclear War Planner - Daniel Ellsberg -  (2017, Bloomsbury USA).epub",139990,ok,,epub_spine_body_sections
+finish_0105,How to Fail at Almost Everything and Still Win Big,local_file,"/Users/clarkbenham/side_projects/data/Books/How to fail at almost everything and still win big _ kind of the story of my life - Adams, Scott - Penguin Books Ltd_Portfolio_Penguin (2013).epub",83794,ok,,epub_spine_body_sections
+finish_0107,IMPRO Improvisation and the Theatre,local_file,"/Users/clarkbenham/side_projects/data/Books/Impro_ Improvisation and the Theatre - Keith Johnstone - (2016, Bloomsbury).epub",86008,ok,,epub_spine_body_sections
+finish_0108,Downfall,local_file,"/Users/clarkbenham/side_projects/data/Books/ Downfall_ Prigozhin, Putin, and the New Fight for the Future of Russia - Anna Arutunyan_ Mark Galeotti - (2024, Ebury Publishing).epub",55612,ok,,epub_spine_body_sections
+finish_0109,Designing Machine Learning Systems,local_file,"/Users/clarkbenham/side_projects/data/Books/Designing Machine Learning Systems_ An Iterative Process for Production-Ready Applications - Chip Huyen -  (2022, O'Reilly Media).epub",130648,ok,,epub_spine_body_sections
+finish_0110,"Declare_ A novel - Powers, Tim.pdf",local_file,"/Users/clarkbenham/side_projects/data/Books/Declare_ A novel - Powers, Tim.pdf",212326,ok,,pdf_repeated_header_footer_body_pages
+finish_0112,machine learning engineering,local_file,/Users/clarkbenham/side_projects/data/Books/Machine Learning Engineering - Andriy Burkov - (2020).pdf,106950,ok,,pdf_repeated_header_footer_body_pages
+finish_0113,nonviolent communication,local_file,/Users/clarkbenham/side_projects/data/Books/Nonviolent Communication_ A Language of Life_ Life-Changing -- Marshall B_ Rosenberg -- 2015 -- Puddledancer Press.epub,77611,ok,,epub_spine_body_sections
+finish_0114,the art of military innovation,local_file,"/Users/clarkbenham/side_projects/data/Books/The Art of Military Innovation_ Lessons from the Israel Defense Forces - Edward N. Luttwak_ Eitan Shamir - (2023, Harvard University Press) [10.4159_9780674295148].pdf",114980,ok,,pdf_repeated_header_footer_body_pages
+finish_0117,Apollo: The Race to the Moon,local_file,"/Users/clarkbenham/side_projects/data/Books/Apollo_ The Race to the Moon - Murray, Charles _ Cox, Catherine Bly - (1989, Simon & Schuster).epub",201215,ok,,epub_spine_body_sections
+finish_0118,best of Isaac Asimov,local_file,/Users/clarkbenham/side_projects/data/Books/The Best of Isaac Asimov - Isaac Asimov - (2005).epub,113961,ok,,epub_spine_body_sections
+finish_0119,parkinson's law,local_file,"/Users/clarkbenham/side_projects/data/Books/Parkinson’s Law, and Other Studies in Administration-Cyril Northcote Parkinson - Houghton Mifflin (1957).pdf",28939,ok,,pdf_repeated_header_footer_body_pages
+finish_0120,how to succeed at business without really trying,local_file,"/Users/clarkbenham/side_projects/data/Books/How to Succeed in Business Without Really Trying - Shepherd Mead - (1952, Simon and Schuster).pdf",21457,ok,,pdf_repeated_header_footer_body_pages
+finish_0121,Life and Fate,local_file,"/Users/clarkbenham/side_projects/data/Books/Life And Fate - Grossman, Vasily - (Orange Inheritance Edition) (2011, Random House).epub",337014,ok,,epub_spine_body_sections
+finish_0121,Life and Fate,web_count,https://www.readinglength.com/book/BRhPVDd,220000,ok,,ReadingLength online-search estimate; rough guess.
+finish_0122,Monday Starts on Saturday,local_file,"/Users/clarkbenham/side_projects/data/Books/Monday Starts on Saturday - Strugatsky, Boris - (2017, Chicago Review Press).epub",86555,ok,,epub_spine_body_sections
+finish_0123,Kelly my share of it all,local_file,"/Users/clarkbenham/side_projects/data/Books/Kelly_ More Than My Share of It All -- Clarence L_ Johnson, Maggie Smith -- 2012.epub",69319,ok,,epub_spine_body_sections
+finish_0124,Atomic Habits,local_file,"/Users/clarkbenham/side_projects/data/Books/Atomic habits_ an easy and proven way to build good habits and break bad ones - Clear, James - (2018, Random House Business Books).epub",62708,ok,,epub_spine_body_sections
+finish_0124,Atomic Habits,web_count,https://www.readinglength.com/book/BDlao2D,51925,ok,,ReadingLength online-search estimate based on audiobook length.
+finish_0125,rlhf,local_file,/Users/clarkbenham/side_projects/data/Books/Reinforcement Learning from Human Feedback_ jun 11_ A short introduction to RLHF and post-training focused on language models - Nathan Lambert.pdf,47606,ok,,pdf_repeated_header_footer_body_pages
+finish_0128,screwtape letters,local_file,/Users/clarkbenham/side_projects/data/Books/The Screwtape Letters-C. S. Lewis -#keep#.epub,31129,ok,,epub_spine_body_sections
+finish_0128,screwtape letters,web_count,https://www.readinglength.com/work/WPCt7r2,40000,ok,,ReadingLength online-search estimate; rough guess.
+finish_0130,the pale king,local_file,"/Users/clarkbenham/side_projects/data/Books/The Pale King- An Unfinished Novel - Wallace, David Foster - (2011, Little, Brown and Company).epub",212632,ok,,epub_spine_body_sections
+finish_0131,the Oxford book of essays,local_file,/Users/clarkbenham/side_projects/data/Books/The Oxford Book of Essays-John J. Gross - Oxford University Press (1991).pdf,283993,ok,,pdf_repeated_header_footer_body_pages
+finish_0132,12 rules for life,local_file,"/Users/clarkbenham/side_projects/data/Books/12 Rules for Life [Hardcover] and Maps of Meaning) 12 Rules for Life_ An Antidote to Ch - Jordan B. Peterson - (2018, Penguin Books Ltd_ Allen Lane).epub",142469,ok,,epub_spine_body_sections
+finish_0133,the pentagon wars,local_file,"/Users/clarkbenham/side_projects/data/Books/The Pentagon Wars_ Reformers Challenge the Old Guard - James G. Burton - (2014, US Naval Institute Press).epub",121017,ok,,epub_spine_body_sections
+finish_0134,you just dont understand,local_file,"/Users/clarkbenham/side_projects/data/Books/You Just Don't Understand - Tannen, Deborah.epub",108691,ok,,epub_spine_body_sections
+finish_0135,on China,local_file,"/Users/clarkbenham/side_projects/data/Books/On China - Kissinger, Henry.epub",167056,ok,,epub_spine_body_sections
+finish_0135,on China,web_count,https://www.readinglength.com/book/BnlFc4Y,146500,ok,,ReadingLength online-search estimate; rough guess.
+finish_0136,The Path to Power: The Years of Lyndon Johnson I,local_file,"/Users/clarkbenham/side_projects/data/Books/The Path to Power_ The Years of Lyndon Johnson vol I - Robert A. Caro -  (2011, Knopf Doubleday Publishing Group).epub",414671,ok,,epub_spine_body_sections
+finish_0136,The Path to Power: The Years of Lyndon Johnson I,web_count,https://www.readinglength.com/book/Bri5ncI,220500,ok,,ReadingLength online-search estimate; rough guess.
+finish_0137,means of ascent,local_file,"/Users/clarkbenham/side_projects/data/Books/Means of ascent v2 - Caro, Robert A - (2009, Knopf Doubleday Publishing Group).epub",213564,ok,,epub_spine_body_sections
+finish_0137,means of ascent,web_count,https://www.readinglength.com/work/Wkqedyu,130500,ok,,ReadingLength online-search estimate; rough guess.
+finish_0138,man’s search for meaning,local_file,/Users/clarkbenham/side_projects/data/Books/Man’s Search for Meaning - Viktor E. Frankl_ Harold S. Kushner_ William J. Winslade_ Isle Lasch - Beacon Press (2006).epub,45192,ok,,epub_spine_body_sections
+finish_0139,master of the senate,local_file,"/Users/clarkbenham/side_projects/data/Books/Master of the Senate v3 - Caro, Robert A.epub",546494,ok,,epub_spine_body_sections
+finish_0139,master of the senate,web_count,https://www.readinglength.com/work/WdnMtJb,308000,ok,,ReadingLength online-search estimate; rough guess.
+finish_0140,the passage of power,local_file,"/Users/clarkbenham/side_projects/data/Books/The Passage of Power_ The Years of Lyndon Johnson v4- Robert A. Caro - (2012, Knopf).epub",328935,ok,,epub_spine_body_sections
+finish_0140,the passage of power,web_count,https://www.readinglength.com/work/WNLqUMg,184000,ok,,ReadingLength online-search estimate; rough guess.
+finish_0142,racing for the bomb,local_file,"/Users/clarkbenham/side_projects/data/Books/Racing for the Bomb_ General Leslie R. Groves, the Manhattan Project's Indispensable Man - Robert S. Norris - (2002, Steerforth Pr).pdf",0,error,no_text_extracted,pdf_raw_text_fallback
+finish_0144,bureaucracy,local_file,/Users/clarkbenham/side_projects/data/Books/Bureaucracy _ what government agencies do and why they do it - James Q. Wilson - (2000).epub,168479,ok,,epub_spine_body_sections
+finish_0145,theory and practice of gamesmanship,local_file,"/Users/clarkbenham/side_projects/data/Books/The Theory and Practice of Gamesmanship_ Or, the Art of Winning Games Without Actually Cheating - Stephen Potter - (2015, Pickle Partners Publishing).epub",22115,ok,,epub_spine_body_sections
+finish_0147,how to improve your marriage without talking about it,local_file,"/Users/clarkbenham/side_projects/data/Books/How to Improve Your Marriage Without Talking About It - Patricia Love, Steven Stosny - (2008, Harmony).epub",62736,ok,,epub_spine_body_sections
+finish_0149,Mathematics for Machine Learning,local_file,/Users/clarkbenham/side_projects/data/Books/Mathematics for Machine Learning Soln.pdf,19784,ok,,pdf_repeated_header_footer_body_pages
+finish_0151,reading asme y14.41,local_file,/Users/clarkbenham/side_projects/data/Books/ASME-Y14-41-2012-Digital-Product-Definition (0)- ASME.pdf,0,error,no_text_extracted,pdf_raw_text_fallback
+finish_0153,failure is not an option,local_file,/Users/clarkbenham/side_projects/data/Books/Failure Is Not an Option_ Mission Control from Mercury to Apollo 13 and Beyond - Gene Kranz - Simon & Schuster (2000).epub,159988,ok,,epub_spine_body_sections
+finish_0152,blueprint reading: construction drawings for the building trade,local_file,"/Users/clarkbenham/side_projects/data/Books/Blueprint reading _ construction drawings for the building trades (2008, McGraw-Hill Companies, Inc.) - [McGraw Hill professional] Sam A. A. Kubba - [10.1036_0071549862].pdf",92387,ok,,pdf_repeated_header_footer_body_pages
+finish_0155,age of ambition,local_file,"/Users/clarkbenham/side_projects/data/Books/Age of Ambition_ Chasing Fortune, Truth, and Faith in the New China - Osnos, Evan - (2014, Farrar, Straus and Giroux).epub",151444,ok,,epub_spine_body_sections
+finish_0156,Apple in China,local_file,"/Users/clarkbenham/side_projects/data/Books/Apple in China - Patrick McGee - (2025, Simon & Schuster UK).epub",126939,ok,,epub_spine_body_sections
+finish_0157,the price of victory,local_file,"/Users/clarkbenham/side_projects/data/Books/The Price of Victory - Rodger, N A M - (2024, Penguin Books Ltd).epub",306312,ok,,epub_spine_body_sections
+finish_0159,Richard Nixon the Life,local_file,"/Users/clarkbenham/side_projects/data/Books/Richard Nixon_ The Life - Farrell, John Aloysius_Nixon, Richard Milhous - (2017, Knopf Doubleday Publishing Group).epub",316037,ok,,epub_spine_body_sections
+finish_0161,high intensity training the mike mentzer way,local_file,/Users/clarkbenham/side_projects/data/Books/HIGH-INTENSITY TRAINING the Mike Mentzer Way by Mike Mentzer with John Little.pdf,71026,ok,,pdf_repeated_header_footer_body_pages
+finish_0166,my early life,local_file,/Users/clarkbenham/side_projects/data/Books/My Early Life  1872 to 1904 - Churchill.epub,124256,ok,,epub_spine_body_sections
+finish_0167,the second world war,local_file,"/Users/clarkbenham/side_projects/data/Books/The Second World War_ Abridged Edition, With an Epilogue on the Years 1945 to 1957 - Churchill.epub",420757,ok,,epub_spine_body_sections
+finish_0168,six crises,local_file,"/Users/clarkbenham/side_projects/data/Books/Six Crises -  Nixon, Richard - (Simon & Schuster).epub",200836,ok,,epub_spine_body_sections
+finish_0170,thoughts and adventures,local_file,/Users/clarkbenham/side_projects/data/Books/Thoughts and Adventures by Winston Churchill.epub,86188,ok,,epub_spine_body_sections
+finish_0171,revolt in the desert,local_file,/Users/clarkbenham/side_projects/data/Books/ Revolt in the Desert by T E Lawrence.epub,130871,ok,,epub_spine_body_sections
+finish_0174,the power broker,local_file,/Users/clarkbenham/side_projects/data/Books/The Power Broker_ Robert Moses and the Fall of New York  -Robert A. Caro -1975.epub,617985,ok,,epub_spine_body_sections
+finish_0174,the power broker,web_count,https://www.readinglength.com/book/BBZvmjw,311500,ok,,ReadingLength online-search estimate; rough guess.
+finish_0175,Shape Up Stop Running in Circles and Ship Work that Matters,local_file,/Users/clarkbenham/side_projects/data/Books/Shape Up_ Stop Running in Circles and Ship Work that Matters -  Ryan Singer - (2019).pdf,32193,ok,,pdf_repeated_header_footer_body_pages
+finish_0176,to say nothing of the dog,local_file,"/Users/clarkbenham/side_projects/data/Books/To say nothing of the dog, or, How we found the bishop's -- Oxford Time Travel  02 -- Connie Willis 1998 -- Bantam Books .epub",186726,ok,,epub_spine_body_sections
+finish_0177,art and fear,local_file,"/Users/clarkbenham/side_projects/data/Books/Art & fear _ observations on the perils (and rewards) of artmaking - Orland, Ted_ Bayles, David - (1993, Turtleback Books_Distributed by Consortium Book Sales & Distribution, Image Continuum Press).pdf",27611,ok,,pdf_repeated_header_footer_body_pages
+finish_0178,the world crisis,local_file,/Users/clarkbenham/side_projects/data/Books/the world crisis abriged - Winston Churchill.epub,204557,ok,,epub_spine_body_sections
+finish_0180,the world crisis vol 3,local_file,/Users/clarkbenham/side_projects/data/Books/The World Crisis - Churchill Winston - Volume 3_ 1916-1918.mobi,203721,ok,no_section_level_body_filter_available,mobi_raw_text
+finish_0181,the world crisis volume 4,local_file,/Users/clarkbenham/side_projects/data/Books/The World Crisis. Volume 4_ The Aftermath - Churchill Winston.mobi,164311,ok,no_section_level_body_filter_available,mobi_raw_text
+finish_0182,the history of the English speaking peoples volume 4,local_file,"data/Books/The Great Democracies_ A History of the English-Speaking Peoples, Volume IV - Churchill, Winston Spencer - (2005, Barnes & Noble).epub",124144,ok,,epub_spine_body_sections
+finish_0183,going postal,local_file,"/Users/clarkbenham/side_projects/data/Books/Going Postal [Discworld 33] - Terry Pratchett - (2009, HarperCollins).epub",121164,ok,,epub_spine_body_sections
+finish_0183,going postal,web_count,https://www.readinglength.com/book/BOzBV4L,105865,ok,,ReadingLength online-search estimate based on audiobook length.
+finish_0184,Now It Can Be Told,local_file,"/Users/clarkbenham/side_projects/data/Books/Now it can be told _ the story of the Manhattan Project - Groves , Leslie R - (1983, Da Capo Press).epub",163006,ok,,epub_spine_body_sections
+finish_0186,it's better to be feared,local_file,"/Users/clarkbenham/side_projects/data/Books/It's Better to Be Feared_ The New England Patriots Dynasty and the Pursuit of Greatness - Seth Wickersham - (2021, Liveright).epub",177956,ok,,epub_spine_body_sections
+finish_0187,the effective executive,local_file,"/Users/clarkbenham/side_projects/data/Books/The Effective Executive_ The Definitive Guide to Getting the Right Things Done - Peter F. Drucker, Jim Collins - (2017, HarperBusiness).epub",64081,ok,,epub_spine_body_sections
+finish_0187,the effective executive,web_count,https://www.readinglength.com/book/B27p7xT,52000,ok,,ReadingLength online-search estimate; rough guess.
+finish_0188,the best and brightest,local_file,"/Users/clarkbenham/side_projects/data/Books/The Best and the Brightest - David Halberstam - (2001, Modern Library).epub",352432,ok,,epub_spine_body_sections
+finish_0189,good omens,local_file,"/Users/clarkbenham/side_projects/data/Books/Good Omens - Pratchett, Terry _ Gaiman, Neil.pdf",108281,ok,,pdf_repeated_header_footer_body_pages
+finish_0189,good omens,web_count,https://www.readinglength.com/book/BaDpWtV,108000,ok,,ReadingLength online-search estimate; rough guess.
+finish_0190,prime movers of globalization,local_file,"/Users/clarkbenham/side_projects/data/Books/eleven_upload/Business, management/Prime Movers of Globalization.epub",80432,ok,,epub_spine_body_sections
+finish_0191,shoe dog,local_file,"/Users/clarkbenham/side_projects/data/Books/Shoe Dog_ A Memoir by the Creator of Nike - Nike (Firm)_Knight, Philip H - (2018_2016, Scribner).epub",125957,ok,,epub_spine_body_sections
+finish_0191,shoe dog,web_count,https://www.readinglength.com/book/Bvk4DQT,96500,ok,,ReadingLength online-search estimate; rough guess.
+finish_0192,the billionaire and the mechanic,local_file,"/Users/clarkbenham/side_projects/data/Books/The billionaire and the mechanic_ how Larry Ellison and a car mechanic teamed up to win sailing's greatest race, the America's -  Bajurin, Norbert_Ellison, Larry_Guthrie, Julian - (2014, Grove Atlantic_Grove Press).epub",142997,ok,,epub_spine_body_sections
+finish_0194,memos from the chairman,local_file,"/Users/clarkbenham/side_projects/data/Books/Memos from the Chairman - Alan C. Greenberg - (2016, Workman Publishing).epub",32426,ok,,epub_spine_body_sections
+finish_0195,night watch,local_file,"/Users/clarkbenham/side_projects/data/Books/Night Watch [Discworld 29 ] - Terry, Pratchett (2010).epub",114185,ok,,epub_spine_body_sections
+finish_0195,night watch,web_count,https://www.readinglength.com/book/Bh4LNED,84500,ok,,ReadingLength online-search estimate; rough guess.
+finish_0197,fall of Hyperion,local_file,"/Users/clarkbenham/side_projects/data/Books/Hyperion Cantos [02] - The Fall of Hyperion - [Hyperion Cantos _2] Simmons, Dan - (1990, Spectra).epub",190613,ok,,epub_spine_body_sections
+finish_0198,thoughts and adventures,local_file,/Users/clarkbenham/side_projects/data/Books/Thoughts and Adventures by Winston Churchill.epub,86188,ok,,epub_spine_body_sections
+finish_0199,my early life,local_file,/Users/clarkbenham/side_projects/data/Books/My Early Life  1872 to 1904 - Churchill.epub,124256,ok,,epub_spine_body_sections
+finish_0201,Churchill: Walking with Destiny,local_file,"/Users/clarkbenham/side_projects/data/Books/Churchill_ Walking with Destiny - Andrew Roberts - (2018, Allen Lane).epub",458440,ok,,epub_spine_body_sections
+finish_0202,churchill the power of words,local_file,"/Users/clarkbenham/side_projects/data/Books/Churchill _ the power of words _ his remarkable life recounted through his writings and speeches _ 200 readings - Churchill, Winston S_ Gilbert, Martin (Editor) - (2014, Da Capo Press_Bantam Press).epub",173941,ok,,epub_spine_body_sections
+finish_0203,the nvidia way,local_file,"/Users/clarkbenham/side_projects/data/Books/The Nvidia Way_ Jensen Huang and the Making of a Tech Giant - Tae Kim - (2024, W. W. Norton & Company).epub",82792,ok,,epub_spine_body_sections
+finish_0204,managing the professional services firm,local_file,"/Users/clarkbenham/side_projects/data/Books/Managing the professional service firm - Maister, David H. - (2014, Free Press).epub",114224,ok,,epub_spine_body_sections

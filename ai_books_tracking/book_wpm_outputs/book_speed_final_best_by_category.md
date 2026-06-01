@@ -1,10 +1,10 @@
 | category_plot | n_books | median_visual_wpm | mean_visual_wpm |
 | --- | --- | --- | --- |
-| Business, management | 25 | 320.41 | 334.69 |
-| fiction | 24 | 323.53 | 331.79 |
-| General Reading | 17 | 324.59 | 345.25 |
-| Literature | 17 | 239.21 | 229.71 |
-| Histories | 14 | 312.41 | 313.70 |
-| Unknown | 12 | 334.76 | 307.18 |
-| Machine Learning | 2 | 253.31 | 253.31 |
-| Computer Science | 1 | 308.55 | 308.55 |
+| Business, management | 19 | 291.74 | 313.91 |
+| fiction | 16 | 292.17 | 316.22 |
+| General Reading | 12 | 324.71 | 324.95 |
+| Histories | 12 | 280.97 | 298.48 |
+| Unknown | 8 | 337.98 | 318.50 |
+| Literature | 7 | 261.44 | 264.39 |
+| Machine Learning | 3 | 503.29 | 367.47 |
+| Computer Science | 1 | 330.18 | 330.18 |

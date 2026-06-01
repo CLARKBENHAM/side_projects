@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import math
 import sys
 from pathlib import Path
 
@@ -54,23 +55,28 @@ def build_speed_analysis(
     output_dir.mkdir(parents=True, exist_ok=True)
     time_df = pd.read_csv(calendar_time_csv)
     words_df = pd.read_csv(word_counts_csv)
+    word_columns = [
+        "finish_id",
+        "chosen_word_count",
+        "word_count_source",
+        "word_count_confidence",
+        "local_file_path",
+        "local_file_match_score",
+        "local_file_word_count",
+        "local_raw_word_count",
+        "local_excluded_word_count",
+        "local_word_count_method",
+        "local_file_error",
+        "external_word_count",
+        "external_word_count_source",
+        "metadata_page_count",
+        "metadata_word_estimate",
+        "online_minus_local_words",
+        "online_error_rate_vs_local",
+        "online_abs_error_rate_vs_local",
+    ]
     merged = time_df.merge(
-        words_df[
-            [
-                "finish_id",
-                "chosen_word_count",
-                "word_count_source",
-                "word_count_confidence",
-                "local_file_path",
-                "local_file_match_score",
-                "local_file_word_count",
-                "local_file_error",
-                "external_word_count",
-                "external_word_count_source",
-                "metadata_page_count",
-                "metadata_word_estimate",
-            ]
-        ],
+        words_df[[column for column in word_columns if column in words_df.columns]],
         on="finish_id",
         how="left",
     )
@@ -130,11 +136,14 @@ def build_speed_analysis(
         merged["matched_finish_date"], errors="coerce"
     ).dt.year
     merged["word_count_confidence"] = merged["word_count_confidence"].fillna("low")
+    merged["uses_local_file_word_count"] = merged["word_count_source"].eq(
+        "local_file_word_count"
+    )
     merged["usable_for_speed"] = (
         merged["chosen_word_count"].notna()
         & merged["primary_first_pass_minutes"].gt(0)
         & merged["is_reread"].fillna(False).eq(False)
-        & merged["word_count_confidence"].isin(["high", "medium"])
+        & merged["uses_local_file_word_count"]
     )
     merged["usable_for_confident_speed"] = merged["usable_for_speed"] & merged[
         "word_count_confidence"
@@ -510,6 +519,7 @@ def write_summaries_and_plots(merged: pd.DataFrame, output_dir: Path) -> None:
         "wpm_first_pass_primary",
         output_dir / "book_speed_histogram.png",
         "First-Pass WPM Histogram",
+        force_zero_floor=False,
     )
     plot_histogram(
         usable,
@@ -527,12 +537,12 @@ def write_summaries_and_plots(merged: pd.DataFrame, output_dir: Path) -> None:
     plot_time_vs_words(
         usable,
         output_dir / "book_time_vs_words.png",
-        "Reading Time vs Estimated Words",
+        "Reading Time vs Local Extracted Words",
     )
     plot_time_vs_words(
         usable,
         output_dir / "book_time_vs_words_full_wall_clock.png",
-        "Full Wall-Clock Reading Time vs Estimated Words",
+        "Full Wall-Clock Reading Time vs Local Extracted Words",
         time_col="first_pass_wall_clock_minutes",
         wpm_col="wpm_first_pass_full_wall_clock",
         x_label="Full wall-clock first-pass time (hours)",
@@ -564,9 +574,139 @@ def write_summaries_and_plots(merged: pd.DataFrame, output_dir: Path) -> None:
         output_dir / "book_speed_violin_by_category.png",
         "First-Pass WPM by Category",
     )
+    write_rolling_category_percentiles(usable, output_dir)
     write_confidence_stratified_outputs(usable, output_dir)
     write_highlight_effects_and_plots(usable, output_dir)
     write_cleaned_and_full_highlight_plots(merged, output_dir)
+
+
+def write_rolling_category_percentiles(
+    usable: pd.DataFrame,
+    output_dir: Path,
+    *,
+    window_months: int = 6,
+    min_books_per_window: int = 2,
+    min_books_per_category: int = 3,
+) -> pd.DataFrame:
+    frame = usable.copy()
+    frame["matched_finish_date"] = pd.to_datetime(
+        frame["matched_finish_date"], errors="coerce"
+    )
+    frame["category_plot"] = frame["category"].replace("", np.nan).fillna("Unknown")
+    frame["wpm_first_pass_primary"] = pd.to_numeric(
+        frame["wpm_first_pass_primary"], errors="coerce"
+    )
+    frame = frame.dropna(subset=["matched_finish_date", "wpm_first_pass_primary"])
+    category_counts = frame["category_plot"].value_counts()
+    categories = sorted(
+        category_counts[category_counts.ge(min_books_per_category)].index.tolist()
+    )
+    output_columns = [
+        "window_end",
+        "window_start_exclusive",
+        "category",
+        "rolling_n",
+        "wpm_p20",
+        "wpm_p50",
+        "wpm_p80",
+    ]
+    if frame.empty or not categories:
+        empty = pd.DataFrame(columns=output_columns)
+        empty.to_csv(
+            output_dir / "book_speed_rolling_6mo_category_percentiles.csv",
+            index=False,
+        )
+        _write_markdown_table(
+            empty, output_dir / "book_speed_rolling_6mo_category_percentiles.md"
+        )
+        return empty
+
+    start = frame["matched_finish_date"].min().to_period("M").to_timestamp("M")
+    end = frame["matched_finish_date"].max().to_period("M").to_timestamp("M")
+    month_ends = pd.date_range(start=start, end=end, freq="ME")
+    rows: list[dict[str, object]] = []
+    for window_end in month_ends:
+        window_start = window_end - pd.DateOffset(months=window_months)
+        for category in categories:
+            subset = frame[
+                frame["category_plot"].eq(category)
+                & frame["matched_finish_date"].gt(window_start)
+                & frame["matched_finish_date"].le(window_end)
+            ].copy()
+            if len(subset) < min_books_per_window:
+                continue
+            values = subset["wpm_first_pass_primary"].to_numpy()
+            p20, p50, p80 = np.percentile(values, [20, 50, 80])
+            rows.append(
+                {
+                    "window_end": window_end.date().isoformat(),
+                    "window_start_exclusive": window_start.date().isoformat(),
+                    "category": category,
+                    "rolling_n": len(subset),
+                    "wpm_p20": p20,
+                    "wpm_p50": p50,
+                    "wpm_p80": p80,
+                }
+            )
+    result = pd.DataFrame(rows, columns=output_columns)
+    result.to_csv(
+        output_dir / "book_speed_rolling_6mo_category_percentiles.csv",
+        index=False,
+    )
+    _write_markdown_table(
+        result, output_dir / "book_speed_rolling_6mo_category_percentiles.md"
+    )
+    plot_rolling_category_percentiles(
+        result,
+        output_dir / "book_speed_rolling_6mo_category_percentiles.png",
+    )
+    return result
+
+
+def plot_rolling_category_percentiles(frame: pd.DataFrame, output_path: Path) -> None:
+    if frame.empty:
+        return
+    plot_frame = frame.copy()
+    plot_frame["window_end"] = pd.to_datetime(plot_frame["window_end"])
+    categories = sorted(plot_frame["category"].unique())
+    colors = {
+        category: plt.get_cmap("tab10")(index % 10)
+        for index, category in enumerate(categories)
+    }
+    percentile_specs = [
+        ("wpm_p20", "20th percentile WPM"),
+        ("wpm_p50", "50th percentile WPM"),
+        ("wpm_p80", "80th percentile WPM"),
+    ]
+    fig, axes = plt.subplots(3, 1, figsize=(13, 11), sharex=True)
+    fig.suptitle(
+        "Six-Month Rolling WPM Percentiles by Category",
+        fontsize=15,
+    )
+    for ax, (column, label) in zip(axes, percentile_specs):
+        for category in categories:
+            subset = plot_frame[plot_frame["category"].eq(category)].sort_values(
+                "window_end"
+            )
+            if subset.empty:
+                continue
+            ax.plot(
+                subset["window_end"],
+                subset[column],
+                marker="o",
+                linewidth=1.6,
+                markersize=3.5,
+                color=colors[category],
+                label=category,
+            )
+        ax.set_ylabel(label)
+        ax.grid(True, alpha=0.2)
+    axes[-1].set_xlabel("Window ending month")
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="center left", bbox_to_anchor=(0.87, 0.5))
+    fig.tight_layout(rect=(0, 0, 0.86, 0.96))
+    fig.savefig(output_path, dpi=180, bbox_inches="tight")
+    plt.close(fig)
 
 
 def write_final_best_subset_outputs(
@@ -646,20 +786,21 @@ def write_final_best_subset_outputs(
 
 def write_aggregate_speed_summary(merged: pd.DataFrame, output_dir: Path) -> None:
     rows: list[dict[str, object]] = []
+    local_word_counts = merged["uses_local_file_word_count"].fillna(False)
     cohorts = [
         (
-            "all_finished_read_instances_with_word_count",
+            "all_finished_read_instances_with_local_file_word_count",
             merged["chosen_word_count"].notna()
             & merged["primary_first_pass_minutes"].gt(0),
         ),
         (
-            "first_reads_with_word_count",
+            "first_reads_with_local_file_word_count",
             merged["chosen_word_count"].notna()
             & merged["primary_first_pass_minutes"].gt(0)
             & merged["is_reread"].fillna(False).eq(False),
         ),
         (
-            "first_reads_gt90m_with_word_count",
+            "first_reads_gt90m_with_local_file_word_count",
             merged["chosen_word_count"].notna()
             & merged["primary_first_pass_minutes"].gt(90)
             & merged["is_reread"].fillna(False).eq(False),
@@ -670,7 +811,7 @@ def write_aggregate_speed_summary(merged: pd.DataFrame, output_dir: Path) -> Non
         ),
     ]
     for cohort, mask in cohorts:
-        subset = merged[mask].copy()
+        subset = merged[mask & local_word_counts].copy()
         total_words = float(subset["chosen_word_count"].sum())
         total_minutes = float(subset["primary_first_pass_minutes"].sum())
         total_full_wall_clock_minutes = float(
@@ -906,16 +1047,26 @@ def plot_violin(
 
 
 def plot_histogram(
-    frame: pd.DataFrame, value_col: str, output_path: Path, title: str
+    frame: pd.DataFrame,
+    value_col: str,
+    output_path: Path,
+    title: str,
+    *,
+    force_zero_floor: bool = True,
 ) -> None:
     values = frame[value_col].replace([np.inf, -np.inf], np.nan).dropna()
     if values.empty:
         return
-    x_max = float(np.ceil(max(values.max(), 1000) / 100) * 100)
-    bins = np.arange(0, x_max + 50, 50)
+    lower = 0 if force_zero_floor else max(0, float(values.min()) - 25)
+    upper = float(values.max()) + 25
+    if lower >= upper:
+        lower = max(0, float(values.min()) - 1)
+        upper = float(values.max()) + 1
+    bin_start = math.floor(lower / 50) * 50
+    bin_end = math.ceil(upper / 50) * 50
+    bins = np.arange(bin_start, bin_end + 50, 50)
     plt.figure(figsize=(10, 6))
     plt.hist(values.clip(lower=0), bins=bins, color="#3b82f6")
-    plt.xlim(0, x_max)
     plt.xlabel("WPM")
     plt.ylabel("Books")
     plt.title(f"{title} (N={len(values)})")
@@ -960,7 +1111,7 @@ def plot_time_vs_words(
             )
     plt.colorbar(label="WPM")
     plt.xlabel(x_label)
-    plt.ylabel("Estimated words (thousands)")
+    plt.ylabel("Local extracted words (thousands)")
     plt.title(f"{title} (N={len(plot_frame)})")
     plt.tight_layout()
     plt.savefig(output_path, dpi=180)
@@ -1127,7 +1278,9 @@ def write_cleaned_and_full_highlight_plots(
         )
 
     full_available = merged[
-        merged["chosen_word_count"].notna() & merged["primary_first_pass_minutes"].gt(0)
+        merged["uses_local_file_word_count"].fillna(False)
+        & merged["chosen_word_count"].notna()
+        & merged["primary_first_pass_minutes"].gt(0)
     ].copy()
     full_highlights = prepare_highlight_frame(full_available, "wpm_first_pass_primary")
     full_highlights.to_csv(
@@ -1433,21 +1586,23 @@ def write_report(merged: pd.DataFrame, output_dir: Path) -> None:
     report = [
         "# Book Speed Analysis",
         "",
-        "Calendar time starts from `data/calendar_analysis.txt`, the cached final TSV produced by `Self_Tracking/calendar_analysis.py`. The primary minute column starts from that dataframe's overlap-adjusted `duration`, then restores full wall-clock duration for minor overlaps of 15 minutes or less and for book/audiobook rows whose larger overlaps are compatible contexts such as walking, travel, or audiobook-friendly chores. Full wall-clock time from `start_time`/`end_time` is retained separately in `first_pass_wall_clock_minutes` and used for the full-time comparison plots.",
+        "Calendar time starts from `data/calendar_analysis.txt`, the cached final TSV produced by `Self_Tracking/calendar_analysis.py`. The primary minute column starts from that dataframe's overlap-adjusted `duration`, then restores full wall-clock duration for book/audiobook rows whose actual overlapped time is longer than 15 minutes; overlaps of exactly 15 minutes remain split by the calendar analysis. Full wall-clock time from `start_time`/`end_time` is retained separately in `first_pass_wall_clock_minutes` and used for the full-time comparison plots.",
         "",
-        "Rows above 900 WPM are not excluded. The only duration screen used for the main subset is `primary_first_pass_minutes > 90`, and every short-duration exclusion is listed below and in `book_speed_short_duration_exclusions.csv`.",
+        "WPM cohorts require `word_count_source == local_file_word_count`, so page estimates and online word counts remain in the word-count audit but do not feed the main speed numbers. Local EPUB/PDF counts use the reading/body-text count where section-level filtering is available, with raw extracted words and excluded notes/index/front-back matter retained in the local text audit. Rows above 900 WPM are not excluded. The only duration screen used for the main subset is `primary_first_pass_minutes > 90`, and every short-duration exclusion is listed below and in `book_speed_short_duration_exclusions.csv`.",
         "",
         "## Core Files",
         "",
         "- Calendar time: `book_calendar_first_pass_time.csv` and `book_calendar_first_pass_events.csv`",
         "- Calendar overlap audit: `book_calendar_overlap_audit.csv`",
         "- Calendar reconciliation: `book_calendar_time_reconciliation.csv` and `book_calendar_unmatched_includable_events.csv`",
-        "- Word counts: `book_word_counts.csv` and `book_word_count_source_audit.csv`",
+        "- Word counts: `book_word_counts.csv`, `book_word_count_source_audit.csv`, `book_word_count_validation_summary.csv`, `book_word_count_local_text_audit.csv`, and `book_word_count_local_section_audit.csv`",
+        "- Online-vs-local word-count error: `book_word_count_online_error_rates.csv`, `book_word_count_online_error_outliers.csv`, and `book_word_count_online_error_rates.png`",
         "- Joined analysis: `book_speed_analysis.csv`",
         "- Duration-screened subset: `book_speed_duration_screened_subset.csv`",
         "- Visual-reading subset excluding audio-dominant books: `book_speed_visual_reading_subset.csv`",
         "- Audio-dominant exclusions: `book_speed_audio_dominant_exclusions.csv`",
         "- Short-duration exclusions: `book_speed_short_duration_exclusions.csv`",
+        "- Rolling category WPM percentiles: `book_speed_rolling_6mo_category_percentiles.csv` and `book_speed_rolling_6mo_category_percentiles.png`",
         "- High-WPM investigation: `book_speed_high_wpm_investigation.csv` and `book_speed_high_wpm_event_evidence.csv`",
         "- >600 WPM duration-screened investigation: `book_speed_gt600_wpm_investigation.csv` and `book_speed_gt600_wpm_event_evidence.csv`",
         "",
@@ -1507,6 +1662,8 @@ def write_report(merged: pd.DataFrame, output_dir: Path) -> None:
         "",
         "![WPM by category](book_speed_violin_by_category.png)",
         "",
+        "![Six-month rolling WPM percentiles by category](book_speed_rolling_6mo_category_percentiles.png)",
+        "",
         "![Time vs pages](book_time_vs_pages.png)",
         "",
         "![Full wall-clock time vs pages](book_time_vs_pages_full_wall_clock.png)",
@@ -1514,6 +1671,8 @@ def write_report(merged: pd.DataFrame, output_dir: Path) -> None:
         "![Time vs words](book_time_vs_words.png)",
         "",
         "![Full wall-clock time vs words](book_time_vs_words_full_wall_clock.png)",
+        "",
+        "![Online word-count search error vs local extraction](book_word_count_online_error_rates.png)",
         "",
         "![WPM vs highlighted words](book_speed_wpm_vs_highlighted_words.png)",
         "",

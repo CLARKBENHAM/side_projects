@@ -1,6 +1,6 @@
 | cohort | n_finished_read_instances | total_estimated_words | total_primary_minutes | total_primary_hours | total_full_wall_clock_minutes | total_full_wall_clock_hours | aggregate_wpm | aggregate_visual_after_audio_350wpm | aggregate_full_wall_clock_wpm | mean_of_book_wpms | mean_of_book_full_wall_clock_wpms | median_book_wpm | median_book_visual_after_audio_350wpm | median_book_full_wall_clock_wpm |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| all_finished_read_instances_with_word_count | 138 | 18849375.00 | 60320.00 | 1005.33 | 61602.50 | 1026.71 | 312.49 | 310.60 | 305.98 | 369.10 | 360.28 | 319.94 | 318.74 | 312.04 |
-| first_reads_with_word_count | 133 | 18479482.00 | 59320.00 | 988.67 | 60602.50 | 1010.04 | 311.52 | 309.75 | 304.93 | 367.97 | 358.83 | 319.46 | 318.02 | 311.67 |
-| first_reads_gt90m_with_word_count | 121 | 17917255.00 | 58405.00 | 973.42 | 59687.50 | 994.79 | 306.78 | 304.75 | 300.18 | 337.20 | 327.15 | 308.55 | 308.55 | 304.61 |
-| visual_reading_first_reads_gt90m_excluding_audio_dominant | 116 | 16774020.00 | 55532.50 | 925.54 | 56687.50 | 944.79 | 302.06 | 301.21 | 295.90 | 332.69 | 323.72 | 307.42 | 307.42 | 302.99 |
+| all_finished_read_instances_with_local_file_word_count | 97 | 14012529.00 | 46316.44 | 771.94 | 46962.50 | 782.71 | 302.54 | 299.42 | 298.38 | 367.92 | 362.84 | 318.61 | 315.83 | 306.80 |
+| first_reads_with_local_file_word_count | 93 | 13739827.00 | 45646.44 | 760.77 | 46292.50 | 771.54 | 301.01 | 297.73 | 296.80 | 365.49 | 360.19 | 314.74 | 310.42 | 306.60 |
+| first_reads_gt90m_with_local_file_word_count | 85 | 13337442.00 | 45023.94 | 750.40 | 45662.50 | 761.04 | 296.23 | 292.56 | 292.09 | 330.35 | 324.97 | 307.78 | 305.86 | 303.05 |
+| visual_reading_first_reads_gt90m_excluding_audio_dominant | 80 | 12285434.00 | 42068.94 | 701.15 | 42662.50 | 711.04 | 292.03 | 290.72 | 287.97 | 326.07 | 321.35 | 305.86 | 302.34 | 298.74 |

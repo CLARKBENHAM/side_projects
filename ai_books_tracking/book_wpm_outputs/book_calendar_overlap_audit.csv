@@ -1,304 +1,304 @@
-date,summary,part_summary,event_type,book_ref,title,matched_finish_date,calendar_analysis_minutes,wall_clock_minutes,overlap_policy_minutes,policy_restored_minutes,overlap_policy_rule,overlap_other_events,overlap_other_calendars
-2021-06-09,read: Kipling,read: Kipling,reading,Kipling,Kipling by Harold bloom,2024-12-23,52.5,60.0,60.0,7.5,full_duration_minor_overlap,dinner (fake; use takeout data from 7 | 13),"Meals, Supplements, Sleep"
-2021-06-25,read: Chekhov,read: Chekhov,reading,Chekhov,,,22.5,30.0,30.0,7.5,full_duration_minor_overlap,blog,Things
-2021-06-29,read: Chekhov,read: Chekhov,reading,Chekhov,,,20.0,45.0,20.0,0.0,calendar_analysis_duration_incompatible_overlap,Job: Hive | dinner (fake; use takeout data from 7 | 13),"Meals, Supplements, Sleep | clark.benham@gmail.com"
-2021-06-29,read: Chekhov,read: Chekhov,reading,Chekhov,,,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Job: Hive,clark.benham@gmail.com
-2021-11-18,read: Conrad,read: Conrad,reading,Conrad,and call me conrad,2025-11-13,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Job: Hive,clark.benham@gmail.com
-2022-01-04,Book:dswn,Book:dswn,reading,dswn,,,52.5,60.0,60.0,7.5,full_duration_minor_overlap,Jack,Waste Time
-2022-01-05,Book:dswn,Book:dswn,reading,dswn,,,45.0,90.0,45.0,0.0,calendar_analysis_duration_incompatible_overlap,airplane to SFO,Things
-2022-02-13,Book:Dune,Book:Dune,reading,Dune,Dune,2022-02-16,345.0,375.0,345.0,0.0,calendar_analysis_duration_incompatible_overlap,laundry | dinner,"Meals, Supplements, Sleep | Things"
-2022-02-18,book:dm,book:dm,reading,dm,Dune Messiah,2022-02-19,30.0,60.0,30.0,0.0,calendar_analysis_duration_incompatible_overlap,Job: Hive,clark.benham@gmail.com
-2022-02-18,book:dm,book:dm,reading,dm,Dune Messiah,2022-02-19,60.0,120.0,60.0,0.0,calendar_analysis_duration_incompatible_overlap,Job: Hive,clark.benham@gmail.com
-2022-02-19,book:cod,book:cod,reading,cod,children of Dune,2022-02-22,52.5,60.0,60.0,7.5,full_duration_minor_overlap,breakfast,"Meals, Supplements, Sleep"
-2022-02-19,book:dm,book:dm,reading,dm,Dune Messiah,2022-02-19,22.5,45.0,22.5,0.0,calendar_analysis_duration_incompatible_overlap,Job: Hive,clark.benham@gmail.com
-2022-03-03,Read: Kipling,Read: Kipling,reading,Kipling,Kipling by Harold bloom,2024-12-23,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Job: Hive,clark.benham@gmail.com
-2022-03-03,read: Kipling,read: Kipling,reading,Kipling,Kipling by Harold bloom,2024-12-23,22.5,45.0,22.5,0.0,calendar_analysis_duration_incompatible_overlap,Job: Hive,clark.benham@gmail.com
-2022-03-06,book:sp,book:sp,reading,sp,"Sadly, Porn",2022-04-23,52.5,60.0,60.0,7.5,full_duration_minor_overlap,blogs,Things
-2022-03-06,book:sp,book:sp,reading,sp,"Sadly, Porn",2022-04-23,97.5,105.0,105.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2022-03-15,book:hf,book:hf,reading,hf,Huck Finn,2022-03-27,82.5,90.0,90.0,7.5,full_duration_minor_overlap,breakfast,"Meals, Supplements, Sleep"
-2022-03-20,book:hf,book:hf,reading,hf,Huck Finn,2022-03-27,7.5,15.0,15.0,7.5,full_duration_minor_overlap,nap,"Meals, Supplements, Sleep"
-2022-03-24,CS book: Memory,CS book: Memory,reading,Memory,,,22.5,30.0,30.0,7.5,full_duration_minor_overlap,sleep,"Meals, Supplements, Sleep"
-2022-04-03,book:sp,book:sp,reading,sp,"Sadly, Porn",2022-04-23,142.5,150.0,150.0,7.5,full_duration_minor_overlap,jack,Waste Time
-2022-04-14,read: Kipling,read: Kipling,reading,Kipling,Kipling by Harold bloom,2024-12-23,60.0,75.0,75.0,15.0,full_duration_minor_overlap,porn,Waste Time
-2022-05-16,Book:debugging,Book:debugging,reading,debugging,,,37.5,45.0,45.0,7.5,full_duration_minor_overlap,Food,"Meals, Supplements, Sleep"
-2022-05-16,finished: Arnold Schwarzenegger ,finished: Arnold Schwarzenegger,finished,Arnold Schwarzenegger,Arnold Schwarzenegger,2022-05-16,97.5,105.0,105.0,7.5,full_duration_minor_overlap,dinner,"Meals, Supplements, Sleep"
-2022-07-19,cs book: ML design patterns,cs book: ML design patterns,reading,ML design patterns,ML design patterns,2022-08-22,22.5,30.0,30.0,7.5,full_duration_minor_overlap,jack,Waste Time
-2022-07-21,cs book: ML design patterns,cs book: ML design patterns,reading,ML design patterns,ML design patterns,2022-08-22,22.5,30.0,30.0,7.5,full_duration_minor_overlap,sleep,"Meals, Supplements, Sleep"
-2022-07-28,cs book: ML design patterns,cs book: ML design patterns,reading,ML design patterns,ML design patterns,2022-08-22,22.5,30.0,30.0,7.5,full_duration_minor_overlap,sleep,"Meals, Supplements, Sleep"
-2022-08-22,read: ml,read: ml,reading,ml,ML design patterns,2022-08-22,67.5,75.0,75.0,7.5,full_duration_minor_overlap,dinner,"Meals, Supplements, Sleep"
-2022-09-22,finished: Deep Learning by Goodfellow et all,finished: Deep Learning by Goodfellow et all,finished,Deep Learning by Goodfellow et all,Deep Learning by Goodfellow et all,2022-09-22,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Job: Hive,clark.benham@gmail.com
-2022-10-30,read: cpp,read: cpp,reading,cpp,,,37.5,45.0,45.0,7.5,full_duration_minor_overlap,football,Waste Time
-2022-12-02,book:ptaesp,book:ptaesp,reading,ptaesp,ptaesp,2022-12-03,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Job: Hive,clark.benham@gmail.com
-2022-12-03,book:ptaesp,book:ptaesp,reading,ptaesp,ptaesp,2022-12-03,57.5,120.0,57.5,0.0,calendar_analysis_duration_incompatible_overlap,Job: Hive | dinner,"Meals, Supplements, Sleep | clark.benham@gmail.com"
-2022-12-06,finished book: the golden enclaves,finished book: the golden enclaves,finished,the golden enclaves,The Golden Enclaves,2022-12-06,82.5,90.0,90.0,7.5,full_duration_minor_overlap,jack,Waste Time
-2022-12-24,book:ttbp,book:ttbp,reading,ttbp,The Three-Body Problem,2022-12-26,22.5,45.0,22.5,0.0,calendar_analysis_duration_incompatible_overlap,airplane,Things
-2022-12-25,book:ttbp,book:ttbp,reading,ttbp,The Three-Body Problem,2022-12-26,37.5,75.0,37.5,0.0,calendar_analysis_duration_incompatible_overlap,airplane,Things
-2022-12-31,book:de,book:de,reading,de,deaths end,2023-01-01,52.5,105.0,105.0,52.5,full_duration_compatible_overlap,travel,Things
-2023-01-01,finished book: deaths end,finished book: deaths end,finished,deaths end,deaths end,2023-01-01,75.0,105.0,105.0,30.0,full_duration_compatible_overlap,travel,Things
-2023-01-04,book:nf,book:nf,reading,nf,Never Finished,2023-01-12,135.0,150.0,150.0,15.0,full_duration_minor_overlap,dinner,"Meals, Supplements, Sleep"
-2023-01-10,book:nf,book:nf,reading,nf,Never Finished,2023-01-12,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Job: Hive,clark.benham@gmail.com
-2023-01-11,book:nf,book:nf,reading,nf,Never Finished,2023-01-12,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Job: Hive,clark.benham@gmail.com
-2023-02-20,Read: Kipling,Read: Kipling,reading,Kipling,Kipling by Harold bloom,2024-12-23,22.5,45.0,22.5,0.0,calendar_analysis_duration_incompatible_overlap,ml matrix mult,clark.benham@gmail.com
-2023-02-26,book:wdycwopt,book:wdycwopt,reading,wdycwopt,wdycwopt,2023-02-27,7.5,15.0,15.0,7.5,full_duration_minor_overlap,breakfast,"Meals, Supplements, Sleep"
-2023-03-01,book:syjf,book:syjf,reading,syjf,surely you’re joking Feynman,2023-03-01,68.0,75.0,75.0,7.0,full_duration_minor_overlap,dinner,"Meals, Supplements, Sleep"
-2023-03-13,read: Kipling,read: Kipling,reading,Kipling,Kipling by Harold bloom,2024-12-23,15.0,30.0,30.0,15.0,full_duration_minor_overlap,travel,Things
-2023-03-13,read: ml,read: ml,reading,ml,,,212.50000000000003,220.0,220.0,7.499999999999972,full_duration_minor_overlap,dinner,"Meals, Supplements, Sleep"
-2023-04-13,book:tmc,book:tmc,reading,tmc,,,82.5,165.0,82.5,0.0,calendar_analysis_duration_incompatible_overlap,Job: Hive,clark.benham@gmail.com
-2023-06-20,finished book: starship troopers,finished book: starship troopers,finished,starship troopers,starship troopers,2023-06-20,99.99999999999997,210.0,99.99999999999997,0.0,calendar_analysis_duration_incompatible_overlap,Job: Hive | breakfast | lunch,"Meals, Supplements, Sleep | clark.benham@gmail.com"
-2023-07-03,book:siasl,book:siasl,reading,siasl,Stranger in a Strange Land,2023-07-05,75.0,150.0,75.0,0.0,calendar_analysis_duration_incompatible_overlap,Job: Hive,clark.benham@gmail.com
-2023-07-03,book:siasl,book:siasl,reading,siasl,Stranger in a Strange Land,2023-07-05,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Job: Hive,clark.benham@gmail.com
-2023-08-05,finished book: Essays to do good,finished book: Essays to do good,finished,Essays to do good,Essays to Do Good,2023-08-05,45.0,60.0,60.0,15.0,full_duration_minor_overlap,purge | tug | Jack,Waste Time
-2023-08-22,book:ksm,book:ksm,reading,ksm,King Solomons Mines,2023-08-23,157.5,165.0,165.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2023-08-29,Finished book: The Peace War,Finished book: The Peace War,finished,The Peace War,The Peace War,2023-08-29,240.0,255.0,255.0,15.0,full_duration_minor_overlap,Jack | Food,"Meals, Supplements, Sleep | Waste Time"
-2023-09-05,Book:Knudsen,Book:Knudsen,reading,Knudsen,,,142.5,150.0,150.0,7.5,full_duration_minor_overlap,sleep,"Meals, Supplements, Sleep"
-2023-10-10,Book:ladr,Book:ladr,reading,ladr,,,15.0,30.0,30.0,15.0,full_duration_minor_overlap,sleep,"Meals, Supplements, Sleep"
-2023-10-20,Book:ladr,Book:ladr,reading,ladr,,,7.5,15.0,15.0,7.5,full_duration_minor_overlap,breakfast,"Meals, Supplements, Sleep"
-2023-10-22,Book:hpmor,Book:hpmor,reading,hpmor,Harry Potter and the Methods of Rationality,2023-10-25,232.5,240.0,240.0,7.5,full_duration_minor_overlap,breakfast,"Meals, Supplements, Sleep"
-2023-10-23,Book:hpmor,Book:hpmor,reading,hpmor,Harry Potter and the Methods of Rationality,2023-10-25,247.5,255.0,255.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2023-11-05,book:pc,book:pc,reading,pc,,,22.5,30.0,30.0,7.5,full_duration_minor_overlap,YouTube,Waste Time
-2023-12-13,Book:ths,Book:ths,reading,ths,that hideous strength,2023-12-14,80.0,165.0,80.0,0.0,calendar_analysis_duration_incompatible_overlap,Flight | Nap,"Meals, Supplements, Sleep | Things"
-2023-12-14,Book:ths,Book:ths,reading,ths,that hideous strength,2023-12-14,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Flight,Things
-2023-12-23,Finished book: the abolition of man,Finished book: the abolition of man,finished,the abolition of man,the abolition of man,2023-12-23,52.5,105.0,105.0,52.5,full_duration_compatible_overlap,Travel,Things
-2023-12-28,Read: Kipling,Read: Kipling,reading,Kipling,Kipling by Harold bloom,2024-12-23,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Turkish air,Things
-2024-01-16,Book:dm,Book:dm,reading,dm,digital minamalism,2024-01-21,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Flight IST to SFO,Things
-2024-02-16,Book:ewtca,Book:ewtca,reading,ewtca,ewtca,2024-02-19,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Travel to Budget Truck Rental,Things
-2024-02-23,Book:htwfaip,Book:htwfaip,reading,htwfaip,how to win friends and influence people,2024-02-24,37.5,45.0,45.0,7.5,full_duration_minor_overlap,Flight LAX SFO,Things
-2024-02-23,Book:htwfaip,Book:htwfaip,reading,htwfaip,how to win friends and influence people,2024-02-24,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Travel,Things
-2024-03-08,Book:jto,Book:jto,reading,jto,Jude the Obscure,2024-03-08,52.5,105.0,105.0,52.5,full_duration_compatible_overlap,Travel,Things
-2024-03-08,Finished book: Jude the obscure,Finished book: Jude the obscure,finished,Jude the obscure,Jude the Obscure,2024-03-08,30.0,60.0,60.0,30.0,full_duration_compatible_overlap,Travel,Things
-2024-04-13,Book:mml,Book:mml,reading,mml,Mathematics for Machine Learning,2025-07-09,37.5,45.0,45.0,7.5,full_duration_minor_overlap,Jack,Waste Time
-2024-05-16,book:mml,book:mml,reading,mml,Mathematics for Machine Learning,2025-07-09,12.499999999999996,15.0,15.0,2.5000000000000036,full_duration_minor_overlap,sleep,"Meals, Supplements, Sleep"
-2024-05-17,book:cp,book:cp,reading,cp,consider phlebas,2024-06-04,57.499999999999986,60.0,60.0,2.500000000000014,full_duration_minor_overlap,sleep,"Meals, Supplements, Sleep"
-2024-05-17,finished move: the dark knight,finished move: the dark knight,finished,move: the dark knight,move: the dark knight,2024-05-17,52.5,60.0,60.0,7.5,full_duration_minor_overlap,dinner,"Meals, Supplements, Sleep"
-2024-05-18,book:mml,book:mml,reading,mml,Mathematics for Machine Learning,2025-07-09,27.5,30.0,30.0,2.5,full_duration_minor_overlap,sleep,"Meals, Supplements, Sleep"
-2024-05-19,book:mml,book:mml,reading,mml,Mathematics for Machine Learning,2025-07-09,12.499999999999996,15.0,15.0,2.5000000000000036,full_duration_minor_overlap,sleep,"Meals, Supplements, Sleep"
-2024-05-30,Book:cp,Book:cp,reading,cp,consider phlebas,2024-06-04,52.5,60.0,60.0,7.5,full_duration_minor_overlap,Food,"Meals, Supplements, Sleep"
-2024-06-01,Book:cp,Book:cp,reading,cp,consider phlebas,2024-06-04,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Flight: SFO to PVU,Things
-2024-06-12,book:5ebgo,book:5ebgo,reading,5ebgo,50 essays by george orwell,2024-06-19,7.5,15.0,15.0,7.5,full_duration_minor_overlap,blogs,Waste Time
-2024-06-15,Book:5ebgo,Book:5ebgo,reading,5ebgo,50 essays by george orwell,2024-06-19,30.0,60.0,30.0,0.0,calendar_analysis_duration_incompatible_overlap,Amelia,Things
-2024-06-16,Book:5ebgo,Book:5ebgo,reading,5ebgo,50 essays by george orwell,2024-06-19,30.0,60.0,30.0,0.0,calendar_analysis_duration_incompatible_overlap,Amelia,Things
-2024-06-27,Book:js,Book:js,reading,js,Jeeves Stories,2024-06-30,22.5,30.0,30.0,7.5,full_duration_minor_overlap,anki,clark.benham@gmail.com
-2024-06-30,Book:js,Book:js,reading,js,Jeeves Stories,2024-06-30,22.5,30.0,30.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2024-07-10,Book:jff,Book:jff,reading,jff,Just for Fun : The Story of an Accidental Revolutionary,2024-07-14,7.5,15.0,15.0,7.5,full_duration_minor_overlap,mats,clark.benham@gmail.com
-2024-07-14,finished book: just for fun,finished book: just for fun,finished,just for fun,Just for Fun : The Story of an Accidental Revolutionary,2024-07-14,22.5,30.0,30.0,7.5,full_duration_minor_overlap,dinner,"Meals, Supplements, Sleep"
-2024-07-21,book:tpp,book:tpp,reading,tpp,The Path to Power: The Years of Lyndon Johnson I,2025-05-04,37.5,45.0,45.0,7.5,full_duration_minor_overlap,anki,clark.benham@gmail.com
-2024-08-09,Book:toboss,Book:toboss,reading,toboss,The Oxford Book of Short Stories,2024-09-14,17.09166666666667,30.0,30.0,12.908333333333331,full_duration_minor_overlap,Travel to Terminal 1 | Airport,Things
-2024-08-09,book:toboss,book:toboss,reading,toboss,The Oxford Book of Short Stories,2024-09-14,15.0,30.0,30.0,15.0,full_duration_minor_overlap,airport,Things
-2024-08-09,book:toboss,book:toboss,reading,toboss,The Oxford Book of Short Stories,2024-09-14,37.5,45.0,45.0,7.5,full_duration_minor_overlap,blogs,Waste Time
-2024-08-13,book:bm,book:bm,reading,bm,,,12.683333333333334,30.0,12.683333333333334,0.0,calendar_analysis_duration_incompatible_overlap,Travel to AMC Bay Street 16 | Deadpool & Wolverine at AMC Bay Street 16,Things | Waste Time
-2024-08-19,book:toboe,book:toboe,reading,toboe,the Oxford book of essays,2025-03-22,22.5,30.0,30.0,7.5,full_duration_minor_overlap,Failed nap,"Meals, Supplements, Sleep"
-2024-08-22,book:toboss,book:toboss,reading,toboss,The Oxford Book of Short Stories,2024-09-14,87.50000000000003,90.0,90.0,2.4999999999999716,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2024-08-23,Book:toboss,Book:toboss,reading,toboss,The Oxford Book of Short Stories,2024-09-14,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Snack,"Meals, Supplements, Sleep"
-2024-08-27,book:ctl,book:ctl,reading,ctl,consider the lobster,2024-08-27,127.5,135.0,135.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2024-09-03,book:asftinda,book:asftinda,reading,asftinda,A Supposedly Fun Thing I'll Never Do Again,2024-09-04,90.0,180.0,180.0,90.0,full_duration_compatible_overlap,Train to Charlottesville VA,Things
-2024-09-12,Book:toboss,Book:toboss,reading,toboss,The Oxford Book of Short Stories,2024-09-14,22.5,30.0,30.0,7.5,full_duration_minor_overlap,Drink,Waste Time
-2024-10-01,book:huc,book:huc,reading,huc,hitlers uranium club,2024-10-02,22.5,30.0,30.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2024-10-09,Book:biwhm,Book:biwhm,reading,biwhm,Brief Interviews with Hideous Men,2024-10-09,22.5,45.0,22.5,0.0,calendar_analysis_duration_incompatible_overlap,Spa,Things
-2024-10-10,book:shilav,book:shilav,reading,shilav,self help is like a vaccine,2024-10-11,67.5,75.0,75.0,7.5,full_duration_minor_overlap,Amelia,Things
-2024-10-23,book:tdm,book:tdm,reading,tdm,The Doomsday Machine,2024-10-24,382.5,390.0,390.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2024-10-27,Book:htfaaeaswb,Book:htfaaeaswb,reading,htfaaeaswb,How to Fail at Almost Everything and Still Win Big,2024-10-31,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Spa,Things
-2024-10-30,book:htfaaeaswb,book:htfaaeaswb,reading,htfaaeaswb,How to Fail at Almost Everything and Still Win Big,2024-10-31,22.5,30.0,30.0,7.5,full_duration_minor_overlap,anki,clark.benham@gmail.com
-2024-10-31,Finished book: how to fail at almost everything and still win big,Finished book: how to fail at almost everything and still win big,finished,how to fail at almost everything and still win big,How to Fail at Almost Everything and Still Win Big,2024-10-31,90.0,105.0,105.0,15.0,full_duration_minor_overlap,Dinner,"Meals, Supplements, Sleep"
-2024-11-02,Read math,Read math,reading,math,,,7.5,15.0,15.0,7.5,full_duration_minor_overlap,sleep,"Meals, Supplements, Sleep"
-2024-11-08,finished book: metropolis man,finished book: metropolis man,finished,metropolis man,metropolis man,2024-11-08,82.5,90.0,90.0,7.5,full_duration_minor_overlap,Amelia,Things
-2024-11-13,read podcasts,read podcasts,reading,podcasts,,,37.5,45.0,45.0,7.5,full_duration_minor_overlap,Snacks | junk food,"Meals, Supplements, Sleep"
-2024-11-21,book:declare,book:declare,reading,declare,"Declare_ A novel - Powers, Tim.pdf",2024-11-28,127.5,135.0,135.0,7.5,full_duration_minor_overlap,Dinner,"Meals, Supplements, Sleep"
-2024-11-30,Book:thmp,Book:thmp,reading,thmp,,,22.5,30.0,30.0,7.5,full_duration_minor_overlap,breakfast,"Meals, Supplements, Sleep"
-2024-12-04,Book:htwww,Book:htwww,reading,htwww,htwww,2024-12-11,112.5,120.0,120.0,7.5,full_duration_minor_overlap,lunch | snack,"Meals, Supplements, Sleep"
-2024-12-05,Book:htwww,Book:htwww,reading,htwww,htwww,2024-12-11,157.5,165.0,165.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2024-12-11,book:mle,book:mle,reading,mle,machine learning engineering,2024-12-12,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Amelia,Things
-2024-12-17,book:eopp,book:eopp,reading,eopp,,,82.5,90.0,90.0,7.5,full_duration_minor_overlap,wiki,Waste Time
-2024-12-18,Book:taomi,Book:taomi,reading,taomi,the art of military innovation,2024-12-19,97.5,105.0,105.0,7.5,full_duration_minor_overlap,Airport,Things
-2024-12-22,book:htkap,book:htkap,reading,htkap,,,7.5,15.0,15.0,7.5,full_duration_minor_overlap,drive back from Chesapeake,Things
-2024-12-23,Book:kbhb,Book:kbhb,reading,kbhb,Kipling by Harold bloom,2024-12-23,37.5,45.0,45.0,7.5,full_duration_minor_overlap,Porn tug,Waste Time
-2024-12-28,book:md,book:md,reading,md,Ms Dalloway,2025-01-01,22.5,30.0,30.0,7.5,full_duration_minor_overlap,breakfast,"Meals, Supplements, Sleep"
-2024-12-29,book:md,book:md,reading,md,Ms Dalloway,2025-01-01,30.0,60.0,30.0,0.0,calendar_analysis_duration_incompatible_overlap,sleep,"Meals, Supplements, Sleep"
-2025-01-01,Finished book: Ms Dalloway,Finished book: Ms Dalloway,finished,Ms Dalloway,Ms Dalloway,2025-01-01,52.5,60.0,60.0,7.5,full_duration_minor_overlap,Amelia,Things
-2025-01-02,Finished book: Apollo,Finished book: Apollo,finished,Apollo,Apollo: The Race to the Moon,2025-01-02,172.5,180.0,180.0,7.5,full_duration_minor_overlap,anki,clark.benham@gmail.com
-2025-01-04,book:laf,book:laf,reading,laf,Life and Fate,2025-01-22,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Amelia cuddle,Things
-2025-01-07,Book:laf,Book:laf,reading,laf,Life and Fate,2025-01-22,97.5,105.0,105.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-01-20,Book:laf,Book:laf,reading,laf,Life and Fate,2025-01-22,97.5,105.0,105.0,7.5,full_duration_minor_overlap,Jack,Waste Time
-2025-01-20,Book:laf,Book:laf,reading,laf,Life and Fate,2025-01-22,90.0,120.0,90.0,0.0,calendar_analysis_duration_incompatible_overlap,Sun,Things
-2025-01-22,Book:laf,Book:laf,reading,laf,Life and Fate,2025-01-22,127.5,135.0,135.0,7.5,full_duration_minor_overlap,Sunset,Things
-2025-01-22,book:tee,book:tee,reading,tee,the effective executive,2026-01-29,7.5,15.0,15.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-01-26,book:msos,book:msos,reading,msos,Monday Starts on Saturday,2025-01-27,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Spa,Things
-2025-02-01,finished book: atomic habits,finished book: atomic habits,finished,atomic habits,Atomic Habits,2025-02-01,22.5,30.0,30.0,7.5,full_duration_minor_overlap,rank,clark.benham@gmail.com
-2025-02-05,book:lkd,book:lkd,reading,lkd,,,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Nap,"Meals, Supplements, Sleep"
-2025-02-06,Book:micro-services,Book:micro-services,reading,micro-services,micro-services,2025-02-09,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Cook,Things
-2025-02-06,book:tc,book:tc,reading,tc,,,22.5,30.0,30.0,7.5,full_duration_minor_overlap,Walk,Things
-2025-02-14,book:ri,book:ri,reading,ri,,,30.0,60.0,30.0,0.0,calendar_analysis_duration_incompatible_overlap,Spa,Things
-2025-02-22,Book:toboss,Book:toboss,reading,toboss,,,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Amelia cuddle,Things
-2025-02-26,Book:sp,Book:sp,reading,sp,,,97.5,105.0,105.0,7.5,full_duration_minor_overlap,Food,"Meals, Supplements, Sleep"
-2025-03-13,audiobook: its not luck,audiobook: its not luck,audiobook,its not luck,,,52.5,105.0,105.0,52.5,full_duration_compatible_overlap,Drive to Indian wells,Things
-2025-03-14,audio book: it's not luck,audio book: it's not luck,audiobook,it's not luck,,,75.0,150.0,150.0,75.0,full_duration_compatible_overlap,Drive home,Things
-2025-03-18,audiobook: it's not luck,audiobook: it's not luck,audiobook,it's not luck,,,30.0,60.0,60.0,30.0,full_duration_compatible_overlap,Walk,Things
-2025-03-20,Book:tpk,Book:tpk,reading,tpk,the pale king,2025-03-21,52.5,60.0,60.0,7.5,full_duration_minor_overlap,Jack,Waste Time
-2025-03-22,Book:toboe,Book:toboe,reading,toboe,the Oxford book of essays,2025-03-22,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Lie in sun,Things
-2025-03-22,Finished book: the Oxford book of essays,Finished book: the Oxford book of essays,finished,the Oxford book of essays,the Oxford book of essays,2025-03-22,45.0,90.0,45.0,0.0,calendar_analysis_duration_incompatible_overlap,Lie in sun,Things
-2025-03-25,Book:tpw,Book:tpw,reading,tpw,the pentagon wars,2025-03-31,52.5,60.0,60.0,7.5,full_duration_minor_overlap,Porn,Waste Time
-2025-04-01,book:oc,book:oc,reading,oc,on China,2025-04-19,52.5,60.0,60.0,7.5,full_duration_minor_overlap,1 beer,Waste Time
-2025-04-05,audiobook: lyndon johnson the path to power,audiobook: lyndon johnson the path to power,audiobook,The Path to Power: The Years of Lyndon Johnson I,The Path to Power: The Years of Lyndon Johnson I,2025-05-04,30.0,60.0,60.0,30.0,full_duration_compatible_overlap,drive to ojai,Things
-2025-04-18,finished book: you just dont understand,finished book: you just dont understand,finished,you just dont understand,you just dont understand,2025-04-18,22.5,30.0,30.0,7.5,full_duration_minor_overlap,Dinner,"Meals, Supplements, Sleep"
-2025-04-19,Book:oc,Book:oc,reading,oc,on China,2025-04-19,22.5,30.0,30.0,7.5,full_duration_minor_overlap,Nap,"Meals, Supplements, Sleep"
-2025-04-25,Book:tptp,Book:tptp,reading,tptp,The Path to Power: The Years of Lyndon Johnson I,2025-05-04,97.5,105.0,105.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-04-30,Book:cp,Book:cp,reading,cp,,,7.5,15.0,15.0,7.5,full_duration_minor_overlap,toastmasters,Things
-2025-04-30,Book:mml,Book:mml,reading,mml,Mathematics for Machine Learning,2025-07-09,22.5,30.0,30.0,7.5,full_duration_minor_overlap,Jack,Waste Time
-2025-05-01,Book:mml,Book:mml,reading,mml,Mathematics for Machine Learning,2025-07-09,7.5,15.0,15.0,7.5,full_duration_minor_overlap,breakfast,"Meals, Supplements, Sleep"
-2025-05-04,Finished book: the path to power,Finished book: the path to power,finished,The Path to Power: The Years of Lyndon Johnson I,The Path to Power: The Years of Lyndon Johnson I,2025-05-04,52.5,60.0,60.0,7.5,full_duration_minor_overlap,Food,"Meals, Supplements, Sleep"
-2025-05-04,book:refactoring,book:refactoring,reading,refactoring,,,7.5,15.0,15.0,7.5,full_duration_minor_overlap,sleep,"Meals, Supplements, Sleep"
-2025-05-06,Audio book: moa,Audio book: moa,audiobook,moa,means of ascent,2025-05-07,150.0,240.0,150.0,0.0,calendar_analysis_duration_incompatible_overlap,Walk | Laundry | Blogs | Walk | grocceires | walk | Cook,Things | Waste Time
-2025-05-07,finished book: means of ascent,finished book: means of ascent,finished,means of ascent,means of ascent,2025-05-07,187.5,195.0,195.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-05-10,audiobook: master of the senate,audiobook: master of the senate,audiobook,master of the senate,master of the senate,2025-05-19,60.0,120.0,120.0,60.0,full_duration_compatible_overlap,walk,Things
-2025-05-14,Audiobook: mots,Audiobook: mots,audiobook,mots,master of the senate,2025-05-19,22.5,45.0,45.0,22.5,full_duration_compatible_overlap,gym,"Meals, Supplements, Sleep"
-2025-05-15,Audiobook: mots,Audiobook: mots,audiobook,mots,master of the senate,2025-05-19,30.0,60.0,60.0,30.0,full_duration_compatible_overlap,gym | Walk,"Meals, Supplements, Sleep | Things"
-2025-05-18,Audiobook: mots,Audiobook: mots,audiobook,mots,master of the senate,2025-05-19,30.0,60.0,60.0,30.0,full_duration_compatible_overlap,Walk,Things
-2025-05-18,Audiobook: mots,Audiobook: mots,audiobook,mots,master of the senate,2025-05-19,45.0,90.0,90.0,45.0,full_duration_compatible_overlap,Walk,Things
-2025-05-19,finished book: master of the senate,finished book: master of the senate,finished,master of the senate,master of the senate,2025-05-19,247.5,255.0,255.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-05-20,Book:sim,Book:sim,reading,sim,,,225.0,240.0,240.0,15.0,full_duration_minor_overlap,Dinner,"Meals, Supplements, Sleep"
-2025-05-22,book:tpop,book:tpop,reading,tpop,the passage of power,2025-05-27,442.5,450.0,450.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-06-01,Book:Kissinger,Book:Kissinger,reading,Kissinger,Kissinger,2025-06-11,67.5,75.0,75.0,7.5,full_duration_minor_overlap,Drink,Waste Time
-2025-06-17,Finished book: bureaucracy,Finished book: bureaucracy,finished,bureaucracy,bureaucracy,2025-06-17,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Amelia,Things
-2025-06-20,Finished book: theory and practice of gamesmanship,Finished book: theory and practice of gamesmanship,finished,theory and practice of gamesmanship,theory and practice of gamesmanship,2025-06-20,75.0,90.0,90.0,15.0,full_duration_minor_overlap,Amelia,Things
-2025-06-23,book:tmotab,book:tmotab,reading,tmotab,the making of the atomic bomb,2025-06-24,97.5,105.0,105.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-06-24,book:tmotab,book:tmotab,reading,tmotab,the making of the atomic bomb,2025-06-24,247.5,255.0,255.0,7.5,full_duration_minor_overlap,food,"Meals, Supplements, Sleep"
-2025-07-05,book:ds,book:ds,reading,ds,dark sun,2025-07-06,67.5,75.0,75.0,7.5,full_duration_minor_overlap,discord | twitter,Waste Time
-2025-07-07,Book:srthmk,Book:srthmk,reading,srthmk,selfish reasons to have more kids,2025-07-12,52.5,60.0,60.0,7.5,full_duration_minor_overlap,anki,clark.benham@gmail.com
-2025-07-09,book:ay,book:ay,reading,ay,,,15.0,30.0,30.0,15.0,full_duration_minor_overlap,sleep,"Meals, Supplements, Sleep"
-2025-07-11,book:finao,book:finao,reading,finao,failure is not an option,2025-07-28,90.0,105.0,105.0,15.0,full_duration_minor_overlap,failed sleep | food,"Meals, Supplements, Sleep"
-2025-07-12,Audio book:  tpb,Audio book:  tpb,audiobook,tpb,the power broker,2025-12-04,30.0,60.0,60.0,30.0,full_duration_compatible_overlap,Walk,Things
-2025-07-13,book:finao,book:finao,reading,finao,failure is not an option,2025-07-28,97.5,105.0,105.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-07-23,reading llm abilities,reading llm abilities,reading,ing llm abilities,,,82.5,90.0,90.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-07-29,book:aoa,book:aoa,reading,aoa,age of ambition,2025-08-02,37.5,45.0,45.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-08-02,finished book: age of ambition,finished book: age of ambition,finished,age of ambition,age of ambition,2025-08-02,30.0,60.0,30.0,0.0,calendar_analysis_duration_incompatible_overlap,China trip,Things
-2025-08-10,Book:aic,Book:aic,reading,aic,Apple in China,2025-08-10,142.5,150.0,150.0,7.5,full_duration_minor_overlap,Dinner,"Meals, Supplements, Sleep"
-2025-08-13,Book:tpv,Book:tpv,reading,tpv,the price of victory,2025-08-14,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Dinner,"Meals, Supplements, Sleep"
-2025-08-13,Book:tpv,Book:tpv,reading,tpv,the price of victory,2025-08-14,285.0,300.0,300.0,15.0,full_duration_minor_overlap,Dinner,"Meals, Supplements, Sleep"
-2025-08-14,Book:tpv,Book:tpv,reading,tpv,the price of victory,2025-08-14,52.5,60.0,60.0,7.5,full_duration_minor_overlap,Porn,Waste Time
-2025-08-14,book:tpv,book:tpv,reading,tpv,the price of victory,2025-08-14,142.5,150.0,150.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-08-18,Book:emfhagaa,Book:emfhagaa,reading,emfhagaa,,,112.5,120.0,120.0,7.5,full_duration_minor_overlap,Dinner,"Meals, Supplements, Sleep"
-2025-09-10,Book:rntl,Book:rntl,reading,rntl,Richard Nixon the Life,2025-09-11,307.5,315.0,315.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-09-26,Read for bed,Read for bed,reading,for bed,,,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Job: diesl,clark.benham@gmail.com
-2025-09-29,Audio book: tpb,Audio book: tpb,audiobook,tpb,the power broker,2025-12-04,52.5,75.0,75.0,22.5,full_duration_compatible_overlap,Walk,Things
-2025-10-01,Book:Buckley,Book:Buckley,reading,Buckley,Buckley,2025-10-04,67.5,75.0,75.0,7.5,full_duration_minor_overlap,Food,"Meals, Supplements, Sleep"
-2025-10-01,Book:buckley,Book:buckley,reading,buckley,Buckley,2025-10-04,37.5,45.0,45.0,7.5,full_duration_minor_overlap,job: diesl,clark.benham@gmail.com
-2025-10-02,book:Buckley,book:Buckley,reading,Buckley,Buckley,2025-10-04,15.0,30.0,30.0,15.0,full_duration_minor_overlap,job: diesl,clark.benham@gmail.com
-2025-10-03,book:buckley,book:buckley,reading,buckley,Buckley,2025-10-04,52.5,60.0,60.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-10-04,Finished Book: Buckley,Finished Book: Buckley,finished,Buckley,Buckley,2025-10-04,67.5,75.0,75.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-10-07,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,the power broker,2025-12-04,37.5,75.0,75.0,37.5,full_duration_compatible_overlap,Walk,Things
-2025-10-09,book:dt,book:dt,reading,dt,DFW_TV.pdf,2025-10-09,7.5,15.0,15.0,7.5,full_duration_minor_overlap,anki,clark.benham@gmail.com
-2025-10-13,Book:mel,Book:mel,reading,mel,my early life,2025-10-14,67.5,75.0,75.0,7.5,full_duration_minor_overlap,Tug,Waste Time
-2025-10-14,finished book: my early life,finished book: my early life,finished,my early life,my early life,2025-10-14,82.5,90.0,90.0,7.5,full_duration_minor_overlap,breakfast,"Meals, Supplements, Sleep"
-2025-10-15,book:tsww,book:tsww,reading,tsww,the second world war,2025-10-21,82.5,90.0,90.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-10-19,Book:tsww,Book:tsww,reading,tsww,the second world war,2025-10-21,165.0,180.0,180.0,15.0,full_duration_minor_overlap,lunch | Jack,"Meals, Supplements, Sleep | Waste Time"
-2025-10-20,Book:tsww,Book:tsww,reading,tsww,the second world war,2025-10-21,52.5,60.0,60.0,7.5,full_duration_minor_overlap,Snack,"Meals, Supplements, Sleep"
-2025-10-21,finished book: the second world war,finished book: the second world war,finished,the second world war,the second world war,2025-10-21,202.5,210.0,210.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-10-26,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,the power broker,2025-12-04,30.0,60.0,60.0,30.0,full_duration_compatible_overlap,Walk,Things
-2025-10-31,audiobook: tpb,audiobook: tpb,audiobook,tpb,the power broker,2025-12-04,30.0,60.0,60.0,30.0,full_duration_compatible_overlap,Amelia chores,Things
-2025-10-31,audiobook: tpb,audiobook: tpb,audiobook,tpb,the power broker,2025-12-04,37.5,75.0,75.0,37.5,full_duration_compatible_overlap,Amelia: Chores,Things
-2025-10-31,book:tpb,book:tpb,reading,tpb,the power broker,2025-12-04,112.5,120.0,120.0,7.5,full_duration_minor_overlap,1 beer,Waste Time
-2025-11-01,book:gc,book:gc,reading,gc,,,22.5,30.0,30.0,7.5,full_duration_minor_overlap,food,"Meals, Supplements, Sleep"
-2025-11-02,audiobook: tpb,audiobook: tpb,audiobook,tpb,the power broker,2025-12-04,37.5,75.0,37.5,0.0,calendar_analysis_duration_incompatible_overlap,Amelia,Things
-2025-11-03,book:gc,book:gc,reading,gc,,,97.5,105.0,105.0,7.5,full_duration_minor_overlap,breakfast,"Meals, Supplements, Sleep"
-2025-11-08,Book:ritd,Book:ritd,reading,ritd,revolt in the desert,2025-11-10,52.5,60.0,60.0,7.5,full_duration_minor_overlap,2 beer,Waste Time
-2025-11-09,Book:ritd,Book:ritd,reading,ritd,revolt in the desert,2025-11-10,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Porn,Waste Time
-2025-11-11,audiobook: tab,audiobook: tab,audiobook,tab,,,22.5,45.0,45.0,22.5,full_duration_compatible_overlap,walk,Things
-2025-11-13,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,the power broker,2025-12-04,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Walk,Things
-2025-11-13,finished book: and call me conrad,finished book: and call me conrad,finished,and call me conrad,and call me conrad,2025-11-13,172.5,180.0,180.0,7.5,full_duration_minor_overlap,1 cocktail,Waste Time
-2025-11-14,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,the power broker,2025-12-04,30.0,60.0,60.0,30.0,full_duration_compatible_overlap,gym | Dinner,"Meals, Supplements, Sleep"
-2025-11-15,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,the power broker,2025-12-04,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Laundry,Things
-2025-11-15,book:hotesp,book:hotesp,reading,hotesp,the history of the English speaking peoples volume 4,2026-01-11,52.5,60.0,60.0,7.5,full_duration_minor_overlap,drink,Waste Time
-2025-11-16,book:hotesp,book:hotesp,reading,hotesp,the history of the English speaking peoples volume 4,2026-01-11,22.5,30.0,30.0,7.5,full_duration_minor_overlap,food,"Meals, Supplements, Sleep"
-2025-11-20,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,the power broker,2025-12-04,37.5,75.0,75.0,37.5,full_duration_compatible_overlap,Walk,Things
-2025-11-22,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,the power broker,2025-12-04,60.0,120.0,120.0,60.0,full_duration_compatible_overlap,Walk,Things
-2025-11-23,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,the power broker,2025-12-04,30.0,60.0,60.0,30.0,full_duration_compatible_overlap,Toil: fix bike,Things
-2025-11-27,book:gs,book:gs,reading,gs,,,11.25,22.5,22.5,11.25,full_duration_minor_overlap,sleep,"Meals, Supplements, Sleep"
-2025-12-01,book:tss,book:tss,reading,tss,,,7.5,15.0,15.0,7.5,full_duration_minor_overlap,anki,clark.benham@gmail.com
-2025-12-02,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,the power broker,2025-12-04,22.5,45.0,45.0,22.5,full_duration_compatible_overlap,gym,"Meals, Supplements, Sleep"
-2025-12-02,Read: Kipling,Read: Kipling,reading,Kipling,,,37.5,45.0,45.0,7.5,full_duration_minor_overlap,Food,"Meals, Supplements, Sleep"
-2025-12-04,Finished Audiobook: the power broker,Finished Audiobook: the power broker,finished,the power broker,the power broker,2025-12-04,45.0,90.0,90.0,45.0,full_duration_compatible_overlap,Walk,Things
-2025-12-04,book:su,book:su,reading,su,Shape Up Stop Running in Circles and Ship Work that Matters,2025-12-05,22.5,30.0,30.0,7.5,full_duration_minor_overlap,amelia,Things
-2025-12-05,book:vc,book:vc,reading,vc,,,37.5,60.0,37.5,0.0,calendar_analysis_duration_incompatible_overlap,job: diesl,clark.benham@gmail.com
-2025-12-05,finished book: shaping up,finished book: shaping up,finished,Shape Up Stop Running in Circles and Ship Work that Matters,Shape Up Stop Running in Circles and Ship Work that Matters,2025-12-05,15.0,30.0,30.0,15.0,full_duration_minor_overlap,job: diesl,clark.benham@gmail.com
-2025-12-06,Audiobook: the great democracies,Audiobook: the great democracies,audiobook,the great democracies,the history of the English speaking peoples volume 4,2026-01-11,52.5,105.0,105.0,52.5,full_duration_compatible_overlap,Walk,Things
-2025-12-07,Book:tsnotd,Book:tsnotd,reading,tsnotd,to say nothing of the dog,2025-12-08,52.5,60.0,60.0,7.5,full_duration_minor_overlap,Dinner,"Meals, Supplements, Sleep"
-2025-12-08,Book:tsnotd,Book:tsnotd,reading,tsnotd,to say nothing of the dog,2025-12-08,45.0,90.0,45.0,0.0,calendar_analysis_duration_incompatible_overlap,sleep,"Meals, Supplements, Sleep"
-2025-12-09,book:pmog ,book:pmog,reading,pmog,prime movers of globalization,2026-02-09,22.5,30.0,30.0,7.5,full_duration_minor_overlap,amelia text,Waste Time
-2025-12-13,audiobook: tgd,audiobook: tgd,audiobook,tgd,the history of the English speaking peoples volume 4,2026-01-11,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Birthday 10K - Santa Monica-Venice Christmas Run,clark.benham@gmail.com
-2025-12-14,Audiobook: tgd,Audiobook: tgd,audiobook,tgd,the history of the English speaking peoples volume 4,2026-01-11,72.5,150.0,150.0,77.5,full_duration_compatible_overlap,Walk | gym | lunch,"Meals, Supplements, Sleep | Things"
-2025-12-16,Audiobook: tgd,Audiobook: tgd,audiobook,tgd,the history of the English speaking peoples volume 4,2026-01-11,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Gym,"Meals, Supplements, Sleep"
-2025-12-16,Audiobook: the world crisis,Audiobook: the world crisis,audiobook,the world crisis,the world crisis,2025-12-27,30.0,60.0,30.0,0.0,calendar_analysis_duration_incompatible_overlap,Gym | Toil: desk | laundry,"Meals, Supplements, Sleep | Things"
-2025-12-17,Audiobook: twc,Audiobook: twc,audiobook,the world crisis,the world crisis,2025-12-27,112.5,120.0,120.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2025-12-17,audiobook: twc,audiobook: twc,audiobook,the world crisis,the world crisis,2025-12-27,22.5,30.0,30.0,7.5,full_duration_minor_overlap,Food,"Meals, Supplements, Sleep"
-2025-12-20,Book:VC,Book:VC,reading,VC,,,22.5,30.0,30.0,7.5,full_duration_minor_overlap,Jack,Waste Time
-2025-12-20,Read Old screenshots,Read Old screenshots,reading,Old screenshots,,,75.0,90.0,90.0,15.0,full_duration_minor_overlap,breakfast,"Meals, Supplements, Sleep"
-2025-12-24,Book:twc,Book:twc,reading,the world crisis,the world crisis,2025-12-27,52.5,60.0,60.0,7.5,full_duration_minor_overlap,Food,"Meals, Supplements, Sleep"
-2026-01-05,Audiobook: twc,Audiobook: twc,audiobook,the world crisis volume 3,the world crisis volume 2,2026-01-04,67.5,135.0,135.0,67.5,full_duration_compatible_overlap,Walk,Things
-2026-01-05,Book:twc,Book:twc,reading,the world crisis volume 3,the world crisis volume 2,2026-01-04,22.5,30.0,30.0,7.5,full_duration_minor_overlap,Porn,Waste Time
-2026-01-05,book:twc ,book:twc,reading,the world crisis volume 3,the world crisis volume 2,2026-01-04,52.5,60.0,60.0,7.5,full_duration_minor_overlap,twitter,Waste Time
-2026-01-06,book:twc,book:twc,reading,the world crisis volume 3,the world crisis vol 3,2026-01-07,60.0,90.0,60.0,0.0,calendar_analysis_duration_incompatible_overlap,stall,Waste Time
-2026-01-07,Finished book: the world crisis vol 3,Finished book: the world crisis vol 3,finished,the world crisis vol 3,the world crisis vol 3,2026-01-07,37.5,60.0,37.5,0.0,calendar_analysis_duration_incompatible_overlap,gym,"Meals, Supplements, Sleep"
-2026-01-09,Book:twc,Book:twc,reading,the world crisis volume 4,the world crisis volume 4,2026-01-10,52.5,60.0,60.0,7.5,full_duration_minor_overlap,Food,"Meals, Supplements, Sleep"
-2026-01-11,Audiobook: tef,Audiobook: tef,audiobook,tef,,,30.0,45.0,45.0,15.0,full_duration_minor_overlap,Walk,Things
-2026-01-11,Audiobook: the creative act,Audiobook: the creative act,audiobook,the creative act,,,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Walk,Things
-2026-01-11,Finished audiobook: the history of the English speaking peoples volume 4,Finished audiobook: the history of the English speaking peoples volume 4,finished,the history of the English speaking peoples volume 4,the history of the English speaking peoples volume 4,2026-01-11,30.0,60.0,60.0,30.0,full_duration_compatible_overlap,Walk,Things
-2026-01-12,Audiobook: nicbt,Audiobook: nicbt,audiobook,nicbt,Now It Can Be Told,2026-01-19,30.0,60.0,30.0,0.0,calendar_analysis_duration_incompatible_overlap,Walk | 1 cocktail,Things | Waste Time
-2026-01-12,Audiobook: nicbt,Audiobook: nicbt,audiobook,nicbt,Now It Can Be Told,2026-01-19,22.5,45.0,45.0,22.5,full_duration_compatible_overlap,Walk,Things
-2026-01-13,Audiobook: nicbt,Audiobook: nicbt,audiobook,nicbt,Now It Can Be Told,2026-01-19,60.0,120.0,60.0,0.0,calendar_analysis_duration_incompatible_overlap,Walk | Toil,Things
-2026-01-14,Audiobook: the age of revolution,Audiobook: the age of revolution,audiobook,the age of revolution,,,45.0,90.0,90.0,45.0,full_duration_compatible_overlap,Walk,Things
-2026-01-15,Audiobook: nicbt,Audiobook: nicbt,audiobook,nicbt,Now It Can Be Told,2026-01-19,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Walk,Things
-2026-01-16,Audiobook: nicbt,Audiobook: nicbt,audiobook,nicbt,Now It Can Be Told,2026-01-19,45.0,60.0,60.0,15.0,full_duration_minor_overlap,Purge,Waste Time
-2026-01-19,Audiobook: surely you’re joking Mr Feynman,Audiobook: surely you’re joking Mr Feynman,audiobook,surely you’re joking Mr Feynman,surely you’re joking Feynman,2026-04-19,67.5,90.0,90.0,22.5,full_duration_compatible_overlap,Gym,"Meals, Supplements, Sleep"
-2026-01-20,finished book: Churchill's wit the definitive collection,finished book: Churchill's wit the definitive collection,finished,Churchill's wit the definitive collection,Churchill's wit the definitive collection,2026-01-20,142.5,150.0,150.0,7.5,full_duration_minor_overlap,Dinner,"Meals, Supplements, Sleep"
-2026-01-23,Book:ibtbf,Book:ibtbf,reading,ibtbf,it's better to be feared,2026-01-24,82.5,90.0,90.0,7.5,full_duration_minor_overlap,Dinner,"Meals, Supplements, Sleep"
-2026-01-23,audiobook: tee,audiobook: tee,audiobook,tee,the effective executive,2026-01-29,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Take transit from Your location to 10800 Rose Ave,Things
-2026-01-24,Book:ibtbf,Book:ibtbf,reading,ibtbf,it's better to be feared,2026-01-24,8.941666666666666,15.0,15.0,6.058333333333334,full_duration_minor_overlap,Travel to WeWork Office Space & Coworking,clark.benham@gmail.com
-2026-01-24,book:ibtbf,book:ibtbf,reading,ibtbf,it's better to be feared,2026-01-24,52.5,60.0,60.0,7.5,full_duration_minor_overlap,Dinner,"Meals, Supplements, Sleep"
-2026-01-25,Book:tbab,Book:tbab,reading,tbab,the best and brightest,2026-02-02,67.5,75.0,75.0,7.5,full_duration_minor_overlap,Food,"Meals, Supplements, Sleep"
-2026-01-25,Book:tbab,Book:tbab,reading,tbab,the best and brightest,2026-02-02,22.5,30.0,30.0,7.5,full_duration_minor_overlap,Tug,Waste Time
-2026-01-28,Audiobook: tee,Audiobook: tee,audiobook,tee,the effective executive,2026-01-29,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Take transit from 520 Broadway to 10800 Rose Ave,Things
-2026-01-29,finished audiobook: the effective executive,finished audiobook: the effective executive,finished,the effective executive,the effective executive,2026-01-29,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Travel to wework,Things
-2026-01-30,audiobook: seven habits of highly effective people,audiobook: seven habits of highly effective people,audiobook,seven habits of highly effective people,the effective executive,2026-01-29,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Travel to Home,Things
-2026-02-01,Book:tbab,Book:tbab,reading,tbab,the best and brightest,2026-02-02,9.999999999999996,30.0,9.999999999999996,0.0,calendar_analysis_duration_incompatible_overlap,Amelia | Beach,Things
-2026-02-03,Audiobook: system design interview two,Audiobook: system design interview two,audiobook,system design interview two,,,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Travel to Home 7:56 train,Things
-2026-02-11,Finished book: shoe dog,Finished book: shoe dog,finished,shoe dog,shoe dog,2026-02-11,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Travel to 520 Broadway,Things
-2026-02-13,Listen speeches,Listen speeches,audiobook,speeches,,,22.5,45.0,45.0,22.5,full_duration_compatible_overlap,Walk,Things
-2026-02-13,book:tbatm,book:tbatm,reading,tbatm,the billionaire and the mechanic,2026-02-14,292.5,300.0,300.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2026-02-14,Book:tbatm,Book:tbatm,reading,tbatm,the billionaire and the mechanic,2026-02-14,37.5,45.0,45.0,7.5,full_duration_minor_overlap,YouTube,Waste Time
-2026-02-19,finished book: the parable of rust a novella,finished book: the parable of rust a novella,finished,the parable of rust a novella,the parable of rust a novella,2026-02-19,82.5,90.0,90.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2026-02-21,Book:ctpow,Book:ctpow,reading,ctpow,churchill the power of words,2026-05-07,217.5,225.0,225.0,7.5,full_duration_minor_overlap,2 cocktails,Waste Time
-2026-02-22,Book:ctpow,Book:ctpow,reading,ctpow,churchill the power of words,2026-05-07,52.5,60.0,60.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2026-02-24,book:vaet,book:vaet,reading,vaet,,,37.5,45.0,45.0,7.5,full_duration_minor_overlap,lunch,"Meals, Supplements, Sleep"
-2026-03-11,Finished book: fall of Hyperion,Finished book: fall of Hyperion,finished,fall of Hyperion,fall of Hyperion,2026-03-11,157.5,165.0,165.0,7.5,full_duration_minor_overlap,Luke,Things
-2026-03-20,Read: Churchill,Read: Churchill,reading,Churchill,Churchill: Walking with Destiny,2026-04-24,90.0,105.0,105.0,15.0,full_duration_minor_overlap,Book sim,clark.benham@gmail.com
-2026-03-22,read: churchill,read: churchill,reading,churchill,Churchill: Walking with Destiny,2026-04-24,22.5,30.0,30.0,7.5,full_duration_minor_overlap,breakfast,"Meals, Supplements, Sleep"
-2026-03-23,read churchill,read churchill,reading,churchill,Churchill: Walking with Destiny,2026-04-24,82.5,90.0,90.0,7.5,full_duration_minor_overlap,blogs,Waste Time
-2026-03-28,book:mel,book:mel,reading,mel,my early life,2026-03-29,90.0,105.0,105.0,15.0,full_duration_minor_overlap,1 beer | 1 beer,Waste Time
-2026-04-04,book:cwwd,book:cwwd,reading,cwwd,Churchill: Walking with Destiny,2026-04-24,67.5,75.0,75.0,7.5,full_duration_minor_overlap,Amelia,Things
-2026-04-06,audiobook: sam walton made in america,audiobook: sam walton made in america,audiobook,sam walton made in america,,,30.0,60.0,60.0,30.0,full_duration_compatible_overlap,walk,Things
-2026-04-07,book:cwwd,book:cwwd,reading,cwwd,Churchill: Walking with Destiny,2026-04-24,97.5,120.0,97.5,0.0,calendar_analysis_duration_incompatible_overlap,book sim,clark.benham@gmail.com
-2026-04-07,book:cwwd,book:cwwd,reading,cwwd,Churchill: Walking with Destiny,2026-04-24,215.0,285.0,215.0,0.0,calendar_analysis_duration_incompatible_overlap,book sim | 1 beer | Food | book sim,"Meals, Supplements, Sleep | Waste Time | clark.benham@gmail.com"
-2026-04-08,Book:cwwd,Book:cwwd,reading,cwwd,Churchill: Walking with Destiny,2026-04-24,172.5,180.0,180.0,7.5,full_duration_minor_overlap,2 beer,Waste Time
-2026-04-09,Audiobook: syjf,Audiobook: syjf,audiobook,syjf,surely you’re joking Feynman,2026-04-19,52.5,105.0,105.0,52.5,full_duration_compatible_overlap,Walk,Things
-2026-04-09,book:cwwd,book:cwwd,reading,cwwd,Churchill: Walking with Destiny,2026-04-24,75.0,90.0,90.0,15.0,full_duration_minor_overlap,history qs,Things
-2026-04-09,book:cwwd,book:cwwd,reading,cwwd,Churchill: Walking with Destiny,2026-04-24,97.5,120.0,97.5,0.0,calendar_analysis_duration_incompatible_overlap,history qs,Things
-2026-04-10,Book:cwwd,Book:cwwd,reading,cwwd,Churchill: Walking with Destiny,2026-04-24,187.5,240.0,187.5,0.0,calendar_analysis_duration_incompatible_overlap,Ai history,Things
-2026-04-12,Audiobook: syjf,Audiobook: syjf,audiobook,syjf,surely you’re joking Feynman,2026-04-19,22.5,45.0,45.0,22.5,full_duration_compatible_overlap,gym | Walk,"Meals, Supplements, Sleep | Things"
-2026-04-15,Book:cwwd,Book:cwwd,reading,cwwd,Churchill: Walking with Destiny,2026-04-24,7.5,15.0,15.0,7.5,full_duration_minor_overlap,anki,clark.benham@gmail.com
-2026-04-19,Finished audiobook: surely you’re joking Feynman,Finished audiobook: surely you’re joking Feynman,finished,surely you’re joking Feynman,surely you’re joking Feynman,2026-04-19,30.0,60.0,60.0,30.0,full_duration_compatible_overlap,Walk,Things
-2026-04-19,Started audiobook: out of the crisis,Started audiobook: out of the crisis,started,out of the crisis,,,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Walk,Things
-2026-04-20,Book:cwwd,Book:cwwd,reading,cwwd,Churchill: Walking with Destiny,2026-04-24,142.5,165.0,142.5,0.0,calendar_analysis_duration_incompatible_overlap,lunch | snack,"Meals, Supplements, Sleep"
-2026-04-20,Book:cwwd,Book:cwwd,reading,cwwd,Churchill: Walking with Destiny,2026-04-24,45.0,60.0,60.0,15.0,full_duration_minor_overlap,Jack | Nap,"Meals, Supplements, Sleep | Waste Time"
-2026-04-21,Book:cwwd,Book:cwwd,reading,cwwd,Churchill: Walking with Destiny,2026-04-24,45.0,90.0,45.0,0.0,calendar_analysis_duration_incompatible_overlap,sleep,"Meals, Supplements, Sleep"
-2026-04-22,book:cwwd,book:cwwd,reading,cwwd,Churchill: Walking with Destiny,2026-04-24,45.0,60.0,60.0,15.0,full_duration_minor_overlap,ai history,Things
-2026-04-23,audiobook: ootc ,audiobook: ootc,audiobook,ootc,,,22.5,45.0,45.0,22.5,full_duration_compatible_overlap,walk,Things
-2026-04-24,Book:cwwd,Book:cwwd,reading,cwwd,Churchill: Walking with Destiny,2026-04-24,217.5,240.0,217.5,0.0,calendar_analysis_duration_incompatible_overlap,Amelia | Dinner,"Meals, Supplements, Sleep | Things"
-2026-04-26,started audiobook: the nvidia way,started audiobook: the nvidia way,started,the nvidia way,the nvidia way,2026-05-13,30.0,60.0,60.0,30.0,full_duration_compatible_overlap,walk,Things
-2026-05-04,Book:mtpsf,Book:mtpsf,reading,mtpsf,managing the professional services firm,2026-05-14,22.5,30.0,30.0,7.5,full_duration_minor_overlap,Interview prep,clark.benham@gmail.com
-2026-05-06,Audiobook: tnw,Audiobook: tnw,audiobook,tnw,the nvidia way,2026-05-13,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Walk,Things
-2026-05-06,Audiobook: tnw,Audiobook: tnw,audiobook,tnw,the nvidia way,2026-05-13,37.5,75.0,75.0,37.5,full_duration_compatible_overlap,Walk,Things
-2026-05-11,Book:mtpsf,Book:mtpsf,reading,mtpsf,managing the professional services firm,2026-05-14,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Nap,"Meals, Supplements, Sleep"
-2026-05-13,Book:mtpsf,Book:mtpsf,reading,mtpsf,managing the professional services firm,2026-05-14,82.5,90.0,90.0,7.5,full_duration_minor_overlap,Food,"Meals, Supplements, Sleep"
-2026-05-13,Finished audiobook: the Nvidia way,Finished audiobook: the Nvidia way,finished,the Nvidia way,the nvidia way,2026-05-13,15.0,30.0,30.0,15.0,full_duration_minor_overlap,Walk,Things
-2026-05-13,Started Audiobook: Iacocca an autobiography,Started Audiobook: Iacocca an autobiography,started,Iacocca an autobiography,,,22.5,45.0,22.5,0.0,calendar_analysis_duration_incompatible_overlap,Cook,Things
-2026-05-14,Audiobook: iaa,Audiobook: iaa,audiobook,iaa,,,7.5,15.0,15.0,7.5,full_duration_minor_overlap,Walk,Things
-2026-05-14,Audiobook: iaa,Audiobook: iaa,audiobook,iaa,,,30.0,60.0,60.0,30.0,full_duration_compatible_overlap,Walk,Things
+date,summary,part_summary,event_type,book_ref,is_audiobook_time,title,matched_finish_date,calendar_analysis_minutes,wall_clock_minutes,wall_minus_calendar_minutes,overlap_total_minutes,overlap_longest_minutes,overlap_policy_minutes,policy_restored_minutes,overlap_policy_rule,overlap_other_events,overlap_other_calendars
+2023-06-20,finished book: starship troopers,finished book: starship troopers,finished,starship troopers,False,starship troopers,2023-06-20,99.99999999999997,210.0,110.00000000000003,210.0,210.0,210.0,110.00000000000003,full_duration_overlap_gt_15m,Job: Hive | breakfast | lunch,"Meals, Supplements, Sleep | clark.benham@gmail.com"
+2024-09-03,book:asftinda,book:asftinda,reading,asftinda,False,A Supposedly Fun Thing I'll Never Do Again,2024-09-04,90.0,180.0,90.0,180.0,180.0,180.0,90.0,full_duration_overlap_gt_15m,Train to Charlottesville VA,Things
+2025-05-06,Audio book: moa,Audio book: moa,audiobook,moa,True,means of ascent,2025-05-07,150.0,240.0,90.0,180.0,60.0,240.0,90.0,full_duration_overlap_gt_15m,Walk | Laundry | Blogs | Walk | grocceires | walk | Cook,Things | Waste Time
+2023-12-13,Book:ths,Book:ths,reading,ths,False,that hideous strength,2023-12-14,80.0,165.0,85.0,165.0,165.0,165.0,85.0,full_duration_overlap_gt_15m,Flight | Nap,"Meals, Supplements, Sleep | Things"
+2023-04-13,book:tmc,book:tmc,reading,tmc,False,,,82.5,165.0,82.5,165.0,165.0,165.0,82.5,full_duration_overlap_gt_15m,Job: Hive,clark.benham@gmail.com
+2025-12-14,Audiobook: tgd,Audiobook: tgd,audiobook,tgd,True,the history of the English speaking peoples volume 4,2026-01-11,72.5,150.0,77.5,150.0,120.0,150.0,77.5,full_duration_overlap_gt_15m,Walk | gym | lunch,"Meals, Supplements, Sleep | Things"
+2023-07-03,book:siasl,book:siasl,reading,siasl,False,Stranger in a Strange Land,2023-07-05,75.0,150.0,75.0,150.0,150.0,150.0,75.0,full_duration_overlap_gt_15m,Job: Hive,clark.benham@gmail.com
+2025-03-14,audio book: it's not luck,audio book: it's not luck,audiobook,it's not luck,True,,,75.0,150.0,75.0,150.0,150.0,150.0,75.0,full_duration_overlap_gt_15m,Drive home,Things
+2026-04-07,book:cwwd,book:cwwd,reading,cwwd,False,Churchill: Walking with Destiny,2026-04-24,215.0,285.0,70.0,135.0,60.0,285.0,70.0,full_duration_overlap_gt_15m,book sim | 1 beer | Food | book sim,"Meals, Supplements, Sleep | Waste Time | clark.benham@gmail.com"
+2026-01-05,Audiobook: twc,Audiobook: twc,audiobook,the world crisis volume 3,True,the world crisis volume 2,2026-01-04,67.5,135.0,67.5,135.0,135.0,135.0,67.5,full_duration_overlap_gt_15m,Walk,Things
+2022-12-03,book:ptaesp,book:ptaesp,reading,ptaesp,False,ptaesp,2022-12-03,57.5,120.0,62.5,120.0,120.0,120.0,62.5,full_duration_overlap_gt_15m,Job: Hive | dinner,"Meals, Supplements, Sleep | clark.benham@gmail.com"
+2022-02-18,book:dm,book:dm,reading,dm,False,Dune Messiah,2022-02-19,60.0,120.0,60.0,120.0,120.0,120.0,60.0,full_duration_overlap_gt_15m,Job: Hive,clark.benham@gmail.com
+2025-05-10,audiobook: master of the senate,audiobook: master of the senate,audiobook,master of the senate,True,master of the senate,2025-05-19,60.0,120.0,60.0,120.0,120.0,120.0,60.0,full_duration_overlap_gt_15m,walk,Things
+2025-11-22,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,True,the power broker,2025-12-04,60.0,120.0,60.0,120.0,120.0,120.0,60.0,full_duration_overlap_gt_15m,Walk,Things
+2026-01-13,Audiobook: nicbt,Audiobook: nicbt,audiobook,nicbt,True,Now It Can Be Told,2026-01-19,60.0,120.0,60.0,120.0,90.0,120.0,60.0,full_duration_overlap_gt_15m,Walk | Toil,Things
+2022-12-31,book:de,book:de,reading,de,False,deaths end,2023-01-01,52.5,105.0,52.5,105.0,105.0,105.0,52.5,full_duration_overlap_gt_15m,travel,Things
+2023-12-23,Finished book: the abolition of man,Finished book: the abolition of man,finished,the abolition of man,False,the abolition of man,2023-12-23,52.5,105.0,52.5,105.0,105.0,105.0,52.5,full_duration_overlap_gt_15m,Travel,Things
+2024-03-08,Book:jto,Book:jto,reading,jto,False,Jude the Obscure,2024-03-08,52.5,105.0,52.5,105.0,105.0,105.0,52.5,full_duration_overlap_gt_15m,Travel,Things
+2025-03-13,audiobook: its not luck,audiobook: its not luck,audiobook,its not luck,True,,,52.5,105.0,52.5,105.0,105.0,105.0,52.5,full_duration_overlap_gt_15m,Drive to Indian wells,Things
+2025-12-06,Audiobook: the great democracies,Audiobook: the great democracies,audiobook,the great democracies,True,the history of the English speaking peoples volume 4,2026-01-11,52.5,105.0,52.5,105.0,105.0,105.0,52.5,full_duration_overlap_gt_15m,Walk,Things
+2026-04-09,Audiobook: syjf,Audiobook: syjf,audiobook,syjf,True,surely you’re joking Feynman,2026-04-19,52.5,105.0,52.5,105.0,105.0,105.0,52.5,full_duration_overlap_gt_15m,Walk,Things
+2026-04-10,Book:cwwd,Book:cwwd,reading,cwwd,False,Churchill: Walking with Destiny,2026-04-24,187.5,240.0,52.5,105.0,105.0,240.0,52.5,full_duration_overlap_gt_15m,Ai history,Things
+2022-01-05,Book:dswn,Book:dswn,reading,dswn,False,,,45.0,90.0,45.0,90.0,90.0,90.0,45.0,full_duration_overlap_gt_15m,airplane to SFO,Things
+2025-03-22,Finished book: the Oxford book of essays,Finished book: the Oxford book of essays,finished,the Oxford book of essays,False,the Oxford book of essays,2025-03-22,45.0,90.0,45.0,90.0,90.0,90.0,45.0,full_duration_overlap_gt_15m,Lie in sun,Things
+2025-05-18,Audiobook: mots,Audiobook: mots,audiobook,mots,True,master of the senate,2025-05-19,45.0,90.0,45.0,90.0,90.0,90.0,45.0,full_duration_overlap_gt_15m,Walk,Things
+2025-12-04,Finished Audiobook: the power broker,Finished Audiobook: the power broker,finished,the power broker,True,the power broker,2025-12-04,45.0,90.0,45.0,90.0,90.0,90.0,45.0,full_duration_overlap_gt_15m,Walk,Things
+2025-12-08,Book:tsnotd,Book:tsnotd,reading,tsnotd,False,to say nothing of the dog,2025-12-08,45.0,90.0,45.0,90.0,90.0,90.0,45.0,full_duration_overlap_gt_15m,sleep,"Meals, Supplements, Sleep"
+2026-01-14,Audiobook: the age of revolution,Audiobook: the age of revolution,audiobook,the age of revolution,True,,,45.0,90.0,45.0,90.0,90.0,90.0,45.0,full_duration_overlap_gt_15m,Walk,Things
+2026-04-21,Book:cwwd,Book:cwwd,reading,cwwd,False,Churchill: Walking with Destiny,2026-04-24,45.0,90.0,45.0,90.0,90.0,90.0,45.0,full_duration_overlap_gt_15m,sleep,"Meals, Supplements, Sleep"
+2022-12-25,book:ttbp,book:ttbp,reading,ttbp,False,The Three-Body Problem,2022-12-26,37.5,75.0,37.5,75.0,75.0,75.0,37.5,full_duration_overlap_gt_15m,airplane,Things
+2025-10-07,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,True,the power broker,2025-12-04,37.5,75.0,37.5,75.0,75.0,75.0,37.5,full_duration_overlap_gt_15m,Walk,Things
+2025-10-31,audiobook: tpb,audiobook: tpb,audiobook,tpb,True,the power broker,2025-12-04,37.5,75.0,37.5,75.0,75.0,75.0,37.5,full_duration_overlap_gt_15m,Amelia: Chores,Things
+2025-11-02,audiobook: tpb,audiobook: tpb,audiobook,tpb,True,the power broker,2025-12-04,37.5,75.0,37.5,75.0,75.0,75.0,37.5,full_duration_overlap_gt_15m,Amelia,Things
+2025-11-20,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,True,the power broker,2025-12-04,37.5,75.0,37.5,75.0,75.0,75.0,37.5,full_duration_overlap_gt_15m,Walk,Things
+2026-05-06,Audiobook: tnw,Audiobook: tnw,audiobook,tnw,True,the nvidia way,2026-05-13,37.5,75.0,37.5,75.0,75.0,75.0,37.5,full_duration_overlap_gt_15m,Walk,Things
+2022-02-13,Book:Dune,Book:Dune,reading,Dune,False,Dune,2022-02-16,345.0,375.0,30.0,60.0,30.0,375.0,30.0,full_duration_overlap_gt_15m,laundry | dinner,"Meals, Supplements, Sleep | Things"
+2022-02-18,book:dm,book:dm,reading,dm,False,Dune Messiah,2022-02-19,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,Job: Hive,clark.benham@gmail.com
+2023-01-01,finished book: deaths end,finished book: deaths end,finished,deaths end,False,deaths end,2023-01-01,75.0,105.0,30.0,60.0,60.0,105.0,30.0,full_duration_overlap_gt_15m,travel,Things
+2024-03-08,Finished book: Jude the obscure,Finished book: Jude the obscure,finished,Jude the obscure,False,Jude the Obscure,2024-03-08,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,Travel,Things
+2024-06-15,Book:5ebgo,Book:5ebgo,reading,5ebgo,False,50 essays by george orwell,2024-06-19,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,Amelia,Things
+2024-06-16,Book:5ebgo,Book:5ebgo,reading,5ebgo,False,50 essays by george orwell,2024-06-19,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,Amelia,Things
+2024-12-29,book:md,book:md,reading,md,False,Ms Dalloway,2025-01-01,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,sleep,"Meals, Supplements, Sleep"
+2025-01-20,Book:laf,Book:laf,reading,laf,False,Life and Fate,2025-01-22,90.0,120.0,30.0,60.0,60.0,120.0,30.0,full_duration_overlap_gt_15m,Sun,Things
+2025-02-14,book:ri,book:ri,reading,ri,False,,,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,Spa,Things
+2025-03-18,audiobook: it's not luck,audiobook: it's not luck,audiobook,it's not luck,True,,,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,Walk,Things
+2025-04-05,audiobook: lyndon johnson the path to power,audiobook: lyndon johnson the path to power,audiobook,The Path to Power: The Years of Lyndon Johnson I,True,The Path to Power: The Years of Lyndon Johnson I,2025-05-04,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,drive to ojai,Things
+2025-05-15,Audiobook: mots,Audiobook: mots,audiobook,mots,True,master of the senate,2025-05-19,30.0,60.0,30.0,60.0,30.0,60.0,30.0,full_duration_overlap_gt_15m,gym | Walk,"Meals, Supplements, Sleep | Things"
+2025-05-18,Audiobook: mots,Audiobook: mots,audiobook,mots,True,master of the senate,2025-05-19,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,Walk,Things
+2025-07-12,Audio book:  tpb,Audio book:  tpb,audiobook,tpb,True,the power broker,2025-12-04,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,Walk,Things
+2025-08-02,finished book: age of ambition,finished book: age of ambition,finished,age of ambition,False,age of ambition,2025-08-02,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,China trip,Things
+2025-10-26,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,True,the power broker,2025-12-04,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,Walk,Things
+2025-10-31,audiobook: tpb,audiobook: tpb,audiobook,tpb,True,the power broker,2025-12-04,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,Amelia chores,Things
+2025-11-14,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,True,the power broker,2025-12-04,30.0,60.0,30.0,60.0,45.0,60.0,30.0,full_duration_overlap_gt_15m,gym | Dinner,"Meals, Supplements, Sleep"
+2025-11-23,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,True,the power broker,2025-12-04,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,Toil: fix bike,Things
+2025-12-16,Audiobook: the world crisis,Audiobook: the world crisis,audiobook,the world crisis,True,the world crisis,2025-12-27,30.0,60.0,30.0,60.0,35.0,60.0,30.0,full_duration_overlap_gt_15m,Gym | Toil: desk | laundry,"Meals, Supplements, Sleep | Things"
+2026-01-06,book:twc,book:twc,reading,the world crisis volume 3,False,the world crisis vol 3,2026-01-07,60.0,90.0,30.0,60.0,60.0,90.0,30.0,full_duration_overlap_gt_15m,stall,Waste Time
+2026-01-11,Finished audiobook: the history of the English speaking peoples volume 4,Finished audiobook: the history of the English speaking peoples volume 4,finished,the history of the English speaking peoples volume 4,True,the history of the English speaking peoples volume 4,2026-01-11,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,Walk,Things
+2026-01-12,Audiobook: nicbt,Audiobook: nicbt,audiobook,nicbt,True,Now It Can Be Told,2026-01-19,30.0,60.0,30.0,60.0,45.0,60.0,30.0,full_duration_overlap_gt_15m,Walk | 1 cocktail,Things | Waste Time
+2026-04-06,audiobook: sam walton made in america,audiobook: sam walton made in america,audiobook,sam walton made in america,True,,,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,walk,Things
+2026-04-19,Finished audiobook: surely you’re joking Feynman,Finished audiobook: surely you’re joking Feynman,finished,surely you’re joking Feynman,True,surely you’re joking Feynman,2026-04-19,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,Walk,Things
+2026-04-26,started audiobook: the nvidia way,started audiobook: the nvidia way,started,the nvidia way,True,the nvidia way,2026-05-13,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,walk,Things
+2026-05-14,Audiobook: iaa,Audiobook: iaa,audiobook,iaa,True,,,30.0,60.0,30.0,60.0,60.0,60.0,30.0,full_duration_overlap_gt_15m,Walk,Things
+2021-06-29,read: Chekhov,read: Chekhov,reading,Chekhov,False,,,20.0,45.0,25.0,45.0,45.0,45.0,25.0,full_duration_overlap_gt_15m,Job: Hive | dinner (fake; use takeout data from 7 | 13),"Meals, Supplements, Sleep | clark.benham@gmail.com"
+2022-02-19,book:dm,book:dm,reading,dm,False,Dune Messiah,2022-02-19,22.5,45.0,22.5,45.0,45.0,45.0,22.5,full_duration_overlap_gt_15m,Job: Hive,clark.benham@gmail.com
+2022-03-03,read: Kipling,read: Kipling,reading,Kipling,False,Kipling by Harold bloom,2024-12-23,22.5,45.0,22.5,45.0,45.0,45.0,22.5,full_duration_overlap_gt_15m,Job: Hive,clark.benham@gmail.com
+2022-12-24,book:ttbp,book:ttbp,reading,ttbp,False,The Three-Body Problem,2022-12-26,22.5,45.0,22.5,45.0,45.0,45.0,22.5,full_duration_overlap_gt_15m,airplane,Things
+2023-02-20,Read: Kipling,Read: Kipling,reading,Kipling,False,Kipling by Harold bloom,2024-12-23,22.5,45.0,22.5,45.0,45.0,45.0,22.5,full_duration_overlap_gt_15m,ml matrix mult,clark.benham@gmail.com
+2024-10-09,Book:biwhm,Book:biwhm,reading,biwhm,False,Brief Interviews with Hideous Men,2024-10-09,22.5,45.0,22.5,45.0,45.0,45.0,22.5,full_duration_overlap_gt_15m,Spa,Things
+2025-05-14,Audiobook: mots,Audiobook: mots,audiobook,mots,True,master of the senate,2025-05-19,22.5,45.0,22.5,45.0,45.0,45.0,22.5,full_duration_overlap_gt_15m,gym,"Meals, Supplements, Sleep"
+2025-09-29,Audio book: tpb,Audio book: tpb,audiobook,tpb,True,the power broker,2025-12-04,52.5,75.0,22.5,45.0,45.0,75.0,22.5,full_duration_overlap_gt_15m,Walk,Things
+2025-11-11,audiobook: tab,audiobook: tab,audiobook,tab,True,,,22.5,45.0,22.5,45.0,45.0,45.0,22.5,full_duration_overlap_gt_15m,walk,Things
+2025-12-02,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,True,the power broker,2025-12-04,22.5,45.0,22.5,45.0,45.0,45.0,22.5,full_duration_overlap_gt_15m,gym,"Meals, Supplements, Sleep"
+2025-12-05,book:vc,book:vc,reading,vc,False,,,37.5,60.0,22.5,45.0,45.0,60.0,22.5,full_duration_overlap_gt_15m,job: diesl,clark.benham@gmail.com
+2026-01-07,Finished book: the world crisis vol 3,Finished book: the world crisis vol 3,finished,the world crisis vol 3,False,the world crisis vol 3,2026-01-07,37.5,60.0,22.5,45.0,45.0,60.0,22.5,full_duration_overlap_gt_15m,gym,"Meals, Supplements, Sleep"
+2026-01-12,Audiobook: nicbt,Audiobook: nicbt,audiobook,nicbt,True,Now It Can Be Told,2026-01-19,22.5,45.0,22.5,45.0,45.0,45.0,22.5,full_duration_overlap_gt_15m,Walk,Things
+2026-01-19,Audiobook: surely you’re joking Mr Feynman,Audiobook: surely you’re joking Mr Feynman,audiobook,surely you’re joking Mr Feynman,True,surely you’re joking Feynman,2026-04-19,67.5,90.0,22.5,45.0,45.0,90.0,22.5,full_duration_overlap_gt_15m,Gym,"Meals, Supplements, Sleep"
+2026-02-13,Listen speeches,Listen speeches,audiobook,speeches,True,,,22.5,45.0,22.5,45.0,45.0,45.0,22.5,full_duration_overlap_gt_15m,Walk,Things
+2026-04-07,book:cwwd,book:cwwd,reading,cwwd,False,Churchill: Walking with Destiny,2026-04-24,97.5,120.0,22.5,45.0,45.0,120.0,22.5,full_duration_overlap_gt_15m,book sim,clark.benham@gmail.com
+2026-04-09,book:cwwd,book:cwwd,reading,cwwd,False,Churchill: Walking with Destiny,2026-04-24,97.5,120.0,22.5,45.0,45.0,120.0,22.5,full_duration_overlap_gt_15m,history qs,Things
+2026-04-12,Audiobook: syjf,Audiobook: syjf,audiobook,syjf,True,surely you’re joking Feynman,2026-04-19,22.5,45.0,22.5,45.0,30.0,45.0,22.5,full_duration_overlap_gt_15m,gym | Walk,"Meals, Supplements, Sleep | Things"
+2026-04-20,Book:cwwd,Book:cwwd,reading,cwwd,False,Churchill: Walking with Destiny,2026-04-24,142.5,165.0,22.5,45.0,30.0,165.0,22.5,full_duration_overlap_gt_15m,lunch | snack,"Meals, Supplements, Sleep"
+2026-04-23,audiobook: ootc ,audiobook: ootc,audiobook,ootc,True,,,22.5,45.0,22.5,45.0,45.0,45.0,22.5,full_duration_overlap_gt_15m,walk,Things
+2026-04-24,Book:cwwd,Book:cwwd,reading,cwwd,False,Churchill: Walking with Destiny,2026-04-24,217.5,240.0,22.5,45.0,30.0,240.0,22.5,full_duration_overlap_gt_15m,Amelia | Dinner,"Meals, Supplements, Sleep | Things"
+2026-05-13,Started Audiobook: Iacocca an autobiography,Started Audiobook: Iacocca an autobiography,started,Iacocca an autobiography,True,,,22.5,45.0,22.5,45.0,45.0,45.0,22.5,full_duration_overlap_gt_15m,Cook,Things
+2026-02-01,Book:tbab,Book:tbab,reading,tbab,False,the best and brightest,2026-02-02,9.999999999999996,30.0,20.000000000000004,30.0,30.0,30.0,20.000000000000004,full_duration_overlap_gt_15m,Amelia | Beach,Things
+2024-08-13,book:bm,book:bm,reading,bm,False,,,12.683333333333334,30.0,17.316666666666666,30.0,23.9,30.0,17.316666666666666,full_duration_overlap_gt_15m,Travel to AMC Bay Street 16 | Deadpool & Wolverine at AMC Bay Street 16,Things | Waste Time
+2021-06-29,read: Chekhov,read: Chekhov,reading,Chekhov,False,,,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Job: Hive,clark.benham@gmail.com
+2021-11-18,read: Conrad,read: Conrad,reading,Conrad,False,and call me conrad,2025-11-13,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Job: Hive,clark.benham@gmail.com
+2022-03-03,Read: Kipling,Read: Kipling,reading,Kipling,False,Kipling by Harold bloom,2024-12-23,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Job: Hive,clark.benham@gmail.com
+2022-04-14,read: Kipling,read: Kipling,reading,Kipling,False,Kipling by Harold bloom,2024-12-23,60.0,75.0,15.0,30.0,30.0,75.0,15.0,full_duration_overlap_gt_15m,porn,Waste Time
+2022-09-22,finished: Deep Learning by Goodfellow et all,finished: Deep Learning by Goodfellow et all,finished,Deep Learning by Goodfellow et all,False,Deep Learning by Goodfellow et all,2022-09-22,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Job: Hive,clark.benham@gmail.com
+2022-12-02,book:ptaesp,book:ptaesp,reading,ptaesp,False,ptaesp,2022-12-03,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Job: Hive,clark.benham@gmail.com
+2023-01-04,book:nf,book:nf,reading,nf,False,Never Finished,2023-01-12,135.0,150.0,15.0,30.0,30.0,150.0,15.0,full_duration_overlap_gt_15m,dinner,"Meals, Supplements, Sleep"
+2023-01-11,book:nf,book:nf,reading,nf,False,Never Finished,2023-01-12,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Job: Hive,clark.benham@gmail.com
+2023-03-13,read: Kipling,read: Kipling,reading,Kipling,False,Kipling by Harold bloom,2024-12-23,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,travel,Things
+2023-08-05,finished book: Essays to do good,finished book: Essays to do good,finished,Essays to do good,False,Essays to Do Good,2023-08-05,45.0,60.0,15.0,30.0,15.0,60.0,15.0,full_duration_overlap_gt_15m,purge | tug | Jack,Waste Time
+2023-08-29,Finished book: The Peace War,Finished book: The Peace War,finished,The Peace War,False,The Peace War,2023-08-29,240.0,255.0,15.0,30.0,15.0,255.0,15.0,full_duration_overlap_gt_15m,Jack | Food,"Meals, Supplements, Sleep | Waste Time"
+2023-10-10,Book:ladr,Book:ladr,reading,ladr,False,,,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,sleep,"Meals, Supplements, Sleep"
+2023-12-14,Book:ths,Book:ths,reading,ths,False,that hideous strength,2023-12-14,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Flight,Things
+2023-12-28,Read: Kipling,Read: Kipling,reading,Kipling,False,Kipling by Harold bloom,2024-12-23,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Turkish air,Things
+2024-02-23,Book:htwfaip,Book:htwfaip,reading,htwfaip,False,how to win friends and influence people,2024-02-24,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Travel,Things
+2024-06-01,Book:cp,Book:cp,reading,cp,False,consider phlebas,2024-06-04,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Flight: SFO to PVU,Things
+2024-08-09,book:toboss,book:toboss,reading,toboss,False,The Oxford Book of Short Stories,2024-09-14,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,airport,Things
+2024-10-31,Finished book: how to fail at almost everything and still win big,Finished book: how to fail at almost everything and still win big,finished,how to fail at almost everything and still win big,False,How to Fail at Almost Everything and Still Win Big,2024-10-31,90.0,105.0,15.0,30.0,30.0,105.0,15.0,full_duration_overlap_gt_15m,Dinner,"Meals, Supplements, Sleep"
+2025-01-26,book:msos,book:msos,reading,msos,False,Monday Starts on Saturday,2025-01-27,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Spa,Things
+2025-02-22,Book:toboss,Book:toboss,reading,toboss,False,,,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Amelia cuddle,Things
+2025-05-20,Book:sim,Book:sim,reading,sim,False,,,225.0,240.0,15.0,30.0,30.0,240.0,15.0,full_duration_overlap_gt_15m,Dinner,"Meals, Supplements, Sleep"
+2025-06-20,Finished book: theory and practice of gamesmanship,Finished book: theory and practice of gamesmanship,finished,theory and practice of gamesmanship,False,theory and practice of gamesmanship,2025-06-20,75.0,90.0,15.0,30.0,30.0,90.0,15.0,full_duration_overlap_gt_15m,Amelia,Things
+2025-07-09,book:ay,book:ay,reading,ay,False,,,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,sleep,"Meals, Supplements, Sleep"
+2025-07-11,book:finao,book:finao,reading,finao,False,failure is not an option,2025-07-28,90.0,105.0,15.0,30.0,15.0,105.0,15.0,full_duration_overlap_gt_15m,failed sleep | food,"Meals, Supplements, Sleep"
+2025-08-13,Book:tpv,Book:tpv,reading,tpv,False,the price of victory,2025-08-14,285.0,300.0,15.0,30.0,30.0,300.0,15.0,full_duration_overlap_gt_15m,Dinner,"Meals, Supplements, Sleep"
+2025-10-02,book:Buckley,book:Buckley,reading,Buckley,False,Buckley,2025-10-04,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,job: diesl,clark.benham@gmail.com
+2025-10-19,Book:tsww,Book:tsww,reading,tsww,False,the second world war,2025-10-21,165.0,180.0,15.0,30.0,15.0,180.0,15.0,full_duration_overlap_gt_15m,lunch | Jack,"Meals, Supplements, Sleep | Waste Time"
+2025-11-13,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,True,the power broker,2025-12-04,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Walk,Things
+2025-11-15,Audiobook: tpb,Audiobook: tpb,audiobook,tpb,True,the power broker,2025-12-04,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Laundry,Things
+2025-12-05,finished book: shaping up,finished book: shaping up,finished,Shape Up Stop Running in Circles and Ship Work that Matters,False,Shape Up Stop Running in Circles and Ship Work that Matters,2025-12-05,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,job: diesl,clark.benham@gmail.com
+2025-12-13,audiobook: tgd,audiobook: tgd,audiobook,tgd,True,the history of the English speaking peoples volume 4,2026-01-11,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Birthday 10K - Santa Monica-Venice Christmas Run,clark.benham@gmail.com
+2025-12-16,Audiobook: tgd,Audiobook: tgd,audiobook,tgd,True,the history of the English speaking peoples volume 4,2026-01-11,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Gym,"Meals, Supplements, Sleep"
+2025-12-20,Read Old screenshots,Read Old screenshots,reading,Old screenshots,False,,,75.0,90.0,15.0,30.0,30.0,90.0,15.0,full_duration_overlap_gt_15m,breakfast,"Meals, Supplements, Sleep"
+2026-01-11,Audiobook: tef,Audiobook: tef,audiobook,tef,True,,,30.0,45.0,15.0,30.0,30.0,45.0,15.0,full_duration_overlap_gt_15m,Walk,Things
+2026-01-11,Audiobook: the creative act,Audiobook: the creative act,audiobook,the creative act,True,,,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Walk,Things
+2026-01-15,Audiobook: nicbt,Audiobook: nicbt,audiobook,nicbt,True,Now It Can Be Told,2026-01-19,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Walk,Things
+2026-01-16,Audiobook: nicbt,Audiobook: nicbt,audiobook,nicbt,True,Now It Can Be Told,2026-01-19,45.0,60.0,15.0,30.0,30.0,60.0,15.0,full_duration_overlap_gt_15m,Purge,Waste Time
+2026-01-23,audiobook: tee,audiobook: tee,audiobook,tee,True,the effective executive,2026-01-29,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Take transit from Your location to 10800 Rose Ave,Things
+2026-01-29,finished audiobook: the effective executive,finished audiobook: the effective executive,finished,the effective executive,True,the effective executive,2026-01-29,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Travel to wework,Things
+2026-03-20,Read: Churchill,Read: Churchill,reading,Churchill,False,Churchill: Walking with Destiny,2026-04-24,90.0,105.0,15.0,30.0,30.0,105.0,15.0,full_duration_overlap_gt_15m,Book sim,clark.benham@gmail.com
+2026-03-28,book:mel,book:mel,reading,mel,False,my early life,2026-03-29,90.0,105.0,15.0,30.0,15.0,105.0,15.0,full_duration_overlap_gt_15m,1 beer | 1 beer,Waste Time
+2026-04-09,book:cwwd,book:cwwd,reading,cwwd,False,Churchill: Walking with Destiny,2026-04-24,75.0,90.0,15.0,30.0,30.0,90.0,15.0,full_duration_overlap_gt_15m,history qs,Things
+2026-04-19,Started audiobook: out of the crisis,Started audiobook: out of the crisis,started,out of the crisis,True,,,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Walk,Things
+2026-04-20,Book:cwwd,Book:cwwd,reading,cwwd,False,Churchill: Walking with Destiny,2026-04-24,45.0,60.0,15.0,30.0,15.0,60.0,15.0,full_duration_overlap_gt_15m,Jack | Nap,"Meals, Supplements, Sleep | Waste Time"
+2026-04-22,book:cwwd,book:cwwd,reading,cwwd,False,Churchill: Walking with Destiny,2026-04-24,45.0,60.0,15.0,30.0,30.0,60.0,15.0,full_duration_overlap_gt_15m,ai history,Things
+2026-05-06,Audiobook: tnw,Audiobook: tnw,audiobook,tnw,True,the nvidia way,2026-05-13,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Walk,Things
+2026-05-13,Finished audiobook: the Nvidia way,Finished audiobook: the Nvidia way,finished,the Nvidia way,True,the nvidia way,2026-05-13,15.0,30.0,15.0,30.0,30.0,30.0,15.0,full_duration_overlap_gt_15m,Walk,Things
+2024-08-09,Book:toboss,Book:toboss,reading,toboss,False,The Oxford Book of Short Stories,2024-09-14,17.09166666666667,30.0,12.908333333333331,25.816666666666666,15.0,30.0,12.908333333333331,full_duration_overlap_gt_15m,Travel to Terminal 1 | Airport,Things
+2025-11-27,book:gs,book:gs,reading,gs,False,,,11.25,22.5,11.25,22.5,22.5,22.5,11.25,full_duration_overlap_gt_15m,sleep,"Meals, Supplements, Sleep"
+2021-06-09,read: Kipling,read: Kipling,reading,Kipling,False,Kipling by Harold bloom,2024-12-23,52.5,60.0,7.5,15.0,7.5,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,dinner (fake; use takeout data from 7 | 13),"Meals, Supplements, Sleep"
+2021-06-25,read: Chekhov,read: Chekhov,reading,Chekhov,False,,,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,blog,Things
+2022-01-04,Book:dswn,Book:dswn,reading,dswn,False,,,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,Jack,Waste Time
+2022-02-19,book:cod,book:cod,reading,cod,False,children of Dune,2022-02-22,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,breakfast,"Meals, Supplements, Sleep"
+2022-03-06,book:sp,book:sp,reading,sp,False,"Sadly, Porn",2022-04-23,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,blogs,Things
+2022-03-06,book:sp,book:sp,reading,sp,False,"Sadly, Porn",2022-04-23,97.5,105.0,7.5,15.0,15.0,97.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2022-03-15,book:hf,book:hf,reading,hf,False,Huck Finn,2022-03-27,82.5,90.0,7.5,15.0,15.0,82.5,0.0,calendar_analysis_duration_overlap_lte_15m,breakfast,"Meals, Supplements, Sleep"
+2022-03-20,book:hf,book:hf,reading,hf,False,Huck Finn,2022-03-27,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,nap,"Meals, Supplements, Sleep"
+2022-03-24,CS book: Memory,CS book: Memory,reading,Memory,False,,,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,sleep,"Meals, Supplements, Sleep"
+2022-04-03,book:sp,book:sp,reading,sp,False,"Sadly, Porn",2022-04-23,142.5,150.0,7.5,15.0,15.0,142.5,0.0,calendar_analysis_duration_overlap_lte_15m,jack,Waste Time
+2022-05-16,Book:debugging,Book:debugging,reading,debugging,False,,,37.5,45.0,7.5,15.0,15.0,37.5,0.0,calendar_analysis_duration_overlap_lte_15m,Food,"Meals, Supplements, Sleep"
+2022-05-16,finished: Arnold Schwarzenegger ,finished: Arnold Schwarzenegger,finished,Arnold Schwarzenegger,False,Arnold Schwarzenegger,2022-05-16,97.5,105.0,7.5,15.0,15.0,97.5,0.0,calendar_analysis_duration_overlap_lte_15m,dinner,"Meals, Supplements, Sleep"
+2022-07-19,cs book: ML design patterns,cs book: ML design patterns,reading,ML design patterns,False,ML design patterns,2022-08-22,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,jack,Waste Time
+2022-07-21,cs book: ML design patterns,cs book: ML design patterns,reading,ML design patterns,False,ML design patterns,2022-08-22,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,sleep,"Meals, Supplements, Sleep"
+2022-07-28,cs book: ML design patterns,cs book: ML design patterns,reading,ML design patterns,False,ML design patterns,2022-08-22,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,sleep,"Meals, Supplements, Sleep"
+2022-08-22,read: ml,read: ml,reading,ml,False,ML design patterns,2022-08-22,67.5,75.0,7.5,15.0,15.0,67.5,0.0,calendar_analysis_duration_overlap_lte_15m,dinner,"Meals, Supplements, Sleep"
+2022-10-30,read: cpp,read: cpp,reading,cpp,False,,,37.5,45.0,7.5,15.0,15.0,37.5,0.0,calendar_analysis_duration_overlap_lte_15m,football,Waste Time
+2022-12-06,finished book: the golden enclaves,finished book: the golden enclaves,finished,the golden enclaves,False,The Golden Enclaves,2022-12-06,82.5,90.0,7.5,15.0,15.0,82.5,0.0,calendar_analysis_duration_overlap_lte_15m,jack,Waste Time
+2023-01-10,book:nf,book:nf,reading,nf,False,Never Finished,2023-01-12,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Job: Hive,clark.benham@gmail.com
+2023-02-26,book:wdycwopt,book:wdycwopt,reading,wdycwopt,False,wdycwopt,2023-02-27,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,breakfast,"Meals, Supplements, Sleep"
+2023-07-03,book:siasl,book:siasl,reading,siasl,False,Stranger in a Strange Land,2023-07-05,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Job: Hive,clark.benham@gmail.com
+2023-08-22,book:ksm,book:ksm,reading,ksm,False,King Solomons Mines,2023-08-23,157.5,165.0,7.5,15.0,15.0,157.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2023-09-05,Book:Knudsen,Book:Knudsen,reading,Knudsen,False,,,142.5,150.0,7.5,15.0,15.0,142.5,0.0,calendar_analysis_duration_overlap_lte_15m,sleep,"Meals, Supplements, Sleep"
+2023-10-20,Book:ladr,Book:ladr,reading,ladr,False,,,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,breakfast,"Meals, Supplements, Sleep"
+2023-10-22,Book:hpmor,Book:hpmor,reading,hpmor,False,Harry Potter and the Methods of Rationality,2023-10-25,232.5,240.0,7.5,15.0,15.0,232.5,0.0,calendar_analysis_duration_overlap_lte_15m,breakfast,"Meals, Supplements, Sleep"
+2023-10-23,Book:hpmor,Book:hpmor,reading,hpmor,False,Harry Potter and the Methods of Rationality,2023-10-25,247.5,255.0,7.5,15.0,15.0,247.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2023-11-05,book:pc,book:pc,reading,pc,False,,,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,YouTube,Waste Time
+2024-01-16,Book:dm,Book:dm,reading,dm,False,digital minamalism,2024-01-21,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Flight IST to SFO,Things
+2024-02-16,Book:ewtca,Book:ewtca,reading,ewtca,False,ewtca,2024-02-19,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Travel to Budget Truck Rental,Things
+2024-02-23,Book:htwfaip,Book:htwfaip,reading,htwfaip,False,how to win friends and influence people,2024-02-24,37.5,45.0,7.5,15.0,15.0,37.5,0.0,calendar_analysis_duration_overlap_lte_15m,Flight LAX SFO,Things
+2024-04-13,Book:mml,Book:mml,reading,mml,False,Mathematics for Machine Learning,2025-07-09,37.5,45.0,7.5,15.0,15.0,37.5,0.0,calendar_analysis_duration_overlap_lte_15m,Jack,Waste Time
+2024-05-17,finished move: the dark knight,finished move: the dark knight,finished,move: the dark knight,False,move: the dark knight,2024-05-17,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,dinner,"Meals, Supplements, Sleep"
+2024-05-30,Book:cp,Book:cp,reading,cp,False,consider phlebas,2024-06-04,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,Food,"Meals, Supplements, Sleep"
+2024-06-12,book:5ebgo,book:5ebgo,reading,5ebgo,False,50 essays by george orwell,2024-06-19,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,blogs,Waste Time
+2024-06-27,Book:js,Book:js,reading,js,False,Jeeves Stories,2024-06-30,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,anki,clark.benham@gmail.com
+2024-06-30,Book:js,Book:js,reading,js,False,Jeeves Stories,2024-06-30,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2024-07-10,Book:jff,Book:jff,reading,jff,False,Just for Fun : The Story of an Accidental Revolutionary,2024-07-14,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,mats,clark.benham@gmail.com
+2024-07-14,finished book: just for fun,finished book: just for fun,finished,just for fun,False,Just for Fun : The Story of an Accidental Revolutionary,2024-07-14,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,dinner,"Meals, Supplements, Sleep"
+2024-07-21,book:tpp,book:tpp,reading,tpp,False,The Path to Power: The Years of Lyndon Johnson I,2025-05-04,37.5,45.0,7.5,15.0,15.0,37.5,0.0,calendar_analysis_duration_overlap_lte_15m,anki,clark.benham@gmail.com
+2024-08-09,book:toboss,book:toboss,reading,toboss,False,The Oxford Book of Short Stories,2024-09-14,37.5,45.0,7.5,15.0,15.0,37.5,0.0,calendar_analysis_duration_overlap_lte_15m,blogs,Waste Time
+2024-08-19,book:toboe,book:toboe,reading,toboe,False,the Oxford book of essays,2025-03-22,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,Failed nap,"Meals, Supplements, Sleep"
+2024-08-23,Book:toboss,Book:toboss,reading,toboss,False,The Oxford Book of Short Stories,2024-09-14,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Snack,"Meals, Supplements, Sleep"
+2024-08-27,book:ctl,book:ctl,reading,ctl,False,consider the lobster,2024-08-27,127.5,135.0,7.5,15.0,15.0,127.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2024-09-12,Book:toboss,Book:toboss,reading,toboss,False,The Oxford Book of Short Stories,2024-09-14,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,Drink,Waste Time
+2024-10-01,book:huc,book:huc,reading,huc,False,hitlers uranium club,2024-10-02,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2024-10-10,book:shilav,book:shilav,reading,shilav,False,self help is like a vaccine,2024-10-11,67.5,75.0,7.5,15.0,15.0,67.5,0.0,calendar_analysis_duration_overlap_lte_15m,Amelia,Things
+2024-10-23,book:tdm,book:tdm,reading,tdm,False,The Doomsday Machine,2024-10-24,382.5,390.0,7.5,15.0,15.0,382.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2024-10-27,Book:htfaaeaswb,Book:htfaaeaswb,reading,htfaaeaswb,False,How to Fail at Almost Everything and Still Win Big,2024-10-31,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Spa,Things
+2024-10-30,book:htfaaeaswb,book:htfaaeaswb,reading,htfaaeaswb,False,How to Fail at Almost Everything and Still Win Big,2024-10-31,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,anki,clark.benham@gmail.com
+2024-11-02,Read math,Read math,reading,math,False,,,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,sleep,"Meals, Supplements, Sleep"
+2024-11-08,finished book: metropolis man,finished book: metropolis man,finished,metropolis man,False,metropolis man,2024-11-08,82.5,90.0,7.5,15.0,15.0,82.5,0.0,calendar_analysis_duration_overlap_lte_15m,Amelia,Things
+2024-11-13,read podcasts,read podcasts,reading,podcasts,False,,,37.5,45.0,7.5,15.0,7.5,37.5,0.0,calendar_analysis_duration_overlap_lte_15m,Snacks | junk food,"Meals, Supplements, Sleep"
+2024-11-21,book:declare,book:declare,reading,declare,False,"Declare_ A novel - Powers, Tim.pdf",2024-11-28,127.5,135.0,7.5,15.0,15.0,127.5,0.0,calendar_analysis_duration_overlap_lte_15m,Dinner,"Meals, Supplements, Sleep"
+2024-11-30,Book:thmp,Book:thmp,reading,thmp,False,,,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,breakfast,"Meals, Supplements, Sleep"
+2024-12-04,Book:htwww,Book:htwww,reading,htwww,False,htwww,2024-12-11,112.5,120.0,7.5,15.0,7.5,112.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch | snack,"Meals, Supplements, Sleep"
+2024-12-05,Book:htwww,Book:htwww,reading,htwww,False,htwww,2024-12-11,157.5,165.0,7.5,15.0,15.0,157.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2024-12-11,book:mle,book:mle,reading,mle,False,machine learning engineering,2024-12-12,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Amelia,Things
+2024-12-17,book:eopp,book:eopp,reading,eopp,False,,,82.5,90.0,7.5,15.0,15.0,82.5,0.0,calendar_analysis_duration_overlap_lte_15m,wiki,Waste Time
+2024-12-18,Book:taomi,Book:taomi,reading,taomi,False,the art of military innovation,2024-12-19,97.5,105.0,7.5,15.0,15.0,97.5,0.0,calendar_analysis_duration_overlap_lte_15m,Airport,Things
+2024-12-22,book:htkap,book:htkap,reading,htkap,False,,,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,drive back from Chesapeake,Things
+2024-12-23,Book:kbhb,Book:kbhb,reading,kbhb,False,Kipling by Harold bloom,2024-12-23,37.5,45.0,7.5,15.0,15.0,37.5,0.0,calendar_analysis_duration_overlap_lte_15m,Porn tug,Waste Time
+2024-12-28,book:md,book:md,reading,md,False,Ms Dalloway,2025-01-01,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,breakfast,"Meals, Supplements, Sleep"
+2025-01-01,Finished book: Ms Dalloway,Finished book: Ms Dalloway,finished,Ms Dalloway,False,Ms Dalloway,2025-01-01,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,Amelia,Things
+2025-01-02,Finished book: Apollo,Finished book: Apollo,finished,Apollo,False,Apollo: The Race to the Moon,2025-01-02,172.5,180.0,7.5,15.0,15.0,172.5,0.0,calendar_analysis_duration_overlap_lte_15m,anki,clark.benham@gmail.com
+2025-01-04,book:laf,book:laf,reading,laf,False,Life and Fate,2025-01-22,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Amelia cuddle,Things
+2025-01-07,Book:laf,Book:laf,reading,laf,False,Life and Fate,2025-01-22,97.5,105.0,7.5,15.0,15.0,97.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-01-20,Book:laf,Book:laf,reading,laf,False,Life and Fate,2025-01-22,97.5,105.0,7.5,15.0,15.0,97.5,0.0,calendar_analysis_duration_overlap_lte_15m,Jack,Waste Time
+2025-01-22,Book:laf,Book:laf,reading,laf,False,Life and Fate,2025-01-22,127.5,135.0,7.5,15.0,15.0,127.5,0.0,calendar_analysis_duration_overlap_lte_15m,Sunset,Things
+2025-01-22,book:tee,book:tee,reading,tee,False,the effective executive,2026-01-29,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-02-01,finished book: atomic habits,finished book: atomic habits,finished,atomic habits,False,Atomic Habits,2025-02-01,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,rank,clark.benham@gmail.com
+2025-02-05,book:lkd,book:lkd,reading,lkd,False,,,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Nap,"Meals, Supplements, Sleep"
+2025-02-06,Book:micro-services,Book:micro-services,reading,micro-services,False,micro-services,2025-02-09,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Cook,Things
+2025-02-06,book:tc,book:tc,reading,tc,False,,,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,Walk,Things
+2025-02-26,Book:sp,Book:sp,reading,sp,False,,,97.5,105.0,7.5,15.0,15.0,97.5,0.0,calendar_analysis_duration_overlap_lte_15m,Food,"Meals, Supplements, Sleep"
+2025-03-20,Book:tpk,Book:tpk,reading,tpk,False,the pale king,2025-03-21,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,Jack,Waste Time
+2025-03-22,Book:toboe,Book:toboe,reading,toboe,False,the Oxford book of essays,2025-03-22,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Lie in sun,Things
+2025-03-25,Book:tpw,Book:tpw,reading,tpw,False,the pentagon wars,2025-03-31,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,Porn,Waste Time
+2025-04-01,book:oc,book:oc,reading,oc,False,on China,2025-04-19,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,1 beer,Waste Time
+2025-04-18,finished book: you just dont understand,finished book: you just dont understand,finished,you just dont understand,False,you just dont understand,2025-04-18,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,Dinner,"Meals, Supplements, Sleep"
+2025-04-19,Book:oc,Book:oc,reading,oc,False,on China,2025-04-19,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,Nap,"Meals, Supplements, Sleep"
+2025-04-25,Book:tptp,Book:tptp,reading,tptp,False,The Path to Power: The Years of Lyndon Johnson I,2025-05-04,97.5,105.0,7.5,15.0,15.0,97.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-04-30,Book:cp,Book:cp,reading,cp,False,,,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,toastmasters,Things
+2025-04-30,Book:mml,Book:mml,reading,mml,False,Mathematics for Machine Learning,2025-07-09,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,Jack,Waste Time
+2025-05-01,Book:mml,Book:mml,reading,mml,False,Mathematics for Machine Learning,2025-07-09,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,breakfast,"Meals, Supplements, Sleep"
+2025-05-04,Finished book: the path to power,Finished book: the path to power,finished,The Path to Power: The Years of Lyndon Johnson I,False,The Path to Power: The Years of Lyndon Johnson I,2025-05-04,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,Food,"Meals, Supplements, Sleep"
+2025-05-04,book:refactoring,book:refactoring,reading,refactoring,False,,,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,sleep,"Meals, Supplements, Sleep"
+2025-05-07,finished book: means of ascent,finished book: means of ascent,finished,means of ascent,False,means of ascent,2025-05-07,187.5,195.0,7.5,15.0,15.0,187.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-05-19,finished book: master of the senate,finished book: master of the senate,finished,master of the senate,False,master of the senate,2025-05-19,247.5,255.0,7.5,15.0,15.0,247.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-05-22,book:tpop,book:tpop,reading,tpop,False,the passage of power,2025-05-27,442.5,450.0,7.5,15.0,15.0,442.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-06-01,Book:Kissinger,Book:Kissinger,reading,Kissinger,False,Kissinger,2025-06-11,67.5,75.0,7.5,15.0,15.0,67.5,0.0,calendar_analysis_duration_overlap_lte_15m,Drink,Waste Time
+2025-06-17,Finished book: bureaucracy,Finished book: bureaucracy,finished,bureaucracy,False,bureaucracy,2025-06-17,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Amelia,Things
+2025-06-23,book:tmotab,book:tmotab,reading,tmotab,False,the making of the atomic bomb,2025-06-24,97.5,105.0,7.5,15.0,15.0,97.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-06-24,book:tmotab,book:tmotab,reading,tmotab,False,the making of the atomic bomb,2025-06-24,247.5,255.0,7.5,15.0,15.0,247.5,0.0,calendar_analysis_duration_overlap_lte_15m,food,"Meals, Supplements, Sleep"
+2025-07-05,book:ds,book:ds,reading,ds,False,dark sun,2025-07-06,67.5,75.0,7.5,15.0,10.0,67.5,0.0,calendar_analysis_duration_overlap_lte_15m,discord | twitter,Waste Time
+2025-07-07,Book:srthmk,Book:srthmk,reading,srthmk,False,selfish reasons to have more kids,2025-07-12,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,anki,clark.benham@gmail.com
+2025-07-13,book:finao,book:finao,reading,finao,False,failure is not an option,2025-07-28,97.5,105.0,7.5,15.0,15.0,97.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-07-23,reading llm abilities,reading llm abilities,reading,ing llm abilities,False,,,82.5,90.0,7.5,15.0,15.0,82.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-07-29,book:aoa,book:aoa,reading,aoa,False,age of ambition,2025-08-02,37.5,45.0,7.5,15.0,15.0,37.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-08-10,Book:aic,Book:aic,reading,aic,False,Apple in China,2025-08-10,142.5,150.0,7.5,15.0,15.0,142.5,0.0,calendar_analysis_duration_overlap_lte_15m,Dinner,"Meals, Supplements, Sleep"
+2025-08-13,Book:tpv,Book:tpv,reading,tpv,False,the price of victory,2025-08-14,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Dinner,"Meals, Supplements, Sleep"
+2025-08-14,Book:tpv,Book:tpv,reading,tpv,False,the price of victory,2025-08-14,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,Porn,Waste Time
+2025-08-14,book:tpv,book:tpv,reading,tpv,False,the price of victory,2025-08-14,142.5,150.0,7.5,15.0,15.0,142.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-08-18,Book:emfhagaa,Book:emfhagaa,reading,emfhagaa,False,,,112.5,120.0,7.5,15.0,15.0,112.5,0.0,calendar_analysis_duration_overlap_lte_15m,Dinner,"Meals, Supplements, Sleep"
+2025-09-10,Book:rntl,Book:rntl,reading,rntl,False,Richard Nixon the Life,2025-09-11,307.5,315.0,7.5,15.0,15.0,307.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-09-26,Read for bed,Read for bed,reading,for bed,False,,,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Job: diesl,clark.benham@gmail.com
+2025-10-01,Book:Buckley,Book:Buckley,reading,Buckley,False,Buckley,2025-10-04,67.5,75.0,7.5,15.0,15.0,67.5,0.0,calendar_analysis_duration_overlap_lte_15m,Food,"Meals, Supplements, Sleep"
+2025-10-01,Book:buckley,Book:buckley,reading,buckley,False,Buckley,2025-10-04,37.5,45.0,7.5,15.0,15.0,37.5,0.0,calendar_analysis_duration_overlap_lte_15m,job: diesl,clark.benham@gmail.com
+2025-10-03,book:buckley,book:buckley,reading,buckley,False,Buckley,2025-10-04,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-10-04,Finished Book: Buckley,Finished Book: Buckley,finished,Buckley,False,Buckley,2025-10-04,67.5,75.0,7.5,15.0,15.0,67.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-10-09,book:dt,book:dt,reading,dt,False,DFW_TV.pdf,2025-10-09,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,anki,clark.benham@gmail.com
+2025-10-13,Book:mel,Book:mel,reading,mel,False,my early life,2025-10-14,67.5,75.0,7.5,15.0,15.0,67.5,0.0,calendar_analysis_duration_overlap_lte_15m,Tug,Waste Time
+2025-10-14,finished book: my early life,finished book: my early life,finished,my early life,False,my early life,2025-10-14,82.5,90.0,7.5,15.0,15.0,82.5,0.0,calendar_analysis_duration_overlap_lte_15m,breakfast,"Meals, Supplements, Sleep"
+2025-10-15,book:tsww,book:tsww,reading,tsww,False,the second world war,2025-10-21,82.5,90.0,7.5,15.0,15.0,82.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-10-20,Book:tsww,Book:tsww,reading,tsww,False,the second world war,2025-10-21,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,Snack,"Meals, Supplements, Sleep"
+2025-10-21,finished book: the second world war,finished book: the second world war,finished,the second world war,False,the second world war,2025-10-21,202.5,210.0,7.5,15.0,15.0,202.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-10-31,book:tpb,book:tpb,reading,tpb,False,the power broker,2025-12-04,112.5,120.0,7.5,15.0,15.0,112.5,0.0,calendar_analysis_duration_overlap_lte_15m,1 beer,Waste Time
+2025-11-01,book:gc,book:gc,reading,gc,False,,,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,food,"Meals, Supplements, Sleep"
+2025-11-03,book:gc,book:gc,reading,gc,False,,,97.5,105.0,7.5,15.0,15.0,97.5,0.0,calendar_analysis_duration_overlap_lte_15m,breakfast,"Meals, Supplements, Sleep"
+2025-11-08,Book:ritd,Book:ritd,reading,ritd,False,revolt in the desert,2025-11-10,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,2 beer,Waste Time
+2025-11-09,Book:ritd,Book:ritd,reading,ritd,False,revolt in the desert,2025-11-10,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Porn,Waste Time
+2025-11-13,finished book: and call me conrad,finished book: and call me conrad,finished,and call me conrad,False,and call me conrad,2025-11-13,172.5,180.0,7.5,15.0,15.0,172.5,0.0,calendar_analysis_duration_overlap_lte_15m,1 cocktail,Waste Time
+2025-11-15,book:hotesp,book:hotesp,reading,hotesp,False,the history of the English speaking peoples volume 4,2026-01-11,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,drink,Waste Time
+2025-11-16,book:hotesp,book:hotesp,reading,hotesp,False,the history of the English speaking peoples volume 4,2026-01-11,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,food,"Meals, Supplements, Sleep"
+2025-12-01,book:tss,book:tss,reading,tss,False,,,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,anki,clark.benham@gmail.com
+2025-12-02,Read: Kipling,Read: Kipling,reading,Kipling,False,,,37.5,45.0,7.5,15.0,15.0,37.5,0.0,calendar_analysis_duration_overlap_lte_15m,Food,"Meals, Supplements, Sleep"
+2025-12-04,book:su,book:su,reading,su,False,Shape Up Stop Running in Circles and Ship Work that Matters,2025-12-05,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,amelia,Things
+2025-12-07,Book:tsnotd,Book:tsnotd,reading,tsnotd,False,to say nothing of the dog,2025-12-08,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,Dinner,"Meals, Supplements, Sleep"
+2025-12-09,book:pmog ,book:pmog,reading,pmog,False,prime movers of globalization,2026-02-09,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,amelia text,Waste Time
+2025-12-17,Audiobook: twc,Audiobook: twc,audiobook,the world crisis,True,the world crisis,2025-12-27,112.5,120.0,7.5,15.0,15.0,112.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2025-12-17,audiobook: twc,audiobook: twc,audiobook,the world crisis,True,the world crisis,2025-12-27,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,Food,"Meals, Supplements, Sleep"
+2025-12-20,Book:VC,Book:VC,reading,VC,False,,,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,Jack,Waste Time
+2025-12-24,Book:twc,Book:twc,reading,the world crisis,False,the world crisis,2025-12-27,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,Food,"Meals, Supplements, Sleep"
+2026-01-05,Book:twc,Book:twc,reading,the world crisis volume 3,False,the world crisis volume 2,2026-01-04,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,Porn,Waste Time
+2026-01-05,book:twc ,book:twc,reading,the world crisis volume 3,False,the world crisis volume 2,2026-01-04,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,twitter,Waste Time
+2026-01-09,Book:twc,Book:twc,reading,the world crisis volume 4,False,the world crisis volume 4,2026-01-10,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,Food,"Meals, Supplements, Sleep"
+2026-01-20,finished book: Churchill's wit the definitive collection,finished book: Churchill's wit the definitive collection,finished,Churchill's wit the definitive collection,False,Churchill's wit the definitive collection,2026-01-20,142.5,150.0,7.5,15.0,15.0,142.5,0.0,calendar_analysis_duration_overlap_lte_15m,Dinner,"Meals, Supplements, Sleep"
+2026-01-23,Book:ibtbf,Book:ibtbf,reading,ibtbf,False,it's better to be feared,2026-01-24,82.5,90.0,7.5,15.0,15.0,82.5,0.0,calendar_analysis_duration_overlap_lte_15m,Dinner,"Meals, Supplements, Sleep"
+2026-01-24,book:ibtbf,book:ibtbf,reading,ibtbf,False,it's better to be feared,2026-01-24,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,Dinner,"Meals, Supplements, Sleep"
+2026-01-25,Book:tbab,Book:tbab,reading,tbab,False,the best and brightest,2026-02-02,67.5,75.0,7.5,15.0,15.0,67.5,0.0,calendar_analysis_duration_overlap_lte_15m,Food,"Meals, Supplements, Sleep"
+2026-01-25,Book:tbab,Book:tbab,reading,tbab,False,the best and brightest,2026-02-02,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,Tug,Waste Time
+2026-01-28,Audiobook: tee,Audiobook: tee,audiobook,tee,True,the effective executive,2026-01-29,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Take transit from 520 Broadway to 10800 Rose Ave,Things
+2026-01-30,audiobook: seven habits of highly effective people,audiobook: seven habits of highly effective people,audiobook,seven habits of highly effective people,True,the effective executive,2026-01-29,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Travel to Home,Things
+2026-02-03,Audiobook: system design interview two,Audiobook: system design interview two,audiobook,system design interview two,True,,,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Travel to Home 7:56 train,Things
+2026-02-11,Finished book: shoe dog,Finished book: shoe dog,finished,shoe dog,False,shoe dog,2026-02-11,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Travel to 520 Broadway,Things
+2026-02-13,book:tbatm,book:tbatm,reading,tbatm,False,the billionaire and the mechanic,2026-02-14,292.5,300.0,7.5,15.0,15.0,292.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2026-02-14,Book:tbatm,Book:tbatm,reading,tbatm,False,the billionaire and the mechanic,2026-02-14,37.5,45.0,7.5,15.0,15.0,37.5,0.0,calendar_analysis_duration_overlap_lte_15m,YouTube,Waste Time
+2026-02-19,finished book: the parable of rust a novella,finished book: the parable of rust a novella,finished,the parable of rust a novella,False,the parable of rust a novella,2026-02-19,82.5,90.0,7.5,15.0,15.0,82.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2026-02-21,Book:ctpow,Book:ctpow,reading,ctpow,False,churchill the power of words,2026-05-07,217.5,225.0,7.5,15.0,15.0,217.5,0.0,calendar_analysis_duration_overlap_lte_15m,2 cocktails,Waste Time
+2026-02-22,Book:ctpow,Book:ctpow,reading,ctpow,False,churchill the power of words,2026-05-07,52.5,60.0,7.5,15.0,15.0,52.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2026-02-24,book:vaet,book:vaet,reading,vaet,False,,,37.5,45.0,7.5,15.0,15.0,37.5,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"
+2026-03-11,Finished book: fall of Hyperion,Finished book: fall of Hyperion,finished,fall of Hyperion,False,fall of Hyperion,2026-03-11,157.5,165.0,7.5,15.0,15.0,157.5,0.0,calendar_analysis_duration_overlap_lte_15m,Luke,Things
+2026-03-22,read: churchill,read: churchill,reading,churchill,False,Churchill: Walking with Destiny,2026-04-24,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,breakfast,"Meals, Supplements, Sleep"
+2026-03-23,read churchill,read churchill,reading,churchill,False,Churchill: Walking with Destiny,2026-04-24,82.5,90.0,7.5,15.0,15.0,82.5,0.0,calendar_analysis_duration_overlap_lte_15m,blogs,Waste Time
+2026-04-04,book:cwwd,book:cwwd,reading,cwwd,False,Churchill: Walking with Destiny,2026-04-24,67.5,75.0,7.5,15.0,15.0,67.5,0.0,calendar_analysis_duration_overlap_lte_15m,Amelia,Things
+2026-04-08,Book:cwwd,Book:cwwd,reading,cwwd,False,Churchill: Walking with Destiny,2026-04-24,172.5,180.0,7.5,15.0,15.0,172.5,0.0,calendar_analysis_duration_overlap_lte_15m,2 beer,Waste Time
+2026-04-15,Book:cwwd,Book:cwwd,reading,cwwd,False,Churchill: Walking with Destiny,2026-04-24,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,anki,clark.benham@gmail.com
+2026-05-04,Book:mtpsf,Book:mtpsf,reading,mtpsf,False,managing the professional services firm,2026-05-14,22.5,30.0,7.5,15.0,15.0,22.5,0.0,calendar_analysis_duration_overlap_lte_15m,Interview prep,clark.benham@gmail.com
+2026-05-11,Book:mtpsf,Book:mtpsf,reading,mtpsf,False,managing the professional services firm,2026-05-14,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Nap,"Meals, Supplements, Sleep"
+2026-05-13,Book:mtpsf,Book:mtpsf,reading,mtpsf,False,managing the professional services firm,2026-05-14,82.5,90.0,7.5,15.0,15.0,82.5,0.0,calendar_analysis_duration_overlap_lte_15m,Food,"Meals, Supplements, Sleep"
+2026-05-14,Audiobook: iaa,Audiobook: iaa,audiobook,iaa,True,,,7.5,15.0,7.5,15.0,15.0,7.5,0.0,calendar_analysis_duration_overlap_lte_15m,Walk,Things
+2023-03-13,read: ml,read: ml,reading,ml,False,,,212.50000000000003,220.0,7.499999999999972,15.0,15.0,212.50000000000003,0.0,calendar_analysis_duration_overlap_lte_15m,dinner,"Meals, Supplements, Sleep"
+2023-03-01,book:syjf,book:syjf,reading,syjf,False,surely you’re joking Feynman,2023-03-01,68.0,75.0,7.0,14.0,14.0,68.0,0.0,calendar_analysis_duration_overlap_lte_15m,dinner,"Meals, Supplements, Sleep"
+2026-01-24,Book:ibtbf,Book:ibtbf,reading,ibtbf,False,it's better to be feared,2026-01-24,8.941666666666666,15.0,6.058333333333334,12.116666666666667,12.116666666666667,8.941666666666666,0.0,calendar_analysis_duration_overlap_lte_15m,Travel to WeWork Office Space & Coworking,clark.benham@gmail.com
+2024-05-17,book:cp,book:cp,reading,cp,False,consider phlebas,2024-06-04,57.499999999999986,60.0,2.500000000000014,5.0,5.0,57.499999999999986,0.0,calendar_analysis_duration_overlap_lte_15m,sleep,"Meals, Supplements, Sleep"
+2024-05-16,book:mml,book:mml,reading,mml,False,Mathematics for Machine Learning,2025-07-09,12.499999999999996,15.0,2.5000000000000036,5.0,5.0,12.499999999999996,0.0,calendar_analysis_duration_overlap_lte_15m,sleep,"Meals, Supplements, Sleep"
+2024-05-19,book:mml,book:mml,reading,mml,False,Mathematics for Machine Learning,2025-07-09,12.499999999999996,15.0,2.5000000000000036,5.0,5.0,12.499999999999996,0.0,calendar_analysis_duration_overlap_lte_15m,sleep,"Meals, Supplements, Sleep"
+2024-05-18,book:mml,book:mml,reading,mml,False,Mathematics for Machine Learning,2025-07-09,27.5,30.0,2.5,5.0,5.0,27.5,0.0,calendar_analysis_duration_overlap_lte_15m,sleep,"Meals, Supplements, Sleep"
+2024-08-22,book:toboss,book:toboss,reading,toboss,False,The Oxford Book of Short Stories,2024-09-14,87.50000000000003,90.0,2.4999999999999716,5.0,5.0,87.50000000000003,0.0,calendar_analysis_duration_overlap_lte_15m,lunch,"Meals, Supplements, Sleep"

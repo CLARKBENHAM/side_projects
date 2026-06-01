@@ -1,7 +1,7 @@
 | title | matched_finish_date | primary_first_pass_minutes | first_pass_wall_clock_minutes | chosen_word_count | word_count_source | word_count_confidence | wpm_first_pass_primary | wpm_first_pass_full_wall_clock | audio_dominant | audiobook_primary_minutes | wpm_visual_after_audio_350wpm | category | highlighted_words | highlight_words_per_10k_words | duration_screen_exclusion_reason |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Now It Can Be Told | 2026-01-19 | 270.00 | 360.00 | 168544.00 | local_file_word_count | high | 624.24 | 468.18 | True | 225.00 | 1995.42 | Business, management | 16.00 | 0.95 |  |
-| the power broker | 2025-12-04 | 1132.50 | 1170.00 | 697127.00 | local_file_word_count | high | 615.56 | 595.84 | True | 907.50 | 1686.68 | Business, management | 4297.00 | 61.64 |  |
-| the effective executive | 2026-01-29 | 150.00 | 150.00 | 66884.00 | local_file_word_count | high | 445.89 | 445.89 | True | 90.00 | 589.73 | Business, management | 1457.00 | 217.84 |  |
-| the nvidia way | 2026-05-13 | 210.00 | 210.00 | 86380.00 | local_file_word_count | high | 411.33 | 411.33 | True | 120.00 | 493.11 |  | 0.00 | 0.00 |  |
-| the history of the English speaking peoples volume 4 | 2026-01-11 | 1110.00 | 1110.00 | 124300.00 | local_file_word_count | high | 111.98 | 111.98 | True | 315.00 | 17.67 | Histories | 4348.00 | 349.80 |  |
+| the nvidia way | 2026-05-13 | 210.00 | 210.00 | 82792.00 | local_file_word_count | high | 394.25 | 394.25 | True | 210.00 |  |  | 0.00 | 0.00 |  |
+| Now It Can Be Told | 2026-01-19 | 360.00 | 360.00 | 163006.00 | local_file_word_count | high | 452.79 | 452.79 | True | 345.00 | 2817.07 | Business, management | 16.00 | 0.98 |  |
+| the power broker | 2025-12-04 | 1162.50 | 1170.00 | 617985.00 | local_file_word_count | high | 531.60 | 528.19 | True | 1035.00 | 2005.76 | Business, management | 4297.00 | 69.53 |  |
+| the effective executive | 2026-01-29 | 127.50 | 150.00 | 64081.00 | local_file_word_count | high | 502.60 | 427.21 | True | 105.00 | 1214.71 | Business, management | 1457.00 | 227.37 |  |
+| the history of the English speaking peoples volume 4 | 2026-01-11 | 1095.00 | 1110.00 | 124144.00 | local_file_word_count | high | 113.37 | 111.84 | True | 375.00 | 0.00 | Histories | 4348.00 | 350.24 |  |

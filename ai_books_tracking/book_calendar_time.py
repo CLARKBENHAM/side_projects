@@ -45,6 +45,7 @@ DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "book_wpm_outputs"
 PRINT_READING_EVENT_TYPES = {"reading", "started"}
 FIRST_PASS_EVENT_TYPES = {"reading", "started", "audiobook", "finished"}
 OVERLAP_RESTORE_EVENT_TYPES = {"reading", "started", "audiobook", "finished"}
+FULL_BOOK_TIME_OVERLAP_THRESHOLD_MINUTES = 15.0
 COMPATIBLE_READING_OVERLAP_RE = re.compile(
     r"\b(?:walk|walking|commute|travel|transit|train|bus|subway|metro|"
     r"flight|fly|airport|uber|lyft|taxi|drive|driving|car|bike|biking|"
@@ -55,6 +56,10 @@ COMPATIBLE_AUDIOBOOK_EXTRA_OVERLAP_RE = re.compile(
     r"\b(?:run|running|gym|workout|exercise|errand|chores?|clean|cleaning|"
     r"laundry|dishes|cook|cooking|meal|breakfast|lunch|dinner|eat|eating|"
     r"grocery|shopping|shower)\b",
+    re.IGNORECASE,
+)
+AUDIOBOOK_TIME_RE = re.compile(
+    r"\b(?:audio\s*book|audiobook|listen(?:ing)?)\b",
     re.IGNORECASE,
 )
 
@@ -96,6 +101,10 @@ def classify_processed_calendar(processed: pd.DataFrame) -> pd.DataFrame:
             )
             if event_type == "other":
                 continue
+            is_audiobook_time = event_type == "audiobook" or (
+                event_type in {"finished", "started"}
+                and bool(AUDIOBOOK_TIME_RE.search(part))
+            )
             include = event_type in {"reading", "audiobook", "started"}
             inclusion_rule = "explicit_reading_or_audiobook_duration" if include else ""
             if event_type == "started":
@@ -118,6 +127,7 @@ def classify_processed_calendar(processed: pd.DataFrame) -> pd.DataFrame:
                     "part_summary": part,
                     "event_type": event_type,
                     "book_ref": book_ref,
+                    "is_audiobook_time": is_audiobook_time,
                     "calendar_analysis_duration_hours": (
                         float(event["calendar_analysis_duration_hours"]) / divisor
                     ),
@@ -151,6 +161,8 @@ def attach_overlap_policy(
     frame["overlap_other_events"] = ""
     frame["overlap_other_calendars"] = ""
     frame["overlap_restored_hours"] = 0.0
+    frame["overlap_total_minutes"] = 0.0
+    frame["overlap_longest_minutes"] = 0.0
     processed_lookup = processed.set_index("event_id", drop=False)
     for idx, row in frame.iterrows():
         if row["event_type"] not in OVERLAP_RESTORE_EVENT_TYPES:
@@ -163,41 +175,49 @@ def attach_overlap_policy(
         calendar_hours = float(row["calendar_analysis_duration_hours"] or 0)
         if wall_hours <= calendar_hours + 1e-9:
             continue
-        is_minor_overlap = wall_hours - calendar_hours <= 0.25
         overlaps = processed[
             (processed["event_id"] != source_id)
             & (processed["start_time"] < source["end_time"])
             & (processed["end_time"] > source["start_time"])
         ].copy()
-        if overlaps.empty and not is_minor_overlap:
+        if overlaps.empty:
             continue
-        overlap_seconds = (
-            overlaps["end_time"].clip(upper=source["end_time"])
-            - overlaps["start_time"].clip(lower=source["start_time"])
-        ).dt.total_seconds()
-        overlaps = overlaps[overlap_seconds.gt(60)].copy()
-        if overlaps.empty and not is_minor_overlap:
+        overlaps["_overlap_start"] = overlaps["start_time"].clip(
+            lower=source["start_time"]
+        )
+        overlaps["_overlap_end"] = overlaps["end_time"].clip(upper=source["end_time"])
+        overlaps["_overlap_minutes"] = (
+            overlaps["_overlap_end"] - overlaps["_overlap_start"]
+        ).dt.total_seconds() / 60
+        overlaps = overlaps[overlaps["_overlap_minutes"].gt(1)].copy()
+        if overlaps.empty:
             continue
+        intervals = sorted(
+            zip(overlaps["_overlap_start"], overlaps["_overlap_end"], strict=False)
+        )
+        merged_intervals: list[list[pd.Timestamp]] = []
+        for start, end in intervals:
+            if not merged_intervals or start > merged_intervals[-1][1]:
+                merged_intervals.append([start, end])
+            elif end > merged_intervals[-1][1]:
+                merged_intervals[-1][1] = end
+        total_overlap_minutes = sum(
+            (end - start).total_seconds() / 60 for start, end in merged_intervals
+        )
+        longest_overlap_minutes = float(overlaps["_overlap_minutes"].max())
         summaries = overlaps["event_name"].astype(str).tolist()
         calendars = overlaps["calendar_name"].astype(str).tolist()
         frame.loc[idx, "overlap_other_events"] = " | ".join(summaries[:8])
         frame.loc[idx, "overlap_other_calendars"] = " | ".join(sorted(set(calendars)))
-        if is_minor_overlap:
-            frame.loc[idx, "overlap_policy_duration_hours"] = wall_hours
-            frame.loc[idx, "overlap_policy_rule"] = "full_duration_minor_overlap"
-            frame.loc[idx, "overlap_restored_hours"] = wall_hours - calendar_hours
-            continue
-        compatible = all(
-            _is_compatible_overlap(str(row["event_type"]), summary)
-            for summary in summaries
-        )
-        if not compatible:
+        frame.loc[idx, "overlap_total_minutes"] = total_overlap_minutes
+        frame.loc[idx, "overlap_longest_minutes"] = longest_overlap_minutes
+        if total_overlap_minutes <= FULL_BOOK_TIME_OVERLAP_THRESHOLD_MINUTES:
             frame.loc[idx, "overlap_policy_rule"] = (
-                "calendar_analysis_duration_incompatible_overlap"
+                "calendar_analysis_duration_overlap_lte_15m"
             )
             continue
         frame.loc[idx, "overlap_policy_duration_hours"] = wall_hours
-        frame.loc[idx, "overlap_policy_rule"] = "full_duration_compatible_overlap"
+        frame.loc[idx, "overlap_policy_rule"] = "full_duration_overlap_gt_15m"
         frame.loc[idx, "overlap_restored_hours"] = wall_hours - calendar_hours
     return frame
 
@@ -239,6 +259,10 @@ def _sum_minutes(
         group if event_types is None else group[group["event_type"].isin(event_types)]
     )
     return float(subset[column].sum() * 60)
+
+
+def _sum_minutes_mask(group: pd.DataFrame, column: str, mask: pd.Series) -> float:
+    return float(group.loc[mask, column].sum() * 60)
 
 
 def _write_markdown_table(frame: pd.DataFrame, path: Path) -> None:
@@ -304,6 +328,10 @@ def build_calendar_time_outputs(
         group_cols = ["finish_id", "title", "matched_finish_date"]
         for keys, group in included.groupby(group_cols, dropna=False):
             finish_id, title, matched_finish_date = keys
+            audiobook_time = group["is_audiobook_time"].fillna(False).astype(bool)
+            print_reading_time = (
+                group["event_type"].isin(PRINT_READING_EVENT_TYPES) & ~audiobook_time
+            )
             calendar_minutes = _sum_minutes(group, "calendar_analysis_duration_hours")
             wall_clock_minutes = _sum_minutes(group, "wall_clock_duration_hours")
             overlap_policy_minutes = _sum_minutes(
@@ -316,23 +344,23 @@ def build_calendar_time_outputs(
                 "first_pass_calendar_minutes": calendar_minutes,
                 "first_pass_wall_clock_minutes": wall_clock_minutes,
                 "first_pass_overlap_policy_minutes": overlap_policy_minutes,
-                "reading_calendar_minutes": _sum_minutes(
-                    group, "calendar_analysis_duration_hours", PRINT_READING_EVENT_TYPES
+                "reading_calendar_minutes": _sum_minutes_mask(
+                    group, "calendar_analysis_duration_hours", print_reading_time
                 ),
-                "reading_wall_clock_minutes": _sum_minutes(
-                    group, "wall_clock_duration_hours", PRINT_READING_EVENT_TYPES
+                "reading_wall_clock_minutes": _sum_minutes_mask(
+                    group, "wall_clock_duration_hours", print_reading_time
                 ),
-                "reading_overlap_policy_minutes": _sum_minutes(
-                    group, "overlap_policy_duration_hours", PRINT_READING_EVENT_TYPES
+                "reading_overlap_policy_minutes": _sum_minutes_mask(
+                    group, "overlap_policy_duration_hours", print_reading_time
                 ),
-                "audiobook_calendar_minutes": _sum_minutes(
-                    group, "calendar_analysis_duration_hours", {"audiobook"}
+                "audiobook_calendar_minutes": _sum_minutes_mask(
+                    group, "calendar_analysis_duration_hours", audiobook_time
                 ),
-                "audiobook_wall_clock_minutes": _sum_minutes(
-                    group, "wall_clock_duration_hours", {"audiobook"}
+                "audiobook_wall_clock_minutes": _sum_minutes_mask(
+                    group, "wall_clock_duration_hours", audiobook_time
                 ),
-                "audiobook_overlap_policy_minutes": _sum_minutes(
-                    group, "overlap_policy_duration_hours", {"audiobook"}
+                "audiobook_overlap_policy_minutes": _sum_minutes_mask(
+                    group, "overlap_policy_duration_hours", audiobook_time
                 ),
                 "finished_calendar_minutes": _sum_minutes(
                     group, "calendar_analysis_duration_hours", {"finished"}
@@ -348,7 +376,7 @@ def build_calendar_time_outputs(
                 "last_event": group["date"].max(),
                 "primary_first_pass_minutes": overlap_policy_minutes,
                 "primary_minutes_rule": (
-                    "calendar_analysis_duration_with_compatible_overlap_restored"
+                    "calendar_analysis_duration_with_gt15m_overlap_restored"
                 ),
             }
             row["calendar_overlap_delta_minutes"] = (
@@ -431,10 +459,14 @@ def write_overlap_audit(resolved: pd.DataFrame, output_dir: Path) -> None:
         "part_summary",
         "event_type",
         "book_ref",
+        "is_audiobook_time",
         "title",
         "matched_finish_date",
         "calendar_analysis_minutes",
         "wall_clock_minutes",
+        "wall_minus_calendar_minutes",
+        "overlap_total_minutes",
+        "overlap_longest_minutes",
         "overlap_policy_minutes",
         "policy_restored_minutes",
         "overlap_policy_rule",
@@ -442,7 +474,21 @@ def write_overlap_audit(resolved: pd.DataFrame, output_dir: Path) -> None:
         "overlap_other_calendars",
     ]
     existing = [column for column in columns if column in frame.columns]
-    frame = frame.sort_values(["date", "summary"])
+    sort_columns = [
+        column
+        for column in [
+            "overlap_total_minutes",
+            "wall_minus_calendar_minutes",
+            "date",
+            "summary",
+        ]
+        if column in frame.columns
+    ]
+    sort_ascending = [
+        column not in {"overlap_total_minutes", "wall_minus_calendar_minutes"}
+        for column in sort_columns
+    ]
+    frame = frame.sort_values(sort_columns, ascending=sort_ascending)
     frame[existing].to_csv(output_dir / "book_calendar_overlap_audit.csv", index=False)
     _write_markdown_table(
         frame[existing].head(120), output_dir / "book_calendar_overlap_audit.md"

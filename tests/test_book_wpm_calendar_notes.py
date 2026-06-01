@@ -5,7 +5,10 @@ from zoneinfo import ZoneInfo
 
 import pandas as pd
 
-from ai_books_tracking.book_calendar_time import classify_processed_calendar
+from ai_books_tracking.book_calendar_time import (
+    build_calendar_time_outputs,
+    classify_processed_calendar,
+)
 from ai_books_tracking.book_wpm_calendar_notes import (
     DocxParagraph,
     MetadataRecord,
@@ -118,7 +121,7 @@ def test_resolve_title_keeps_path_to_power_aliases_canonical() -> None:
     assert resolve_title("pp", known_titles) == "pp"
 
 
-def test_overlap_policy_restores_compatible_walk_overlap_only() -> None:
+def test_overlap_policy_restores_only_overlaps_longer_than_15_minutes() -> None:
     processed = pd.DataFrame(
         [
             {
@@ -161,6 +164,46 @@ def test_overlap_policy_restores_compatible_walk_overlap_only() -> None:
                 "calendar_analysis_duration_hours": 0.5,
                 "wall_clock_duration_hours": 1.0,
             },
+            {
+                "event_id": "audio_gym",
+                "event_name": "Audiobook: Example",
+                "calendar_name": "Things",
+                "start_time": pd.Timestamp("2025-01-03T10:00:00Z"),
+                "end_time": pd.Timestamp("2025-01-03T11:00:00Z"),
+                "duration": 0.5,
+                "calendar_analysis_duration_hours": 0.5,
+                "wall_clock_duration_hours": 1.0,
+            },
+            {
+                "event_id": "gym",
+                "event_name": "gym",
+                "calendar_name": "Things",
+                "start_time": pd.Timestamp("2025-01-03T10:00:00Z"),
+                "end_time": pd.Timestamp("2025-01-03T11:00:00Z"),
+                "duration": 0.5,
+                "calendar_analysis_duration_hours": 0.5,
+                "wall_clock_duration_hours": 1.0,
+            },
+            {
+                "event_id": "book_short",
+                "event_name": "Book: Short Example",
+                "calendar_name": "Things",
+                "start_time": pd.Timestamp("2025-01-04T10:00:00Z"),
+                "end_time": pd.Timestamp("2025-01-04T10:15:00Z"),
+                "duration": 0.125,
+                "calendar_analysis_duration_hours": 0.125,
+                "wall_clock_duration_hours": 0.25,
+            },
+            {
+                "event_id": "short_overlap",
+                "event_name": "walk",
+                "calendar_name": "Things",
+                "start_time": pd.Timestamp("2025-01-04T10:00:00Z"),
+                "end_time": pd.Timestamp("2025-01-04T10:15:00Z"),
+                "duration": 0.125,
+                "calendar_analysis_duration_hours": 0.125,
+                "wall_clock_duration_hours": 0.25,
+            },
         ]
     )
 
@@ -168,13 +211,57 @@ def test_overlap_policy_restores_compatible_walk_overlap_only() -> None:
 
     walk_book = classified[classified["source_row_id"].eq("book_walk")].iloc[0]
     job_book = classified[classified["source_row_id"].eq("book_job")].iloc[0]
+    audio_gym = classified[classified["source_row_id"].eq("audio_gym")].iloc[0]
+    short_book = classified[classified["source_row_id"].eq("book_short")].iloc[0]
     assert walk_book["overlap_policy_duration_hours"] == 1.0
-    assert walk_book["overlap_policy_rule"] == "full_duration_compatible_overlap"
-    assert job_book["overlap_policy_duration_hours"] == 0.5
+    assert walk_book["overlap_policy_rule"] == "full_duration_overlap_gt_15m"
+    assert job_book["overlap_policy_duration_hours"] == 1.0
+    assert job_book["overlap_policy_rule"] == "full_duration_overlap_gt_15m"
+    assert audio_gym["overlap_policy_duration_hours"] == 1.0
+    assert audio_gym["overlap_policy_rule"] == "full_duration_overlap_gt_15m"
+    assert short_book["overlap_policy_duration_hours"] == 0.125
     assert (
-        job_book["overlap_policy_rule"]
-        == "calendar_analysis_duration_incompatible_overlap"
+        short_book["overlap_policy_rule"]
+        == "calendar_analysis_duration_overlap_lte_15m"
     )
+    assert short_book["overlap_total_minutes"] == 15.0
+
+
+def test_finished_and_started_audiobook_events_count_as_audio_minutes(
+    tmp_path,
+) -> None:
+    calendar_tsv = tmp_path / "calendar_analysis.txt"
+    pd.DataFrame(
+        [
+            {
+                "event_name": "Started audiobook: Example Audio",
+                "calendar_name": "Things",
+                "start_time": "2026-01-01T10:00:00Z",
+                "end_time": "2026-01-01T10:30:00Z",
+                "duration": 0.5,
+            },
+            {
+                "event_name": "Finished audiobook: Example Audio",
+                "calendar_name": "Things",
+                "start_time": "2026-01-02T10:00:00Z",
+                "end_time": "2026-01-02T11:00:00Z",
+                "duration": 1.0,
+            },
+        ]
+    ).to_csv(calendar_tsv, sep="\t", index=False)
+
+    totals, resolved, _ = build_calendar_time_outputs(
+        calendar_analysis_tsv=calendar_tsv,
+        output_dir=tmp_path / "outputs",
+        notes_dir=tmp_path / "missing_notes",
+    )
+
+    row = totals.iloc[0]
+    assert row["primary_first_pass_minutes"] == 90
+    assert row["audiobook_overlap_policy_minutes"] == 90
+    assert row["reading_overlap_policy_minutes"] == 0
+    assert row["finished_overlap_policy_minutes"] == 60
+    assert resolved["is_audiobook_time"].tolist() == [True, True]
 
 
 def test_build_finish_timeline_keeps_rereads_as_separate_instances() -> None:
