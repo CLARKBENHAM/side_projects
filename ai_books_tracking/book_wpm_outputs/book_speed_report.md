@@ -24,19 +24,19 @@ WPM cohorts require `word_count_source == local_file_word_count`, so page estima
 
 | usable_books_before_duration_screen | duration_screened_books | excluded_lte_90_minutes | gt900_wpm_books_investigated | gt600_wpm_duration_screened_books | audio_dominant_books_excluded_from_visual_wpm | visual_reading_books_after_audio_screen | median_duration_screened_wpm | median_visual_wpm_after_350wpm_audio_adjustment |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 93.00 | 85.00 | 8.00 | 3.00 | 2.00 | 5.00 | 80.00 | 307.78 | 302.34 |
+| 131.00 | 117.00 | 14.00 | 6.00 | 3.00 | 5.00 | 112.00 | 314.74 | 307.65 |
 
 ## WPM Percentiles
 
 | percentile | wpm_first_pass_primary |
 | --- | --- |
-| 5.00 | 188.15 |
-| 10.00 | 232.53 |
-| 25.00 | 261.44 |
-| 50.00 | 307.78 |
-| 75.00 | 360.24 |
-| 90.00 | 454.36 |
-| 95.00 | 529.53 |
+| 5.00 | 191.73 |
+| 10.00 | 233.50 |
+| 25.00 | 261.65 |
+| 50.00 | 314.74 |
+| 75.00 | 390.32 |
+| 90.00 | 456.11 |
+| 95.00 | 542.06 |
 
 ## Aggregate WPM
 
@@ -44,56 +44,57 @@ Aggregate WPM is `sum(chosen_word_count) / sum(primary_first_pass_minutes)`, not
 
 | cohort | n_finished_read_instances | total_estimated_words | total_primary_minutes | total_primary_hours | total_full_wall_clock_minutes | total_full_wall_clock_hours | aggregate_wpm | aggregate_visual_after_audio_350wpm | aggregate_full_wall_clock_wpm | mean_of_book_wpms | mean_of_book_full_wall_clock_wpms | median_book_wpm | median_book_visual_after_audio_350wpm | median_book_full_wall_clock_wpm |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| all_finished_read_instances_with_local_file_word_count | 97 | 14012529.00 | 46316.44 | 771.94 | 46962.50 | 782.71 | 302.54 | 299.42 | 298.38 | 367.92 | 362.84 | 318.61 | 315.83 | 306.80 |
-| first_reads_with_local_file_word_count | 93 | 13739827.00 | 45646.44 | 760.77 | 46292.50 | 771.54 | 301.01 | 297.73 | 296.80 | 365.49 | 360.19 | 314.74 | 310.42 | 306.60 |
-| first_reads_gt90m_with_local_file_word_count | 85 | 13337442.00 | 45023.94 | 750.40 | 45662.50 | 761.04 | 296.23 | 292.56 | 292.09 | 330.35 | 324.97 | 307.78 | 305.86 | 303.05 |
-| visual_reading_first_reads_gt90m_excluding_audio_dominant | 80 | 12285434.00 | 42068.94 | 701.15 | 42662.50 | 711.04 | 292.03 | 290.72 | 287.97 | 326.07 | 321.35 | 305.86 | 302.34 | 298.74 |
+| all_finished_read_instances_with_local_file_word_count | 137 | 18858659.00 | 60144.44 | 1002.41 | 60905.00 | 1015.08 | 313.56 | 311.45 | 309.64 | 397.87 | 392.94 | 323.24 | 322.17 | 319.39 |
+| first_reads_with_local_file_word_count | 131 | 18429695.00 | 58934.44 | 982.24 | 59695.00 | 994.92 | 312.72 | 310.75 | 308.73 | 399.13 | 393.98 | 322.17 | 321.95 | 318.55 |
+| first_reads_gt90m_with_local_file_word_count | 117 | 17649001.00 | 57921.94 | 965.37 | 58675.00 | 977.92 | 304.70 | 302.24 | 300.79 | 335.71 | 330.24 | 314.74 | 310.42 | 306.80 |
+| visual_reading_first_reads_gt90m_excluding_audio_dominant | 112 | 16596993.00 | 54966.94 | 916.12 | 55675.00 | 927.92 | 301.94 | 301.00 | 298.10 | 332.89 | 327.89 | 310.64 | 307.65 | 306.64 |
 
 ## WPM By Year
 
 | finish_year | n_books | median_wpm | mean_wpm |
 | --- | --- | --- | --- |
-| 2022.00 | 5.00 | 258.47 | 248.40 |
-| 2023.00 | 8.00 | 275.52 | 279.94 |
-| 2024.00 | 18.00 | 333.77 | 357.86 |
-| 2025.00 | 36.00 | 321.95 | 346.99 |
-| 2026.00 | 18.00 | 299.82 | 314.74 |
+| 2021.00 | 1.00 | 457.16 | 457.16 |
+| 2022.00 | 16.00 | 266.43 | 282.67 |
+| 2023.00 | 11.00 | 276.94 | 283.14 |
+| 2024.00 | 28.00 | 342.39 | 371.10 |
+| 2025.00 | 41.00 | 321.72 | 356.16 |
+| 2026.00 | 20.00 | 299.82 | 309.51 |
 
 ## WPM By Category
 
 | category_plot | n_books | median_wpm | mean_wpm |
 | --- | --- | --- | --- |
-| Business, management | 22 | 307.59 | 338.21 |
-| fiction | 16 | 292.17 | 316.22 |
-| Histories | 14 | 288.75 | 318.47 |
-| General Reading | 12 | 324.71 | 324.95 |
-| Unknown | 9 | 339.85 | 326.91 |
-| Literature | 8 | 280.95 | 355.90 |
-| Machine Learning | 3 | 503.29 | 367.47 |
+| Business, management | 28 | 303.68 | 334.80 |
+| fiction | 23 | 315.22 | 325.63 |
+| Unknown | 20 | 337.98 | 351.19 |
+| General Reading | 16 | 344.86 | 358.72 |
+| Histories | 15 | 263.99 | 311.22 |
+| Literature | 11 | 259.41 | 311.77 |
+| Machine Learning | 3 | 503.29 | 407.69 |
 | Computer Science | 1 | 330.18 | 330.18 |
 
 ## Highlight Effect
 
 | n_books | pearson_corr_log_highlight_density_wpm | slope_wpm_per_log1p_highlight_density | p25_highlight_words_per_10k_words | p75_highlight_words_per_10k_words | predicted_wpm_at_p25_highlight_density | predicted_wpm_at_p75_highlight_density | observational_wpm_change_if_p75_to_p25_density |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 84.00 | -0.07 | -2.77 | 0.00 | 999.60 | 341.84 | 322.72 | 19.12 |
+| 114.00 | -0.05 | -1.72 | 0.00 | 848.24 | 341.36 | 329.75 | 11.61 |
 
 ## Highlight And Note Models
 
 | model | response_column | predictor | n_books | coefficient_wpm_per_log1p_unit | intercept_or_baseline | r_squared | p25_predictor | p75_predictor | estimated_wpm_change_p75_to_p25 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| unadjusted | wpm_first_pass_primary | highlight_count_per_page | 84 | -92.76 | 351.36 | 0.02 | 0.00 | 0.53 | 39.47 |
-| category_fixed_effects | wpm_first_pass_primary | highlight_count_per_page | 84 | -153.33 | 384.15 | 0.06 | 0.00 | 0.53 | 65.25 |
-| unadjusted | wpm_first_pass_primary | my_note_words_per_page | 84 | -21.19 | 335.39 | 0.00 | 0.00 | 0.52 | 8.83 |
-| category_fixed_effects | wpm_first_pass_primary | my_note_words_per_page | 84 | -31.73 | 353.41 | 0.02 | 0.00 | 0.52 | 13.21 |
+| unadjusted | wpm_first_pass_primary | highlight_count_per_page | 114 | -76.80 | 349.35 | 0.02 | 0.00 | 0.45 | 28.34 |
+| category_fixed_effects | wpm_first_pass_primary | highlight_count_per_page | 114 | -98.17 | 360.83 | 0.05 | 0.00 | 0.45 | 36.23 |
+| unadjusted | wpm_first_pass_primary | my_note_words_per_page | 114 | -27.46 | 341.03 | 0.01 | 0.00 | 0.37 | 8.58 |
+| category_fixed_effects | wpm_first_pass_primary | my_note_words_per_page | 114 | -34.14 | 350.36 | 0.03 | 0.00 | 0.37 | 10.67 |
 
 ## Confidence Comparison
 
 | confidence_subset | n_books | median_wpm | mean_wpm | aggregate_wpm | aggregate_full_wall_clock_wpm |
 | --- | --- | --- | --- | --- | --- |
-| high_confidence | 85 | 307.78 | 330.35 | 296.23 | 292.09 |
+| high_confidence | 117 | 314.74 | 335.71 | 304.70 | 300.79 |
 | medium_confidence | 0 |  |  |  |  |
-| local_file_high_confidence | 85 | 307.78 | 330.35 | 296.23 | 292.09 |
+| local_file_high_confidence | 117 | 314.74 | 335.71 | 304.70 | 300.79 |
 
 ## Calendar Time Reconciliation
 
@@ -110,9 +111,12 @@ Aggregate WPM is `sum(chosen_word_count) / sum(primary_first_pass_minutes)`, not
 
 | title | matched_finish_date | primary_first_pass_minutes | first_pass_wall_clock_minutes | chosen_word_count | word_count_source | wpm_first_pass_primary | wpm_first_pass_full_wall_clock | duration_screen_exclusion_reason | likely_cause |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| SQL | 2022-05-25 | 30.00 | 30.00 | 99534.00 | local_file_word_count | 3317.80 | 3317.80 | calendar_time_lte_90_minutes | calendar_time_lte_90_minutes |
 | blueprint reading: construction drawings for the building trade | 2025-07-28 | 45.00 | 45.00 | 92387.00 | local_file_word_count | 2053.04 | 2053.04 | calendar_time_lte_90_minutes | calendar_time_lte_90_minutes |
 | what is man and other essays | 2024-08-07 | 75.00 | 75.00 | 101021.00 | local_file_word_count | 1346.95 | 1346.95 | calendar_time_lte_90_minutes | calendar_time_lte_90_minutes |
+| Everyman for himself and god against all | 2025-09-01 | 90.00 | 90.00 | 103268.00 | local_file_word_count | 1147.42 | 1147.42 | calendar_time_lte_90_minutes | calendar_time_lte_90_minutes |
 | the Oxford book of essays | 2025-03-22 | 285.00 | 300.00 | 283993.00 | local_file_word_count | 996.47 | 946.64 |  | long_book_has_too_little_matched_calendar_time |
+| Tremendous Trifles | 2024-03-01 | 60.00 | 60.00 | 59778.00 | local_file_word_count | 996.30 | 996.30 | calendar_time_lte_90_minutes | calendar_time_lte_90_minutes |
 
 ## >600 WPM Duration-Screened Investigation
 
@@ -120,14 +124,21 @@ Aggregate WPM is `sum(chosen_word_count) / sum(primary_first_pass_minutes)`, not
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | the Oxford book of essays | 2025-03-22 | 285.00 | 300.00 | 283993.00 | local_file_word_count | 996.47 | 946.64 |  | long_book_has_too_little_matched_calendar_time |
 | age of ambition | 2025-08-02 | 202.50 | 210.00 | 151444.00 | local_file_word_count | 747.87 | 721.16 |  | needs_manual_calendar_or_word_count_review |
+| selfish reasons to have more kids | 2025-07-12 | 97.50 | 105.00 | 65820.00 | local_file_word_count | 675.08 | 626.86 |  | needs_manual_calendar_or_word_count_review |
 
 ## Short-Duration Exclusions
 
 | title | matched_finish_date | primary_first_pass_minutes | first_pass_wall_clock_minutes | chosen_word_count | wpm_first_pass_primary | wpm_first_pass_full_wall_clock | duration_screen_exclusion_reason |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| SQL | 2022-05-25 | 30.00 | 30.00 | 99534.00 | 3317.80 | 3317.80 | calendar_time_lte_90_minutes |
 | blueprint reading: construction drawings for the building trade | 2025-07-28 | 45.00 | 45.00 | 92387.00 | 2053.04 | 2053.04 | calendar_time_lte_90_minutes |
 | what is man and other essays | 2024-08-07 | 75.00 | 75.00 | 101021.00 | 1346.95 | 1346.95 | calendar_time_lte_90_minutes |
+| Everyman for himself and god against all | 2025-09-01 | 90.00 | 90.00 | 103268.00 | 1147.42 | 1147.42 | calendar_time_lte_90_minutes |
+| Tremendous Trifles | 2024-03-01 | 60.00 | 60.00 | 59778.00 | 996.30 | 996.30 | calendar_time_lte_90_minutes |
 | high intensity training the mike mentzer way | 2025-09-22 | 90.00 | 90.00 | 71026.00 | 789.18 | 789.18 | calendar_time_lte_90_minutes |
+| The Inner game of tennis | 2021-10-17 | 75.00 | 75.00 | 45281.00 | 603.75 | 603.75 | calendar_time_lte_90_minutes |
+| The Art of Readable Code | 2022-11-30 | 75.00 | 75.00 | 42585.00 | 567.80 | 567.80 | calendar_time_lte_90_minutes |
+| the last interview | 2024-08-28 | 60.00 | 60.00 | 27863.00 | 464.38 | 464.38 | calendar_time_lte_90_minutes |
 | art and fear | 2025-12-15 | 60.00 | 60.00 | 27611.00 | 460.18 | 460.18 | calendar_time_lte_90_minutes |
 | self help is like a vaccine | 2024-10-11 | 82.50 | 90.00 | 34342.00 | 416.27 | 381.58 | calendar_time_lte_90_minutes |
 | memos from the chairman | 2026-02-25 | 90.00 | 90.00 | 32426.00 | 360.29 | 360.29 | calendar_time_lte_90_minutes |

@@ -1,2 +1,2 @@
 n_books,pearson_corr_log_highlight_density_wpm,slope_wpm_per_log1p_highlight_density,p25_highlight_words_per_10k_words,p75_highlight_words_per_10k_words,predicted_wpm_at_p25_highlight_density,predicted_wpm_at_p75_highlight_density,observational_wpm_change_if_p75_to_p25_density
-84,-0.06793389647864743,-2.7678469230219473,0.0,999.6017108263843,341.8446810850412,322.7234069485193,19.12127413652189
+114,-0.045837711283902995,-1.721196018113238,0.0,848.2391398249343,341.3599835447558,329.7516509822963,11.608332562459452

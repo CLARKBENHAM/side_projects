@@ -1,5 +1,7 @@
 root,exists,is_dir,can_iterate,visible_entry_count,error
 /Users/clarkbenham/side_projects/data/Books,True,True,True,492,
 /Users/clarkbenham/side_projects/data/Books/eleven_upload,True,True,True,12,
+/Users/clarkbenham/side_projects/data/Takeout_Play_books_03_16_25_pt1/Google Play Books,True,True,True,341,
+/Users/clarkbenham/side_projects/data/Takeout_Play_books_03_16_25_pt2/Google Play Books,True,True,True,679,
 /Users/clarkbenham/Documents/Books,True,True,False,0,PermissionError: [Errno 1] Operation not permitted: '/Users/clarkbenham/Documents/Books'
 /Users/clarkbenham/Documents/Books/eleven_upload,True,True,False,0,PermissionError: [Errno 1] Operation not permitted: '/Users/clarkbenham/Documents/Books/eleven_upload'
