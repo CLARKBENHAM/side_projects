@@ -18,6 +18,7 @@ class LLMExecutionError(RuntimeError):
 DEFAULT_MODEL_BY_BACKEND: dict[str, str | None] = {
     "gemini": "gemini-3.1-pro-preview",
     "claude": "sonnet",
+    "codex": "gpt-5.5",
     "stub": None,
 }
 
@@ -106,9 +107,39 @@ def _build_command(
         if system_prompt:
             command.extend(["--system-prompt", system_prompt])
         command.append(prompt)
+    elif backend == "codex":
+        command = [
+            "codex",
+            "exec",
+            "--ephemeral",
+            "--ignore-rules",
+            "--skip-git-repo-check",
+            "-s",
+            "read-only",
+            "-c",
+            'approval_policy="never"',
+            "-c",
+            'model_reasoning_effort="high"',
+            "-",
+        ]
+        if model:
+            command[2:2] = ["-m", model]
     else:
         raise ValueError(f"Unsupported backend: {backend}")
     return command
+
+
+def _stdin_prompt_for_backend(
+    backend: str,
+    prompt: str,
+    *,
+    system_prompt: str | None,
+) -> str | None:
+    if backend.lower() != "codex":
+        return None
+    if not system_prompt:
+        return prompt
+    return f"{system_prompt.strip()}\n\n{prompt}"
 
 
 def run_prompt_with_metadata(
@@ -135,11 +166,17 @@ def run_prompt_with_metadata(
         model=model,
         system_prompt=system_prompt,
     )
+    stdin_prompt = _stdin_prompt_for_backend(
+        backend,
+        prompt,
+        system_prompt=system_prompt,
+    )
     started_wall = datetime.now().isoformat()
     started_monotonic = monotonic()
     try:
         result = subprocess.run(
             command,
+            input=stdin_prompt,
             capture_output=True,
             text=True,
             timeout=timeout,
@@ -203,6 +240,11 @@ async def run_prompt_async(
         model=model,
         system_prompt=system_prompt,
     )
+    stdin_prompt = _stdin_prompt_for_backend(
+        backend,
+        prompt,
+        system_prompt=system_prompt,
+    )
 
     @asynccontextmanager
     async def _no_limit() -> object:
@@ -213,12 +255,16 @@ async def run_prompt_async(
         started_monotonic = monotonic()
         process = await asyncio.create_subprocess_exec(
             *command,
+            stdin=asyncio.subprocess.PIPE if stdin_prompt is not None else None,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
         )
         try:
             stdout, stderr = await asyncio.wait_for(
-                process.communicate(), timeout=timeout
+                process.communicate(
+                    stdin_prompt.encode("utf-8") if stdin_prompt is not None else None
+                ),
+                timeout=timeout,
             )
         except TimeoutError as exc:
             process.kill()

@@ -6,6 +6,8 @@ from structured_summaries.models import BookRecord
 from structured_summaries.prompts import (
     build_color_alignment_review_prompt,
     build_chunk_analysis_prompt,
+    build_preread_chunk_prompt,
+    build_preread_synthesis_prompt,
     build_synthesis_prompt,
 )
 
@@ -68,6 +70,33 @@ def test_synthesis_prompt_requests_pushback_and_legibility() -> None:
     assert "do not infer importance from narrative vividness alone" in prompt
     assert "prefer specific named late-book cases, tools, and metrics" in prompt
     assert "do not generate psychological interpretations" in prompt
+
+
+def test_preread_prompts_are_red_yellow_calibrated_and_concise() -> None:
+    chunk_prompt = build_preread_chunk_prompt(
+        _book(),
+        "Sample text",
+        chunk_index=1,
+        total_chunks=2,
+    )
+    synthesis_prompt = build_preread_synthesis_prompt(
+        _book(),
+        ['{"arc_events": [{"event": "A thing happened"}]}'],
+    )
+
+    assert "red highlights = most important factual/structural signal" in chunk_prompt
+    assert "yellow highlights = important normal signal" in chunk_prompt
+    assert "blue highlights = personal resonance" in chunk_prompt
+    assert "do not optimize for these in pre-reading" in chunk_prompt
+    assert "orientation_facts" in chunk_prompt
+    assert "arc_events" in chunk_prompt
+    assert "load_bearing_scenes" in chunk_prompt
+    assert "Stay within the item limits." in chunk_prompt
+    assert "roughly 1,000-1,500 words" in synthesis_prompt
+    assert "The Arc To Keep In Your Head" in synthesis_prompt
+    assert "What To Watch For While Reading" in synthesis_prompt
+    assert "Optimize for red highlights first" in synthesis_prompt
+    assert "Do not add a generic \"questions to verify\" section." in synthesis_prompt
 
 
 def test_color_alignment_prompt_prioritizes_red_grounding_and_chunk_mapping() -> None:

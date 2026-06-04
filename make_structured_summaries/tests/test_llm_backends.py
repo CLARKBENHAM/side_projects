@@ -5,6 +5,8 @@ from time import monotonic
 
 from structured_summaries.llm_backends import (
     AsyncRequestLimiter,
+    _build_command,
+    _stdin_prompt_for_backend,
     default_model_for_backend,
 )
 
@@ -12,6 +14,22 @@ from structured_summaries.llm_backends import (
 def test_default_model_for_backend_uses_current_gemini_pro() -> None:
     assert default_model_for_backend("gemini") == "gemini-3.1-pro-preview"
     assert default_model_for_backend("claude") == "sonnet"
+    assert default_model_for_backend("codex") == "gpt-5.5"
+
+
+def test_codex_backend_uses_stdin_and_high_reasoning() -> None:
+    command = _build_command("codex", "large prompt", model="gpt-5.5")
+    stdin_prompt = _stdin_prompt_for_backend(
+        "codex",
+        "large prompt",
+        system_prompt="system",
+    )
+
+    assert command[:4] == ["codex", "exec", "-m", "gpt-5.5"]
+    assert command[-1] == "-"
+    assert 'model_reasoning_effort="high"' in command
+    assert "large prompt" not in command
+    assert stdin_prompt == "system\n\nlarge prompt"
 
 
 async def _measure_peak_concurrency(

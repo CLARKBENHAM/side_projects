@@ -164,6 +164,284 @@ Chunk extractions:
 """
 
 
+def build_preread_chunk_prompt(
+    book: BookRecord,
+    chunk_text: str,
+    *,
+    chunk_index: int,
+    total_chunks: int,
+) -> str:
+    return f"""You are preparing a pre-reading brief for a reader who will read the full book later.
+
+Book:
+- title: {book.title}
+- author: {book.author or "unknown"}
+- chunk: {chunk_index} of {total_chunks}
+
+Goal:
+Extract only the material that would help the reader read the book faster and retain it better.
+Use the reader's historical highlights as the calibration target:
+- red highlights = most important factual/structural signal
+- yellow highlights = important normal signal
+- green highlights = what the author or people at the time believed; include only when it unlocks the arc
+- blue highlights = personal resonance; do not optimize for these in pre-reading
+
+Prefer:
+- the main arc of events, especially cause -> maneuver -> consequence
+- concrete institutional facts, constraints, incentives, veto points, and power mechanisms
+- a small number of scenes that make the machinery of the book legible
+- facts that explain later events, even if they are not colorful
+- enough names, factions, places, and chronology to prevent disorientation while reading
+
+Avoid:
+- long inventories of every detail in the chunk
+- generic mental-model labels that sound clever but hide the event
+- bloated prose
+- "questions to verify" unless the text itself makes a claim genuinely central and doubtful
+- personal-application advice unless the text directly supports it
+- treating every vivid anecdote as important
+
+Return JSON only with this schema. Stay within the item limits.
+{{
+  "orientation_facts": [
+    {{
+      "fact": "specific background fact the reader needs before reading",
+      "why_it_matters": "why this prevents confusion later"
+    }}
+  ],
+  "arc_events": [
+    {{
+      "event": "what happened, with names and stakes",
+      "consequence": "what changed because of it"
+    }}
+  ],
+  "key_mechanisms": [
+    {{
+      "mechanism": "the concrete process, incentive, constraint, or power move",
+      "example": "the shortest useful example from this chunk"
+    }}
+  ],
+  "load_bearing_scenes": [
+    {{
+      "label": "short label",
+      "what_happens": "2-3 sentences, concrete and chronological",
+      "why_it_matters": "why this is likely red/yellow-level important"
+    }}
+  ],
+  "reader_watchpoints": [
+    "what to watch for while reading the full book"
+  ],
+  "people_and_terms": [
+    {{
+      "name": "person, faction, institution, place, or term",
+      "role": "why the reader needs to recognize it"
+    }}
+  ],
+  "likely_low_value_detail": [
+    "detail type to skip or hold lightly during pre-reading"
+  ]
+}}
+
+Limits:
+- orientation_facts: 0-4
+- arc_events: 0-5
+- key_mechanisms: 0-5
+- load_bearing_scenes: 0-4
+- reader_watchpoints: 0-5
+- people_and_terms: 0-6
+- likely_low_value_detail: 0-3
+- Each string should be short and concrete.
+
+Chunk text:
+{chunk_text}
+"""
+
+
+def build_preread_synthesis_prompt(book: BookRecord, chunk_outputs: list[str]) -> str:
+    joined = "\n\n".join(
+        f"--- chunk {index} preread extraction ---\n{output}"
+        for index, output in enumerate(chunk_outputs, start=1)
+    )
+    return f"""You are writing a pre-reading brief for a book the reader has not read yet.
+
+Book:
+- title: {book.title}
+- author: {book.author or "unknown"}
+
+Use the chunk extractions below. The purpose is not to replace the book; it is to
+make the first real read faster, more oriented, and more memorable.
+
+Write concise Markdown, roughly 1,000-1,500 words. The prose should be plain,
+specific, and easy to scan. Do not sound like marketing copy, a school report,
+or a management-framework deck.
+
+Sections:
+
+1. Before You Start
+   - 5-8 bullets that orient the reader to the book's stakes, time period, factions,
+     and central problem.
+
+2. The Arc To Keep In Your Head
+   - 8-12 chronological bullets.
+   - Each bullet should say what changed, not merely what happened.
+
+3. What To Watch For While Reading
+   - 8-12 bullets.
+   - These should be the red/yellow-level mechanisms, constraints, recurring moves,
+     and authorial claims likely to matter most.
+
+4. Load-Bearing Scenes
+   - 5-8 short entries.
+   - Each entry should include the setup, action, and payoff in plain prose.
+
+5. Cast And Terms
+   - A compact glossary of names, factions, institutions, places, and terms the reader
+     should recognize before reading.
+
+6. What To Hold Lightly
+   - 3-6 bullets about details that may be interesting but should not dominate the
+     pre-read mental map.
+
+Rules:
+- Optimize for red highlights first, then high-signal yellow highlights.
+- Do not optimize for personal blue highlights.
+- Include green-style material only when beliefs of the author or historical actors
+  are needed to understand the arc.
+- Prefer concrete nouns, dates, actors, constraints, and consequences over abstractions.
+- Do not add a generic "questions to verify" section.
+- If a claim deserves skepticism, fold that caution into the relevant bullet in one sentence.
+- Do not include everything. Exclude detail aggressively.
+- If the chunk extractions are noisy, write from the strongest recurring signal.
+- Keep bullets short enough that the reader can skim the whole brief before opening the book.
+
+Chunk extractions:
+{joined}
+"""
+
+
+def build_chapter_preread_summary_prompt(
+    book: BookRecord,
+    *,
+    chapter_title: str,
+    chapter_index: int,
+    total_chapters: int,
+    chapter_text: str,
+) -> str:
+    return f"""You are writing a pre-read guide for one chapter of a book.
+
+Book:
+- title: {book.title}
+- author: {book.author or "unknown"}
+- chapter: {chapter_index} of {total_chapters}
+- chapter title: {chapter_title}
+
+Goal:
+Write the thing a smart reader should read immediately before reading this chapter.
+The reader wants to move faster through the real chapter while retaining the main
+arc, load-bearing facts, important mechanisms, and a few scenes worth watching.
+
+Write Markdown only, roughly 700-1,100 words, with these sections:
+
+1. Orientation Before Reading
+   - 4-7 bullets giving the time, stakes, people, institutions, and conflict.
+
+2. The Chapter Arc
+   - 5-9 chronological bullets.
+   - Each bullet should say what changes, not just what happens.
+
+3. What To Watch For
+   - 5-9 bullets naming the important mechanisms, constraints, causal moves,
+     or authorial claims likely to matter.
+
+4. Load-Bearing Scenes
+   - 3-6 short entries.
+   - Each entry should have setup, action, and payoff in plain prose.
+
+5. Cast And Terms
+   - A compact glossary only for names, factions, places, institutions, and terms
+     needed to read this chapter without friction.
+
+6. What To Hold Lightly
+   - 2-5 bullets for vivid but probably nonessential detail.
+
+Rules:
+- Do not summarize every page.
+- Do not write a school-report recap.
+- Do not invent generic mental-model labels when a concrete event is clearer.
+- Prefer specific actors, constraints, incentives, chronology, and consequences.
+- Keep prose clean and readable; no throat-clearing and no motivational language.
+- Assume the reader has not read this chapter yet.
+- Do not mention reader highlights; this is for a new unread chapter.
+
+Chapter text:
+{chapter_text}
+"""
+
+
+def build_chapter_highlight_judge_prompt(
+    book: BookRecord,
+    *,
+    chapter_title: str,
+    chapter_index: int,
+    total_chapters: int,
+    summary_markdown: str,
+    highlights_markdown: str,
+) -> str:
+    return f"""Judge a chapter pre-read guide against the reader's actual later highlights.
+
+Book:
+- title: {book.title}
+- author: {book.author or "unknown"}
+- chapter: {chapter_index} of {total_chapters}
+- chapter title: {chapter_title}
+
+The reader's highlight colors mean:
+- red: strongest signal; important factual, structural, or causal material
+- yellow: normal important material
+- green: what the author or people in the period thought
+- blue: personal resonance; useful context, but do not let it dominate the score
+
+Important caveats:
+- Highlights are evidence of what mattered to this reader; they are not exhaustive.
+- The summary was written before seeing the highlights. Judge whether it would have
+  prepared the reader well, not whether it copied highlight wording.
+- Penalize missing red material more than missing yellow material.
+- Penalize long, generic, or badly written prose even if many topics are present.
+
+Write Markdown with these sections:
+
+1. Verdict
+   - one paragraph with an overall letter grade and whether this would work before reading
+
+2. Scorecard
+   - Main-point coverage: 1-10
+   - Concision / detail control: 1-10
+   - Prose quality: 1-10
+   - Pre-read usefulness: 1-10
+
+3. What The Summary Got Right
+   - bullets tied to specific highlights or highlight themes
+
+4. Important Misses
+   - bullets for high-signal highlight themes absent or too vague in the summary
+
+5. Excess Or Low-Value Detail
+   - bullets for summary material that probably should be cut before reading
+
+6. Prose Problems
+   - bullets for awkward, bloated, generic, or unclear writing
+
+7. Prompt Fixes
+   - concrete changes to the chapter-summary prompt that would improve the next run
+
+Reader highlights from this chapter:
+{highlights_markdown}
+
+Generated pre-read summary:
+{summary_markdown}
+"""
+
+
 def build_challenge_prompt(book: BookRecord, summary_markdown: str) -> str:
     return f"""You are a skeptical but fair reviewer of a book summary.
 
