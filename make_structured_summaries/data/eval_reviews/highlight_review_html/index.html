@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Highlight Review Index</title>
+  <style>
+    :root {
+      --bg: #f7f7f4;
+      --ink: #202124;
+      --muted: #60646c;
+      --line: #d8d8d2;
+      --panel: #ffffff;
+      --yellow: #fff2a8;
+      --green: #d8f3dc;
+      --blue: #dbeafe;
+      --red: #ffe0e0;
+      --uncolored: #f1f3f4;
+      --warn: #fff7d6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    a { color: #174ea6; }
+    .page-header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: rgba(247, 247, 244, 0.96);
+      border-bottom: 1px solid var(--line);
+      padding: 16px 24px;
+      backdrop-filter: blur(8px);
+    }
+    h1 { margin: 4px 0; font-size: 24px; letter-spacing: 0; }
+    p { margin: 0 0 10px; }
+    code { font-size: 12px; overflow-wrap: anywhere; }
+    main { padding: 18px 24px 40px; }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(160px, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .summary-grid div, .provenance {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 10px;
+      border-radius: 6px;
+    }
+    .summary-grid strong, .summary-grid span, .provenance strong, .provenance span {
+      display: block;
+      font-size: 13px;
+    }
+    .summary-grid span, .provenance span { color: var(--muted); margin-top: 4px; }
+    .provenance { margin-top: 10px; }
+    .provenance.warning { background: var(--warn); }
+    .columns-label, .position-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+    }
+    .columns-label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+      padding: 0 2px;
+    }
+    .position-row {
+      margin-bottom: 14px;
+      align-items: start;
+    }
+    .real-highlights, .ai-output {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 12px;
+      min-height: 120px;
+    }
+    .span-meta, .highlight-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .span-meta span, .highlight-meta span {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 999px;
+      padding: 2px 7px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .highlight-card {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 8px;
+      background: var(--uncolored);
+    }
+    .highlight-card.yellow { background: var(--yellow); }
+    .highlight-card.green { background: var(--green); }
+    .highlight-card.blue { background: var(--blue); }
+    .highlight-card.red { background: var(--red); }
+    .highlight-card.uncolored { background: var(--uncolored); }
+    .ai-category {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+      margin-top: 8px;
+    }
+    .ai-category summary {
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .ai-category ol {
+      margin: 0 0 0 22px;
+      padding: 0;
+    }
+    .ai-category li {
+      margin-bottom: 8px;
+    }
+    .empty-state {
+      color: var(--muted);
+      font-style: italic;
+    }
+    .index-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--panel);
+      border: 1px solid var(--line);
+    }
+    .index-table th, .index-table td {
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      padding: 9px 10px;
+      vertical-align: top;
+    }
+    .index-table th {
+      font-size: 13px;
+      color: var(--muted);
+      background: #fafafa;
+    }
+    details { margin-top: 10px; }
+    @media (max-width: 900px) {
+      .summary-grid, .columns-label, .position-row {
+        grid-template-columns: 1fr;
+      }
+      .page-header { position: static; }
+      main { padding: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+    <header class="page-header">
+      <h1>Highlight Review Index</h1>
+      <p>
+        Positional review pages: real Play Books highlights are grouped on the
+        left; AI chunk extractions from the same approximate book span are on
+        the right. No text-match scoring is used.
+      </p>
+      <p>
+        Inputs: Drive DOCX notes, tablet markdown exports, curated notes, and
+        existing local AI chunk outputs.
+      </p>
+    </header>
+    <main>
+      <table class="index-table">
+        <thead>
+          <tr>
+            <th>Book</th>
+            <th>Author</th>
+            <th>Highlights</th>
+            <th>With pages</th>
+            <th>AI output</th>
+            <th>Direct PDF</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td><a href="a-history-of-the-english-speaking-peoples-collection.html">A History of the English-Speaking Peoples Collection</a></td>
+              <td>Winston S. Churchill</td>
+              <td>87</td>
+              <td>87</td>
+              <td>no AI output</td>
+              <td>no AI output</td>
+            </tr>
+            
+            <tr>
+              <td><a href="churchill.html">Churchill</a></td>
+              <td>Winston Churchill</td>
+              <td>232</td>
+              <td>18</td>
+              <td>no AI output</td>
+              <td>no AI output</td>
+            </tr>
+            
+            <tr>
+              <td><a href="churchill-walking-with-destiny.html">Churchill: Walking with Destiny</a></td>
+              <td>Andrew Roberts</td>
+              <td>1271</td>
+              <td>999</td>
+              <td>no AI output</td>
+              <td>no AI output</td>
+            </tr>
+            
+            <tr>
+              <td><a href="great-contemporaries.html">Great Contemporaries</a></td>
+              <td>Winston S. Churchill</td>
+              <td>107</td>
+              <td>99</td>
+              <td>no AI output</td>
+              <td>no AI output</td>
+            </tr>
+            
+            <tr>
+              <td><a href="master-of-the-senate.html">Master of the Senate</a></td>
+              <td>Robert A. Caro</td>
+              <td>658</td>
+              <td>605</td>
+              <td>31 chunks</td>
+              <td>no (epub)</td>
+            </tr>
+            
+            <tr>
+              <td><a href="my-early-life.html">My Early Life</a></td>
+              <td>Churchill, Winston S.</td>
+              <td>496</td>
+              <td>337</td>
+              <td>no AI output</td>
+              <td>no AI output</td>
+            </tr>
+            
+            <tr>
+              <td><a href="the-price-of-victory.html">The Price of Victory</a></td>
+              <td>Rodger, N A M</td>
+              <td>1094</td>
+              <td>808</td>
+              <td>no AI output</td>
+              <td>no AI output</td>
+            </tr>
+            
+            <tr>
+              <td><a href="the-second-world-war.html">The Second World War</a></td>
+              <td>Winston S. Churchill</td>
+              <td>598</td>
+              <td>598</td>
+              <td>no AI output</td>
+              <td>no AI output</td>
+            </tr>
+            
+            <tr>
+              <td><a href="the-world-crisis-vol-2-winston-churchill-s-world-crisis-collection.html">The World Crisis, Vol. 2 (Winston Churchill&#x27;s World Crisis Collection)</a></td>
+              <td>Winston S. Churchill</td>
+              <td>896</td>
+              <td>182</td>
+              <td>no AI output</td>
+              <td>no AI output</td>
+            </tr>
+            
+            <tr>
+              <td><a href="thoughts-and-adventures.html">Thoughts and Adventures</a></td>
+              <td>Winston Spencer Churchill</td>
+              <td>141</td>
+              <td>141</td>
+              <td>no AI output</td>
+              <td>no AI output</td>
+            </tr>
+            </tbody>
+      </table>
+    </main>
+    
+</body>
+</html>

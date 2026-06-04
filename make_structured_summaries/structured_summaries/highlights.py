@@ -4,8 +4,10 @@ from __future__ import annotations
 
 import csv
 import re
+import zipfile
 from dataclasses import dataclass, replace
 from pathlib import Path
+from xml.etree import ElementTree as ET
 
 from .llm_backends import run_prompt
 from .prompts import build_alignment_review_prompt, build_anki_prompt
@@ -23,6 +25,8 @@ PLAY_BOOKS_COLOR_HEADINGS = {"yellow", "green", "blue", "red"}
 PLAY_BOOKS_BOOKMARK_ONLY_MARKER = "bookmarks"
 PLAY_BOOKS_COLOR_PRIORITY = {"blue": 4, "red": 3, "green": 2, "yellow": 1, "": 0}
 DATE_PATTERN = re.compile(r"^[A-Za-z]+ \d{1,2}, \d{4}$")
+WORDPROCESSINGML_NS = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+NOTE_HEADER_RE = re.compile(r'^Notes from ["_](.+?)["_]$')
 
 
 @dataclass(frozen=True)
@@ -36,6 +40,80 @@ class HighlightEntry:
     estimated_chunk: int | None = None
     duplicate_count: int = 1
     source_section: str = ""
+
+
+@dataclass(frozen=True)
+class HighlightDocument:
+    title: str
+    author: str = ""
+    entries: tuple[HighlightEntry, ...] = ()
+    source_path: Path | None = None
+
+
+def read_highlight_source_text(path: Path) -> str:
+    if path.suffix.lower() == ".docx":
+        return read_docx_text(path)
+    return path.read_text(encoding="utf-8", errors="ignore")
+
+
+def read_docx_text(path: Path) -> str:
+    """Extract visible paragraph text from a Word/Google Docs .docx export."""
+    with zipfile.ZipFile(path) as archive:
+        document_xml = archive.read("word/document.xml")
+
+    root = ET.fromstring(document_xml)
+    lines: list[str] = []
+    for paragraph in root.iter(f"{WORDPROCESSINGML_NS}p"):
+        parts: list[str] = []
+        for node in paragraph.iter():
+            if node.tag == f"{WORDPROCESSINGML_NS}t" and node.text:
+                parts.append(node.text)
+            elif node.tag == f"{WORDPROCESSINGML_NS}tab":
+                parts.append("\t")
+        line = "".join(parts).strip()
+        if line:
+            lines.append(line)
+    return "\n".join(lines)
+
+
+def _clean_metadata_candidate(line: str) -> str:
+    line = re.sub(r"^\s{0,3}#{1,6}\s*", "", line.strip())
+    return line.strip(" \t#")
+
+
+def _fallback_title_from_path(path: Path | None) -> str:
+    if path is None:
+        return "Unknown Title"
+    fallback_name = path.stem
+    match = NOTE_HEADER_RE.match(fallback_name)
+    if match:
+        fallback_name = match.group(1)
+    fallback_name = re.sub(r"^Notes from [_\"]?", "", fallback_name).strip(" _\"")
+    return fallback_name or path.stem
+
+
+def _extract_title_author(text: str, fallback_name: str) -> tuple[str, str]:
+    content_lines: list[str] = []
+    for raw_line in text.replace("\ufeff", "").splitlines():
+        line = _clean_metadata_candidate(raw_line)
+        if line.startswith(">"):
+            continue
+        if not line or _should_drop_line(line):
+            continue
+        if line in {
+            "This document is overwritten when you make changes in Play Books."
+        }:
+            continue
+        content_lines.append(line)
+        if len(content_lines) >= 2:
+            break
+
+    if not content_lines:
+        return fallback_name, "Unknown Author"
+
+    title = content_lines[0]
+    author = content_lines[1] if len(content_lines) >= 2 else "Unknown Author"
+    return title, author
 
 
 def _extract_play_books_annotation_body(text: str) -> str:
@@ -62,6 +140,8 @@ def _should_drop_line(line: str) -> bool:
     if any(marker in lowered for marker in PLAY_BOOKS_METADATA_SUBSTRINGS):
         return True
     if lowered == "cover image":
+        return True
+    if re.fullmatch(r"highlight \d+", lowered):
         return True
     if re.fullmatch(r"[a-z]+ \d{1,2}, \d{4}", lowered):
         return True
@@ -226,6 +306,49 @@ def parse_structured_highlights(text: str) -> list[HighlightEntry]:
     return _dedupe_entries(entries)
 
 
+def parse_highlight_document_text(
+    text: str,
+    *,
+    source_path: Path | None = None,
+    fallback_name: str | None = None,
+    source_section: str = "",
+) -> HighlightDocument | None:
+    fallback = fallback_name or _fallback_title_from_path(source_path)
+    title, author = _extract_title_author(text, fallback)
+    entries = parse_structured_highlights(text)
+
+    if not entries:
+        entries = [
+            HighlightEntry(text=item, source_section=source_section or "unstructured")
+            for item in split_highlights(text)
+        ]
+
+    if not entries:
+        return None
+
+    if source_section:
+        entries = [replace(entry, source_section=source_section) for entry in entries]
+
+    return HighlightDocument(
+        title=title,
+        author=author,
+        entries=tuple(entries),
+        source_path=source_path,
+    )
+
+
+def load_highlight_document(
+    path: Path,
+    *,
+    source_section: str = "",
+) -> HighlightDocument | None:
+    return parse_highlight_document_text(
+        read_highlight_source_text(path),
+        source_path=path,
+        source_section=source_section,
+    )
+
+
 def annotate_entries_with_progress(
     entries: list[HighlightEntry],
     *,
@@ -304,7 +427,7 @@ def split_highlights(text: str) -> list[str]:
 
 
 def load_highlights(path: Path) -> list[str]:
-    return split_highlights(path.read_text(encoding="utf-8", errors="ignore"))
+    return split_highlights(read_highlight_source_text(path))
 
 
 def load_highlights_from_paths(paths: list[Path]) -> list[str]:
@@ -317,9 +440,8 @@ def load_highlights_from_paths(paths: list[Path]) -> list[str]:
 def load_structured_highlights(
     path: Path, *, total_chunks: int | None = None
 ) -> list[HighlightEntry]:
-    entries = parse_structured_highlights(
-        path.read_text(encoding="utf-8", errors="ignore")
-    )
+    document = load_highlight_document(path)
+    entries = list(document.entries) if document else []
     return annotate_entries_with_progress(entries, total_chunks=total_chunks)
 
 
@@ -330,11 +452,9 @@ def load_structured_highlights_from_paths(
 ) -> list[HighlightEntry]:
     combined: list[HighlightEntry] = []
     for path in paths:
-        combined.extend(
-            parse_structured_highlights(
-                path.read_text(encoding="utf-8", errors="ignore")
-            )
-        )
+        document = load_highlight_document(path)
+        if document is not None:
+            combined.extend(document.entries)
     return annotate_entries_with_progress(
         _dedupe_entries(combined),
         total_chunks=total_chunks,

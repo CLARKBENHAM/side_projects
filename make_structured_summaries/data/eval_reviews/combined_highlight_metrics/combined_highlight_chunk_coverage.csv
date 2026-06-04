@@ -1,0 +1,5 @@
+book_id,highlight_count,covered_count,partial_count,missed_count,covered_rate,covered_or_partial_rate,avg_score,yellow_count,green_count,blue_count,red_count,uncolored_count
+master-of-the-senate-master-of-the-senate,658,135,402,121,0.205167,0.816109,0.303010,541,23,12,29,53
+the-doomsday-machine-the-doomsday-machine,308,72,171,65,0.233766,0.788961,0.297942,249,25,5,29,0
+the-goal-a-process-of-ongoing-improvement,107,43,47,17,0.401869,0.841121,0.375832,83,2,8,14,0
+the-path-to-power-the-years-of-lyndon-johnson-i,816,90,522,204,0.110294,0.750000,0.272543,693,54,20,49,0

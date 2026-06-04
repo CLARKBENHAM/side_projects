@@ -1,0 +1,3394 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Churchill - positional highlight review</title>
+  <style>
+    :root {
+      --bg: #f7f7f4;
+      --ink: #202124;
+      --muted: #60646c;
+      --line: #d8d8d2;
+      --panel: #ffffff;
+      --yellow: #fff2a8;
+      --green: #d8f3dc;
+      --blue: #dbeafe;
+      --red: #ffe0e0;
+      --uncolored: #f1f3f4;
+      --warn: #fff7d6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    a { color: #174ea6; }
+    .page-header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: rgba(247, 247, 244, 0.96);
+      border-bottom: 1px solid var(--line);
+      padding: 16px 24px;
+      backdrop-filter: blur(8px);
+    }
+    h1 { margin: 4px 0; font-size: 24px; letter-spacing: 0; }
+    p { margin: 0 0 10px; }
+    code { font-size: 12px; overflow-wrap: anywhere; }
+    main { padding: 18px 24px 40px; }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(160px, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .summary-grid div, .provenance {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 10px;
+      border-radius: 6px;
+    }
+    .summary-grid strong, .summary-grid span, .provenance strong, .provenance span {
+      display: block;
+      font-size: 13px;
+    }
+    .summary-grid span, .provenance span { color: var(--muted); margin-top: 4px; }
+    .provenance { margin-top: 10px; }
+    .provenance.warning { background: var(--warn); }
+    .columns-label, .position-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+    }
+    .columns-label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+      padding: 0 2px;
+    }
+    .position-row {
+      margin-bottom: 14px;
+      align-items: start;
+    }
+    .real-highlights, .ai-output {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 12px;
+      min-height: 120px;
+    }
+    .span-meta, .highlight-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .span-meta span, .highlight-meta span {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 999px;
+      padding: 2px 7px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .highlight-card {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 8px;
+      background: var(--uncolored);
+    }
+    .highlight-card.yellow { background: var(--yellow); }
+    .highlight-card.green { background: var(--green); }
+    .highlight-card.blue { background: var(--blue); }
+    .highlight-card.red { background: var(--red); }
+    .highlight-card.uncolored { background: var(--uncolored); }
+    .ai-category {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+      margin-top: 8px;
+    }
+    .ai-category summary {
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .ai-category ol {
+      margin: 0 0 0 22px;
+      padding: 0;
+    }
+    .ai-category li {
+      margin-bottom: 8px;
+    }
+    .empty-state {
+      color: var(--muted);
+      font-style: italic;
+    }
+    .index-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--panel);
+      border: 1px solid var(--line);
+    }
+    .index-table th, .index-table td {
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      padding: 9px 10px;
+      vertical-align: top;
+    }
+    .index-table th {
+      font-size: 13px;
+      color: var(--muted);
+      background: #fafafa;
+    }
+    details { margin-top: 10px; }
+    @media (max-width: 900px) {
+      .summary-grid, .columns-label, .position-row {
+        grid-template-columns: 1fr;
+      }
+      .page-header { position: static; }
+      main { padding: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+        <header class="page-header">
+          <a href="index.html">Index</a>
+          <h1>Churchill</h1>
+          <p>Winston Churchill</p>
+          <p>
+            This page is positional, not text-matched. Left-side highlights are
+            grouped by Play Books page/progress; right-side AI output is grouped
+            by the original AI chunk. The current artifacts do not contain exact
+            PDF page ranges for each AI chunk.
+          </p>
+          
+    <div class="summary-grid">
+      <div><strong>Real highlights</strong><span>232</span></div>
+      <div><strong>Highlights with pages</strong><span>18</span></div>
+      <div><strong>AI output</strong><span>none</span></div>
+      <div><strong>Direct PDF</strong><span>no AI output</span></div>
+    </div>
+    
+          
+        <div class="provenance warning">
+          <strong>AI provenance</strong>
+          <span>No AI summary/extraction output was found for this book.</span>
+        </div>
+        
+          <details><summary>Highlight source files</summary><ul><li><code>/Users/clarkbenham/side_projects/data/Play_Books_Notes-20260531T040817Z/Notes from _Churchill_.docx</code></li>
+<li><code>/Users/clarkbenham/side_projects/data/play_books_highlights_full_backup_20260530_235315/Churchill.md</code></li></ul></details>
+        </header>
+        <main class="book-page">
+          <div class="columns-label">
+            <span>Real highlights from this span</span>
+            <span>AI chunk extraction from the corresponding span</span>
+          </div>
+          
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p501</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#1</span>
+        <span>blue</span>
+        <span>p501</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>17 notes/highlights THE READINGS We repressed the German-instigated rising in Iraq. We defended Palestine. With the assistance of General de Gaulle’s indomitable Free French we cleared Syria and the Lebanon of Vichyites and of German aviators and intriguers.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#2</span>
+        <span>yellow</span>
+        <span>p501</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>We repressed the German-instigated rising in Iraq. We defended Palestine. With the assistance of General de Gaulle’s indomitable Free French we cleared Syria and the Lebanon of Vichyites and of German aviators and intriguers.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p503</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#3</span>
+        <span>blue</span>
+        <span>p503</span>
+        <span>drive_docx</span>
+        <span>2 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>the rescue of France and the defeat of Germany. For our part, British and Canadians, we have had about one-third as many men over there as the Americans, but we have taken our full share of the fighting, as the scale of our losses shows</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p504</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#4</span>
+        <span>blue</span>
+        <span>p504</span>
+        <span>drive_docx</span>
+        <span>2 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>And others may say: It would be an ill day for all the world and for the pair of them if they did not go on working together and marching together and sailing together and flying together, whenever something has to be done for the sake of freedom and fair play all over the world. That is the great hope of the future.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p505</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#5</span>
+        <span>blue</span>
+        <span>p505</span>
+        <span>drive_docx</span>
+        <span>2 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>that there is still a lot to do, and that you must be prepared for further efforts of mind and body and further sacrifices to great causes if you are not to fall back into the rut of inertia, the confusion of aim, and the craven fear of being great.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p507</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#6</span>
+        <span>blue</span>
+        <span>p507</span>
+        <span>drive_docx</span>
+        <span>2 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Churchill hoped that his Grand Coalition would continue in power until the defeat of Japan. But the Labour Party was determined to have a General Election as soon as possible, and to seek a popular mandate.</p>
+    </article>
+    
+
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#7</span>
+        <span>blue</span>
+        <span>p507</span>
+        <span>drive_docx</span>
+        <span>2 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The Labour Party would go into opposition, and an electoral struggle would begin. On 26 May 1945, Churchill broadcast to the nation whose war leader he had been for the previous five years and sixteen days:</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p514</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#8</span>
+        <span>blue</span>
+        <span>p514</span>
+        <span>drive_docx</span>
+        <span>2 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>also to make up for the loss of six years’ building which the war had entailed. When the war had broken out, in the year before the war we had built 350,000 houses in one year.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p515</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#9</span>
+        <span>blue</span>
+        <span>p515</span>
+        <span>drive_docx</span>
+        <span>2 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>We have a four years’ plan. In this have figured largely the Socialist leaders. Then we have the great insurance scheme which covers everybody from the cradle to the grave, and which certainly Sir William Beveridge, who does not belong to the Labour Party, had a great deal to do with. We have also a large development of the health services, and we have to put in operation the Education Bill. The so he also campaigned on this</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p518</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#10</span>
+        <span>blue</span>
+        <span>p518</span>
+        <span>drive_docx</span>
+        <span>2 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>May the memory of this glorious pilgrimage which you have made from Alamein to the Baltic and Berlin never die. A march – as far as my reading of history leads me to believe – unsurpassed in the whole story of wa</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p520</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#11</span>
+        <span>blue</span>
+        <span>p520</span>
+        <span>drive_docx</span>
+        <span>2 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I have therefore laid down the charge which was placed upon me in darker times. I regret that I have not been permitted to finish the work against Japan</p>
+    </article>
+    
+
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#12</span>
+        <span>blue</span>
+        <span>p520</span>
+        <span>drive_docx</span>
+        <span>2 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>the General Election result, which was announced on 26 July 1945.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p521</span>
+          <span>3 highlights</span>
+          <span>page group: 3</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#13</span>
+        <span>blue</span>
+        <span>p521</span>
+        <span>drive_docx</span>
+        <span>2 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Clementine Churchill remarked to her husband that it was ‘a blessing in disguise’ – to which he replied: ‘Very heavily disguised.’</p>
+    </article>
+    
+
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#14</span>
+        <span>blue</span>
+        <span>p521</span>
+        <span>drive_docx</span>
+        <span>2 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>To a friend, he commented: ‘I don’t pretend not to be vexed. Defeat, however explained, consoled or discounted, is odious.’</p>
+    </article>
+    
+
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#15</span>
+        <span>blue</span>
+        <span>p521</span>
+        <span>drive_docx</span>
+        <span>2 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>When, as a school-boy, I was so bad at passing examinations. In fact one might almost say that no one ever passed so few examinations and received so many degrees. From this a superficial thinker might argue that the way to get the most degrees is to fail in the most examinations. This would however, ladies and gentlemen, be a conclusion unedifying in the academic atmosphere in which I now preen myself, and I therefore hasten to draw another moral with which I am sure we shall all be in accord: namely, that no boy or girl should ever be disheartened by lack of success in their youth but should diligently and faithfully continue to persevere and make up for lost time</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p528</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#16</span>
+        <span>blue</span>
+        <span>p528</span>
+        <span>drive_docx</span>
+        <span>2 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>In these last years of my life there is a message of which I conceive myself to be a bearer. It is a very simple message which can be well understood by the people of both our countries. It is that we should stand together.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p540</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#17</span>
+        <span>blue</span>
+        <span>p540</span>
+        <span>drive_docx</span>
+        <span>2 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Deliberate extermination of whole populations was contemplated and pursued by both Germany and Russia in the Eastern war. The hideous process of bombarding open cities from the air, once started by the Germans, was repaid twenty-fold by the ever-mounting power of the Allies, and found its culmination in the use of the atomic bombs which obliterated Hiroshima and Nagasaki. We have at length emerged from a scene of material ruin and moral havoc</p>
+    </article>
+    
+
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#18</span>
+        <span>blue</span>
+        <span>p540</span>
+        <span>drive_docx</span>
+        <span>2 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Still, apart from the excesses of the Russian Revolution, the main fabric of European civilisation remained erect at the close of the struggle. When the storm and dust of the cannonade passed suddenly away, the nations despite their enmities could still recognise each other as historic racial personalities. The laws of war had on the whole been respected. him not noticing or addressing the moral change?</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>no page</span>
+          <span>214 highlights</span>
+          <span>page group: 214</span>
+        </div>
+        
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#19</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>*Note:** 1950 even and cheuchil, is all on bombs of which a few</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#20</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>*Note:** Logistics school of thought says uboatd are good idea here?</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#21</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>*Note:** Ministry of supple being long proposed and deni3d. It is churchills avenue back into power and also exposes failures ofdisarment</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#22</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>*Note:** So every ten years lessons of past forgot? Ww1 and defense of s Korea instead of making invasion dash to border, jfk and his coontemporaro3s with Cuba</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#23</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>*Note:** So to them explanations for nazi invasion ifnussr</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#24</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>*Note:** Stanley Baldwin gets him back in on the 2nd attempt of giving easy conservative seat. So part his prominence but also social ties? Seems to be 3rd be turning point of his life</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#25</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>*Note:** They e tested it in August of 49 , and this is Dec 50 and it&#x27;s assumed us ahead</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#26</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>*Note:** Trickle down</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#27</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>. Conservative policy is essentially a tentative policy, a look-before-you-leap policy, and it is a policy of don’t leap at all if there is a ladder.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#28</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>. In particular, they cannot move their armour about laterally from north to south or west to east: either they must divide it between the various conquered countries – in which case it would become hopelessly dispersed – or they must hold it back in a central position in Germany, in which case it will not arrive until large and important lodgments have been made by us from overseas.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#29</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>. On November 11, Churchill formally resigned from the Cabinet.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#30</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>. The American Fleet and flying boats have been ordered to patrol the wide waters of the Western Hemisphere, and to warn the peaceful shipping of all nations outside the combat zone of the presence of lurking U-boats or raiding cruisers</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#31</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>. When I say the people of the Transvaal, I mean the whole people of the Transvaal, and not necessarily those who arrived there first. At that time there were nearly two and a half times as many British and non-Dutch as there were Boers, but during the few weeks before the outbreak of the war every train was crowded with British subjects who were endeavouring to escape from the approaching conflict,</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#32</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>1918, Field Marshal Haig issued, on April 11, a Special Order of the Day, known as his ‘Backs to the Wall’ communiqué, to all ranks of the British Army in France and Flanders. In it he declared: ‘There is no other course open to us but to fight it out. Every position must be held to the last man: there must be no retirement. With our backs to the wall and believing in the justice of our cause each one of us must fight on to the end.’</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#33</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>1932. He spoke in nineteen cities between January 28 and February 21, earning in that short time more than the annual salary of a British Prime Minister.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#34</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>A political convulsion in Germany might bring it to a speedy end at any time, but against that must be set the iron control of German life in all its forms, including the Army, which has been established by Hitler’s storm troops and secret police. This exceeds anything previously known among men. Therefore, we cannot count upon any of the normal reactions of public opinion.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#35</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>A voice]: ‘What about the Dardanelles?’ What do you know about that? You throw that retort out without having given consideration to the question. The Dardanelles might have saved millions of lives. (Dissent.) I am sure the gentleman is not one who would wish to introduce prejudice into a discussion of this kind. People who in the war filled positions of awful responsibility and had to take terrible decisions have the right to be judged leniently and generously by their fellow-countrymen. I believe history will show they acted for the best, and will record its opinion that this was the right thing to do, and that if one could have got more power and influence to push it through with vigour it would have made an enormous difference and would have saved us the torments and tortures of the last two years of the war. Don’t imagine I am running away from the Dardanelles. I glory in it.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#36</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Again it was August 4, and this time we were impotent. Public opinion in England and France was prostrate. All forms of military intervention were impossible. There was nothing left but words and gestures.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#37</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>All hearts go out to the fighter pilots, whose brilliant actions we see with our own eyes day after day, but we must never forget that all the time, night after night, month after month, our bomber squadrons travel far into Germany, find their targets in the darkness by the highest navigational skill, aim their attacks, often under the heaviest fire, often with serious loss, with deliberate, careful discrimination, and inflict shattering blows upon the whole of the technical and war-making structure of the Nazi power</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#38</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Also that November, a Bolshevik government came to power in Russia, committed to ending the war on the Eastern Front by negotiation and massive territorial surrender, thus freeing millions of German troops and their weaponry to turn westward in 1918</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#39</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>And between these two agonized Empires, reacted upon continually by their convulsions, stood Poland, comparatively weak, comparatively small, quite inexperienced, without organization, without structure, short of food, short of weapons, short of money, brandishing her indisputable and newly reaffirmed title deeds to freedom and independence. A reasonable comprehension of Poland’s difficulties is indispensable to a true view of Poland’s peril. It is easy for those who live a long way from the Russian Bolshevists – especially those who are protected by a good strip of salt water, and who stand on the firm rock of an active political democracy – to adopt a cool and airy view of their Communist doctrines and machinations. But a new, weak, impoverished, famishing State like Poland, itself quaking internally, is placed in hourly jeopardy by close and continuous contact with such neighbours.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#40</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Appeasement in itself may be good or bad according to the circumstances. Appeasement from weakness and fear is alike futile and fatal. Appeasement from strength is magnanimous and noble and might be the surest and perhaps the only path to world peace</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#41</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>As Minister of Munitions from July 1917 to November 1918, Churchill</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#42</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>As long as France is strong and Germany is but inadequately armed there is no chance of France being attacked with success, and therefore no obligation will arise under Locarno for us to go to the aid of France</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#43</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>As one gets older seasickness retreats. I did not succumb, but slept soundly till we were in the calm waters of our synthetic lagoon. I went aboard the cruiser Enterprise, where I remained for three days, making myself thoroughly acquainted with the whole working of the harbour, on which all the armies now almost entirely depended, and at the same time transacting my London business. The nights were very noisy, there being repeated raids by single aircraft, and more numerous alarms. By day I studied the whole process of the landing of supplies and troops, both at the piers, in which I had so long been interested, and on the beaches</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#44</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>As the House will remember, we offered to give full release to the French from their Treaty obligations, although these were designed for precisely the case which arose, on one condition, namely, that the French Fleet should be sailed for British harbours before the separate armistice negotiations with the enemy were completed.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#45</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>As to the hardships, these though severe may be endured. Ascetics and recluses have in their endeavours to look beyond the grave suffered worse things. Nor will the soldier in the pursuit of fame and the enjoyment of the pleasures of war be exposed to greater discomforts than Diogenes in his tub, or the Trappists in their monastery. B</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#46</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>At the Munich Conference at the end of September 1938, Britain and France agreed to put pressure on Czechoslovakia to cede its large German-speaking region – the Sudetenland – to Germany. Before 1914, the Sudetenland had been a part of the Austro-Hungarian Empire, not of Germany. Hitler, who in March 1938 had annexed Austria, was triumphant</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#47</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>At the end I accepted from Mr. Stettinius a contract of over £100,000,000 sterling to supply the whole requirements of the United States Army in medium artillery (6-inch guns and howitzers) for the campaign of 1919. The principles of this contract were simple. We guaranteed the United States we would make no profit, and they guaranteed us we should suffer no loss, however the event might turn.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#48</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>At the end of 1931, Churchill, having lost heavily in the Wall Street economic collapse of 1929, and hoping to recoup his losses, agreed to undertake a strenuous lecture tour through the United States</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#49</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>At the end of October 1915, the Prime Minister, H. H. Asquith, announced that the inner War Cabinet would no longer be the five-man Dardanelles Committee – on which Churchill had served for the previous six months – but a smaller policy-making body of three, the Cabinet War Committee, headed by Asquith as Prime Minister, with Kitchener and Balfour as the other two members. Churchill was excluded</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#50</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>At this point Stalin seemed suddenly to grasp the strategic advantages of ‘Torch’. He recounted four main reasons for it: first, it would hit Rommel in the back; second, it would overawe Spain; third, it would produce fighting between Germans and Frenchmen in France; and, fourth, it would expose Italy to the whole brunt of the war.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#51</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Britain declared war on Germany on 4 August 1914, following the German advance through Belgium</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#52</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>But Marshal Pétain’s attitude, detached and sombre, gave me the feeling that he would face a separate peace. The influence of his personality, his reputation, his serene acceptance of the march of adverse events, apart from any words he used, was almost overpowering to those under his spell.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#53</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>But the Rhine, the broad, deep, swift-flowing Rhine, once held and fortified by the French Army, would be a barrier and a shield behind which France could dwell and breathe for generations. Very different were the sentiments and views of the English-speaking world, without whose aid France must have succumbed. The territorial provisions of the Treaty of Versailles left Germany practically intact. She still remained the largest homogeneous racial block in Europe. When Marshal Foch heard of the signing of the Peace Treaty of Versailles he observed with singular accuracy: ‘This is not Peace. It is an Armistice for twenty years.’</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#54</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>But the crash of the German shells bursting on our trench lines eight thousand yards away was so overpowering that the accession to the tumult of nearly two hundred guns firing from much nearer to us could not be even distinguished</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#55</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>But the future was heavy with foreboding. The population of France was less than two-thirds that of Germany. The French population was stationary, while the German grew. In a decade or less the annual flood of German youth reaching the military age must be double that of France. Germany had fought nearly the whole world, almost single-handed, and she had almost conquered</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#56</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>But the murder in Cairo in 1944 of one of his closest friends, Lord Moyne, by Jewish terrorists, had shaken his belief in the victory of Jewish moderation.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#57</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>But there was no time now. I saw the sunlit aerodrome close beneath me, and the impression flashed through my mind that it was bathed in a baleful yellowish glare. Then in another flash a definite thought formed in my brain, ‘This is very likely Death.’ And swift upon that I felt again in imagination the exact sensations of my smash on the Buc Aerodrome a month before. Something like that was going to happen NOW! I record these impressions exactly as they occurred, and they probably occupied in reality about the same time as they take to read. Apart from the sinister impression of a differently lighted world, there was no time for fear. Luckily we can only take in a certain amount at a time, whatever happens.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#58</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>But when I saw after the War was over, for the first time, the historic ‘Backs to the Wall’ document written before sunrise on that fateful April morning in 1918, and that it was no product of some able staff officer in the bureau, but written with his own precise hand, pouring out without a check or correction the pent-up passion of his heart, my vision of the man assumed a new scale and colour. The Furies indeed contended in his soul; and that arena was large enough to contain their strife.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#59</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Churchill had spoken for twenty minutes. The National Labour MP Harold Nicolson noted in his diary that evening: ‘In those 20 minutes Churchill brought himself nearer the post of Prime Minister than he has ever been before. In the lobbies afterwards even Chamberlainites were saying “we have now found our leader”</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#60</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Churchill made a personal statement to the House of Commons, the right accorded any Minister who has resigned.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#61</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Churchill read Hitler’s book Mein Kampf (‘My Struggle’) and took seriously Hitler’s threats towards the Jews. In November 1935 he published an article, ‘The Truth about Hitler’, in the Strand magazine</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#62</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Churchill witnessed a Nazi procession. Speaking to the House of Commons on 23 November 1932</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#63</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Churchill’s fears that Britain would not be properly prepared if war came were accentuated by Neville Chamberlain’s refusal to create a Ministry of Supply</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#64</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Coaling, communications, and supplies are vital and constant needs, and once the upper hand has been lost they become operations of almost insuperable difficulty to the weaker navy.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#65</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Despite his wife Clementine’s reluctance that Churchill should continue his flying lessons, following the fatal crashes before the war of two of his flying instructors, in 1919 Churchill asked a pilot friend, Colonel Jack Scott, for some more instruction. Scott, an air ace who had shot down thirteen German aircraft in the war, had damaged his legs so badly in a flying accident that he had to be lowered into the cockpit every time he flew. Churchill was then forty-four</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#66</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>During the last six months of 1919, Churchill, as Secretary of State for War, withdrew all British combat troops from Russia, and limited Britain’s support for the anti-Bolshevik Russian armies to providing munitions and a few military advisers.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#67</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>During the summer of 1939, Churchill became increasingly worried about the sense of defeatism and despair that he began to feel around him.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#68</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>During this period – between the beginning of the War and the end of 1915 – while the Germans will be receiving an accession of three ships we shall receive [. . .] fifteen ships in all</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#69</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>During those two great wars, which began in 1793 and ended, after a brief interval, in 1814, 10,871 British merchant ships were captured or sunk by the enemy. Even after the decisive battle of Trafalgar, when we had the undisputed command of the sea so far as it can be tactically and strategically attained, the loss of British ships went on at a rate of over 500 ships a year. In 1806, 519 ships were sunk or captured – that is, the year after Trafalgar</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#70</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>England is a great exporting country, and it is no use for an exporting country to protect the home market. In cotton goods the imports are 5 millions and the exports 148 millions; in iron and steel, imports are 11 millions and the exports 68 millions; in woollen goods, imports are 8 millions and exports 53 millions. (</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#71</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>England is afraid of the French Fleet. What in effect England is carrying out is a war-time deal with Hitler in which Vichy serves as a go-between.’ He explained that Vichy served Germany by keeping the French people in subjection and England by keeping the fleet out of German hands</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#72</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Even now, no one under thirty has ever cast a vote at a General Election, or even at a by-election, since the registers fell out of action at the beginning of the war.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#73</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Foreign nations know what war is. There is scarcely a capital in Europe which has not been taken in the last one hundred years, and it is the lively realisation of the awful consequences of war which maintains the peace of Europe.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#74</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Gibbon’s Autobiography,</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#75</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>He had a distinction which he tried to bring out in every talk about Ethiopia just then: it seemed to him very important. ‘It’s not the thing we object to,’ he would say, ‘it’s the kind of thing.’ I had not then succumbed as much to his genial charm as I did later, and I could not quite accept this. I mentioned the Red Sea, the route to India, the importance of Aden. Mr Churchill brushed all that aside: ‘We don’t need to worry about the Italians,’ he said. ‘It isn’t that at all. It isn’t the thing. It’s the kind of thing . . .’ Mr Churchill was pinned down firmly one day by an elegant lady, Mme Lepelletier, who said that an objection to the thing might be practical and necessary, but that England had no historical right to object to the kind of thing. England had too often profited by ‘the kind of thing’. ‘Ah, but you see, all that belongs to the unregenerate past, is locked away in the limbo of the old, the wicked days,’ Mr Churchill said, smiling benevolently upon her across the luncheon table. ‘The world progresses. We have endeavoured, by means of the League of Nations and the whole fabric of international law, to make it impossible for nations nowadays to infringe upon each other’s rights. In trying to upset the empire of Ethiopia, Mussolini is making a most dangerous and foolhardy attack upon the whole established structure</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#76</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>He said – Ladies and gentlemen, I thank you most sincerely for the attentive hearing – (applause) – you have given me, and I think you have vindicated in a most effective manner the devotion of the Socialist party to free speech. You have shown, it has been shown, clearly that a handful of rowdies can break up a great meeting, and can then prevent ten times their number from transacting their public business.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#77</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>He then said that there was not a single German division in France of any value, a statement which I contested. There were in France twenty-five German divisions, nine of which were of the first line. He shook his head. I said that I had brought the Chief of the Imperial General Staff and General Sir Archibald Wavell with me in order that such points might be examined in detail with the Russian General Staff. There was a point beyond which statesmen could not carry discussions of this kind</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#78</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>His Majesty’s Government had felt it necessary in the dire circumstances to order Lord Gort to take off fighting men and leave the wounded behind. If present hopes were confirmed, 200,000 able-bodied troops might be got away. This would be almost a miracle. Four days ago I would not have wagered on more than 50,000 as a maximum</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#79</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>His grip upon the imagination of the modern world was due to his indifference to all the delights which nature offers to her multitudes of children. He could feel her pangs to the full. Her prizes did not stir him. Home, money, comfort, fame, power itself – meant little or nothing to him. The modern world had no means of exerting the slightest pull upon him. Solitary, austere, inexorable, he moved upon a plane apart from and above our common lot. Existence was no more than a duty, yet a duty faithfully to be discharged.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#80</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>His hardest trials are reduced to great simplicity. ‘Advance’, ‘Hold’, or ‘Retreat’. ‘There are but ten divisions left in reserve: shall we give three today to the beseeching, clamouring battle-zone, or keep them back till to-morrow or the day after? Shall we send them in trains to the north or to the south?’ His personal encounters are limited to an unpleasant conversation with an army commander who must be dismissed, an awkward explanation to a harassed Cabinet, or an interview with a representative of the neutral Press. Time is measured at least by days and often by weeks. There is nearly always leisure for a conference even in the gravest crises.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#81</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Hitler in England would have been resisted by the people, whereas in the case of a British landing in France the people would be on the side of the British. I pointed out that it was all the more important therefore not to expose the people of France by a withdrawal to the vengeance of Hitler and to waste them when they would be needed in the big operation in 1943. There was an oppressive silence. Stalin at length said that if we could not make a landing in France this year he was not entitled to demand it or to insist upon it, but he was bound to say that he did not agree with my arguments</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#82</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>How many had entered into his mental composition? How many had been hammered on the anvils of his mind and afterwards ranged in an armoury of bright weapons ready to hand? Choose well, choose wisely, and choose one. Concentrate upon that one. Do not be content until you find yourself reading in it with real enjoyment.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#83</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>How would it be if we came back in three weeks’ time, just before the end of August, so that we could all be in complete agreement? I should think it would be a pretty safe thing to adjourn for a fortnight or three weeks now. Surely we are not going to ask either that we should stay here night and day, or that we should never come back. That is far too narrow a dilemma. Lord Balfour used to say that this was a singularly ill-contrived world, but that it was not so ill-contrived as that. I would like to endorse the argument that it will not be so easy to recall Parliament once it has been dispersed. The reason is that events move on from day to day, and it is very difficult to say at what point a situation is being created which requires the recall of Parliament. Moreover, the recall of Parliament in the present circumstances will denote a situation of the gravest emergency, because the Fleet is already mobilized. The recall of Parliament will mean in all probability that something has occurred which brings us right up against the supreme decision</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#84</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I am told that Germany must be punished. I ask: When did punishment begin? It certainly seems to have been going on for a long time. It began in 1943, and continued during 1944 and 1945, when the most frightful air bombardments were cast upon German cities, and when the general exhaustion of their life under the cruel Nazi regime had drained the last ounces of strength from the German race and nation</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#85</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I am too old a campaigner to be disheartened (cheers) by the ups and downs of political life.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#86</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I do not believe that the Conservative Party can afford to reject and repulse the forces which are represented in the 8,000 votes for an Independent Anti-Socialist candidate</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#87</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I have borne the heavy burden of being, according to the time-honoured language of my patent, ‘responsible to Crown and Parliament for all the business of the Admiralty’, and when I say responsible, I have been responsible in the real sense, that I have had the blame for everything that has gone wrong. (Laughter and cheers.) T</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#88</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I have lived myself for the last 35 years or more in a mental relationship and to a large extent in sympathy with an abstraction called France. I still do not think it is an illusion. I cannot feel that de Gaulle is France, still less that Darlan and Vichy are France. France is something greater, more complex, more formidable than any of these sectional manifestation</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#89</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I hope it is true – that it had been successfully destroyed from the air. That would have been a very good tale to tell if true, after it had happened, but why was it necessary to attract the enemy’s attention to this vehicle beforehand? That seems to me a particular illustration. We really must have tighter control over what is published. We all seek to prevent and limit aggression, and one of the additional deterrents which we might impose upon the enemy’s aggression would be to tell them that if it goes on much longer we shall cut them off from these invaluable supplies of information</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#90</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I say nothing against private interchanges in secret diplomacy between the Foreign Offices of the different countries of a friendly character – ‘If you will not do this, we shall not have to do that,’ ‘If your program did not start so early, ours would begin even later,’ and so on such as have always gone on, and may perfectly legitimately go on. I believe a greater advance and progress towards a diminution of expenditure on armaments might have been achieved by these methods than by the conferences and schemes of disarmament which have been put forward at Geneva. I</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#91</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I see two imminent forces that will be brought to bear in the shaping of mankind’s destiny – the armed Asiatic conception of communism and the English-speaking ideal of individualism. Our disunion may make the struggle end the wrong way.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#92</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I wanted to do so last year, but I did not venture to. It is the line: ‘Not less we praise in darker days.’ I have obtained the Head Master’s permission to alter ‘darker’ to ‘sterner’: ‘Not less we praise in sterner days.’ Do not let us speak of darker days; let us speak rather of sterner days.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#93</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I was depicted a scaremonger. Less than six months after, Mr Baldwin had to come down to the House and admit he was wrong and he said, ‘We are all to blame’ and everybody said, ‘How very honest of him to admit his mistake.’ He got more applause for making this mistake, which may prove fatal to the British Empire and to British freedom, than ordinary people would do after they rendered some great service which added to its security and power</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#94</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>If only 50 Members of the Conservative Party went into the Lobby to-night to vote for this Amendment, it would not affect the life of the Government, but it would make them act. It would make a forward movement of real power, of real energy. We should get our Ministry of Supply no doubt, but much more than that: we should get a feeling of renewed strength and a prestige outside this country which would be of real service and value</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#95</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>In April 1919, while Churchill was Secretary of State for War, a British general in India, Major General Reginald Dyer, opened fire on a large crowd of unarmed Indians in a confined space, the Jallianwalla Bagh, in the city of Amritsar. More than three hundred Indians were killed. When General Dyer was censured by a War Office commission of inquiry, many Members of Parliament were appalled by the criticism of a senior British officer. Churchill defended the decision to censure General Dyer</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#96</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>In February the U-boat losses in the Atlantic rose to seventy-one ships, of 384,000 tons, all but two of which were sunk in the American zone. This was the highest rate of loss which we had so far suffered throughout the war. It was soon to be surpassed. All this destruction, far exceeding anything known in this war, though not reaching the catastrophic figures of the worst period of 1917, was caused by no more than twelve to fifteen boats working in the area at one time</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#97</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>In January 1921, Lloyd George appointed Churchill as Secretary of State for the Colonies. For the next two years, Churchill worked to secure peace between Southern Ireland and the counties of Ulster, and to give Southern Ireland its independence.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#98</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>In March the main stress fell in the area between Charleston and New York, while single U-boats prowled over all the Caribbean and the Gulf of Mexico, with a freedom and insolence which were hard to bear. During this month the sinkings were nearly half a million tons, of which three-quarters was sunk within three hundred miles of the American coast, and nearly half was in tanker tonnage. Against this could only be set the loss of two U-boats in American waters sunk by American aircraft on ocean convoy escort off Newfoundland in March.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#99</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>In October 1911, five weeks before his thirty-seventh birthday, Churchill was appointed First Lord of the Admiralty.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#100</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>In mid-October 1919 it looked as if the anti-Bolshevik Russian forces would enter Petrograd and Moscow, but within a month the tide had turned. By the end of 1919 the Bolsheviks had regained control of much of Russia. C</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#101</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>In order to sustain his Movement at the moment of the American occupation of French North Africa and to console him and his friends for their exclusion from the enterprise</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#102</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>In the South Atlantic, throughout October, November and early December 1939, the German pocket battleship Graf Spee had been sinking merchant ships without respite. On December 13</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#103</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>In those days there were moments when the problem seemed well-nigh insoluble. Very often to hunt down a U-boat it was necessary to use a flotilla of 15 or 20 vessels working together for a whole day on the vaguest indications. Now two destroyers or even one can maintain prolonged and relentless pursuit</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#104</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It ended with over 2,000,000 American soldiers on the soil of France. A campaign in 1919 would have seen very large American armies continually engaged, and these by 1920 might well have amounted to 5,000,000 of men. Compared to potentialities of this kind, what would have been the value of, let us say, the capture of Paris? As for the 200 U-boats, the mechanical hope, there was still the British Navy, which at this period, under the aegis of an overwhelming battle fleet, maintained upwards of 3,000 armed vessels on the seas.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#105</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It is a strange experience to me to sit at the Admiralty again, after a quarter of a century, and to find myself moving over the same course, against the same enemy, and in the same months of the year – the sort of thing that one would hardly expect to happen. But it gives me an opportunity of making comparisons which, perhaps, no one else could make, and I see how much greater are the advantages which we possess to-day in coping with the U-boat</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#106</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It is always easy to be wise after the event, but there were many people in this country who were wise before the event. I am by no means sure that His Majesty’s Government and their expert advisers are excluded from that large number.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#107</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It is difficult to imagine the postures into which man, once created in the image of his Maker, had been twisted. It is not wise to try, for he who succeeds will ask himself with me: ‘Can I ever forget?’ I have tried to gild war, and to solace myself for the loss of dear and gallant friends, with the thought that a soldier’s death for a cause that he believes in will count for much, whatever may be beyond this world. When the soldier of a civilised Power is killed in action, his limbs are composed and his body is borne by friendly arms reverently to the grave. The wail of the fifes, the roll of the drums, the triumphant words of the Funeral Service, all divest the act of its squalor, and the spectator sympathises with, perhaps almost envies, the comrade who has found this honourable exit. But there was nothing dulce et decorum about the Dervish dead; nothing of the dignity of unconquerable manhood; all was filthy corruption. Yet these were as brave men as ever walked the earth. The conviction was borne in on me that their claim beyond the grave in respect of a valiant death was not less good than that which any of our countrymen could make. The thought may not be original; it may happily be untrue; it seemed certainly most unwelcome.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#108</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It is evident that, whereas an equally contested war under such conditions might work the ruin of the world and cause an immeasurable diminution of the human race, the possession by one side of some overwhelming scientific advantage would lead to the complete enslavement of the unwary party. Not only are the powers now in the hands of man capable of destroying the life of nations, but for the first time they afford to one group of civilized men the opportunity of reducing their opponents to absolute helplessness.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#109</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It is from this point of view of securing and preserving our world peace that the case of Poland must be considered. Poland is the lynch-pin of the Treaty of Versailles. This ancient State, torn into three pieces by Austria, Prussia and Russia, has been liberated from its oppressors and reunited in its integrity after 150 years of bondage and partition. We ask ourselves: how has the Polish national character and spirit been affected by this prolonged and melancholy experience? What has Poland learnt from her vicissitudes? What has she lost in her captivity? As far as we can judge by what has happened in the last eighteen months, 150 years of adversity have neither broken the spirit of Poland, nor taught her wisdom.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#110</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It is not true that the old battle has merely been raised to a gigantic scale. In the process of enlargement the sublime function of military genius – perhaps happily – has been destroyed for ever.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#111</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It was Churchill who, as Secretary of State for War in 1919</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#112</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It was Fisher whose sudden resignation and physical disappearance from the Admiralty as First Sea Lord in May 1915 had precipitated the crisis that led to Churchill’s departure from the Admiralty. But when Churchill spoke in the debate, he was to astonish all who heard him by calling for Fisher’s return as First Sea Lord.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#113</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It was thought a very daring assertion when the President declared that the Russian armies would hold out till the winter. You may say that the military men of all countries – friend, foe, and neutral alike – were very doubtful whether this would come true.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#114</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>January 1906, the new Prime Minister, Sir Henry Campbell-Bannerman, invited Churchill to enter the Government as Under-Secretary of State for the Colonies. He was thirty-one years old. Given the task of introducing responsible government to both the Transvaal Colony and the Orange River Colon</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#115</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Leave to live by no man’s leave underneath the law</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#116</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Martyrs not less than soldiers, they fulfilled the high purpose of duty with which they were imbued. The battlefields of the Somme were the graveyards of Kitchener’s Army. The flower of that generous manhood which quitted peaceful civilian life in every kind of workaday occupation, which came at the call of Britain, and as we may still hope, at the call of humanity, and came from the most remote parts of her Empire, was shorn away for ever in 1916</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#117</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Moreover, I do not believe that the Boers would attach particular importance to the utterances of the hon. Member. No people in the world received so much verbal sympathy and so little practical support as the Boers. If I were a Boer fighting in the field – and if I were a Boer I hope I should be fighting in the field</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#118</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>My right hon. Friend the Prime Minister mentioned last week the figure of six or seven U-boats destroyed. That was, as he said, probably an understatement. Since then we have had some fruitful and hopeful days; but even taking six or seven as a safe figure, that is one-tenth of the total enemy submarine fleet as it existed at the declaration of war destroyed during the first fortnight of the war, and it is probably one-quarter, or perhaps even one-third, of all the U-boats which are being employed actively</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#119</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Nearly a million and a half Frenchmen had perished defending the soil of France on which they stood against the invader. Five times in a hundred years, in 1814, 1815, 1870, 1914, and 1918, had the towers of Nôtre Dame seen the flash of Prussian guns and heard the thunder of the cannonade.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#120</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Never give in. Never give in. Never, never, never – in nothing, great or small, large or petty – never give in, except to convictions of honour and good sense.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#121</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>On 1 October 1900, Churchill was elected to Parliament. Then, five weeks before his twenty-sixth birthday, he embarked on an extended lecture tour of Britain, the United States and Canada, talking about his South African experiences</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#122</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>On 1 September 1939, Germany invaded Poland. Two days later, Britain and France, honouring their treaties with Poland, declared war on Germany. That same day, September 3, the Prime Minister, Neville Chamberlain, brought Churchill back into the Cabinet as First Lord of the Admiralty</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#123</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>On 12 December 1899 – after twenty-seven days in captivity, including his twenty-fifth birthday – he escaped,</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#124</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>On 16 November 1922, Churchill was defeated at Dundee – by a Prohibitionist and a Labour candidate. For the first time since 1900, he was without a seat in Parliament. The new Conservative Government had no interest in finding him one or offering him a Cabinet post; indeed, although the Liberal Party had been drastically reduced in strength, he was still determined to stand as a Liberal. In November 1923 the new Conservative Prime Minister, Stanley Baldwin, called a General Election. Churchill had been out of Parliament for a year. Seven local Liberal Associations asked him to be their candidate. He agreed to stand at West Leicester, and on 27 November 1923 spoke in his new constituency for the first time:</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#125</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>On 19 October 1922, the Conservative Party decided to withdraw from Lloyd George’s peacetime coalition, in which they had served for almost four years. That afternoon, Lloyd George, who was dependent on the Conservative Members of Parliament for his majority, resigned. Andrew Bonar Law, the leader of the Conservative Party, became Prime Minister, and a General Election was called for mid-November. Churchill, in hospital with appendicitis, w</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#126</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>On 2 August 1939 the Government proposed to adjourn Parliament until October 3</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#127</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>On 23 May 1916, six days after his speech on air power, in which he urged a more active British policy – and hoped, in vain, that he might be given a ministerial post in charge of air warfare</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#128</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>On 25 October 1951 the Conservative Party was returned to power at the General Election, and Churchill became Prime Minister for the second time.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#129</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>On 27 April 1941, with German troops, having attacked and conquered Yugoslavia, about to overrun Greece,</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#130</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>On 4 August 1920, the Bolshevik armies, advancing deep into Poland, stood within a few miles of the Polish capital, Warsaw</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#131</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>On August 4 Mr Lloyd George warned Kamenev and Krassin that ‘if the Soviet armies advanced further into Poland, a rupture with the Allies would be inevitable</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#132</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>On New Year’s Day 1916, Churchill learned that he was to command, not a brigade of some four thousand men, with the rank of brigadier general, but a battalion of a thousand men, with the rank of lieutenant colonel</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#133</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>On the following day he wrote to his wife (using his regular abbreviations), setting down the advice he had given them: Don’t be careless about yourselves – on the other hand not too careful. Keep a special pair of boots to sleep in &amp; only get them muddy in a real emergency. Use alcohol in moderation but don’t have a great parade of bottles in yr dugouts. Live well but do not flaunt it. Laugh a little, &amp; teach your men to laugh – gt good humour under fire – war is a game that is played with a smile. If you can’t smile grin. If you can’t grin keep out of the way till you can.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#134</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>One German captain signalled to me personally the position of a British ship which he had just sunk, and urged that rescue should be sent. He signed his message, ‘German submarine’. I was in some doubt at the time as to what address I should direct a reply. However, he is now in our hands, and is treated with all consideration.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#135</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>One of the tasks of the President is to sign maybe a hundred or two State papers with his own hand every day, commissions and so forth. All this he continued to carry out with the utmost strictness. When death came suddenly upon him ‘he had finished his mail’. That portion of his day’s work was done. As the saying goes, he died in harness,</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#136</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>One poor man was to have a serious operation, and was actually on the table about to take the anaesthetic. I was slipping away when he said he wanted me. He smiled warily and kissed my hand. I was deeply moved</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#137</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Only Finland – superb, nay, sublime – in the jaws of peril – Finland shows what free men can do. The service rendered by Finland to mankind is magnificent. They have exposed, for all the world to see, the military incapacity of the Red Army and of the Red Air Force.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#138</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Over and over again we have seen British officers and soldiers storm entrenchments under the heaviest fire, with half their number shot down before they entered the position of the enemy, the certainty of a long, bloody day before them, a tremendous bombardment crashing all around – we have seen them in these circumstances taking out their maps and watches, and adjusting their calculations with the most minute detail, and we have seen them show, not merely mercy, but kindness, to prisoners, observing restraint in the treatment of them, punishing those who deserved to be punished by the hard laws of war, and sparing those who might claim to be admitted to the clemency of the conquero</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#139</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Polling took place on 19 March 1924. It was the ninth parliamentary election of Churchill’s career. As the final packet of votes was counted, Churchill was told that he had been elected with a majority of a hundred, a result that was passed by the wire services to all the London clubs. In fact, Churchill had been defeated by forty-three votes.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#140</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>President Roosevelt was reluctant to see the Free French accorded the position of an Allied Power, which would involve giving them, after Germany’s defeat, a Zone of Occupation in Germany. He was also openly critical of General de Gaulle</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#141</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Roosevelt had promised in the November 1940 presidential election campaign that no American troops would be sent overseas to fight</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#142</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Serious risks are run by our great ships – so few, so precious – only one where in the last war there was a squadron of eight – every time they go north on this perilous duty; at any time the Admiralty or even the Minister of Defence may have to account to you for some loss which would take five years to replace.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#143</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Show me a moment when I swerved from this conception, and you will show me a moment when I have been wrong</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#144</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Side by side with the training grounds of the new armies and the great aerodromes, the concentration camps pockmark the German soil. In these thousands of Germans are coerced and cowed into submission to the irresistible power of the Totalitarian State.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#145</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Silly people, and there were many, not only in enemy countries, might discount the force of the United States. Some said they were soft, others that they would never be united. They would fool around at a distance. They would never come to grips. They would never stand bloodletting. Their democracy and system of recurrent elections would paralyse their war effort.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#146</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>So I held up my hand, and like Mr. Jorrocks’s foxes, cried ‘Capivy’. Then I was herded with the other prisoners in a miserable group, and about the same time I noticed that my hand was bleeding, and it began to pour with rain. Two days before I had written to an officer in high command at home, whose friendship I have the honour to enjoy: ‘There has been a great deal too much surrendering in this war, and I hope people who do so will not be encouraged.’ Fate had intervened, yet though her tone was full of irony she seemed to say, as I think Ruskin once said, ‘It matters very little whether your judgments of people are true or untrue, and very much whether they are kind or unkind,’ and repeating that I will make an end.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#147</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>So menacing were the conditions in the outer waters beyond the range of air cover that on November 4, I personally convened a new Anti-U-boat Committee to deal specially with this aspec</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#148</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Such a position, once established, as it would have been possible to do, about 100 miles long, presents a very different obstacle to the advance and infiltration of masses of enemy infantry, from a moving front in hilly, rocky, scrub-covered country, then broadened to about 300 miles.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#149</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Such wrongful deeds I am sure will not be condoned by history, and I firmly believe that a generation of Frenchmen will arise who will clear their national honour from all countenance of them.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#150</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>That year, eleven years after his father’s death, saw the publication of Churchill’s two-volume biography Lord Randolph Churchill,</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#151</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The Battle of the Somme opened on 1 July 1916. On the first day almost 20,000 British soldiers were killed. When the battle ended that November, more than 130,000 British and Commonwealth soldiers and 170,000 German soldiers had been killed. In The World Crisis, Churchill reflected on the battle: A young army, but the finest we have ever marshalled; improvised at the sound of the cannonade, every man a volunteer, inspired not only by love of country but by a widespread conviction that human freedom was challenged by military and Imperial tyranny, they grudged no sacrifice however unfruitful and shrank from no ordeal however destructive.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#152</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The British ability to read top-secret German signals had led, in 1941, to a dramatic drop in German U-boat sinkings. But at the beginning of 1942, the German Navy’s top-secret signalling system changed, and for the rest of that year there was no way in which the Allies could know in advance where the U-boats would be ordered to strike. While not able to reveal this fact in The Second World War – or to explain how the German Navy’s codes were again broken for good at the beginning of 1943</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#153</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The Central Empires had successfully defended their southern flank in the Balkans and in Turkey. Their victory quelled simultaneously all likelihood of any attempt against their northern flank upon the Baltic. All such ideas had received their quietus. Good, plain, straightforward frontal attacks by valiant flesh and blood against wire and machine guns, ‘killing’ Germans while Germans killed Allies twice as often, calling out the men of forty, of fifty, and even of fifty-five, and the youths of eighteen, sending the wounded soldiers back three or four times over into the shambles – such were the sole manifestations now reserved for the military art.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#154</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The First World War came to an end with the German Armistice of 11 November 1918. Austria-Hungary, Bulgaria and Turkey had already surrendered</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#155</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The Government simply cannot make up their minds, or they cannot get the Prime Minister to make up his mind. So they go on in strange paradox, decided only to be undecided, resolved to be irresolute, adamant for drift, solid for fluidity, all-powerful to be impotent. So we go on preparing more months and years – precious, perhaps vital to the greatness of Britain – for the locusts to eat. They will say to me, ‘A Minister of Supply is not necessary, for all is going well.’ I deny it. ‘The position is satisfactory.’ It is not true. ‘All is proceeding according to plan.’ We know what that means.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#156</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The Liberal Government’s social reform policies depended on expenditure that had to be approved not only by the House of Commons but by the House of Lords. When it became clear that a majority of the Upper House would throw out David Lloyd George’s Budget, Churchill took a leading part in the Liberal Party’s campaign to end the Lords’ power of veto over the Budget:</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#157</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The Mediterranean is closed, and all our transports have to go round the Cape of Good Hope, each ship making only three voyages in the year</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#158</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The argument which is used that ‘it is our turn now’ has no place in military thought. Whatever is done must be done in the cold light of science.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#159</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The deterrent effect of the atomic bomb is at the present time almost our sole defence. Its potential use is the only lever by which we can hope to obtain reasonable consideration in an attempt to make a peaceful settlement with Soviet Russia. If they had superiority, or even something like equality in this weapon with the United States, I cannot feel any assurance that they would be restrained</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#160</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The fact that in a Mohammedan law every woman must belong to some man as his absolute property – either as a child, a wife or a concubine – must delay the final extinction of slavery until the faith of Islam has ceased to be a great power among men</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#161</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The great Bismarck – for there were once great men in Germany – is said to have observed towards the close of his life that the most potent factor in human society at the end of the nineteenth century was the fact that the British and American peoples spoke the same language</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#162</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The great Burke has truly said, ‘People will not look forward to posterity who never look backward to their ancestors’,</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#163</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The only guide to a man is his conscience; the only shield to his memory is the rectitude and sincerity of his actions. It is very imprudent to walk through life without this shield, because we are so often mocked by the failure of our hopes and the upsetting of our calculations; but with this shield, however the fates may play, we march always in the ranks of honour.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#164</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The removal of the just grievances of the vanquished ought to precede the disarmament of the victors. To bring about anything like equality of armaments if it were in our power to do so, which it happily is not, while those grievances remain unredressed, would be almost to appoint the day for another European war –</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#165</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The spirit of resistance to Nazi encroachment has not been extinguished in Eastern and South-eastern Europe. Countries which before Munich were under the impression that they were being asked to confer favours on France and Great Britain, have now realised forcibly that it is their own lives which are endangered.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#166</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Then, as Secretary of State for War, appointed in January 1919, he proposed that the British troops then in Russia give what support they could to the many anti-Bolshevik armies that, as they advanced from the west during 1919 to the outskirts of Petrograd and drove from the south towards Moscow, hoped to destroy the new regime. With Cabinet support, Churchill authorised the British troops then in Russia to aid the anti-Bolshevik armies</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#167</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Then, on May 7, after another seven weeks facing the daily perils of trench warfare, he finally returned to London and resumed his seat in Parliamen</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#168</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>There are less than seventy million malignant Huns – some of whom are curable and others killable – many of whom are already engaged in holding down Austrians, Czechs, Poles, French, and the many other ancient races they now bully and pillage. The peoples of the British Empire and of the United States number nearly two hundred millions in their homelands and in the British Dominions alone</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#169</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>There he excelled at History and English, and won both the Harrow School and Public Schools fencing championships. A</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#170</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>There is a great deal more sense and deep reason and sagacity in that lack of logical subtlety than might appear upon the surface. I think the workman will not often raise the point. He has often voted against a candidate to whom his trade union subscription has gone without being conscious of any injury to himself in his own personal integrity. Where there is no sense of injury in this field there is no injur</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#171</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>There was bitterness in France that Britain had not been able to do more to help halt the German advance, but the weight of German armour and air power was formidab</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#172</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>There was, however, one hope and one hope only – namely that if Japan entered the war with her allies, Germany and Italy, the United States would come in on our side, thus far more than repairing the balance. For this reason, I have been most careful, all these many months, not to give any provocation to Japan, and to put up with Japanese encroachments, dangerous though they were, so that if possible, whatever happened, we should not find ourselves forced to face this new enemy alone. I could not be sure that we should succeed in this policy, but it has come to pass. J</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#173</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>These are not dark days: these are great days – the greatest days our country has ever lived; and we must all thank God that we have been allowed, each of us according to our stations, to play a part in making these days memorable in the history of our race.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#174</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Think if we had kept that rammer compressed ready to release when the time came – if we had held in reserve the energies which were expended at Loos, Arras, and in Champagne – kept them to discharge at some moment during the protracted and ill-starred German attack on Verdun!</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#175</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>This House is sometimes disparaged in this country, but abroad it counts. Abroad, the House of Commons is counted, and especially in Dictator countries, as a most formidable expression of the British national will and an instrument of that will in resistance to aggression</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#176</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>This was what Poland dreaded and will now have reason to dread still more; and this was the cause, even more than the gathering of the Russian armies on the Polish front, continuous for nearly a year, that led the Poles to make that desperate military sally or counter-stroke which English Liberal opinion has so largely misunderstood, and which Socialist opinion has so successfully misrepresented.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#177</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Thus in a short time the immense Mercantile Marine of the British Empire will be armed. As we usually have 2,000 ships on salt water every day, this is a considerable operation</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#178</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Thus, then, on the night of the 10th of May, at the outset of this mighty battle, I acquired the chief power in the State, which henceforth I wielded in ever-growing measure for five years and three months of world war,</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#179</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Two mighty branches of the European family will never rest content with their existing situation. Russia, stripped of her Baltic Provinces, will, as the years pass by, brood incessantly upon the wars of Peter the Great. From one end of Germany to the other an intense hatred of France unites the whole population.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#180</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Two minutes before his eyes were bright and joyous with the excitement of the man hunt. He had galloped a mile – mostly under fire – to bring the reinforcements to surround the Boers. ‘Bag the lot, you know.’ Now he was very sad. ‘There’s a poor boy dying up there – only a boy, and so cold – who’s got a blanket?’ So the soldiers succoured the Boer wounded, and we told the prisoners that they would be shown courtesy and kindness worthy of brave men and a famous quarrel</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#181</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Under the rules of that time, a newly appointed Cabinet Minister had to seek re-election. Churchill duly did so, and just six days after his appointment, on April 14, was defeated in his own constituency, Manchester North-West. In order to take up his Cabinet post, he needed a new constituency; on May 9 he was elected as Liberal Member of Parliament for the Scottish city of Dundee.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#182</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Unhappily, except as regards the atomic bomb – about which I shall have a word to say before I sit down – we are in a very weak position and likely to remain so for several years. As I have repeatedly said, it is only the vast superiority of the United States in this awful weapon that gives us any chance of survival</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#183</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Very few wars have been won by mere numbers alone. Quality, will-power, geographical advantages, natural and financial resources, the command of the sea, and, above all, a cause which rouses the spontaneous surgings of the human spirit in millions of hearts – these have proved to be the decisive factors in the human story. If it were otherwise, how would the race of men have risen above the apes; how otherwise would they have conquered and extirpated dragons and monsters; how would they have ever evolved the moral theme; how would they have marched forward across the centuries to broad conceptions of compassion, of freedom, and of right?</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#184</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>We are in the presence of a disaster of the first magnitude which has befallen Great Britain and France. Do not let us blind ourselves to that. It must now be accepted that all the countries of Central and Eastern Europe will make the best terms they can with the triumphant Nazi Power. The system of alliances in Central Europe upon which France has relied for her safety has been swept away</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#185</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>We had won the war. England would live; Britain would live; the Commonwealth of Nations and the Empire would live. How long the war would last or in what fashion it would end no man could tell, nor did I at this moment care. Once again in our long Island history we should emerge, however mauled or mutilated, safe and victorious. We should not be wiped out. Our history would not come to an end. We might not even have to die as individuals</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#186</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>We have not journeyed all this way across the centuries, oceans, across the mountains, across the prairies, because we are made of sugar candy.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#187</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>What prospect was there in the future that the Great Allies would once again appear in their millions upon the battlefields of France or in the East? Russia was in ruin and convulsion, transformed beyond all semblance of the past. Italy might be upon the opposite side. Great Britain and the United States were separated by the seas or oceans from Europe. The British Empire itself seemed knit together by ties which none but its citizens could understand</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#188</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>What shall I do with all my books?’ was the question; and the answer, ‘Read them,’ sobered the questioner. But if you cannot read them, at any rate handle them and, as it were, fondle them. Peer into them. Let them fall open where they will. Read on from the first sentence that arrests the eye. Then turn to another. Make a voyage of discovery,</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#189</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>When Churchill summoned the new Ministers to Admiralty House that afternoon, he told them: ‘I have nothing to offer but blood, toil, tears and sweat.’</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#190</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>When all was over, Torture and Cannibalism were the only two expedients that the civilized, scientific, Christian States had been able to deny themselves: and these were of doubtful utility.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#191</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>When the whole of the Japanese problem is examined, on military grounds alone it would certainly not be prudent to assume that a shorter period than eighteen months after the destruction of Hitler would be required for the final destruction of the Japanese will or capacity to fight,</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#192</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>When we consider the heroic resistance made by the French Army against heavy odds in this battle, the enormous losses inflicted upon the enemy and the evident exhaustion of the enemy, it may well be thought that these 25 divisions of the best-trained and best-equipped troops might have turned the scale. However, General Weygand had to fight without them. Only three British divisions or their equivalent were able to stand in the line with their French comrades</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#193</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>When we read about Germany, when we watch with surprise and distress the tumultuous insurgency of ferocity and war spirit, the pitiless ill-treatment of minorities, the denial of the normal protections of civilized society to large numbers of individuals solely on the ground of race – when we see that occurring in one of the most gifted, learned, scientific and formidable nations in the world, one cannot help feeling glad that the fierce passions that are now raging in Germany have not found, as yet, any other outlet but upon Germans.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#194</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>With the introduction by the Labour Government of the India Independence Bill in 1947, his opposition to full independence came to an end, and he insisted that the grant of independence was too important to be the gift of one political party; that it had to come from the whole nation. To this end, he urged his fellow Conservatives to support the Labour Government’s Bill, and it was passed into law</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#195</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Yet I would advise you from time to time, when you are anxious or depressed, to dwell a little on the colour and light of the terrible war pictures now presented to the eye. See Australia and New Zealand smiting down in the last and finest crusade the combined barbarism of Prussia and of Turkey. General Louis Botha holding South Africa for the King. See Canada defending to the death the last few miles of shattered Belgium. Look further, and, across the smoke and carnage of the immense battlefield, look forward to the vision of a united British Empire on the calm background of a liberated Europe. Then turn again to your task. Look forward, do not look backward. G</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#196</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>a National Government established in 1931, headed by the former Labour Prime Minister, Ramsay MacDonald, and with a predominantly Conservative House of Commons – was active at the League of Nations in supporting the search for world disarmament.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#197</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>although it had been agreed that after the war, and as much as possible even during the war, the Syrians are to enjoy their independence.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#198</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>assail the traveller with the fact that twenty-five millions of soldiers fought here and twelve millions shed their blood or perished in the greatest of all human contentions less than ten years ago</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#199</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>cherish the hope, Sir, that by liberating the production of new wealth from some of the shackles of taxation the Budget may stimulate enterprise and accelerate industrial revival, and that by giving a far greater measure of security to the mass of wage-earners, their wives and children, it may promote contentment and stability, and make our Island more truly a home for all these people.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#200</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>could not accept a position of general responsibility for war policy without any effective share in its guidance and control. Even when decisions of principle are rightly taken, the speed and method of their execution are factors which determine the result.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#201</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>doing their utmost night and day, giving all, daring all, enduring all – to the utmost – to the end.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#202</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>f alliances with the smaller States of Europe; and for the present at any rate overwhelming force is on their side. But physical force alone, unsustained by world opinion, affords no durable foundation for security</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#203</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>he Minister of War, the venerable Marshal Pétain – hero of the defence of Verdun in 1916 – prevailed: France must seek an armistice with Germany. Learning this on June 17</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#204</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>he venerable Lord Dufferin introduced me. No one could turn a compliment so well as he. I can hear him now saying with his old-fashioned pronunciation, ‘And this young man – at an age when many of his contemporaries have hardly left their studies – has seen more active service than half the general officers in Europe.’ I had not thought of this before. It was good.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#205</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>if for instance only a few score thousand Germans fell by American hands; the moral consequence of the United States joining the Allies was indeed the deciding cause in the conflict</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#206</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>in August 1941 seemed vastly better than it had been a year earlier in 1940, when France had just been beaten into the awful prostration in which she now lies, when we were almost entirely unarmed in our own Island, and when it looked as if Egypt and all the Middle East would be conquered by the Italians who still held Abyssinia and had newly driven us out of British Somaliland</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#207</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>in letting it be widely known that not only American moral support but also practical aid in munitions and supplies will be accorded to the Western democracies should they become the victims of unprovoked aggression, is a potent stabilising force</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#208</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>influence of Nazi Germany and of our existence becoming dependent upon their good will or pleasure. It is to prevent that that I have tried my best to urge the maintenance of every bulwark of defence – first the timely creation of an Air Force superior to anything within striking distance of our shores; secondly the gathering together of the collective strength of many nations; and thirdly, the making of alliances and military conventions, all within the Covenant, in order to gather together forces at any rate to restrain the onward movement of this Power. It has all been in vain</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#209</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>intended, I daresay, to convey a gentle admonition: ‘To do good is noble; to teach others to do good is nobler, and no trouble</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#210</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>n 5 November 1924, Churchill was asked by Stanley Baldwin to become Chancellor of the Exchequer. He agreed to do so, and agreed also to rejoin the Conservative Party, which he did a few days after his fiftieth birthday on 30 November 1924.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#211</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>n the autumn of 1942, information smuggled out of Germany to neutral Switzerland was published in the British newspapers. It revealed the extent of the German slaughter of Jews in German-occupied Russia and Poland, and the deportation of Jews from France, Belgium and Holland to an ‘unknown destination’ in the East</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#212</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>n. I was twenty-six. Was it wonderful that I should have thought I had arrived? But luckily life is not so easy as all that: otherwise we should get to the end too quickly.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#213</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>n. It is perhaps the crowning example of the unwisdom of basing a war policy upon the computation of material factors alone. The war effort of 120,000,000 educated people, equipped with science, and possessed of the resources of an unattackable Continent, nay, of a New World, could not be measured by the number of drilled soldiers, of trained officers, of forged cannon, of ships of war they happened to have at their disposal. It betokens ignorance of the elemental forces resident in such a community to suppose they could be permanently frustrated by a mechanical instrument called the U-boat. How rash to balance the hostile exertions of the largest, if not the leading, civilized nation in the world against the chance that they would not arrive in time upon the field of battle</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#214</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>newspapers, appealing with authority to countless readers, are prepared almost every morning to urge us into war against one or other and sometimes several of the Great Powers of the earth, surely we ought not to make it seem so easy, and even attractive, to embark on such terrible enterprises, or to think that with the land forces at our disposal we may safely intermeddle in the European game?</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#215</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>not indeed from the French nation, who have never been and apparently never are to be consulted upon these transactions, but from the Bordeaux Government. This is the instance. There were over four hundred German air pilots who were prisoners in France, many of them, perhaps most of them, shot down by the Royal Air Force. I obtained from M. Reynaud a personal promise that these pilots should be sent for safe keeping to England, and orders were given by him to that effect; but when M. Reynaud fell, these pilots were delivered over to Germany in order, no doubt, to win favour for the Bordeaux Government with their German masters</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#216</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>only two Conservatives followed Churchill into the Lobby: Brendan Bracken and Harold Macmillan. Neville Chamberlain’s comment during the debate that, for all his brilliant gifts, Churchill lacked the faculty of judgement had made its mark – and stung Churchill to the quick</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#217</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>pledged, loyal, faithful supporters on all occasions of His Majesty’s Government – must not imagine that they can throw their burden wholly on the Ministers of the Crown. Much power has rested with them. One healthy growl from those benches three years ago – and how different today would be the whole lay-out of our armaments production!</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#218</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>sustained by the esprit de corps at least of ‘The Battalion’. But in the dire need of the great struggle and in a loyal desire to share the tribulations of their allies, American soldiers by scores of thousands readily obeyed orders from their Government to serve, albeit under the general supervision of Pershing, as isolated companies or even platoons in British or French units in order that the largest number might come under the fire of the enemy at an earlier period.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#219</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>that all the enemy machines and pilots which are shot down over our Island, or over the seas which surround it, are either destroyed or captured; whereas a considerable proportion of our machines, and also of our pilots, are saved, and soon again in many cases come into action.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#220</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>that as I went to bed at about 3 a.m. I was conscious of a profound sense of relief. At last I had the authority to give directions over the whole scene. I felt as if I were walking with destiny, and that all my past life had been but a preparation for this hour and for this trial. Ten years in the political wilderness had freed me from ordinary party antagonisms. My warnings over the last six years had been so numerous, so detailed, and were now so terribly vindicated, that no one could gainsay me.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#221</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>that the terrible words have for the time being been pronounced against the Western democracies: ‘Thou art weighed in the balance and found wanting.’</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#222</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>the Chinese armies, if they had attacked such a line, might well have renewed on an even larger scale the painful experiences which we ourselves so often suffered on the Somme and at Passchendaele and in other bloody battlefields of the First World War.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#223</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>the German garrisons would prove insufficient to cope both with the strength of the liberating forces and the fury of the revolting people</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#224</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>the regiment with which he had served as a Territorial officer until the outbreak of war, attending its annual military camp. Reaching Boulogne, he found a car waiting to take him to General Sir John French, Commander-in-Chief of the British Expeditionary Force, who offered him command of an infantry brigade, some four thousand men, with the rank of brigadier general</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#225</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>their generals told their Prime Minister and his divided Cabinet, ‘In three weeks England will have her neck wrung like a chicken.’ Some chicken! Some neck!</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#226</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>they did not attack us after Dunkirk when we were so much weaker, when our hopes of United States help were of the most slender character, and when we were all alone, I could hardly believe that they would commit what seemed to be a mad act. Tonight the Japanese are triumphant. They shout their exultation round the world. We suffer. We are taken aback. W</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#227</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>they have already proved themselves to be formidable, deadly, and, I am sorry to say, barbarous antagonists. This proves a hundred times over that there never was the slightest chance, even though we had been much better prepared in many ways than we were, of our standing up to them alone while we had Nazi Germany at our throat and Fascist Italy at our belly.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#228</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>venture to think that in future the Czechoslovak State cannot be maintained as an independent entity. You will find that in a period of time which may be measured by years, but may be measured only by months, Czechoslovakia will be engulfed in the Nazi regime.</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#229</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>we have lost 60,000 tons in the first fortnight and gained 50,000 tons from the enemy,</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#230</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>we prepared ourselves to argue that the defeat of Japan would not spell the defeat of Hitler, but that the defeat of Hitler left the finishing off of Japan merely a matter of time and trouble</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#231</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>would bring Russia and Germany into direct and immediate contact. Should such an event unhappily take place, it is necessary to realize that an awful, yet in some ways a wonderful, choice will be presented to Germany. Beaten as they have been in the war, powerless as they are in so many matters, the German people will have it in their hands either to renew and redouble the miseries of Europe, or to render a service to civilization of the very highest order. It will be open to the Germans either to sink their own social structure in the general Bolshevist welter and spread the reign of chaos far and wide throughout the Continent; or, on the other hand, by a supreme effort of sobriety, of firmness, of self-restraint and of courage – undertaken, as most great exploits have to be, under conditions of peculiar difficulty and discouragement – to build a dyke of peaceful, lawful, patient strength and virtue against the flood of red barbarism</p>
+    </article>
+    
+
+    <article class="highlight-card uncolored">
+      <div class="highlight-meta">
+        <span>#232</span>
+        <span>uncolored</span>
+        <span>no page</span>
+        <span>tablet_md</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>‘How can you talk like that?’ I said; ‘we are for ever safe from invasion, since the days of Napoleon.’ ‘I see further ahead than you do. I see into the future. This country will be subjected somehow, to a tremendous invasion, by what means I do not know, but (warming up to his subject) I tell you I shall be in command of the defences of London and I shall save London and England from disaster.’ ‘Will you be a general then, in command of the troops?’ ‘I don’t know; dreams of the future are blurred but the main objective is clear. I repeat – London will be in danger and in the high position I shall occupy, it will fall to me to save the Capital and save the Empire.’</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+        </main>
+        
+</body>
+</html>

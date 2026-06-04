@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 from pathlib import Path
+from zipfile import ZipFile
 
 from structured_summaries.highlights import (
+    load_highlight_document,
     load_structured_highlights,
     load_structured_highlights_from_paths,
     load_highlights_from_paths,
@@ -191,3 +193,79 @@ def test_load_structured_highlights_from_paths_dedupes_and_keeps_stronger_color(
     assert len(entries) == 1
     assert entries[0].color == "blue"
     assert entries[0].duplicate_count == 2
+
+
+def _write_minimal_docx(path: Path, paragraphs: list[str]) -> None:
+    body = "".join(
+        f"<w:p><w:r><w:t>{paragraph}</w:t></w:r></w:p>" for paragraph in paragraphs
+    )
+    document_xml = (
+        '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+        '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'
+        f"<w:body>{body}</w:body></w:document>"
+    )
+    with ZipFile(path, "w") as archive:
+        archive.writestr("word/document.xml", document_xml)
+
+
+def test_load_highlight_document_reads_docx_play_books_export(tmp_path: Path) -> None:
+    docx_path = tmp_path / "Notes from _Example Book_.docx"
+    _write_minimal_docx(
+        docx_path,
+        [
+            "Example Book",
+            "Example Author",
+            "Annotations by color",
+            "1 yellow notes • 1 red notes",
+            "Yellow",
+            "The bottleneck governs the system.",
+            "May 5, 2025",
+            "44",
+            "Red",
+            "Throughput matters more than local efficiency.",
+            "May 6, 2025",
+            "88",
+        ],
+    )
+
+    document = load_highlight_document(docx_path, source_section="drive_docx")
+
+    assert document is not None
+    assert document.title == "Example Book"
+    assert document.author == "Example Author"
+    assert [(entry.color, entry.page) for entry in document.entries] == [
+        ("yellow", 44),
+        ("red", 88),
+    ]
+    assert {entry.source_section for entry in document.entries} == {"drive_docx"}
+
+
+def test_load_highlight_document_reads_tablet_markdown_export(
+    tmp_path: Path,
+) -> None:
+    md_path = tmp_path / "Example Book.md"
+    md_path.write_text(
+        """
+        # Example Book
+
+        ## Highlight 1
+
+        > The bottleneck governs the system.
+
+        ## Highlight 2
+
+        > Inventory is not the goal.
+        """,
+        encoding="utf-8",
+    )
+
+    document = load_highlight_document(md_path, source_section="tablet_md")
+
+    assert document is not None
+    assert document.title == "Example Book"
+    assert [entry.text for entry in document.entries] == [
+        "The bottleneck governs the system.",
+        "Inventory is not the goal.",
+    ]
+    assert [entry.color for entry in document.entries] == ["", ""]
+    assert {entry.source_section for entry in document.entries} == {"tablet_md"}

@@ -1,0 +1,3414 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thoughts and Adventures - positional highlight review</title>
+  <style>
+    :root {
+      --bg: #f7f7f4;
+      --ink: #202124;
+      --muted: #60646c;
+      --line: #d8d8d2;
+      --panel: #ffffff;
+      --yellow: #fff2a8;
+      --green: #d8f3dc;
+      --blue: #dbeafe;
+      --red: #ffe0e0;
+      --uncolored: #f1f3f4;
+      --warn: #fff7d6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    a { color: #174ea6; }
+    .page-header {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: rgba(247, 247, 244, 0.96);
+      border-bottom: 1px solid var(--line);
+      padding: 16px 24px;
+      backdrop-filter: blur(8px);
+    }
+    h1 { margin: 4px 0; font-size: 24px; letter-spacing: 0; }
+    p { margin: 0 0 10px; }
+    code { font-size: 12px; overflow-wrap: anywhere; }
+    main { padding: 18px 24px 40px; }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(160px, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .summary-grid div, .provenance {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 10px;
+      border-radius: 6px;
+    }
+    .summary-grid strong, .summary-grid span, .provenance strong, .provenance span {
+      display: block;
+      font-size: 13px;
+    }
+    .summary-grid span, .provenance span { color: var(--muted); margin-top: 4px; }
+    .provenance { margin-top: 10px; }
+    .provenance.warning { background: var(--warn); }
+    .columns-label, .position-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+    }
+    .columns-label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+      padding: 0 2px;
+    }
+    .position-row {
+      margin-bottom: 14px;
+      align-items: start;
+    }
+    .real-highlights, .ai-output {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 12px;
+      min-height: 120px;
+    }
+    .span-meta, .highlight-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .span-meta span, .highlight-meta span {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 999px;
+      padding: 2px 7px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .highlight-card {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 8px;
+      background: var(--uncolored);
+    }
+    .highlight-card.yellow { background: var(--yellow); }
+    .highlight-card.green { background: var(--green); }
+    .highlight-card.blue { background: var(--blue); }
+    .highlight-card.red { background: var(--red); }
+    .highlight-card.uncolored { background: var(--uncolored); }
+    .ai-category {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+      margin-top: 8px;
+    }
+    .ai-category summary {
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .ai-category ol {
+      margin: 0 0 0 22px;
+      padding: 0;
+    }
+    .ai-category li {
+      margin-bottom: 8px;
+    }
+    .empty-state {
+      color: var(--muted);
+      font-style: italic;
+    }
+    .index-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--panel);
+      border: 1px solid var(--line);
+    }
+    .index-table th, .index-table td {
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      padding: 9px 10px;
+      vertical-align: top;
+    }
+    .index-table th {
+      font-size: 13px;
+      color: var(--muted);
+      background: #fafafa;
+    }
+    details { margin-top: 10px; }
+    @media (max-width: 900px) {
+      .summary-grid, .columns-label, .position-row {
+        grid-template-columns: 1fr;
+      }
+      .page-header { position: static; }
+      main { padding: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+        <header class="page-header">
+          <a href="index.html">Index</a>
+          <h1>Thoughts and Adventures</h1>
+          <p>Winston Spencer Churchill</p>
+          <p>
+            This page is positional, not text-matched. Left-side highlights are
+            grouped by Play Books page/progress; right-side AI output is grouped
+            by the original AI chunk. The current artifacts do not contain exact
+            PDF page ranges for each AI chunk.
+          </p>
+          
+    <div class="summary-grid">
+      <div><strong>Real highlights</strong><span>141</span></div>
+      <div><strong>Highlights with pages</strong><span>141</span></div>
+      <div><strong>AI output</strong><span>none</span></div>
+      <div><strong>Direct PDF</strong><span>no AI output</span></div>
+    </div>
+    
+          
+        <div class="provenance warning">
+          <strong>AI provenance</strong>
+          <span>No AI summary/extraction output was found for this book.</span>
+        </div>
+        
+          <details><summary>Highlight source files</summary><ul><li><code>/Users/clarkbenham/side_projects/data/Play_Books_Notes-20260531T040817Z/Notes from _Thoughts and Adventures_.docx</code></li></ul></details>
+        </header>
+        <main class="book-page">
+          <div class="columns-label">
+            <span>Real highlights from this span</span>
+            <span>AI chunk extraction from the corresponding span</span>
+          </div>
+          
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p11</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#1</span>
+        <span>blue</span>
+        <span>p11</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>that if one had the chance to live one’s life over again foreknowledge would, in important decisions, be only fully effective once. Thereafter I should be dealing with a continually diverging skein of consequence which would increasingly affect my immediate environment.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#2</span>
+        <span>yellow</span>
+        <span>p11</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>fired two or three shots at twenty yards at a mounted burgher named Botha, who summoned me to surrender. If I had killed him on that day, November 15, 1899, the history of South Africa would certainly have been different and almost certainly would have been less fortunate. This was the Botha who afterward became Commander-in-Chief of the Boers and later Prime Minister of the South African Union. But for his authority and vigour the South African rebellion which broke out at the beginning of the Great War might never have been nipped in the bud</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p13</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#3</span>
+        <span>blue</span>
+        <span>p13</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I remember my father in his most sparkling mood, his eye gleaming through the haze of his cigarette, saying, ‘Why begin? If you want to have an eye that is true, and a hand that does not quiver, if you want never to ask yourself a question as you ride at a fence, don’t smoke.’ But consider! How can I tell that the soothing influence of tobacco upon my nervous system may not have enabled me to comport myself with calm and with courtesy in some awkward personal encounter or negotiation, or carried me serenely through some critical hours of anxious waiting? How can I tell that my temper would have been as sweet or my companionship as agreeable if I had abjured from my youth the goddess Nicotine?</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p14</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#4</span>
+        <span>green</span>
+        <span>p14</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Even apart from the Free Trade quarrel, I was in full reaction against the war and they in full exploitation in the political sphere of the so-called victory. Thus when the Protection issue was raised I was already disposed to view all their actions in the most critical light.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#5</span>
+        <span>yellow</span>
+        <span>p14</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>When the Great War broke out and I started with the enormous prestige of having prepared the fleet in spite of so much opposition and of having it ready according to the science of those days, almost to a single ship, at the fateful hour, I made the singular mistake of being as much interested in the military as in the naval operations. Thus, without prejudice to my Admiralty work, I was led into taking minor military responsibilities upon my shoulders which exposed me to all those deadly risks on a small scale that await those in high stations who come too closely in contact with action in detail.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p15</span>
+          <span>4 highlights</span>
+          <span>page group: 4</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#6</span>
+        <span>blue</span>
+        <span>p15</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>n all great business very large errors are excused or even unperceived, but in definite and local matters small mistakes are punished out of all proportion. I might well have lost all the esteem I gained by the mobilization and readiness of the fleet, through getting mixed up in the firing-lines at Antwerp</p>
+    </article>
+    
+
+    <article class="highlight-card red">
+      <div class="highlight-meta">
+        <span>#7</span>
+        <span>red</span>
+        <span>p15</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Those who are charged with the direction of supreme affairs must sit on the mountain-tops of control; they must never descend into the valleys of direct physical and personal action.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#8</span>
+        <span>yellow</span>
+        <span>p15</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>However, it must not be forgotten that the land attack upon the Gallipoli Peninsula, costly and unsuccessful as it was, played a great part in bringing Italy into the War in the nick of time, kept Bulgaria in awed suspense through the summer of 1915, and before it was finished broke the heart of the Turkish army.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#9</span>
+        <span>yellow</span>
+        <span>p15</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It seems clear now that when Lord Kitchener went back upon his undertaking to send the 29th Division to reinforce the army gathering in Egypt for the Dardanelles expedition and delayed it for nearly three weeks, I should have been prudent then to have broken off the naval attack. It would have been quite easy to do so, and all arrangements were made upon that basis. I did not do it, and from that moment I became accountable for an operation the vital control of which had passed to other hands.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p16</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#10</span>
+        <span>blue</span>
+        <span>p16</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>When I survey in the light of these reflections the scene of my past life as a whole, I have no doubt that I do not wish to live it over again. Happy, vivid and full of interest as it has been, I do not seek to tread again the toilsome and dangerous path. Not even an opportunity of making a different set of mistakes and experiencing a different series of adventures and successes would lure me. How can I tell that the good fortune which has up to the present attended me with fair constancy would not be lacking at some critical moment in another chain of causation? even Churchill thinks his most important aspects are luck</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#11</span>
+        <span>yellow</span>
+        <span>p16</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>it was the very fact that I was out of Parliament, free from all attachment and entanglement in any particular constituency, that enabled me to make an independent and unbiased judgment of the situation when the Liberals most unwisely and wrongly put the Socialist minority government for the first time into power, thus sealing their own doom.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p19</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#12</span>
+        <span>green</span>
+        <span>p19</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>To which the prostrate France replied: ‘Not an inch of our territory, not a stone of our fortresses!’ How could I not champion France? All the English boys who grew up then had this idea somewhere in their minds and pictured France ill-treated, beaten down, unchivalrously used by a sort of suet-dumpling Germany, uncommonly efficient and punctual, and with that very sharp sword. All of them got the notion that it would be a fine thing and only fair if some day this same broken, trampled France stood up and had her revenge upon the dumpling lady.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p32</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#13</span>
+        <span>green</span>
+        <span>p32</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>They might have coquetted with the Irish vote as a manœuvre in their fierce political battle with the Liberals; but any decided advance towards Home Rule would have split them from end to end, dethroned their leaders in such a course, and destroyed the power of the Party as a governing instrument. Mr. Gladstone gave to his opponents through this miscalculation what was virtually a twenty years’ reign of power.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p34</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#14</span>
+        <span>yellow</span>
+        <span>p34</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>: ‘In a democratic country possessing representative institutions it is occasionally necessary to defer to the opinions of other people’; and, ‘I am their leader; I must follow them.’</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p37</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#15</span>
+        <span>yellow</span>
+        <span>p37</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>first, when he repealed the Roman Catholic disabilities, and, secondly, when he abolished Protection</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p38</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#16</span>
+        <span>yellow</span>
+        <span>p38</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>ines of Crabbe, in the hopes of a similar measure of indulgence: ‘Minutely trace man’s life; year after year, Through all his days let all his deeds appear, And then, though some may in that life be strange, Yet there appears no vast nor sudden change; The links that bind those various deeds are seen, And no mysterious void is left between.’</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p41</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#17</span>
+        <span>yellow</span>
+        <span>p41</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>In England the political opinion of men and parties grows like a tree shading its trunk with its branches, shaped or twisted by the winds, rooted according to its strains, stunted by drought or maimed by storm. In America opinions are taken from the standard text-books and platforms are made by machinery according to the exigencies of party without concern for individuals. We produce few of their clear-cut political types or clear-cut party programmes.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p44</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#18</span>
+        <span>green</span>
+        <span>p44</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The object of the Christian Church, he explained, was to enlarge the bounds of family affection to the widest possible extent without admitting within those bounds the possibility of sex disturbance. Here were noble and delightful relationships where the deceased wife’s sister without fear of scandal could enter the widower’s house and discharge in perfect honour over long years her duty to her beloved nephews and nieces. Dethrone the principle of prohibited degrees, and in hundreds—nay in thousands—of households the position of these devoted women, hitherto unquestioned, would become a target for comment and calumny</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p45</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#19</span>
+        <span>yellow</span>
+        <span>p45</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>that there was no limit to the arguments which could be used against their project, or at least to the energy with which these arguments could be advanced, embroidered, or indeed repeated</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p46</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#20</span>
+        <span>green</span>
+        <span>p46</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>We had been let loose in this world with a conscious power of choice for a brief interlude in an unending existence, and by our faith and actions we should be judged for ever.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p47</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#21</span>
+        <span>blue</span>
+        <span>p47</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>He has realized acutely the truth of the adage ‘A man convinced against his will, is of the same opinion still.’ He never in the days when I knew him best thought of giving himself satisfaction by what he said.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#22</span>
+        <span>yellow</span>
+        <span>p47</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>An intense comprehension of the more amiable weaknesses of human nature: a sure gift of getting on the right side of a man from the beginning of a talk: a complete avoidance of anything in the nature of chop-logic reasoning: a deft touch in dealing with realities: the sudden presenting of positions hitherto unexpected, but apparently conciliatory and attractive—all these are modes and methods in which he is a natural adept. I have seen him turn a Cabinet round in less than ten minutes, and yet when the process was complete, no one could remember any particular argument to which to attribute their change of view.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p50</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#23</span>
+        <span>green</span>
+        <span>p50</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Following the custom which, till then, had long been almost invariable in England, all the police were unarmed</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p51</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#24</span>
+        <span>yellow</span>
+        <span>p51</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>We were clearly in the presence of a class of crime and a type of criminal which for generations had found no counterpart in England. The ruthless ferocity of the criminals, their intelligence, their unerring marksmanship, their modern weapons and equipment, all disclosed the characteristics of the Russian Anarchist</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p54</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#25</span>
+        <span>yellow</span>
+        <span>p54</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>. From my chair in the Home Office I could have sent any order and it would have been immediately acted on, but it was not for me to interfere with those who were in charge on the spot. Yet, on the other hand, my position of authority, far above them all, attracted inevitably to itself direct responsibility. I saw now that I should have done much better to have remained quietly in my office.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p60</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#26</span>
+        <span>yellow</span>
+        <span>p60</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I had carried away from the South African veldt a very lively and modern sense of what rifle bullets could do. On the effects of the fire of large numbers of guns we could only use our imagination. But where the power of the magazine rifle was concerned we felt sure we possessed a practical experience denied to the leaders of these trampling hosts. We watched with astonishment the movements of dense columns of men</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#27</span>
+        <span>yellow</span>
+        <span>p60</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Only a hundred years ago! It seemed incredible that a single century, four fleeting generations, should have sufficed to raise the mighty fabric of power and wealth, energy and organization, of which we were the awe-struck witnesses. What an amazing contrast: 1806-1906! poor to poor in 4 generations; also was true of germany 1806 to 1918</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p61</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#28</span>
+        <span>yellow</span>
+        <span>p61</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Besides South Africa I had also vividly in my mind the Battle of Omdurman, where we had shot down quite easily, with hardly any loss, more than 11,000 Dervishes in formations much less dense, and at ranges far greater than those which were now on every side exhibited to our gaze. We had said to ourselves after Omdurman, ‘This is the end of these sort of spectacles. There will never be such fools in the world again.’ 1906 still haven&#x27;t thought through what this all means</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#29</span>
+        <span>yellow</span>
+        <span>p61</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>nconcealed impatience among the German officers with whom I rode. A Princess, who in full uniform was leading her regiment, was in the easy assurance of Royal privilege indignantly ‘outspoken.’ ‘What folly!’ she exclaimed. ‘It is madness. The Generals should all be dismissed.’ And so on. But in the main everything passed off happily.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p62</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#30</span>
+        <span>green</span>
+        <span>p62</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Down there,’ he indicated a wooded valley, ‘is the Katsbach stream, where we beat the French in 1813 in our war of Liberation.’</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p64</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#31</span>
+        <span>yellow</span>
+        <span>p64</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Although these formations were still to British eyes much too dense for modern fire, they nevertheless constituted an enormous advance upon 1906. They were, I believe, substantially the formations with which the German Army five years later entered the Great War, and which were then proved to be superior in efficiency to those of their French opponents.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p70</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#32</span>
+        <span>yellow</span>
+        <span>p70</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The whole scene bursting thus suddenly upon the eye and with all its immense significance filling the mind, was one which I shall never forget. Not a house, not a building of any kind disfigured the splendid hills and cliffs that ran down on either side to ocean water. Yet gathered together in this solitude and narrow compass was the floating steel city with its thirty or forty thousand inhabitants upon whose strength, loyalty, courage and devotion our lives and freedom, and as we may perhaps assert still the freedom of the world, from minute to minute depended. Last night not a vessel had been there; to-morrow morning perhaps the bay would again be empty;</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p76</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#33</span>
+        <span>yellow</span>
+        <span>p76</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Will you take a Brigade?’ I answered that of course I should be proud to do so, but that before I could undertake any such responsibility, I must learn first-hand the special conditions of trench warfare.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p82</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#34</span>
+        <span>blue</span>
+        <span>p82</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The longer one lives, the more one realizes that everything depends upon chance, and the harder it is to believe that this omnipotent factor in human affairs arises simply from the blind interplay of events. Chance, Fortune, Luck, Destiny, Fate, Providence seem to me only different ways of expressing the same thing, to wit, that a man’s own contribution to his life story is continually dominated by an external superior power</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p86</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#35</span>
+        <span>yellow</span>
+        <span>p86</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>‘About five minutes after you left, Sir. A whizzbang came in through the roof and blew his head off.’</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p88</span>
+          <span>3 highlights</span>
+          <span>page group: 3</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#36</span>
+        <span>yellow</span>
+        <span>p88</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Everyone remembers the remark of the old man at the point of death: that his life had been full of troubles most of which had never happened.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#37</span>
+        <span>yellow</span>
+        <span>p88</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It therefore made very little difference to us whether we were in or out of the trenches, and we lost about the same number of men through shell fire.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#38</span>
+        <span>yellow</span>
+        <span>p88</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Our so-called ‘rest’ billets when out of the line were separated by scarcely a mile and a half of flat country from our front trenches, at this point distant about three hundred yards from those of the Germans. In this situation, living on a little more than a square mile of ground, we were destined to remain for over three months.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p94</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#39</span>
+        <span>blue</span>
+        <span>p94</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I passed the next three days in helpless anxiety. I reproached myself a thousand times with not having sent the document back by an officer the moment it had been so incontinently brought to me in the line by the military post. Why had I ever let it out of my possession for a second? This brings me to the remark of the dying old man with which the account of this incident opens, and I may at once relieve the anxiety of the reader and clear my own character for prudence. On the third day I happened to put my hand into my right inner breast-pocket, which I hardly ever used. There I found, safe and secure, the paper I had been so feverishly seeking. Instinctively, in leaving the room over which swift peril was impending, I had picked up the one thing that mattered and put it in my pocket</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p97</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#40</span>
+        <span>green</span>
+        <span>p97</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It was accepted as a matter of course that the seas were safe for all the Allies, and an insurance of less than one per cent. was sufficient to cover merchant ships putting to sea in time of war unguarded and unrestricted in every direction from every port</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#41</span>
+        <span>yellow</span>
+        <span>p97</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The strategic effect of placing the Grand Fleet at Scapa Flow before the declaration of war had been alike complete and instantaneous.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p98</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#42</span>
+        <span>yellow</span>
+        <span>p98</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Outside the land-locked waters of the Baltic and the Black Sea, not a single hostile vessel cleft salt water</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#43</span>
+        <span>yellow</span>
+        <span>p98</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>We knew that the Germans had only some twenty-five U-boats, and not more than one-third of them could be on the prowl at once. On hundreds of ships proceeding weekly in and out of scores of harbours, this handful of marauders could make no serious impression</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p99</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#44</span>
+        <span>yellow</span>
+        <span>p99</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>A hundred submarines lay ready to proceed on fateful missions. The Admirals marshalled facts and figures to prove that unrestricted U-boat warfare would certainly yield a sinkage of 600,000 tons a month, and that five months of this would bring Great Britain</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#45</span>
+        <span>yellow</span>
+        <span>p99</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Desperation alone turned the scale. In 1916 the miscarriage at Verdun, the strain of the Somme, the surprise of Brusilov’s offensive, and finally the hostile entry of Roumania, constituted for Germany the second climacteric of the War</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p100</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card red">
+      <div class="highlight-meta">
+        <span>#46</span>
+        <span>red</span>
+        <span>p100</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>These prodigious stakes would never have been played if any of those who gathered at Pless had known that a few months later Russia would collapse, and that a new prospect of victory on land would open</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p101</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#47</span>
+        <span>yellow</span>
+        <span>p101</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>October and November, 1916, to nearly 300,000 tons a month. In January this total was still 284,000 tons. With the opening of unrestricted warfare in February the dial mounted sharply to nearly 470,000 tons.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#48</span>
+        <span>yellow</span>
+        <span>p101</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The German Naval Staff had calculated that England, after providing for her own and allied military needs, had about 10½ million tons of shipping for her supplies. She could not manage with less than 7½ million tons</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p102</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card red">
+      <div class="highlight-meta">
+        <span>#49</span>
+        <span>red</span>
+        <span>p102</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>it was the adoption of a third expedient, the tactics of convoy, that alone decided the fate of nations. No story of the Great War is more remarkable or more full of guidance for the future than this. It was a long, intense, violent struggle between the amateur politicians, thrown by democratic Parliamentary institutions to the head of affairs, on the one hand, and the competent, trained, experienced experts of the Admiralty and their great sea officers on the other. The astonishing fact is that the politicians were right, and that the Admiralty authorities were wrong</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#50</span>
+        <span>yellow</span>
+        <span>p102</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>April saw another tremendous rise, and the fateful finger moving remorselessly up. It was pointing to 837,000 tons of British, Allied, and Neutral sinkings, of which 516,000 tons were of British sinkings</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p103</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#51</span>
+        <span>green</span>
+        <span>p103</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>In no other country could such a thing have happened. In Germany, for instance, the Kaiser and his Ministers had to accept the facts, figures, and opinions of the naval experts as final. When Admiral Holtzendorff declared that unrestricted warfare would sink 600,000 tons of British shipping a month, and that five months would ruin England’s war-making power; when he put that forward on his honour and conscience as the head of the German Naval Staff, there was no means of gainsaying him</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p104</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#52</span>
+        <span>yellow</span>
+        <span>p104</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The Admiralty argued that convoy would be no protection against submarine attack. First of all, it was not physically practicable. Merchant ships could not keep their stations in a convoy. They would certainly not be able to zig-zag in company. Their different speeds would make their pace that of the slowest. Time would be lost, danger increased, and tonnage capacity wasted. They would be readily thrown into confusion on a sudden attack. A submarine in the midst of a convoy might make tremendous havoc. We should be putting too many eggs in one basket. No fewer than 2,500 merchant ships, said the Admiralty, entered or left British ports every week. No convoy would be safe if it contained more than three or four merchantmen to every escorting warship. Where were the destroyers and small craft for this prodigious task?</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p105</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#53</span>
+        <span>yellow</span>
+        <span>p105</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>No part of the Official History is written with more circumspection than the account of the conflict between the War Cabinet and the Admiralty upon the adoption of the convoy system.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p107</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card red">
+      <div class="highlight-meta">
+        <span>#54</span>
+        <span>red</span>
+        <span>p107</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>t was shown that the 2,500 voyages included all the repeated calls of coasters and short-sea traders of 300 tons and upwards. But these were not the ships upon which our life depended. It was the ocean-going traffic to and from all parts of the world that alone was vital. In the early days of April it was proved by Commander Henderson that the minimum arrivals and departures of ocean-going ships of 1,600 tons and upwards upon which everything hung did not exceed between 120 and 140 a week. The whole edifice of logical argument collapsed when the utterly unsound foundation of 2,500 was shorn away.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#55</span>
+        <span>yellow</span>
+        <span>p107</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>the number of ships arriving at or leaving British ports within a week had been magniloquently stated to amount to 2,500. How was it physically possible for the sixty or seventy destroyers which were at most available,</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p108</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#56</span>
+        <span>green</span>
+        <span>p108</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It may be that a dread of becoming responsible not only for the warships of the Navy, but for the safety of every merchant ship that sailed, lay heavy upon their minds.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p109</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#57</span>
+        <span>yellow</span>
+        <span>p109</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>In September the clouds began to break. Monthly sinkings had fallen from 800,000 to 300,000 tons. In February, 1918, the curve of building output crossed the sinkage curve. By October, 1918, 1,782 great ships had been convoyed across the seas with a loss of only 167.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p110</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#58</span>
+        <span>yellow</span>
+        <span>p110</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>showing that this 400,000 tons saving could be effected by drawing the whole of the Allied supplies from the American Continent instead of from all parts of the world; and that the supplies would be forthcoming. The scheme was adopted, and the Salonican armies were therefore permitted to continue their campaign. As we all know now, it was the surrender of Bulgaria in October, 1918, which produced the final collapse of the Teutonic Empires. But for this, the German armies would have effected their retreat to the Meuse or the Rhine,</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p111</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card red">
+      <div class="highlight-meta">
+        <span>#59</span>
+        <span>red</span>
+        <span>p111</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>But the American naval authorities knew from Admiral Sims’s reports that the convoy system had been forced upon the British sailors against their better judgment by political interference. They therefore refused to risk their ships upon what they knew was inexpert and unprofessional advice.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#60</span>
+        <span>yellow</span>
+        <span>p111</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The reluctance of all the naval chiefs in every Allied country to adopt convoy finds its counterpart only in the reluctance of the military chiefs of all the armies, Allied and enemy, to comprehend the significance of the tank. In both cases these means of salvation were forced upon them from outside and from below.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p112</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#61</span>
+        <span>yellow</span>
+        <span>p112</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Great results were expected from this barrage, and its reputation was established by a curious coincidence. On the very day that it was laid, April 24, 1916, Admiral Scheer, the German Commander-in-Chief, had been ordered to restrict submarine warfare. The German Government had decided that merchantmen were to be boarded before being sunk. In protest Scheer had called off his U-boats. None, therefore, passed the Straits for some months, and the cessation of their attempts gave rise at Dover to the idea that they had been stopped by the new net barrage.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p113</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#62</span>
+        <span>yellow</span>
+        <span>p113</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>justly censured the Admiralty mine. Lord Fisher, in his earlier peace-time administration, had been hostile to mines. The sub-department concerned had dwelt in a highly secret and secluded nook, defended on every side by abstruse technicalities. There is no doubt that it had produced at the beginning of the War a mine which would rarely keep its depth and very often not explode on being bumped. Even these defective instruments were not very numerous</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p114</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#63</span>
+        <span>yellow</span>
+        <span>p114</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>. Strong evidence was furnished by the Naval Intelligence that the Plans Division were right. A U-boat (U.C. 44) sunk in shoal water had been fished up, and her captain’s log revealed the exact dates on which each of a continuous stream of U-boats had passed the Straits,</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#64</span>
+        <span>yellow</span>
+        <span>p114</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The climax was reached upon the blunt issue of whether the minefields should be illuminated or not. The brightly-lighted picture of these large areas, picketed by almost defenceless trawlers manned by fishermen, seemed a most unwarlike proposition. One might almost have said that common sense repelled such a remedy. But on this point the Admiralty Staff were right, and the Admiral on the spot was wrong. The simple truth emerged that the barrage and minefields were no use unless they were vigorously defended from above water.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p115</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#65</span>
+        <span>yellow</span>
+        <span>p115</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>In the next six months eleven identified submarines perished in the Dover minefields or their approaches. The sinkings in the Channel, influenced also by convoy, rapidly declined. The German voyage through the Dover Straits became one of intolerable peril. In 1918 a Zeebrugge submarine could count on not more than six voyages before she met her inevitable doom.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#66</span>
+        <span>yellow</span>
+        <span>p115</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>certainly the story of the Dover barrage forms a corroborating sequel to the story of the convoy system. It was the Prime Minister, the War Cabinet and the First Lord who asserted the freedom of the new professional thought over embattled seniority</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p116</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#67</span>
+        <span>yellow</span>
+        <span>p116</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The area was as bright as Piccadilly in peace time; and its occupants scarcely better armed. Some miles to the eastward five patrolling divisions of destroyers offered their only possible protection. But if these were evaded by a raiding enemy, a massacre seemed inevitable</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p118</span>
+          <span>5 highlights</span>
+          <span>page group: 5</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#68</span>
+        <span>yellow</span>
+        <span>p118</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>For the first time since the battles of 1914 Germany would outnumber the British and French.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#69</span>
+        <span>yellow</span>
+        <span>p118</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Many months must pass before the gigantic new combatant could appear in the aren</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#70</span>
+        <span>yellow</span>
+        <span>p118</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Once the War had begun, the only chance Germany had of making peace was during the winter of 1917. It was a good chance. Russia had fallen, the Treaty of Brest-Litovsk had been signed</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#71</span>
+        <span>yellow</span>
+        <span>p118</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The British Headquarters erroneously believed that they could break the German front, and they found in the temporary weakening of France a wealth of reasons to reinforce their convictions.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#72</span>
+        <span>yellow</span>
+        <span>p118</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The mutinies in the French army which followed upon General Nivelle’s disastrous offensive in April, 1917, had reduced France to the strictest form of defensive during the rest of the year</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p120</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#73</span>
+        <span>green</span>
+        <span>p120</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Even as late as January or February, 1918, if Germany had offered the full restoration of Belgium, and a settlement with France about Alsace-Lorraine coupled with a scheme of German gains from Russia, a basis for negotiation might well have been established.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#74</span>
+        <span>yellow</span>
+        <span>p120</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>And here we come to an essential characteristic of this extraordinary man. He loved his country, but he loved his task more. His task was to procure victory at all costs; to make sure that if defeat was certain, no resource should be left unconsumed, no chance untried, no boats unburned behind him</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p121</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#75</span>
+        <span>yellow</span>
+        <span>p121</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>And were not the Design in itself, and the Event to which it would give rise, mental propositions of rare quality? To make such plans, to set in motion such forces and trains of consequence, to play for such stakes—were not these good in themselves?</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p123</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#76</span>
+        <span>yellow</span>
+        <span>p123</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Covered by this monstrous battery, 66 German divisions were to be launched in the dawn of March 21 against a front held by 19 British divisions.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p124</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#77</span>
+        <span>green</span>
+        <span>p124</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>represents the most terrific and most unhuman (in the sense of being wholly impersonal) of all the battles in the annals of war. But the scale and mechanism of the enterprise were the very features which captivated Ludendorff. These were the calculations on which he had spent his life. This was the quintessence of all he had learnt and wrought.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p125</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#78</span>
+        <span>yellow</span>
+        <span>p125</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It was the fatal weakness of the German Empire that its military leaders, who knew every detail of their profession and nothing outside it, considered themselves, and became, arbiters of the whole policy of the State. In</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p126</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#79</span>
+        <span>yellow</span>
+        <span>p126</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>how the line of the British Fifth Army was bent backwards with a loss of 150,000 men and 1,000 guns, and how the Germans pressed into the ever-distending bulge in their march upon Amiens; how General Pétain resolved to break contact with the British Army and reserve the whole French forces for the defence of Paris; how, nevertheless, the thin line was never broken; how the British right-hand and the French left, joined as they had been during four shattering years, were destined not to be unclasped till victory was won</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p127</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#80</span>
+        <span>green</span>
+        <span>p127</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Now all doubts were cast away. No longer was it a question of fighting to impose hard terms upon the enemy. Actual defeat seemed to stare the Allies in the face; and defeat before the weight of the United States could be brought to bear. The disaster, heavy though it was, revived the morale and reinvigorated the military strength of Britain and France</p>
+    </article>
+    
+
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#81</span>
+        <span>green</span>
+        <span>p127</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The slaughter of vain offensives, not for the purpose of winning the War (for that seemed won already), but for the purpose of imposing the most rigorous terms upon an enemy who was anxious for peace, offered a broadening field for differences of opinion even among those who had entered resolutely into the struggle.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p128</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#82</span>
+        <span>yellow</span>
+        <span>p128</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>President Wilson, receiving the British demand for the dispatch of hundreds of thousands of American infantry, and the immense shipment of American divisions still only partially trained, across the Atlantic, replied to Lord Reading, in words which the British nation will always link with his memory: ‘Ambassador, I’ll do my damnedest!’</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#83</span>
+        <span>yellow</span>
+        <span>p128</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Up till the 21st March the United States was preparing its armies in an elaborate, methodical, and necessarily lengthy manner. Although the great Republic had been in the War for more than a year, only six American divisions were in France and only two in the line.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p143</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#84</span>
+        <span>yellow</span>
+        <span>p143</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>‘A battle like this runs through regular phases. The first phase, in which we now are, is forming a front of any kind. It is the phase of Men. The second phase is that of Guns. We are entering upon that. In forty-eight hours we shall have strong artillery organizations. The next is Ammunition-supplies. That will be fully provided in four days. The next phase is Roads. All the roads will be breaking up under the traffic in a week’s time. But we are opening our quarries this evening. We ought just to be in time with the roads, if the front holds where it is. If it recedes, we shall have to begin over again.’</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p145</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#85</span>
+        <span>yellow</span>
+        <span>p145</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Except for the year 1916, I was continually in control of one or the other branch of the Air Service during the first eleven years of its existence.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p148</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#86</span>
+        <span>yellow</span>
+        <span>p148</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>He it was who, when the dangerous spins first began to kill our pilots, went up 10,000 feet, put his machine deliberately into what had hitherto been considered a fatal movement, and was whirled round and round at 100 miles an hour towards the ground until at last he found the way of breaking the frightful rotation and sailing out of it into a smooth vol plané</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#87</span>
+        <span>yellow</span>
+        <span>p148</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>If ever there was a man born to fly, three parts a bird and the rest genius, it was Hamel</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p149</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#88</span>
+        <span>yellow</span>
+        <span>p149</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Although I have flown hundreds of times, probably with a hundred pilots, I have never experienced that sense of the poetry of motion which Hamel imparted to those who were privileged to fly with him.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p151</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#89</span>
+        <span>green</span>
+        <span>p151</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>s Minister of Munitions in 1917-18 I had to be alternately on each side of the Channel and I usually travelled by air, landing at the exact point on the front where I had to see people or where I wished to witness particular operations.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p161</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#90</span>
+        <span>yellow</span>
+        <span>p161</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The aeroplane was just turning from its side-slip into the nose dive when it struck the ground at perhaps fifty miles an hour with terrific force. Its left wing crumpled, and its propeller and nose plunged into the earth. Again I felt myself driven forward as if in some new dimension by a frightful and overwhelming force, through a space I could not measure</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#91</span>
+        <span>yellow</span>
+        <span>p161</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>‘Anyone can fly an aeroplane when things are going all right, but it is when things go wrong that the great qualities of a man like Scott are decisive.’ These words had indeed come true. With unfailing presence of mind he had switched off the electric current in the few seconds before the machine struck the ground, and had thus prevented the clouds of petrol vapour from exploding in flame</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p165</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#92</span>
+        <span>blue</span>
+        <span>p165</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Above all, never lose your temper. The worse it goes, the more you must treat it as a puppet show.</p>
+    </article>
+    
+
+    <article class="highlight-card blue">
+      <div class="highlight-meta">
+        <span>#93</span>
+        <span>blue</span>
+        <span>p165</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>How much more effectually are they stimulated by the interruptions of their opponents, than convinced by the reasonings of their candidate! A long sagacious argument makes the audience yawn, a good retort at a turbulent meeting makes friends by the dozen, even sometimes of the enemy. My advice to candidates in rowdy meetings is this. First of all grin, or, as they say, ‘smile.’ There is nothing like it. Next be natural, and quite easy, as if you were talking to a single friend in some quiet place about something in which you were both much interested. Thirdly, cultivate a marked sense of detachment from the clatter and clamour proceeding around you.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p166</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#94</span>
+        <span>yellow</span>
+        <span>p166</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>‘Are you nervous?’ he said. I admitted I was a bit worried. ‘Well,’ he said, ‘I have always found it a good rule when you come before a very large audience to take a good look at them and say to yourself with conviction, “I have never seen such a lot of d——d fools in all my life.” ’</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p168</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#95</span>
+        <span>yellow</span>
+        <span>p168</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>showed great emotion in defeat. But it does no good, it only pleases the other side. It is far better to pretend that the matter is of trifling consequence. Most painful is the grief of your supporters. This is sometimes poignant. Men and women who have given weeks of devoted and utterly disinterested labour, with tears streaming down their cheeks and looking as if the world had come to an end!</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p170</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#96</span>
+        <span>yellow</span>
+        <span>p170</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The Conservative party which had ruled the nation for so many years was shattered to pieces; barely a hundred representatives came back to the chamber which they had left nearly four hundred strong. Seats wrested by a great wave of public opinion from the side to which they normally belong usually return to their old allegiance at the first opportunity</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p172</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#97</span>
+        <span>green</span>
+        <span>p172</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>By-elections are always much harder than fights in a General Election. Both these by-elections following one upon the other without an interval had riveted the attention of the country. I had had to speak many times each day, and columns had appeared in all the newspapers.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p174</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#98</span>
+        <span>green</span>
+        <span>p174</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Enormous masses of people hitherto disfranchised through not paying the rates, and great numbers of very poor women and mill-girls, streamed to the poll during the last two hours of the voting, besieging the polling-station in solid queues. My majority at the ‘Victory’ election of fifteen thousand was swept away, and I was beaten by over ten thousand votes</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#99</span>
+        <span>yellow</span>
+        <span>p174</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I felt no bitterness towards him. I knew that his movement represented after a fashion a strong current of moral and social revival. During the fifteen years of his efforts to gain the seat he had visited several times almost every household in the city.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p175</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#100</span>
+        <span>yellow</span>
+        <span>p175</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Here is a good instance of the ups and downs of politics. I had been a prominent member of the Coalition Government to which both Liberals and Conservatives were giving allegiance. I had in two years successfully conducted the settlement of our affairs in Palestine and Irak, and had carried through the extremely delicate and hazardous arrangements necessitated by the Irish treaty. I think I may say that the session of 1922 was the most prosperous I have ever had as a minister in the House of Commons. Suddenly everything broke in pieces.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p176</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#101</span>
+        <span>yellow</span>
+        <span>p176</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>On a vacancy occurring in the Abbey division of Westminster I decided to stand as a Liberal who wished to join with Conservatives in arresting the march of Socialism. This seemed at first a very forlorn hope. I had no organization, and no idea how to form one. All the three great parties, Conservatives, Liberals and Labour, brought forward their official candidates and backed them with their whole resources. The polling day was fixed for the earliest possible date, and less than a fortnight was available for the fight. However, I immediately felt the exhilarating sensation of being supported by a real and spontaneous movement of public opinion. From all sides men of standing and importance came to join me. With scarcely a single exception the whole London Press gave its support.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p177</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#102</span>
+        <span>yellow</span>
+        <span>p177</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>A minute later the actual figures showed that I was beaten by forty votes out of nearly forty thousand polled. I must confess I thoroughly enjoyed the fight from start to finish. I had now been defeated three times in succession—Dundee, West Leicester and Westminster—and it was a relief to be returned by a majority of ten thousand for West Essex at the end of the General Election of 1924. This made four elections in under two years!</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#103</span>
+        <span>yellow</span>
+        <span>p177</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The chorus girls of Daly’s Theatre sat up all night addressing the envelopes and dispatching the election address. It was most cheering and refreshing to see so many young and beautiful women of every rank in life ardently working in a purely disinterested cause not unconnected with myself</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p178</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#104</span>
+        <span>green</span>
+        <span>p178</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>For a system of human government so vast and so variously composed as the British Empire, a compact with open rebellion in the peculiar form in which it was developed in Ireland was an event which might well have shaken to its foundations that authority upon which the peace and order of hundreds of millions of people and of many races and communities were erected</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#105</span>
+        <span>yellow</span>
+        <span>p178</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>were shot down at close quarters by persons who, though they considered themselves as belonging to a hostile army, bore no distinguishing mark and conformed in no respect to the long-established laws and customs of war. It was only possible to say of those responsible for these acts that they were not actuated by selfish or sordid motives, that they were ready to lay down their own lives, and that in the main they were supported by the sentiment of their fellow-countrymen. To receive the leaders of such men at the Council Board, to attempt to form through their agency the government of a civilized and worthy state, must be regarded as one of the most questionable and hazardous experiments upon which a great empire in the plenitude of its power and on the morrow of its greatest victory could ever have embarked a terrorist nation made workable?</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p179</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#106</span>
+        <span>yellow</span>
+        <span>p179</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>In 1903 the Irish claim had been accorded by the vote of the House of Commons, and the measure embodying it had been destroyed only by the vote of the House of Lords. In 1914, when after four years of the fiercest Party strife a third Home Rule Bill seemed to be approaching a successful conclusion, doctrines of unconstitutional action had rightly or wrongly been proclaimed and preached by the great Conservative Party. Our country had been brought to the verge almost of civil war when this hateful issue was drowned in the cannonade of Armageddon</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#107</span>
+        <span>yellow</span>
+        <span>p179</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>in 1920, in spite of unceasing effort, the problem was still unsolved and Ireland had become ungovernable except by processes of terror and violent subjugation deeply repugnant to British institutions and to British national character</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p183</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#108</span>
+        <span>yellow</span>
+        <span>p183</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I wonder. It is extraordinary how rarely in history have victors been capable of turning in a flash to all those absolutely different processes of action, to that utterly different mood, which alone can secure them for ever by generosity what they have gained by force. In the hour of success, policy is blinded by the passion of the struggle. Yet the struggle with the enemy is over. There is only then the struggle with oneself. That is the hardest of all</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p184</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#109</span>
+        <span>green</span>
+        <span>p184</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>And we have in our own time South Africa, where decisive victory in arms was swiftly followed by complete concession in policy, with results marvellous to this day. Our settlement with the Boers, with my own vivid experiences in it, was my greatest source of comfort and inspiration in this Irish business</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p185</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#110</span>
+        <span>yellow</span>
+        <span>p185</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>He was determined that the Irish name should not be dishonoured by the breach of the Treaty made in all good faith and goodwill. ‘I expect,’ he said to me towards the end, ‘that I shall soon be killed. It will be a help. My death will do more to make peace than I could do by living.’</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p186</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#111</span>
+        <span>green</span>
+        <span>p186</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>However, we have seen that this system of government seems to lose much of its authority when based upon universal suffrage. So many various odd and unwritten processes are interposed between the elector and the assembly, and that assembly itself is subjected to so much extraneous pressure, that the famous phrase ‘Government of the people by the people for the people’ has in many states proved a mere illusion. Many of the parliaments so hopefully erected in Europe in the nineteenth century have already in the first quarter of the twentieth century been pulled down.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p187</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#112</span>
+        <span>yellow</span>
+        <span>p187</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>In the United States representative institutions have expressed themselves almost entirely through the machinery of party; but here at home, although the party organization is necessary and powerful, the parliamentary conception is still dominant.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#113</span>
+        <span>yellow</span>
+        <span>p187</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It seems ready to yield up the tangible rights hard won in rugged centuries to party organizations, to leagues and societies, to military chiefs or to dictatorships in various forms.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p188</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#114</span>
+        <span>green</span>
+        <span>p188</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It is no longer a case of one party fighting another, nor of one set of politicians scoring off another set. It is the case of successive governments facing economic problems, and being judged by their success or failure in the duel. The nation is not interested in politics, it is interested in economics.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p190</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#115</span>
+        <span>yellow</span>
+        <span>p190</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>these doctrines comprise among others the following tenets: Free imports, irrespective of what other countries may do and heedless of the consequences to any particular native industry or interest. Ruthless direct taxation for the repayment of debt without regard to the effects of such taxation upon individuals or their enterprise or initiative. Rigorous economy in all forms of expenditure whether social or military. Stern assertion of the rights of the creditor, national or private, and full and effectual discharge of all liabilities. Profound distrust of State-stimulated industry in all its forms, or of State borrowing for the purpose of creating employment. Absolute reliance upon private enterprise, unfettered and unfavoured by the State</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p194</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#116</span>
+        <span>yellow</span>
+        <span>p194</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Who could have thought that it would be easier to produce by toil and skill all the most necessary or desirable commodities than it is to find consumers for them?</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p196</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#117</span>
+        <span>green</span>
+        <span>p196</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>I see no reason why the political Parliament should not choose in proportion to its party groupings a subordinate Economic Parliament of say one-fifth of its numbers, and composed of persons of high technical and business qualifications</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p203</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#118</span>
+        <span>green</span>
+        <span>p203</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>But physical force alone, unsustained by world opinion, affords no durable foundation for security. Germany is a far stronger entity than France, and cannot be kept in permanent subjugation.</p>
+    </article>
+    
+
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#119</span>
+        <span>green</span>
+        <span>p203</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Russia, stripped of her Baltic Provinces, will, as the years pass by, brood incessantly upon the wars of Peter the Great. From one end of Germany to the other an intense hatred of France unites the whole population. The enormous contingents of German youth growing to military manhood year by year are inspired by the fiercest sentiments, and the soul of Germany smoulders with dreams of a War of Liberation or Revenge</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p205</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#120</span>
+        <span>yellow</span>
+        <span>p205</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>There is no reason why a base, degenerate, immoral race should not make an enemy far above them in quality, the prostrate subject of their caprice or tyranny, simply because they happened to be possessed at a given moment of some new death-dealing or terror-working process and were ruthless in its employment. The liberties of men are no longer to be guarded by their natural qualities, but by their dodges; and superior virtue and valour may fall an easy prey to the latest diabolical trick.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p208</span>
+          <span>3 highlights</span>
+          <span>page group: 3</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#121</span>
+        <span>green</span>
+        <span>p208</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Certainly we see around us to-day a marked lack of individual leadership. The late Mr. John Morley, statesman and philanthropist, man of letters and man of affairs, some years ago towards the close of his life delivered an oration in which he drew attention to the decline in the personal eminence of the leaders in almost all the important spheres of thought and art.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#122</span>
+        <span>yellow</span>
+        <span>p208</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Science in all its forms surpasses itself every year. The body of knowledge ever accumulating is immediately interchanged and the quality and fidelity of the research never flags. But here again the mass effect largely suppresses the individual achievement. The throne is occupied; but by a throng. In part we are conscious of the enormous processes of collectivization which are at work among us.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#123</span>
+        <span>yellow</span>
+        <span>p208</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>it is difficult to marshal to-day in any part of the English-speaking world an assembly of notables, who either in distinction or achievement can compare with those to whom our grandfathers so gladly paid attention and tribute.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p210</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#124</span>
+        <span>yellow</span>
+        <span>p210</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>We must not forget the enormous circulations at cheap prices of the greatest books of the world, which is a feature of modern life in civilized countries, and nowhere more than in the United States.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p211</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#125</span>
+        <span>yellow</span>
+        <span>p211</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It is at once the safeguard and the glory of mankind that they are easy to lead and hard to drive</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#126</span>
+        <span>yellow</span>
+        <span>p211</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Mass effects and their reactions are of course more pronounced in the leading nations than in more backward and primitive communities. In Great Britain, the United States, Germany, and France, the decline in personal pre-eminence is much more plainly visible than in societies which have less wealth, less power, less freedom. The great emancipated nations seem to have become largely independent of famous guides and guardians.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p213</span>
+          <span>3 highlights</span>
+          <span>page group: 3</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#127</span>
+        <span>green</span>
+        <span>p213</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Even ‘the Divinity that doth hedge a King’ is considered out of place except on purely official occasions. Sovereigns are admired for their free and easy manners, their readiness to mingle with all classes, their matter-of-fact work-a-day air, their dislike of pomp and ritual</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#128</span>
+        <span>yellow</span>
+        <span>p213</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The question is whether the sense of leadership, and the commanding attitude towards men and affairs, are likely to arise from such simple and unpretentious customs and habits of mind: and further whether our public affairs will now for the future run on quite happily without leaders who by their training and situation, no less than by their abilities, feel themselves to be uplifted above the general mass.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#129</span>
+        <span>yellow</span>
+        <span>p213</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>While we gaze, we feel that the day will never come when we shall learn the answer for which we have clamoured. Meanwhile the halters rot and the laurels fade. Both the making and the winning of the most terrible and the most recent of earthly struggles seems to have been a co-operative affair! Modern conditions do not lend themselves to the production of the heroic or super-dominant type. On the whole they are fatal to pose. The robes, the wigs, the ceremonies, the grades that fortified the public men and ruling functionaries of former centuries have fallen into disuse in every country. Even ‘the Divinity that doth hedge a King’ is considered out of place except on purely official occasions</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p215</span>
+          <span>2 highlights</span>
+          <span>page group: 2</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#130</span>
+        <span>yellow</span>
+        <span>p215</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The heroes of modern war lie out in the cratered fields, mangled, stifled, scarred; and there are too many of them for exceptional honours. It is mass suffering, mass sacrifice, mass victory. The glory which plays upon the immense scenes of carnage is diffused. No more the blaze of triumph irradiates the helmets of the chiefs.</p>
+    </article>
+    
+
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#131</span>
+        <span>yellow</span>
+        <span>p215</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The obliteration of the personal factor in war, the stripping from high commanders of all the drama of the battlefield, the reducing of their highest function to pure office work, will have profound effects upon sentiment and opinion. Hitherto the great captain has been rightly revered as the genius who by the firmness of his character, and by the mysterious harmonies and inspirations of his nature, could rule the storm. He did it himself: and no one else could do it so well. He conquered there and then. Often he fell beneath the bolts and the balls, saviour of his native land. Now, however illogical it may seem and even unjust, his glamour and honours will not readily descend upon our calculating friend at the telephone</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p216</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#132</span>
+        <span>green</span>
+        <span>p216</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>From this will follow blessed reactions. The idea of war will become loathsome to humanity. The military leader will cease to be a figure of romance and fame</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p223</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#133</span>
+        <span>yellow</span>
+        <span>p223</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>We can seek a period in the past whose conditions resemble as closely as possible those of our day, and presume that the sequel to that period will, save for some minor alterations, be repeated. Secondly, we can survey the general course of development in our immediate past, and endeavour to prolong it into the near future. The first is the method of the historian; the second that of the scientist.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p224</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#134</span>
+        <span>green</span>
+        <span>p224</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>Nuclear energy is at least one million times more powerful still. If the hydrogen atoms in a pound of water could be prevailed upon to combine together and form helium, they would suffice to drive a thousand horse-power engine for a whole year. If the electrons—those tiny planets of the atomic systems—were induced to combine with the nuclei in the hydrogen the horse-power liberated would be 120 times greater still</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p228</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card green">
+      <div class="highlight-meta">
+        <span>#135</span>
+        <span>green</span>
+        <span>p228</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It is indeed a descent almost to the ridiculous to contemplate the impact of the tremendous and terrifying discoveries which are approaching upon the structure of Parliamentary institutions. How can we imagine the whole mass of the people being capable of deciding by votes at elections upon the right course to adopt amid these cataclysmic changes? Even now the Parliaments of every country have shown themselves quite inadequate to deal with the economic problems which dominate the affairs of every nation and of the world.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p230</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#136</span>
+        <span>yellow</span>
+        <span>p230</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>‘Why are we here? What is the purpose of life? Whither are we going?’ No material progress, even though it takes shapes we cannot now conceive, or however it may expand the faculties of man, can bring comfort to his soul. It is this fact, more wonderful than any that Science can reveal, which gives the best hope that all will be well. Projects undreamed of by past generations will absorb our immediate descendants; forces terrific and devastating will be in their hands; comforts, activities, amenities, pleasures will crowd upon them, but their hearts will ache, their lives will be barren, if they have not a vision above material things. And with the hopes and powers will come dangers out of all proportion to the growth of man’s intellect, to the strength of his character or to the efficacy of his institutions. Once more the choice is offered between Blessing and Cursing. Never was the answer that will be given harder to foretell.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p233</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#137</span>
+        <span>yellow</span>
+        <span>p233</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>The fluctuations of the Nile could only be provided against by enormous granaries filled in good years. The possession of these granaries constituted the power of government.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p237</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#138</span>
+        <span>yellow</span>
+        <span>p237</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>inside the frame of Moses, ‘I will endow you with superhuman power. There is nothing that man cannot do, if he wills it with enough resolution. Man is the epitome of the universe. All moves and exists as a result of his invincible will, which is My Will.’</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p238</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#139</span>
+        <span>yellow</span>
+        <span>p238</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>It was a dead-lift struggle between Jehovah and Pharaoh. But Jehovah did not wish to win too easily. The liberation of the Children of Israel was only a part of His high Purpose. Their liberation had to be effected in such a manner as to convince them that they were the Chosen People, with the supreme forces of the universe enlisted in their special interest, should they show themselves faithful. So Jehovah laid on his plagues on the one hand, and hardened the heart of Pharaoh on the other.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p241</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#140</span>
+        <span>yellow</span>
+        <span>p241</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>At any rate there is no doubt about one miracle. This wandering tribe, in many respects indistinguishable from numberless nomadic communities, grasped and proclaimed an idea which all the genius of Greece and all the power of Rome were incapable. There was to be only one God, a universal God, a God of nations, a just God, a God who would punish in another world a wicked man dying rich and prosperous; a God from whose service the good of the humble and of the weak and the poor was inseparable.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+
+    <article class="position-row">
+      <section class="real-highlights">
+        <div class="span-meta">
+          <span>p247</span>
+          <span>1 highlights</span>
+          <span>page group: 1</span>
+        </div>
+        
+    <article class="highlight-card yellow">
+      <div class="highlight-meta">
+        <span>#141</span>
+        <span>yellow</span>
+        <span>p247</span>
+        <span>drive_docx</span>
+        <span>1 source hits</span>
+        <span>page group</span>
+      </div>
+      <p>‘What shall I do with all my books?’ was the question; and the answer, ‘Read them,’ sobered the questioner.</p>
+    </article>
+    
+      </section>
+      <section class="ai-output">
+        <div class="empty-state">No AI extraction output found for this book.</div>
+      </section>
+    </article>
+    
+        </main>
+        
+</body>
+</html>
