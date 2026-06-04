@@ -4,6 +4,7 @@ import argparse
 import json
 import random
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from datetime import datetime
 from difflib import SequenceMatcher
@@ -134,6 +135,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--judge-backend")
     parser.add_argument("--judge-model")
     parser.add_argument("--timeout-seconds", type=int, default=1_200)
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=1,
+        help="Number of chapter prompt jobs to run concurrently.",
+    )
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--force", action="store_true")
     parser.add_argument(
@@ -869,6 +876,7 @@ def write_manifest(
             "judge_model": args.judge_model
             or args.model
             or default_model_for_backend(args.judge_backend or args.backend),
+            "workers": args.workers,
             "dry_run": args.dry_run,
         },
         "candidate_count": len(candidates),
@@ -889,6 +897,54 @@ def write_manifest(
         ],
     }
     return write_text(args.out_dir / "manifest.json", json.dumps(manifest, indent=2))
+
+
+def run_samples(
+    selected: list[ChapterCandidate],
+    *,
+    args: argparse.Namespace,
+    backend: str,
+    model: str | None,
+    judge_backend: str,
+    judge_model: str | None,
+) -> list[ChapterRunResult]:
+    if args.workers <= 1 or len(selected) <= 1:
+        return [
+            run_sample(
+                candidate,
+                out_dir=args.out_dir,
+                backend=backend,
+                model=model,
+                judge_backend=judge_backend,
+                judge_model=judge_model,
+                timeout=args.timeout_seconds,
+                force=args.force,
+                dry_run=args.dry_run,
+            )
+            for candidate in selected
+        ]
+
+    results: list[ChapterRunResult | None] = [None] * len(selected)
+    with ThreadPoolExecutor(max_workers=args.workers) as executor:
+        futures = {
+            executor.submit(
+                run_sample,
+                candidate,
+                out_dir=args.out_dir,
+                backend=backend,
+                model=model,
+                judge_backend=judge_backend,
+                judge_model=judge_model,
+                timeout=args.timeout_seconds,
+                force=args.force,
+                dry_run=args.dry_run,
+            ): index
+            for index, candidate in enumerate(selected)
+        }
+        for future in as_completed(futures):
+            results[futures[future]] = future.result()
+
+    return [result for result in results if result is not None]
 
 
 def main() -> int:
@@ -914,20 +970,14 @@ def main() -> int:
         or args.model
         or default_model_for_backend(judge_backend)
     )
-    results = [
-        run_sample(
-            candidate,
-            out_dir=args.out_dir,
-            backend=backend,
-            model=model,
-            judge_backend=judge_backend,
-            judge_model=judge_model,
-            timeout=args.timeout_seconds,
-            force=args.force,
-            dry_run=args.dry_run,
-        )
-        for candidate in selected
-    ]
+    results = run_samples(
+        selected,
+        args=args,
+        backend=backend,
+        model=model,
+        judge_backend=judge_backend,
+        judge_model=judge_model,
+    )
     index_path = write_text(args.out_dir / "index.html", render_index(results))
     manifest_path = write_manifest(
         args=args,
