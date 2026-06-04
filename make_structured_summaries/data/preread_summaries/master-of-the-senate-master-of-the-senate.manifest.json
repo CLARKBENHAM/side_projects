@@ -1,0 +1,51 @@
+{
+  "book": {
+    "book_id": "master-of-the-senate-master-of-the-senate",
+    "title": "Master of the Senate",
+    "author": "Master of the Senate",
+    "book_dir": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/Master of the Senate",
+    "primary_path": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/Master of the Senate/Master of the Senate.epub",
+    "primary_format": "epub",
+    "companion_html_path": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/Master of the Senate/Master of the Senate.html",
+    "all_paths": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/Master of the Senate/Master of the Senate.epub|/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/Master of the Senate/Master of the Senate.html",
+    "duplicate_count": "1",
+    "source_name": "play_books_takeout",
+    "search_title": "Master of the Senate"
+  },
+  "config": {
+    "chunk_backend": "claude",
+    "chunk_model": "sonnet",
+    "synthesis_backend": "claude",
+    "synthesis_model": "sonnet",
+    "chunk_chars": 60000,
+    "overlap_chars": 2000,
+    "max_chunks": null,
+    "llm_timeout_seconds": 900,
+    "force": true,
+    "dry_run": true
+  },
+  "timestamp_started": "2026-06-01T23:17:18.114524",
+  "timestamp_finished": "2026-06-01T23:17:18.509425",
+  "status": "completed",
+  "current_stage": "completed",
+  "chunk_count": 62,
+  "stage_records": [
+    {
+      "name": "extract_text",
+      "status": "completed",
+      "started_at": "2026-06-01T23:17:18.114740",
+      "metadata": {
+        "source_path": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/Master of the Senate/Master of the Senate.epub",
+        "extracted_text_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/extracted_text/master-of-the-senate-master-of-the-senate.txt",
+        "char_count": 3572846,
+        "chunk_count": 62
+      },
+      "finished_at": "2026-06-01T23:17:18.500503"
+    }
+  ],
+  "paths": {
+    "extracted_text_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/extracted_text/master-of-the-senate-master-of-the-senate.txt",
+    "chunk_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/preread_chunk_notes/master-of-the-senate-master-of-the-senate",
+    "summary_path": ""
+  }
+}

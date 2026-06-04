@@ -1,0 +1,233 @@
+{
+  "timestamp": "2026-06-03T02:02:56.560884",
+  "config": {
+    "sample_count": 3,
+    "seed": 20260603,
+    "min_highlights": 2,
+    "min_chapter_chars": 2500,
+    "max_chapter_chars": 110000,
+    "backend": "codex",
+    "model": "gpt-5.5",
+    "judge_backend": "codex",
+    "judge_model": "gpt-5.5",
+    "dry_run": false
+  },
+  "candidate_count": 61,
+  "selected_count": 3,
+  "index_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_codex_review/index.html",
+  "samples": [
+    {
+      "book": {
+        "book_id": "master-of-the-senate-master-of-the-senate",
+        "title": "Master of the Senate",
+        "author": "Master of the Senate",
+        "book_dir": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/Master of the Senate",
+        "primary_path": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/Master of the Senate/Master of the Senate.epub",
+        "primary_format": "epub",
+        "companion_html_path": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/Master of the Senate/Master of the Senate.html",
+        "all_paths": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/Master of the Senate/Master of the Senate.epub|/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/Master of the Senate/Master of the Senate.html",
+        "duplicate_count": "1",
+        "source_name": "play_books_takeout",
+        "search_title": "Master of the Senate"
+      },
+      "chapter": {
+        "index": 44,
+        "title": "42 Three More Years",
+        "source_label": "OEBPS/Caro_9780307422033_epub_c42_r1.htm",
+        "start_char": 3070936,
+        "end_char": 3132046,
+        "char_count": 61110
+      },
+      "highlight_count": 48,
+      "matched_highlight_titles": [
+        "Master of the Senate"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_codex_review/artifacts/master-of-the-senate-chapter-044",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_codex_review/master-of-the-senate-chapter-044.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-03T01:57:11.590357",
+        "finished_at": "2026-06-03T01:58:15.990628",
+        "duration_seconds": 64.4
+      },
+      "judge_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-03T01:58:15.991228",
+        "finished_at": "2026-06-03T01:59:07.678886",
+        "duration_seconds": 51.687
+      }
+    },
+    {
+      "book": {
+        "book_id": "the-price-of-victory-the-price-of-victory",
+        "title": "The Price of Victory",
+        "author": "The Price of Victory",
+        "book_dir": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/The Price of Victory",
+        "primary_path": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/The Price of Victory/The Price of Victory.epub",
+        "primary_format": "epub",
+        "companion_html_path": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/The Price of Victory/The Price of Victory.html",
+        "all_paths": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/The Price of Victory/The Price of Victory.epub|/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/The Price of Victory/The Price of Victory.html",
+        "duplicate_count": "1",
+        "source_name": "play_books_takeout",
+        "search_title": "The Price of Victory"
+      },
+      "chapter": {
+        "index": 32,
+        "title": "Chapter 32",
+        "source_label": "OEBPS/part0049.xhtml",
+        "start_char": 1390716,
+        "end_char": 1445746,
+        "char_count": 55030
+      },
+      "highlight_count": 35,
+      "matched_highlight_titles": [
+        "The Price of Victory"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_codex_review/artifacts/the-price-of-victory-chapter-032",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_codex_review/the-price-of-victory-chapter-032.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-03T01:59:07.683325",
+        "finished_at": "2026-06-03T02:00:10.384614",
+        "duration_seconds": 62.701
+      },
+      "judge_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-03T02:00:10.385216",
+        "finished_at": "2026-06-03T02:01:06.013907",
+        "duration_seconds": 55.629
+      }
+    },
+    {
+      "book": {
+        "book_id": "a-history-of-the-english-speaking-peoples-collecti-speaking-peoples-collecti",
+        "title": "A History of the English-Speaking Peoples Collecti",
+        "author": "Speaking Peoples Collecti",
+        "book_dir": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/A History of the English-Speaking Peoples Collecti",
+        "primary_path": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/A History of the English-Speaking Peoples Collecti/A History of the English-Speaking Peoples Collecti.epub",
+        "primary_format": "epub",
+        "companion_html_path": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/A History of the English-Speaking Peoples Collecti/A History of the English-Speaking Peoples Collecti.html",
+        "all_paths": "/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/A History of the English-Speaking Peoples Collecti/A History of the English-Speaking Peoples Collecti.epub|/Users/clarkbenham/Downloads/Play Books Takeout 5/Google Play Books/A History of the English-Speaking Peoples Collecti/A History of the English-Speaking Peoples Collecti.html",
+        "duplicate_count": "1",
+        "source_name": "play_books_takeout",
+        "search_title": "A History of the English"
+      },
+      "chapter": {
+        "index": 8,
+        "title": "Chapter 8",
+        "source_label": "OEBPS/c06.xhtml",
+        "start_char": 186400,
+        "end_char": 215951,
+        "char_count": 29551
+      },
+      "highlight_count": 11,
+      "matched_highlight_titles": [
+        "A History of the English-Speaking Peoples Collection"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_codex_review/artifacts/a-history-of-the-english-speaking-peoples-collecti-chapter-008",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_codex_review/a-history-of-the-english-speaking-peoples-collecti-chapter-008.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-03T02:01:06.017864",
+        "finished_at": "2026-06-03T02:02:16.319429",
+        "duration_seconds": 70.301
+      },
+      "judge_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-03T02:02:16.320030",
+        "finished_at": "2026-06-03T02:02:56.558644",
+        "duration_seconds": 40.239
+      }
+    }
+  ]
+}
