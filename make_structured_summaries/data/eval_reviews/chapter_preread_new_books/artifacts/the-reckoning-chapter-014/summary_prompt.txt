@@ -1,0 +1,50 @@
+You are writing a pre-read guide for one chapter of a book.
+
+Book:
+- title: The Reckoning
+- author: David Halberstam
+- chapter: 14 of 59
+- chapter title: Chapter 13 (part 2)
+
+Goal:
+Write the thing a smart reader should read immediately before reading this chapter.
+The reader wants to move faster through the real chapter while retaining the main
+arc, load-bearing facts, important mechanisms, and a few scenes worth watching.
+
+Write Markdown only, roughly 700-1,100 words, with these sections:
+
+1. Orientation Before Reading
+   - 4-7 bullets giving the time, stakes, people, institutions, and conflict.
+
+2. The Chapter Arc
+   - 5-9 chronological bullets.
+   - Each bullet should say what changes, not just what happens.
+
+3. What To Watch For
+   - 5-9 bullets naming the important mechanisms, constraints, causal moves,
+     or authorial claims likely to matter.
+
+4. Load-Bearing Scenes
+   - 3-6 short entries.
+   - Each entry should have setup, action, and payoff in plain prose.
+
+5. Cast And Terms
+   - A compact glossary only for names, factions, places, institutions, and terms
+     needed to read this chapter without friction.
+
+6. What To Hold Lightly
+   - 2-5 bullets for vivid but probably nonessential detail.
+
+Rules:
+- Do not summarize every page.
+- Do not write a school-report recap.
+- Do not invent generic mental-model labels when a concrete event is clearer.
+- Prefer specific actors, constraints, incentives, chronology, and consequences.
+- Keep prose clean and readable; no throat-clearing and no motivational language.
+- Assume the reader has not read this chapter yet.
+- Do not mention reader highlights; this is for a new unread chapter.
+
+Chapter text:
+Lundy was the one Whiz Kid who stayed the whole course. Of the original group, both McNamara and Arjay Miller had made president, but McNamara served for only a few weeks, and Miller’s term was comparatively brief and uneventful. Lundy made it all the way through, and, more than either of them, he put his stamp on the Ford Motor Company. That he could hold so much power for so long surprised men who had in the earlier years underestimated him. In the end it was a reflection of the age of the company, the need to preserve and conserve rather than to create, and the fact that he represented, in the most personal way, the Ford family interest. That was critical. For Henry Ford was not just the head of the Ford Motor Company but the head of the Ford family and the conservator of its interests. Ed Lundy was his life-support system. Lundy’s job was to protect Ford. He knew the company, he had no other loyalty, he had none of the raging ambition of an Iacocca or the troublesome talent of a Don Frey, and he would spend as little Ford money as possible. Lundy and Ford were on the phone all the time, and Henry Ford checked out everything with Ed Lundy. Everything. They were not close socially, and Lundy avoided social occasions in Detroit and the foreign trips as much as he could, fearing, his friends suspected, what would happen when Henry Ford started to drink, and the sudden cruelty of Ford’s tongue. But most in the company knew how much Henry Ford trusted Lundy, and for those who did not there were constant indications. It was clear, for example, that before every important meeting Lundy and Ford had caucused, that to a large degree the decisions had been made by these two men even before the meeting started. Once it convened, Henry Ford would turn to Lundy and say, “Well, Ed, as we were just saying...” or Lundy would turn to Ford and say, “Of course, Mr. Ford, you know my position on this...” No one else in the company had that access and that trust, and thus no one else in the company had that much power.
+
+Even his opponents respected Lundy. He was a man of goodwill. Product men who thought that the power of the finance people was pernicious nevertheless believed that in contrast to McNamara, he was a fair man. He did not bully those who disagreed with him. He did not, as McNamara did, load the questions so that there was only one answer. (There were, it was believed, few honest answers given at Ford during McNamara’s years because there were few honest questions.) He had none of McNamara’s overwhelming ambition. McNamara had ruled by the force of his personality, often intimidating the people beneath him; Lundy ruled by kindness—almost, one critic thought, by love. That he was pledged to the greater good of the company there was no doubt. He was decent and fair, but the system he created was not.

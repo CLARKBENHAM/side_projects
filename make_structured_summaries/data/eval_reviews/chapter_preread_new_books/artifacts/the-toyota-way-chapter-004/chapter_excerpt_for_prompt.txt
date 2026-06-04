@@ -1,0 +1,721 @@
+planning groups, and formulates a concrete plan as a result of joint discussion with those groups.
+With the Prius, a team of specialists from the various design, evaluation, and manufacturing functional groups sat in a
+big room with the chief engineer and made decisions in real time. Joining that group were not only the design
+engineers, but the production engineers as well so they could have discussions together. To assist these discussions,
+computer-assisted design (CAD) terminals were put into the room and it became known as obeya (big room). The
+obeya serves two purposes information management and on-the-spot decision making. The nemawashi process can
+take a great deal of time to make decisions, but in obeya the right players are there to make decisions on the spot.
+There are many visual management tools (Principle 7) in the obeya drawings of vehicles and schedules with
+checkpoints, so team members can quickly see where they are in every aspect of the program.
+How often are people in the room? It varies, according to Uchiyamada, but usually once every two days at least
+the whole team assembles there. One day for the obeya and the other day the chief engineer is in his own separate
+office. Obeya is the war room. Before the Prius project, the chief engineer as an individual controlled everything, but
+with obeya a cross-functional team now controls the program. Since the Prius, the obeya system has evolved and is
+now a standard part of Toyota s development process.
+
+2. Simultaneous engineering. Manufacturing and production engineers are now involved very early in the design
+process working with design engineers at the concept development stage, to give input on manufacturing issues. This
+level of cooperation at such an early stage is unusual in the auto industry. Toyota had been incorporating simultaneous
+engineering for several years before the Prius. But Uchiyamada intensified it. Because so much was new and because
+of the intense time pressures, there was unparalleled cooperation across divisions and between design and
+manufacturing for the Prius.
+As a result of these innovations, along with innovations in the use of computer technology, Toyota s product
+development process is now routinely down to 12 months or less for derivative vehicles in Japan, an impressive feat,
+considering that most competitors require twice this long. But the cornerstone of Toyota s product development
+system is not computers or organizational changes. The cornerstone is still the chief engineer and the Toyota Way
+principles he and Toyota s engineers live out in their work. According to Uchiyamada:
+
+The role of the chief engineer has not changed too much. The personality of the CE and getting people to
+cooperate continues to be very important. The personality and perseverance and the ability of the CE really
+determine the success of the car.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Other Toyota Way Principles from the Prius Story
+Notably missing from my recounting of this story are Principles 2-6 of the Toyota Way (under the category, The
+Right Process Will Produce the Right Results). These deal more with the processes used at Toyota to do the detailed
+work. These principles (creating flow, leveling the work load, stopping the process to ensure high quality,
+standardization) are central to product development and to the development of these breakthrough vehicles. They
+were the details of the day-to-day process that allowed the Prius to be completed in record time once the G21 group
+had settled on the technical concept.
+
+Other key Toyota Way principles that can be seen in the stories of the Lexus and the Prius include the following.
+
+Principle 1. Base your management decisions on a long-term philosophy, even at the expense of short-term financial
+goals. Both the Lexus and the Prius projects were long-term investments in the future of the company. At the time the
+Prius project was initiated, nobody knew whether hybrid vehicles would go anywhere. But Toyota decided to be the
+first and bet that hybrids would be an investment in the future. The best people with active support from the very top
+of the company were assigned to the Prius and they all felt like they were working on a project that was critical to the
+future of the company. Similarly, who knew whether the Lexus could successfully penetrate the luxury market
+dominated by European prestige? Investing in the future, not short-term profits, was the focus of these projects.
+
+Principle 9. Grow leaders who thoroughly understand the work, live the philosophy, and teach it to others. Both of
+these programs were driven by leaders who were absolutely committed to the success of the programs. In general,
+chief engineers epitomize the leadership philosophy of Toyota. They grow up in the system, starting with the most
+basic engineering work and only gradually, after 15-20 years of engineering practice, getting project management
+responsibility. They are selected because of their combination of technical skills and leadership abilities developed
+through these years of experience. They seem to fit the this yet that philosophy of Suzuki at work in the
+development of Lexus. They are leaders, yet they are also exceptional engineers. They are visionaries with a broad
+perspective, yet they understand the development of the vehicle down to the tiniest detail. They are independent
+thinkers doing what they believe is best for the customer and the product, yet they are experts at working the Toyota
+network and can garner all the resources and approvals needed. They do a lot of work as individuals that other
+managers might delegate, yet they are able to motivate all those who touch the project to do exceptional engineering
+work that at first seems impossible.
+Principle 13. Make decisions slowly by consensus, thoroughly considering all options; implement rapidly
+(nemawashi). It s clear that the chief engineers are target-driven and timing-driven, yet always willing to step back
+and reflect on the range of options that are available. One thing remarkable about both the Lexus and the Prius is the
+no-compromise attitude of the chief engineers. At some point, with the intense time pressure to do a seemingly
+impossible job, one would expect the leader to say, OK, let s pick a direction and just get on with it. But repeatedly
+throughout the Prius development, Uchiyamada would step back and say, Let s stop and reflect (hansei). Let s
+rethink what this project is about. Let s test every possible design for a hybrid engine in the world. Let s have a
+design competition and get all the styling studios to generate competitive designs (as discussed in Chapter 19).
+Suzuki decided to do what had never been done in engine technology, aerodynamics, and fuel economy through
+experimenting and trying new ideas. These do not seem to be the things a rational person does to get a job done
+quickly. But central to the Toyota Way is thorough consideration in decision making. It is not acceptable to quickly
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+choose a direction and go racing off in that direction. Exploring all possible alternatives and considering pros and
+cons of each while consulting all partners who have something to offer allows Toyota to execute fast, once a decision
+is finally made, without backtracking to remake decisions.
+
+Is Toyota a conservative company? Yes. Does it seem to be very plodding and slow to make changes? Yes, certain
+types of changes. Is it innovative? Remarkably so. In this regard, Toyota itself is another of Suzuki s yets. Go slow,
+build on the past, and thoroughly consider all implications of decisions, yet move aggressively to beat the competition
+to market with exceptional products that break the mold. This is the Toyota Way.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Part Two: The Business
+Principles of the Toyota Way
+Chapter List
+Section I: Long-Term Philosophy Chapter 7: Principle 1: Base Your Management Decisions on a Long-Term
+Philosophy, Even at the Expense of Short-Term Financial Goals Chapter 8: Principle 2: Create Continuous Process
+Flow to Bring Problems to the Surface Chapter 9: Principle 3: Use Pull Systems to Avoid Overproduction Chapter
+10: Principle 4: Level Out the Workload (Heijunka) Section II: The Right Process Will Produce the Right Results
+Chapter 11: Principle 5: Build a Culture of Stopping to Fix Problems, to Get Quality Right the First Time Chapter 12:
+Principle 6: Standardized Tasks Are the Foundation for Continuous Improvement and Employee Empowerment
+Chapter 13: Principle 7: Use Visual Control So No Problems Are Hidden Chapter 14: Principle 8: Use Only
+Reliable, Thoroughly Tested Technology That Serves Your People and Processes Section III: Add Value to the
+Organization by Developing Your People and Partners Chapter 15: Principle 9: Grow Leaders Who Thoroughly
+Understand the Work, Live the Philosophy, and Teach It to Others Chapter 16: Principle 10: Develop Exceptional
+People and Teams Who Follow Your Company s Philosophy Chapter 17: Principle 11: Respect Your Extended
+Network of Partners and Suppliers by Challenging Them and Helping Them Improve Section IV: Continuously
+Solving Root Problems Drives Organizational Learning Chapter 18: Principle 12: Go and See for Yourself to
+Thoroughly Understand the Situation (Genchi Genbutsu) Chapter 19: Principle 13: Make Decisions Slowly by
+Consensus,Thoroughly Considering All Options; Implement Rapidly (Nemawashi) Chapter 20: Principle 14: Become
+a Learning Organization Through Relentless Reflection (Hansei) and Continuous Improvement (Kaizen)
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Section I: Long-Term Philosophy
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 7: Principle 1: Base
+Your Management Decisions on a
+Long-Term Philosophy, Even at
+the Expense of Short-Term
+Financial Goals
+Overview
+The most important factors for success are patience, a focus on long-term rather than short-term results,
+reinvestment in people, product, and plant, and an unforgiving commitment to quality.
+Robert B. McCurry, former Executive V.P., Toyota Motor Sales
+In the last few decades, the world has been moving in the direction of capitalism as the dominant socio-economic
+system. The prevailing belief is that if individuals and companies pursue their self-interests, supply and demand will
+magically lead to innovation, economic growth, and overall economic well-being for humanity. While it is comforting
+to think we can all simply do what is best for our short-term economic interests and all will be well in the world, there
+is a dark side to the pursuit of self-interest as the engine for economic growth. We see it with Enron and other
+scandals and the aftermath of extreme distrust of large corporations and the morality of corporate executives. We see
+it when there is an economic downturn and millions of people are thrown out of their jobs to fend for themselves.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+A Mission Greater than Earning a Paycheck
+Can a modern corporation thrive in a capitalistic world and be profitable while doing the right thing, even if it means
+that short-term profits are not always the first goal? I believe that Toyota s biggest contribution to the corporate
+world is that of providing a real-life example that this is possible.
+Throughout my visits to Toyota in Japan and the United States, in engineering, purchasing, and manufacturing, one
+theme stands out. Every person I have talked with has a sense of purpose greater than earning a paycheck. They feel
+a greater sense of mission for the company and can distinguish right from wrong with regard to that mission. They
+have learned the Toyota Way from their Japanese sensei (mentors) and the message is consistent: Do the right
+thing for the company, its employees, the customer, and society as a whole. Toyota s strong sense of mission
+and commitment to its customers, employees, and society is the foundation for all the other principles and the
+missing ingredient in most companies trying to emulate Toyota.
+When I interviewed Toyota executives and managers for this book, I asked them why Toyota existed as a business.
+The responses were remarkably consistent. For example, Jim Press, Executive Vice President and C.O.O. of Toyota
+Motor Sales in North America and one of two American Managing Directors of Toyota, explained:
+
+The purpose of the money we make is not for us as a company to gain, and it s not for us as associates to see
+our stock portfolio grow or anything like that. The purpose is so we can reinvest in the future, so we can
+continue to do this. That s the purpose of our investment. And to help society and to help the community, and
+to contribute back to the community that we re fortunate enough to do business in. I ve got a trillion
+examples of that.
+This is not to say that Toyota does not care about cutting costs. Shortly after World War II, Toyota nearly went
+bankrupt, which led to the resignation of the company founder Kiichiro Toyoda. Toyota pledged to become
+debt-free. Cost reduction has been a passion since Taiichi Ohno began eliminating wasted motions on the shop floor.
+Often this led to removing a worker from a line or cell, to be placed in another job so one less worker had to be
+hired in the future. Toyota now has a rigorous Total Budget Control System in which monthly data is used to
+monitor the budgets of all the divisions down to the tiniest expenditure.
+I asked many of the Toyota managers I interviewed if cost reduction is a priority and they just laughed. Their answers
+amounted to You haven t seen anything until you ve experienced the cost-consciousness of Toyota down to pennies.
+Yet cost reduction is not the underlying principle that drives Toyota. For example, Toyota would no sooner fire its
+employees because of a temporary downturn in sales than most of us would put our sons and daughters out on the
+street because our stock investments went bad. Toyota executives understand their place in the history of the
+company. They are working within a long-term philosophical mission to bring the company to the next level. The
+company is like an organism nurturing itself, constantly protecting and growing its offspring, so that it can continue to
+grow and stay strong. In this day and age of cynicism about the ethics of corporate officers and the place of large
+capitalistic corporations in civilized society, the Toyota Way provides an alternative model of what happens when
+you align almost 250,000 people to a common purpose that is bigger than making money. Toyota s starting point in
+business is to generate value for the customer, society, and the economy.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Doing the Right Thing for the Customer
+I asked Jim Press how he learned the Toyota Way. He explained that the reason he joined the company was partly
+to move on from an environment at Ford where there was constant tension between doing business the way it should
+be done and the way it actually was done. When he went to a social event, he avoided telling people he worked for
+Ford. He explained:
+
+People told me all the problems with their Ford cars and I had seen the end result when working in a service
+department of a Ford dealership. One job I had was driving a Thunderbird before it was shipped, and I could
+tell how badly the customers were going to complain. Intuitively I knew that was not right.
+In contrast, Toyota is aligned around satisfying the customer. It felt like I finally had found a home. The
+learning process was from the people I worked with from Japan. The executive coordinators from Japan
+really were here not only to guide the company s development but the development of the people. The
+environment allowed you to do business the way you knew it should be done. Toyota was a company that did
+not say it, they did it. We saw it firsthand.
+Press described an early example of Toyota s commitment to doing the right thing for the customer during the Nixon
+shock of 1971. President Nixon had imposed an import surcharge and also the yen was starting to float.
+
+We had in dealerships at any one given time three different prices for the same car three dealer costs, three
+different MSRPs. You went into three dealerships and there were three 1971 Coronas, the same color, same
+specs, with three different prices. The dealers had paid three different dealer costs. It was a mess. We were a
+very young company then. Finally, Nixon s import surcharge was reversed, but the government did not pay
+us back. We still went back and paid every customer and dealer for all that extra tax they had paid on cars
+they purchased from us. We lost money. But we did it to satisfy the customer and to gain their long-term
+interest in us .... We were the only company that did it. We got approval from Japan and it was not a time
+when we were real rich, either. We struggled to make payroll.
+Jim Press then fast-forwards to Lexus in 1996-1997:
+
+We wanted to have a distinctive Lexus-like ride and wanted to break new ground in ride quality. To get that,
+our tire compounds were fairly soft. And so even though the customers experienced a good ride and the tires
+were well within our specs, they did not last as long initially as many customers wished. I think 5-7 percent of
+the customers actually complained about tire life. To us that is a big deal, as we are used to dealing in
+complaint levels of far less than 1 percent. So we sent the owners of every Lexus where these tires were
+specified a coupon they could redeem for $500 and apologized if they had any inconvenience with their tires
+and felt that they wore out early. Many of these were customers who had already sold their cars. The way
+you treat the customer when you do not owe them anything, like how you treat somebody who cannot fight
+back that is the ultimate test of character.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The NUMMI Story: Building Trust with Employees
+In the early 1980s, Toyota formed a joint venture with GM. It was Toyota s first overseas plant and they did not
+want to go it alone. They agreed to teach GM the principles of the Toyota Production System (TPS). Toyota
+proposed to take over a light truck factory in Fremont, California that had been closed by GM in 1982 and run it
+according to the principles of the Toyota Way. Dennis Cuneo, now Senior VP of Toyota Motor Manufacturing
+North America, was an attorney for Toyota at the time. He explains:
+The perception that everybody had at that time was that the Toyota Production System just worked people to
+death. It was just basically Speed up! In fact, I remember the first meeting we had in the union hall with
+union leadership and there was this gentleman by the name of Gus Billy. He was sitting at the end of the table
+and we were talking about the Toyota Production System and kaizen, etc. He said, It sounds like a
+production speed-up to me. It s the whole concept of making all these suggestions, trying to suggest your way
+out of a job.
+This was not an isolated hostile attitude. Even when the plant had been run by GM, the union local had the reputation
+of being militant, to the point of calling illegal wildcat strikes. Nevertheless, when Toyota took over management of
+the plant, against the advice of GM, Toyota decided to bring back the UAW local and bring back the specific
+individuals who represented this UAW local in the plant. Cuneo says:
+
+I think it surprised GM. Some of the labor relations staff advised us not to. We took a calculated risk. We
+knew that the former GM workforce needed leadership and the Shop Committee comprised the natural
+leaders of that workforce. We had to change their attitudes and opinions. So we sent the shop committee to
+Japan for three weeks. They saw firsthand what the TPS was all about. And they came back converted and
+convinced a skeptical rank and file that this Toyota Production System wasn t so bad.
+In fact, under Toyota s new management, when the old factory reopened in 1984, it surpassed all of GM s plants in
+North America in productivity, quality, space, and inventory turns. It is often used as an example of how TPS can be
+successfully applied in a unionized U.S. plant with workers who had grown up learning the traditional culture of
+General Motors and the traditional adversarial relationships between union and management. Cuneo says the key
+was building trust with the workers:
+
+We built trust early on with our team members. GM had problems selling the Nova in 1987 to 88, and they
+substantially cut the orders to our plant. We had to reduce production and were running at about 75 percent
+capacity, but we didn t lay anybody off. We put people on kaizen teams and found other useful tasks for
+them. Of all the things we did at NUMMI, that did the most to establish trust.
+According to Cuneo, GM s initial motivation for entering the venture was to outsource production of a small car. As
+GM learned more about the TPS, they became more interested in using NUMMI as a learning laboratory. Hundreds
+of General Motors executives, managers, and engineers have come through the doors of NUMMI, only to be
+transformed by the teachings of TPS by the time they returned to GM. I have visited GM plants in the U.S. and
+China and the bible for manufacturing is a version of the Toyota Production System first written by Mike Brewer, an
+early alum of NUMMI sent by GM to learn TPS. GM s Global Manufacturing System is a direct copy of the
+Toyota Production System.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Unfortunately, it took about 15 years for GM to take the lessons of NUMMI seriously. When they began to take it
+seriously, it took GM about five years before they really began to see improved productivity and quality, corporate
+wide (as seen in the auto industry s Harbour Reports and customer surveys by J.D. Powers and Consumer Reports
+).
+You may be asking, Why would Toyota teach their coveted lean manufacturing system to a major competitor, GM?
+There were lots of different motivations for starting the joint venture. But at least one consideration was that Toyota
+realized GM was the world s largest carmaker and was struggling in its manufacturing operations. By helping to raise
+the level of manufacturing at GM, they were helping society and the community, as well as creating high-paying
+manufacturing jobs for Americans. The senior executives at Toyota speak of giving back something to the U.S. for
+the help they provided Japan to rebuild its industry after World War II. This is not mere lip service or pie-in-the-sky
+idealism. They really believe it.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Don t Let Business Decisions Undermine Trust and
+Mutual Respect
+Toyota understands that maintaining the jobs of associates is part of its obligation to the community and society. A
+great example of this is the case of Toyota s longest-running manufacturing operation in the United States a truck bed
+plant called TABC.
+
+In the 1960s the U.S. imposed a 30 percent surcharge on trucks that were imported, called the chicken tax. It was
+in retaliation for Europeans refusing to import poultry. To get around this duty tax, most foreign companies imported
+trucks without the truck beds and the truck was then considered a part rather than a truck. They imported the bed
+separately, which was also a part, and bolted the truck and bed together at the port. Toyota also wanted to avoid the
+duty, but decided to build the truck beds in the U.S., partly because it would also contribute to local employment.
+They chose Long Beach, California, because it was near the port where Toyota trucks entered the U.S.
+
+TABC was actually the first U.S. company to seriously and successfully apply TPS and today it has 600 employees.
+In June 2002 TABC celebrated its 30th anniversary in Long Beach. But the celebration could have been a dismal
+affair, because in 2001 Toyota decided to move the truck bed business to a new factory in Mexico. This sounds like
+a familiar corporate scenario of chasing low-wage Mexican labor. However, this story ends differently, because
+Toyota was following the Toyota Way principles. Toyota had a variety of reasons for wanting a Mexican truck bed
+plant, including building vehicles where they were being sold and avoiding tougher environmental laws for paint in
+California that required major new investments to their U.S. facility. I ll let Cuneo explain what Toyota did and why
+they didn t lay anyone off.
+
+That Long Beach plant s 30 years old; it s landlocked. Who s keeping Califor-nia manufacturing facilities
+open, right? Many companies are looking for an excuse to shut down their California facilities. But we and
+our top management in Japan recognized that the TABC workforce has performed well. With limited
+resources, they ve really implemented TPS. It would be unfair and send the wrong message to the team
+members at our other plants to penalize a workforce that has done everything we ve asked of them. So we re
+finding additional work for TABC. During my stay at NUMMI back in the late 80s, GM closed its Norwood
+plant here in Cincinnati, which was a pretty productive plant. They were building Firebirds and Camaros and
+they shipped all that production to their Van Nuys plant because it made short-term economic sense. I
+remember some of the GM guys at NUMMI who later lamented, Here we had this Norwood plant that had
+really improved productivity, etc., and what did we do? We shut them down. And so, when you re asking
+team members on the line to give you a hundred percent, to find ways to add more content to the job to
+improve productivity, what do they get in return? And if what they get in return is a weekly wage but a pink
+slip as soon as we have a downturn, it s hard to engender that trust and mutual respect that you need. So you
+can t just say human resources are our most important asset; you have to walk the talk every day. And
+people really watch what you do, rather than listen to what you say. That s the Toyota System. It goes back
+to this whole concept of stakeholders. If the financial analysts on Wall Street were the primary stakeholders
+for Toyota, we couldn t do something like that. It s just a big difference in philosophy. It s always been that
+way with Toyota.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+My interview with Cuneo was in February 2002, when it was not clear how Toyota was going to keep the TABC
+plant open, though Toyota was committed to finding new work. By June the plant was celebrating its 30th
+anniversary and its new business venture with Hino Motors, an affiliated company partly owned by Toyota. Instead
+of closing it down, Toyota has helped TABC expand its operations to build new trucks, making it the first new
+vehicle assembly operation to build trucks in California since NUMMI opened in 1984. An article reporting on the
+celebration noted, At today s anniversary celebration, TABC also presented checks for $2,000 each to ten area
+organizations as a way to thank the community for its part in the company s 30-year success. In addition, the
+company recognized ten TABC team members who have been with the company since its start-up in 1972. [1]
+So instead of 600 laid-off workers collecting unemployment, the company was celebrating and giving money away to
+community organizations. Toyota has since given TABC additional responsibility for manufacturing 68,000
+four-cylinder engines per year for the Tacoma truck to a plant in California with its high cost of doing business. For
+most companies, this makes absolutely no sense, based on short-term economic logic. But Toyota was practicing
+Principle 1: Base your management decisions on a long-term philosophy, even at the expense of short-term
+financial goals. Toyota wasn t measuring this investment in terms of quarterly budgets; it was measuring it in the
+ongoing respect the customer and its employees have for their company and products. And, of course, through TPS
+Toyota knew this sophisticated and committed workforce could build in quality and continue to eliminate waste.
+Toyota believes this is what drives profits in the long run.
+Here s another example of Toyota s deep sense of responsibility to the community, from a conversation I had with
+Cuneo:
+
+Dennis: I just got a note two days ago from one of our Senior Managing Directors in Japan about odor complaints
+from a couple of homeowners who lived close to our Georgetown [Kentucky] plant. These houses were close to the
+plant and should have been purchased when we originally built the plant. Recently we set aside some money to buy
+those houses. The homeowners were using the odor complaints as negotiating leverage. Once the news of odor
+complaints reached Japan, we received a note from a Senior Managing Director asking us what we planned to do
+about the complaints. Our policy is zero violations this was simply a complaint to gain negotiating leverage. So I had
+to explain the difference between a complaint and a violation.
+Jeff: That s a couple of houses?
+Dennis: Yeah, two houses.
+Jeff: Two houses and the Managing Directors write a letter?
+Dennis: Two guys are really complaining cause they want to get a higher price for their property. So I have a
+senior managing director writing us a note saying, Here s our policy: zero violations. I mean, what s that tell you?
+Jeff: I can throw out a number of hypotheses. One is that to some degree that is Japanese. The Japanese are very
+concerned about harmony, disharmony. To some degree there s almost a paranoia about any problem in the United
+States because of potential tensions with the government. On the other hand, I could attribute it to more of a value
+system. Where do you think it falls out there?
+Dennis: Value system. Of course, you want to avoid regulatory and legal issues, but this goes more to the value
+system. We, Toyota, have made this commitment to the environment. Our policy is zero violations. That s one of our
+eight global performance indicators, along with quality, productivity, etc.
+You may question the purity of Toyota s motives. Surely a Japanese company that has penetrated such a major part
+of the U.S. market had to be concerned about political repercussions of any negative publicity. But Toyota s zero
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+violations policy goes beyond purely political motives. Toyota executives really try to do the right thing.
+
+[1]Automotive Intelligence News, www.autointell.com, June 12, 2002.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Use Self-Reliance and Responsibility to Decide
+Your Own Fate
+One of my favorite discussions of the history of the development of the Japanese automobile industry is a book by
+Michael Cusumano, The Japanese Automobile Industry (Cusumano, 1985), that contrasts in detail the evolution of
+Nissan and the evolution of Toyota. In his book, Cusumano clearly illustrates the different trajectories of the two
+companies.
+One of the key differences is that Toyota always chose a path of self-reliance and let s do it ourselves, rather than
+relying on outside business partners. For example, when Toyota wanted to get into the luxury car business, it didn t
+buy BMW. Instead it created its own luxury division, Lexus, from scratch, in order to learn and understand for itself
+the essence of a luxury car (in the genchi genbutsu spirit).
+Like the small farmers of old who had to build their own houses, repair their own equipment, and creatively solve all
+their own problems, Toyota Motor Company started small with few resources. Everyone had to chip in on every
+activity and do what was necessary to engineer and build a car. In fact, in the 1930s the president of Toyoda
+Automatic Loom, Kodama Risaburo, thought the automotive business was risky and was reluctant to invest all but
+minimal capital in the new venture (Cusumano, 1985). So the Toyota automobile company had to learn to make
+everything for itself.
+While many companies can claim to value self-reliance, Toyota actually lives this philosophy on a corporate
+institutional level. Toyota Motor Company founder, Kiichiro Toyoda, said:
+
+My father was not educated. The only strength he had was to believe in one thing all the way: that the
+Japanese have latent capabilities. The automatic loom was the product of this conviction.
+Kiichiro, son of Sakichi and the first president of Toyota Motor Company, carried on the tradition of his father s
+self-reliant philosophy. In the 1920s he was an engineering student, but not just an engineering student going to class
+and passing tests. Like his father, he actually invented things, and by 1926-1928 he was inventing processes to build
+a car. Jim Press, a Toyota history buff, explains how this do-it-yourself philosophy played out in the new car
+company led by Kiichiro:
+
+Toyota s orientation from the very beginning was anybody could go hire a mechanic and hire an engineer
+and hire this and buy that. Toyota s view was that before they could build a car, they needed to perfect new
+revolutionary processes to build a mold, to build an engine, to go back to that level. And that s what makes
+the company different. Going back to the essence.
+Later, when other Japanese automakers were willing to buy kits from U.S. carmakers and assemble knockoffs of
+their vehicles, Toyota chose to design and build its own cars, drawing on pieces of designs from a variety of U.S.
+vehicles. In fact, Toyota was the first automobile company in Japan to develop vehicles without technical assistance
+agreements with the more advanced automobile companies in Europe and the U.S. It didn t want to be dependent on
+outside assistance.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+In both a physical and psychological sense, Toyota is somewhat isolated from the rest of Japan. Toyota City is
+almost in the middle of nowhere. To get there requires going to Nagoya, a major though not central city in Japan.
+Then a long train ride and finally a taxi will get you to Toyota headquarters. Even now, with Toyota and its suppliers
+populating the landscape, there is a rural flavor. And Toyota executives proudly proclaim themselves unsophisticated
+country bumpkins. Mikio Kitano, formerly President of Toyota Motor Manufacturing Kentucky and a director of the
+company at the time I visited his office, had a huge stuffed animal gorilla in his office. He described himself to me as
+an ape not like the sophisticates of Tokyo.
+At Toyota the companion to self-reliance is responsibility for its own successes and failures. In Toyota Way 2001 it
+states: We strive to decide our own fate. We act with self-reliance, trusting in our own abilities. We accept
+responsibility for our conduct and for maintaining and improving the skills that enable us to produce added value.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Toyota s Mission Statement and Guiding Principles
+We get a flavor of what distinguishes Toyota from excerpts of its mission statement for its North American operations
+compared with that of Ford (Figure 7-1). Ford s mission statement seems reasonable. The company is concerned
+about being a leader in its products and services and wants to continually improve these to prosper as a business and
+provide a reasonable return to its stockholders the owners of the business.
+
+Figure 7-1: Toyota s mission versus Ford s
+In contrast, Toyota does not mention stockholders, even though at this time it was listed on the New York Stock
+Exchange. It does not even mention the quality of its products even though we know that is a passion within Toyota.
+The purpose of Toyota is not to make a quality product that will sell well and make money for owners. That is a
+requirement in order to achieve the mission. The true mission, according to this statement, has three parts:
+1.
+Contribute to the economic growth of the country in which it is located (external stakeholders).
+2.
+Contribute to the stability and well being of team members (internal stakeholders).
+3.
+Contribute to the overall growth of Toyota.
+
+The poignant message is that the company must enhance the growth of society or it cannot contribute to its external
+or internal stakeholders. This is its reason for making excellent products. Toyota challenges its workers to contribute
+to Toyota and make a place in its history. Toyota genuinely wants its associates to grow and learn, to invest in
+long-term technologies, and create lasting customer satisfaction with the goal of getting repeat business for life.
+Another look at Toyota s guiding principles comes from the following internal document (see Figure 7-2). It was
+revised after Toyota s global expansion, to emphasize the company s responsibility as a global citizen. The principles
+here accurately express Toyota s feeling of responsibility to its business partners for stable, long-term growth, and
+mutual benefits.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Figure 7-2: Guiding principles at Toyoto Motor Corporation
+Unfortunately most companies still suffer from short-term myopia. I give presentations about Toyota throughout the
+world, and I often get questions that make perfect sense for companies whose only goal is today s profits. Examples
+include:
+•
+Will Toyota still use JIT if there is a major disaster that shuts down the supply chain?
+•
+Doesn t Toyota lay off employees when business is bad for a particular product in a plant?
+•
+If Toyota does not lay off employees, what do they do with them?
+•
+Now that Toyota is listed on the New York Stock Exchange, aren t they more concerned about quarterly
+earnings?
+•
+How does Toyota cost justify investments in technology for quick changeover and right-sized equipment to
+create one-piece flow?
+
+The answer to all these shortsighted questions is simply that Toyota s business decisions are driven by its
+philosophies. It will not abandon them at the drop of a hat. The only way it will change its philosophies of
+manufacturing, investment, and managing people is if there is a fundamental shift in the world that threatens its
+long-term survival ... after very thorough analysis. The philosophies discussed in this chapter did not grow up
+overnight and Toyota will not drop them overnight. John Shook, reflecting back on what he learned as a manager at
+Toyota, explains this well:
+
+Toyota intuited many years ago that it must focus on survival and the integration of all corporate functions
+toward ensuring that survival. TPS, then, is the result of efforts to direct all activities to support the goal of
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+firm survival. This is vastly different from the narrow goal of making money, though in most
+micro-instances of actual work performance, they may appear to be virtually the same thing .... I posit here
+that Toyota has evolved the most effective form of industrial organization ever devised. At the heart of that
+organization is a focus on its own survival. It is this focus that enables Toyota to behave as a natural
+organism, enabling it to evolve as a truly emergent system. (Shook, 2002)
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Create a Constancy of Purpose and Place in
+History
+When I think about Toyota and how it operates, I keep on coming back to quality guru W. Edwards Deming s
+famous edict: Constancy of purpose. Constancy of purpose explains why, in any given year, if you bet Toyota will
+make a profit, you will probably win. If you bet that its sales will grow over the year before, you will probably win.
+You will not see huge growth spurts from one year to the next or major shifts in strategy. You will not see boardroom
+coups where a new regime takes over and remakes the company. Rather, you will see a slow and steady movement
+forward year in and year out. This is constancy of purpose, as I believe Deming envisioned it, that goes beyond
+short-term profits and enriching a few executives. The Toyota Way is about adding value to customers, employees,
+and society. It provides a framework for Toyota to make short-term and long-term decisions, and it rallies
+employees around a shared purpose that is bigger than any of them.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Gutting of Chrysler s Culture: A Cautionary
+Tale
+Anyone who witnessed the rebirth of Chrysler under Lee Iacocca knows that one of the best product decisions he
+made was to invest in the K-Car, the basis for all the new passenger cars introduced in the 1980s. It saved the
+company from ruin. Then, in the 1990s, he was willing to step back and allow some remarkable leaders like Bob
+Eaton and Tom Stallkamp and Bob Lutz and François Castaing to reshape the company. A major focus was in
+product development, where vehicle centers (modeled after Honda) were created to realign the old functional
+organization into a product-driven organization. Engineers responsible for electrical components, body engineering,
+chassis engineering, and manufacturing engineering were all put together under one general manager, who took a role
+something like the Toyota chief engineer. These groups had a single focus produce excellent vehicles that customers
+will want to buy at a low cost so Chrysler could make a profit. This led to the LH series of vehicles (Chrysler
+Concorde, Dodge Intrepid, etc.), a modernized minivan, the Neon, an award-winning new Jeep Grand Cherokee,
+and even the quirky but popular PT Cruiser. Each general manager was learning from the last one and the
+organization, at least in product development, was getting stronger and stronger. In the meantime, Tom Stallkamp
+was revolutionizing purchasing and creating what a Harvard Business Review article called an American keiretsu
+(Dyer, 1996). Chrysler soon became the world s most profitable car company in terms of profit per vehicle not the
+biggest, but the most profitable per vehicle.
+Toyota was actually concerned by these developments. Up to that point, no U.S. company had shown signs of
+getting it right and developing a culture that could compete with Toyota. But Chrysler was beginning to get it right.
+Fortunately for Toyota, Chrysler was bought by Daimler. Chrysler s renaissance proved to be just another
+flash-in-the-pan threat that would vanish as quickly as it appeared. By 2000, Chrysler was again on the verge of
+bankruptcy and scrambling to simply break even. What happened?
+The merger of Daimler and Chrysler was initially portrayed as a cooperative venture of equals that would learn the
+best of the best from each other. Soon it became obvious this was an out-and-out takeover. Of course, in any
+takeover there is a cleansing of the old guard who resist change so out the door went all of these fine leaders who
+were starting to truly build something. And out the door went what they were trying to build, until all that mattered
+was short-term cost cutting to regain profitability. And out the door went the partnership with suppliers that
+Stallkamp had carefully built and the trust and the sharing of technology that was taking place in developing new
+vehicles .
+It is not clear what Daimler s long-term purpose was in buying Chrysler. In the short term, it seemed logical to
+expand from a European luxury carmaker to enter the U.S. market in full force making lower-tier vehicles. But did
+Daimler really think through the implications of integrating a very different company with a culture completely different
+from their own? Did they think through the implications for public opinion in the U.S.? Did they think through what
+effect their purchasing and management style would have on the existing culture of Chrysler?
+By gutting the leadership of Chrysler, Daimler gutted the culture that Chrysler was proudly building a culture that
+made companies like Toyota nervous. Instead of building on this proud culture and protecting it, Daimler tore it down
+through radical cost cutting, eviscerating Chrysler s strengths. From Toyota s perspective, the appropriate response
+might be Thank you, Daimler, for doing what we could not and would not do to a competitor. You destroyed its
+culture.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Section II: The Right Process
+Will Produce the Right Results
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 8: Principle 2: Create
+Continuous Process Flow to Bring
+Problems to the Surface
+Overview
+If some problem occurs in one-piece flow manufacturing then the whole production line stops. In this sense it
+is a very bad system of manufacturing. But when production stops everyone is forced to solve the problem
+immediately. So team members have to think, and through thinking team members grow and become better
+team members and people.
+Teruyuki Minoura, former President,
+Toyota Motor Manufacturing, North America
+Toyota leaders truly believe that if they create the right process the results will follow. In this chapter we begin
+looking at the first of six of the 14 Toyota Way principles that are part of the second broad category, The Right
+Process Will Produce the Right Results. Within these six principles are most of the TPS tools for improving
+manufacturing processes as well as the more routine processes for product development and service organizations
+what many companies mistakenly believe is lean thinking. Important and powerful as these tools and processes are,
+they are only the tactical or operations aspect of the Toyota Way and becoming lean. As you learned in Chapter 7,
+these tools are far more effective when they are supported by a company-wide, long-term management philosophy.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Most Business Processes Are 90% Waste and 10%
+Value-Added Work
+A good place for any company to begin the journey to lean is to create continuous flow wherever applicable in its
+core manufacturing and service processes. Flow is at the heart of the lean message that shortening the elapsed time
+from raw materials to finished goods (or services) will lead to the best quality, lowest cost, and shortest delivery time.
+Flow also tends to force the implementation of a lot of the other lean tools and philosophies such as preventative
+maintenance and built-in quality (jidoka). A lean expression is that lowering the water level of inventory exposes
+problems (like rocks in the water) and you have to deal with the problems or sink. Creating flow, whether of
+materials or of information, lowers the water level and exposes inefficiencies that demand immediate solutions.
+Everyone concerned is motivated to fix the problems and inefficiencies because the process will shut down if they
+don t. Traditional business processes, in contrast, have the capacity to hide vast inefficiencies without anyone noticing
+people just assume that a typical process takes days or weeks to complete. They don t realize that a lean process
+might accomplish the same thing in a matter of hours or even minutes.
+To illustrate the fact that most business processes are full of waste, let s say you have been promoted and you place
+an order for new office furniture with a genuine wood desk and ergonomic chair and drawers and compartments
+galore. You can t wait to get rid of that old scuffed and stained furniture you currently have. But don t turn in the old
+stuff just yet. For one thing, the promised delivery date is eight weeks out and, if you investigate further, the furniture
+is likely to be late by another month or so. Why does it take so long? Are skilled craftsmen slaving away at each
+piece of wood so it looks perfect? A nice thought, but quality has little to do with the delays. Your inconvenience is a
+result of a clumsy manufacturing process called batch and queue. Your desk and office chair are mass-produced in
+stages. Large batches of standardized material sit in a queue at each stage of the production process and wait for
+long periods of (wasted) time until they are moved to the next stage of production.
+Consider the custom-made office chair that is delivered two months after you order it. The value-added work (i.e.,
+the work actually performed) in the assembly process consists of putting together the upholstery and cover with the
+standard foam cushions and then bolting together the chair. This takes a few hours at most. Actually making the fabric
+and foam and frame and parts, which are done in parallel, takes another day at most. Everything else during the two
+months you are waiting is waste (muda). Why is there so much waste? The department making seat covers, the
+supplier making springs, and the plant making foam are all making big batches of these items and then shipping them
+to the furniture manufacturer, where they wait in piles of inventory. Then you, the customer, wait for someone to pull
+them from inventory and build the chair. More wasted time. Add several weeks for the chair to get out of inventory at
+the plant and through the distribution system to your office and you have been waiting months sitting in that
+uncomfortable old chair. In a TPS/lean environment the goal is to create one-piece flow by constantly cutting out
+wasted effort and time that is not adding value to your chair. Lean initiatives in companies like Herman Miller and
+Steelcase are cutting that process of making chairs to days.
+In Chapter 3 we summarized the eight non-value-adding wastes that Toyota continually seeks to remove from its
+processes:
+1.
+overproduction
+2.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+waiting
+3.
+unnecessary transport
+4.
+overprocessing
+5.
+excess inventory
+6.
+unnecessary movement
+7.
+defects
+8.
+unused employee creativity
+
+(In Chapter 10 you will learn about two other sources of waste, muri and mura, meaning no value added beyond
+capability and unevenness. )
+How do you distinguish the value-added work from waste? Consider an office where engineers are all very busy
+designing products, sitting in front of the computer, looking up technical specifications, and having meetings with
+co-workers or suppliers. Are they doing value-added work? The answer is you cannot measure an engineer s
+value-added productivity by looking at what he or she is doing. You have to follow the progress of the actual product
+the engineer is working on as it is being transformed into a final product (or service). Engineers transform information
+into a design, so you look at such things as 1) at what points do the engineers make decisions that directly affect the
+product? and 2) when do the engineers actually conduct important tests or do an analysis that impacts those
+decisions? When you start asking these kinds of questions, you re likely to find that typical engineers (or any
+white-collar professionals) are working like maniacs churning out all sorts of information. The problem is that very
+little of their work is truly value added, i.e., work that ends up actually shaping the final product.
+
+Consider the example of an engineering analysis group. They generate and accumulate various complex analyses for a
+project. Then what happens? The reports sit and wait in an information warehouse (inventory) until someone from
+another department accesses the reports. If we continue to follow the path of the information, you ll most likely find
+that any decisions based on this data could take months and go through several people, processes, and/or
+departments. Or the decision makers may not even know the analysis was done and make the decisions without the
+information. Your value-added work, which in this case is the flow of information as it is being transformed into a
+design, is being delayed by a number of inefficiencies because the process is organized around the old rules of
+batch-and-queue manufacturing. In this example, engineers and departments are mass-producing information that sits
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+around, is inefficiently accessed, and is pushed along to the next stage. This is how most white-collar work (and
+blue-collar work, for that matter) is organized. What s the alternative? Flow.
+Flow means that when your customer places an order, this triggers the process of obtaining the raw materials needed
+just for that customer s order. The raw materials then flow immediately to supplier plants, where workers immediately
+fill the order with components, which flow immediately to a plant, where workers assemble the order, and then the
+completed order flows immediately to the customer. The whole process should take a few hours or days, rather than
+a few weeks or months.
+
+An example of this is the fact that Toyota engineers new vehicles in Japan in less than one year. Their competitors
+take over two years. The reason is that Toyota s engineering work is organized into a flow, and efforts are constantly
+made to reduce waste in this flow. Its engineering work, design decisions, prototype construction, and tool
+construction seamlessly flow and communicate from the beginning to the end of the vehicle design process. No one
+produces anything before it is needed by the next person or step in the process.
+Of course, the ideal of one-piece flow is not reality and Toyota is steeped in reality. So you will not see Toyota just
+throwing together machines and suppliers and forcing one-piece flow where it does not fit. Taiichi Ohno wrote that it
+takes time and patience to achieve flow. And as we will see in Chapters 9 and 10, inventory buffers are used
+judiciously where continuous flow is not possible today. But the ideal of flow provides a clear direction. At Toyota it
+means that using small lots, having processes close together, and keeping the material moving through processes
+without interruption is better than producing large batches of stuff and having them sit and wait.
+Toyota managers and engineers do not have to do a detailed cost-benefit analysis every time they want to implement
+something that will improve the flow. Cost is obviously a factor, but the bias is to create flow where it is possible and
+continuously improve in the direction of better flow. Even when Toyota strategically sets up inventory buffers in
+places where pure one-piece flow is not possible the focus is still on reducing the inventory over time to improve
+flow. In fact, inventory buffers in the right places can actually allow for better overall flow across the enterprise.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Traditional Mass Production Thinking
+What is the ideal way to organize your equipment and processes? In traditional mass production thinking (the way
+most companies are organized), the answer seems obvious: group similar machines and similarly skilled people
+together. So mass production thinking sets up departments of mechanical engineering, electrical engineering,
+accounting, purchasing, and manufacturing as well as departments for stamping, welding, wire soldering, assembly,
+and the like. The following were the perceived benefits of grouping similarly skilled people and equipment together:
+1.
+Economies of scale. First and foremost, mass production thinking was about squeezing the most production
+possible at the lowest cost per unit out of every piece of equipment or every worker in a manual operation.
+Having one huge stamping press to meet the needs of all the factory s products would lead to the smallest
+capital cost per piece. And then you wanted to run that press flat-out 100% of the time to get the greatest
+asset utilization. Similarly, by organizing people into departments, you can focus on best practices in each
+professional specialty and squeeze the highest productivity (or innovation) possible out of each person.
+2.
+Apparent flexibility in scheduling. When you put all the welders together in one department, it s easier for
+the welding department manager to schedule available machines and welders to any job that comes up. If you
+create one-piece flow cells, you take those welding machines and welders and dedicate them to a one-piece
+cell, so they re no longer free to do other work that might come up.
+In mass production thinking, once you have decided to group all the similar types of people and processes together
+by department, the next question is how often should you move material or information between departments? Since
+you have organized your people and equipment by specialty, you must create another specialty, the material handling
+department or the planning department, to move material. That department is also measured by efficiency. The most
+efficient way to utilize a person moving material is to get that person to move the most material possible each trip.
+From the viewpoint of the material handling department, the optimal time to move material from one department to
+the next is when there is a large batch. The goal is to move the material once a day or, even better yet, once a week.
+
+The best way to schedule an operation that is organized into separate pro-cesses is to send individual schedules to
+each individual department. For example, if schedules are developed weekly, then each department head can decide
+what to make each day in order to optimize equipment and utilize people for that week. A weekly schedule also
+provides flexibility for people missing work. You just make less that day and make it up with more production
+another day in the week. As long as by Friday you meet the production target, everything is OK.
+
+Lean thinking looks at this way of organizing production and sees a company producing a lot of work-in-process
+(WIP) inventory. The fastest equipment, such as stamping, will build up the most WIP. Material sitting in inventory is
+caused by the most fundamental waste, overproduction. The mass production system guarantees overproduction in
+large batches, which in turn guarantees inventory sitting idle and taking up valuable plant space and, more importantly,
+hiding problems.
+Another problem with organizing similar professional specialties and similar manufacturing equipment together into
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+departments is that a product being made for a customer does not live in just one department. It must move across
+departments to become what the customer wants. Engineering, purchasing, and accounting are all located in different
+departments. Yet many value streams cross through these departments, causing a delay each time a process enters a
+new department. In a one-piece flow, you physically line up the processes in the sequence that will produce the
+customer s order in the shortest time.
+Figure 8-1 illustrates a simplified view of a computer maker that is organized into three departments. One department
+makes computer bases, the second makes monitors and attaches them, and the third tests equipment. (Of course, in
+the real world there would be many departments and companies in a supply chain making a complete computer.) In
+this model, the material handling department decided it wants to move a batch size of 10 units at a time. Each
+department takes one minute per unit to do its work, so it takes 10 minutes for a batch of computers to move through
+each department. Even without considering material handling time to move between

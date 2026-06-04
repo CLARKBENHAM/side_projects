@@ -1,0 +1,1290 @@
+You are writing a pre-read guide for one chapter of a book.
+
+Book:
+- title: Toyota Production System: Beyond Large-Scale Production
+- author: Taiichi Ohno
+- chapter: 3 of 5
+- chapter title: 3 Further Development An Autonomic Nervous System in the Business Organization A BUSINESS ORGANIZATION is like the human body. The (part 1)
+
+Goal:
+Write the thing a smart reader should read immediately before reading this chapter.
+The reader wants to move faster through the real chapter while retaining the main
+arc, load-bearing facts, important mechanisms, and a few scenes worth watching.
+
+Write Markdown only, roughly 700-1,100 words, with these sections:
+
+1. Orientation Before Reading
+   - 4-7 bullets giving the time, stakes, people, institutions, and conflict.
+
+2. The Chapter Arc
+   - 5-9 chronological bullets.
+   - Each bullet should say what changes, not just what happens.
+
+3. What To Watch For
+   - 5-9 bullets naming the important mechanisms, constraints, causal moves,
+     or authorial claims likely to matter.
+
+4. Load-Bearing Scenes
+   - 3-6 short entries.
+   - Each entry should have setup, action, and payoff in plain prose.
+
+5. Cast And Terms
+   - A compact glossary only for names, factions, places, institutions, and terms
+     needed to read this chapter without friction.
+
+6. What To Hold Lightly
+   - 2-5 bullets for vivid but probably nonessential detail.
+
+Rules:
+- Do not summarize every page.
+- Do not write a school-report recap.
+- Do not invent generic mental-model labels when a concrete event is clearer.
+- Prefer specific actors, constraints, incentives, chronology, and consequences.
+- Keep prose clean and readable; no throat-clearing and no motivational language.
+- Assume the reader has not read this chapter yet.
+- Do not mention reader highlights; this is for a new unread chapter.
+
+Chapter text:
+Toyota Production System: Beyond Large-Scale Production by Taiichi Ohno;Norman Bodek;Norman Bodek
+3
+
+Further Development
+
+An Autonomic Nervous System in the
+Business Organization
+
+A BUSINESS ORGANIZATION is like the human body. The
+human body contains autonomic nerves that work without
+regard to human wishes and motor nerves that react to human
+command to control muscles. The human body has an amazing structure and operation; the fine balance and precision
+with which body parts are accommodated in the overall design are even more marvelous.
+
+In the human body, the autonomic nerve causes us to salivate when we see tasty food. It accelerates our heart rate during exercise so that circulation is enhanced. It performs other
+similar functions that respond automatically to changes in the
+body. These functions are performed unconsciously without
+any directive from the brain.
+
+At Toyota, we began to think about how to install an autonomic nervous system in our own rapidly growing business
+organization. In our production plant, an autonomic nerve
+means making judgments autonomously at the lowest possible
+level; for example, when to stop production, what sequence to
+follow in making parts, or when overtime is necessary to produce the required amount.
+
+These discussions can be made by factory workers themselves, without having to consult the production control or
+engineering departments that correspond to the brain in the
+human body. The plant should be a place where such judgments can be made by workers autonomously.
+
+In Toyota's case, I believe this autonomic nervous system
+grew as the idea of just-in-time penetrated broadly and deeply
+into the production field, and as adherence to the rules in creased through the use of kanban. As I thought about the business organization and the autonomic nerves in the human
+body, the concepts began to interconnect, overlap, and stir
+my imagination.
+
+In actual business practice, the production control department, as the center of operation, sends out various directives.
+These plans must then be altered continuously. Because these
+plans are what really affect a business's present and future, we
+could say they correspond to the backbone in the human body.
+
+Plans change very easily. Worldly afflirs do not always go
+according to plan and orders have to change rapidly in response to changes in circumstances. If one sticks to the idea
+that, once set, a plan should not be changed, a business cannot
+exist for long.
+
+It is said that the sturdier the human spine, the more easily it
+bends. This elasticity is important. If something goes wrong
+and the backbone is placed in a cast, this vital area gets stiff and
+stops functioning. Sticking to a plan once it is set up is like putting the human body in a cast. It is not healthy.
+
+Some people think that acrobats must have soft bones. But
+this is not true - acrobats are not mollusks. Their strong,
+flexible backbones enable them to make surprising movements.
+
+The spine of an older person, like myself; does not bend easily.
+And, once bent, it does not unbend quickly. This is definitely
+a phenomenon of aging. We observe the same phenomenon in
+a business.
+
+I think a business should have reflexes that can respond instantly and smoothly to small changes in the plan without
+having to go to the brain. It is similar to the fluttering reflex action of the eyes when dust is around or the reflex action of a
+hand pulling away quickly when it touches something hot.
+
+The larger a business, the better reflexes it needs. If a small
+change in a plan must be accompanied by a brain command to
+make it work (for example, the production control department issuing order slips and plan change sheets), the business
+will be unable to avoid burns or injuries and will lose great
+opportunities.
+
+Building a fine-tuning mechanism into the business so that
+change will not be felt as change is like implanting a reflex nerve inside the body. Earlier I said visual control is possible
+through just-in-time and autonomation. I firmly believe that
+an industrial reflex nerve can be installed by using these two
+pillars of the Toyota production system.
+
+► Provide Necessary Information When Needed
+
+I have emphasized that an "agricultural" mind at work in the
+industrial age causes problems. But should we then go to a
+"computer" mind in one jump? The answer is no. There
+should be an "industrial" mind between the agricultural and
+the computer minds.
+
+The computer is indeed a great invention. With computers
+available, it is a waste to perform calculations by hand. Conventional wisdom dictates that such work be done by computers. In reality, however, the situation seems different.
+While we intend humans to control them, computers have
+become so speedy that now it looks as if humans are controlled
+by the machine.
+
+Is it really economical to provide more information than we
+need - more quickly than we need it? This is like buying a
+large, high-performance machine that produces too much.
+The extra items have to be stored in a warehouse, which raises
+the cost.
+
+Much of the excess information generated by computers is
+not needed for production at all. Receiving information too
+quickly results in early delivery of raw materials, causing
+waste. Too much information throws the production field
+into confusion.
+
+The industrial mind extracts knowledge from manufacturing people, gives the knowledge to the machines working as
+extensions of the workers' hands and feet, and develops the
+production plan for the entire plant including outside
+cooperating firms.
+
+America's mass-production system has used computers extensively and effectively. At Toyota, we do not reject the
+computer, because it is essential in planning production leveling procedures and calculating the number of parts needs daily. We use the computer freely, as a tool, and try not to be
+pushed around by it. But we reject the dehumanization caused
+by computers and the way they can lead to higher costs.
+
+Toyota's just-in-time production is a way to deliver exactly
+what the production line needs when it is needed. This
+method does not require extra inventory. Similarly, we want
+information only when we need it. Information sent to production should be timed exactly.
+
+A computer performs instantly calculations that previously
+took an hour. Its tempo is incompatible with that of people. We
+can run into completely unexpected situations unless we realize
+this. Processing customer orders and information on market
+wants and needs by computer can be very effective. However,
+information needed for production purposes, although arrived at gradually, is not needed 10 or 20 days in advance.
+
+An industrial mind must be very realistic - and realism is
+what the Toyota production system is based upon.
+
+► The Toyota-Style Information System
+
+Toyota naturally makes production schedules - like other
+companies. Just because we produce just-in-time in response
+to market needs, that is, incoming orders from the Toyota
+Automobile Sales Company, does not mean we can operate
+without planning. To operate smoothly, Toyota's production
+schedule and information system must be tightly meshed.
+
+First, the Toyota Motor Company has an annual plan. This
+means the rough number of cars - for instance, 2 million -
+to be produced and sold during the current year.
+
+Next, there is the monthly production schedule. For example,
+the type and quantities of cars to be made in March are announced internally early on, and in February, a more detailed
+schedule is "set." Both schedules are sent to the outside
+cooperating firms as they are developed. Based on these plans,
+the daily production schedule is established in detail and includes production leveling.
+
+In the Toyota production system, the method of setting up
+this daily schedule is important. During the last half ofthe pre vious month, each production line is informed of the daily
+production quantity for each product type. At Toyota, this is
+called the daily level. On the other hand, the daily sequence
+schedule is sent only to one place - the final assembly line.
+This is a special characteristic of Toyota's information system.
+In other companies, scheduling information is sent to every
+production process.
+
+This is how the Toyota information system works in production: when the production line workers use parts at the
+side of the line for assembly, they remove the kanban. The
+preceding process makes as many parts as were used, eliminating the need for a special production schedule. In other words,
+the kanban acts as a production order for the earlier processes.
+
+Figure 2. Automobile Assembly Line
+
+For example, Figure #2 depicts the final body assembly line
+in an automobile plant. Each sub-assembly process combines
+with the main line in the middle to form the production line.
+The numbers in the illustration are the car pass numbers.
+Thus, Car #1 is about to come off the line and Car #20 has just
+entered Process #1.
+
+The production order, or sequence schedule, is issued to
+Process #1 for each car (in this example, specifications for Car
+#20 are issued). The worker at Process #1 attaches a sheet of
+paper (production order sheet) to this car with all the information needed for its production (that is, they information indicating what kind of car it is). The workers in processes following
+Process #2 can tell which parts to use for assembly by looking
+at the car.
+
+Workers in the sub-processes can also tell what to do as soon
+as they can see the car. If the car is not visible because it is
+blocked by equipment or pillars, information is passed by
+kanban in the following way:
+
+Suppose bumpers are being assembled on the main line in
+Process A. Let's call the process where bumpers are prepared
+Subprocess 3. Process A needs to know what type of bumper
+goes on Car 6. Therefore, the process on the main assembly
+line assembling Car 6 gives the information to Process A on a
+kanban. No other information is needed.
+
+Computers could relay such information to each process
+when it is needed. Setting up the computers, however, requires equipment and wiring that are not only expensive but
+often unreliable. With the computers of today, Car #20's information is issued to Process A and to the main line at the
+same time. But, at that moment, Process A needs information
+only on Car #6 - not on Car #20.
+
+Too much information induces us to produce ahead and can
+also cause a mix-up in sequence. Items might not be produced
+when needed, or too many might be made, some with defects.
+Eventually, it becomes impossible to make a simple change in
+the production schedule.
+
+In business, excess information must be suppressed. Toyota
+suppresses it by letting the products being produced carry the
+information.
+
+► Fine Adjustment
+
+Automatic adjustments are an important effect in production
+if we organize the information system as just described.
+
+With market predictions and the automobile in general,
+quantities and product types shift constantly with or without a
+big economic crisis. To cope with a constantly fluctuating
+market, the production line must be able to respond to
+schedule changes. In reality, however, the information system
+and production constraints make change difficult.
+
+An important characteristic of kanban is that within certain
+limits it makes fine adjustments automatically. A line does not
+have detailed schedules beforehand and so does not know
+what type of car to assemble until the kanban is removed and
+read. For example, it anticipates four Car A's and six Car B's
+for a total of 10 cars. But in the end, the ratio might turn out to
+be the reverse - six Car A's and four Car B's.
+
+Reversed ratios, however, do not cause someone to run
+around announcing the change. It happens simply because the
+production process follows the information carried by the
+kanban. Kanban's value is that it allows this degree of change
+to be handled automatically. If we ignore market fluctuations
+and fail to make adjustments accordingly, sooner or later we
+will have to make a big change in scheduling.
+
+For example, by sticking to a production schedule for three
+months despite a 5 to 10 percent sales slump, we might be
+forced to cut production by 30 to 40 percent in one jump four
+or five months later under the guise of inventory adjustment.
+This would cause problems not only within the company but
+in the cooperating firms as well. The larger the business, the
+greater the social impact - and this could be a serious problem.
+
+Sticking to a schedule once it is established, regardless of
+circumstances, is how things are done under a controlled (or
+planned) economy. I don't believe the fine adjustments in production made possible by using kanban will work in controlled economies where initial production plans never vary.
+
+► Coping with Changes
+
+The term "fine adjustment" has a hidden meaning that should
+be understood, especially by top management. Everyone
+knows that things do not always go according to plan. But
+there are people in the world who recklessly try to force a
+schedule even though they know it may be impossible. They
+will say "It's good to follow the schedule" or "It's a shame to
+change the plan," and will do anything to make it work. But as
+long as we cannot accurately predict the future, our actions
+should change to suit changing situations. In industry, it is important to enable production people to cope with change and
+think flexibly.
+
+I myself have struggled for a long time with a production
+system not easily understood by others. Looking back at the
+route I have persistently taken, I believe I can safely recommend: "Correct a mistake immediately - to rush and not
+take time to correct a problem causes work loss later." I also say,
+"Wait for the right opportunity." These ideas developed from
+kanban, the tool that kept us from failure and misjudgment.
+
+I believe the role of fine adjustments is not only to indicate
+whether a schedule change is a "go" or a "temporary stop,"
+but also to enable us to find out why a stop occurred and how
+to make the fine adjustments necessary to make it go again.
+The Toyota production system is still not perfect. More development is needed on fine adjustments.
+
+I naturally prefer a free economy over a controlled one.
+Today, however, the value of private enterprise is frequently
+questioned and it is imperative that everyone be qualified and
+flexible enough to make fine adjustments when they are needed.
+
+► What Is True Economy?
+
+"Economy" is a word used daily but rarely understood, even
+in business. Particularly in business, the pursuit of true economy is tied directly to its survival. Therefore, we must consider
+this point seriously.
+
+In the Toyota production system, we think of economy in
+terms of manpower reduction and cost reduction. The relationship between these two elements is clearer if we consider a manpower reduction policy as a means of realizing cost reduction,
+the most critical condition for a business's survival and growth.
+
+Manpower reduction at Toyota is a company-wide activity
+whose purpose is cost reduction. Therefore, all considerations
+and improvement ideas, when boiled down, must be tied to
+cost reduction. Saying this in reverse, the criterion of all decisions is whether cost reduction can be achieved.
+
+Two other issues in cost reduction are judging which is
+more advantageous, A or B, and selecting which is most
+economical and advantageous among the several alternatives
+of A, B, C, and so on.
+
+First let's consider judging. Frequently, problems arise
+when judging which of two things is better. For example,
+should a certain product be made internally or ordered from
+outside? In making a certain product, should we purchase
+machines exclusively for that purpose or use a general-purpose
+machine we already have?
+
+We should not be biased in making such judgments. Take a
+cool look at the situation in your jurisdiction. Don't basejudg-
+ments on a single cost analysis and conclude that it would be
+cheaper to order it from outside than to make it internally.
+
+In selecting, we can consider many methods to achieve a
+manpower reduction. For example, we can buy automated
+machines, or change the work combination, or even consider
+buying robots. There are countless ways to achieve an objective when pursuing such improvement ideas. Therefore, we
+should list every conceivable improvement idea, examine
+each in depth, and, finally, select the best. If an improvement
+is pushed forward before thorough study, we can easily end
+up with an improvement that, while making a small cost reduction, costs too much to implement.
+
+For example, let's suppose there is a suggestion to install a
+$500 electrical control device to replace one worker. If this
+$500 device could reduce the workforce by one worker, it
+would be a big gain for Toyota. If closer study reveals, however, that one worker could be eliminated at no cost by changing the
+sequence of work, then spending $500 would be considered
+a waste.
+
+In Toyota's early days when buying automatic machines
+seemed so easy, such examples were numerous. This is a common problem for big as well as medium- and small-size
+businesses.
+
+Toyota's main plant - its oldest facility - provides an
+example of a smooth production flow accomplished by rearranging the conventional machines after a thorough study of
+the work sequence. The manager of a certain small business
+visited our main plant with the preconception that nothing
+would be relevant to his firm because Toyota was so much
+larger. Looking around the production plant, however, he
+realized that the old machines he had discarded long ago were
+working well at Toyota. He was amazed and thought we must
+have remodeled them.
+
+It is crucial for the production plant to design a layout in
+which worker activities harmonize with rather than impede
+the production flow. We can achieve this by changing the
+work sequence in various ways. But if we rashly purchase the
+most advanced high-performance machine, the result will be
+overproduction and waste.
+
+► Re-Examining the Wrongs of Waste
+
+The Toyota production system is a method to thoroughly
+eliminate waste and enhance productivity. In production,
+"waste" refers to all elements of production that only increase
+cost without adding value - for example, excess people, inventory, and equipment.
+
+Too many workers, equipment, and product only increase
+the cost and cause secondary waste. For example, with too
+many workers, unnecessary work is invented which, in turn,
+increases power and materials usage. This is secondary waste.
+
+The greatest waste of all is excess inventory. If there is too
+much inventory for the plant to store, we must build a warehouse, hire workers to carry the goods to this warehouse,
+and probably buy a carrying cart for each worker.
+
+In the warehouse, people would be needed for rust prevention and inventory management. Even then, some stored
+goods still rust and suffer damage. Because of this, additional
+workers will be needed to repair the goods before removal
+from the warehouse for use. Once stored in the warehouse,
+the goods must be inventoried regularly. This requires additional workers. When the situation reaches a certain level,
+some people consider buying computers for inventory control.
+
+If inventory quantities are not completely controlled, shortages can arise. So despite planned daily production, some
+people will think shortages are a reflection on the production
+capacity. A plan for increasing production capacity is consequently put into the following year's equipment investment
+plan. With the purchase of this equipment, inventory increases even more.
+
+The vicious cycle of waste generating waste hides
+everywhere in production. To avoid this, production managers and supervisors must understanding fully what waste is
+and its cause.
+
+The above example is a worst-case scenario. Although I
+don't think this could happen in Toyota's production plant,
+similar phenomena might easily occur, although the extent
+would differ.
+
+All of the primary and secondary wastes described above
+eventually become part of the direct and indirect labor cost,
+depreciation cost, and general management expenses. They
+would contribute to cost increases.
+
+Considering these facts, we can never ignore the costraising elements. The waste caused by a single mistake will eat
+up the profit that ordinarily amounts to only a few percent of
+sales and thereby endanger the business itself. Behind the notion that the Toyota production system aims at reducing costs
+lies the above-mentioned understanding of the cost facts.
+
+Eliminating waste is specifically aimed at reducing cost by
+reducing manpower and inventory, clarifying the extra availability of facilities and equipment, and gradually diminishing secondary waste. Regardless of how much is said, adopting
+the Toyota production system will be meaningless without a
+complete understanding of the elimination of waste. For this
+reason, I have explained it again.
+
+► Generate Excess Capacity
+
+I have mentioned that there are many ways to achieve a goal.
+Let's consider Toyota's thinking about what is economically
+advantageous from the standpoint of production capacity.
+
+Opinions differ on the economic advantages of maintaining
+extra production capacity. In brief, excess capacity utilizes
+workers and machines that are otherwise idle, incurring no
+new expense. In other words, they cost nothing.
+
+Let's consider excess capacity in internal versus external
+production. Often, cost comparisons are made between producing a product internally or ordering it from outside. If
+there is excess capacity for internal production, the only cost
+actually incurred is the variable expense that increases in proportion to the amount of production; for example, the material and oil cost. Consequently, without having to look at the
+cost comparison, internal production would be advantageous.
+
+Now, consider the problem of waiting. If a worker has to
+wait until a pallet is full before transporting it, having him do
+line work or preparation would cost nothing. This point
+should require no study - it would be crazy to spend valuable time calculating the workpower.
+
+Next is the problem of reducing lot sizes. When a generalpurpose machine, such as a die press, has excess capacity, it is
+an advantage to reduce lot size as much as possible, aside from
+the separate problem of shortening setup time. If the machine
+still has excess capacity, it is better to continue reducing setup
+time to utilize it.
+
+As we've seen above, when there is excess capacity, loss or
+gain is evident without requiring cost studies. The most important thing is to know the extent of excess capacity at all times. If
+we don't know whether there is excess capacity, we are bound
+to make mistakes in the selection process and incur expenses.
+
+At Toyota, we go one step further and try to extract improvements from excess capacity. This is because, with greater production capacity, we don't need to fear new costs.
+
+► The Significance of Understanding
+
+In this section, I want to emphasize the importance of thoroughly
+understanding production and manpower reduction.
+
+"The way we currently operate, the production line has a
+fairly high operation rate and fairly low defect rate. Therefore,
+as awhole, things seem to be proceeding reasonably."
+
+If we allow ourselves to feel this way, we cut off any hope
+for progress or improvement.
+
+"Understanding" is my favorite word. I believe it has a
+specific meaning - to approach an objective positively and
+comprehend its nature. Careful inspection of any production
+area reveals waste and room for improvement. No one can
+understand manufacturing by just walking through the work
+area and looking at it. We have to see each area's role and function in the overall picture. Through close observation, we can
+divide the movement of workers into waste and work:
+
+• Waste - The needless, repetitious movement that must
+be eliminated immediately. For example, waiting for or
+stacking subassemblies.
+
+• Work - The two types are non-value-added work and
+value-added work.
+
+Non-value-added work may be regarded as waste in the conventional sense. For example, walking to pick up parts, opening the package of goods ordered from outside, operating the
+push buttons, and so forth are things that have to be done
+under present working conditions. To eliminate them, these
+conditions must be partially changed.
+
+Value-added work means some kind of processing - changing
+the shape or character of a product or assembly. Processing
+adds value. In processing, in other words, the raw materials or
+parts are made into products to generate added value. The
+higher this ratio, the greater the working efficiency.
+
+Figure 3. Understanding the Manufteturing Function
+
+Examples of processing are: assembling parts, forging raw
+materials, press forging, welding, tempering gears, and painting bodies.
+
+In addition, some production activities are outside the standard work procedures, for example, small repairs of equipment
+or tools and reworking defective products. Considering these,
+we come to realize that the ratio of value-added work is lower
+than most people think.
+
+This is why I frequently emphasize that worker movement
+in the production area must be working, or value-adding
+movement. Moving is not necessarily working. Working
+means actually advancing the process toward completing the
+job. Workers must understand this.
+
+Manpower reduction means raising the ratio of value-added
+work. The ideal is to have 100 percent value-added work. This
+has been my greatest concern while developing the Toyota
+production system.
+
+► Utilizing the Full Work System
+
+To raise the ratio of value-added work, we must be concerned
+with non-value-added movements, that is, the total elimination of waste. In connection with this problem, let's consider
+the redistribution of work.
+
+If we see someone waiting or moving needlessly in a job
+done by a team of workers, it is not difficult to eliminate
+waste, redistribute the work load, and reduce manpower. In
+reality, however, such waste is usually hidden, making it
+difficult to eliminate. Let's look at some examples.
+
+In any manufacturing situation, we frequently see people
+working ahead. Instead of waiting, the worker works on the
+next job, so the waiting is hidden. If this situation is repeated,
+inventory begins to accumulate at the end of a production line
+or between lines. This inventory has to be moved or neatly
+stacked. If these movements are regarded as "work," soon we
+will be unable to tell waste from work. In the Toyota production system, this phenomenon is called the waste of overproduction - our worst enemy - because it helps hide
+other wastes.
+
+The most important step in reducing manpower is to eliminate overproduction and establish control measures. To implement the Toyota production system in your own business,
+there must be a total understanding of waste. Unless all
+sources of waste are detected and crushed, success will always
+be just a dream.
+
+Let's look at one measure. With an automatic machine,
+suppose the standard inventory of a process is five pieces. If
+the inventory stands at only three pieces, the earlier process
+automatically starts producing the item until there are five
+pieces. When the inventory reaches its required number, the
+earlier process stops production.
+
+If the standard inventory of the later process decreases by one,
+the earlier process starts production and sends the item to the
+later process. When the inventory in the later process reaches
+the required number, processing in the earlier process stops.
+
+Thus, in such a system, standard inventories are always maintained and the machines of each process work together to
+prevent overproduction. We call this the full work system.
+
+► Do Not Make a False Show
+
+To prevent overproduction and make items as needed, one by
+one, we have to know when they are needed. Thus, the appropriate tact time becomes important.
+
+Tact is the length of time, in minutes arid seconds, it takes to
+make one piece of the product. It must be calculated in reverse
+from the number of pieces to be produced. Tact is obtained by
+dividing the operable time per day by the required number per
+day (pieces). Operable time is the length of time that production can be carried out per day.
+
+In the Toyota production system, we make a distinction between operating and operable rates. The operating rate means
+the present production record of a machine based on its fulltime operation capacity. On the other hand, operable rate refers
+to the availability of a machine in operable condition when it is
+needed. The ideal operable rate is 100 percent. To achieve this,
+machine maintenance must be constant and setup times must
+be reduced.
+
+For example, the operable rate of an automobile is the percentage of time the car will run smoothly when the driver
+wants it to - the ideal being, of course, 100 percent.
+
+On the other hand, the operating rate refers to the amount
+of time per day the car is actually driven. Few people would
+drive a car any longer than needed. If one drove the car from
+morning till night regardless of need, the constant gasoline
+and oil consumption would increase the probability of
+mechanical problems and result in loss. Therefore, the ideal
+rate is not necessarily 100 percent.
+
+To establish tact time, we must understand how the required production figures for the day are decided. But first, I
+would like to touch upon the relationship between production
+quantity and number of workers. If this relationship is viewed
+in terms of efficiency, we should remember that improving
+efficiency and reducing cost are not necessarily the same.
+
+For example, on a production line, 10 workers produced
+100 pieces of product per day. Improvements were introduced
+to increase efficiency. Now 10 workers could produce 120
+pieces a day, a 20-percent increase in efficiency.
+
+Demand rose at this time, so production could be increased
+to 120 pieces a day without having to increase manpower. Obviously, this cost reduction would increase profits.
+
+Now, suppose that market demand - that is, the required
+number for production - drops to 100 or 90 pieces per day.
+What happens? If we continue to make 120 pieces a day because of our improved efficiency, we will have 20 to 30 pieces
+left over daily. This will increase our material and labor expenses and result in a serious inventory problem.
+
+In a case like this, how can we improve efficiency and still
+reduce costs?
+
+The problem is solved by improving the process so that
+eight workers can produce the daily required 100 pieces. If 90
+pieces are needed, seven workers should be used. All of this requires that the process be improved.
+
+At Toyota, increasing efficiency by increasing production
+while the actual demand or required number remains unchanged or even drops is called an "apparent increase [increase
+in calculation I of efficiency. "
+
+► Required Numbers Are All-Important
+
+Required numbers are based on sales and this is determined by
+the market. Consequently, production is given a number
+based on demand or the actual orders - a number that cannot
+be increased or decreased arbitrarily.
+
+Back in the days when you could sell everything you could
+make, people tended to forget about required numbers. They
+were busy buying high-performance machines that would
+allow them to keep up with the growing demand. Even while
+preparing for production increases, however, a business must
+also keep track of daily demand changes and be prepared with
+a system that can shift to reduced production when necessary.
+At Toyota, production has been built around required numbers.
+
+As I described in the previous section, there are two ways to
+increase efficiency: (1) increase the production quantity or (2)
+reduce the number of workers.
+
+If asked to choose between these methods, most people on
+the production line will tend toward increasing efficiency by
+increasing production. This is probably because reducing
+workers is more difficult and involves reorganizing the workforce. However, it is unrealistic not to reduce the number of
+workers if demand is dropping.
+
+The goal, as I have often said, is cost reduction. Therefore,
+an increase in efficiency must be achieved by a method consistent with this goal. To eliminate overproduction reduce costs,
+it is absolutely necessary that the production quantity equal
+the required number.
+
+Every Toyota plant produces in accordance with actual demand. Car dealers around the country send their orders daily
+to the main office of the Toyota Automobile Sales Company
+in Nagoya. These orders are classified by computer as to car
+type, model, fuel discharge rate, style, transmission, color,
+and so forth. The resulting data serve as the basis for production requirements at Toyota's production plants.
+
+The production system itself is also based on this data. Increasing efficiency through manpower reduction can be
+realized only by eliminating waste from the tact time which is
+calculated from the required number. These improvements
+may enable a worker to do more or autonomate a portion of
+his or her work. The resulting extra manpower can then be
+utilized to carry out other production work. The operating
+rate of the machines is also determined this way.
+
+► The Tortoise and the Hare
+
+When thinking about overproduction, I often tell the story of
+the tortoise and the hare.
+
+In a plant where required numbers actually dictate production, I like to point out that the slower but consistent tortoise
+causes less waste and is much more desirable than the speedy hare who races ahead and then stops occasionally to doze. The
+Toyota production system can be realized only when all the
+workers become tortoises.
+
+High-performance machines were in demand for a long
+time before the term "high performance" was thoroughly
+examined. When we say high performance, we may mean
+high-precision finishing, low energy consumption, or even
+trouble-free machines. Each can be correct. However, a frequent mistake is to regard high-productivity and high-speed
+machines as being the same.
+
+If we can raise the speed without lowering the operable rate
+or shortening the life of the equipment, if a higher speed will
+not change the manpower requirements or produce more
+products than we can sell - then we can say high speed
+means high productivity.
+
+Speed is meaningless without continuity. Just remember
+the tortoise and the hare. Moreover, we cannot fail to notice
+that machines not designed for endurance at high speeds will
+have shortened lifespans if we speed them up.
+
+Increasing speed in the name of productivity improvement
+alone or forcing high speeds on a machine that cannot endure
+them merely to avoid a drop in production may seem to benefit production. However, these actions actually hinder production. Production managers and supervisors as well as other
+managers must understand this.
+
+► Take Good Care of Old Equipment
+
+Does the value of equipment really go down? In the case of a
+worker, years of experience add depth and the worker's value
+to the company. A machine, lacking human qualities, is discarded after giving long service. I want to advocate that, like
+workers, machines that give long service should be used with
+great, great care.
+
+The language of business economics talks of "depreciation," "residual value," or "book value" - artificial terms
+used for accounting, tax purposes, and convenience. Unfortu nately, people seem to have forgotten that such terms have no
+relevance to the actual value of a machine.
+
+For example, we often hear: "This machine has been depreciated and paid off, and, therefore, we can discard it any time
+without loss," or "The book value of this machine is zero.
+Why spend money on an overhaul when we can replace it with
+a new, advanced model?"
+
+This kind of thinking is a big mistake.
+
+If a piece of equipment purchased in the 1920s is kept up and
+can guarantee, at present, an operable rate close to 100 percent
+and if it can bear the production burden placed on it, the
+machine's value has not declined a bit. On the other hand, if a
+machine purchased last year has been poorly maintained and
+produces at only half its operable rate, we should regard its
+value as having declined 50 percent.
+
+A machine's value is not determined by its years of service
+or its age. It is determined by the earning power it still retains.
+
+When replacing old equipment, we can look at it economically in different ways. We can compare cost analyses or interest on investment. But can such methods that appear so
+logical really be used in a plant? We must not lose sight of the
+fact that these methods are based only on premise.
+
+For example, some people think conventional maintenance
+is the only way. Then they decide that absolute loss can only
+be based on several premises. In practice, however, these
+methods cannot even be used as standards. Despite this, faced
+with a poorly maintained, deteriorating machine, they apply
+these methods and conclude it would be better to replace the
+machine. This is completely irrational.
+
+How, then, should we decide whether or not to replace an
+old machine? My conclusion is that if adequate maintenance
+has been done, replacement with a new machine is never
+cheaper, even if maintaining the older one entails some expense.
+If we do decide to replace it, we should realize that we have
+either been misled by our calculations and made the wrong decision or that our maintenance program has been inadequate.
+
+When we lose an economic argument, we then argue the
+validity of replacement by saying "it is too difficult to restore the needed precision" or "we want to overhaul it but have no
+substitute machine."
+
+This reasoning is unsound. It shows we want new machines
+because we don't have a better idea. When replacing aged
+equipment, we should always decide case by case.
+
+Whether overhauled or renewed, if the machines are poorly
+maintained and driven close to death, the costs incurred by replacement is enormous. Computed as maintenance cost, for
+example, it would mean nothing unless an actual effect was
+achieved in proportion to the cost increase.
+
+► Look Straight at the Reality
+
+Business management must be very realistic. A vision of the
+future is important but it must be down-to-earth. In this age,
+misreading reality and its ceaseless changes can result in an
+instant decline in business. We are indeed surrounded by a
+harsh environment.
+
+Some people say the character of business must change.
+They insist that since our economic base has changed from
+high to low growth, we should repay loans and work only
+within the limits of working capital. We should have thought
+of this, however, in the high-growth period.
+
+During high growth, such business changes might have
+been easy. But if one company increased production, others
+felt uneasy and so they also expanded. Machines and manpower were increased without questioning their efficiency. As
+a result, profits did not increase at the same rate sales did.
+Those satisfied with this reflected a "pre-management" mentality no longer acceptable in the business world's demanding
+environment.
+
+A company prepared to carry out true rationalization while
+experiencing high growth could have held its growth to 5 percent and not increased equipment and workers. Other companies, meanwhile, would have expanded their sales by 10
+percent. Doing so, profits might have increased enough to
+repay all the debts and expand the facilities. An action like this, from management's viewpoint, would have put business in a
+desirable position.
+
+In the current low-growth period, market competition has
+become increasingly fierce - a battle of life and death. In such
+an environment, strengthening the character of business is an
+absolute requirement for survival.
+
+In the effort to make the Toyota production system truly effective, there is a limit to what the Toyota Motor Company, a
+chassis maker, can do alone. Only by working as partners
+with the cooperating firms is it possible to perfect this system.
+The same is true in improving the character of management.
+Toyota alone cannot achieve the goal if the cooperating firms
+do not work together. So, we have been asking our cooperating firms to implement Toyota production system policies in
+their own businesses.
+
+About 10 years ago, I visited the tempering shop of another
+company. At the time, our monthly production was approximately 70,000 cars.
+
+The manager said, "We have enough manpower and equipment to cope with your order even if you make 100,000 cars. "
+
+So I asked him, "Then, is your plant closed for 10 days out
+of the month?"
+
+He answered, "We would never do a silly thing like that."
+
+Then I went to an earlier process - the machine processing
+section. There I saw women workers working like dogs at
+maximum speed because they did not want the furnace to
+be idle.
+
+On calculation, the unit price was fairly low. The furnace in
+the tempering plant was filled with items to treat so that the
+fuel cost per unit would be less. Because they had the capacity
+to produce 100,000 car parts, they accumulated an extra
+30,000 parts each month. Toyota was going to order only
+what we needed, however, so, the tempering firm probably
+had to build a warehouse.
+
+The oil crisis made people begin to understand the waste of
+overproduction. And only then did they begin to recognize
+the Toyota production system's real value. I wish the readers
+could see for themselves how warehouses are disappearing
+one by one from the sites of our cooperating firms.
+
+► 0. 1 Worker Is Still One Worker
+
+In business, we are always concerned with how to produce
+more with fewer workers.
+
+In our company, we use the term "worker saving" instead
+of "labor saving." The term "labor saving" is somehow easily
+misused in a manufacturing company. Labor-saving equipment such as the lift and bulldozer, used mainly in construction work, are directly connected to reducing manpower.
+
+In automobile plants, however, a more relevant problem is
+partial and localized automation. For example, in work involving several steps, an automatic device is installed only at
+the last stage. At other points in the operation, work continues
+to be done manually. I find this kind of labor saving all wrong.
+If automation is functioning well, that is fine. But if it is simply used to allow someone to take it easy, it is too costly.
+
+How can we increase production with fewer workers? If we
+consider this question in terms of the number of worker days,
+it is a mistake. We should consider it in terms of number of
+workers. The reason is that the number of workers is not reduced even with a reduction of 0.9 worker days.
+
+First, work and equipment improvement should be considered. Work improvement alone should contribute half or
+one-third of total cost reduction. Next, autonomation, or
+equipment improvement, should be considered. I repeat that
+we should be careful not to reverse work improvement and
+equipment improvement. If equipment improvement is done
+first, costs only go up - not down.
+
+The company newspaper reported on a talk I gave on
+worker saving. In the story, the term "labor saving" was
+printed in error as "using fewer workers. " But when I saw it,
+I thought, "This is true." "Using fewer workers" gets at the
+heart of the problem far better than "labor saving."
+
+When we say "labor saving," it sounds bad because it implies eliminating a worker. Labor saving means, for example,
+a job that took 10 workers in the past is now done by eight
+workers - eliminating two people.
+
+"Using fewer workers" can mean using five or even three
+workers depending on the production quantity - there is no fixed number. "Labor saving" suggests that a manager hires a
+lot of workers to start with, reducing the number when they
+are not needed. "Using fewer workers," by contrast, can also
+mean working with fewer workers from the start.
+
+In actual experience, Toyota had a labor dispute in 1950 as a
+result of reducing its workforce. Immediately after its settlement, the Korean War broke out and brought special demands. We met these demands with just enough people and
+still increased production. This experience was valuable and,
+since then, we have been producing the same quantity as other
+companies but with 20 to 30 percent fewer workers.
+
+How was this possible? In short, it was the effort, creativity,
+and power of its people that enabled Toyota to put into practice the methods that ultimately have become the Toyota production system. And this is not just an expression of conceit.
+
+In the Toyota production system, we frequently say, "Do
+not make isolated islands." If workers are sparsely positioned
+here and there among the machines, it appears as if there are
+few workers. However, if a worker is alone, there can be no
+teamwork. Even if there is only enough work for one person,
+five or six workers should be grouped together to work as a
+team. By providing an environment sensitive to human
+needs, it becomes possible to realistically implement a system
+that employs fewer workers.
+
+► Management by Ninjutsu
+
+To think that mass-produced items are cheaper per unit is understandable - but wrong.
+
+A company's balance sheet may regard work in process as
+having some added value and treat it as inventory or property.
+But this is where the confusion begins. Most of this inventory
+is frequently not needed and has no added value.
+
+Increasing production is a prosperous business. Materials
+are purchased and workers work overtime. Even though the
+inventory they are generating is unnecessary, workers naturally demand overtime pay as well as a bonus.
+
+We became accustomed to a working environment in
+which expanding sales and increasing capital, manpower, and
+machines were believed good. Management generally did not
+see the forest for the trees. And, naturally, business managers
+were mainly interested in their main motivation - profit.
+
+These days we can make calculations too quickly, and this
+can cause problems. The following incident happened at the
+end of 1966 when we began producing the Corolla.
+
+Corollas were fairly popular and selling well. We started
+with a plan to make 5,000 cars. I instructed the head of the engine section to make 5,000 units and use under 100 workers.
+After two or three months, he reported, "We can make 5,000
+units with 80 workers."
+
+After that, the Corolla kept selling well. So I asked him,
+"How many workers can make 10,000 units?"
+
+He instantly answered, "160 workers."
+
+So I yelled at him. "In grade school I was taught that two
+times eight equals sixteen. After all these years, do you think I
+should learn that from you? Do you think I'm a fool?"
+
+Before long, 100 workers were making over 10,000 units.
+We might say mass production made this possible. But it was
+due largely to the Toyota production system in which waste,
+inconsistencies, and excesses were thoroughly eliminated.
+
+I frequently say management should be done not by arithmetic but by ninjutsu, the art of invisibility. My meaning follows.
+
+Other countries these days use the word "magic" in expressions like "management magic" or "management magician. "
+In Japan, however, ninjutsu is more suitable for management.
+As children, we watched ninjutsu tricks at the movies - like
+the hero suddenly disappearing. As a management technique,
+however, it is something very rational.
+
+To me, management by ninjutsu means acquiring management skills by training. In this age, I am painfully aware of the
+fact that people tend to forget the need for training. Of course,
+if skills to be learned are not creative or stimulating and if they
+do not require the best people, training may not seem worthwhile. But let's take a hard look at the world. No goal, regardless of how small, can be achieved without adequate training.
+
+If in the United States there is management magic, then in
+Japan, we can call it the Toyota production system's management by ninjutsu, a reflection of its Japanese character
+and culture.
+
+► In an Art Form, Action Is Required
+
+If you look up the word "engineer" in an English dictionary,
+you might find "technologist," while in Japanese, its meaning
+uses the character for "art." Analyzing this character, you
+will find it is created by inserting the character "require" into
+the character "action. " So, art seems to be something requiring action.
+
+In mathematics, use of the abacus requires practice even
+though the principle of the abacus beads can be understood
+easily by anybody. But fast and accurate operation requires
+constant practice.
+
+The martial art ofshinai, the bamboo sword, was first called
+gekken, attacking with the sword. But it soon became kenjutsu,
+the art of using the sword. When actual fighting with the
+sword ceased in the beginning of the Meiji era, it became
+kendo, the way of the sword. Recently, it is being called kengi,
+the technique of using the sword.
+
+In the era when the stronger opponent generally won, it was
+gekken, fighting with swords. But as the art form developed,
+even a weaker opponent could win and so it became kenjutsu.
+When the practical use of the sword was no longer in demand,
+it became kendo. In my opinion, swordsmanship advanced
+most during the kenjutsu era because action was required.
+
+Action is also required ingijutsu (technology) - real action
+is what counts. The character for "talk" is also pronounced
+jutsu. Recently there seems to be more technology talk than
+practice. This should be a matter of great concern to us.
+
+I feel that I am still a practicing technologist. I may not be a
+great speaker but it does not bother me. Talking about
+technology and actually practicing it are two different things.
+Computers began doing mathematics at the same time that kenjutsu changed from kendo to kengi. An art form has its own
+value, however, and I am still greatly attracted to it.
+
+► Advocating Profit-Making Industrial Engineering
+
+After World War II, the United States influenced Japan greatly
+in many ways. American cultural attitudes became fairly common nation-wide even in politics.
+
+In the world of industry, America was, without dispute, the
+leader. Catching up with and surpassing America was not a
+job to be done in a day. To catch up, the shortest route was to
+buy advanced American technology. So, aggressive Japanese
+businesses imported and adopted America's high-level production and manufacturing technology. In academia and business, a great number of American business management
+techniques were also studied and discussed. For example,
+Japanese businesses carefully studied industrial engineering
+(IE), a company-wide manufacturing technology directly
+tied to management that was developed and applied in the
+United States.
+
+Defining industrial engineering seems to be fairly difficult.
+When first introduced, it was pointed out that the Toyota production system was method engineering (ME), not IE. Don't
+be confused over the meanings.
+
+To me, IE is not a partial production technology but rather
+a total manufacturing technology reaching the whole business
+organization. In other words, IE is a system and the Toyota
+production system may be regarded as Toyota-style IE.
+
+What is the difference between traditional IE and the
+Toyota system? In brief, Toyota-style IE is m(5keru or profitmaking IE, known as MIE. Unless IE results in cost reductions and profit increases, I think it is meaningless.
+
+There are various definitions of IE. A former head of the
+American Steel Workers' Union defined its function as that of
+entering a plant to improve methods and procedures and to reduce costs. And this is exactly so.
+
+"IE is the use of techniques and systems to improve the method of manufacturing. In scope it: ranges from work
+simplification to large-scale capital investment plans."'
+
+"IE has two meanings. One aims at improving work
+methods in the plant or in a particular work activity. The other
+one means the specialized study of time and action. However,
+this is the work of a technician. Essentially, an industrial engineer studies systematic approaches to improvements. "z
+
+I would like to add a definition from the Society for Advancement of Management (SAM), an organization that succeeded
+the Taylor Society:
+
+Industrial engineering applies engineering knowledge and techniques for the study, improvement, planning, and iniplenienta-
+tion of the following:
+
+1. method and system,
+
+2. qualitative and quantitative planning and various standards including the various procedures in the organization of work,
+
+3. measuring actual results under the standards and taking suitable actions.
+
+This is all done to exercise better management with special consideration for employee welfare, and it does not restrict business
+to lowering the cost of improved products and services.'
+
+I have listed various IE definitions, each saying good things,
+because they are useful references. However, in private business, implementing IE effectively is not easy.
+
+The reason I call Toyota's industrial engineering profitmaking IE is my wish that the Toyota production system born
+and raised at Toyota Motor Company be comparable or
+superior to the American IE's business management and manufacturing system.
+
+We are very happy that the Toyota production system has
+become, as I intended, a company-wide manufacturing technology directly tied to management. And, fortunately, it is
+extending to the outside cooperating firms as well.
+
+► Surviving the Slow-Growth Economy
+
+I have said before that I calmly accept the words "slow growth. "
+
+Over 5 percent macro-economic growth would be regarded as prosperity rather than recession, and we would consider 3 to 5 percent growth normal. Because future cycles may
+bring zero or negative growth, we must be prepared.
+
+The Japanese automobile industry experienced negative
+growth immediately after the oil crisis and, at one time, fell
+into a slump. After that, however, exports improved and,
+compared to the sluggish state of other industries, the automobile industry alone seemed to enjoy good fortune. The actual situation, however, is not necessarily optimistic.
+
+Domestic demand has matured following a cycle and, presently, a large demand cannot be hoped for. Export expansion
+will also slow down as a matter of course. In Europe and the
+United States, political and emotional resistance against
+Japanese cars has gradually risen. With the rising yen, the international market can also be expected to reflect a declining
+competitiveness of Japanese cars. Also, U. S. firms have entered into small-car manufacturing, negatively affecting
+Japanese exports.
+
+The automobile industry may have been endowed with too
+much good fortune. There is already a hidden danger. If
+domestic demands continue their slow growth and if exports
+suffer even a slight slump, we shall face a serious situation.
+
+Textile and utilities industries are regarded as economically
+depressed and it is said that the only formula for recovery lies
+in some basic business shifts. The automobile industry is presently booming, but there is no guarantee that it will not also
+fall on hard times.
+
+In a severe recession or slow-growth economy, private enterprises must persevere by whatever means they can. The
+Toyota production system has been thorough in removing
+waste, inconsistency, and excess from production. It is by no
+means a passive or defensive management system.
+
+The Toyota production system represents a revolution in
+thinking. Because it requires us to change our way of thinking in fundamental ways, I hear strong support as well as strong
+criticism. I find that the cause of such criticism is insufficient
+understanding of what the system is.
+
+Of course, we have not made a big enough effort to teach
+people about the nature of the Toyota production system.
+However, it would not be an exaggeration to say that it has
+already gone beyond Toyota, the company, to become a
+uniquely Japanese production system.
+
+4
+
+Genealogy of the
+
+Toyota Production System
+
+A Global World Around Us
+
+IT IS SAID Toyoda Kiichiro once told Toyoda Eiji,' current
+president of Toyota, that in a comprehensive industry such as
+automobile manufacturing, the best way to work would be to
+have all the parts for assembly at the side of the line just in time
+for their use.
+
+We have already called this idea of just-in-time the principle
+behind the Toyota production system. The words "just-intime" pronounced by Toyoda Kiichiro were a revelation to
+some Toyota management people, one of whom became
+quite attached to the idea. And I have been attached ever since.
+
+"Just-in-time" was new to us then and we found the concept
+stimulating. The idea of needed parts arriving at each process
+on the production line when and in the quantity needed was
+wonderful. Although it seemed to contain an element of fantasy, something made us think it would be difficult but not
+impossible to accomplish. In any case, it gave me an idea.
+
+In the spring of 1932, 1 graduated from the mechanical
+technology department of Nagoya Technical High School
+and joined Toyoda Spinning and Weaving. The company
+was founded by Toyoda Sakichi, whom we might call the
+father of Toyota.
+
+Two years earlier, the world saw New York's stock market
+crash. The ensuing worldwide economic depression still
+deeply affected the Japanese economy. Business was had, unemployment was rising, the social atmosphere was violent
+and it was the year Prime Minister Inukai was assassinated.
+
+My motive for joining Toyoda Spinning and Weaving was
+to use my technical education. Jobs were scarce at the time. But my father, an acquaintance of Toyoda Kiichiro, helped
+me acquire a position.
+
+I never dreamed of encountering Toyoda Kiichiro and the
+world of automobiles. But in 1942, Toyoda Spinning and
+Weaving was dissolved. In 1943, I was transferred to the
+Toyota Motor Company, where I entered Toyoda Kiichiro's
+busy realm of producing automobiles for the war effort.
+
+My textile experience was valuable. Whether in car or fabric
+production, the relationship between workers and machines is
+basically the same. For a private business that is part of a secondary manufacturing industry, cost reduction remains man-
+agen)ent's biggest problem - in both the East and West.
+
+Prior to the war and even the automobile, Japan's textile industry had been struggling in the rough waters of world trade.
+To catch up with and surpass Lancashire and Yorkshire, England's major textile regions, and to strengthen our international standing, we were already implementing cost reduction
+measures. Thus, Japan's textile industry already had a global
+view and was actively rationalizing its production methods.
+
+In comparison, the automobile industry in Japan had a short
+history. Before and during World War II, Toyoda Kiichiro
+headed two teams of automobile engineers and business managers in an attempt to mass-produce cars domestically. But
+while truck production was reaching fairly high quantities,
+passenger car production was still far away.
+
+By the late 1940s, Toyoda Kiichiro saw the possibility of his
+wish being fulfilled. In October 1949, the restriction on small
+passenger car production was lifted and price controls
+abolished. The lifting of distribution control and transition to
+independent sales came in April 1950. Unfortunately, at about
+this time, Toyoda Kiichiro resigned from the presidency, taking responsibility for the labor dispute.
+
+Toyoda Spinning and Weaving and the Toyota Motor
+Company, while both small in scale, possessed a global atmosphere. When I Joined Toyoda Spinning and Weaving in
+1932, two years after Toyoda Sakichi's death, the legacy of the
+great inventor remained. Unconsciously, we seemed to know what "world class" was. Moving to the world of automobiles,
+I met Toyoda Kiichiro, whose foresight was matched by no
+one's. Thus, from the beginning, our corporate world was
+globally oriented.
+
+► Two Extraordinary Characters
+
+The two pillars of the Toyota production system are autonomation and just-in-time.
+
+Autonomation was taken from the ideas and practice of
+Toyoda Sakichi. The Toyota-type auto-activated loom,
+which he invented, was fast as well as equipped with a device
+to automatically stop the machine should any one of the many
+warp threads break or the weft thread run out.
+
+A major condition for production under the Toyota production system is the total elimination of waste, inconsistency, and excess. Therefore, it is essential that equipment be
+stopped immediately if there is a possibility of defects.
+
+From Toyoda Sakichi, we learned that applying human intelligence to machines was the only way to make machines
+work for people. The following is an excerpt from an article by
+Haraguchi Akira entitled "Conversation with Toyoda Sakichi":
+
+The textile industry at that time was not as large as today's.
+Mostly, older women wove at home by hand. In my village,
+every family farmed and each house had a hand-weaving
+machine. Influenced by my environment, I gradually began
+thinking about this hand-weaving machine. Sometimes, I would
+spend all day watching the grandmother next door weaving. I
+came to understand the way the weaving machine worked. The
+woven cotton fabric was wound into a thicker and thicker roll.
+The more I watched, the more interested I became.
+
+Toyoda Sakichi was talking about the spring of 1888 when
+he was 20 years old. Reading this, I was impressed by the way
+he observed all day, gradually understanding the way the
+loom operated and becoming more interested as he watched.
+
+With any problem, I always ask why five times. This
+Toyota procedure is actually adapted from Toyoda Sakichi's habit of watching. We can talk about work improvement, but
+unless we know production thoroughly we can accomplish
+nothing. Stand on the production floor all day and watch -
+you will eventually discover what has to be done. I cannot emphasize this too much.
+
+Opening our eyes and standing in the manufacturing plant,
+we really understand what waste is. We also discover ways to
+turn "moving" into "working," activities that always concern us.
+
+"Just-in-time" came directly from Toyoda Kiichiro. This
+second Toyota pillar did not have the same objective as the
+auto-activated loom that prompted the idea of autonomation.
+It posed different sorts of difficulties.
+
+Toyoda Sakichi went to America for the first time in 1910
+when the automobile industry was just beginning. The popularity of cars was rising and many companies were attempting
+to produce them. Ford had been selling the Model T for two
+years when Toyoda Sakichi saw them in the marketplace.
+
+Looking back, it must have been tremendously stimulating,
+especially to an inventor like Toyoda Sakichi. During his four
+months in America, he must have grasped what an automobile was and how it could become the feet of the people.
+On his return to Japan, he often said we were now in the era
+of automobiles.
+
+In agreement with Toyoda Sakichi's wishes, Toyoda
+Kiichiro went into the business of cars. His understanding of
+the automobile industry and America's role was astute. He
+realized the great potential as well as the difficulty an automobile manufacturer would encounter dealing with countless
+peripheral firms and developing a compatible business system.
+
+I was strongly affected by Toyoda Kiichiro's words: "justin-time." Afterwards, I wondered about how he came up with
+the idea. Of course, I can never be positive because I couldn't
+ask him directly. But it is clear he thought a great deal about
+how to surpass America's highly developed automobile production system.
+
+Just-in-time is a unique concept. Considering how difficult
+it is to understand even now, I cannot help paying respect to
+Toyoda Kiichiro's rich imagination.
+
+► Learning from the Unyielding Spirit
+
+Both Toyoda men had a strong, unyielding spirit. Toyoda
+Sakichi's was exposed, while Toyoda Kiichiro seems to have
+kept his hidden.
+
+Statements made by Toyoda Sakichi between 1922 and
+1924 strongly address the idea that Japanese people should
+challenge the world with their intelligence:
+
+Presently, white people question what contributions Japanese
+people have made to modern civilization. The Chinese invented
+the magnetic compass. But what invention did the Japanese
+make? Japanese people are merely imitators. This is what they say.
+
+Therefore, Japanese people must address this situation seriously. I am not saying to fight, but we must prove our intelligence
+and clear ourselves of this shame.... Rather than stirring up hostility by competing internationally, we should progress enough
+to show our potential.
+
+We had Taka-Diastase' and Dr. Noguchi Hideyo. ` But these
+achievements were made under the guidance of white people -
+with their help and the use of their facilities. I say we should
+achieve greatness through the capabilities of our own people,
+without assistance from outsiders.

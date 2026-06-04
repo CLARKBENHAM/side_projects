@@ -1,0 +1,77 @@
+You are writing a pre-read guide for one chapter of a book.
+
+Book:
+- title: The Reckoning
+- author: David Halberstam
+- chapter: 36 of 59
+- chapter title: Chapter 35
+
+Goal:
+Write the thing a smart reader should read immediately before reading this chapter.
+The reader wants to move faster through the real chapter while retaining the main
+arc, load-bearing facts, important mechanisms, and a few scenes worth watching.
+
+Write Markdown only, roughly 700-1,100 words, with these sections:
+
+1. Orientation Before Reading
+   - 4-7 bullets giving the time, stakes, people, institutions, and conflict.
+
+2. The Chapter Arc
+   - 5-9 chronological bullets.
+   - Each bullet should say what changes, not just what happens.
+
+3. What To Watch For
+   - 5-9 bullets naming the important mechanisms, constraints, causal moves,
+     or authorial claims likely to matter.
+
+4. Load-Bearing Scenes
+   - 3-6 short entries.
+   - Each entry should have setup, action, and payoff in plain prose.
+
+5. Cast And Terms
+   - A compact glossary only for names, factions, places, institutions, and terms
+     needed to read this chapter without friction.
+
+6. What To Hold Lightly
+   - 2-5 bullets for vivid but probably nonessential detail.
+
+Rules:
+- Do not summarize every page.
+- Do not write a school-report recap.
+- Do not invent generic mental-model labels when a concrete event is clearer.
+- Prefer specific actors, constraints, incentives, chronology, and consequences.
+- Keep prose clean and readable; no throat-clearing and no motivational language.
+- Assume the reader has not read this chapter yet.
+- Do not mention reader highlights; this is for a new unread chapter.
+
+Chapter text:
+The Reckoning
+35. THE ARRIVISTES
+
+IT TOOK TAKASHI ISHIHARA, once considered the boy wonder of Nissan, only forty years to become the company’s president. He had joined it in 1937, when he was a young man of twenty-five trying to crash the old-boy network of Japanese business. He was not very well connected, having come from a second-level university, and he entered what was generally regarded in those days as a second-rate company. He got the job there in the first place, he liked to tell friends, because he was not talented enough for the first-rate places, the banks and the high ministries. He advanced quickly during the war, in which he did not serve. “I was lucky,” he later said. “All the smarter young men had to go into the army, and so there was little competition in my generation.” Some contemporaries thought he had not served because the authorities were suspicious of him for alleged left-wing activities as a student.
+
+Because he went back so far in Nissan’s history, he was well aware of the hard times. He had been director of the accounting department in 1945, when Nissan simply could not pay its bills and the company seemed perched close to bankruptcy. There were crises every Saturday, when the parts suppliers would show up to be paid. Nissan did not have the cash to pay most of them, and so it had to hold them off until Monday, the day its own desperately needed loans came through from the bank. Ishihara selected a young man named Yoshihisa Yokoyama to write all the Saturday checks. “But I am not very good at writing checks,” Yokoyama protested. “Good,” Ishihara replied, “the worse the better. Make as many mistakes as you can.” So it was that on Saturdays the parts suppliers would line up, and Yokoyama, warned by Ishihara to write only a few checks, would sit, sweat pouring down his face, writing as slowly as he could, making as many errors as he could, until the clock tolled noon and Nissan closed up and the banks also closed.
+
+Ishihara had an exceptional early career, and he was made a director in 1954, when he was only thirty-three. For a time his career became sidetracked because of the company’s political divisions, but in the sixties, with the success of the exports, he was resurrected. In the mid-sixties, as managing director, he pushed for a small one-liter car for the domestic market. Kawamata opposed this strenuously. The car was made, Ishihara opened a separate sales channel for it, and it became Nissan’s best-selling model. In 1973 many board members thought it was his turn to be president, but Kawamata passed him over for a union loyalist named Tadahiro Iwakoshi. Four years later, Ishihara’s time finally came. He was sixty-five years old.
+
+His first major test came in 1978, just a few months after he took office. It was some five years since the Yom Kippur War, which had triggered the first great oil shock and quadrupled the price of oil. The Japanese, with their smaller cars, had been the immediate beneficiaries of that cataclysm, but over the five years American consumers had gradually adjusted to the new prices. By 1978, the Yom Kippur shock was regarded not as the beginning of a complicated, less stable era but rather as a momentary aberration. Big cars were selling again. “Welcome to the year of the Whopper,” Ben Bidwell of Ford had said in introducing the new Ford line to automotive reporters that year. In 1978 all the Ford factories that fall were working overtime trying to get as many hefty V-8 engines into the showrooms as possible.
+
+The world automotive market, always fickle, now seemed more so than ever. This time it was the Japanese companies that had been caught in the changing tide. Their small cars simply were not selling; they were piling up on the beaches of California. All fall, month by month, Japan’s problem had gotten worse: There had been a reversion to type in American taste. In December 1978, Ishihara estimated that there was some five months’ worth of inventory waiting to be sold in America, about 150,000 cars. His only consolation was that the people of Toyota were in the same predicament. It was unlike anything the cautious Japanese companies had ever faced before.
+
+Ishihara was desperate. He knew he was going to have to take drastic action. All that stock, he thought, had to be liquidated. He did not know what it was going to take to do it—what gimmicks, sales drives, rebates—but it had to go. He decided to tell the Nissan directors that they must prepare themselves to go to zero production for export, perhaps for the entire period between April and September. The first move he made was cutting back on overtime and holidays. Nissan workers usually got one hour of overtime a day, which they badly wanted, and they often worked on holidays. Starting in January and lasting through March there would be none of either. But this was not enough of a reduction, he knew. He could close down one of his factories, each of which was producing about 170,000 cars a year, but closing down a whole factory would be terribly hard on its workers and its community; instead he would close the equivalent of one factory, spreading the reductions among all the plants. He intended to start doing this in April. Everyone in the company would have to share the burden.
+
+Then the events in Iran began to unfold. At first it seemed inconceivable to Ishihara that the Shah, with billions of dollars’ worth of the best American military equipment, could fall to a rabble, but soon his advisers were telling him that the Shah might not make it. At first Ishihara had little sense of the long-range implications of what was happening. Gradually he realized that these were not minor matters but transcending ones, which would profoundly affect the price of oil. That portent unsettled him, because any dramatic increase in oil prices would strike to the very core of his business. As oil jumped to $16 a barrel and then $20, still rising, he became alternately pessimistic and optimistic. Then he began to see that this was a comparative problem. If the world of autos was threatened by expensive gasoline, the big auto was threatened first, which constituted a great opportunity for the small auto. He was head of a company that produced some of the best small cars in the world.
+
+The market obeyed his prediction. In March he did not have to give the order to cut back production; he gave an order to increase it. Years later the American manufacturers claimed that he and the other Japanese executives had been lucky, that they had been like beached whales until the collapse of the Shah’s regime. Perhaps it was luck, Ishihara thought, but he and the others at Nissan had worked very hard for a long time to earn that luck.
+
+Japan’s success in automobiles came so fast it threatened to upset the long-accepted hierarchy of the nation’s businesses. It was puzzling and bothersome to the Japanese establishment that the auto industry, which was not venerated or connected to Japan’s past, became more powerful every year. Auto’s spiritual place in the life of the nation was still uncertain. Was it wasteful? Did it pollute? Would it help create a softer, more materialistic youth? Despite these reservations, the power of the auto industry surged in the mid-seventies, while shipping and steel—under assault from poorer countries like Korea—went into minor slumps.
+
+As auto’s power grew, so did that of Katsuji Kawamata, the chairman of Nissan. He was now auto’s representative in the Keidanren, the powerful business association, although chosen only by process of elimination. The Toyota people didn’t want the job; they kept to themselves in Nagoya. Soichiro Honda was too radical, too much the outsider. The rise of auto privately offended many of the Keidanren traditionalists, who felt that the auto men were arrivistes, unaccustomed to their new power and insensitive in using it. (Their disdain was similar, in fact, to what some American industrialists felt toward Detroit executives, that they were too confident, selfish, and insular.) Kawamata, like the industry he represented, was considered too young, only in his early seventies while they were in their eighties. Furthermore, he was viewed as too arrogant and bumptious, insufficiently schooled in the art of false modesty.
+
+In the past the leaders of the Keidanren were from industries whose role in the nation was absolutely clear. Steel, for example, had been of great importance in Japan ever since 1853, when Admiral Perry sailed his black steel ships into Tokyo Bay, impressing the Japanese. The steel men were perceived not as crude, bullying capitalists but as men who embodied the national spirit. This lofty image did not hinder their business practices in any way, however; steel was a genuine cartel. Once the fierce early competition had abated, executives from every company regularly convened to set prices, which they then announced to their customers. No other industry besides agriculture had enjoyed such complete government support in the early years of Japan’s postwar recovery. Now that agriculture no longer played such a large role in the country’s economy, steel was the government’s favorite. It was full of top bureaucrats from MITI and the Ministry of Finance who went to work in the industry after their ministerial careers were completed. Thus aided by the government, the banks, and a rising new class of engineers, the Japanese steel industry was by the early sixties the best in the world. The excellence of the steel industry had been a major factor in the success of the automobile industry. It not only met auto’s specifications but even surpassed the quality of American steel, particularly in rustproofing. The Americans had had the same technology available but had failed to use it. That was to grate on some American auto makers.
+
+The steel industry’s status was threatened in the seventies, however, and nothing demonstrated auto’s ascendancy so vividly as its increased leverage in dealing with it. “We had to bow to them a great deal when we were younger,” Kawamata once confided to a friend. “We do not have to bow so much anymore. It was not so hard for us to bow then, we never expected it to be different—but I think it is very hard for them now when we do not bow.” Many of the steel men had been imperious when they had been more powerful than auto, and there was lingering resentment among auto executives. After the Yom Kippur War, as the balance changed, auto began criticizing steel for failing to modernize facilities quickly enough, for prices that were too high, for becoming lazy now that they were no longer challenged by the Americans.
+
+In 1977 the steel men asked for a price increase. The auto men agreed but declared that they would no longer accept an annual increase. They began to buy in bulk, what one auto man called their own “cartel.” The steel men did not like it, but there was little they could do. Slowly auto began to set the terms. “You are beginning to treat us,” one of the executives of Nippon Kokan told an official of Toyota, “like one of the noodle caterers.” He meant not only that steel was being demeaned but also that the auto industry was regarding the steel companies like any other supplier: telling them how much steel they wanted, when it was to be delivered, and how much they were willing to pay for it. To save everyone’s face a ritual was conceived. In 1982, steel executives wanted a 10 percent price increase. They reconnoitered quietly and were immediately repulsed by the auto men. The auto men met and decided that 5 ½ percent was their outer limit. They were not happy with even that large an increase, but they were worried that steel, which was suffering badly from foreign competition, might go in the red. In the long run, the weakening of the steel industry would harm auto. Therefore, they secretly communicated this figure to the steel industry before the public negotiations began. They were exceptionally polite about it, but there was no doubt that theirs was the hand that held the whip. At that point the steel men went public. They announced that they wanted an increase of 5 ½ percent and they would fight to get it. In the following weeks the newspapers were full of speculation about whether or not steel would be able to muscle the increase. In the end, when 5 ½ percent became the size of the increase, the appearance was given that steel, as always, had gotten what it always wanted, though auto had the satisfaction of knowing steel had gotten barely half. Its representatives were so powerful that they did not need to show their power in public.
+
+That new power was symbolized by Katsuji Kawamata. Some colleagues thought he was openly politicking to become the chairman of the Keidanren. To them, that outcome was unthinkable. He was the upstart head of an upstart company. Many of the old-timers were offended by the nakedness of his ambition and his relationship with the union. Besides, the chairmanship of the Keidanren was not something one sought; it was something that happened. “He’s the man,” said one of the older members, a textile man, “who has a statue of himself in his own factory!”

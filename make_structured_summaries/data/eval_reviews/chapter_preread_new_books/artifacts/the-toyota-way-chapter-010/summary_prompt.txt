@@ -1,0 +1,781 @@
+You are writing a pre-read guide for one chapter of a book.
+
+Book:
+- title: The Toyota Way
+- author: Jeffrey K. Liker
+- chapter: 10 of 14
+- chapter title: Span 10
+
+Goal:
+Write the thing a smart reader should read immediately before reading this chapter.
+The reader wants to move faster through the real chapter while retaining the main
+arc, load-bearing facts, important mechanisms, and a few scenes worth watching.
+
+Write Markdown only, roughly 700-1,100 words, with these sections:
+
+1. Orientation Before Reading
+   - 4-7 bullets giving the time, stakes, people, institutions, and conflict.
+
+2. The Chapter Arc
+   - 5-9 chronological bullets.
+   - Each bullet should say what changes, not just what happens.
+
+3. What To Watch For
+   - 5-9 bullets naming the important mechanisms, constraints, causal moves,
+     or authorial claims likely to matter.
+
+4. Load-Bearing Scenes
+   - 3-6 short entries.
+   - Each entry should have setup, action, and payoff in plain prose.
+
+5. Cast And Terms
+   - A compact glossary only for names, factions, places, institutions, and terms
+     needed to read this chapter without friction.
+
+6. What To Hold Lightly
+   - 2-5 bullets for vivid but probably nonessential detail.
+
+Rules:
+- Do not summarize every page.
+- Do not write a school-report recap.
+- Do not invent generic mental-model labels when a concrete event is clearer.
+- Prefer specific actors, constraints, incentives, chronology, and consequences.
+- Keep prose clean and readable; no throat-clearing and no motivational language.
+- Assume the reader has not read this chapter yet.
+- Do not mention reader highlights; this is for a new unread chapter.
+
+Chapter text:
+ts from Toyota descended on the TMI plant and swarmed through it daily for two
+weeks. TMI was given a level-two designation in Toyota s purchasing supplier rating, which meant they were put on
+watch and had to report monthly on improvements based on a true root cause analysis and clearly defined
+countermeasures. The Toyota experts ended up visiting the plant a few times a week for six months, then monthly.
+A typical response to this problem might be The computer went down, for heaven s sake fix it and implement a true
+manual backup system and be done with it. In fact, TMI had delivery problems in the past and Toyota considered
+this to be yet one more symptom of a deeper problem. Toyota s solution: analyze every aspect of the business,
+including quality planning, employee selection and training, team structure, problem-solving processes, pull systems,
+standardized work, supplier management basically recreate the business.
+TMI did just that and now J.D. Power routinely rates it as the top automotive seat supplier in the country on quality,
+a model TPS supplier exceeded only by its parent company in Japan. TMI also runs a manual system every month to
+be ready for any computer malfunctions. In a very big way, TMI s crisis and level two rating was the best thing that
+every happened to it. Whereas other companies would threaten problem suppliers Fix the problems or we will drop
+you Toyota nurses them out of their sickness in a very holistic way.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Developing an Extended Learning Enterprise
+Means Enabling Others
+While musing over American Auto s debacle with suppliers and wondering why it wanted to take an elevator to the
+top without stopping at any of the floors in between, I began to conceptualize the problem as a pyramid or hierarchy.
+Thinking back to college social psychology, I thought of Maslow s needs hierarchy, discussed briefly in the last
+chapter, which assumes humans can work on higher-level needs like self-actualization (developing themselves) only if
+lower-level needs are satisfied. So I developed a supplier version of the need hierarchy (see Figure 17-1).
+
+Figure 17-1: Supply chain need hierarchy (modeled after Maslow s need hierarchy)
+The message from suppliers was that they were not interested in supplier development help from American Auto until
+some more fundamental issues were fixed. As a starting point, they wanted fair and equitable commercial relations. A
+lot of American Auto s practices were simply unfair. For example, American Auto had adopted the Toyota practice
+of target pricing, setting targets for suppliers instead of relying on competitive bidding, but they had not executed it
+effectively. One supplier explained:
+
+We have gone through a different target cost process for every group we deal with (in American Auto). If you
+are above target, they cannot issue a purchase order. We have gone around and around and reached launch
+without a purchase order.
+Another supplier complained how inconsistent American Auto is in the target setting process:
+
+If we meet the target too early in the design process, they will change the target. So there is absolutely no
+incentive to make the target early. There is no target-setting process. It is done differently every time. It even
+is different across programs within the same platform. It depends on who is in the room.
+American Auto also has developed a long and complex process of certifying that a supplier s process is capable from
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+a quality perspective. Although it was burdensome, suppliers accepted it but American Auto kept changing it. In fact,
+it would change multiple times during a new vehicle program and each time the supplier certification process would
+extend out. Until they were certified, suppliers did not get paid for tooling. Typical of most manufacturing businesses,
+American Auto is responsible for paying for the costs of tooling, dies, and special equipment used to make the parts.
+This can run into millions of dollars. In some cases, suppliers got all the way to the production phase and were
+producing new parts for months that were passing all the quality tests, but since they were not quality certified, they
+were not paid for the tooling.
+This comes back to the concept of coercive versus enabling bureaucracy discussed in Chapter 12. Both American
+Auto and Toyota are very bureaucratic in their dealings with suppliers. By this, I mean there are extensive standards,
+auditing procedures, rules, and the like. While suppliers view American Auto as highly coercive, Toyota, which uses
+similar quality methods and procedures, is viewed as enabling. For example, an American automotive interior supplier
+described working with Toyota in this way:
+
+When it comes to fixing problems, Toyota does not come in and run detailed process capability studies 15
+times like American Auto. They just say, Take a bit of material off here and there and that will be OK let s
+go. In 11 years I have never built a prototype tool for Toyota. Knee bolsters, floor panels, instrument panels,
+etc. are so similar to the last one it is not necessary to build a prototype. When there is a problem, they look
+at the problem and come up with a solution focus on making it better, not placing blame.
+By contrast, a supplier gave the following highly emotional description of American Auto:
+
+In the climate we have today versus days past, we are successful if we do not get the crap beat out of us. We
+may execute on a program or a change and may be performing under the most demanding circumstances
+(e.g., attempting something we had said could not be done) and we execute 99.9% flawless. But if it is not
+100% you get killed. We used to get appreciation for busting our butt for making the last-minute change.
+Now we are happy if we do not get any licks during the course of the week. It used to be a reward system and
+now it is purely a punitive system.
+The supply chain need hierarchy in Figure 17-1 suggests that, until the relationship has stabilized to the point where
+the business relationship is fair, processes are stable, and expectations are clear, it is impossible to get to the higher
+levels of enabling systems and truly learning together as an enterprise. And you can come down the hierarchy as fast
+as you can go up. American Auto was making progress up the hierarchy in the early to mid-1990s and then went
+sharply down in the late 1990s and into the 21st century. Toyota in the meantime has been moving steadily up. For
+American Auto to become a benchmark for supplier relations, they will need to do much more than build a supplier
+development center. To begin to approach Toyota, they will need to remake their internal culture, become a learning
+organization, and break down the chimneys that provide contradictory policies to suppliers.
+
+Toyota Way Principle 11 is Respect your extended network of partners and suppliers by challenging them and
+helping them improve. What really cements Toyota as the model for supplier relations is its approach to learning
+and growing together with its suppliers. It has achieved, in my view, something unique: an extended learning
+enterprise. This is, to me, the highest form of the lean enterprise.
+Case Example: Trim Masters, Inc. JIT Auto Seats Like the Toyota Textbook Says
+In 1994 Trim Masters, Inc. (TMI) was established as a joint venture operation to supply Toyota s Georgetown plant.
+It was part of Toyota s effort to purchase parts in the U.S. and to get JIT delivery to Toyota assembly plants in
+North America. The Toyota Way does not allow Toyota to buy parts from just anybody. Toyota views the suppliers
+as long-term partners and they must meet Toyota s exacting standards for quality, cost, and delivery. So, to get the
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+localization and the expertise they demanded, Toyota arranged for a joint venture to be created with ownership by
+Toyota Tsusho, Araco, their long-term interior parts supplier in Japan, and Johnson Controls. Johnson Controls
+(JCI) is the single largest shareholder, with 40%, but Toyota and Araco (of which Toyota owns 75%) together have
+controlling interest. Toyota had earlier contracted with Johnson Controls to supply seats for its vehicles and worked
+closely to teach TPS to Johnson Controls. That plant still makes a large percentage of Toyota s seats, but Toyota
+likes to have at least two suppliers in competition, to keep them motivated to improve and reduce cost.
+So Toyota set up TMI as a joint venture to supply seats for the opening of its new plant in Georgetown, Kentucky.
+TMI s seat plant is in Nicholasville, Kentucky. Araco runs the show on getting TMI s operation together, while JCI is
+more or less a silent partner. Toyota encourages TMI to follow TPS building only the seats needed on the assembly
+line, in the exact order in which they are needed. Even Araco, one of Toyota s premier seat suppliers and veteran
+TPS practitioner, sometimes keeps finished goods inventory in Japan, but Toyota wants TMI to do better than that.
+From the time the auto body comes out of Toyota s paint shop and starts down the assembly line, TMI has about
+four hours to receive Toyota s order for the sequence of seats it needs, build the seats, and ship them to Toyota.
+Then the seats travel down a spur to the main assembly line just in time to mate up with the exact car they were built
+for. This is a very challenging system and not for the weak of heart! Any slight hiccup risks shutting the Toyota plant
+down, at a cost of tens of thousands of dollars a minute. For one thing, most of TMI s parts come from suppliers that
+are delivering to TMI throughout the day. A problem from one of them can shut TMI down in a couple of hours.
+Also, seats are complex assemblies and appearance counts. A bad batch of leather, a tiny scratch on any one of
+dozens of pieces of plastic, a spring mechanism that is not precise, etc., and Toyota will reject the seat.
+But the Toyota Way is to patiently teach TPS to its suppliers to meet its exacting standards. And though TMI has
+had its share of struggles, the results have been outstanding. Lean expert Jim Womack likes to say that the amount of
+regular inventory turnover is the acid test of true leanness the more, the better. Ask Hesselbrock, Director of
+Operations for all TMI plants, what the Nicholasville inventory turns are and you will think he is making it up: 135
+turns per month! When I saw this on an overhead slide, I thought I was very clever in spotting the error. This should
+be per year, right? No, it is per month. The plant brings in over 750 part numbers of raw materials. Some come from
+Japan, some from Mexico, and most from the U.S. and Canada. If delivery of raw materials stopped at any point in
+time, the plant would have to stop making seats in one and a half hours.
+For example, every seat needs foam, which comes in large containers from a sister company, Foamex. There are 75
+varieties of foam, so too much inventory would take up a small warehouse. So there is typically only one and a half
+hours of foam on the floor and 45 minutes of safety stock. TMI receives 12 truckloads of foam every day coming in
+every one and a half hours. When I visited the seat plant in 2000, they were averaging just under 40 parts per million
+defects to Toyota. Toyota expects a maximum of 50 defective seats per million. There are 100 parts on every seat
+and about 1000 seats per day. Any part could be defective; if so, the whole seat is considered a defect. When I was
+last there in the summer of 2002, they were down in the range of 20-30 parts per million defects. TMI has since
+launched a new seat plant to provide seats for the Lexus RX330 in Cambridge, Ontario, which has a requirement of
+single-digit parts per million defects maximum true Six Sigma quality.
+
+The seat plant in Nicholasville looks much like a Toyota supplier s plant in Japan. Final seat assembly is done on a
+one-piece-flow moving assembly line. There are about one to two hours of parts along the line, neatly arranged in
+small bins on flow racks. The only schedule for the plant is the broadcast order Toyota sends out after the car body
+has been painted, stating the exact sequence of seats required to mate up with the cars. Every 55 seconds (the takt
+time of the Toyota plant) an order comes in. So TMI knows only 55 seconds in advance what to work on next. They
+queue up 10 broadcast orders for seat sets, they reverse the sequence that Toyota has requested (to adjust for the
+fact that they load finished seats on the truck in reverse sequence), and then send the orders out to the assembly line
+and to other sequencing processes in the TMI plant. Some large components such as seat frames, seat covers, and
+foam are sequenced to the seat assembly line and smaller components like nuts and bolts are stored in a parts
+supermarket and brought to the line based on a kanban system. TMI also uses a pull replenishment system with its
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+own suppliers.
+They have almost 800 different parts coming into the plant, some from Mexico and Japan. Obviously, for the distant
+plants more inventory is held and TMI uses a schedule to bring in these parts. For example, they keep 40 hours of
+Mexico parts in safety stock and hate every hour of it.
+But TMI s work is never done. Toyota in 2001 challenged its suppliers to reduce the price of components by 30%
+for the next new major model introduction in 2004 about 10% price reduction per year. One of the rumors is that
+Toyota, through its joint venture with Peugeot, got insight into what other automakers pay for parts. While other
+companies might have gone shopping around to other companies for lower prices, in the true Toyota Way fashion of
+using operational excellence as a strategic weapon, Toyota saw no reason why its current suppliers with the TPS
+couldn t match or beat world-class costs.
+Though TMI is already quite lean in labor costs, its reaction has been quite positive and productive. They launched a
+major hoshin kanri initiative to achieve the target. Hoshin kanri means policy deployment. It starts with high-level
+objectives and then cascades these objectives down to every function in the organization. It is part of the Toyota
+Way approach to management, a give-and-take process of communicating between top to middle management and
+sometimes supervisors and team leaders. One of hoshin kanri s greatest strengths is its ability to translate high-level,
+executive-level goals into quantitative, achievable actions. Simply put, policy deployment is a system that encourages
+employees to analyze situations, create plans for improvement, conduct performance checks, and take appropriate
+action. For this purpose, Trim Masters has a war room with objectives for every function in the organization to
+reduce costs, as well as cross-functional projects. Every policy deployment chart ends with measurable objectives,
+measures, and a point person responsible for achieving the results. TMI holds weekly meetings to discuss progress in
+each area.
+One reason TMI never panics about the high demands placed on it is because it is always working closely with
+Toyota. Toyota realizes that TMI has limited control over costs, and some of the biggest cost savings can be
+achieved jointly in the product design stage through value engineering. Value engineering is a systematic,
+cross-functional team approach to examine the design factors that affect the cost of new products and then redesign
+the product to achieve the required standard of quality at the target cost set by Toyota. TMI and Toyota working
+together can greatly reduce cost by changing the engineering of the seat prior to production. In addition, Toyota
+purchasing representatives come to the plant regularly to review their process and progress and, to date, have been
+very pleased with the effort. TMI realizes that, with a sincere effort and good results, it will be treated fairly and well.
+TMI is a U.S. success story in implementing TPS under rather severe circumstances just-in-time building and delivery
+with no inventory in sequence to the assembly plant. But ask the senior managers if they are a model lean facility and
+they will just laugh. They know how far they have to go to get to the level of sophistication they see in their parent
+company in Japan.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Section IV: Continuously Solving
+Root Problems Drives
+Organizational Learning
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 18: Principle 12: Go and
+See for Yourself to Thoroughly
+Understand the Situation (Genchi
+Genbutsu)
+Overview
+Observe the production floor without preconceptions and with a blank mind. Repeat why five times to every
+matter.
+Taiichi Ohno (as quoted in The Toyota Way document)
+In my Toyota interviews, when I asked what distinguishes the Toyota Way from other management approaches, the
+most common first response was genchi genbutsu whether I was in manufacturing, product development, sales,
+distribution, or public affairs. You cannot be sure you really understand any part of any business problem unless you
+go and see for yourself firsthand. It is unacceptable to take anything for granted or to rely on the reports of others.
+I have often heard the following story, or a variant, from managers of Toyota s Georgetown, Kentucky, plant.
+Reflecting back on the early days when Fujio Cho was the first president of the Georgetown plant, the stories begin
+with the managers visits to the factory floor in the morning. On the way in, they notice Cho standing and watching an
+operation. They pass nearby him, expecting Cho to notice and greet them, but he doesn t respond. He just stands
+and stares, as if off into space. They walk even closer. He continues to stare. They go about their business, then
+happen by 15 minutes later. Cho is standing and staring. They wonder if he is ill or frozen to the ground at that point.
+Finally, Cho relaxes, as if coming out of a trance, notices he is not alone, and says, Good morning with a smile.
+Later there are some orders from the president s office to tighten up some part of the Toyota Production System in
+the plant.
+
+So what was Cho doing? The only way he could truly understand the state of TPS in the plant was to go and see for
+himself. Are they following the standard work procedures? Is it a level flow and just-in-time? Are parts being
+delivered before they are needed? He must personally observe the flow of material to the line to answer these
+questions. He must look to see if workers on the line are using the andon to call for help and stop the line if
+necessary. And how are the team leaders and group leaders responding? Applying decades of skill, he can see all
+of this for himself. He is a black belt of seeing and understanding TPS. He knows that what he sees firsthand would
+not show up in written reports and tables of numbers, though he wants to see those also. Tables and numbers may
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+measure results, but they do not reveal the details of the actual process being followed every day.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Principle: Deeply Understanding and
+Reporting What You See
+Literally translated, Genchi means the actual location and genbutsu means the actual materials or products. But
+genchi genbutsu is interpreted within Toyota to mean going to the place to see the actual situation for
+understanding. Gemba is a term that has become more popular. It refers to the actual place and means about the
+same thing as genchi genbutsu. The first step of any problem-solving process, development of a new product, or
+evaluation of an associate s performance is grasping the actual situation, which requires going to gemba. Toyota
+promotes and expects creative thinking, and innovation is a must, but it should be grounded in thoroughly
+understanding all aspects of the actual situation. This is one of the behaviors that really distinguishes someone trained
+in the Toyota Way they take nothing for granted and know what they are talking about, because it comes from
+firsthand knowledge.
+It would be relatively easy for management attempting to learn from the Toyota Way to mandate that from this day
+forward all engineers and managers will spend a half hour observing the floor to understand the situation. But this
+would accomplish very little unless they had the skill to analyze and understand the current situation. There is a
+surface version of genchi genbutsu and a much deeper version, which takes many years for employees to master.
+What the Toyota Way requires is that employees and managers must deeply understand the processes of flow,
+standardized work, etc., as well as have the ability to critically evaluate and analyze what is going on. (This may
+include some analysis of data.) In addition, they must know how to get to the root cause of any problems they
+observe and communicate it effectively to others. As Tadashi ( George ) Yamashina, president of the Toyota
+Technical Center, explained:
+
+It is more than going and seeing. What happened? What did you see? What are the issues? What are the
+problems? Within the Toyota organization in North America, we are still just going and seeing. OK, I went
+and saw it and now I have a feeling. But have you really analyzed it? Do you really understand what the
+issues are? At the root of all of that, we try to make decisions based on factual information, not based on
+theory. Statistics and numbers contribute to the facts, but it is more than that. Sometimes we get accused of
+spending too much time doing all the analysis of that. Some will say, Common sense will tell you. I know
+what the problem is. But collecting data and analysis will tell you if your common sense is right.
+When Yamashina joined the Toyota Technical Center as president, he laid out his 10 management principles (see
+Figure 18-1), which include principles three and four that relate to genchi genbutsu:
+3.
+Think and speak based on verified, proven information and data:
+o
+Go and confirm the facts for yourself.
+o
+You are responsible for the information you are reporting to others.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+4.
+Take full advantage of the wisdom and experience of others to send, gather or discuss information.
+
+Figure 18-1: President s management philosophies Mr. Yamashina, Toyota Technical Center
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Ohno Circle Watch and Think for Yourself
+There are many stories about the famous Ohno circle. I was fortunate to speak in person with Teruyuki Minoura,
+who at the time was president of Toyota Motor Manufacturing, North America. He had learned TPS directly from
+the master and part of his early education at Toyota was standing in a circle:
+
+Minoura: Mr. Ohno wanted us to draw a circle on the floor of a plant and then we were told, Stand in that and
+watch the process and think for yourself, and then he didn t even give you any hint of what to watch for. This is the
+real essence of TPS.
+
+Liker: How long did you stay in the circle?
+
+Minoura: Eight hours!
+
+Liker: Eight hours?!
+
+Minoura: In the morning Mr. Ohno came to request that I stay in the circle until supper and after that Mr. Ohno
+came to check and ask me what I was seeing. And of course, I answered, (reflecting) I answered, There were so
+many problems with the process . But Mr. Ohno didn t hear. He was just looking.
+
+Liker: And what happened at the end of the day?
+Minoura: It was near dinner time. He came to see me. He didn t take any time to give any feedback. He just said
+gently, Go home.
+Of course, it is difficult to imagine this training happening in a U.S. factory. Most young engineers would be irate if
+you told them to draw a circle and stand for 30 minutes, let alone all day. But Minoura understood this was an
+important lesson as well as an honor to be taught in this way by the master of TPS. What exactly was Ohno
+teaching? The power of deep observation. He was teaching Minoura to think for himself about what he was seeing,
+that is, to question, analyze, and evaluate.
+
+These days we often depend upon computers to analyze and evaluate data. For example, in a Six Sigma quality
+improvement initiative, we collect data and run it through our statistical package correlations, regression, analysis of
+variance. Some of the results we get are statistically significant. But do we truly understand the context of what is
+going on or the nature of the problem?
+Data is of course important in manufacturing, but I place the greatest emphasis on facts.
+Taiichi Ohno
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+To Ohno the big difference was that data was one step removed from the process, merely indicators of what was
+going on. What you want to do is verify the on-the-scene facts of the situation. Ohno s approach was very much like
+that of a forensic scientist investigating a crime scene.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Think and Speak Based on Personally Verified
+Data
+David Baxter is a vice president at the Toyota Technical Center. At one point he was responsible for evaluating
+supplier parts. When Toyota launched a version of the Camry in 1997, they had a wire harness problem. Yazaki
+Corporation, a parts supplier to Toyota in Japan, supplied the problem wire harness. What happened next is not
+typical of most companies. Yes, a quality engineer from Yazaki called Toyota to explain what corrective action they
+were taking. Yes, Yazaki sent an engineer to the Camry plant. But then the president of Yazaki actually went out to
+the Camry plant in Georgetown personally, to watch how workers assembled the wire harness onto the vehicle.
+
+What would a U.S. executive of a parts supplier do in this circumstance? Well, one data point is a story told by Jim
+Griffith, also a vice president of the Toyota Technical Center, who took over the parts evaluation function from
+Baxter. A problem similar to the wire harness problem occurred with a U.S. parts supplier. In this case, the vice
+president of the business unit that serves Toyota came out to the Toyota Technical Center to discuss what he was
+doing to solve the problem. He was very reassuring, explaining, I am deeply sorry about this. Do not worry. This will
+get my personal attention. We are going to solve this problem. There are no excuses. When Griffith asked him what
+the problem was and what his plans were, he responded, Oh, I do not know yet and I do not get into that kind of
+detail. But do not worry. We are going to get to the bottom of this and solve the problem. I promise. Griffith looked
+exacerbated as he told the story:
+
+And I was supposed to feel better about that? It would be unacceptable in Toyota to come to a meeting like
+that so poorly prepared. How could he give us his assurance if he did not even go and see for himself what
+the problem was? So we asked him to please go back and do this and then return when he truly understood
+the problem and countermeasure.
+Another Baxter story reveals the benefits of taking time and effort to see for yourself. It is about an early assignment
+to evaluate the capabilities of an outside test lab, let s call it Detroit Labs, which was highly reputable and had been in
+business since the early 1900s. Toyota brought in some previously tested struts from Japan and wanted Detroit Labs
+to test them, using the same test standards used in Japan. As Baxter explained:
+
+I went on visits with my Japanese mentor, who was an exceptional test engineer. We took the struts to
+Detroit Labs and compared their test results with the known data in Japan. For us the issue was not whether
+their results came out exactly the same or different, but we wanted to see if they had a good procedure and a
+good way to do the test. Even when we went to the test company to do this, we were not satisfied looking at
+pictures and failed parts. We wanted to see the parts under failed tests and to see how the data was being
+compiled. My mentor would ask most of the technical questions to understand in detail how they had done
+the testing. What we concluded was they had a very good process and procedure for implementing the tests,
+but their technical capability did not meet our expectations. They did not use engineering analysis techniques
+that met Toyota standards. For example, they did a fatigue test and reported the number of cycles and load,
+but in addition, we were interested in how the load was oriented and we thought they should be controlling
+the frequency in applying the load (during the durability test) and they did not do that. So we were not
+pleased with their approach to testing and analysis.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Of course, the Toyota team had further discussion with them and gave them feedback, which is part of genchi
+genbutsu. Detroit Labs responded by saying Toyota did not tell them to do the test in this way. Part of the Toyota
+Way evaluation was to determine whether Detroit Labs would take the initiative to test the struts thoroughly on their
+own, which they hadn t. Not only that, they had a negative attitude about it. Baxter concluded:
+Had we not gone to see the testing ourselves, we would not have been able to confirm that lack of
+understanding on their part. We would have only seen it in the results and it would have been vague. We
+were not interested in pass-fail but the process to control the test. The data itself turned out OK their test of
+how the part failed confirmed our tests from Japan. Previous tests indicated it would fail. They found out and
+confirmed what we knew, so got the right answer. At GM (former employer), I would have said, They got the
+same answer, so let s use them. But they were doing a test to a prescribed procedure rather than doing
+actual engineering the way Toyota expects. They were doing a task and not thinking deeply. From this
+experience, I started to understand what a learning company is all about.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+See America, Then Design for America
+The 2004 Sienna is what Toyota considers a major redesign a new and improved version of its highly ranked
+minivan. Toyota engineered it to be bigger, faster, smoother, quieter, and about $1,000 cheaper. Toyota also
+designed in many small but important enhancements that make life easier for the North American driver. Many of
+these enhancements were the result of genchi genbutsu.
+The chief engineer job of developing this Sienna was assigned to Yuji Yokoya. The primary markets are the U.S. and
+Canada with some sales in Mexico. Yokoya had worked on Japanese and European projects, but never a North
+American vehicle. He had seen various parts of North America, but not specifically with the eyes of a chief engineer
+developing a vehicle for North America. So he felt that he did not really understand the North American market.
+Other managers may have hit the books on marketing data, but that is only one thing you do at Toyota. Yokoya went
+to his director and requested he be permitted to make a trip. He said, I want to drive all 50 states and all 13
+provinces and territories in Canada and all parts of Mexico.
+Andy Lund was an American program manager at the Toyota Technical Center assigned to assist Yokoya. He had
+an opportunity to take part of the trip through Canada with him. He related the following example of Yokoya s
+determination to go and see a small town in Canada called Rankin Inlet in Nunavut:
+
+He arrived at a very small airport and tried to reserve a car, but there were no rental car companies there or
+in the whole town. So Yokoya-san called a taxi and a minivan-type taxi picked him up. He tried to speak to
+the taxi driver to make a request, but the driver did not speak English well enough for Yokoya-san to
+understand. Eventually the taxi driver s son came out and translated. The taxi driver agreed to Yokoya-san s
+request to hire the car but drive it himself. As it turned out, the town was so small Yokoya-san drove the taxi
+through the only roads in minutes and was done.
+Yokoya achieved his goal of driving in every single U.S. state, including Alaska and Hawaii, and every part of
+Canada and Mexico. In most cases they were able to rent a Toyota Sienna, looking for ways to improve it. As a
+result, he made many design changes that would make no sense to a Japanese engineer living in Japan. For example:
+•
+The roads in Canada have a higher crown than in America (bowed up in the middle), perhaps because of the
+amount of snow they get. They learned driving in Canada that controlling the drift of the minivan is very
+important.
+•
+When driving on a bridge over the Mississippi River, a gust of wind blew him very hard and Yokoya realized
+that side-wind stability was very important. Driving through the crosswinds of Ontario, he was alarmed how
+easy it was for trucks to blow the minivan aside. If you drive any place with a crosswind, the newer Sienna is
+much better.
+•
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+When he was driving the narrow streets of Santa Fe, Yokoya found it hard to turn the corner with the
+previous Sienna and improved the turning radius by 3 feet. This is a huge accomplishment, since the new
+version is also significantly bigger.
+•
+
+•
+
+By practically living in the Sienna for all these driving trips, Yokoya learned the value of cup holders. In
+Japan, distances are usually shorter. You may buy a can of juice, but it is more common in the culture to
+drink this outside of the car. In America, on a long trip, he learned it was common for one person to have
+one-half empty cup of coffee or bottle of water and one full one. You don t want to wait until you stop and
+have already run out. Therefore, you really need two cup holders per person, or even three, if a person wants
+a cup of coffee plus two bottles of water. There are 14 sturdy cup and bottle holders in the Sienna. And
+there are numerous compartments and pockets for those long trips as well.
+
+Yokoya also noted the American custom of eating in vehicles rather than taking the time to stop and eat. In
+Japan it is very uncommon to eat in the car, partly because the roads are narrower and trucks wind in and
+out, so you need to focus on the road and periodically take a break from the stress. The luxurious American
+highways lead to more relaxed driving, using cruise control. So he learned the value of having a place for
+hamburgers and fries by putting in a flip-up tray accessible from the driver position. This option had been
+previously adopted by Toyota minivans in Japan but is even more useful for the North American market.
+
+The original concept for a longer minivan also came from genchi genbutsu. Dr. Akihiko Saito, who was responsible
+for all of R&D for Toyota globally, believed in the design philosophy that small is smart. The philosophy is to adopt
+the smallest possible exterior to minimize the weight of the vehicle while achieving the appropriate interior volume.
+During a visit to the Toyota Technical Center in Ann Arbor, he took a trip to Home Depot. He just stood in the
+parking lot and watched like he was in the Ohno circle. What Saito saw were Americans buying large things, like 4 x
+8 plywood, and putting them into the back of their pickup trucks and Honda Odysseys. Back at the technical center,
+he also saw how a sheet of plywood fit into the Honda Odyssey but not the previous generation Sienna. Mr. Saito
+approved the size to accommodate the 4' x 8' plywood for the new Sienna on the spot.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Leaders Are Not Excused from Genchi Genbutsu
+Kiichiro Toyoda learned from his father the importance of getting your hands dirty and learning by doing. He insisted
+on this from all of his engineers. A famous story about Toyoda has become part of Toyota s cultural heritage (Toyota
+Way document, p. 8):
+
+One day Kiichiro Toyoda was walking through the vast plant when he came upon a worker scratching his
+head and muttering that his grinding machine would not run. Kiichiro took one look at the man, then rolled
+up his sleeves and plunged his hands into the oil pan. He came up with two handfuls of sludge. Throwing the
+sludge on the floor, he said: How can you expect to do your job without getting your hands dirty!
+For some reason, sludge in oil pans seems to creep into a number of Toyota stories. When I visited Jim Press (COO
+of Toyota Motor Sales, U.S.A.), he related the following story:
+
+Our dealers see executives from Japan more often than domestic dealers see executives from Detroit. I recall
+when I was with Dr. Shoichiro Toyoda on a visit, in the mid- 70s. And we had just introduced a four-speed
+automatic transmission. It was very unusual to have an automatic transmission fail, if ever. It seemed
+indestructible. We were visiting a dealership. And the dealer complained about the fact that a car just came
+in with a transmission that had failed. Dr. Toyoda, in his pressed suit, walked over to the technician, got in a
+dialogue with him, walked over to the oil pan where he d drained the oil from the transmission, rolled his
+sleeve up and put his hand in this oil, and pulled out some filings. He put the filings on a rag, dried them off,
+and put them in his pocket to take back to Japan for testing. He wanted to find out if the filings were the
+result of a failed part or if it was residue from the machining process.
+In most large U.S. companies, the president is like the king. The king is not someone who you casually run into and
+strike up a conversation with. One can judge rank in these U.S. fiefdoms based on office size, windows, furniture
+quality, carpet quality, how difficult it is to get an appointment, and yearly bonuses.
+When I last visited Toyota in Georgetown, Kentucky, to interview President Gary Convis, I also had to go through
+public affairs and secretaries. A secretary led me into a luxurious conference room in the front office and offered me
+something to drink. Convis was late, which is also quite typical of visits like these. So I wandered a bit under the
+pretext of going to get coffee. The executive offices were quite spartan for someone of his rank and stature. But what
+was odder was that the vaunted 5S of Toyota was in disarray here. There were boxes every place and his assistant
+was busily packing boxes. When I asked what she was doing, she explained, a bit disgruntled, that the boss wanted
+to be near the shop floor so he could be where cars are being made, so he moved to one of the offices in the middle
+of the plant with windows overlooking the assembly line. His assistant seemed a little annoyed that she had to leave
+the nice front-office facilities with their outside windows. But she seemed to understand, pausing and then explaining:
+He is the most shop-floor-oriented president we have had. This is quite a compliment when past presidents included
+the likes of Fujio Cho.
+
+When I interviewed Don Jackson, vice president of manufacturing of the Georgetown plant, he spent more time with
+me than we had scheduled. He had several calls that he did not take. Finally he got one that got his attention, and it
+wasn t from higher up.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Jackson: [Yeah, I ll be right down. Just a second, OK? Bye.] I am sorry. I have a team member concern meeting. I
+have to be there.
+
+Liker: Is this something you usually handle?
+
+Jackson: Yes. The group leader or superintendent could handle it. But I want to investigate it for myself. And I want
+them to see that this is important to me. I want the team member to see that.
+
+Liker: I ve heard about the concept of managers spending their time on the floor. Is that true even up to your level?
+Do you really have that much time to spend on the floor?
+
+Jackson: Typically my average day is 10 to 12 hours. I usually start out on the production floor around 8:00 and I
+pick an area of the plant I visit in the morning to sort of assess the last 24 hours of what took place. And from that
+point on, I m pretty much confirming different parts of the operation or the annual plan activity throughout the plant.
+Part of the annual planning process is milestones and how you ll achieve efficiency improvements or quality
+improvements or supplier improvements. So, based on our annual plan, we are following those items up. And I do
+weekly department head reviews on the floor. The team members are pretty motivated by that. I actually come, see
+their improvements, and give them some suggestions.
+
+Liker: So you spend a lot of time here on site, as opposed to traveling.
+
+Jackson: Well, when I was managing quality, I spent probably 50% of my time visiting suppliers and then 50% in
+the plant, but now probably about 95% in the plant.
+
+Liker: One last question. Many companies bring in managers from outside the company. Can a Toyota plant
+manager be hired from another company?
+Jackson: I think that would be pretty difficult. I recently hired a person from General Motors and I brought him in at
+the department head level. It s really the first time it s been done here at Georgetown. He was pretty unique. He grew
+up through Saturn, spent a couple of years at NUMMI, so he had a little bit of experience hands-on versus maybe
+operating from HIS office. I think a lot of the plant managers at a company like Ford, for example, are looking at the
+financial side and looking at more of the manpower and efficiency from a computer screen versus on-the-floor
+management. And our philosophy is management on the floor. If you can manage from the floor operation, then that s
+the same way the group leader will manage and the same way the assistant manager will manage. Then they re in
+control. And I m spending that much time on the floor because I m trying to develop the staff in my department.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Hourensou Rapid Genchi Genbutsu for Executives
+As president of Toyota, Cho had to learn to rely more on trust than he did in the days of running a few manufacturing
+plants. He doesn t have the time to go and see everything for himself. Instead, he surrounds himself with people he
+trusts and, by default, goes and sees secondhand through them.
+But he also uses a method called hourensou to keep in touch with what is going on. It seems almost antithetical to
+genchi genbutsu, but if practiced right it can be an efficient way for an executive to accomplish the same thing.
+Hourensou is a Japanese word made up of three parts: hou (hou koku to report), ren (renroku to give updates
+periodically), and sou (sou dan to consult or advise). To serve some of the genchi genbutsu functions, senior
+management uses hourensou, which is common within top Japanese companies.
+
+Since Toyota executives know the importance of keeping involved at a detailed level and see as a key role the
+training and developing of subordinates through questioning and carefully targeted advice, they make a big effort to
+find efficient ways to get information fed to them and to give feedback and advice. There is no one magic bullet for
+accomplishing this, but one important approach they use is to have subordinates who learn how to communicate
+efficiently give reports daily on key events that happened during the day. When they can, the executives will still travel
+to where the work is being done.
+
+For example, Yamashina, as president of the Toyota Technical Center (TTC), has responsibility for five areas: the
+main technical center in Ann Arbor, Michigan; the prototyping center in Plymouth, Michigan; the Arizona proving
+grounds; the technical center in California; and design engineers at Toyota s manufacturing plants. Yamashina
+schedules meetings with all the departments in TTC once a month, which includes all levels, and travels from site to
+site to have these meetings in remote locations. Different individuals have an opportunity to report on the status of
+their projects and prepare what they will say for that monthly meeting. Though Yamashina has a great understanding
+of what is happening and can, on a regularly scheduled basis, get feedback and give advice, this is not enough. He
+also insists that each vice president and general manager give him a report on the day, a little update, instead of
+waiting until the end of the week. This gives Yamashina an opportunity to share live information he got that day from
+other parts of the company.
+While Toyota is not the most computerized company in the world, they are learning to use e-mail effectively for
+hourensou. As Yamashina explained:
+
+One young engineer explains his test through e-mail and its purpose and asks if others have any experience
+with similar tests. Suddenly a very experienced engineer sends an e-mail saying, I tried that test under
+similar circumstances and the test did not work. His advice to the young engineer is to find another way to
+perform the test or stop the test. If there were no system to share the information, probably that young
+engineer will waste a lot of time and energy. So using e-mail is a type of training or consulting or reporting
+system from top to bottom and bottom to top. I insist that those who report to me send me a daily journal. So
+I get 60-70 e-mails from VPs or general managers per day. I insist that they make bullet points in the
+messages. What are the key things you are doing? It has to be designed in such a way that others will read it.
+That stimulates thinking and sharing information. It is part of how Toyota does learning.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The first reaction of U.S. managers to hourensou is that it is another form of micro-management, that is, until they
+begin to practice and experience the benefits at Toyota. According to several managers I spoke to, over time it
+becomes an essential part of their management repertoire. How could they manage effectively without it?
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Way of Genchi Genbutsu Is Ingrained in a
+Country s Culture
+It is easy to point to dramatic examples of genchi genbutsu, like driving all over North America to develop the
+Sienna minivan or standing in a circle all day in the factory, but what is most important is how it becomes
+incorporated into the collective psyche of all employees. It is really part of the culture when it simply becomes the
+natural way of doing things. Though this is the Toyota Way in Japan, Toyota must work hard to implement it in its
+overseas operations. For example, Bruce Brownlee, general manager of external affairs for the Toyota Technical
+Center, is one of the few American members of the management staff who grew up in Japan and speaks Japanese
+fluently. He explains:
+
+We use genchi genbutsu more casually outside of engineering. For example, when I organize a press event at
+a hotel, I always take time to go in advance and look at the hotel. I want to understand what to expect. Often
+there are surprises and we want to solve the problems in advance. Or, if there is an important dinner, say for
+a visiting director, I will go to the restaurant in advance and perhaps eat there. We may ask to see the
+kitchen. In one case, a highly rated restaurant did not have a quiet back room where we could meet and the
+service was not what it was reputed to be, so we went to a different restaurant. When Dr. Saito (senior
+executive of R&D) visited, he wanted to see the Getty Museum, so we checked it out in advance. We wanted
+to understand exactly what to expect.
+Earlier in the chapter, I quoted Yamashina, who lamented that within the Toyota organization in North America, we
+are still just going and seeing (genchi genbutsu). Obviously, building a Toyota Way culture overseas is a slow
+process and Toyota works diligently on it. But are they in any way hampered by the American culture? Interestingly,
+there is some evidence that they may be, if you look at a fascinating book by Richard E. Nisbett of the University of
+Michigan, The Geography of Thought: How Asians and Westerners Think Differently ... and Why. The book
+compares East Asians (Korea, China, and Japan) and Westerners (Europe, United Kingdom, and North America).
+A series of experiments provide concrete evidence that, when looking at the same scene, what Westerners typically
+see are general categories of objects at a somewhat superficial level, while Asians typically see objects and
+relationships between objects at a more detailed level.
+In one study, Japanese and American students at the University of Michigan were briefly shown pictures of
+aquariums that contained fish, frogs, and the usual plants, rocks, etc. He then asked them to recall what they had
+seen. The Japanese remembered 60% more background elements than did the American students and referred twice
+as often to relationships involving the background objects (e.g., the little frog was above the pink rock ).
+Nisbett and his associates concluded that Westerners prefer abstract universal principles; East Asians seek rules
+appropriate to a situation. [1] And the East Asians see the same situation in more detail than the Westerners. Now
+consider Yokoya traveling all over North America to figure out how to redesign the Sienna. If he is experiencing the
+journey with much greater resolution due to his Japanese heritage and the skills developed in Toyota s culture of
+genchi genbutsu, he undoubtedly got a whole lot more out of the trip than a Western engineering project leader
+would. He was not just going and seeing, but understanding the situation at a very deep level and using this deep
+understanding to make decisions about the direction of the next Sienna minivan.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The implication of Toyota applying Principle 12: Go and see for yourself to thoroughly understand the situation
+(genchi genbutsu) for learning overseas is both exciting and a bit scary. Thinking through the fine details of strategy
+and operations is clearly central to the culture that has helped Toyota become one of the world s most successful
+companies. So the Toyota Way principles are something every company should try to learn from and apply.
+However, if some of these principles are more truly hardwired into the East Asian cultural DNA, it will be more
+difficult for Westerners to emulate. Or, at least it will require greater effort and practice for Westerners to get really
+good at it.
+We will return to this theme in the last chapter of the book when we consider what companies can learn from the
+Toyota Way. In the meantime, we have set the stage for examining more closely in the next two chapters how Toyota
+uses the detailed knowledge that comes from genchi genbutsu to make carefully reasoned decisions and ultimately
+become a true learning organization.
+
+[1]Sharon Begley, East Versus West: One Sees Big Picture, Other Is Focused, The Wall Street Journal, March
+28, 2003.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 19: Principle 13: Make
+Decisions Slowly by
+Consensus,Thoroughly
+Considering All Options;
+Implement Rapidly (Nemawashi)
+Overview
+If you ve got a project that is supposed to be fully implemented in a year, it seems to me that the typical
+American company will spend about three months on planning, then they ll begin to implement. But they ll
+encounter all sorts of problems after implementation, and they ll spend the rest of the year correcting them.
+However, given the same year-long project, Toyota will spend nine to 10 months planning, then implement in
+a small way such as with pilot production and be fully implemented at the end of the year, with virtually no
+remaining problems.
+Alex Warren, former senior vice president,
+Toyota Motor Manufacturing, Kentucky
+If you have bought a house, you probably signed a zillion documents at closing, trusting and hoping that they were all
+standard documents that wouldn t come back to haunt you. Your lawyer may even have reviewed the documents
+and told you that everything was in order. This seems like a natural way of doing business to most companies, but not
+if you are following the Toyota Way.
+
+Richard Mallery was engaged by Toyota in 1989 as its lawyer to help acquire 12,000 acres just northwest of
+Phoenix. Today it is the Toyota Arizona Proving Ground, where vehicles are driven on test tracks and evaluated. The
+acreage comprised the northern one-fourth of the Douglas Ranch. Mallery has handled much larger transactions and,
+from his perspective, the acquisition was routine. A Stanford law school graduate and attorney since 1964 in a
+prestigious law firm, he knew his stuff and assumed he would handle his relationship with Toyota just like he would
+with any client. But he had not worked for a client like Toyota. As
+Richard explained:
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+I came away with a far more complete knowledge of the legal history of Arizona and the development of its
+statutory and common law than I ever had before (laughing), because I had to answer all of the Toyota team
+s questions. I could not just point to the title policy and say either, That is how we have always done it or
+Do not worry, the seller will indemnify us. The Toyota team wanted to dig deeper and know the complete
+background and history leading up to the decision in order to make the best possible reasoned decision. To
+answer all of their questions, I became a student again and learned a lot about the federal system that
+established Arizona first as a territory and then as a state.
+Toyota wanted to know how the seller acquired title and how title traced back to the original owner, the federal
+government. Having now worked with Toyota for 14 years, Mallery concludes, Toyota stands out as the preeminent
+analyst of strategy and tactics. Nothing is assumed. Everything is verified. The goal is getting it right. His learning
+from working with Toyota has spilled over to how he works with other clients as well:
+
+I am more inclined to ask the penetrating question: why do you do it that way? Do not just tell me what you
+do the standard operating procedures. I want to know why. I also challenge conventional assumptions. I
+learned more about due diligence and strategic planning as legal counsel for Toyota than with any other
+client I have had in 40 years of practice.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Principle: Thorough Consideration in
+Decision Making
+Many employees outside Japan who have joined Toyota after working for another company have had to face the
+challenge of learning the Toyota approach to problem solving and decision making. Because Toyota s process of
+consensus decision making deviates so dramatically from the way most other firms operate, it is a major reeducation
+process. New employees wonder how an efficient company like Toyota can use such a detailed, slow, cumbersome,
+and time-consuming decision-making process. But all the people I have met who have worked for or with Toyota for
+a few years are believers in the process and have been greatly enriched by it even in their personal lives.
+
+For Toyota, how you arrive at the decision is just as important as the quality of the decision. Taking the time
+and effort to do it right is mandatory. In fact, management will forgive a decision that does not work out as expected,
+if the process used was the right one. A decision that by chance works out well, but was based on a shortcut
+process, is more likely to lead to a reprimand from the boss. As Warren explained in this chapter s opening quote,
+Toyota s secret to smooth and often flawless implementation of new initiatives is careful, upfront planning. Underlying
+the entire process of planning, problem solving, and decision making is careful attention to every detail. This behavior
+is associated with many of the best Japanese firms and Toyota is a master at it. No stone is left unturned. In fact,
+every stone is inspected under a microscope. Mallery had an eloquent explanation:
+There is a classic theory of beauty that comes out of Greek and Roman art: God is in the details. Even the
+frieze on the Parthenon that is high above the spectators on ground level is perfect because their gods would
+see it. I think Toyota s excellence is in the details.
+Thorough consideration in decision making includes five major elements:
+1.
+Finding out what is really going on, including genchi genbutsu.
+2.
+Understanding underlying causes that explain surface appearances asking Why? five times.
+3.
+Broadly considering alternative solutions and developing a detailed rationale for the preferred solution.
+4.
+Building consensus within the team, including Toyota employees and outside partners.
+5.
+Using very efficient communication vehicles to do one through four, preferably one side of one sheet of paper.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+We already discussed genchi genbutsu in the last chapter and we will be discussing five- why analysis in the next
+chapter. So we will focus here on steps three through five.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Broadly Consider Alternative Solutions with a
+Set-Based Approach
+As a young Toyota engineer, you attack a problem with relish. You carefully identify the cause of the problem, taking
+care to do a thorough five-why analysis. You then think and think and come up with a brilliant solution. You detail the
+solution and run in to share it with your mentor. Instead of evaluating the idea on its merits and congratulating you, he
+asks, What other alternatives have you considered? How does this solution compare with those alternatives? You
+are stopped dead in your tracks, as you were convinced you had the best approach.
+
+When my colleagues and I started to study Toyota s product development system, we noticed a distinguishing feature
+of Toyota, compared not only with U.S. auto companies but also with other Japanese companies, like Mazda and
+Nissan. Toyota senior engineers and managers were trained to think in sets of alternative solutions. Moreover, they
+could think concurrently about how things like the design of the product and the manufacturing system fit together.
+We called this set-based concurrent engineering (Ward et al., 1995). It seemed paradoxical that considering such a
+broad array of alternatives required so much time and delayed decisions, yet Toyota was consistently faster in
+product development than its competitors.
+There are many examples of this in the Prius development discussed in Chapter 6:
+1.
+In developing the new suspension needed for Prius, Uchiyamada decided to hold a competition. Instead of
+using trial and error and testing one suspension alternative at a time, the competition led to over 20 different
+suspensions tested simultaneously.
+2.
+There were many hybrid engine technologies to choose from. The team began with 80 different hybrid types
+and systematically eliminated engines that did not meet the requirement, narrowing it down to 10 types. The
+team carefully considered the merits of each of these and then selected the best four. Each of these four types
+was then evaluated carefully through computer simulation. Based on this, they were confident in the

@@ -1,0 +1,81 @@
+You are writing a pre-read guide for one chapter of a book.
+
+Book:
+- title: The Reckoning
+- author: David Halberstam
+- chapter: 44 of 59
+- chapter title: Chapter 43
+
+Goal:
+Write the thing a smart reader should read immediately before reading this chapter.
+The reader wants to move faster through the real chapter while retaining the main
+arc, load-bearing facts, important mechanisms, and a few scenes worth watching.
+
+Write Markdown only, roughly 700-1,100 words, with these sections:
+
+1. Orientation Before Reading
+   - 4-7 bullets giving the time, stakes, people, institutions, and conflict.
+
+2. The Chapter Arc
+   - 5-9 chronological bullets.
+   - Each bullet should say what changes, not just what happens.
+
+3. What To Watch For
+   - 5-9 bullets naming the important mechanisms, constraints, causal moves,
+     or authorial claims likely to matter.
+
+4. Load-Bearing Scenes
+   - 3-6 short entries.
+   - Each entry should have setup, action, and payoff in plain prose.
+
+5. Cast And Terms
+   - A compact glossary only for names, factions, places, institutions, and terms
+     needed to read this chapter without friction.
+
+6. What To Hold Lightly
+   - 2-5 bullets for vivid but probably nonessential detail.
+
+Rules:
+- Do not summarize every page.
+- Do not write a school-report recap.
+- Do not invent generic mental-model labels when a concrete event is clearer.
+- Prefer specific actors, constraints, incentives, chronology, and consequences.
+- Keep prose clean and readable; no throat-clearing and no motivational language.
+- Assume the reader has not read this chapter yet.
+- Do not mention reader highlights; this is for a new unread chapter.
+
+Chapter text:
+The Reckoning
+43. A GRATEFUL WORKER
+
+WHEN JOEL GODDARD WAS first hired at the nonunion machine shop in early 1981, after nearly twenty-six months out of work, he felt lucky. He was making an acceptable salary while the rest of industrial Michigan was on its knees. He lavishly praised his new boss to some of his fellow workers. “Listen, Joel,” one of them said, “I know you’re glad to get the work, but ease up—you’ll learn soon enough this guy is far from perfect.” Soon Goddard was torn between gratitude to be working again and resentment of the way he was treated.
+
+For the first time in his life he was working without union protection, something he had taken for granted when he worked at Ford. It was not the money; it was the atmosphere of the plant that bothered him. In the nonunion shop, the boss was all-powerful, a virtual dictator, Goddard thought. He never let his employees forget that he had given them their jobs and could take them away. If a worker complained or if the boss took a dislike to him, he was soon fired. There was genuine fear in the shop: When the boss walked through, everyone jumped to attention. Workers were allowed five minutes to go to the bathroom. There were no chairs to sit down on. The boss watched them all the time. If he had to leave the shop for a sales appointment, he went around the shop first to check how far each worker had gotten on a particular job so he could monitor how much progress had been made while he was gone. “What the hell were you guys doing while I was away?” he would always ask. He constantly pushed them to work faster, yet Goddard and the other workers knew that he was charging his customers their time plus other charges.
+
+To get more money, Goddard realized, people had to kiss ass. No one was supposed to know how much anyone else made. There were no benefits of any kind. If you wanted a 50-cent raise, you went in and begged for it, and you were lucky to get 25 cents. The workers had no leverage, and the boss knew it. Not as confident or educated as Ford workers, they couldn’t get jobs anywhere else. When Goddard pointed out to his boss that he was making $2 an hour less than a colleague not nearly as skilled, the boss waved him aside. “He’s more loyal to me,” he said. “You’re going back to Ford the first chance you get.” A key ingredient of the boss’s power was his ability to withhold praise. If he praised the men, he would have to pay them; his hold on them came from letting them know that they did not quite measure up. Since the language of the shop was deliberately negative, the mood paralleled the language; a negative place it became. When the boss sensed that the men were about to ask for raises, he would start saying he doubted he could make the payroll that week. If he gave them their checks on time, he would tell them to hold on to them until Monday or Tuesday just to be sure they cleared. Even one year when the shop did well and there were bonus checks, they were handed out secretly in the men’s room, with dire warnings that no one else was to know how much the worker made.
+
+Finally, in March 1982, Goddard was called back to the Ford plant at Rawsonville. The day he heard, he went to see the boss and told him, “You can take this job and shove it up your ass. I’m done here. I appreciate the fact that you gave me a job, but you ought to learn how to treat people. A lot of things here aren’t fair.”
+
+“I’m sorry you feel like that,” the boss replied. “I always thought I treated you well.”
+
+When Joel Goddard went back to Ford he was thirty-six years old. Suddenly he felt a new pleasure in driving to work. It was like being reborn. He had been through bad times, but he had always had a marketable skill and a strong marriage. Others were not so lucky. About twenty-four hundred workers from the Rawsonville plant were still out. Hundreds of men he had worked with, unable to find work, had just disappeared—crushed as he had nearly been crushed. Some of the wives, not as well educated as Joyce, had been punished by their jealous husbands for finding even $6000-a-year fast-food jobs. Goddard decided he had been a spoiled American kid but had just grown up in a hurry.
+
+Protected temporarily against the Japanese by the import restrictions, the auto industry was making a comeback. Goddard was aware, however, that his plant was in direct competition with the Japanese and the Koreans, because making parts was a great strength of the Asians. The other Ford diemaking plant, in Sheffield, Alabama, was closing down. He heard rumors that the Rawsonville plant might follow. Who needed expensive diemakers anymore in an automated world? The word—and in a place like Ford, the word was often reliable since the top union people seemed to be one step ahead of management—was that Ford was planning to transfer much of its diemaking to its plants in Mexico, where labor was much cheaper. Goddard had a piercing sense of his factory’s vulnerability, and his own. A man, it had turned out, did not have a God-given right to work forty-eight hours a week for high wages at a Ford plant. To his surprise, however, he found that few of his colleagues shared his fears. Many of them had not been laid off, and they refused to believe the world had changed. The company often held slide shows emphasizing how stiff the competition was. Goddard’s colleagues were not impressed with the photos of smiling, harmonious Japanese workers at Nippondenso, a threatening competitor that had just established facilities in Michigan to serve not only the Japanese manufacturers in America but the Big Three as well. He himself had a sinking feeling when he saw those presentations; he believed the quality was better at Rawsonville, but he knew how much cheaper Japanese manufacturing was, especially that of Japan’s auto industry’s suppliers. With mounting anxiety he read stories about the rise of the Koreans. But the men around him were blithe. “It’s all bullshit,” one of them told Goddard as they left one of those slide shows, “but if the company wants to pay me fifteen dollars an hour to watch it, that’s okay with me.” The man’s sense of immunity from the world outside stunned Goddard. Was he unaware of the agonizing three and a half years Goddard and others had just gone through? He did not appreciate the privilege of working for Ford, of good wages, a comparative lack of harassment, the right to go to the bathroom and read a newspaper. The man reminded Goddard of somebody, but he couldn’t quite recall whom. And then he said to himself, He reminds me of me.
+
+After much consultation, Ford and the UAW chose the Rawsonville plant for a pilot program called Permanent Employment Guarantee (PEG). In exchange for a freeze in hourly wages and for giving the company quite a bit more freedom with job classifications, Ford said, it would protect the jobs of the Rawsonville workers during the three-year life of the contract. Under the proposal, through 1987, if Ford laid off workers, it would keep paying their salaries; a laid-off person might be required to contribute his time to public service, with the Red Cross for example. Goddard, wary of being laid off again, was thrilled to sacrifice immediate financial gain for security, and he became an early and enthusiastic supporter. To his surprise, however, most of his colleagues remained suspicious of the contract. Goddard knew that many of them were older and were concerned with retirement; since their pensions were based on their hourly wage at the time of retirement, they wanted it to be as high as possible. Although both the union and the company had expected the contract to sail right through, it was defeated almost two to one. The union’s mistake, Goddard thought, lay in its assumption that the pilot program was so good that the workers could not fail to recognize its value. They did not realize that the workers’ suspicion of both the company and the union ran very deep.
+
+By the time the proposal came up a second time, the UAW had lobbied much harder. The old Joel Goddard had never been a very strong union man; he had wondered why the UAW could not protect him if, for example, he had gotten written up for leaving the job five minutes early. The new Joel Goddard decided it was his own damn fault for leaving early. Somewhat to his surprise, he became one of the leaders of the movement to accept the agreement. He tried to describe what had happened to him to his fellow workers in the most personal terms and to convince them that it might happen again. This factory, he told them, is right in the line of fire of the new world economy; we workers are an endangered species. One of the factors that influenced the workers’ decision was Ford’s promise to spend $10 million on new diemaking machinery if the proposal was approved; the workers believed that while they themselves were disposable, the company would not buy millions of dollars’ worth of new machinery only to close down the factory. Eventually the proposal passed, this time by almost a reverse margin. Those who had sold it were men like Goddard who had seen the future and were terrified.
+
+Joel Goddard was excited by the prospect of the twenty-one new diemaking machines, but when they arrived, he decided they were junk. That they also happened to be Japanese junk angered many of the men even more. They were furious that Ford had bought these machines from the Japanese after it had made its great case against the Japanese and had enlisted the help of the union in seeking domestic-content legislation and voluntary restrictions from the Japanese. The workers felt it smacked of hypocrisy, and it aggravated their suspicions about Ford’s long-range intentions. They felt that the company would do what was good for profits and stockholders, even if it hurt the workers. Company officials held a series of meetings at which they tried to explain their actions, but the workers were not satisfied. One of the things Goddard sensed from the meetings was how diversified Ford was; he doubted Ford needed him as much as he needed Ford. In fact, he was not sure Ford and he were in exactly the same business. Ford had a connection to Mazda. Perhaps Mazda would soon make the parts currently produced at Rawsonville.
+
+The brief period of artificial prosperity ended in late 1985 when the voluntary restrictions on Japanese cars were relaxed. As Datsuns and Toyotas started flooding the country again, the increased demand of the last four years for American cars fell off, and so, of course, did production at Rawsonville. There were layoffs, but since the number of plant workers could not dip below the 2625 who were employed at the time of the PEG agreement, 500 men who would normally have been laid off were channeled into community service. They were guaranteed a minimum salary of thirty-two hours a week at their regular Ford wage. The shadow of the changed international economy hung over the plant, although even then not all of the workers perceived it. Goddard heard through the grapevine that Ford’s management was not pleased with the PEG agreement and that it might not be renewed in 1987. So much for permanence, he thought. Certainly the new machines, which he hated, were an argument for keeping the plant open, but Ford had just closed down a brand-new casting plant in Flat Rock. There was more and more gossip about transferring Rawsonville’s functions to Mexico.
+
+Goddard knew that Lee Iacocca was boasting about Chrysler’s advantage, that it could buy its parts cheaper than Ford and GM could because it was less vertically integrated, it didn’t make as many of its own parts and so wasn’t locked into expensive American suppliers. Goddard admired Iacocca a great deal, but words like those were particularly chilling. Still, Goddard was confident about the future, if not with Ford then on his own. He was sure the worst was over. He and his family had been tested, and they were better and stronger people now. If there was one lesson he and Joyce had learned in the last four years, it was that they had to depend on themselves and not on an institution that in his opinion cared first and foremost about profit.
+
+He remained somewhat uneasy about his job. The plant had stabilized by early 1986; the men who had been lent to different social service institutions under the PEG agreement had been called back. But it was a plant under constant pressure from foreign competition, both Asian and Mexican, and the very existence of that competition had all but neutralized the union, which operated now, if not out of weakness, then certainly out of acute vulnerability. Beyond that, it was a plant with an old work force. There were no young workers; they had all been let off. Joel Goddard, much to his surprise, looked around one day and decided that, at forty, he was one of the youngest men in the plant. Most of the men were in their fifties and had twenty-five years of seniority. That brought home to him the fact that he was in a business with a marginal future.
+
+That spring his seventeen-year-old son Scotty, a junior in high school, had come home with his college aptitude test scores. They were good but not as good as they could have been, and that night father and son talked about what Scott Goddard would do with his future if his marks were not good enough for college.
+
+“I can always do what you do, Dad,” the boy said. “That would be fine with me.”
+
+“No, you can’t do what I do,” Joel Goddard replied. “Those jobs aren’t going to be there anymore.”

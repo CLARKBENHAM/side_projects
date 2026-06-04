@@ -1,0 +1,707 @@
+rs.
+Now companies use computers to accurately monitor human motions and instantly report on productivity of
+individual workers. As a result, people know they are being monitored, so they will work to make the numbers, often
+regardless of quality. Sadly, they become slaves to the numbers, rather than focus on a company s mission statement
+or philosophy. It doesn t have to be this way, as we will see with Toyota s approach to standardized tasks.
+
+Ford Motor Company was one of the early mass-production giants associated with rigid standardization on the
+moving assembly line, and Toyota s approach to standardized work was partially shaped by Henry Ford s view.
+While Ford eventually became a rigid bureaucracy that followed the destructive practices of Taylor s scientific
+management, this was not the view that the founder had of standards. Henry Ford s (1988) perspective, written back
+in 1926, fits well with the Toyota view:
+
+Today s standardization ... is the necessary foundation on which tomorrow s improvement will be based. If you think
+of standardization as the best you know today, but which is to be improved tomorrow you get somewhere. But if
+you think of standards as confining, then progress stops.
+
+Even more influential than Henry Ford was the methodology and philosophy of the American military s Training
+Within Industry (TWI) service. This program was established in 1940 during WWII to increase production to
+support the Allied forces. It was based on the belief that the way to learn about industrial engineering methods was
+through application on the shop floor and that standardized work should be a cooperative effort between the foreman
+and the worker (Huntzinger, 2002). During the U.S. occupation and rebuilding efforts of Japan after WWII, a former
+TWI trainer and his group called The Four Horsemen taught Japanese businesses these standardization processes.
+The Toyota Way of going to the source, observing in detail, and learning by doing were all very much influenced by
+TWI (Dietz and Bevens, 1970) and became the backbone of Toyota s standardization philosophy.
+Standardized work in manufacturing at Toyota is much broader than writing out a list of steps the operator must
+follow. Toyota President Cho describes it this way:
+
+Our standardized work consists of three elements takt time (time required to complete one job at the pace of
+customer demand), the sequence of doing things or sequence of processes, and how much inventory or stock
+on hand the individual worker needs to have in order to accomplish that standardized work. Based upon
+these three elements, takt time, sequence, and standardized stock on hand, the standard work is set.
+In this chapter, we will see that, like so many organizational practices, the Toyota Way has turned the practice of
+standardized work on its head. What can be perceived as negative or ineffective becomes positive and effective
+within the Toyota Way and builds collaborative teams rather than conflict between employees and management. As
+we will see, standardized work was never intended by Toyota to be a management tool to be imposed coercively on
+the work force. On the contrary, rather than enforcing rigid standards that can make jobs routine and degrading,
+standardized work is the basis for empowering workers and innovation in the work place.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Principle: Standardization Is the Basis for
+Continuous Improvement and Quality
+Toyota s standards have a much broader role than making shop floor workers tasks repeatable and efficient. The
+Toyota Way results in standardized tasks throughout the company s white-collar work processes, such as
+engineering. Everyone in the company is aware of and practices standardization. For example, an engineer can walk
+into any Toyota factory in the world and see almost identical processes. Toyota also applies standards to the design
+of products and manufacturing equipment.
+Managers have a misconception that standardization is all about finding the scientifically one best way to do a task
+and freezing it. As Imai (1986) explained so well in Kaizen, his famous book on continuous improvement, it is
+impossible to improve any process until it is standardized. If the process is shifting from here to there, then any
+improvement will just be one more variation that is occasionally used and mostly ignored. One must standardize, and
+thus stabilize the process, before continuous improvements can be made. As an example, if you want to learn golf,
+the first thing an instructor will teach you is the basic golf swing. Then you need to practice, practice, and practice to
+stabilize your swing. Until you have the fundamental skills needed to swing the club consistently, there is no hope of
+improving your golf game.
+
+Standardized work is also a key facilitator of building in quality. Talk with any well-trained group leader at Toyota
+and ask how he or she can ensure zero defects. The answer is always Through standardized work. Whenever a
+defect is discovered, the first question asked is Was standardized work followed? As part of the problem-solving
+process, the leader will watch the worker and go through the standardized work sheet step by step to look for
+deviations. If the worker is following the standardized work and the defects still occur, then the standards need to be
+modified.
+In fact, at Toyota the standard work is posted outward, away from the operator. The operator is trained using the
+standardized work, but then must do the job and not look up at the standardized work sheet. The standard work
+sheet is posted outward for the team leaders and group leaders to audit to see if it is being followed by the operator.
+
+Any good quality manager at any company knows that you cannot guarantee quality without standard procedures for
+ensuring consistency in the process. Many quality departments make a good living turning out volumes of such
+procedures. Unfortunately, the role of the quality department is often to assign blame for failing to follow the
+procedures when there is a quality problem. The Toyota Way is to enable those doing the work to design and build
+in quality by writing the standardized task procedures themselves. Any quality procedures have to be simple and
+practical enough to be used every day by the people doing the work.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Coercive vs. Enabling Bureaucracies Employee
+Empowerment
+Under Taylor s (1947) scientific management, workers were viewed as machines who needed to be made as efficient
+as possible through the manipulations of industrial engineers and autocratic managers. The process consisted of the
+following:
+•
+Scientifically determining the one best way of doing the job.
+•
+•
+
+Scientifically developing the one best way to train someone to do the job.
+
+Scientifically selecting people who were most capable of doing the job in that way.
+•
+Training foremen to teach their subordinates and monitor them so they followed the one best way.
+•
+Creating financial incentives for workers to follow the one best way and exceed the performance standard
+scientifically set by the industrial engineer.
+
+Taylor did achieve tremendous productivity gains by applying scientific management principles. But he also created
+very rigid bureaucracies in which managers were supposed to do the thinking and workers were to blindly execute
+the standardized procedures. The results were predictable:
+•
+Red tape
+•
+Tall, hierarchical organizational structures
+•
+Top-down control
+•
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Books and books of written rules and procedures
+•
+Slow and cumbersome implementation and application
+•
+Poor communication
+•
+Resistance to change
+•
+Static and inefficient rules and procedures
+
+Most bureaucracies are static, internally focused on efficiency, controlling of employees, unresponsive to changes in
+the environment, and generally unpleasant to work in (Burns and Stalker, 1994). But in organizational theory,
+bureaucracies are not necessarily bad. Bureaucracies can be very efficient if the environment is very stable and if
+technology changes very little. However, most modern organizations try to be flexible and organic, meaning focused
+on effectiveness, adaptable to change, and empowering of their employees. Organic organizations are more effective
+when the environment and technology are changing rapidly. So it would appear, since the world around us is
+changing at the speed of thought, that it s time to throw out the bureaucratic standards and policies and create
+self-managing teams to be flexible and competitive. The Toyota Way follows neither approach.
+
+Paul Adler, an organizational theory expert who has studied Toyota s organizational practices, noticed from in-depth
+studies of Toyota s NUMMI plant in California that the jobs are highly repetitive with short cycle times (e.g., about
+one minute before repeating). The workers follow very detailed standardized procedures that touch every aspect of
+the organization. In the workplace, there is a place for everything and everything is in its place. Waste is being
+eliminated to continually increase productivity. There are a lot of team leaders and group leaders and an extensive
+hierarchy. There is strict discipline about time, cost, quality and safety virtually every minute of the day is structured.
+In short, NUMMI has all the characteristics associated with bureaucracy and a very mechanistic organization. Wasn
+t this exactly what Fredrick Taylor s scientific management tried to attain?
+
+But NUMMI also has many of the characteristics associated with flexible organizations referred to as organic :
+extensive employee involvement, a lot of communication, innovation, flexibility, high morale, and a strong customer
+focus. This caused Adler to rethink some of the traditional theories about bureaucratic organizations. He realized that
+there are not two types of organizations bureaucratic/mechanistic vs. organic but at least four, as shown in Figure
+12-1. You can distinguish organizations with extensive bureaucratic rules and structures (mechanistic) from those
+unencumbered by bureaucracy (organic). But often when we think of bureaucracy, we think of a set of rigid rules and
+procedures. The rules and procedures are all part of the technical structure of the organization. But this ignores the
+social structure, which can be either coercive or enabling. When you put together the two technical structures with
+the two social structures, you get the four types of organization and two types of bureaucracy. TPS at NUMMI was
+proving that the technical standardization when coupled with enabling social structures can lead to enabling
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+bureaucracy.
+Figure 12-1: Coercive versus enabling bureaucracies
+Source: Adapted from P. S. Adler, Building Better Bureaucracies, Academy of Management Executive, 13:4,
+November, 1999, 36-47.
+Adler (1999) went further in contrasting coercive bureaucracies with enabling bureaucracies. While both carefully
+design systems and procedures that must be followed, the similarity stops there. Figure 12-2 summarizes how the
+coercive bureaucracy uses standards to control people, catch them breaking the rules, and punish them to get them
+back in line. The workers feel like they are part of a chain gang, rather than a home team. By contrast, enabling
+systems are simply the best practice methods, designed and improved upon with the participation of the work force.
+The standards actually help people control their own work.
+
+Figure 12-2: Coercive versus enabling design of systems and standards
+Source: P. S. Adler, Building Better Bureaucracies, Academy of Management Executive, 13:4, November,
+1999, 36-47.
+
+The key difference between Taylorism and the Toyota Way is that the Toyota Way preaches that the worker is the
+most valuable resource not just a pair of hands taking orders, but an analyst and problem solver. From this
+perspective, suddenly Toyota s bureaucratic, top-down system becomes the basis for flexibility and innovation. Adler
+called this behavior democratic Taylorism.
+The assumption that to be a high-performance organization meant throwing out the mechanistic bureaucratic rulebook
+and adopting an organic system to empower employees did a great deal of harm to organizations in the 1980s and
+1990s. The Toyota Way shows that, to remain competitive year after year and continually stay among the industry
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+leaders, a company must have viable and enabling standards so it can continually improve upon repeatable processes.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Standardizing Work for a New Product Launch
+The Toyota Way of handling the chaos of getting an army of people involved in creating and launching a new vehicle
+is to standardize the work in a balanced way that doesn t give complete control to any group of employees. Having
+only engineers devise the standards would be a form of Taylorism. On the other hand, having all the workers come to
+consensus on every step would be overly organic, resulting in chaos. Toyota s innovative approach is to develop a
+pilot team. When a new product is in the early planning stages, workers representing all the major areas of the
+factory are brought together full time to an office area where as a team they help plan the launch of the vehicle. They
+work hand in hand with engineering and develop the initial standardized work used when the product is first launched.
+Then it is turned over to the production teams to improve. As Gary Convis, President of Toyota s Kentucky
+manufacturing operations, explained:
+
+Pilot teams are put together, especially when we launch a new model, like we just launched the Camry. Team
+member voices are heard by way of that link.
+Usually it s a three-year assignment. We have a four-year model change cycle, so we ll have an Avalon model
+change, then we ll have a Camry model change, and we ll have a Sienna model change. So there are enough
+big model changes to have these guys go through at least one or two before they rotate back out.
+There is a great deal of learning for team members on the pilot team about the design and production of the new
+vehicle, and when they finish their rotation they are back on the floor as team members, contributing to and improving
+the standardized work. This is important, because launching a new vehicle is an exercise in coordinating thousands of
+parts, with thousands of people making detailed engineering decisions that must fit together at the right time.
+
+When my associates and I studied Toyota s product development system, we found that standardization promotes
+effective teamwork by teaching employees similar terminology, skills, and rules of play. From the time they are hired
+into the company, engineers are trained to learn the standards of product development. They all go through a similar
+training regimen of learning by doing (Sobek, Liker, and Ward, 1998). Toyota engineers also make extensive use of
+design standards that go back to when Toyota first started engineering cars. Within each section door latches,
+seat-raising mechanisms, steering wheels engineering checklists have evolved from what has been learned as good
+and bad design practice. The engineer uses these checklist books from his or her first days at Toyota and develops
+them further with each new vehicle program. More recently, Toyota has computerized these books.
+U.S. companies have tried to imitate Toyota s approach by going right to computers, creating large databases of
+engineering standards, but without success. The reason is they have not trained their engineers to have the discipline
+to use the standards and improve on them. Capturing knowledge is not difficult. The hard part is getting people to use
+the standards in a database and contribute to improving it. Toyota spends years working with its people to instill in
+them the importance of using and improving standards.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Standardization as an Enabler
+The critical task when implementing standardization is to find that balance between providing employees with rigid
+procedures to follow and providing the freedom to innovate and be creative to meet challenging targets consistently
+for cost, quality, and delivery. The key to achieving this balance lies in the way people write standards as well as who
+contributes to them.
+First, the standards have to be specific enough to be useful guides, yet general enough to allow for some flexibility. In
+repetitive manual work, standards are pretty specific. In engineering, since there are no fixed quantities, the standards
+need to be more variable. For example, knowing how the curvature of the hood of a car will relate to the air/wind
+resistance of that body part is more useful than knowing a specific parameter for the curve of the hood.
+Second, the people doing the work have to improve the standards. There is simply not enough time in a workweek
+for industrial engineers to be everywhere writing and rewriting standards. Nobody likes following someone s detailed
+rules and procedures when they are imposed on them. Imposed rules that are strictly policed become coercive and a
+source of friction and resistance between management and workers. However, people happily focused on doing a
+good job appreciate getting tips and best practices, particularly if they have some flexibility in adding their own ideas.
+In addition, it is very empowering to find that everyone is going to use your improvement as a new standard. Using
+standardization at Toyota is the foundation for continuous improvement, innovation, and employee growth.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 13: Principle 7: Use
+Visual Control So No Problems
+Are Hidden
+Overview
+Mr. Ohno was passionate about TPS. He said you must clean up everything so you can see problems. He
+would complain if he could not look and see and tell if there is a problem.
+Fujio Cho, President, Toyota Motor Corporation
+If you walked into most manufacturing plants outside Japan in the 1980s, you would see a mess. But it was what you
+would not see that was most important. You would not be able to see around the piles and piles of inventory that
+were stacked to the roof. You would not be able to tell whether items were in place or out of place. Certainly you
+could not see if there were problems with how work was being done, as Taiichi Ohno wanted. The accepted
+dysfunction of the day was to see no problems and hear no problems until the hidden problems jumped up and bit
+you in the face. By that time, it usually wasn t a problem, but a fire-fighting crisis, and managers would spend much of
+their time jumping from putting out one fire to the next. In short, crisis management was the accepted mentality of the
+day.
+The Donnelly Mirrors (now Magna Donnelly) Grand Haven plant, which produces exterior automotive mirrors, was
+so disorganized when they began implementing lean manufacturing that no one could see much of anything except
+waste. One day a Ford Taurus mysteriously disappeared. It had been in the factory so they could try fitting it with
+some prototype mirrors. When it vanished, they even filed a police report. Then it turned up months later. Guess
+where it was. In the back of the plant, surrounded by inventory. Donnelly associates now tell this story to illustrate
+how far they have come since implementing lean (Liker, 1997).
+Outrageous as the Donnelly story may seem, it dramatizes what many of us deal with in our workplaces daily. Try
+this little exercise at your own place of work. Go up to a co-worker and ask to see a specific document, tool, or
+something on his or her computer or the company s intranet. Watch to see if the person can go immediately to one
+place and pull out the document, locate the tool, or find the information on the computer on the first try. The amount
+of time it takes, and perhaps the person s frustration level, will most likely tell you at a glance whether your
+co-worker s way of visually organizing his or her workplace is in control or out of control. Or observe a conference
+room that is used for important planning meetings. (Some call them war rooms. ) Is it easy to see at a glance the
+status of what is going on? What do you see when you look at the walls? Are there charts and graphs that tell you if
+today the managers are ahead or behind schedule on the action items? Are any abnormalities or delays in the project
+or operation easily visible? That is, are there visual controls, the ability to see abnormalities at a glance?
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Principle Clean It Up, Make It Visual
+When Americans were making pilgrimages to Japanese plants in the 1970s and 80s, the first reaction was invariably
+The factories were so clean you could eat off of the floor. For the Japanese this was simply a matter of pride. Why
+would you want to live in a pigpen? But their efforts go beyond making the factory look clean and orderly. In Japan
+there are 5S programs that comprise a series of activities for eliminating wastes that contribute to errors, defects,
+and injuries in the workplace. Here are the five S s (seiri, seiton, seiso, seiketsu, and shitsuke, translated into
+English):
+1.
+Sort Sort through items and keep only what is needed while disposing of what is not.
+2.
+Straighten (orderliness) A place for everything and everything in its place.
+3.
+Shine (cleanliness) The cleaning process often acts as a form of inspection that exposes abnormal and
+pre-failure conditions that could hurt quality or cause machine failure.
+4.
+Standardize (create rules) Develop systems and procedures to maintain and monitor the first three S s.
+5.
+Sustain (self-discipline) Maintaining a stabilized workplace is an ongoing process of continuous improvement.
+
+In mass production, without the five S s, many wastes accumulate over the years, covering up problems, and
+becoming an accepted dysfunctional way of doing business. The five S s together create a continuous process for
+improving the work environment, as illustrated in Figure 13-1. Start by sorting through what is in the office or shop to
+separate what is needed every day to perform value-added work from what is seldom or never used. Mark the
+rarely used items with red tags and move them outside of the work area. Then create permanent locations for each
+part or tool in the order of how much it is needed to support the operator as if he or she were a surgeon. The
+operator should be able to immediately reach for each commonly used part or tool. Then shine, making sure
+everything stays clean every day. Standardize, as described in the previous chapter, to maintain the first three pillars.
+Sustain keeps the benefits of 5S working by making a habit of properly maintaining the correct procedures. Sustain is
+a team-oriented continuous improvement technique that managers play a critical role in implementing to support 5S.
+The 5S programs that are the best sustained, in my experience, are audited regularly, e.g., monthly, by managers,
+who use a standard audit form and often give symbolic rewards for the best team. One plant awarded the best team
+with a golden broom, which was rotated when another team got better. In advanced lean plants, work teams audit
+their own areas weekly or even daily and then managers inspect randomly.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Figure 13-1: The 5 S s
+Unfortunately, some companies have confused 5S with lean production. More than one company I have visited has
+related some version of the following story. A few years back, management decided to try this lean stuff. They paid
+a million dollars to a training company who taught us 5S and did a lot of 5S workshops. The place got cleaned up
+and looked better than it ever had since I started working here.
+But we did not save any money, quality did not get better, and eventually management stopped the program. We
+ended up right back where we started.
+The Toyota Way is not about using 5S to neatly organize and label materials, tools, and waste to maintain a clean and
+shiny environment. Visual control of a well-planned lean system is different from making a mass-production operation
+neat and shiny. Lean systems use 5S to support a smooth flow to takt time. 5S is also a tool to help make problems
+visible and, if used in a sophisticated way, can be part of the process of visual control of a well-planned lean system
+(Hirano, 1995).
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Visual Control Systems Are About Improving
+Value Added Flow
+Visual control is any communication device used in the work environment that tells us at a glance how work should
+be done and whether it is deviating from the standard. It helps employees who want to do a good job see
+immediately how they are doing. It might show where items belong, how many items belong there, what the standard
+procedure is for doing something, the status of work in process, and many other types of information critical to the
+flow of work activities. In the broadest sense, visual control refers to the design of just-in-time information of all types
+to ensure fast and proper execution of operations and processes. There are many excellent examples in everyday life,
+such as traffic signals and signage. Because it is a matter of life and death, traffic signals tend to be well-designed
+visual controls. Good traffic signs don t require you to study them: their meaning is immediately clear.
+Visual control goes beyond capturing deviations from a target or goal on charts and graphs and posting them publicly.
+Visual controls at Toyota are integrated into the process of the value-added work. The visual aspect means being
+able to look at the process, a piece of equipment, inventory, or information or at a worker performing a job and
+immediately see the standard being used to perform the task and if there is a deviation from the standard. Ask this
+question: can your manager walk through the shop floor, office, or any type of facility where work is being performed
+and recognize if standard work or procedures are being followed? If you have a clear standard for every tool to be
+hung in a certain place and it s made visual, then the manager can see if anything is out of place. This is why a popular
+5S activity is to create shadow tool boards. A shadow of each tool is painted on the board in the place that tool
+should be hung; for example, the shape of a hammer shows where the hammer goes, so it is obvious if the hammer is
+missing. Similarly, having clearly visible indicators of minimum and maximum levels for inventory will help the manager
+(and everyone else) see if inventory is being managed appropriately. Well-designed charts and graphs that are kept
+up every day can visually control projects in offices.
+Principle 7 of the Toyota Way is to use visual control to improve flow. Devia-tions from the standard should be
+deviations from working to takt time, one piece at a time. In fact, many of the tools associated with lean production
+are visual controls used to make visible any deviations from the standard and to facilitate flow. Examples include
+kanban, the one-piece-flow cell, andon, and standardized work. If there is no kanban card asking to be filled on a
+bin, then the bin should not be there. The filled bin without a kanban card is a visual signal of overproduction. A
+well-designed cell will immediately reveal extra pieces of WIP through clearly marked places for the standard WIP.
+The andon cord signals a deviation from standard operating conditions. Standard task procedures are posted, so it is
+clear what the best-known method is for achieving flow at each operator s station. Observed deviations from the
+standard procedure indicate a problem. In essence, Toyota uses an integrated set of visual controls or a visual
+control system designed to create a transparent and waste-free environment. Let s look at a most unlikely place
+where visual control enhances flow a lean mega-warehouse.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Visual Control to Enhance Flow in a Service Parts
+Warehouse
+Automakers in the U.S., as well as Japan, are required by law to keep service parts for vehicles for at least 10 years
+after they stop making the vehicles. This adds up to having millions of different parts available. Toyota s goal is to
+have them available just in time, as its manufacturing philosophy preaches.
+Hebron, Kentucky, is home of the newest and biggest Toyota service parts facility in the world. This facility ships
+parts all over North America to regional distribution centers, which ship them to automotive dealers. Contrary to the
+tenets of JIT, it is a true warehouse, with 843,000 square feet of space and about 232 hourly and 86 salaried
+associates working there. In 2002 they shipped an average of 51 truckloads of service parts a day, which constituted
+154,000 items per day. Parts are brought in from over 400 suppliers all over the United States and Mexico and most
+of them are put on the shelf until a Toyota dealer needs them. The Hebron facility sends parts to the nine regional
+parts distribution centers, which then send them to the Toyota dealers. Being global and modern, the facility uses
+sophisticated information technology, though the basic Toyota principles are apparent, including visual control.
+First, the warehouse is organized into cells called home positions. The home positions have similar-sized parts stored
+in the same way, e.g., small parts. Teams of associates are dedicated to home positions. Second, a powerful
+computer system was custom-designed. The volume of each part was meticulously entered into the computer as was
+its physical location. A batch of a variety of small parts are all packaged into a standard-sized box to be shipped to a
+particular regional distribution center. A computer algorithm figures out what parts going to a particular location will
+just fill the box going to that destination, based on the volumes, and develops a parts-picking route that can be
+completed in 15 minutes. Pickers have a handheld radio frequency-controlled device with a small screen; it tells them
+what to pick next and they scan each item as they pick it. Third, visual control is used extensively. Throughout the
+facility, you will see various types of white boards called process control boards. These are the nerve centers of the
+operation. Figure 13-2 illustrates a process control board with actual data from the Hebron facility. The data is
+handwritten with dry-erase markers. This one was for picking parts in a home position to be put into a box for
+shipment. It captures an enormous amount of information, including the status of the operation every 15 minutes. It is
+worth describing how it operates to illustrate the power of visual control to pace an operation and monitor progress
+
+vs. takt time.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Figure 13-2: Process control board at Kentucky parts distribution center
+Each morning before the pickers arrive to work, the parts orders for the day come in by computer. The computer
+sorts them by home position. Then the algorithm described above assigns parts to 15-minute batches, in this case
+picking routes. The supervisor of the team fills in the process control boards.
+The supervisor starts with the data to the right. In this case, he wrote in the number of pieces that would be picked
+for the day 2838 which the computer determined was 82 15-minute batches to be picked. The total time window
+for picking those parts is 420 minutes in the shift, after breaks are taken out. 420 minutes divided by 82 batches gives
+a takt time of 5.1 minutes per batch the rate at which boxes must be filled with parts to satisfy the customers. A
+15-minute cycle time per batch divided by the takt time of 5.1 minutes means that 2.9 people will be needed to pick
+the orders for the day.
+
+To the left the team supervisor notes that three of his four team members will be needed to pick parts for that day, so
+he finds another assignment that day for John (to department 18/99). He then writes in the planned number and
+cumulative number of batches to be picked, spread evenly throughout the shift. There are a few light periods during
+which there will be 11 boxes filled instead of 12 and those will include break periods. At the beginning of each
+15-minute part-picking route, the associates will put a small round magnet on the batch they are picking a green
+magnet if they are on time or a red magnet if they are running late. In this case, you can see that Jane is right where
+she should be, since it is 10:18 a.m., while Bill is ahead and Linda is behind. But in this period the load is light 11
+boxes so they are taking breaks and there is some flexibility. Everyone is OK. At a glance the supervisor knows the
+status of the operation. Moreover, the board helps to enforce a continuous flow of work throughout the day.
+Associates will immediately know if they are getting behind and put in extra effort or call for help to catch up. If they
+try to work ahead of the leveled schedule, it will be clear to the supervisor. Heijunka is reinforced daily.
+
+This system at Hebron is quite powerful and is a good example of the ingenuity of Toyota TPS experts who figured
+out how to create continuous flow in a non-traditional, pick-to-order environment an environment in which many
+people would have thrown up their hands and said TPS tools do not apply here. Despite the complex computer
+systems, the key tools that govern daily operations are visual management tools. One of the bigger stories at Hebron
+is how they are building a culture of associate involvement to improve this world-class system (discussed in Chapter
+16).
+But even before this huge distribution center was built, Toyota s smaller service parts facilities using these same TPS
+methods led the industry in productivity and facing fill rates and system fill rates the key indicators that track and
+measure such facilities. (The facing fill rate is the percent of time a part ordered is immediately available at the
+distribution center assigned to that dealer. The system fill rate is the percent of time a part ordered is immediately
+available somewhere in a Toyota parts distribution center.) For example, from 1992 to 1998 Toyota s parts
+distribution center in Cincinnati, Ohio, had the highest level of productivity in the industry: the facing fill rate was 95%
+and the system fill rate was over 98%. Toyota s fill rates are routinely among the top three in the industry.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Visual Control and Office Work
+I have spent a lot of time at the Toyota Technical Center in Michigan, where they engineer vehicles like Camry and
+Avalon. For much of this time, Kunihiko ( Mike ) Masaki was the president there. Masaki had worked in many
+different engineering and manufacturing organizations during his career at Toyota, all using excellent visual controls, so
+it seemed quite natural to him that the office environment at the Toyota Technical Center should follow the principles
+of 5S. Twice a year, Masaki would visit each person at his or her desk and ask to see a file cabinet (as part of
+Toyota s document retention program). He audited the file cabinets to see that they were organized properly and no
+documents were there that were not needed. There is a standard way to organize files at Toyota and Masaki was
+looking for deviations from the standard. A report is then filed and a grade is given. If an area is deficient, associates
+in the area must prepare a plan for counter-measures and a follow-up review is scheduled to be sure the deficiency is
+taken care of.
+Though this may seem excessive or even intrusive for such mundane activities as filing, for the employee it clearly
+signals the importance of visual control, especially in the light of the fact that this was the president following the
+Toyota principle of teaching by going directly to the source and seeing for himself (genchi genbutsu). More recently,
+this responsibility has shifted to a vice president and has been expanded to spot auditing of each employee s e-mail
+organization system, to make sure messages are well organized in folders and old messages are discarded.
+
+One of the biggest visual control innovations in Toyota s globally benchmarked product development system is the
+obeya (big room), which was used in the Prius development discussed in Chapter 6. The system is just a few years
+old. The chief engineer of a vehicle development project resides in the obeya, along with heads of major engineering
+groups working on the project. It is a very large conference war room in which many visual management tools are
+displayed and maintained by the responsible representatives of the various functional specialties. These tools include
+the status of each area (and each key supplier) compared with the schedule, design graphics, competitor tear-down
+results, quality information, manpower charts, financial status, and other important performance indicators. These
+tools can be reviewed by any of the team members. Any deviation from schedule or performance targets is
+immediately visible in the obeya.
+The obeya is a high-security area and only appropriate representatives from the functional areas are given access.
+Toyota has found that the obeya team system enables fast and accurate decision-making, improves communication,
+maintains alignment, speeds information gathering, and creates an important sense of team integration. When I
+interviewed Ichiro ( Michael Jordan ) Suzuki, the chief engineer of the first Lexus, he was at the Toyota Technical
+Center to teach them the secret to excellent engineering. His focus on this trip was visual management. He
+emphasized the importance of using visual management charts and graphs everywhere (showing schedule, cost, etc.
+on one sheet of paper). He also pointed out that Using an electronic monitor does not work if only one person uses
+that information. Visual management charts must allow for communication and sharing.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+A3 Reports: Capturing All You Need to Know on
+One Sheet of Paper
+When I interviewed David Baxter, vice president at the Toyota Technical Center, he was a bit nervous about a
+report he was working on. It was the proposed budget for the entire center. The whole time he talked about the
+report, I was envisioning a large book-like document. Suddenly it dawned on me that he was talking about an 11" x
+17" (A3) sheet of paper and how he was going to put the entire budget and its justification on that one sheet of
+paper. Toyota is very strict about having managers and associates go to great lengths to put key information on one
+side of an A3-sized piece of paper. Why A3? Because this is the largest paper that can fit through a fax machine. A
+typical A3 report is not a memo it is a full report documenting a process. For example, a problem-solving A3 would
+succinctly state the problem, document the current situation, determine the root cause, suggest alternative solutions,
+suggest the recommended solution, and have a cost-benefit analysis. This would be on one sheet of paper, using
+figures and graphics as much as possible. The push in the last few years in Toyota has been for everyone to move to
+A4 reports (8fi" x 11") the idea that less is more. The ingenious process for developing A3 reports is described in
+greater detail in Chapter 19.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Keeping It Visual Through Technology and
+Human Systems
+In today s world of computers, information technology, and automation, one of the goals is to make the office and
+factory paperless. You can now use computers, the Internet, and the corporate intranet to call up large storehouses
+of data, both written and visual, at lightning speed and share it via various software and e-mail. As we will discuss in
+the next chapter, Toyota has resisted this information-technology-centric trend. As Suzuki pointed out, going to look
+at the computer screen is typically done by one person in isolation. Working in a virtual world removes you from
+hands-on teamwork and, more importantly, usually (unless you do your work on the computer) takes you away from
+where the real work is being performed.
+The Toyota Way recognizes that visual management complements humans because we are visually, tactilely, and
+audibly oriented. And the best visual indicators are right at the work site, where they can jump out at you and clearly
+indicate by sound, sight, and feel the standard and any deviation from the standard. A well-developed visual control
+system increases productivity, reduces defects and mistakes, helps meet deadlines, facilitates communication,
+improves safety, lowers costs, and generally gives the workers more control over their environment.
+As the computer, IT systems, and software continue to replace the work of people and companies continue to move
+whole departments to countries like India that have a workforce steeped in information technology, Toyota will have
+an increasing challenge to be competitive using its old physical human system. How can it continue to make the
+workplace visual and people-oriented while utilizing the power and benefits of computer technology?
+The answer is to follow Toyota Way Principle 7: Use visual control so no problems are hidden. The principle
+does not say to avoid information technology. It simply means thinking creatively using whatever means are the best
+available to create true visual control. Toyota has already replaced some physical prototype models with digital
+models on large screens, with high involvement of engineers in critiquing the design. One thing is for certain: Toyota
+will not readily compromise its principles and goals for something that is merely faster and cheaper, as discussed in
+the next chapter on new technology. Simply putting everything on the corporate intranet and using information
+technology to cut costs can have many unintended consequences that can profoundly change or even be detrimental
+to a company s culture.
+The Toyota Way will seek a balance and take a conservative approach to using information technology to maintain its
+values. This may entail a compromise, such as maintaining a physical visual signal along with a computer in the
+background, like in the Toyota service parts warehouse in Hebron. Or it may mean using a wall-sized screen to
+display a 3-D image of a complete vehicle. But the important principle will remain: support your employees through
+visual control so they have the best opportunity to do a good job.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 14: Principle 8: Use Only
+Reliable, Thoroughly Tested
+Technology That Serves Your
+People and Processes
+Overview
+Society has reached the point where one can push a button and be immediately deluged with technical and
+managerial information. This is all very convenient, of course, but if one is not careful there is a danger of
+losing the ability to think. We must remember that in the end it is the individual human being who must solve
+the problems.
+Eiji Toyoda, Creativity, Challenge and Courage
+Toyota Motor Corporation, 1983
+Everyone at one time or another has to search for a job. These days a modern job search cannot ignore the Internet
+the technology solution to the problem of finding a job. Yet according to the bible of job searches, What Color Is
+Your Parachute? (Bolles 2003), using the Internet is the absolute worst way to find a job. A survey showed that 96
+percent of all online-job-hunters finally found their jobs in ways other than on the Internet. And employers find 92
+percent of their new employees in ways other than through the Internet. So what is the best way to find employment?
+Going to the yellow pages and calling potential employers in your area of interest has an 84% success rate. Knocking
+on the door of any place that interests you has a 47% success rate. What does this say? Personal contact makes a
+difference. You could have taken this advice directly out of the Toyota Way playbook.
+
+Over the years, Toyota has tended to lag behind its competitors in acquiring all types of new technology. Notice that
+I said acquiring, not using. Unfortunately, too much of what is acquired by so-called leading edge companies never
+really gets into actual use. The Toyota Way is to move slowly, because more than one technology has failed to meet
+their acid test of supporting people, process, and values and has been yanked in favor of simpler, manual systems.
+Toyota is still following this policy in the age of digital technology. Though Toyota does not lead the industry in
+acquiring technology, it is a global benchmark on how to use value-added technology that supports the appropriate
+processes and people.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Principle Adoption of New Technology Must
+Support Your People, Process, and Values
+At Toyota, new technology is introduced only after it is proven out through direct experimentation with the
+involvement of a broad cross-section of people. This does not exclude new or cutting-edge technology. It means the
+technology has been thoroughly evaluated and tested to ensure it provides added value. Before adopting new
+technology, Toyota will go to great lengths to analyze the impact it may have on existing processes. First, it will go
+and see firsthand the nature of the value-added work being performed by the workers for the particular process. It
+will look for new opportunities to eliminate waste and even out the flow. Toyota will then use a pilot area to improve
+the process with the existing equipment, technology, and people. When it has accomplished as much improvement as
+possible with the present process, Toyota will ask again if it can make any additional improvements by adding the
+new technology. If it determines that the new technology can add value to the process, the technology is then
+carefully analyzed to see if it conflicts with Toyota s philosophies and operating principles. These include principles of
+valuing people over technology, using consensus decision making, and an operational focus on waste elimination. If
+the technology violates these principles or if there is any chance it may adversely disrupt stability, reliability, and
+flexibility, Toyota will reject the technology or at least delay adopting it until the problems can be resolved.
+If the new technology is acceptable, the guiding principle is to design and use it to support continuous flow in the
+production process and help employees perform better within the Toyota Way standards. This means the technology
+should be highly visual and intuitive. Ideally, it will be used right where the work is being done so it does not require a
+person in an office to input the data. The important principle is to find ways to support the actual work process while
+not distracting people from the value-added work. Throughout this analysis and planning, Toyota will broadly involve
+all key stakeholders in a consensus-building process. Once Toyota has thoroughly gone through this process, it will
+quickly implement the new technology. Because of this painstaking process, Toyota will typically implement the new
+technology smoothly without the employee resistance and process disruption that other companies often experience.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+People Do the Work, Computers Move the
+Information
+When I teach about Toyota s system, I start with the basics including kanban, which is mainly a manual visual
+process. If there is an information technology specialist in the house, he or she inevitably asks the question, Isn t
+there any place for information technology in the Toyota Production System? I reassure them that they are not out of
+a job even if their company goes completely lean. But their role may be different. IT will not drive the way Toyota
+does business and certainly is not allowed to disrupt the values of the Toyota Way.
+
+Toyota is a modern company and, like any modern company, you could paralyze it in no time by shutting down its
+computer systems. Computers are used to run finances, pay bills, keep track of millions of customer orders and tens
+of millions of service parts transactions, capture the data for developing new products, and schedule many things. IT
+is critical to Toyota, but Toyota looks at technology as a tool that, like any other tool, exists to support the people
+and the process.
+For example, at Toyota s service parts operations they continue to use an old software system developed in house
+years ago under much simpler circumstances. It has continuously evolved over the years and does exactly what is
+needed today. Jane Beseda, General Manager and VP North American Parts Operations, does not see any burning
+need to modernize it, but she does plan a gradual transition to newer technology.
+
+In contrast, I had an interesting consulting experience with an America auto parts supplier that had worked with
+Toyota for years learning the Toyota Production System (TPS). My client s CEO got hooked on the idea of
+increasing inventory turns as a major corporate lean goal. He gave all of the business units aggressive targets for
+inventory turns, which on the surface would seem to support TPS principles of eliminating waste. It became a
+corporate mania.
+
+A large group of supply chain engineers within the company was tasked with addressing this problem. The
+background of the leader of the supply chain group was in information technology. His main priority was to bring in
+new Internet technology to provide visibility into the supply chain. There are many supply chain software solutions
+promising to radically cut inventory and provide control over the process. They supposedly do this by showing
+anyone who logs into the Web site how much inventory there is in real time at every stage of the supply chain.
+His subordinates were very proud of their boss, who was extremely intelligent and a fast thinker, and they often
+repeated a story he would tell. He described supply chain visibility software as analogous to a bulldozer. You can dig
+ditches manually and it will work. But a bulldozer will do the same thing in a fraction of the time. IT was like this
+speeding up dramatically work that could be done by hand.
+I was floored by this belief. How does keeping track of inventory on the computer give you any control over making
+it go away? From my TPS training, I knew that inventory is generally a symptom of poorly controlled processes.
+Ultimately, manufacturing is about making things. I talked to the boss and gave him my perspective. I explained that
+software may be very fast, but it is not a person or a machine performing work. In fact, true supply chain visibility is
+more analogous to setting up a video camera at the work site and hooking up a remote monitor in another state so
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+you can sit back and watch the ditchdiggers work. To get more productivity out of the work process, you have to
+change the way the work is done by eliminating waste. Supply chain software by itself does not eliminate waste.
+
+My perspective was confirmed when we did a project in one of their plants. Without any information technology, we
+were able to cut inventory by 80% on the assembly line. We did this by moving from the system of pushing inventory
+according to schedules to a manual pull system, using kanban. Lead time was reduced by one-third with no new
+technology. To eliminate most of the parts inventory required working with a supplier in Mexico also owned by the
+same company that was pushing as much inventory as it could onto this plant so its inventory turns would look good.
+Improving the process is the only way you can control inventory.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+How Information Technology Supports the Toyota
+Way
+I accompanied the University of Michigan s Dean of Engineering on a trip to Japan some years ago and one of our
+hosts was Mikio Kitano, who at that time was overseeing the Motomachi complex Toyota s largest industrial
+complex. My Dean was asking a lot of questions about the use of information technology at Toyota. Kitano seemed
+a bit impatient. To make a point to the Dean he pulled out a typical information system design flowchart with all the
+usual IT symbols information flowing from computer to computer, storage devices, input devices, output devices, and
+the like. It had been given to him some time earlier by a Toyota IT specialist as a proposal for the Motamachi
+assembly plant. He said he sent this flowchart back along with the IT guy who brought it to him and told him, At
+Toyota we do not make information systems. We make cars. Show me the process of making cars and how the
+information system supports that. He then pulled out a large process flow diagram that the IT guy had produced in
+response to Kitano s demand. The top showed the body, paint, and assembly lines representing how Toyota builds
+cars. The bottom of the diagram showed various information technologies and the way in which they would support
+the production of cars. As far as Kitano was concerned, the process flow diagram showed IT in its appropriate place
+supporting the production lines.
+Toyota has had experience with pushing technology that is the latest and greatest, only to later regret it. One example
+was an experiment 10 years ago in Toyota s Chicago Parts Distribution Center, where the company installed a highly
+automated rotary-rack system. At the time the warehouse was built, Toyota s dealers placed weekly stock orders for
+parts. But soon after the warehouse was completed, the company implemented daily ordering and daily deliveries to
+reduce lead time and lower inventories in the dealerships. When the process changed from a five-day to a one-day
+shipment cycle, the equipment was inflexible and suddenly outdated, because the fixed conveyor length was designed
+for larger orders. So the smaller daily orders should have filled the smaller boxes much faster than the larger five-day
+boxes of parts but the person at the end of the conveyor still had to wait for the parts to come down this long
+conveyor. The person spent a great deal of time waiting one of the eight wastes. The benefit of the technology was
+short-lived and the Chicago facility became one of Toyota s least productive warehouses. In 2002, the company
+again made a significant investment in Chicago, but this time it was to remove the automation and unwind the
+computer system that supported it. By comparison, Toyota s most productive regional parts depot is in Cincinnati,
+where there is very little automation.
+
+Beseda explained:
+
+When you live in the logistics world, nothing moves without information. But, we re conservative in our
+approach to applying automation. You can kaizen people processes very easily, but it is hard to kaizen a
+machine. Our processes got far more productive and efficient, but the machine didn t. So, the machine had to
+come out.
+In 2002, Toyota s Parts Distribution Centers completed a two-year systems initiative known as the Monarch Project
+to improve its demand forecasting and inventory planning. A joint team of logistics experts and information systems
+specialists spent a year identifying which components of the legacy systems worked well, which components needed
+an upgrade or replacement, and what new functionalities needed to be added. The focus of the Monarch system is to
+work behind the scenes supporting a visual system on the floor so people can go and see the actual situation. As
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Beseda described it:
+
+From the warehouse person s perspective, sitting and looking into a computer screen doesn t tell you
+everything you need to know. You have to have a feel for the size of the parts and the real situation in the
+warehouse. The computer recommends an inventory level to the procurement analyst, but it can t tell him if
+the inventory will make life tough for the person on the warehouse floor because there isn t enough space to
+store it.
+Procurement analysts are located at the parts centers to encourage on-site observation and frequent communication
+between the inventory group and warehouse operations. The two groups often collaborate to empirically refine the
+inventory levels of problem parts. The stockkeeper monitors the actual movement of the inventory by putting a large
+label on each carton and noting the date. If there is demand, the inventory is available to ship. If the dates show that
+inventory in some cartons is not moving, the stockkeeper and the procurement analyst can safely agree to lower the
+inventory level. This simple visual control is a practical way to save space and reduce clutter. The procurement
+analyst relies on the computer-generated stock level, but supplements the system recommendation with his or her
+own judgment and direct communication with the shop floor.
+As Beseda observed:
+First work out the manual process, and then automate it. Try to build into the system as much flexibility as
+you possibly can so you can continue to kaizen the process as your business changes. And always supplement
+the system information with genchi genbutsu, or go look, go see.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+IT in Toyota s Product Development Process
+In the early 1980s, the trend among automakers was to develop their own internal computer-aided design (CAD)
+system for designing parts on a computer rather than on paper blueprints. Toyota did this like everyone else, but in a
+way that preserved and embodied the Toyota problem-solving philosophy. The designers of the new CAD system
+asked, What was the specific need for each software module (e.g., styling, die design, component design)? What
+were the specific conditions of use? What were the software requirements? What options were available? What was
+the best option? Often the best option was a low-tech solution. For example, in analyzing stamping dies that stamp
+out parts, the analysis technology was not sophisticated enough to model the complexity of stamping out the part and
+verifying the best die design on a computer. So Toyota used a simpler solution that produced a color diagram
+showing the various stress points on the die. The die designer, working with an experienced die maker, then
+examined the diagram and made judgments on the design based on experience. In contrast, U.S. automakers
+implementing CAD systems did this stress analysis using software alone, then made recommendations to the die
+designers in a throw-it-over-the-wall fashion. The result was that the die engineers often rejected the analysis because
+the results were impractical or unrealistic.
+
+As their competitors moved to the latest commercial CAD systems, Toyota maintained its homegrown system, to the
+chagrin of engineers and suppliers. The software is clearly outdated. Bu

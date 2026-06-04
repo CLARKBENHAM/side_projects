@@ -1,0 +1,1040 @@
+For automation to be effective, we must implement a system
+in which the machines sense the occurrence of an abnormality
+and stop themselves. In other words, we must give the automated machines a human touch - enough intelligence to
+make them autonomated and achieve "worker saving" rather
+than "labor saving."
+
+The oil crisis in the fall of 1973 brought a new twist to
+Japan's economy. At Toyota, where production increases had
+been achieved yearly since the 1930s, we were forced to reduce
+production for 1974.
+
+Throughout the industrial sector in Japan, profits plummeted as a result of zero growth and the shock of production
+cutbacks. The results were terrible. At this time, because
+Toyota had suffered less from the effects of the oil crisis,
+people began to pay attention to its production system.
+
+With the reduced production that followed the oil crisis,
+Toyota faced problems that had been hidden or less visible
+during the previous high-growth period. The problems had
+to do with the autonomated machines to which a fixed
+number of operators were assigned.
+
+A perfect autonomated machine, that is, a machine without
+an operator, was the exception. The autonomated machine
+that needed two workers to complete a cycle was the problem.
+With production reduced by 50 percent, the operation still required two workers. One worker was needed at the input and
+one at the output of a large, autonomated machine, for example.
+
+Thus, an autonomated machine discovers abnormalities
+and performs the useful role of preventing the production of
+defective products. From another angle, however, it has the
+disadvantage of requiring a certain number of workers.
+
+This is a major handicap in any factory that has to respond
+to a change in production. Therefore, the next step for the
+Toyota production system was to embark on demolishing the system of a fixed number of workers. This was the concept of
+reducing the number of workers.
+
+This idea is applied not only to the machine but also to the
+production line where people are working. A five-worker
+line, for example, is organized in such a way that the work can
+be done by four men in case one worker is absent. But the
+quantity produced is only 80 percent of the standard. To accomplish this, improvements in plant layout and equipment,
+as well as multi-skilled training of workers must be instituted
+while times are still normal.
+
+To reduce the number of workers means that a production
+line or a machine can be operated by one, two, or any number
+of workers. The idea originated with the need to refute the
+need for a fixed number of workers for a machine.
+
+Isn't this sort of understanding needed by all businesses during periods of low growth? In a high-growth period, productivity can be raised by anyone. But how many can attain it
+during the more difficult circumstances induced by lowgrowth rate? This is the deciding factor in the success or failure
+of an enterprise.
+
+Even during high growth, to prevent generating excess inventory through overproduction, we avoided arbitrarily buying mass production machinery. We knew how big a strain
+the approach of "big guns" could be on manufacturing. So we
+concentrated on developing the Toyota production system
+without being pushed by the trends.
+
+The Toyota production system first established the basis of
+rationalization with its production method. Its challenge was
+the total elimination of waste by using the just-in-time system
+and kanban.
+
+For every problem, we must have a specific countermeasure.
+A vague statement that waste should be eliminated, or that
+there are too many workers, will not convince anybody. But
+with the introduction of the Toyota production system, waste
+can be identified immediately and specifically. In fact, I always
+say production can be done with half as many workers.
+
+At Toyota today, changes are occurring in all production
+areas. Everyone knows the fluctuations of various factors in producing different types of cars. When one model drops in
+sales, its costs rise. But you cannot ask the customer to pay
+more for the car.
+
+Car models in lesser demand still somehow have to be made
+cheaply and sold for a profit. Facing this fact, we continue to
+study methods of increasing productivity even when quantities decrease.
+
+Each automobile model has its own history. The Corona
+currently sells well, but it did not, at first, and we had a
+difficult time. When a model does not sell well, we must increase efficiency even with small quantities to reduce costs. I
+always tell people in manufacturing:
+
+"There must be hundreds of people around the world who
+can improve productivity and efficiency by increasing production quantity. We, too, have such foremen at Toyota. But
+few people in the world can raise productivity when production quantities decrease. With even one such person, the
+character of a business operation will be that much stronger. "
+
+People prefer working with large quantities, however. It is
+easier than having to work hard and learn from producing
+small quantities.
+
+It has been over 30 years since I began work on the Toyota
+production system. During this period, I have been taught a
+lot of ideas by many people and by society. Each idea was conceived and developed in response to a need.
+
+I think it is more worthwhile in a company to work in the
+area where there are problems due to dwindling sales than in
+an area where sales are rising. The need for improvement is
+more urgent even though it may not seem that way.
+
+It is a shame that in today's business and industrial society,
+the relationships between work and worker and machine and
+worker have become so adversarial. For our development to
+continue, we must become more generous, more resourceful,
+and more creative.
+
+As the Toyota production system evolved, I frequently
+applied reverse common sense or inverse thinking. I urge all
+managers, intermediate supervisors, foremen, and workers in
+production to be more flexible in their thinking as they go
+about their work.
+
+► Learning from the Flexibility of Ancient People
+
+Digressing for a moment, it is said that the characters for fermented soybean (natt(5) and bean curd (tofu) had opposite
+meanings originally.
+
+There are various theories about this. One holds that Ogyu
+Sorai, a Confucian scholar of the mid-Edo period, mistook the
+two terms. Another has it that he intentionally switched them.
+
+NattO, a product for which the Tohoku region, Mito, and
+other areas are famed, should originally have been written the
+way tofu is now [ 11 ], because natto is made by allowing soybeans [ $ ] to rot [ as
+
+What we now call "tofu" was originally written with the
+characters now used for natto, [ * ], because tofu is made from
+soybeans I _R ] and formed [ m ] into cubes.
+
+The problem is that no one would ever eat natto if the word
+were written with the characters for "rotten soybeans," while
+tofu is so white and appetizing that, even if it were written as
+[ a ], no one would think of it as rotten beans. The story goes,
+then, that each written word was used for the other.
+
+Nomenclature in Japan contains many other fascinating
+examples of this sort, examples that reveal a characteristically
+Japanese way of conceiving things.
+
+Among the Chinese characters used in Japanese, we find a
+thought process in Japanese that differs from the older Chinese.
+This way of thinking was born in the Japanese environment.
+
+I place value on the native ideas unique to Japan. For instance, although the Toyota Motor Company has become a
+Y 2 trillion firm, we do not consider moving away from the
+main office in Mikawa. Sometimes we are warned that by
+staying in such a place we miss out on the latest news. However,
+I do not believe this keeps us in the dark information-wise
+from the world or the rest of Japan. The Toyota-style information system mentioned earlier, organized as part of the Toyota
+production system, is working very effectively in this sense.
+
+Of course, what is important is not the system but the
+creativity of human beings who select and interpret the information. Fortunately, the Toyota production system is still being perfected. Improvements are made daily thanks to the
+vast number of suggestions received from its employees.
+
+My mind has a tendency to crystallize and so I renew my determination every day and force myself to think creatively.
+There is always much to do in the production field ...
+
+Postscript to the Original
+
+Japanese Edition
+
+MY WISH HAS been to give readers a basic understanding of
+the Toyota production system. I wanted to illustrate how it
+reduces costs by improving productivity with human effort
+and innovation even in periods of severe low growth - not
+by increasing quantities.
+
+While writing this book, I witnessed Japanese economy
+running into more and more serious international problems
+regarding the yen. This concerns me very much. The automobile industry has grown in the last two or three years
+primarily through exports. This growth, however, seems to
+have already reached its limit.
+
+.Japanese industry must get away from mass production
+quickly and make a transition based on bold ideas. It would be
+very fortunate if the Toyota production system became a useful tool in generating these changes.
+
+Without the assistance of Mr. Mito Setsuo of Keizai
+Jduarisuto, this book would not have been possible. I wish to
+record the fact here and express my gratitude to him.
+
+I have been renewed and influenced by the writings and personal greatness of Mr. Toyoda Sakichi and Mr. Toyoda
+Kiichiro. To them I am indebted.
+
+Finally, I wish to thank the staff members of Diamond Inc.
+for the labor they provided behind the scenes. [Ed. - Diamond
+is the original Japanese publisher.]
+
+Taiichi Ohno
+
+1978
+
+Glossary of Major Terms
+
+As a guide to understanding and applying the Toyota production system, the author has defined 24 important terms.
+
+► Andon
+
+Andon, the line-stop indicator board hung above the production line, is a visual control. The trouble indicator light works
+as follows:
+
+When operations are normal, the green light is on. When a
+worker wants to adjust something on the line and calls for
+help, he turns on a yellow light. If a line stop is needed to rectify
+a problem, the red light is turned on. To thoroughly eliminate
+abnormalities, workers should not be afraid to stop the line.
+
+► Autonomation (Automation with a Human Touch)
+
+The Toyota production system utilizes autonomation, or automation with a human touch, rather than automation. Autonomation means transferring human intelligence to a machine.
+The concept originated with the auto-activated loom of
+Toyoda Sakichi. His invention was equipped with a device
+that automatically and immediately stopped the machine if the
+vertical or lateral threads broke or ran out. In other words, a
+device capable of making a judgment was built into the machine.
+
+At Toyota, this concept is applied not only to the machinery
+but also to the production line and the workers. In other
+words, if an abnormal situation arises, a worker is required to
+stop the line. Autonomation prevents the production of defec tive products, eliminates overproduction, and automatically
+stops abnormalities on the production line allowing the situation to be investigated.
+
+► Baka-Yoke (Fool-Proofing)
+
+To produce quality products 100 percent of the time, innovations must be made to tools and equipment in order to install
+devices for the prevention of defects. This is called baka-yoke,
+and the following are examples of Baka-yoke devices:
+
+1. When there is a working mistake, the material will not
+fit the tool.
+
+2. If there is irregularity in the material, the machine will
+not start.
+
+3. If there is a working mistake, the machine will not start
+the machining process.
+
+4. When there are working mistakes or a step left out, corrections are made automatically and machining continues.
+
+5. Irregularities in the earlier process are checked in the
+later process to stop the defective products.
+
+6. When some step is forgotten, the next process will
+not start.
+
+► Baton Passing Zone
+
+In a swimming relay, the fastest and slowest swimmers must
+both swim the same fixed distance. In a track relay, however,
+a faster runner can make up for a slower runner in the baton
+passing zone. On a production line, the track relay method is
+preferred. To improve the efficiency of the line, the supervisor
+must establish a baton passing zone where workers have a
+chance to catch up.
+
+► Do Not Make Isolated Islands
+
+If workers are isolated here and there, they cannot help each
+other. But if work combinations are studied and work distribution, or work positioning, done to enable workers to assist
+each other, the number of workers can be reduced. When work
+flow is properly laid out, small isolated islands do not form.
+
+► Five Why's
+
+The basis of Toyota's scientific approach is to ask why five
+times whenever we find a problem. In the Toyota production
+system, "5W" means five why's. By repeating why five times,
+the nature of the problem as well as its solution becomes clear.
+The solution, or the how-to, is designated as "I H." Thus,
+"Five Why's equal One How" (5W = 1H).
+
+► Just-In-Time
+
+With the possibility of acquiring products at the time and in
+the quantity needed, waste, unevenness, and unreasonableness can be eliminated and efficiency improved. Toyoda
+Kiichiro, father ofJapanese car manufacturing, originally conceived this idea which his successors then developed into a
+production system. The thing to remember is that it is not
+only "in time" but "just in time. "Just-in-time and autonomation
+constitute the two main pillars of the Toyota production system.
+
+► Kanban
+
+A kanban ("tag") is a tool for managing and assuring just-intime production, the first pillar of the Toyota production
+system. Basically, a kanban is a simple and direct form of
+communication always located at the point where it is needed.
+In most cases, a kanban is a small piece of paper inserted in a
+rectangular vinyl envelope. On this piece of paper is written how many of what part to pick up or which parts to assemble.
+
+In the just-in-time method, a later process goes to an earlier
+process to withdraw needed goods, when and in the quantity
+needed. The earlier process then produces the quantity withdrawn. In this case, when the later process goes to the earlier
+process to pick up, they are connected by the withdrawal or
+transport information, called withdrawal kanban and transport
+kanban, respectively. This is an important role of kanban.
+
+Another role is the in-process, or production ordering kanban,
+which tells the operator to produce the quantity withdrawn
+from the earlier process. These two kanban work as one, circulating between the processes within the Toyota Motor
+Company, between the company and its affiliates, and also
+between the processes in each affiliate.
+
+In addition, there is the signal kanban used in the stamping
+process, for instance, where production of a specific quantity,
+perhaps more than required by just-in-time, cannot be avoided.
+
+► Labor Saving to Worker Saving to
+Reducing Number of Workers
+
+If large, high-performance machines are bought, we save
+worker energy. In other words, labor saving is achieved. However, it is more important to reduce the number of workers by
+using these machines and reassigning workers to departments
+where they are needed. If, as a result of labor saving, 0.9 of a
+worker is saved, it means nothing. At least one person must be
+saved before a cost reduction results. Therefore, we must attain worker saving.
+
+At Toyota, we set a new goal - to reduce the number of
+workers. To achieve worker saving, we promoted autonomation. When production was decreased, however, we could not
+reduce the number of workers proportionately. This was because autonomation was operated by a fixed number of
+workers. In a low-growth period, we must (1) break down
+this concept of a fixed number of workers and (2) set up new,
+flexible production lines where work can be carried on by fewer workers regardless of production quantities. This is the
+aim of reducing the number of workers.
+
+► Moving vs. Working
+
+Regardless of how much workers move, it does not mean
+work has been done. Working means that progress has been
+made, that a job is done with little waste and high efficiency.
+The supervisor must make an effort to turn workers' movements into working.
+
+► Multi-Process Operation System
+
+In the machining process, suppose, for example, that five
+lathes, five milling machines, and five drilling machines are
+lined up in two parallel rows. If an operator operates five
+lathes, we call this a multi-unit operation system. The same is true
+for handling five milling or five drilling machines.
+
+If, however, an operator uses one lathe, one milling
+machine, and one drilling machine (that is, several processes),
+we call this a multi-process operation system. In the Toyota production system, setting up the production flow is of primary
+importance. Therefore, we try to achieve a multi-process operation system that directly reduces the number of workers.
+For the worker on the production line, this means shifting
+from being single-skilled to becoming multi-skilled.
+
+► Operating Rate and Operable Rate
+
+The operating rate is the current production level in relation to
+the full operating capacity of the machine for a specific length
+of time. If sales go down, the operating rate naturally drops. On
+the other hand, if orders increase, the operating rate can reach
+120 percent or more through shift work or overtime. Whether
+an operating rate is good or bad is determined by the way
+equipment is used relative to the quantity of products needed.
+
+The operable rate at Toyota means the machine's availability
+and operable condition when operation is desired. The ideal
+100 percent depends on good equipment maintenance and
+rapid changeovers.
+
+► Production Leveling
+
+On a production line, fluctuations in product flow increase
+waste. This is because the equipment, workers, inventory,
+and other elements required for production must always be
+prepared for peak production. If a later process varies its withdrawal of parts in terms of timing and quantity, the range of
+these fluctuations will increase as they move up the line toward the earlier processes.
+
+To prevent fluctuations in production even in outside
+affiliates, we must try to keep fluctuation in the final assembly
+line to zero. Toyota's final assembly line never assembles the
+same automobile model in a batch. Production is leveled by
+making first one model, then another model, then yet another.
+
+- Profit-Making Industrial Engineering
+
+The production management technique we call industrial engineering (IE) came from America. Traditional definitions
+aside, in the Toyota production system, IE is regarded as the
+production technology that attempts to reduce costs by harmonizing quality, quantity, and timing throughout the production area. It is not the IE method discussed in academia.
+The most important characteristic of Toyota-style IE is that it
+is a profit-earning IE tied directly to cost reduction.
+
+► Real Cause
+
+Underneath the "cause" of a problem, the real cause is hidden.
+In every case, we must dig up the real cause by asking why, why, why, why, why. Otherwise, countermeasures cannot be
+taken and problems will not be truly solved.
+
+► Required Numbers Equal Production Quantity
+
+At Toyota, production quantity equals market demand or actual orders. In other words, the number needed is the number
+sold. Therefore, because market needs are directly connected
+to production, manufacturing cannot arbitrarily change production quantities. To reduce overproduction, efficiency improvement must be achieved on the basis of required numbers.
+In other words, production quantities are based on demand.
+
+► Small Lot Sizes and Quick Setups
+
+In production leveling, batches are made as small as possible in
+contrast to traditional mass production, where bigger is considered better. At Toyota we try to avoid assembling the same
+type of car in batches. Of course, when the final assembly
+process does produce this way, the earlier process - such as
+the press operation - naturally has to go along with it. This
+means die changes must be done frequently. Up to now, conventional wisdom has dictated having each die press punch
+out as many parts as possible. In the Toyota production system, however, this does not apply. Die changes are made
+quickly and improved even more with practice. In the 1940s,
+it took two to three hours. In the 1950s, it dropped from one
+hour to 15 minutes. Presently, setups have been shortened to
+three minutes.
+
+► Standard Work Procedures
+
+For just-in-time production to be carried out, standard work
+sheets for each process must be clear and concise. The three
+elements of a standard work sheet are:
+
+1. Cycle time, the length of time (minutes and seconds) in
+which one unit is to be made;
+
+2. Work sequence, the sequence of work in the flow of time;
+
+3. Standard inventory, the minimum amount of goods
+needed to keep the process going.
+
+► Stopping the Line
+
+A production line that does not stop is either a perfect line or a
+line with big problems. When many people are assigned to a
+line and the flow does not stop, it means problems are not surfacing. This is bad.
+
+It is important to set up a line so that it can be stopped
+when necessary:
+
+• to prevent generating defective products,
+
+• to make improvements with only a few workers, and
+finally,
+
+• to develop a line that is strong and rarely needs to be stopped.
+
+There is no reason to fear a line stop.
+
+► Toyota Production System
+
+The first aspect of the Toyota production system is the Toyotastyle method of production, which means putting a flow into the
+manufacturing process. In the past, lathes were located in
+the lathe area, and milling machines in the milling area. Now,
+we place a lathe, a milling machine, and a drilling machine in
+the actual sequence of the manufacturing processing.
+
+This way, instead of having one worker per machine, one
+worker oversees many machines or, more accurately, one
+worker operates many processes. This improves productivity.
+
+Next is the kanban system, an operational tool that carries
+out the just-in-time production method. Kanban assures that
+the right parts are available at the time and in the quantity needed by functioning as the withdrawal or transport information, an order for conveyance or delivery of the goods and
+also as a work order within the production processes.
+
+Visual Control (Management by Sight)
+
+Autonomation means stopping the production line or the
+machine whenever an abnormal situation arises. This clarifies
+what is normal and what is abnormal. In terms of quality, any
+defective products are forced to surface because the actual
+progress of work in comparison to daily production plans is
+always clearly visible. This idea applies to machines and the
+line as well as to the arrangement of goods and tools, inventory, circulation of kanban, standard work procedures, and so
+on. In production lines using the Toyota production system,
+visual control, or management by sight, is enforced.
+
+► Waste Recognition and Elimination
+
+To recognize waste, we must understand its nature. Production waste can be divided into the following categories:
+
+• overproduction
+
+• waiting
+
+• transporting
+
+• too much machining (over-processing)
+
+• inventories
+
+• moving
+
+• making defective parts and products
+
+Consider the waste of overproduction, for example. It is
+not an exaggeration to say that in a low-growth period such
+waste is a crime against society more than a business loss.
+Eliminating waste must be a business's first objective.
+
+► Work Flow and Work Forced to Flow
+
+Work flow means that value is added to the product in each
+process while the product flows along. If goods are carried by
+conveyor, this is not work flow, but work forced to flow. The
+basic achievement of the Toyota production system is setting
+up the manufacturing flow. This naturally means establishing
+a work flow.
+
+► Work Improvement vs. Equipment Improvement
+
+Plans to improve production can be roughly divided into (1)
+work improvement, such as establishing work standards, redistributing work, and clearly indicating the places where
+things are to be placed, and (2) equipment improvement, such as
+buying equipment and making machines autonomated.
+Equipment improvement takes money and cannot be undone.
+
+In the Toyota production system, sequencing of work and
+work standardization are done first. In this way, most problem
+areas can be eliminated or improved. If equipment improvement
+comes first, manufacturing processes will never be improved.
+
+Editor's Notes
+
+Chapter 1
+
+1. For comparative statistics between Japanese and U.S. auto makers,
+see pages 215-217 in Michael A. Cusumano's Thu' Japanese Automobile Industry (The Council on East Asian Studies, Harvard University, distributed by Harvard University Press, 1985).
+
+2. In 1937, Toyota Motor Company was founded by Toyoda Kiichiro,
+the son of Toyoda Sakichi, an automatic loom inventor fascinated
+by motor vehicles and founder of Toyoda Spinning and Weaving
+and Toyoda Automatic Loom. The family name "Toyoda," which
+means "abundant rice field," was changed to "Toyota" by the automobile division for marketing purposes. The word is an alternate
+reading of the two logographs with which the family name is written. [Ibid., 59.]
+
+Chapter 2
+
+1. Maruzen is a chain ofJapanese bookstores.
+
+2. There are three distinct regional markets in Japan: Kanto, encompassing the Tokyo area; Kansai, in the Kyoto-Osaka region; and
+Nagoya, wherein lies Toyota City. Each region personifies different
+business qualities. [David J. Lu, Inside CorporateJapan (Cambridge,
+MA: Productivity Press, 1987), Ch. 1.]
+
+3. The term "rationalization" is frequently used in Japanese writings to
+indicate activities undertaken to upgrade technology, improve quality, and reduce cost. It may also mean reorganizing and integrating
+an industry while engaged in the above-mentioned activities.
+[Ibid., 227.]
+
+Chapter 3
+
+1. From Factory magazine, formerly published by McGraw-Hill and
+defunct since 1977.
+
+2. Attributed to Professor W.V. Clark, Massachusetts Institute of
+Technology, who met with the inspection party of Japan's IE Association founded by the Japan Productivity Center for the purpose
+of studying American IE in the early 1960s. The IE definition attributed to Professor Clark is not in his original words but has been
+retranslated into English from Japanese.
+
+3. This IE definition is an English translation of a Japanese translation
+of the original English definition. The source of the original English
+definition cannot be located.
+
+Chapter 4
+
+1. Toyoda Eiji was president of Toyota Motor Company from 1967 to
+1982. Born in 1913, he was the cousin of Toyoda Kiichiro and the
+son of Toyoda Sakichi's brother.
+
+2. Taka-Diastase is the trade name of a digestive compound developed
+by Dr. Takamine Jokichi (1854-1922), a Japanese chemist who
+worked in the United States. Takamine was also the first to succeed
+in the extraction of epinephrine.
+
+3. Dr. Noguchi Hideyo (1876-1928) was a Japanese-born American
+physician and bacteriologist who worked in the United States.
+
+4. An earthquake in 1923 in the Tokyo area prompted the municipal
+government to import thousands of Model T trucks from the
+United States to replace destroyed transportation networks and to
+distribute supplies. [Cusumano, op. cit., 17.1
+
+5. Honda Kotaro was a professor at Tohoku University and Japan's
+leading expert in iron alloys.
+
+6. This 1936 legislation, drafted by the military, required that companies making over 3,000 vehicles per year obtain a license from the
+government. Only firms with over 50 percent of their shares and
+members of their board of directors held by Japanese citizens could
+be licensed. [Ibid., 17.]
+
+Chapter 5
+
+1. Charles E. Sorensen, with Samuel T. Williamson, My Forty Years
+with Ford (New York: W.W. Norton & Company, 1956), 117-118.
+
+2. Today and Tomorrow has been out of print for decades. Because of
+its educational value, Productivity Press will issue a commemorative edition in 1988.
+
+3. Henry Ford, Today and Tomorrow (New York: Doubleday and
+Company, 1926), 90-92.
+
+4. Ibid., 78.
+
+5. Ibid., 79.
+
+6. Ibid., 192.
+
+7. While Ford had always produced just one car type, General Motors
+in 1923 began offering several car types with yearly model changes.
+(Cusumano, op. cit., 270.1
+
+8. Ford, op. cit., 55-56.
+
+9. Ibid., 56-57.
+
+10. Ibid., 4-6.
+
+About the Author
+
+TAIICHI OHNO WAS born in Dairen (Port Arthur), Manchuria, China, in February 1912. In 1932, after graduating
+from the department of mechanical engineering, Nagoya
+Technical High School, he joined Toyoda Spinning and
+Weaving. In 1943, he was transferred to the Toyota Motor
+Company where he was named machine shop manager in
+1949. He became Toyota's director in 1954, managing director in 1964, senior managing director in 1970, and executive
+vice president in 1975. Although he retired from Toyota in
+1978, Mr. Ohno continues as chairman of Toyoda Spinning
+and Weaving. He resides in Toyota-shi, Aichi-ken.
+
+This book first appeared in Japan in May 1978 and reached
+its twentieth printing in February 1980. Productivity Press's
+1988 edition is the first printed for the English-reading public.
+
+Index
+
+Books from Productivity, Inc.
+
+Productivity, Inc. publishes books that empower individuals and companies
+to achieve excellence in quality, productivity, and the creative involvement of all
+employees. Through steadfast efforts to support the vision and strategy of
+continuous improvement, Productivity Press delivers today's leading-edge tools
+and techniques gathered directly from industry leaders around the world.
+Call toll-free 1-800-394-6868 for our free catalog.
+
+5 Pillars of the Visual Workplace
+
+The Sourcebook for 5S Implementation
+
+Hiroyuki Hirano
+
+In this important sourcebook, JIT expert Hiroyuki Hirano provides the most vital
+information available on the visual workplace. He describes the 5S's: in Japanese
+they are seiri, seiton, seiso, seiketsu, and shitsuke (which translate as sort, set in
+order, shine, standardize, and sustain). Hirano discusses how the 5S theory
+fosters efficiency, maintenance, and continuous improvement in all areas of the
+company, from the plant floor to the sales office. This book includes case material, graphic illustrations, and photographs.
+
+ISBN 1-56327-047-1 /377 pages, illustrated /$85.00 / Order FIVE-8163
+
+20 Keys to Workplace Improvement (Revised Edition)
+
+lwao Kobayashi
+
+The 20 Keys system does more than just bring together twenty of the world's top
+manufacturing improvement approaches-it integrates these individual methods
+into a closely interrelated system for revolutionizing every aspect of your manufacturing organization. This revised edition of Kobayashi's bestseller amplifies the
+synergistic power of raising the levels of all these critical areas simultaneously.
+The new edition presents upgraded criteria for the five-level scoring system in
+most of the 20 Keys, supporting your progress toward becoming not only best in
+your industry but best in the world.
+
+ISBN 1-56327-109-5 / 302 pages / $50.00 / Order 20KREV-B163
+
+Becoming Lean
+
+Inside Stories of U.S. Manufacturers
+
+Jeffrey Liker
+
+Most other books on lean management focus on technical methods and offer a
+picture of what a lean system should look like. Some provide snapshots of before
+and after. This is the first book to provide technical descriptions of successful
+solutions and performance improvements. The first book to include powerful firsthand accounts of the complete process of change, its impact on the entire organization, and the rewards and benefits of becoming lean. At the heart of this book
+you will find the stories of American manufacturers who have successfully implemented lean methods. Authors offer personalized accounts of their organization's
+lean transformation, including struggles and successes, frustrations and
+surprises. Now you have a unique opportunity to go inside their implementation
+process to see what worked, what didn't, and why. Many of these executives and
+managers who led the charge to becoming lean in their organizations tell their
+stories here for the first time!
+
+ISBN 1-56327-173-7/ 350 pages / $35.00 / Order LEAN-8163
+
+Fast Track to Waste-Free Manufacturing
+
+Straight Talk from a Plant Manager
+
+John W. Davis
+
+Batch, or mass, manufacturing is still the preferred system of production for most
+U.S.-based industry. But to survive, let alone become globally competitive,
+companies will have to put aside their old habitual mass manufacturing paradigms and completely change their existing system of production. In Fast Track
+to Waste-Free Manufacturing: Straight Talk from a Plant Manager, John Davis
+details a new and proven system called Waste-Free Manufacturing (VVFM) that
+rapidly deploys the lean process. He covers nearly every aspect of the lean revolution and provides essential tools and techniques you will need to implement
+WFM. Drawing from more than 30 years of manufacturing experience, John Davis
+gives you tools and techniques for eliminating anything that cannot be clearly
+established as value added.
+
+ISBN: 1-56327-212-1 / 425 pages / $45.00 / Order WFM-B163
+
+Implementing TPM
+
+The North American Experience
+
+Charles J. Robinson and Andrew P. Ginder
+
+The authors document an approach to TPM planning and deployment that modifies the JIPM 12-step proc-ess to accommodate the experiences of North
+American plants. They include details and advice or specific deployment steps,
+OEE calculation methodology, and autonomous maintenance deployment. This
+book shows how to make TPM work in unionized plants and how to position TPM
+to support and complement other strategic manufacturing improvement initiatives.
+
+ISBN 1-56327-087-0 / 224 pages / $45.00 / Order IMPTPM-B163
+
+Integrating Kanban with MRPII
+
+Automating a Pull System for Enhanced JIT Inventory Management
+
+Raymond S. Louis
+
+Manufacturing organizations continuously strive to match the supply of products
+to market demand. Now for the first time, the automated kanban system is introduced utilizing MRPII. This book describes an automated kanban system that
+integrates MRPII, kanban bar codes and a simple version of electronic data interchange into a breakthrough system that substantially lowers inventory and significantly eliminates non-value adding activities. This new system automatically
+recalculates and triggers replenishment, integrates suppliers into the manufacturing loop, and uses bar codes to enhance speed and accuracy of the receipt
+process. From this book, you will learn how to enhance the flexibility of your
+manufacturing organization and dramatically improve your competitive position.
+ISBN 1-56327-182-6 / 200 pages / $45.00 / Order INTKAN-B163
+
+Kaizen for Quick Changeover
+
+Going Beyond SMED
+
+Kenichi Sekine and Keisuke Arai
+
+Especially useful for manufacturing managers and engineers, this book describes
+exactly how to achieve faster changeover. Picking up where Shingo's SMED
+book left off, you'll learn how to streamline the process even further to reduce
+changeover time and optimize staffing at the same time.
+
+ISBN 0-915299-38-0 / 315 pages / $75.00 / Order KAIZEN-B1 63
+
+Kanban and Just-In-Time at Toyota
+
+Management Begins at the Workplace
+
+Japan Management Association / Translated by David J. Lu
+
+Toyota's world-renowned success proves that with kanban, the Just-In-Time
+production system (JIT) makes most other manufacturing practices obsolete.
+This simple but powerful classic is based on seminars given by JIT creator Taiichi
+Ohno to introduce Toyota's own supplier companies to JIT. It shows how to
+implement the world's most efficient production system. A clear and complete
+introduction.
+
+ISBN 0-915299-48-8 / 211 pages / $40.00 / Order KAN-8163
+
+One-Piece Flow
+
+Cell Design for Transforming the Production Process
+
+Kenichi Sekine
+
+By reconfiguring your traditional assembly lines into production cells based on
+one-piece flow, you can drastically reduce your lead time, staffing requirements,
+and number of defects. Sekine examines the basic principles of process flow
+building, then offers detailed case studies of how various industries designed
+unique one-piece flow systems to meet their particular needs.
+
+ISBN 0-915299-33-X / 308 pages / $75.00 / Order 1 PIECE-8163
+
+P-M Analysis
+
+An Advanced Step in TPM Implementation
+
+Kunio Shirose, Yoshifumi Kimura, and Mitsugu Kaneda
+
+P-M analysis is an effective methodology to find and control the causes of equipment-related chronic losses. Chronic loss stems from complex and interrelated
+causes, and in most cases, it is very difficult to understand how any single cause
+impacts the overall problem. P-M Analysis is used to overcome the weaknesses
+of traditional improvement activities in addressing these losses. This well-illustrated book uses thorough discussion, case studies of implementation, and
+provides a disciplined step-by-step approach to identify and eliminate causes
+of chronic equipment-related loss.
+
+ISBN 1-56327-035-8 / 198 pages / $65.00 / Order PMA-B163
+
+Poka-Yoke
+
+Improving Product Quality by Preventing Defects
+
+Nikkan Kogyo Shimbun Ltd. and Factory Magazine (ed.)
+
+If your goal is 100 percent zero defects, here is the book for you-a completely
+illustrated guide to poka-yoke (mistake-proofing) for supervisors and shopfloor
+workers. Many poka-yoke devices come from line workers and are implemented
+with the help of engineering staff. The result is better product quality-and
+greater participation by workers in efforts to improve your processes, your
+products, and your company as a whole.
+
+ISBN 0-915299-31-3 / 295 pages / $65.00 / Order IPOKA-8163
+
+Quick Response Manufacturing
+
+A Companywide Approach to Reducing Lead Times
+
+Rajan Sun
+
+Quick Response Manufacturing (QRM) is an expansion of time-based competition (TBC) strategies which use speed for a competitive advantage. Essentially,
+QRM stems from a single principle: to reduce lead times. But unlike other timebased competition strategies, QRM is an approach for the entire organization,
+from the front desk to the shop floor, from purchasing to sales. In order to truly
+succeed with speed-based competition, you must adopt the approach
+throughout the organization.
+
+ISBN 1-56327-201-6/ 560 pages / $50.00 / Order QRM-B1 63
+
+A Revolution in Manufacturing
+
+The SMED System
+
+Shigeo Shingo
+
+The heart of JIT is quick changeover methods. Dr. Shingo, inventor of the SingleMinute Exchange of Die (SMED) system for Toyota, shows you how to reduce
+your changeovers by an average of 98 percent! By applying Shingo's techniques,
+you'll see rapid improvements (lead time reduced from weeks to days, lower
+inventory and warehousing costs) that will improve quality, productivity, and
+profits.
+
+ISBN 0-915299-03-8 / 383 pages / $75.00 / Order SMED-B163
+
+TPM in Process Industries
+
+Tokutaro Suzuki (ed.)
+
+Process industries have a particularly urgent need for collaborative equipment
+management systems like TPM that can absolutely guarantee safe, stable operation. In TPM in Process Industries, top consultants from JIPM (Japan Institute of
+Plant Maintenance) document approaches to implementing TPM in process
+industries. They focus on the process environment and equipment issues such as
+process loss structure and calculation, autonomous maintenance, equipment and
+process improvement, and quality maintenance. Must reading for any manager in
+the process industry.
+
+ISBN 1-56327-036-6 / 400 pages / $85.00 / Order TPMPI-B1 63
+
+Uptime
+
+Strategies for Excellence in Maintenance Management
+
+John Dixon Campbell
+
+Campbell outlines a blueprint for a world class maintenance program by examining, piece by piece, its essential elements-leadership (strategy and management), control (data management, measures, tactics, planning and scheduling),
+continuous improvement (RCM and TPM), and quantum leaps (process reengineering). He explains each element in detail, using simple language and practical
+examples from a side range of industries. This book is for every manager who
+needs to see the "big picture" of maintenance management. In addition to maintenance, engineering, and manufacturing managers, all business managers will
+benefit from this comprehensive yet realistic approach to improving asset performance.
+
+ISBN 1-56327-053-6 / 1 80 pages / $35.00 / Order UP-8163
+
+Zero Quality Control
+
+Source Inspection and the Poka-Yoke System
+
+Shigeo Shingo
+
+Dr. Shingo reveals his unique defect prevention system, which combines source
+inspection and poka-yoke (mistake-proofing) devices that provide instant feedback on errors before they can become defects. The result: 100 percent inspection that eliminates the need for SQC and produces defect-free products without
+fail. Includes 112 examples, most costing under $100. Two-part video program
+also available; call for details.
+
+ISBN 0-915299-07-0 / 328 pages / $75.00 / Order ZQC-B163
+
+TO ORDER: Write, phone, or fax Productivity, Inc., Dept. BK, P.O. Box 13390,
+Portland, OR 97213-0390, phone 1-800-394-6868, fax 1-800-394-6286. Send
+check or charge to your credit card (American Express, Visa, MasterCard
+accepted).
+
+U.S. ORDERS: Add $5 shipping for first book, $2 each additional for UPS
+surface delivery. Add $5 for each AV program conta ping 1 or 2 tapes; add $12
+for each AV program containing 3 or more tapes. We offer attractive quantity
+discounts for bulk purchases of individual titles; call for more information.
+
+ORDER BY E-MAIL: Order 24 hours a day from anywhere in the world. Use
+either address:
+
+To order: service@productivityinc.com
+
+To view the online catalog and/or order: http://www.productivityinc.com
+
+QUANTITY DISCOUNTS: For information on quantity discounts, please contact
+our sales department.
+
+INTERNATIONAL ORDERS: Write, phone, or fax for quote and indicate shipping method desired. For international callers, telephone number is 503-2350600 and fax number is 503-235-0909. Prepayment in U.S. dollars must
+accompany your order (checks must be drawn on U.S. banks). When quote is
+returned with payment, your order will be shipped promptly by the method
+requested.
+
+Note: Prices are in U.S. dollars and are subject to change without notice.
+
+About the Shopfloor Series
+
+Put powerful and proven improvement tools in the hands of your
+entire workforce!
+
+Progressive shopfloor improvement techniques are imperative for manufacturers
+who want to stay competitive and to achieve world class excellence. And it's the
+comprehensive education of all shopfloor workers that ensures full participation
+and success when implementing new programs. The Shopfloor Series books
+make practical information accessible to everyone by presenting major concepts
+and tools in simple, clear language and at a reading level that has been adjusted
+for operators by skilled instructional designers. One main idea is presented every
+two to four pages so that the book can be picked up and put down easily. Each
+chapter begins with an overview and ends with a summary section. Helpful illustrations are used throughout.
+
+Books currently in the Shop floor Series include:
+
+5S for Operators
+5 Pillars of the Visual Workplace
+
+The Productivity Development Team
+
+ISBN 1-56327-123-0/ 133 pages
+
+Order 5SOP-B163 / $25.00
+
+Mistake-Proofing for Operators
+
+The Productivity Development Team
+
+ISBN 1-56327-127-3 / 93 pages
+
+Order ZQCOP-B163 / $25.00
+
+TPM for Supervisors
+
+The Productivity Development Team
+
+ISBN 1-56327-161-3 / 96 pages
+
+Order TPMSUP-B163 / $25.00
+
+Cellular Manufacturing
+
+The Productivity Development Team
+
+ISBN 1-56327-213-X / 96 pages
+
+Order CELL-B163 / $25.00
+
+Just-In-Time for Operators
+
+The Productivity Development Team
+
+ISBN 1-56327-133-8 / 84 pages
+
+Order JITOP-B163 / $25.00
+
+OEE for Operators
+
+The Productivity Development Team
+
+ISBN 1-56327-221-0 /_96 pages
+
+Order OEEOP-B163 / $25.00
+
+Quick Changeover for Operators
+The SMED System
+
+The Productivity Development Team
+
+ISBN 1-56327-125-7 / 93 pages
+
+Order QCOOP-B163 / $25.00
+
+TPM Team Guide
+
+Kunio Shirose
+
+ISBN 1-56327-079-X / 175 pages
+
+Order TGUIDE-B163 / $25.00
+
+TPM for Every Operator
+
+Japan Institute of Plant Maintenance
+
+ISBN 1-56327-080-3 / 136 pages
+
+Order TPMEO-B163 / $25.00
+
+Autonomous Maintenance
+
+Japan Institute of Plant Maintenance
+
+ISBN 1-56327-082-X / 138 pages
+
+Order AUTMOP-8163 / $25.00
+
+Focused Equipment
+Improvement
+
+Japan Institute of Plant Maintenance
+
+ISBN 1-56327-081-1 / 138 pages
+
+Order FEIOP-B163 / $25.00
+
+Continue Your Learning with In-House
+Training and Consulting from Productivity, Inc.
+
+Productivity, Inc. offers a diverse menu of consulting services and training
+products that complement the exciting ideas from our books. Whether you
+need assistance with long-term planning or focused, results-driven training,
+Productivity's experienced professional staff can enhance your pursuit of
+competitive advantage.
+
+Productivity, Inc. integrates a cutting edge management system with today's
+leading process improvement tools for rapid, measurable, lasting results.
+In concert with your management team, we will focus on implementing the
+principles of Value Adding Management, Total Quality Management, Just-InTime, and Total Productive Maintenance. Each approach is supported by
+Productivity's wide array of team-based tools: Standardization, One-Piece
+Flow, Hoshin Planning, Quick Changeover, Mistake-Proofing, Kanban,
+Problem Solving with CEDAC, Visual Workplace, Visual Office, Autonomous
+Maintenance, Equipment Effectiveness, Design of Experiments, Quality
+Function Deployment, and more.
+
+Productivity is known for significant improvement on the shopfloor and the
+bottom line. Through years of repeat business, an expanding and loyal client
+base continues to recommend Productivity to their colleagues. Contact us to
+learn how we can tailor our services to fit your needs.
+
+Telephone: 1-800-394-6868 (U.S. only) or 1-503-235-0600
+
+Fax: 1-800-394-6286

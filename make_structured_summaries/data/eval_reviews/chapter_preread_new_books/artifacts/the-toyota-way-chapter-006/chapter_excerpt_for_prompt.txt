@@ -1,0 +1,687 @@
+not allow for heijunka.
+In the case of the motors, the plant did a careful analysis and discovered the long time to changeover the line was due
+to moving in and out parts and tools for the larger engine and moving in and out new parts and tools for the smaller
+engine. There were also different-sized pallets for the different engines. The solution was to bring a small amount of all
+the parts on flow racks to the operator on the line. The tools needed for all three engines were mounted over the
+production line. It was also necessary to create a flexible pallet that could hold any size engine. This eliminated the
+equipment changeover completely, allowing the plant to build the engines in any order it wanted on a mixed-model
+assembly line. It could then make a repeating (level) sequence of all three engine sizes, so it matched the mix of parts
+ordered by the customer (see Figure 10-3). There were four benefits of leveling the schedule:
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Figure 10-3: Mixed model production (leveled)
+1.
+Flexibility to make what the customer wants when they want it. This reduced the plant s inventory and
+its associated problems.
+2.
+Reduced risk of unsold goods. If the plant makes only what the customer orders, it doesn t have to worry
+about eating the costs of owning and storing inventory.
+3.
+Balanced use of labor and machines. The plant can create standardized work and level out production by
+taking into account that some engines will require less work and others will require more work. As long as a
+big engine that takes extra work is not followed by another big engine, the workers can handle it. Once the
+plant takes this into account and keeps the schedule level, it can have a balanced and manageable workload
+over the day.
+4.
+Smoothed demand on upstream processes and the plant s suppliers. If the plant uses a just-in-time
+system for upstream processes and the suppliers deliver multiple times in a day, the suppliers will get a stable
+and level set of orders. This will allow them to reduce inventory and then pass some savings on to the
+customer so that everyone gets the benefits of leveling.
+
+None of this would have been possible if the plant hadn t found a way to eliminate the setup time for changeover.
+Though it may seem unrealistic that you could do this in every circumstance, several decades ago Shigeo Shingo
+proved in his time studies that this was exactly what you had to do. Shingo was not a Toyota employee, but worked
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+closely with Toyota. He was a meticulous industrial engineer who paid attention to every microscopic reach and
+grasp of the worker. In the Toyota style, he thoroughly analyzed the setup process for large stamping presses and
+discovered that most of the work performed fell into one of two categories: it was muda or it was something that
+could be done while the press was still making parts. He called the second category external setup, as opposed to
+internal setup, which was work that had to be done while the press was shut down.
+In traditional mass production, the first thing the setup teams did when they performed the changeover of a
+production line from one model to another was to shut down the press. Shingo wondered how much of the
+changeover he could perform while the press was still running, so he organized an operator s workplace for that
+purpose and made other technical improvements until there was no more setup the operator could do while the press
+was running. Things like getting the next die and tools, preheating the die, and setting it in place beside the press were
+external and could be done while the press was making parts. When he finally shut down the press, all that was left to
+do was basically to swap the dies and start it up again. Amazingly, these several-hundred-ton presses that previously
+took many hours to change over could, it turned out, be changed over in minutes. Think of it like a racing pit crew
+that quickly services and gets the car back on the track, often in less than a minute.
+
+Over the years changeover has become a kind of a sport in Japan, a manufacturing equivalent of an American rodeo.
+On one trip I took to Japan in the 1980s, I visited a Mazda supplier of stamped door panels whose team had
+recently won a prize in a national competition for changing over a several-hundred-ton press in 52 seconds.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Leveling the Schedule Inventory s Role
+Leveling the schedule has profound benefits throughout the value stream, including giving you the ability to plan every
+detail of production meticulously and standardizing work practices. If you visit a Toyota plant or a Toyota supplier,
+you will see the great pains taken to level the schedule. The best Toyota suppliers also work on the assumption that
+Toyota s demand for their parts will be level. This is a risk, because not keeping finished goods inventory means
+leaving themselves fully exposed to any wild variations in their customer s volume and mix of products. They can do
+this and still sleep at night because Toyota is a very reliable customer and levels out its production schedule.
+
+For example, Trim Masters is a U.S. supplier in Georgetown, Kentucky that makes seats for the Camry and the
+Avalon manufactured there. Trim Masters builds and delivers seats just in time, based on a broadcast from the
+Toyota plant that orders one seat at a time. From the time the orders are placed, Trim Masters has three hours to
+build the seats, put them on the truck in sequence, and deliver them to the Toyota plant, so they appear on the
+assembly line in the exact order needed for production. Trim Masters orders parts just in time from its suppliers and
+keeps very little inventory, with inventory turns of 128 times per month. The Avalons and Camrys take different seats
+that require different parts, so Trim Masters has to trust Toyota will make the mix of Avalons and Camrys that it
+projects. If there is a sudden spike in Avalon seat production, Trim Masters will run out of parts and must pay for
+emergency delivery of parts. This happens routinely for U.S. auto companies, providing many truckers and helicopter
+pilots a good living on high-priced expedited freight. This happens from time to time with Toyota, but by and large it
+carefully maintains a leveled schedule and builds what it says it will build.
+Most suppliers are not like Trim Masters and must satisfy customers whose demand fluctuates significantly. In these
+cases, TPS experts will often recommend keeping at least a small inventory of finished goods. This seems to
+contradict lean thinking. Theoretically, the leanest solution is to build to order and ship just what the customer wants.
+(If you are going to keep inventory, why keep the most expensive inventory finished goods? Instead, build to order
+and store only raw material inventory.) But this reasoning doesn t consider the importance of heijunka. A small
+inventory of finished goods is often necessary to protect a supplier s level production schedule from being jerked
+around by sudden spikes in demand. It may seem wasteful, but by living with the waste of some finished goods
+inventory, you can eliminate far more waste in your entire production process and your supply chain, if you keep your
+production level.
+This is one reason why companies that have successfully applied TPS often schedule their production with a
+combination of building to order and maintaining a pre-determined level of finished goods inventory. The case
+example at the end of this chapter shows a company that builds high-volume seasonal products to hold in inventory
+and then builds other products to order. This combination allows the company to level the schedule over the year,
+have a smooth flow, and build most of its products to order.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Build to Order Yet Heijunka
+Cho s quote at the opening of this chapter suggested customers may have to wait a little longer if they want to order a
+vehicle specially built for them. He is not willing to sacrifice the quality and efficiency benefits of heijunka for the sake
+of build-to-order. Yet, other car manufacturers have developed build-to-order systems, potentially giving them a
+competitive advantage. One of the conventional build-to-order solutions is to keep a lot of finished vehicle inventory
+in huge dealer lots around the country and swap vehicles among dealers that match custom orders.
+So is Toyota satisfied with asking customers to wait while they may be able to get the specific car they want from a
+competitor? In response to this challenge, Toyota has developed a solution that will allow it to level the schedule and
+at the same time build to order. They are never satisfied with either/or. Alan Cabito, Group Vice President of Toyota
+Motor Sales, explained:
+
+The Toyota system s not a build-to-order system. It is a change to order system. And the big difference is
+that we have cars moving down a line that we change specs on. We ve always done that. But we re just
+taking it another big notch up. We pick a car on the line, any car, and change it. And obviously there are
+guidelines on how many changes you can do in a day, so we consistently have the parts available to do it.
+This is all done within the leveled schedule created several months in advance. Cabito explained further the realities of
+the mixed model production line:
+
+You might have a van unibody and a truck and then you might have another truck, so that the van was every
+third vehicle. That isn t going to change. You can change the color, which is not simply paint, it s interior and
+everything else. You can have matching mirrors, etc. There s a lot of complexity to changing color you have
+to change virtually all the accessories. And the way that gets managed is on the allowance of how much
+change can take place. There will be a limit to the number of green, leather-interior Siennas we can make in
+the same day.
+As usual, Toyota experimented with building to order with an actual pilot the Solara, a sporty coupe version of a
+Camry in the Canadian plant. It is relatively low volume. For Solara they achieved 100% change to order. For the
+Tacoma truck there are a huge number of engine combinations, and they were able to achieve about 80% change to
+order from dealers who called in with customer requests. Cabito gave me a sales perspective on how this works:
+
+We place a single month s order three times. We ll order it four months out, three months out, two months
+out. During that time, they set up all the components and suppliers. For July production, the final order will
+be placed in May. So your order s out there 60 days in advance. Then every week we can change the order in
+the U.S. plants. Every week we can modify anything that s unbuilt, except for the basic body type.
+The important point here is that the Toyota culture does not allow managers and engineers to conclude, That cannot
+be done here. The rigid principle of heijunka does not stay rigid for long. On the other hand, it is not simply thrown
+away because of a new trend such as build-to-order. The question is: How can we accommodate the customer s
+desire to make choices and get the car quickly without compromising the integrity of the production system? In true
+Toyota Way problem-solving style, the engineers carefully studied the situation, experimented on the shop floor, and
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+implemented a new system.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Heijunka in Service Operations
+Leveling out a work schedule is easier in high-volume manufacturing than in typically lower-volume service
+environments. How do you level schedules in a service operation where service providers are responding to
+customers and the lead times on service work vary widely case by case? The solutions are similar to the solutions in
+manufacturing:
+1.
+Fit customer demand into a leveled schedule. This is more common in service operations than you may
+think. Why is it that doctors and dentists schedule procedures and you need to fit into their schedule? So they
+can level the workload and have a constant stream of income. Time is money in service operations.
+2.
+Establish standard times for delivering different types of service. Again, the medical field is instructive.
+Even though everyone has somewhat different medical needs, doctors and dentists have been able to
+establish standard times for different types of procedures. And they separate diagnosis from the procedure.
+You visit, they diagnose you, and then, in most cases, they can predict the time that will be required for your
+procedure.
+Toyota has effectively been able to level the schedule for product development even though lead times are months or
+even years. In most cases, Toyota will make minor updates to a vehicle every two years, adding features and
+changing styling, and will do a redesign of the vehicle every four or five years. Toyota product development works
+according to a matrix, where the rows are the different Toyota vehicles Camry, Sienna, Tundra and the columns are
+years. They decide when each vehicle will be freshened and go through a major redesign. They intentionally level the
+schedule so a fixed percent of the vehicles are being redesigned in any one year.
+
+Planning when vehicles are scheduled for redesign would be futile if the lead times required to actually design and
+develop a vehicle were unpredictable. This is where Toyota has a big edge over some of its competitors. While some
+auto companies let the start of production slip by months or even a year, Toyota is like clockwork. Development
+milestones are met with virtually 100% accuracy. So the leveled plan becomes reality.
+Toyota also has found there is a cadence to the workload requirements over the life of the development project: the
+workload is relatively light early in the conceptual stage, then builds up as they get to detailed design, and then
+reduces again in launch. By offsetting different vehicle projects, they know when one is peaking and others are in the
+light period and can assign the numbers of engineers to products accordingly. They also can flex the number of
+people needed by borrowing engineers from affiliated companies (suppliers and other divisions of Toyota, such as
+Toyota Auto Body). Affiliates can come onto projects as needed and then go back to their home companies,
+allowing an extremely flexible system and requiring minimal full-time employees. This is the result of other Toyota
+Way principles, particularly standardization. Toyota has standardized its product development system and the
+product designs themselves to the point that engineers can seamlessly come in and out of design projects, because
+their engineers have a standardized skill set similar to the Toyota engineers and years of experience working in
+Toyota s system. The principle of long-term partnering that we will discuss in Chapter 17 allows Toyota to have a
+trustworthy and capable set of partners who they can depend on for extra help when needed.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+In short, it is possible to level the schedule in service operations. But there are some base requirements. You must
+follow all of the other Toyota Way process principles flow, pull, standardization, and even visual management to get
+control over lead times. Standardization is critical to controlling lead times and also to bringing people on and off the
+projects to address peak workloads. You must also develop stable partnerships with outside companies that are
+capable and that you can trust.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Putting Leveling and Flow Together A Tough Sell
+Every business would like to have a consistent volume over time so there is a consistent and predictable workload.
+That is an easy sell in concept. But if your sales department does not behave like Toyota Sales by cooperating to
+avoid spikes in demand, what can you do?
+The TPS expert might suggest that a manufacturer hold some finished goods inventory and build at a leveled pace to
+replenish what the customer takes away in a pull system (discussed in Chapter 9). The manufacturer screams, But
+we have 15,000 part numbers! The expert says, Look for a smaller number of part numbers that are in big demand
+and perhaps even seasonal, build those when you have fewer real orders, and then keep those in inventory. That is,
+use a combination of build-to-stock and build-to-order like the aluminum gutter company in the case study at the end
+of this chapter. This sounds reasonable to the manufacturer. But then comes the hard sell. The TPS expert says to
+changeover frequently to level the mix of products built every day. Most manufacturers balk. After all, it is so
+convenient building in batches, making product A for a while, then retooling, and making product B for a while, and
+so on. Quick retooling does not seem possible, until an expert shows them how they can do a three-hour changeover
+in five minutes. Even then, it is difficult for many manufacturers to maintain the discipline of quick changeover. And the
+real root cause of the problem may be sales promotion strategies that contribute to uneven customer demand. The
+most sophisticated lean enterprises begin to change their policies in sales to maintain a level customer demand. This
+requires a deep commitment at the very top of the company, but these organizations quickly find the enormous
+benefits of heijunka make it a worthwhile investment.
+It cannot be overstated. To achieve the lean benefits of continuous flow, you need Principle 4: Level out the
+workload (Heijunka). Eliminating muda is only one-third of achieving flow. Eliminating muri and smoothing mura
+are equally important. Principle 4 focuses on muri and mura by leveling your product volume and mix and, most
+importantly, leveling out the demand on your people, equipment, and suppliers. Standardized work is far easier,
+cheaper, and faster to manage. It becomes increasingly easy to see the wastes of missing parts or defects. Without
+leveling, wastes naturally increase as people and equipment are driven to work like mad and then stop and wait, like
+the hare. Working according to a level schedule applies to all parts of Toyota, including sales. Everyone in the
+organization works together to achieve it.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Case Example: Building Aluminum Gutters on a
+Level Production Schedule
+These days aluminum gutters for houses, at least in the U.S., are mostly built to order, on-site at the house. Rolls of
+materials are brought to the job site, where they are cut to length, end caps are formed, and the gutters are installed.
+A plant in the Midwest makes much of the material that installers use the rolls of painted aluminum. While these rolls
+of aluminum are not complex, there is variation in the width of the gutters, the length, and the colors. They also are
+packaged in different boxes, depending on the customer.
+
+This company originally adopted the build-to-order model. Deliveries were mostly made on time, but the process of
+getting raw materials, scheduling operations, building the product, moving the finished goods to a warehouse, and
+then shipping those goods from the dozen or so shipping docks was chaotic, to say the least. There was inventory
+everywhere. Yet the plant regularly was short of critical materials needed for the gutters ordered. Costs of expediting
+shipments to large customers were getting higher and higher. People were added and laid off with regularity. A big
+problem was the seasonality of the business. Big box warehouse stores like Home Depot bought large quantities of
+gutters in the spring and early summer and then business dropped dramatically for the rest of the year. So a large
+number of temporary workers were added in the peak season.
+The Midwestern gutter plant decided to hire a consultant who used to work for the Toyota Supplier Support Center.
+The consultant said the unthinkable the overall operation would be leaner if the plant would build select products to
+store away in inventory! This meant selectively adding some waste. They followed the consultant s advice.
+He knew there is not one type of finished goods inventory, but four types. The first is real built-to-order product that
+should be set in a staging lane to be put on a truck immediately. The second is seasonal product for high-volume
+items the plant knows it will sell, that should be built steadily throughout the year and accumulated in a seasonal
+inventory buffer, which then will be drawn down in the busy spring/summer season. The third is safety stock, which is
+inventory used to buffer against unexpectedly high demand for products that are not in the seasonal buffer; it is
+customer-driven variation. The fourth is buffer stock, which is held to cushion against downtime in the factory, so
+customers will continue to get their product even when machines are down for repair; it is plant-driven variation.
+On the consultant s recommendation, each of these four types of inventory was stored in a separate area at the
+aluminum gutter plant, so that everyone would always be able to see how much inventory of each type was available
+(Toyota Way Principle #7).
+The inventory was replenished by using the kanban system (cards instructing the production line to make a certain
+quantity of a certain end product) explained in Chapter 9. For example, the largest amount of inventory is the
+seasonal inventory buffer. It is built up during the off-season and reaches a peak just before the spring, when sales
+are highest. There is a pre-specified amount of seasonal buffer and, based on that forecasted amount, kanban is used
+by the production cell to make only that remaining number of packages needed. In front of the inventory is what
+looks like a clothesline labeled with months of the year. For example, the amount that should be completed by
+August, based on a constant level of production over the year, has a sign saying August. In August, if the inventory
+pile is larger than should be built by that time, the pile of inventory will have moved beyond the August sign and
+everyone will know that there is an excess inventory problem needing to be solved.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+In kanban, discussed in Chapter 9, the information flow begins with the customer order and works backward
+through the operation. In this company, a final cutting and packaging (one-piece flow) cell gets customer orders that it
+has to build to order. But when those orders are low, the workers do not have to sit around with nothing to do. They
+can build to the seasonal inventory buffer or build to replace any safety stock or buffer stock that has been used. The
+seasonal inventory, safety stock, and buffer stock that need to be built are represented by kanban cards. The cards
+are sorted by a planner into a visual scheduling box called a heijunka box, which levels the schedule. For each
+product, the box says what to make at 8:00 a.m., 8:10 a.m., 8:20 a.m., etc. Cards are put in the slots and delivered
+to the production cell. These tell the cell what to make and pace the work of the cell. As the cell uses materials, like
+the painted aluminum product, a kanban is sent back to the prior operation asking it to make more. Pull has been
+established all the way back to suppliers, like the paint supplier.
+At the suggestion of the TPS consultant, other improvements were made, such as standardizing work procedures,
+reducing changeover time, and putting in error-proofing devices (discussed in Chapters 11 and 12). The result was a
+very smooth flow of product through the facility, so smooth that all outbound shipping could be handled through two
+docks with the other 10 closed down. In addition, the plant achieved incredible performance improvements. The
+overall lead time for making product was reduced by 40%, changeover time was reduced by 70%, WIP of painted
+product was reduced by 40%, inventory obsolescence was reduced by 60%, and on-time delivery was close to
+100%. A typical lean transformation!
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 11: Principle 5: Build a
+Culture of Stopping to Fix
+Problems, to Get Quality Right
+the First Time
+Overview
+Mr. Ohno used to say that no problem discovered when stopping the line should wait longer than tomorrow
+morning to be fixed. Because when making a car every minute we know we will have the same problem again
+tomorrow.
+Fujio Cho, President, Toyota Motor Corporation
+Russ Scafade was the vice president of Powertrain for Toyota when it launched the first American powertrain plant in
+Georgetown, Kentucky. He had worked decades for General Motors and had an excellent reputation as a
+manufacturing guy who could get things done and worked well with people. He was excited about the opportunity to
+work for Toyota and to help start up a brand-new plant following state-of-the-art TPS principles. He worked day
+and night to get the plant up to the demanding standards of Toyota and to please his Japanese mentors, including
+Fujio Cho, who was president of Toyota Motor Corporation in Kentucky.
+Scafade had learned the golden rule of automotive engine production: do not shut down the assembly plant! At
+General Motors, managers were judged by their ability to deliver the numbers. Get the job done no matter what and
+that meant getting the engines to the assembly plant to keep it running. Too many engines, that was fine. Too few, that
+sent you to the unemployment line.
+So when Cho remarked to Scafade that he noticed he had not shut down the assembly plant once in a whole month,
+Scafade perked up: Yes sir, we had a great month, sir. I think you will be pleased to see more months like this.
+Scafade was shocked to hear from Cho:[1]
+Russ-san, you do not understand. If you are not shutting down the assembly plant, it means that you have no
+problems. All manufacturing plants have problems. So you must be hiding your problems. Please take out
+some inventory so the problems surface. You will shut down the assembly plant, but you will also continue to
+solve your problems and make even better-quality engines more efficiently.
+When I interviewed Cho for this book, I asked him about differences in culture between what he experienced starting
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+up the Georgetown, Kentucky, plant and managing Toyota plants in Japan. He did not hesitate to note that his
+number-one problem was getting group leaders and team members to stop the assembly line. They assumed that if
+they stopped the line, they would be blamed for doing a bad job. Cho explained that it took several months to
+re-educate them that it was a necessity to stop the line if they want to continually improve the process. He had to go
+down to the shop floor every day, meet with his managers, and, when he noticed a reason to stop the line, encourage
+the team leaders to stop it.[2]
+[1]This quote is a paraphrase from the many times I have heard Russ Scafade tell this story.
+
+[2]This is a classic example of Principle 12: Go and see for yourself to thoroughly understand the situation
+(genchi genbutsu). Today there are only a handful of companies that are run by a president who will walk the shop
+floor and teach a philosophical lesson, such as the old Hewlett-Packard Company when Bill Hewlett and Dave
+Packard did daily walkabouts, called management by walking around (MBWA), to personally engage with the
+engineers.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Principle Stopping the Process to Build in
+Quality (Jidoka)
+Jidoka, the second pillar of TPS, traces back to Sakichi Toyoda and his long string of inventions that revolutionized
+the automatic loom. Among his inventions was a device that detected when a thread broke and, when it did, it would
+immediately stop the loom. You could then reset the loom and, most importantly, solve the problem to avoid
+repeating the defect (waste). Like many elements of TPS, a simple invention and simple idea led to profound and
+broad insights. Quality should be built in. This means that you need a method to detect defects when they occur and
+automatically stop production so an employee can fix the problem before the defect continues downstream. One of
+the leading American students of TPS, Alex Warren, former Executive Vice President, Toyota Motor Corporation,
+Kentucky, defined jidoka and how it relates to employee empowerment:[3]
+In the case of machines, we build devices into them, which detect abnormalities and automatically stop the
+machine upon such an occurrence. In the case of humans, we give them the power to push buttons or pull
+cords called andon cords which can bring our entire assembly line to a halt. Every team member has the
+responsibility to stop the line every time they see something that is out of standard. That s how we put the
+responsibility for quality in the hands of our team members. They feel the responsibility they feel the power.
+They know they count.
+Jidoka is also referred to as autonomation equipment endowed with human intelligence to stop itself when it has a
+problem. In-station quality (preventing problems from being passed down the line) is much more effective and less
+costly than inspecting and repairing quality problems after the fact.
+Lean manufacturing dramatically increases the importance of building things right the first time. With very low levels of
+inventory, there is no buffer to fall back on in case there is a quality problem. Problems in operation A will quickly
+shut down operation B. When equipment shuts down, flags or lights, usually with accompanying music or an alarm,
+are used to signal that help is needed to solve a quality problem. This signaling system is now referred to as andon.
+Andon refers to the light signal for help.
+
+While it may seem obvious that you should catch and address quality problems immediately, the last thing
+management in traditional mass manufacturing would permit was a halt in production. Bad parts, when they happened
+to be noticed, were simply labeled and set aside to be repaired at another time and by another department. The
+mantra is produce large quantities at all costs and fix problems later. As Gary Convis, President of the Toyota,
+Georgetown factory, explained to me:
+
+When I was at Ford, if you didn t run production 100% of the shift, you had to explain it to Division. You
+never shut the line off. We don t run 100% of the scheduled time out here. Toyota s strength, I think, is that
+the upper management realizes what the andon system is all about . They ve lived through it and they
+support it. So in all the years I ve been with Toyota, I ve never really had any criticism over lost production
+and putting a priority on safety and quality over hitting production targets. All they want to know is how are
+you problem solving to get to the root cause? And can we help you? I tell our team members there are two
+ways you can get in trouble here: one is you don t come to work, and two is you don t pull the cord if you ve
+got a problem. The sense of accountability to ensure quality at each station is really critical.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+So here we have a paradox. Toyota management says it is OK to run less than 100% of the time, even when the line
+is capable of running full-time, yet Toyota is regularly ranked among the most productive plants in the auto industry.
+Why? Because Toyota learned long ago that solving quality problems at the source saves time and money
+downstream. By continually surfacing problems and fixing them as they occur, you eliminate waste, your productivity
+soars, and competitors who are running assembly lines flat-out and letting problems accumulate get left in the dust.
+
+When Toyota s competitors finally did start using Toyota s andon system, they made the mistake of assuming that the
+line-stop system was hardwired to each and every workstation push the button and the entire assembly line comes to
+a screeching halt. At Toyota, the andon in all of its assembly and engine plants is called a fixed-position line stop
+system. As shown in Figure 11-1, when an operator in workstation five pushes an andon button, workstation five
+will light up in yellow, but the line will continue moving. The team leader has until the vehicle moves into the next
+workstation zone to respond, before the andon turns red and the line segment automatically stops. This is likely to be
+a matter of 15-30 seconds on an assembly line building cars at one a minute. In that time, the team leader might
+immediately fix the problem or note it can be fixed while the car is moving into other workstations and push the
+button again, canceling out the line stoppage. Or the team leader might conclude the line should stop. Team leaders
+have been carefully trained in standardized procedures on how to respond to andon calls.
+
+Figure 11-1: The andon system on a manual assembly line
+The assembly line is divided into segments with small buffers of cars in between (typically containing seven to 10
+cars). Because of the buffers, when a line segment stops, the next line segment can keep working for seven to 10
+minutes before it will shut down, and so forth. Rarely does the whole plant shut down. Toyota achieved the purpose
+of andon without taking needless risks of lost production. It took U.S. auto companies years to understand how to
+apply this TPS tool. That may be one reason why workers and supervisors were hesitant to stop the line because it
+actually stopped the entire line!
+The built-in quality created by jidoka has never been more important to Toyota than with the Lexus and the necessity
+of meeting the extremely high expectations of Lexus owners. Until recently, Lexus vehicles were built only in Japan,
+where the culture and quality systems are undisputedly world-class. But can a Lexus be built in North America and
+still maintain the unbelievably meticulous levels of quality customers have come to expect? The answer is yes and it is
+being done in Toyota s Cambridge, Ontario, facility. Among the innovations used to maintain this pursuit of
+perfection are some technologies and processes that are taking andon to the next level.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Ray Tanguay, President of Toyota Motor Corporation, Canada, knew that the bar was now higher as he moved
+from making the Toyota Corolla and Matrix models to the Lexus RX 330. There are many innovations designed into
+the people, processes, and technologies of the new Lexus line to ensure that Lexus buyers will get Lexus quality. For
+example, production tools and robots on the line have been designed with built-in sensors to detect any deviation
+from standard and use radio transmitters to send an electronic signal to team leaders wearing headphone sets. Since
+not every problem can be caught in process, there is a highly detailed 170-point quality check for every finished RX
+330. Tanguay wears a Blackberry personal digital assistant on his belt wherever he goes and every time an error is
+found on a finished vehicle, a report is instantly sent to Tanguay s Blackberry, along with a digital photo of the
+problem. Tanguay can transfer the photo to an electronic billboard in the plant so huge displays can be seen by
+workers and they can be cautious to prevent the same mistake from occurring. While the technology is new, the
+principle is the same: bring problems to the surface, make them visible, and go to work immediately on
+countermeasures.
+
+[3]From The Toyota Way, Toyota Motor Company, April 2001.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Using Countermeasures and Error-Proofing to Fix
+Problems
+This point has been made earlier in the book, but it bears repeating: the closer you are to one-piece flow, the quicker
+quality problems will surface to be addressed. This hit home for me personally in a unique opportunity I had in the
+summer of 1999. General Motors had a program through its joint venture with Toyota, the NUMMI plant, in
+Fremont, California, in which they sent GM employees for one week of training in TPS. This one week included two
+days of working on the Toyota assembly line actually building cars. I was given the opportunity to participate.
+
+I was assigned to a subassembly operation off the main assembly line that made axle assemblies for the Toyota
+Corolla and the equivalent GM model. In unibody cars, where there is no chassis, there is not a real axle but four
+independent modules that include the wheel, brakes, and shock absorber. They are built in the same sequence as the
+cars on the assembly line, put on pallets, and delivered in the order of cars moving down the assembly line. There are
+about two hours from the time a module is built until it will be attached to the car, so if there is a problem, you have a
+maximum of two hours to fix it before the main assembly line segment is shut down.
+One of the easy freshman jobs I had was to attach a cotter pin to hold a ball joint in place. You put in the cotter pin,
+spread out the ends, and it locked the ball joint in place. This affected braking, so it was a safety item and very
+important. At one point early in the afternoon, I saw people scrambling around and there were a number of
+impromptu meetings. I asked the hourly associate next to me what was going on and he explained that a unit had
+gotten to the assembly line without a cotter pin and it was a big deal. An assembly line worker who installed the
+subassembly on the car had caught it. The team knew it happened only a couple of hours earlier. I assumed it was my
+mistake and immediately felt terrible for having missed installing a cotter pin. The team member claimed that it
+happened while I was on break. Who knows? But his response to my guilt feelings was even more important. He
+said:
+
+What is important is that the error went through eight people who did not see it. We are supposed to be
+inspecting the work when it comes to us. And the guy at the end of the line is supposed to check everything.
+This should never have gotten to the assembly line. Now we as a team are embarrassed because we did not
+do our jobs.
+The other job I did was the final job on the line a 100% inspection before loading the axles onto the pallet. The
+inspection included marking with colored felt-tip pens all the points you are supposed to inspect, including the cotter
+pin. It turns out that the unit with the missing cotter pin was not marked, so the inspector at the end of the line (which
+could have been me again I m not sure) failed to do a complete inspection. But again, what mattered is that the team
+went through intense problem solving to identify the root cause and put in place a countermeasure all within two hours
+of when the problem occurred.
+
+Although this missing cotter pin went undetected through the entire system of inspection, there were a remarkable
+number of countermeasures that had already been put in place on the axle line to prevent things like this from
+occurring. In fact, at every workstation there were numerous poka-yoke devices. Poka-yoke refers to
+mistake-proofing (also error-proofing or fool-proofing). These are creative devices that make it nearly impossible for
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+an operator to make an error. Obviously, there was not a poka-yoke to detect whether the cotter pin was in place.
+Nonetheless, the level of sophistication on the line was impressive there were 27 poka-yoke devices on the front axle
+line alone. Each poka-yoke device also had its own standard form that summarizes the problem addressed, the
+emergency alarm that will sound, the action to be taken in an emergency, the method and frequency of confirming the
+error-proof method is operating correctly, and the method for performing a quality check in the event the fool-proof
+method breaks down. This is the level of detail that Toyota uses to build in quality.
+As an example, though they did not have a poka-yoke to check if the cotter pin was in place, they did have a light
+curtain over the tray of cotter pins. If the light curtain was not broken by the operator reaching through it to pick up a
+cotter pin, the moving assembly line would stop, an andon light would come on, and an alarm would sound. Another
+poka-yoke device required that I replace a tool (somewhat like a file, used to expand the cotter pin) back in its
+holder after each time I used it or the line would stop and an alarm would sound. It sounds a bit bizarre one step
+removed from getting electric shocks for any misstep. But it is effective. Of course there are ways around the system,
+and the workers on the line find them all. But at Toyota there is a discipline about following the standard tasks that
+workers tend to adhere to.
+
+Standardized work (Toyota Way Principle 6) is itself a countermeasure to quality problems. For example, the
+particular job I had was designed so it could be accomplished in 44.7 seconds of work and walk time. The takt time
+(line speed in this case) was 57 seconds per job, so there was plenty of slack time; hence it was a freshman job. Yet
+even for this simple job there were 28 steps shown on the standard work chart, right down to the number of
+footsteps to take to and from the conveyor. This standard work chart was posted at my job site, where there were
+visuals that also explained potential quality problems. A more detailed version in a notebook had each of the 28 steps
+on its own sheet, described in greater detail along with a digital photo of that step being performed correctly. Very
+little was left to chance. Whenever there is a quality problem, the standard work chart is reviewed to see if something
+is missing that allowed the error to occur and, if so, the chart is updated accordingly.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Keep Quality Control Simple and Involve Team
+Members
+If American and European companies got anything from the invasion of Japanese products to the U.S. market in the
+1980s, it was quality fever. The level of quality consciousness in Japanese companies made our heads spin. They
+were crafting fine art and we were slapping parts together. But we woke up and worked hard to fix this. J.D. Power
+s recent surveys of initial quality (during the first three months of ownership) show that the gap between Japanese
+auto companies and U.S. and European competitors has shrunk to the point of being barely noticeable. But
+longer-term data shows that the quality differential has not been erased. It has just been hidden. It is relatively easy to
+inspect an assembled vehicle and fix all the problems before the customer has a chance to see them. But inspected-in
+quality is often temporary quality.
+I have seen a lot of non-public internal quality data on auto companies, including data collected by J.D. Power and
+the results are striking. Initial quality shows little difference across automakers. But three years out, the gap grows.
+Five years out, the gap balloons. In the 2003 annual auto issue of Consumer Reports, the magazine summarizes its
+studies of durability. Not surprisingly Acura, Toyota, and Lexus are the top three makes for problems per 100
+vehicles during the first three years of ownership, with 25 problems per 100 vehicles for Toyota and Lexus. The U.S.
+and European makes are mostly at the bottom of the list, with 50, 60, 70 problems per 100 two to three times worse
+than Toyota and Lexus. Why does the gap persist?
+
+Unfortunately, for many companies the essence of building in quality has gotten lost in bureaucratic and technical
+details. Things like ISO-9000, an industrial quality standard that calls for all kinds of detailed standard operating
+procedures, for whatever good they have done, have made companies believe that if they put together detailed rule
+books the rules will be followed. Quality planning departments are armed with reams of data analyzed using the most
+sophisticated statistical analysis methods. Six Sigma has brought us roving bands of black belts who attack major
+quality problems with a vengeance, armed with an arsenal of sophisticated technical methods.
+At Toyota they keep things simple and use very few complex statistical tools. The quality specialists and team
+members have just four key tools:
+•
+Go and see.
+•
+Analyze the situation.
+•
+Use one-piece flow and andon to surface problems.
+•
+Ask Why? five times.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+(Asking why five times whenever you uncover a problem will provide root cause analysis of the problem as well as
+countermeasures to solve it. As discussed in Chapter 20, it s an excellent team tool for keeping the focus on solving
+problems rather than blaming someone for them, which is just another form of muda.)
+Don Jackson, VP of manufacturing for Toyota s Georgetown plant, was a quality manager for a U.S. auto supplier
+before joining Toyota. He had been a stickler for detail and defended the complex quality manuals he had helped
+write. At Toyota he learned the power of simplicity. As he described it, Before joining Toyota I made a lot of
+policies and procedures too difficult to follow. They were doomed for failure. He still participates in some quality
+audits of suppliers, but his approach and philosophy are now completely different from the more bureaucratic mindset
+he had before joining Toyota:
+You can write a complex procedure that covers the operator, equipment maintenance, and a quality audit
+and theoretically, the process will run forever. But my philosophy is support the team members who are
+running the process. I want them to be able to know everything because they re the ones producing the
+product. So those team members have to know that the preventative maintenance was done on schedule, and
+their equipment is in good shape by some visual control system. The quality check every hour ... those team
+members should know that it was done and it was OK every hour or they stop the line. Then finally, they
+must know what their job requirements are and know that they re getting good built-in quality by some
+means. So those team members are in total control. I want that team member to know that they have
+everything they need to build that product correctly ,.. man, material, method, machine.
+Obviously this audit is very different than the typical quality audit of following detailed procedures from a manual,
+perhaps analyzing some statistical data, and maybe even checking to see if the procedures are being followed.
+Jackson is looking with a different set of eyes the eyes of the operator controlling the process. He is looking at quality
+from the point of view of the shop floor the actual situation (genchi genbutsu).
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Building in Quality in a Services Environment
+You can extend Toyota Way Principle 4: Build a culture of stopping to fix problems, to get quality right the first
+time to the office environment. Of course you are not going to hang andon lights over everyone s desk so they can
+signal in case there is a problem. Clearly the tool of andon as it is practiced in manufacturing is designed for very
+short-cycle, repetitive jobs where immediate help is needed and seconds count. This is the case with some highly
+repetitive office work, like call centers or data entry departments, and the same tools could be applied. But most
+kinds of office environments are non-routine work where stop when there is a quality problem is a matter of
+philosophy and personal work habits. In a typical office environment, a person waits and waits for information in
+order to move along several piles of work in process and then, when the information arrives, often has to sprint madly
+to meet deadlines, making numerous errors and missing important details along the way. Obviously, this system of
+work needs a different quality model.
+
+Toyota engineering provides one of the better examples of designing in quality within a professional services
+environment. For example, the extensive use of checklists and standards that will be discussed in Chapter 12 is one
+way to ensure quality at the source. Also, Toyota s bias toward incremental development carrying over standard
+components from vehicle to vehicle and focusing on changing selected aspects of the vehicle also helps greatly. There
+are many things that Toyota does that help ensure quality from the start. We will highlight two other areas that
+illustrate the jidoka philosophy in engineering.
+First, we saw in the Prius case that at several key junctures in the program the chief engineer was willing to stop and
+reflect and consider all options (Toyota Way Principle 13) before racing ahead. This was a program of enormous
+visibility within Toyota and, later, with the public, and the self-imposed deadlines were severe. Timing was of the
+essence. Yet in the early stages of developing the Prius concept, Uchiyamada saw the team getting bogged down in
+specific technical details on engine technology. He asked the group to stop focusing on hardware. The team stepped
+back and spent several days brainstorming key concepts to describe the 21st-century car and boiling them down to
+the goal of a small, fuel-efficient car. Several times throughout the Prius development, Uchiyamada took a time-out
+from the development details to step back and consider where the program was headed.
+
+When my colleagues and students and I originally studied Toyota s product development system, we called it
+set-based concurrent engineering (Ward, Liker, Cristiano, and Sobek, 1995). We noticed that Toyota leaders
+tended to consider a broad set of alternatives and study them thoroughly before making a final decision. Several
+leaders explained that the biggest challenge they faced in training young engineers is to slow them down and get them
+to stop and reflect on all the alternatives they should consider. This is an example of stopping and fixing the problem
+before racing ahead and causing defects downstream.
+
+A second and related example is in the early stages of development, before the styling department has agreed on the
+final vehicle design called clay-model freeze in automotive jargon. In traditional auto companies, development
+engineers think there is nothing to engineer until styling completes the design, because the engineering work would be
+wasted since key parts of the vehicle could change. Toyota views this time as an opportunity to study alternatives and
+have them ready to go when the styling design is frozen. It is called the kentou (study drawing) phase and the focus in
+this period is generating hundreds of study drawings, called kentouzu.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+While the artist is styling in the design studios, engineers are studying many different engineering alternatives in the
+interior of the car, the exterior, and the engine. They know pretty closely what the main dimensions of the vehicle will
+be and have made a lot of decisions about aerodynamics, power, and feel of the ride. So they can sketch out these
+alternatives and share the sketches broadly across specialties. For example, the 2002 Camry headlights were
+aggressively designed, extending deeply back and cutting into the hood and fender. Body engineers made sketches
+and determined, based on the checklists of formability in stamping, that it could lead to stamped metal parts that
+would have quality problems. They suggested to the styling department a redesign of the headlights to avoid the
+quality problems yet provide the look that styling wanted. Styling approved the changes. Thus, a quality problem that
+might have haunted manufacturing for years, or even haunted customers several years after they took ownership, was
+avoided because of this intense study period to design quality into the vehicle very early in the design process.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Building in Quality Is a Principle, Not a
+Technology
+A story I heard from a plant manager at Reiter Automotive (supplier of sound-dampening materials) helped put into
+perspective what it takes to build in quality. He ran a plant that makes sound-dampening materials in Chicago and
+supplied them to Toyota. He had a Toyota mentor who was teaching him TPS. The Toyota mentor had suggested
+they needed an andon system to immediately detect quality problems. So the plant manager got his engineers to spec
+out an andon system similar to the kind Toyota uses, with light boards hung from the rafters that are directly hooked
+up to buttons the operator pushes. This was a relatively small plant compared with the Toyota plant, but he wanted to
+use the very best to implement this important system. When the Toyota mentor visited and he proudly showed him
+the elaborate andon system they had on order, the mentor said, No, no, no. You do not understand. Come with me.
+He then charged off and drove the plant manager to a local hardware store. He picked out a red flag, a yellow flag,
+and a green flag. He handed them to the plant manager and said, Andon. His point was that implementing andon is
+not the same thing as buying fancy new technology. Andon works only when you teach your employees the
+importance of bringing problems to the surface so they can be quickly solved. Unless you have a problem-solving
+process already in place and people are following it, there s no point in spending money on fancy technology.
+Americans tend to think that buying expensive new technology is a good way to solve problems. Toyota prefers to
+first use people and processes to solve problems, then supplement and support its people with technology.
+
+General Motors early on copied Toyota s NUMMI plant system of team leaders hourly associates whose primary
+job is to support team members. But the team leaders spent a good deal of their time in the back room smoking
+cigarettes or playing cards. What good is pushing the andon button if nobody is around to respond? In a later
+incarnation, GM got smarter. In their Cadillac plant in Hamtramck, Michigan, they put in sophisticated fixed-position
+stop andons. These are full-blown systems. When the button is pushed, the line will keep going until the car enters
+the next workstation and then the line will automatically stop at a fixed position. It is very expensive and in the past
+GM would have rolled this out quickly to show a payoff. Instead, they refused to turn on the automatic stopping
+capability until a work team had passed an overall lean audit. GM realized that the andon system would be effective
+only when the operators followed standardized work, the kanban system was reliably pulling materials to the
+workstation, workplace discipline was followed, and the team leaders were responding to problems. As a result,
+each work team struggled to pass the audit so they would have the privilege of having the complete andon system
+turned on. There were celebrations each time a team succeeded.
+In the Toyota Way of doing things, what matters when improving quality is enabling the process and the people. You
+can spend a great deal of money on the latest and greatest andon and have no impact whatsoever on quality.
+Instead, you need to constantly reinforce the principle that quality is everyone s responsibility throughout the
+organization. Quality for the customer drives your value proposition, so there is no compromising on quality, because
+adding value to your customer is what keeps you in business and allows you to make money so everyone can
+continue to be part of the company.
+A common Toyota quality tactic is to front-load projects of all kinds, to anticipate problems as early as possible and
+put in place countermeasures before the problems even occur. Occasionally a time-out is required to reflect on the
+purpose and direction of the project before moving on. This is done within the context of stretch-timing objectives
+that are rarely compromised. The Toyota Way is to build into the culture the philosophy of stopping or slowing down
+to get quality right the first time to enhance productivity in the long run. We saw this repeatedly in the Prius case.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Closely related to this philosophy are the problem-solving and organizational-learning approaches of the Toyota
+Way. It should be clear to the reader by now that all aspects of the Toyota Way philosophy, processes, partners,
+and problem solving support its ability to build in quality and satisfy customers.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 12: Principle 6:
+Standardized Tasks Are the
+Foundation for Continuous
+Improvement and Employee
+Empowerment
+Overview
+Standard work sheets and the information contained in them are important elements of the Toyota
+Production System. For a production person to be able to write a standard work sheet that other workers
+can understand, he or she must be convinced of its importance.... High production efficiency has been
+maintained by preventing the recurrence of defective products, operational mistakes, and accidents, and by
+incorporating workers ideas. All of this is possible because of the inconspicuous standard work sheet.
+Taiichi Ohno
+Whether your employees are designing intricate new devices, styling new attractive products, processing accounts
+payable, developing new software, or working as nurses, they are likely to respond to the idea of standardizing their
+work in the same way: We are creative, thinking professionals and every task we do is a unique project. If you are
+not in manufacturing, you may be surprised to learn that even workers on the assembly line believe they have a knack
+for doing the job best their own way and that standards will simply set them back. But some level of standardization
+is possible and, as we will see, is the backbone of Toyota Way processes.
+
+Standardizing tasks became a science when mass production replaced the craft form of production. Much of
+modern manufacturing and standardization is based on the principles of industrial engineering first set forth by
+Frederick Taylor, the father of scientific management.
+In the automotive world, plants had armies of industrial engineers who implemented Taylor s approach of time and
+motion studies. Industrial engineers (IEs) were everywhere, timing every second of workers tasks and trying to
+squeeze every extra bit of productivity out of the labor force. Open and honest workers who shared their work
+practices with the IEs would quickly find the job standards raised and they would soon be working harder for no
+extra money. So workers withheld techniques and labor-saving devices they invented and hid them whenever the IEs
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+were around. They deliberately worked slower when the IEs were doing a study, so expectations were set low. The
+IEs caught on to this and would at times try sneaking up on the operator to watch him or her at work. Often
+efficiency and time studies that changed the job description and responsibilities led to union grievances and became a
+major source of conflict between management and worke

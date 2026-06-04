@@ -1,0 +1,922 @@
+The Toyota Way: 14 Management Principles from the
+World's Greatest Manufacturer
+by Jeffrey K. Liker
+ISBN:0071392319
+McGraw-Hill © 2004 (352 pages)
+This book explains the management principles and
+business philosophy behind Toyota's worldwide
+reputation for quality and reliability. It also shows
+managers in every industry how to improve business
+processes.
+
+Table of Contents
+The Toyota Way 14 Management Principles from the World s Greatest
+Manufacturer
+Preface
+Part One - The World-Class Power of the Toyota Way
+The Toyota Way: Using Operational Excellence as a Strategic
+Chapter 1 Weapon
+How Toyota Became the World s Best Manufacturer: The Story
+Chapter 2 of the Toyoda Family and the Toyota Production System
+Chapter 3 - The Heart of the Toyota Production System: Eliminating Waste
+The 14 Principles of the Toyota Way: An Executive Summary of
+Chapter 4 - the Culture Behind TPS
+The Toyota Way in Action: The No Compromises Development
+Chapter 5of Lexus
+The Toyota Way in Action: New Century, New Fuel, New Design
+Chapter 6 Process Prius
+Part Two - The Business Principles of the Toyota Way
+
+Se
+cti
+- Long-Term Philosophy
+on
+I
+
+Ch
+apt
+er
+7
+Se
+cti
+on
+II
+Ch
+apt
+er
+8
+Ch
+apt
+er
+9
+Ch
+apt
+er
+10
+Ch
+apt
+er
+11
+Ch
+apt
+er
+12
+Ch
+apt
+er
+13
+Ch
+apt
+er
+14
+Se
+cti
+on
+III
+Ch
+apt
+er
+15
+Ch
+apt
+er
+16
+
+-
+
+Principle 1: Base Your Management Decisions on a Long-Term
+Philosophy, Even at the Expense of Short-Term Financial Goals
+
+- The Right Process Will Produce the Right Results
+
+-
+
+Principle 2: Create Continuous Process Flow to Bring Problems to
+the Surface
+
+- Principle 3: Use Pull Systems to Avoid Overproduction
+
+- Principle 4: Level Out the Workload (Heijunka )
+
+-
+
+Principle 5: Build a Culture of Stopping to Fix Problems, to Get
+Quality Right the First Time
+
+-
+
+Principle 6: Standardized Tasks Are the Foundation for
+Continuous Improvement and Employee Empowerment
+
+- Principle 7: Use Visual Control So No Problems Are Hidden
+
+-
+
+Principle 8: Use Only Reliable, Thoroughly Tested Technology
+That Serves Your People and Processes
+
+-
+
+Add Value to the Organization by Developing Your People and
+Partners
+
+-
+
+Principle 9: Grow Leaders Who Thoroughly Understand the
+Work, Live the Philosophy, and Teach It to Others
+
+-
+
+Principle 10: Develop Exceptional People and Teams Who Follow
+Your Company s Philosophy
+
+Ch
+apt
+Principle 11: Respect Your Extended Network of Partners and
+er
+Suppliers by Challenging Them and Helping Them Improve
+17
+Se
+cti
+Continuously Solving Root Problems Drives Organizational
+on
+Learning
+IV
+Ch
+apt
+Principle 12: Go and See for Yourself to Thoroughly Understand
+er
+the Situation (Genchi Genbutsu )
+18
+Ch
+apt
+Principle 13: Make Decisions Slowly by Consensus,Thoroughly
+er
+Considering All Options; Implement Rapidly (Nemawashi )
+19
+Ch
+apt
+Principle 14: Become a Learning Organization Through Relentless
+er
+Reflection (Hansei ) and Continuous Improvement (Kaizen )
+20
+Part Three - Applying the Toyota Way in Your Organization
+Ch
+apt
+Using the Toyota Way to Transform Technical and Service
+er
+Organizations
+21
+Ch
+apt
+Build Your Own Lean Learning Enterprise, Borrowing from the
+er
+Toyota Way
+22
+Bibliography/Chapter References
+Recommended for Further Reading
+Index
+List of Figures
+List of Sidebars
+
+Back Cover
+
+What Can Your Business Learn From Toyota?
+•
+•
+•
+•
+
+Double or triple the speed of any business process
+Build quality into workplace systems
+Eliminate the huge costs of hidden waste
+Turn every employee into a quality control inspector
+
+With a market capitalization greater than the value of General Motors, Ford, and Chrysler combined, Toyota is also,
+(by far), the world s most profitable automaker. Toyota s well-known secret weapon is Lean production the
+revolutionary approach to business processes that it invented in the 1950s and has spend decades perfecting. Less
+well known are the management principles that underlie Lean production, Lean product development, and all of
+Toyota s business and service processes. Today businesses around the world are attempting to implement Toyota s
+radical system for speeding up processes, reducing waste, and improving quality. But are they getting beneath the
+surface of Lean tools and techniques to the real foundation of Toyota s success?
+
+The Toyota Way, explains Toyota s unique approach to Lean management the 14 principles that drive Toyota s
+quality and efficiency-obsessed culture. You ll gain valuable insights that can be applied to any organization and any
+business process, whether in services or manufacturing. You ll discover how the right combination of long-term
+philosophy, processes, people, and problem solving can transform your organization into a Lean, learning enterprise
+the Toyota Way.
+
+About the Author
+Jeffrey K. Liker, Ph.D., is Professor of Industrial and Operations Engineering at the University of Michigan, and
+cofounder and Director of the Japan Technology Management Program and the Lean Manufacturing and Product
+Development Certificate Program at the university. Winner of four Shingo Prizes for Excellence, Dr. Liker s writings
+on Toyota have appeared in The Harvard Business Review, Sloan Management Review, and other leading
+publications. Dr. Liker is a principal of Optiprise, a Lean enterprise/supply chain management consulting firm, and
+was the editor of Becoming Lean: Experiences of U.S. Manufacturers, which won the 1998 Shigeo Shingo prize
+for excellence in manufacturing research.
+
+The Toyota Way 14 Management
+Principles from the World s
+Greatest Manufacturer
+Jeffrey K. Liker
+McGraw-Hill
+Copyright © 2004 by McGraw-Hill. All rights reserved. Printed in the United States of America. Except as
+permitted under the United States Copyright Act of 1976, no part of this publication may be reproduced or
+distributed in any form or by any means, or stored in a database or retrieval system, without the prior written
+permission of the publisher.
+
+1 2 3 4 5 6 7 8 9 0 AGM/AGM 0 9 8 7 6 5 4 3
+ISBN 0-07-139231-9
+Editorial and production services provided by CWL Publishing Enterprises, Inc., Madison, WI, www.cwlpub.com.
+This publication is designed to provide accurate and authoritative information in regard to the subject matter covered.
+It is sold with the understanding that neither the author nor the publisher is engaged in rendering legal, accounting, or
+other professional service. If legal advice or other expert assistance is required, the services of a competent
+professional person should be sought.
+
+From a Declaration of Principles jointly adopted by a Committee
+of the American Bar Association and a Committee of Publishers
+McGraw-Hill books are available at special quantity discounts to use as premiums and sales promotions, or for use in
+corporate training programs. For more information, please write to the Director of Special Sales, McGraw-Hill, Two
+Penn Plaza, New York, NY 10121-2298. Or contact your local bookstore.
+
+This book is printed on recycled, acid-free paper containing a minimum of 50% recycled de-inked fiber.
+
+Dedication
+To Deb, Emma, and Jesse
+
+and Our Amazing Life Journey
+Foreword
+When I joined Toyota after 18 years in the U.S. automobile business, I didn t know exactly what to expect. But I
+was hopeful. I knew that I wasn t comfortable with the direction that American automobile manufacturing was taking,
+and I felt Toyota might be different. In no time at all I noticed a fundamental difference between Toyota and my
+previous employers. At a Toyota/GM joint venture plant in Fremont, California, called NUMMI (New United Motor
+Manufacturing), I witnessed the transformation of a workforce from one of the worst in the General Motors system
+to one of the best in any manufacturing facility in the United States. The difference was the Toyota Way. In this
+book, Dr. Liker explains the management systems, thinking, and philosophy that form the foundation of Toyota s
+success, providing the reader with valuable insights that can be applied to any business or situation. While there are
+many books that provide insight into the tools and methods of Toyota s Production System (TPS), Professor Liker s
+book is unique in its explanation of the broader principles at work in the Toyota culture.
+
+The Toyota Way is not the Japanese Way or the American Way or even the Gary Convis Way of managing. It is the
+fundamental way that Toyota views its world and does business. The Toyota Way, along with the Toyota Production
+System, make up Toyota s DNA. This DNA was born with the founders of our company and continues to be
+developed and nurtured in our current and future leaders.
+
+The Toyota Way can be briefly summarized through the two pillars that support it: Continuous Improvement and
+Respect for People. Continuous improvement, often called kaizen, defines Toyota s basic approach to doing
+business. Challenge everything. More important than the actual improvements that individuals contribute, the true
+value of continuous improvement is in creating an atmosphere of continuous learning and an environment that not
+only accepts, but actually embraces change. Such an environment can only be created where there is respect for
+people hence the second pillar of the Toyota Way. Toyota demonstrates this respect by providing employment
+security and seeking to engage team members through active participation in improving their jobs. As managers, we
+must take the responsibility for developing and nurturing mutual trust and understanding among all team members. I
+believe management has no more critical role than to motivate and engage large numbers of people to work together
+toward a common goal. Defining and explaining what the goal is, sharing a path to achieving it, motivating people to
+take the journey with you, and assisting them by removing obstacles those are management s reasons for being. We
+must engage the minds of people to support and contribute their ideas to the organization. In my experience, the
+Toyota Way is the best method for fulfilling this role.
+However, readers of this book should understand that each organization must develop its own way of doing business.
+The Toyota Way is the special product of the people who created Toyota and its unique history. Toyota is one of the
+most successful companies in the world. I hope this book will give you an understanding of what has made Toyota
+successful, and some practical ideas that you can use to develop your own approach to business.
+
+Gary Convis
+Managing Officer of Toyota and President,
+Toyota Motor Manufacturing, Kentucky
+
+Acknowledgments
+This book is the product of 20 years of study of Toyota. Much of that work was done under the auspices of the
+
+Japan Technology Management Program at University of Michigan, Ann Arbor, where I am currently Director. This
+program was started in 1991 with generous funding through the U.S. Air Force Office of Scientific Research
+(AFOSR), but it really began with the vision of Senator Jeff Bingaman of New Mexico. Senator Bingaman worked
+behind the scenes to get the funding to support university programs like mine to learn from Japan, send technically
+oriented students to Japan on internships, and share what we learned with others in the United States. At that time in
+the late 80s and early 90s, the learning trade imbalance was huge with most of the learning going from the U.S. to
+Japan and little coming back. There were many reasons for this, but one was that the U.S. did not want to listen. The
+phenomenal success of companies like Toyota woke us up, and Toyota has contributed greatly to bringing more
+balance into the exchange of learning.
+Toyota has been remarkably open in sharing its source of competitive advantage with the rest of the world. A
+milestone was Eiji Toyoda s decision in 1982 when, as chairman, he, along with Shoichiro Toyoda, President,
+approved the agreement with GM to create NUMMI, a joint auto manufacturing venture specifically intended to
+teach the Toyota Way to GM. That meant sharing Toyota s crown jewel, the famous Toyota Production System,
+with its principal global competitor. Another milestone in opening up TPS to the world was the decision to create the
+Toyota Supplier Support Center in 1992 for the purpose of teaching the Toyota Production System to U.S.
+companies by setting up working models in plants across industries. I personally benefited from this remarkable
+openness.
+
+Unfortunately, I cannot acknowledge all of the individuals at Toyota who graciously agreed to lengthy interviews and
+reviewed parts of this book for accuracy.
+But several were particularly influential in my learning about the Toyota Way. These included (job titles are from the
+time of the interviews):
+•
+Bruce Brownlee, General Manager, Corporate Planning and External Affairs of the Toyota Technical Center
+my key liaison for the book.
+•
+Jim Olson, Senior Vice President, Toyota Motor Manufacturing North America carefully considered the
+Toyota Way book and then supported Toyota s full participation to get it right.
+•
+Jim Wiseman, Vice President, Toyota Motor Manufacturing, North America opened the doors to the Toyota
+Production System in manfacturing.
+•
+Irv Miller, Group Vice President, Toyota Motor Sales opened the door to the world of sales and distribution
+at Toyota.
+•
+Fujio Cho, President of Toyota Motor Company shared his passion for the Toyota Way.
+•
+
+Gary Convis, President of Toyota Motor Manufacturing, Kentucky and Managing Officer of Toyota helped
+me understand the process of an American learning the depths of the Toyota Way.
+•
+Toshiaki (Tag) Taguchi, President and CEO of Toyota Motor North America provided insights into the
+Toyota Way in Sales.
+•
+Jim Press, Executive Vice President and Chief Operating Officer of Toyota Motor Sales, USA gave me
+deep insights into the philosophy of the Toyota Way.
+•
+Al Cabito, Group Vice President, Sales Administration, Toyota Motor Sales, USA provided great insights
+into Toyota s emerging build-to-order strategy.
+•
+Tadashi (George) Yamashina, President, Toyota Technical Center, USA introduced me to hourensou and a
+deeper appreciation of genchi genbutsu.
+•
+Kunihiko (Mike) Masaki, former President, Toyota Technical Center took every opportunity to get me in the
+door at Toyota to study the Toyota Way.
+•
+Dave Baxter, Vice President, Toyota Technical Center shared more hours than I had a right to ask for
+explaining Toyota s product development system and its underlying philosophy.
+•
+Ed Mantey, Vice President, Toyota Technical Center Ed is a real engineer who is living proof Toyota can
+train American engineers who deeply understand the Toyota Way.
+•
+Dennis Cuneo, Senior Vice President, Toyota Motor North America drew on his wealth of experience at
+NUMMI and beyond and helped me understand Toyota s commitment to social responsibility.
+•
+
+•
+
+Dick Mallery, Partner, Snell and Wilmer passionately described how as a lawyer for Toyota he has been
+transformed by the Toyota Way.
+
+Don Jackson, Vice President, Manufacturing, Toyota Motor Manufacturing, Kentucky explained and
+
+demonstrated what it means to respect and involve workers on the shop floor.
+•
+Glenn Uminger, Assistant General Manager, Business Management & Logistics Production Control, Toyota
+Motor Manufacturing, North America, Inc explained how an accountant at Toyota could develop a TPS
+support office and then lead logistics for North America having fun at every step.
+•
+Teruyuki Minoura, former President, Toyota Motor Manufacturing, North America chilled me with real life
+stories of learning TPS at the feet of the master Taiichi Ohno.
+•
+Steve Hesselbrock, Vice President Operations, Trim Masters shared generously of his years of learning to be
+one of the best Toyota seat suppliers in the world through trial by fire.
+•
+Kiyoshi Imaizumi, President Trim Masters gave me the real story on what it took to be a Toyota supplier in
+Japan.
+•
+Ichiro Suzuki, former Chief Engineer, Lexus and Executive Advisory Engineer showed me what a real super
+engineer can be.
+•
+Takeshi Uchiyamada, Senior Managing Director and former Chief Engineer, Prius taught me what it means to
+lead a revolutionary project (Prius) by working through people.
+•
+Jane Beseda, GM and VP North American Parts Operations articulated for me the Toyota Way view of
+information technology and automation in a way that made the light bulbs come on.
+•
+Ken Elliott, Service Parts Center National Manager shared his story of building the Toyota Way culture in a
+new parts distribution center.
+•
+Andy Lund, Program Manager, Sienna, Toyota Technical Center shared insights into the translation of
+Toyota s culture in Japan into U.S. operations from the perspective of an American who grew up in Japan.
+•
+Jim Griffith, Vice President, Toyota Technical Center always with humor corrected misconceptions and
+
+challenged my understanding of the Toyota Way.
+•
+Chuck Gulash, Vice President, Toyota Technical Center on a test-track drive taught me attention to detail in
+vehicle evaluation.
+•
+Ray Tanguay, President, Toyota Motor Manufacturing, Canada taught me that technological innovation and
+TPS can go hand in hand.
+
+I owe a special debt to John Shook, the former Toyota manager who helped start up NUMMI, the Toyota Technical
+Center, and the Toyota Supplier Support Center. John has dedicated his career to understanding the Toyota Way.
+He brought this passion to the University of Michigan where he joined us for several years as Director of our Japan
+Technology Management Program and continues to be a leader in the Lean community. John was my mentor on
+TPS, teaching me first the basics and then, as I developed my understanding, the ever more sophisticated lessons in
+the philosophy of the Toyota Way.
+Most of this book was written in 2003 when I was privileged to spend a very cold East Coast winter in sunny and
+warm Phoenix visiting my former student and now Professor Tom Choi of Arizona State University. With a nice,
+private office without windows in the mornings and afternoons of golf, it was the perfect climate for writing. The
+four-month adventure with my loving wife Deborah and my children Jesse and Emma is a once-in-a-lifetime memory.
+
+This book looks beyond Toyota s Production System across the company, including parts logistics and supply chain
+management. My understanding of lean logistics has been greatly enhanced by research funded by the Sloan
+Foundation s Trucking Industry Program, led by my close friend and colleague Chelsea (Chip) White at Georgia
+Institute of Technology.
+
+Finally, I had a lot of editing and writing help. When informed by my publisher that my book was twice as long as
+allowable, in a panic I called my former developmental editor, Gary Peurasaari, to bail me out. He worked his magic
+on every page in this book, reorganizing content where necessary, but more importantly, and in the true Toyota Way
+fashion, he eliminated wasted words, bringing value-added words to life. He was more of a partner in writing than an
+editor. Then Richard Narramore, the editor at McGraw-Hill who asked me to write the book, lead me through a
+second major rewrite bringing the book to a new level. It is a testimony to the Toyota Way that these two individuals
+got so engrossed in the book they spent night and day painstakingly helping to craft the right words to describe this
+precious philosophy of management.
+
+Preface
+In 1982 when I first arrived as a new assistant professor at the University of Michigan, Ann Arbor, the automotive
+industry was in serious turmoil in the midst of a national recession. The situation seemed dire. The Ford Motor
+company was seriously flirting with bankruptcy. The Big 3 were losing market share fast.
+There was a lot of debate at the time over the root cause. The party line among Detroit auto executives was that the
+cause was the Japanese invasion. Japan, Inc. had banded together with industry and government colluding to set up
+trade barriers to prevent American cars from being sold in Japan and artificially lowering prices of Japanese cars in
+the United States. Of course, in the minds of U.S. companies, as long as the root cause was unfair business practices,
+there was no need to seriously change the way they built cars. Instead, political channels would right the wrongs.
+
+Around this time I was fortunate to be invited by David Cole and Robert Cole (two University of Michigan
+professors who were leading the study of the Japanese quality movement) to work on a U.S.-Japan automotive
+study. This research was an effort to help U.S. companies learn from the Japanese automakers. My project focused
+on how automakers worked with their suppliers on new product development in the U.S. and Japan. The numerous
+studies that made up the overall U.S.-Japan auto study covered many aspects of the industry, and all the studies
+collectively pointed to a single conclusion. Whatever was going on with Japan s government and the value of the yen
+and other macro-economic factors, Japanese auto companies were very good at engineering and building cars. They
+were not necessarily financial or marketing whizzes. They were not the leaders in advanced manufacturing
+technology, at least not in complex automation. They designed in quality and built in quality at every step of the
+process, and they did it with remarkably few labor hours. Not only were Japan s automakers good, their top
+suppliers were also world class in engineering and manufacturing, and they worked together as a team.
+
+But even in these early stages of my introduction to the auto industry in Japan, there were indications that Toyota was
+different from the other Japanese automakers. While the basic product development process seemed similar across
+the three automakers, and the top tier suppliers were all integrally part of the product development process, there
+was a sense of partnership between Toyota and its suppliers that we did not see as strongly in the keiretsu of Mazda
+and Nissan.
+
+Later, in 1991 John Campbell and I received a grant to create the Japan Technology Management Program at the
+University of Michigan, Ann Arbor, which I am still directing. The goals of this program are to learn about the
+practices that have helped the best Japanese companies become strong globally, teach what we learn to our students
+and industry, and encourage technically oriented students to learn about Japanese language and culture through
+courses and internships in Japan. This research program allowed me to continue my studies of the Japanese auto
+industry, and I chose to focus more intensively on Toyota, in particular its product development process and the
+Toyota Production System. The U.S. government grant focused on transfer of learning so I began studying Toyota s
+efforts to transfer its practices to its U.S.-based subsidiaries and American companies efforts to learn from Toyota.
+
+By the early 1990s all of the Big 3 auto producers had woken up to the reality of Japanese quality and concluded
+
+that Toyota was the company to beat. They were all actively studying Toyota and creating their own versions of
+Toyota s systems. They benchmarked the company on its production system, product development system, and
+supplier relationship management. Their great interest in Toyota s systems has given me an opportunity to teach about
+Toyota s production system and product development process, and get my hands dirty consulting to implement these
+systems. I have had opportunities to work in America, the United Kingdom, and Mexico in industries including
+automotive, paint manufacturing, nuclear fuel rod assembly, ship building, ship repair, an engineering professional
+organization, and lawncare equipment. I have taught lean change agents from over one thousand companies
+worldwide, and my participation in lean transformation has given me a deeper understanding of what is involved in
+transforming a culture and learning from Toyota.
+My studies of U.S. companies working to implement versions of the Toyota Production System led to a book I
+edited called Becoming Lean: Experiences of U.S. Manufacturers (Liker, 1997), winner of a Shingo Prize (in
+honor of Shigeo Shingo who helped create the TPS) in 1998. Articles I co-authored on Toyota s product
+development system and supplier management in Sloan Management Review and Harvard Business Review also
+won Shingo Prizes. But it was not until I was invited to write The Toyota Way that I had an opportunity to pull
+together in one volume 20 years of observations of Toyota and companies learning from Toyota.
+Reading this book might give you the impression that I am a strong advocate for Toyota. As a professor and social
+scientist, I work at being objective, but I will admit I am a fan of the Toyota Way. I believe Toyota has raised
+continuous improvement and employee involvement to a unique level, creating one of the few examples of a genuine
+learning enterprise in human history not a small accomplishment.
+Much of the research behind this book has come from 20 years of visits to Japan and interviews in Toyota facilities
+there and in the United States. When I was asked to write this book, I immediately asked Toyota for support through
+additional interviews specifically focused on the Toyota Way. They graciously agreed. As it turned out, they had just
+launched their own internal version of the Toyota Way to keep the Toyota DNA strong as they globalize and entrust
+international team members to run subsidiaries. This was the pet project of Fujio Cho, President of Toyota Motor
+Company, who learned the Toyota Way from one of its inventors, Taiichi Ohno, and he agreed to a rare, personal
+interview. I asked him what was unique about Toyota s remarkable success. His answer was quite simple.
+
+The key to the Toyota Way and what makes Toyota stand out is not any of the individual elements.... But
+what is important is having all the elements together as a system. It must be practiced every day in a very
+consistent manner not in spurts.
+Over a one-year period I was able to interview over 40 Toyota managers and executives from manufacturing, sales,
+product development, logistics, service parts, and production engineering. I gathered over 120 hours of interviews, all
+transcribed. Included in these interviews were several former Toyota managers who left to apply what they learned to
+U.S. Companies and several suppliers to Toyota. I visited many Toyota plants, supplier plants, Toyota s sales
+offices, a parts distribution center, a supplied parts cross-dock, the Arizona proving ground, and the Toyota
+Technical Center.
+I have thought about what impact I would like to make on readers of The Toyota Way. First, I have had a special
+opportunity to get inside the culture of a unique and high performing company and wish to share my insights. Second,
+Toyota is a model to many companies throughout the world so I wish to provide a different look at what makes
+Toyota so successful. The fundamental insight I have from my studies of Toyota is that its success derives from
+balancing the role of people in an organizational culture that expects and values their continuous improvements, with a
+technical system focused on high-value-added flow. This leads to my third and more challenging goal: to help other
+companies learn from Toyota and themselves so they can continuously improve on what they do.
+
+To capture the complexity of the Toyota Way and the Toyota Production System (TPS), I divided the book into
+three parts. Part One introduces you to the present success and history of Toyota. It describes how TPS evolved as
+a new paradigm of manufacturing, transforming businesses across industries. As a way of showing the Toyota Way in
+action, you will see how the Toyota Way was applied to the development of the Lexus and the Prius. In Part Two I
+cover the 14 principles of the Toyota Way that I identified through my research. These key principles drive the
+techniques and tools of the Toyota Production System and the management of Toyota in general. The 14 principles
+are divided into four sections:
+•
+Long-Term Philosophy. Toyota is serious about long-term thinking. The focus from the very top of the
+company is to add value to customers and society. This drives a long-term approach to building a learning
+organization, one that can adapt to changes in the environment and survive as a productive organization.
+Without this foundation, none of the investments Toyota makes in continuous improvement and learning
+would be possible.
+•
+The Right Process Will Produce the Right Results. Toyota is a process-oriented company. They have
+learned through experience what processes work, beginning with the ideal of one-piece flow, (see Chapter 8
+for details). Flow is the key to achieving best quality at the lowest cost with high safety and morale. At
+Toyota this process focus is built into the company s DNA, and managers believe in their hearts that using the
+right process will lead to the results they desire.
+•
+Add Value to the Organization by Developing Your People and Partners. The Toyota Way includes a
+set of tools that are designed to support people continuously improving and continuously developing. For
+example, one-piece flow is a very demanding process that quickly surfaces problems that demand fast
+solutions or production will stop. This suits Toyota s employee development goals perfectly because it gives
+people the sense of urgency needed to confront business problems. The view of management at Toyota is
+that they build people, not just cars.
+•
+Continuously Solving Root Problems Drives Organizational Learning. The highest level of the Toyota
+Way is organizational learning. Identifying root causes of problems and preventing them from occurring is the
+focus of Toyota s continuous learning system. Tough analysis, reflection, and communication of lessons
+learned are central to improvement as is the discipline to standardize the best-known practices.
+
+Part Three of the book discusses how organizations can apply the Toyota Way and what actions they can take to
+become a lean, learning organization. One chapter focuses specifically on applying Toyota Way principles to service
+organizations that do not manufacture products.
+Understanding Toyota s success and quality improvement systems does not automatically mean you can transform a
+company with a different culture and circumstances. Toyota can provide inspiration, demonstrate the importance of
+stability in leadership and values that go beyond short-term profit, and suggest how the right combination of
+philosophy, process, people, and problem solving can create a learning enterprise. I believe all manufacturing and
+service companies that want to be successful in the long term must become learning enterprises. Toyota is one of the
+best models in the world. Though every company must find its own way and learn for itself, understanding the Toyota
+Way can be one giant step on that journey.
+
+Jeffrey K. Liker, Ph.D.
+University of Michigan, Ann Arbor
+
+Part One: The World-Class
+Power of the Toyota Way
+Chapter List
+Chapter 1: The Toyota Way: Using Operational Excellence as a Strategic Weapon Chapter 2: How Toyota Became
+the World s Best Manufacturer: The Story of the Toyoda Family and the Toyota Production System Chapter 3: The
+Heart of the Toyota Production System: Eliminating Waste Chapter 4: The 14 Principles of the Toyota Way: An
+Executive Summary of the Culture Behind TPS Chapter 5: The Toyota Way in Action: The No Compromises
+Development of Lexus Chapter 6: The Toyota Way in Action: New Century, New Fuel, New Design Process Prius
+
+Chapter 1: The Toyota Way:
+Using Operational Excellence as a
+Strategic Weapon
+Overview
+We place the highest value on actual implementation and taking action. There are many things one doesn t
+understand and therefore, we ask them why don t you just go ahead and take action; try to do something?
+You realize how little you know and you face your own failures and you simply can correct those failures and
+redo it again and at the second trial you realize another mistake or another thing you didn t like so you can
+redo it once again. So by constant improvement, or, should I say, the improvement based upon action, one
+can rise to the higher level of practice and knowledge.
+Fujio Cho, President, Toyota Motor Corporation, 2002
+
+Toyota first caught the world s attention in the 1980s, when it became clear that there was something special about
+Japanese quality and efficiency. Japanese cars were lasting longer than American cars and required much less repair.
+And by the 1990s it became apparent that there was something even more special about Toyota compared to other
+automakers in Japan (Womack, Jones, and Roos, 1991). It was not eye-popping car designs or performance though
+the ride was smooth and the designs often very refined. It was the way Toyota engineered and manufactured the
+autos that led to unbelievable consistency in the process and product. Toyota designed autos faster, with more
+reliability, yet at a competitive cost, even when paying the relatively high wages of Japanese workers. Equally
+impressive was that every time Toyota showed an apparent weakness and seemed vulnerable to the competition,
+Toyota miraculously fixed the problem and came back even stronger. Today Toyota is the third-largest auto
+manufacturer in the world, behind General Motors and Ford, with global vehicle sales of over six million per year in
+170 countries. However, Toyota is far more profitable than any other auto manufacturer. Auto industry analysts
+estimate that Toyota will pass Ford in global vehicles sold in 2005, and if current trends continue, it will eventually
+pass GM to become the largest automaker in the world.
+Every automotive industry insider and many consumers are familiar with Toyota s dramatic business success and
+world-leading quality:
+•
+Toyota s annual profit at the end of its fiscal year in March 2003, was $8.13 billion larger than the combined
+earnings of GM, Chrysler, and Ford, and the biggest annual profit for any auto maker in at least a decade. Its
+
+net profit margin is 8.3 times higher than the industry average.
+•
+
+•
+
+•
+
+While stock prices of the Big 3 were falling in 2003, Toyota s shares had increased 24% over 2002. Toyota
+s market capitalization (the total value of the company s stock) was $105 billion as of 2003 higher than the
+combined market capitalization of Ford, General Motors, and Chrysler. This is an amazing statistic. Its return
+on assets is 8 times higher than the industry average. The company has made a profit every year over the last
+25 years and has $20-$30 billion in its cash war chest on a consistent basis.
+
+Toyota has for decades been the number one automaker in Japan and a distant fourth behind the Big 3
+automakers in North America. But in August of 2003, for the first time, Toyota sold more vehicles in North
+America than one of the Big 3 automakers (Chrysler). It seems that Toyota could eventually become a
+permanent member of the Big 3 U.S. automakers. (Of 1.8 million Toyota/Lexus vehicles sold in North
+America in 2002, 1.2 million were made in North America. Toyota is rapidly building new production
+capacity in the U.S., at a time when U.S. manufacturers are looking for opportunities to close plants, reduce
+capacity and move production abroad.)
+
+In 2003 the Toyota nameplate was on track to sell more vehicles in the U.S. than either of the two
+brandnames that have led U.S. sales for the past 100 years Ford and Chevrolet. Camry was the top-selling
+U.S. passenger car in 2003 and five of the years prior. Corolla was the top selling small car in the world.
+•
+Toyota not long ago was known for making small, basic transportation vehicles, yet in ten years leaped out to
+become the leader in luxury vehicles. Lexus was introduced in 1989 and in 2002 outsold BMW, Cadillac,
+and Mercedes-Benz in the U.S. for the third year in a row.
+•
+
+•
+
+Toyota invented lean production (also known as the Toyota Production System or TPS ), which has
+triggered a global transformation in virtually every industry to Toyota s manufacturing and supply chain
+philosophy and methods over the last decade. The Toyota Production System is the foundation of dozens of
+books on lean including two bestsellers: The Machine That Changed the World: The Story of Lean
+Production (Womack, Jones, Roos, 1991) and Lean Thinking (Womack, Jones, 1996). Toyota
+employees are sought out by companies in almost every industry throughout the world for their expertise.
+
+Toyota has the fastest product development process in the world. New cars and trucks take 12 months or
+less to design, while competitors typically require two to three years.
+•
+Toyota is benchmarked as the best in class by all of its peers and competitors throughout the world for high
+quality, high productivity, manufacturing speed, and flexibility. Toyota automobiles have consistently been at
+the top of quality rankings by J.D. Powers and Associates, Consumer Reports, and others for many years.
+Much of Toyota s success comes from its astounding quality reputation. Consumers know that they can count on
+their Toyota vehicle to work right the first time and keep on working, while most U.S. and European automotive
+
+companies produce vehicles that may work when new but almost certainly will spend time in the shop in a year or so.
+In 2003 Toyota recalled 79% fewer vehicles in the U.S. than Ford and 92% fewer than Chrysler. According to a
+2003 study in Consumer Reports, one of the most widely read magazines for auto-buying customers, 15 of the top
+38 most reliable models from any manufacturer over the last seven years were made by Toyota/Lexus. No other
+manufacturer comes close. GM, Mercedes, and BMW have no cars on this list. Not a single Toyota is on the
+dreaded vehicles to avoid list, while a handful of Fords, almost 50 percent of the GMs, and more than 50 percent of
+the Chryslers are to be avoided, according to Consumer Reports.
+Here are some other statistics from Consumer Reports 2003 annual auto issue:
+•
+In the small car category (Toyota Corolla, Ford Focus/Escort, GM Cavalier, and Chrysler Neon), Toyota
+won each of the last three years for overall reliability, as well as the prior three years, and predicted reliability
+for the 2003 model year.
+•
+For family sedans, the Toyota Camry beat out the Ford Taurus, the GM Malibu, and Dodge Intrepid,
+winning in the last three years, the three prior years, and predicted reliability for the 2003 model year.
+•
+
+•
+
+More than half of all Toyota used cars are singled out as recommended for purchase, compared with less
+than 10 percent of the Fords, 5 percent of the GMs, and none of the Chryslers.
+
+Toyota/Lexus has also dominated the J.D. Powers initial quality and long-term durability rankings for years.
+Toyota s Lexus was again the #1 most reliable car, according to the J.D. Powers 2003 quality survey,
+followed by Porsche, BMW, and Honda.
+What is the secret of Toyota s success? The incredible consistency of Toyota s performance is a direct result of
+operational excellence. Toyota has turned operational excellence into a strategic weapon. This operational excellence
+is based in part on tools and quality improvement methods made famous by Toyota in the manufacturing world, such
+as just-in-time, kaizen, one-piece flow, jidoka, and heijunka. These techniques helped spawn the lean manufacturing
+revolution. But tools and techniques are no secret weapon for transforming a business. Toyota s continued success at
+implementing these tools stems from a deeper business philosophy based on its understanding of people and human
+motivation. Its success is ultimately based on its ability to cultivate leadership, teams, and culture, to devise strategy,
+to build supplier relationships, and to maintain a learning organization.
+This book describes 14 principles which, based on my 20 years of studying the company, constitute the Toyota
+Way. These 14 principles are also the foundation of the Toyota Production System (TPS) practiced at Toyota
+manufacturing plants around the world. For ease of understanding, I have divided the principles into four categories,
+all starting with P Philosophy, Process, People/Partners, and Problem Solving (see Figure 1-1). (For an executive
+summary of the 14 principles of the Toyota Way, see chapter 4.)
+
+About the same time that I started writing this book, Toyota was unveiling its own internal Toyota Way document
+for training purposes. This document greatly influenced my thinking about the 14 principles and consequently I have
+incorporated the four high-level principles from that document (Genchi Genbutsu, Kaizen, Respect and Teamwork,
+and Challenge) and correlated them to my four principle categories of Philosophy, Process, People/Partners, and
+
+Problem Solving (see Figure 1-1).
+Figure 1-1: A 4 P model of the Toyota Way
+The Toyota Way and the Toyota Production System (Toyota s manufacturing method) are the double helix of Toyota
+s DNA; they define its management style and what is unique about the company. In this book I hope to explain and
+show how the Toyota model of success can be applied in any organization, to improve any business process, from
+sales to product development, marketing, logistics, and management. To assist you in this journey, I offer numerous
+examples of what Toyota does to maintain such a high level of achievement as well as explore companies from a
+variety of industries and service operations that have effectively applied Toyota s principles.
+
+The Toyota Production System (TPS) and Lean
+Production
+The Toyota Production System is Toyota s unique approach to manufacturing. It is the basis for much of the lean
+production movement that has dominated manufacturing trends (along with Six Sigma) for the last 10 years or so.
+Despite the huge influence of the lean movement, I hope to show in this book that most attempts to implement lean
+have been fairly superficial. The reason is that most companies have focused too heavily on tools such as 5S and
+just-in-time, without understanding lean as an entire system that must permeate an organization s culture. In most
+companies where lean is implemented, senior management is not involved in the day-to-day operations and
+continuous improvement that are part of lean. Toyota s approach is very different.
+What exactly is a lean enterprise? You could say it s the end result of applying the Toyota Production System to all
+areas of your business. In their excellent book, Lean Thinking, James Womack and Daniel Jones define lean
+manufacturing as a five-step process: defining customer value, defining the value stream, making it flow, pulling
+from the customer back, and striving for excellence. To be a lean manufacturer requires a way of thinking that
+focuses on making the product flow through value-adding processes without interruption (one-piece flow), a pull
+system that cascades back from customer demand by replenishing only what the next operation takes away at short
+intervals, and a culture in which everyone is striving continuously to improve.
+
+Taiichi Ohno, founder of TPS, said it even more succinctly:
+
+All we are doing is looking at the time line from the moment the customer gives us an order to the point when
+we collect the cash. And we are reducing that time line by removing the non-value-added wastes. (Ohno,
+1988)
+As we will see in more detail in Chapter 2, Toyota developed the Toyota Production System after World War II at a
+time when it faced very different business conditions than Ford and GM. While Ford and GM used mass production,
+economies of scale, and big equipment to produce as many parts as possible, as cheaply as possible, Toyota s
+market in post-war Japan was small. Toyota also had to make a variety of vehicles on the same assembly line to
+satisfy its customers. Thus, the key to their operations was flexibility. This helped Toyota make a critical discovery:
+when you make lead times short and focus on keeping production lines flexible, you actually get higher quality, better
+customer responsiveness, better productivity, and better utilization of equipment and space. While Ford s traditional
+mass production looks good when you measure the cost per piece on an individual machine, what customers want is
+a much greater variety of choices than traditional manufacturing can offer cost-effectively. Toyota s focus in the
+1940s and 50s on eliminating wasted time and material from every step of the production process from raw material
+to finished goods was designed to address the same conditions most companies face today: the need for fast,
+flexible processes that give customers what they want, when they want it, at the highest quality and
+affordable cost.
+A focus on flow has continued to be a foundation for Toyota s success globally in the 21st century. Companies like
+Dell have also become famous for using short lead times, high inventory turns, and getting paid fast to rapidly develop
+a fast growing company. But even Dell is just beginning on the road to becoming the sophisticated lean enterprise
+that Toyota has developed through decades of learning and hard work.
+
+Unfortunately, most companies are still using the mass production techniques that worked so well for Henry Ford in
+the 1920s, when flexibility and customer choice were not important. The mass production focus on efficiency of
+individual processes goes back to Frederick Taylor and his scientific management at the beginning of the 20th
+century. Like the creators of the Toyota Production System, Taylor tried to eliminate waste from production
+processes. He observed workers and tried to eliminate every second of inefficient motion. Mass production thinkers
+have long understood that machine downtime is another obvious non-value-added waste a machine shut down for
+repair is not making parts that could make money. But consider the following counter-intuitive truths about
+non-value-added waste within the philosophy of TPS.
+•
+Often the best thing you can do is to idle a machine and stop producing parts. You do this to avoid
+over production, the fundamental waste in TPS.
+•
+
+•
+
+•
+
+Often it is best to build up an inventory of finished goods in order to level out the production
+schedule, rather than produce according to the actual fluctuating demand of customer orders.
+Leveling out the schedule (heijunka) is a foundation for flow and pull systems and for minimizing inventory in
+the supply chain. (Leveling production means smoothing out the volume and mix of items produced so there
+is little variation in production from day to day.)
+
+Often it is best to selectively add and substitute overhead for direct labor. When waste is stripped away
+from your value-adding workers, you need to provide high-quality support for them as you would support a
+surgeon performing a critical operation.
+
+It may not be a top priority to keep your workers busy making parts as fast as possible. You should
+produce parts at the rate of customer demand. Working faster just for the sake of getting the most out of
+your workers is another form of over production and actually leads to employing more labor overall.
+•
+It is best to selectively use information technology and often better to use manual processes even
+when automation is available and would seem to justify its cost in reducing your headcount. People
+are the most flexible resource you have. If you have not efficiently worked out the manual process, it will not
+be clear where you need automation to support the process.
+
+In other words, Toyota s solutions to particular problems often seem to add waste rather than eliminate it. The reason
+for these seemingly paradoxical solutions is that Ohno had learned from his experiences walking the shop floor a very
+particular meaning of non-valued-added waste: it had little to do with running labor and equipment as hard as
+possible, and everything to do with the manner in which raw material is transformed into a saleable commodity. For
+Ohno, the purpose of his journey through the shop floor was to identify activities that added value to raw material,
+and get rid of everything else. He learned to map the value stream of the raw material moving to a finished product
+that the customer was willing to pay for. This was a radically different approach from the mass production thinking of
+merely identifying, enumerating, and eliminating the wasted time and effort in the existing production processes.
+
+As you make Ohno s journey for yourself, and look at your own organization s processes, you will see materials,
+invoicing, service calls, and prototype parts in R&D (you fill in the blank for your business process) being
+transformed into something the customer wants. But on closer inspection, they are often being diverted into a pile,
+someplace where they sit and wait for long periods of time, until they can be moved to the next process or
+transformation. Certainly, people do not like to be diverted from their journeys and to wait on long lines. Ohno
+viewed material as having the same degree of impatience. Why? If any large batches of material are produced and
+then sit and wait to be processed, if service calls are backed up, if R&D is receiving prototype parts they don t have
+time to test, then this sitting and waiting to move to the next operation becomes waste. This results in both your
+internal and external customers becoming impatient. This is why TPS starts with the customer, by asking, What value
+are we adding from the customer s perspective? Because the only thing that adds value in any type of process
+be it in manufacturing, marketing, or a development process is the physical or information transformation of
+that product, service, or activity into something the customer wants.
+
+Why Companies Often Think They Are Lean But
+Aren t
+When I first began learning about TPS, I was enamored of the power of one-piece flow. The more I learned about
+the benefits of flowing and pulling parts as they were needed, rather than pushing and creating inventory, the more I
+wanted to experience the transformation of mass production processes into lean processes first hand. I learned that
+all the supporting tools of lean such as quick equipment changeovers, standardized work, pull systems, and error
+proofing, were all essential to creating flow. But along the way, experienced leaders within Toyota kept telling me that
+these tools and techniques were not the key to TPS. Rather the power behind TPS is a company s management
+commitment to continuously invest in its people and promote a culture of continuous improvement. I nodded like I
+knew what they were talking about and continued to study how to calculate kanban quantities and set up one-piece
+flow cells. After studying Toyota for almost 20 years and observing the struggles companies have had applying lean
+manufacturing, what these Toyota teachers (called sensei) told me is finally sinking in. As this book attempts to show,
+the Toyota Way consists of far more than just a set of lean tools like just-in-time.
+Let s say you bought a book on creating one-piece flow cells or perhaps went to a training class or maybe even hired
+a lean consultant. You pick a process and do a lean improvement project. A review of the process reveals lots of
+muda or waste, Toyota s term for anything that takes time but does not add value for your customer. Your process
+is disorganized and the place is a mess. So you clean it up and straighten out the flow in the process. Everything starts
+to flow faster. You get better control over the process. Quality even goes up. This is exciting stuff so you keep doing
+it on other parts of the operation. What s so hard about this?
+
+I have visited hundreds of organizations that claim to be advanced practitioners of lean methods. They proudly show
+off their pet lean project. And they have done good work, no doubt. But having studied Toyota for twenty years it is
+clear to me that in comparison they are rank amateurs. It took Toyota decades of creating a lean culture to get to
+where they are and they still believe they are just learning to understand the Toyota Way. What percent of
+companies outside of Toyota and their close knit group of suppliers get an A or even a B+ on lean? I cannot say
+precisely but it is far less than 1%.
+The problem is that companies have mistaken a particular set of lean tools for deep lean thinking. Lean thinking
+based on the Toyota Way involves a far deeper and more pervasive cultural transformation than most companies can
+begin to imagine. Starting with a project or two to generate some enthusiasm is the right thing to do. The purpose of
+this book is to explain the Toyota culture and the principles it is based on.
+Here is one example of what I find disturbing in the lean movement in the U.S. The Toyota Supplier Support Center
+(TSSC) was established by Toyota in the U.S. to work with U.S. companies to teach them TPS. Its leader, Mr.
+Hajime Ohba, (a disciple of Taiichi Ohno who founded TPS) fashioned the center after a similar Toyota consulting
+organization in Japan. They have worked with many U.S. companies in different industries, in each case doing a lean
+project which consists of transforming one production line of a company using TPS tools and methods typically in a
+6-9 month period. Usually companies come to TSSC and apply for these services; however, in 1996 TSSC took the
+unusual step of approaching an industrial sensor manufacturing company that I will call Lean Company X. It was
+strange that Toyota would offer to help this company because Lean Company X was already widely regarded as a
+best-practice example of lean manufacturing. It had become a common tour site for companies wishing to see
+world-class manufacturing in the U.S. Lean Company X even won the Shingo Prize for Manufacturing, an American
+
+based award in honor of Shigeo Shingo, who contributed to the creation of the Toyota Production System. At the
+time they agreed to work with TSSC, the plant s world-class manufacturing work included:
+•
+Established production cells
+•
+Problem-solving groups of workers
+•
+Company work time and incentives for worker problem solving
+•
+A learning resource center for employees
+
+The Shingo Prize at the time was based largely on showing major improvements in key measures of productivity and
+quality. The reason TSSC wanted to work with Lean Company X was for mutual learning, because it was known as
+a best-practice example. TSSC agreed to take one product line in this world-class plant and use the methods of
+TPS to transform it. At the end of the nine-month project, the production line was barely recognizable compared with
+its original world-class state and had attained a level of leanness the plant could not have thought possible. This
+production line had leapfrogged the rest of the plant on all key performance measures, including:
+•
+46% reduction in lead-time to produce the product (from 12 to 6.5 hours)
+•
+83% reduction in work-in-process inventory (from 9 to 1.5 hours)
+•
+91% reduction in finished-goods inventory (from 30,500 to 2,890 units)
+•
+50% reduction in overtime (from 10 hours to 5 hours/person-week)
+•
+83% improvement in productivity (from 2.4 to 4.5 pieces/labor hour)
+When I lecture at companies on the Toyota Way, I describe this case and ask, What does this tell you? The answer
+is always the same: There is always room for continuous improvement. But were these improvements small,
+incremental continuous improvements? I ask. No. These were radical improvements. If you look at the original state
+of the production line at the beginning of the nine-month project, it is clear from the results that the company was in
+
+fact far from being world-class 12 days of lead-time to make a sensor, 9 hours of work-in-process, 10 hours
+overtime per person-week. The implications of this case (and cases I ve seen even in 2003) are clear and disturbing:
+•
+This lean plant was not even close to being lean based on Toyota s standards, despite being nationally
+recognized as a lean facility.
+•
+The actual changes implemented by the company before TSSC showed up barely scratched the surface.
+•
+Visitors were coming to the plant convinced they were seeing world-class manufacturing suggesting they did
+not have a clue what world-class manufacturing is.
+•
+The award examiners who chose to honor this plant in the name of Shigeo Shingo did not understand any
+more than the visitors what the Toyota Production System really is. (They have improved a great deal since
+then.)
+•
+Companies are hopelessly behind Toyota in their understanding of TPS and lean.
+
+I have visited hundreds of companies and taught employees from over one thousand companies. I have compared
+notes with many of those I have taught. I have also visited a number of the U.S. plants that were fortunate to have
+received assistance from TSSC, which has consistently helped companies achieve a level of improvement like Lean
+Company X. Unfortunately, I see a persistent trend in the inability of these companies to implement TPS and lean.
+Over time, the lean production line TSSC sets up degrades rather than improves. Little of what Toyota has taught
+ultimately is spread to other, less efficient production lines and other parts of the plant. There is a lean production cell
+here and a pull system there and the time it takes to changeover a press to a new product has been reduced, but that
+is where the resemblance to an actual Toyota lean model ends. What is going on?
+
+The U.S. has been exposed to TPS for at least two decades. The basic concepts and tools are not new. (TPS has
+been operating in some form in Toyota for well over 40 years.) The problem, I believe, is that U.S. companies have
+embraced lean tools but do not understand what makes them work together in a system. Typically management
+adopts a few of these technical tools and even struggles to go beyond the amateurish application of them to create a
+technical system. But they do not understand the power behind true TPS: the continuous improvement culture needed
+to sustain the principles of the Toyota Way. Within the 4P model
+I mentioned earlier, most companies are dabbling at one level the Process level (see Figure 1-2). Without adopting
+the other 3Ps, they will do little more than dabble because the improvements they make will not have the heart and
+intelligence behind them to make them sustainable throughout the company. Their performance will continue to lag
+behind those companies that adopt a true culture of continuous improvement.
+
+Figure 1-2: The 4 P model and where most companies are
+The quote at the beginning of this chapter from Mr. Fujio Cho, President of Toyota, is not just rhetoric. From the
+executives up to the shop floor workers performing the value-added work, Toyota challenges people to use their
+initiative and creativity to experiment and learn. It is interesting that labor advocates and humanists for years have
+criticized assembly line work as being oppressive and menial labor, robbing workers of their mental faculties. Yet
+when Toyota sets up assembly lines, it selects only the best and brightest workers, and challenges them to grow in
+their jobs by constantly solving problems. Similarly, Toyota staffs sales, engineering, service parts, accounting, human
+resources, and every aspect of the business with carefully selected individuals and gives them the directive to improve
+their processes and find innovative ways to satisfy their customers. Toyota is a true learning organization that has
+been evolving and learning for most of a century. This investment in its employees should frighten those traditional
+mass production companies that merely focus on making parts and counting quarterly dollars while changing leaders
+and organizational structures every few years.
+
+Using the Toyota Way for Long-Term Success
+Critics often describe Toyota as a boring company. This is the kind of boring I like. Top quality year in and year
+out. Steadily growing sales. Consistent profitability. Huge cash reserves. Of course, operational efficiency by itself
+can be dangerous. Think of the Swiss companies that were s

@@ -1,0 +1,732 @@
+You are writing a pre-read guide for one chapter of a book.
+
+Book:
+- title: The Toyota Way
+- author: Jeffrey K. Liker
+- chapter: 9 of 14
+- chapter title: Span 9
+
+Goal:
+Write the thing a smart reader should read immediately before reading this chapter.
+The reader wants to move faster through the real chapter while retaining the main
+arc, load-bearing facts, important mechanisms, and a few scenes worth watching.
+
+Write Markdown only, roughly 700-1,100 words, with these sections:
+
+1. Orientation Before Reading
+   - 4-7 bullets giving the time, stakes, people, institutions, and conflict.
+
+2. The Chapter Arc
+   - 5-9 chronological bullets.
+   - Each bullet should say what changes, not just what happens.
+
+3. What To Watch For
+   - 5-9 bullets naming the important mechanisms, constraints, causal moves,
+     or authorial claims likely to matter.
+
+4. Load-Bearing Scenes
+   - 3-6 short entries.
+   - Each entry should have setup, action, and payoff in plain prose.
+
+5. Cast And Terms
+   - A compact glossary only for names, factions, places, institutions, and terms
+     needed to read this chapter without friction.
+
+6. What To Hold Lightly
+   - 2-5 bullets for vivid but probably nonessential detail.
+
+Rules:
+- Do not summarize every page.
+- Do not write a school-report recap.
+- Do not invent generic mental-model labels when a concrete event is clearer.
+- Prefer specific actors, constraints, incentives, chronology, and consequences.
+- Keep prose clean and readable; no throat-clearing and no motivational language.
+- Assume the reader has not read this chapter yet.
+- Do not mention reader highlights; this is for a new unread chapter.
+
+Chapter text:
+ould not focus only on social
+support and stop being directive, especially since they were still removing waste and making jobs more
+interdependent. So a combination of directiveness and social support was still needed while associates removed
+waste and contributed new ideas to improve the technical process.
+After three years, the group leaders finally felt the associates had matured to the point that, in some home positions,
+they could assign some associates to team leader roles and move the group toward being more self-directed. They
+were in Blanchard s stage 3. The move toward stage 4 is continuing to evolve over years.
+
+The way I see it, the difference between the one-minute version of situational leadership and the Toyota version is the
+difference between holding meetings with action items and actually working as a team in a tightly coordinated,
+complex work system. The individuals in the coordinated system are executing standard operating procedures and
+there is a need for tight synchronization across associates to get the job done right. This type of team building does
+not happen in a conference room across a few well-facilitated meetings.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Work Groups Are the Focal Point for Solving
+Problems
+In a conventional automotive plant, white-collar or skilled-trade staff is responsible for problem solving, quality
+assurance, equipment maintenance, and productivity. By contrast, shop floor work groups are the focal point for
+problem solving in the Toyota Production System (see Figure 16-2).
+
+Figure 16-2: Typical Toyota organization assembly operation
+Source: Bill Constantino, former group leader, Toyota, Georgetown
+
+The associates who perform the value-added jobs are the most familiar with the actual work and the actual problems
+that affect the work. Since Toyota exists to add value for its customers and it is team members who do the
+value-added work, the team members are at the top of the hierarchy. The rest of the hierarchy is there to support
+them. The next line of defense is the team leader, an hourly employee who worked on the line but has an opportunity
+for a small promotion. The team leader cannot take disciplinary action but is there to support the team members. The
+first-line supervisor is the group leader, who is responsible for leading and coordinating a number of groups.
+By the standards of many companies, Toyota has an organizational structure that looks very inefficient lots of leaders
+for a small number of workers. Team leaders typically have just four to eight workers they support and most of the
+time the team leaders are not doing production jobs. Group leaders typically have three or four groups.
+This concept of bottom-up management and employee empowerment is a cliché in many companies, but Toyota
+takes this very seriously. The small span of control of the team leaders is more a matter of necessity. In some
+respects, the TPS bottom-up management is even more challenging for teams, because TPS continuously takes the
+waste out of the value stream, that is, the inventory is taken out of the process, and it takes out waste from every job
+position. On the other hand, traditional job layouts are designed with waste built in, or at least little systematic thought
+has been given to making the layout efficient and synchronized with other processes. This waste is a cushion from the
+perspective of the worker. Now, remove that waste and replace it with additional value-added tasks. Suddenly the
+worker has to be on his toes. This would arguably be inhumane if it were not for the team leader system. The team
+leader is like an on-the-spot physician ready to jump in any time there is a problem, such as when there is a call for
+help through the andon system (Chapter 11). The team leader is also a safety valve, always walking the line and
+watching to see if there are any problems emerging, such as parts getting low or someone getting behind who needs
+assistance or relief.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The roles and responsibilities for team members, team leaders, and group leaders are summarized in Figure 16-3
+(courtesy of Bill Costantino, one of the first group leaders at the Toyota plant in Georgetown, Kentucky).
+Noteworthy is the progression of responsibilities from team members to group leaders. Team members perform
+manual jobs to standard and are responsible for problem solving and continuous improvement. Team leaders take
+on a number of the responsibilities traditionally done by white-collar managers, though they are not formally
+managers and do not have the authority to discipline other team members. Their prime role is to keep the line running
+smoothly and producing quality parts. Group leaders do many things that otherwise would be handled by specialty
+support functions in human resources, engineering, and quality. They are integral to major improvements of the
+process, even introducing new products and processes. They regularly teach short topics. If needed, they are also
+capable of getting on the line and performing the jobs. There is no such thing as a hands-off leader at Toyota.
+
+Figure 16-3: Toyota roles and responsibilities
+This same basic system of team leaders and group leaders applies throughout Toyota. The Hebron service parts
+warehouse is moving in this direction. You also see something similar in engineering. The equivalents of the team
+leaders are first-grade engineers who have mastered a specific technical area and take on the role of supporting and
+developing junior engineers in their specialty. At Toyota, when you are at the working levels of high-volume
+production whether it is producing parts, engineering drawings, quality plans, or sales there is always an immediate
+mentor there to support you day to day. Nobody is cut loose to figure it out for himself or herself, though the
+mentorship style is to give challenging assignments and let you struggle until you pull the andon and call for help.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+At Toyota, Everything You Learned in School
+About Motivation Theory Is Right
+Most of us at some point in our education learned about human motivation. If you took a class, you may recall a
+dizzying array of different theories and theorists and no clear way of figuring out who was right or wrong. Which
+motivation theory does Toyota, implicitly, subscribe to? As it turns out, all of them. All of the theories are used to
+great effect at Toyota, though often with a bit of a twist on the original theories.
+Figure 16-4 summarizes Toyota s approach to the five most prominent motivation theories. The first two theories
+assume people are primarily motivated internally: intrinsic characteristics of the job itself motivate them to work hard
+and do quality work. The next three theories assume people are primarily driven by external factors rewards,
+punishments, and measurement toward goals. Toyota uses all of these approaches to motivate associates. We will
+discuss each in turn.
+
+Figure 16-4: Classic motivation theories and the Toyota Way
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Internal Motivation Theories
+Maslow s Hierarchy of Needs. Abraham Maslow s need hierarchy looks at motivating people as equivalent to
+satisfying their internal needs. Your highest level of motivation will be to do the things that better you as a person
+called self-actualization. But there are a few steps you have to take before you can get there. Humans can work on
+higher-level needs like self-actualization only if lower-level needs are satisfied physiological (e.g., having enough food
+to eat), safety and security (e.g., feeling safe from harm), and social approval (having others you care about think well
+of you). These factors are all external to you. There are then two higher-level needs self-esteem (you feel good about
+yourself) and the ultimate self-actualization striving to develop yourself.
+When you work for Toyota, your lower-level needs are covered. You are well paid, you have job security, and you
+are working in a safe, controlled environment. The work group can help satisfy social needs along with a myriad of
+social activities at work and after work. Toyota s culture emphasizes the use of challenging work situations to build
+self-confidence in their people for experimenting and accomplishing exceptional feats that can move in the direction of
+self-actualization.
+Herzberg s Job Enrichment. Frederick Herzberg s theories are similar to Maslow s, but they focus on
+characteristics of work that are motivators. He said that what Maslow called lower-level needs are really hygiene
+factors. Their absence will cause dissatisfaction, but providing a person more and more of them will not positively
+motivate. For example, a clean and bright work environment, nice eating facilities, and good pay and benefits can
+help keep people in the job, but more hygiene factors do not make people work harder. If you really want to
+motivate people, you have to go beyond the hygiene factors and enrich jobs so they are intrinsically motivating.
+People performing the work need feedback on how they are doing. They need to perform a whole piece of work,
+one in which they can identify with the product of their work. They also need a degree of autonomy.
+
+Toyota has done a good job of providing for the hygiene factors through job security with safe and attractive work
+environments. Nevertheless, on the face of it, an assembly line is anything but enriching. People do the same mindless
+task repeatedly and are responsible only for a tiny piece of an overall product. However, TPS adds a great deal to
+make the tasks more intrinsically motivating and Toyota has specifically worked on designing assembly lines to
+improve job enrichment. Some of the features that make the job more enriching include job rotation (which gives the
+work group ownership over a subsystem of the vehicle), various kinds of feedback on how workers are doing at
+their jobs, the andon system (which allows the worker to be proactive in solving problems), and a good deal of work
+group autonomy over the tasks. Toyota became interested in job enrichment in the 1990s and redesigned its
+assembly lines so that parts that make up a subsystem of the vehicle are installed in one specific area on the assembly
+line. Rather than a work group assembling electrical systems and then putting in floor mats and then door handles, a
+work group might focus almost exclusively on the electrical system under the hood. For white collar workers, Toyota
+organizes teams around complete projects from start to finish. For example, the design of the interior of the vehicle is
+the responsibility of one team from the design phase through production. Having the responsibility of participating in
+the project from beginning to end enriches and empowers the employee.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+External Motivation Theories
+Taylor s Scientific Management. Taylorism is the ultimate in external motivation. People come to work to make
+money end of story. You motivate workers by giving them clear standards, teaching them the most efficient way to
+reach the standard, and then giving them bonuses when they exceed the standard. The standards are for quantity, not
+quality. In Chapter 12, we discussed how Toyota s system is also based on standardization, but workers have
+responsibility for improving standardized work. Basically, Toyota turned scientific management on its head and turned
+over control of standardization to work teams. While Taylor strictly focused on individual incentives for productivity,
+Toyota distributes work to teams. Groups, not individuals, take on responsibility. Performance measures are about
+how the group is doing.
+Behavior Modification. Behavior modification is the more generalized approach of using rewards and punishments
+to motivate. In behavior modification, we recognize that there are many things that people find rewarding and
+punishing, that go beyond money. It could be praise from a supervisor or peer. It could be winning an award. The
+important point is that the positive or negative reinforcement comes as quickly as possible after the action.
+
+Toyota s system based on continuous flow and the andon system is ideal for powerful behavior modification.
+Feedback is very rapid. The best kind of negative feedback is impersonal and people find out how they are doing
+without a supervisor even telling them by uncovering quality problems immediately. As for praise or reprimands from
+supervisors, the group leaders are right there on the floor in a perfect position to give immediate feedback to
+associates. In addition, they are trained to do it.
+One example of a splashy reward system developed by Toyota in the United States is the perfect attendance award
+used in all U.S.-based manufacturing facilities. Attendance is critical within Toyota, because associates are very
+skilled and part of a team, and staffing is lean. The perfect attendance system rewards perfect attendance zero
+unexcused absences in a year. Those who make the perfect attendance club are invited to a big banquet held at a
+major convention center. About a dozen brand-new Toyota vehicles are paraded on stage. A lottery picks winners
+who drive home the vehicles with taxes and fees all fully paid. About 60% to 70% of Toyota associates get into the
+perfect attendance club not a single day of missed work or lateness. The total cost of this one-night extravaganza to
+Toyota for getting thousands of associates to come to work on time every day is peanuts.
+
+Goal Setting. Put simply, people are motivated by challenging but attainable goals and measurement of progress
+toward those goals like playing a game. Toyota s visual management systems plus policy deployment mean that teams
+always know how they are doing and always are working toward stretch improvement targets.
+Policy deployment sets challenging, stretch goals from the top to the bottom of the company. Careful measurements
+every day let work teams know how they are performing.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+People Drive Continuous Improvement
+Toyota invests in people and in return it gets committed associates who show up to work every day and on time and
+are continually improving their operations. On one of my visits, I found that in the past year at the Toyota,
+Georgetown, assembly plant associates made about 80,000 improvement suggestions. The plant implemented 99%
+of them.
+So how can you get your employees to work diligently to do their jobs perfectly and strive to improve every day?
+Build a system that follows Toyota Way who follow your company s philosophy by first looking at the system
+dynamics of your organization. Building excellent people who understand and support your company s culture is not a
+matter of adopting simple solutions or an afterthought of applying motivational theories. Training exceptional people
+and building individual work groups needs to be the backbone of your management approach, an approach that
+integrates your social systems with your technical system. Throughout this book, you have seen how one-piece flow
+drives positive problem-solving behaviors and motivates people to improve. However, you need a social system and
+culture of continuous improvement to support this behavior.
+Of course, you cannot pull a ready-made culture out of a wizard s hat. Building a culture takes years of applying a
+consistent approach with consistent principles. It includes the foundational elements of Maslow. People must have a
+degree of security and feel they belong to a team. You must design jobs to be challenging. People need some
+autonomy to feel they have control over the job. Moreover, there seems to be nothing as motivating as challenging
+targets, constant measurement and feedback on progress, and an occasional reward thrown in. The rewards can be
+symbolic and not all that costly. In the end, building exceptional people and teams derives from having in place some
+form of a respect for humanity system.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 17: Principle 11: Respect
+Your Extended Network of
+Partners and Suppliers by
+Challenging Them and Helping
+Them Improve
+Overview
+Toyota is more hands-on and more driven to improving their own systems and then showing how that
+improves you.... Toyota will do things like level their production systems to make it easier on you. Toyota
+picks up our product 12 times per day. They helped move presses, moved where we get the water from,
+trained our employees. On the commercial side they are very hands-on also they come in and measure and
+work to get cost out of the system. There is more opportunity to make profit at Toyota. We started with
+Toyota when we opened a Canadian plant with one component and, as performance improved, we were
+rewarded, so now we have almost the entire cockpit. Relative to all car companies we deal with, Toyota is
+the best.
+an automotive supplier
+Auto industry suppliers consistently report that Toyota is their best customer and also their toughest. We often think
+of tough as difficult to get along with or unreasonable. In Toyota s case, it means they have very high standards of
+excellence and expect all their partners to rise to those standards. More importantly, they will help all their partners
+rise to those standards. This chapter explains how this unusual approach to supplier relationships works.
+Let s start with an example of an ineffective (but sadly typical) approach to supplier relationships. In 1999, one of
+the Big Three U.S. auto companies, which I ll call American Auto, decided it wanted to make its supplier
+relationships the best in the industry. American Auto was tired of hearing how great Toyota and Honda were at
+teaching and developing their suppliers to be lean. For years, American Auto had worked to improve its relationships
+with suppliers, but when suppliers were asked who the leaders were in supplier development, it was uniformly
+Toyota and Honda. Their goal was to develop a supplier development center that would become the global
+benchmark for best practice. Even Toyota would benchmark American Auto.
+This became a highly visible project within American Auto s purchasing department, with champions for its success at
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+the vice president level. From the start the vice presidents already had a vision for their supplier development center.
+In fact, one vice president already had preliminary blueprints for building a supplier development center that would
+have state-of-the-art instructional technology. Their building would be the biggest and best, and suppliers would
+come together to learn best practices, including lean manufacturing methods.
+
+The first step in the project was to collect data on the current situation by interviewing about 25 suppliers to
+American Auto. Most of these suppliers already had internal lean manufacturing programs and many had surpassed
+American Auto on lean. The main message from the supplier interviews was clear and consistent:
+Tell American Auto not to waste their money building a big expensive building to train us, but instead to get
+their own house in order so they can be a capable and reliable partner we can truly work with. Fix their
+broken product development process and ask them to implement lean manufacturing internally. We will even
+help teach American Auto.
+The following quote from a supplier provides a flavor of a very consistent message:
+
+The problem is American Auto has inexperienced engineers who think they know what they are supposed to
+do. I would rather have those who realize they need to learn and train them. It is not clear if it is the reward
+system that causes them to get aggressive and adversarial. I have worked with American Auto for almost 18
+years and saw the wave of good people back then who were trying to help you. Now relationships have
+deteriorated tremendously. It used to feel good working with the American Auto people. Today, I do not trust
+them. Even people I worked with and trusted are finding ways to manipulate suppliers. It is almost sad.
+Clearly American Auto needed to do a great deal of work before any benefit would come from constructing a fancy
+supplier development center. The basic problems were inherent in the weaknesses of American Auto s own internal
+systems, the lack of development of their own people, and their focus on carrot-and-stick management without
+understanding their supplier s processes. They needed to earn the right to be leaders before they could expect their
+suppliers to be followers and learn from them. They were a long way off and, in fact, headed in the wrong direction.
+Ultimately, cost-cutting killed the whole effort to build a supplier development center. That was 1999 and, if anything,
+things have deteriorated even further at American Auto. American Auto is not unusual in my experience in companies
+that want to jump right to the benefits of a streamlined, efficient supply chain without doing any of the hard internal
+development needed to get there.
+In the meantime, Toyota has spent decades building a strong lean enterprise in Japan and has a fast start at building a
+world-class supplier network in North America. Suppliers are reacting positively to Toyota s demanding but fair
+partnership approach. For example, the OEM Benchmark Survey, a survey of auto suppliers by John Henke of
+Oakland University that is the principal measure of supplier relations in the American auto industry, ranks Toyota
+number one. In 17 measures from trust to perceived opportunity, the 2003 survey places Toyota first, followed by
+Honda and Nissan, while Chrysler, Ford, and GM are fourth, fifth, and sixth. And Toyota s scores keep getting
+better, with a 7% improvement over 2002.[1]
+A survey conducted by J.D. Power of automotive suppliers found that Nissan, Toyota, and BMW are the best North
+American automakers in promoting innovation with their suppliers (Automotive News, Feb. 24, 2003). Honda and
+Mercedes also finished above average in fostering innovation, while the Chrysler group, Ford, and General Motors
+all were rated below average.
+Toyota has been rewarded time and time again for its serious investment in building a network of highly capable
+suppliers that is truly integrated into Toyota s extended lean enterprise. Much of the award winning quality that
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+distinguishes Toyota and Lexus results from the excellence in innovation, engineering, manufacture, and overall
+reliability of Toyota s suppliers. And Toyota s suppliers are integral to the just-in-time philosophy, both when it is
+working smoothly and when there is a breakdown in the system.
+While many companies would abandon just-in-time when the first crisis hits, Toyota works its way through the rare
+crises working hand in hand with suppliers. For example, February 1, 1997, a fire destroyed an Aisin factory.[2]
+Aisin is one of Toyota s biggest and closest suppliers. Normally Toyota dual sources parts but Aisin was the sole
+source for something called a p-valve which is an essential brake part used in all Toyota vehicles worldwide at that
+time 32,500 per day. Toyota s vaunted JIT system meant only two days of inventory were available in total in the
+supply chain. Two days and disaster would strike evidence that JIT is a bad idea? Instead of faltering, 200 suppliers
+self-organized to get p-valve production started within 2 days. Sixty three different firms took responsibility for
+making the parts piecing together what existed of engineering documentation, using some of their own equipment,
+rigging together temporary lines to make the parts, and keeping Toyota in business almost seamlessly. The power of
+the supply chain is far more than information technology. It is the power of ingenuity and relationships.
+
+[1]Source: Robert Sherefkin and Julie Cantwell Armstrong, Suppliers Prefer Japanese, Automotive News, May
+12, 2003, pp. 1 and 50.
+
+[2]Nishiguchi, T. and A. Beaudet, 1998, The Toyota Group and the Aisin Fire, Sloan Management Review, Fall,
+pp. 49-59.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Principle: Find Solid Partners and Grow
+Together to Mutual Benefit in the Long Term
+Go to a conference on supply chain management and what are you likely to hear? You will learn a lot about
+streamlining the supply chain through advanced information technology. If you can get the information in
+nanoseconds, you should be able to speed the supply chain to nanosecond deliveries, right? What you are not likely
+to hear about is the enormous complexity of coordinating detailed, daily activities to deliver value to the customer.
+You are not likely to hear about relationships across firms about how to work together toward common goals. Yet,
+this is the heart of what has made Toyota s partnership with suppliers a global benchmark.
+
+When Toyota started building automobiles, it did not have capital or equipment for building the myriad of
+components that go into a car. One of Eiji Toyoda s first assignments as a new engineer was to identify high-quality
+parts suppliers that Toyota could partner with. At that time they did not have the volume to give a lot of business to
+suppliers. In fact, some days they did not build a single vehicle because they did not have enough quality parts. So
+Toyoda understood the need to find solid partners. All that Toyota could offer was the opportunity for all partners to
+grow the business together and mutually benefit in the long term. So, like the associates who work inside Toyota,
+suppliers became part of the extended family who grew and learned the Toyota Production System.
+
+Even when Toyota became a global powerhouse, it maintained the early principle of partnership. It views new
+suppliers cautiously and gives only very small orders. They must prove their sincerity and commitment to Toyota s
+high performance standards for quality, cost, and delivery. If they demonstrate this for early orders, they will get
+increasingly larger orders. Toyota will teach them the Toyota Way and adopt them into the family. Once inside, you
+are not kicked out except for the most egregious behavior.
+
+This is not to say that respect for the extended network of supplier partners is analogous to being soft and an easy
+target. Toyota s view is that, just as it challenges its own people to improve, it needs to challenge its suppliers.
+Supplier development includes a series of aggressive targets and challenges to meet those stretch targets. Suppliers
+want to work for Toyota because they know they will get better and develop respect among their peers and other
+customers. But no supplier I know that has Toyota as a customer believes it is easy to please. From Toyota s
+perspective, having high expectations for their suppliers and then treating them fairly and teaching them is the
+definition of respect. Treating them softly or beating them up without teaching them would be very disrespectful. And
+simply switching supplier sources because another supplier is a few percentage points cheaper (a common practice in
+the auto industry) would be unthinkable. As Taiichi Ohno said:
+Achievement of business performance by the parent company through bullying suppliers is totally alien to the
+spirit of the Toyota Production System.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+How Ford and Toyota Took Different Approaches
+to a Logistics Partnership
+An excellent example of the contrast in approaches between Toyota and its competitors is in how Toyota
+approached the logistic challenges in building manufacturing and supply chain capabilities in North America. How can
+Toyota assembly plants get just-in-time delivery of parts multiple times per day to U.S.-based plants when they are
+spread across the U.S. and Canada? One part of the solution was to use cross-docking (some call these break-bulk
+facilities). In this case, the cross-dock takes in deliveries of supplier parts a few times a day and reconfigures them
+into different mixes of products so they are shipped as mixed truckloads of the right number of parts for one to two
+hours of production. The cross-dock allows for efficient pickup of parts from suppliers and for just-in-time delivery
+to the assembly plant. Cross-docks are quite common in many industries, for example, in the food industry, and
+normally cross-docking is subcontracted out as a commodity. What is distinct about Toyota s cross-dock is the care
+with which Toyota s partner, Transfreight, manages it and the care with which Toyota painstakingly teaches that
+partner to use TPS. From Toyota s perspective, the cross-dock is an extension of the assembly line part of the
+lifeblood of the value stream that gets parts just in time from suppliers onto vehicles and finally to customers. It is all
+part of the flow.
+
+Ford Motor Company, in the mid-1990s, developed the Ford Production System, which was modeled after the
+Toyota Production System. Most of the early focus was on implementation inside the four walls of the plant, but later
+in the 1990s they began to focus on synchronous material flow outside the plant mainly getting parts to the plant just
+in time in small lots with frequent deliveries. So Ford did what many large U.S. companies do in this situation. In the
+late 1990s, they hired an outside executive and gave him the task. The executive they hired had worked in logistics
+for General Motors and had some exposure to NUMMI (though he had not worked there). He fit the Ford model of
+an aggressive, hard-driving leader who issues orders and expects action or heads to roll. He recognized that he had
+to change the way the assembly plants were set up to accept just-in-time deliveries and deliver parts in small
+quantities, so he hired a large group of experts on pull systems in the factory (over 20 of them) to straighten out Ford
+s internal logistics. They worked in the assembly plant, pulling inventory off the assembly line and in some cases
+repacking parts from large 4 x 4 x 4 containers into small containers holding one hour s worth of parts. They then
+put in pull systems to replenish the assembly line. This still left the assembly plants with large inventories of parts from
+suppliers in the wrong-sized containers, but that was supposed to be taken care of by a separate external logistics
+initiative, so they didn t worry about it.
+This Ford executive decided to handle the external part of the logistics process by hiring it out to a third-party
+logistics firm, sort of like Toyota s supplier, Transfreight. He put out a request for bid that had aggressive
+cost-reduction targets for cutting logistics costs (10% per year) and offered the whole of North America to the
+company that would meet the target price. Penske Logistics won the bid and set out to get to smaller lot deliveries of
+parts to the assembly plant. They took on responsibility for getting 167,000 production parts from 900 suppliers to
+Ford s engine and assembly plants. They designed and managed the entire transportation network, dealt directly with
+the carriers, handled disciplinary issues, and paid bills.
+The Ford executive issued the marching orders: every part every day. He meant he wanted every part currently
+delivered weekly or monthly to the assembly plants to be delivered at least once every day. This was a take no
+prisoners order. Ironically, he called the project Nirvana and the centerpiece was the deal negotiated with Penske
+Logistics. Ford stood to save hundreds of millions of dollars in transportation and inventory costs. As a result, the
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Ford executive was promoted to vice president of Ford s material planning and logistics.
+
+Penske Logistics set up a business unit with its own executive dedicated to the Ford business. Penske did not own
+many of the assets associated with Ford s business, such as trucks or cross-docks, but instead was acting as a
+broker, making the appropriate arrangements from Ford s end and the logistics end. Penske had full-time analysts
+and traffic people who were setting up the appropriate transportation logistics and then managing it on an ongoing
+basis. This put Penske in an intermediary position in which it needed to both negotiate with Ford assembly plants on
+things like delivery times and part quantities and negotiate with transportation service providers. In the assembly
+plants, the plant managers had inventory reduction targets and arranged to set up much smaller, Toyota-style parts
+supermarkets and free up warehouse space for other business.
+
+Overall, the effort seemed to have all the trappings of duplicating Toyota s system ... on the surface. But the results
+were nothing short of a disaster. In an interview with a Penske manager responsible for design of the transportation
+network in fall 2002, we learned:
+Every part every day was great for the plants, because it hollowed out the buildings and they were making
+money with that space. But it cost logistics $100 million more per year. After a while, it got so distasteful to
+Ford that the VP in charge left and we were tasked with going back to the old system of delivering large
+batches of parts weekly and monthly. We have been working on that for eight months. Ford senior
+management is baffled at why we cannot do it in eight weeks. But it will take more like one year. The goal is
+to get back to pre-Nirvana freight costs. By the end of Nirvana, we had the capability of shipping 95% of
+parts every day. With the new vision, Ford management would like to see it around 60% and currently we
+have it at around 80%. It was unrealistic to go from non-JIT to JIT and expect cost savings. I do not know
+where the savings were supposed to come from. We just completed a study of delivery network improvement.
+We think it will save Ford $8 million per year. But what will it do to the plants? It is going to put in more
+inventory and they are not happy about that.
+There is a lot embedded in this case example that illustrates how Ford, under then CEO Jacques Nasser, had a
+supplier management approach totally in contrast with that of Toyota. Ford was well-intentioned in trying to learn
+from TPS in moving to just-in-time in its parts supply network. What did Ford do wrong from the perspective of the
+Toyota Way?
+•
+Ford tasked an executive hired from the outside to manage a multi-billion-dollar logistics network, and he
+was able to make major decisions based on his own vision.
+•
+This executive did not understand the Ford Way and had only a superficial understanding of how to get to a
+just-in-time logistics network. For example, Toyota would never try to move every part every day. That
+makes sense for some parts but not others.
+•
+He handed off an amazing amount of responsibility to an outside vendor with which Ford did not have a
+strong partnership at least not in this area and on a project of this magnitude.
+•
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+•
+
+The outside vendor was purely a logistics management company and in fact did not have any real expertise in
+the Ford Production System. They knew how to move freight, and that is the only network they wanted to
+optimize freight costs.
+
+The outside vendor never understood or believed in the mission of Nirvana and thought Ford was making a
+mistake that could only lead to higher costs.
+•
+Ford put an outside company between its plants and the logistics network, guaranteeing political battles
+between different functions that want to suboptimize for their own benefit.
+The last point is an important one. Toyota works hard to break down barriers among functions so everyone is
+working toward a common goal. By hiring an outside logistics vendor that has the sole objective of reducing cost in
+the transportation network, Ford was almost guaranteeing conflict and suboptimization. As the Penske manager
+explained:
+
+We (Penske) are playing in the middle between the plants and the parts delivery network. The plants want
+what is best for them. Optimizing delivery costs may not be the cheapest for a given plant. A plant may want
+parts from a specific supplier delivered to it five times a week. If I go there once a week with a truckload of
+volume, I save money for the delivery network but inconvenience that plant. Plants always want JIT delivery.
+But the delivery network may be going to less frequent, less expensive deliveries. I talk to the plants in
+numbers and they talk to me in numbers. If my numbers are bigger than theirs. I win and the network wins.
+The results were that Ford never really got to just-in-time and an enormous amount of money was wasted. The
+logistics network Penske was rebuilding after Nirvana still represented a compromise. For example, when plants
+emptied out their warehouse space, they put in more production and reduced the amount of space available for
+holding inventory for less frequent deliveries. As a result, Penske had to rent warehouse space near the plants.
+
+In contrast, Toyota did not simply hand off responsibility to Transfreight for cross-docking, but rather slowly and
+deliberately built Transfreight into part of the extended enterprise over a 10-year period. Transfreight was a joint
+venture formed in 1987 between TNT Logistics and Mitsui Trading Company part of the Toyota family of companies
+in Japan. TNT Logistics had an existing logistics network and Toyotas goal was to keep as much as possible of
+North American auto supply in North America. Mitsui s role was to be a silent partner but to give Toyota control
+over the joint venture. (Actually, it was 50-50 ownership.) With intense involvement by TPS experts from Toyota,
+the first cross-dock was set up. A Toyota advisor from Japan even toured the first cross-dock with the Transfreight
+plant manager and drew on the floor what the system should look like.
+The purpose of the cross-dock is to take in deliveries from distant suppliers a few times a day, temporarily store the
+pallets of material, and then load trucks for the assembly plant with mixed loads going out about 12 times per day.
+The assembly plants get frequent JIT deliveries and trucks are full from suppliers to the cross-dock and from the
+cross-dock to the assembly plant.
+
+The cross-dock is designed using all of the principles of the Toyota Production System (Karlin, 2003).[3] It is a
+flow-through facility, associates are involved in continuous improvement, visual indicators and mistake-proofing
+devices are everywhere building in quality and reliability, and truck drivers have clearly defined roles in picking up
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+and delivering within tight time windows, including making quality checks. Nothing is left to chance. The system is set
+up using many of the principles of the service parts operations distribution system we discussed in Chapter 8 on flow.
+Because of the tight coordination among parts suppliers, Transfreight, and the assembly plants, there is a carefully
+orchestrated flow of parts moving toward the assembly plants and the returnable containers coming back from the
+assembly plants through the cross-docks. It is basically a one-for-one exchange of full containers for empty
+returnable containers. Toyota works hard in the assembly plant to level the schedule, which also levels the delivery of
+parts through the network to the assembly plant. This leads to a very even flow of parts from suppliers through the
+cross-dock to the assembly plant and creates a balance between parts sent to the assembly plant and the returnable
+containers sent back to suppliers.
+
+Toyota started small with one cross-dock and one assembly plant and over a decade built up Transfreight so it
+serves most of their North American cross-docking needs. Transfreight has added additional customers beyond
+Toyota and is a profitable enterprise. The results:
+•
+Toyota achieved its goal of just-in-time deliveries in North America despite the great distances.
+•
+The costs of transportation went down considerably after the cross-docking system was in place. Before the
+cross-docking, there were expensive milk runs from supplier to supplier over great distances, with the trucks
+only partially full. Now trucks are almost always very full in either direction.
+•
+Toyota saves money on returnable containers, using the minimum number because of the balance between
+parts going to the assembly plant and empty containers returned every day.
+•
+Transfreight is continually improving and reducing costs, like other Toyota operations.
+Not only has Transfreight successfully solved Toyota s problem of JIT logistics in North America, but it has become
+a successful international company and an exemplar of lean logistics. On two occasions, Transfreight has won Toyota
+s Truckload Carrier of the Year Award. Toyota has continued to give Transfreight additional business as it has
+expanded globally to plants in West Virginia, Indiana, California, France, the United Kingdom, and Spain.
+It is interesting to note that TNT Logistics did not understand the value of Transfreight and was unable to transfer the
+remarkable lean logistics system to its own operations. Mitsui, on the other hand, saw Transfreight s stellar reputation
+in the trucking and logistics industry and its profitable growth. TNT and Mitsui discussed their positions and came to
+a mutually agreeable settlement in which Mitsui bought out TNT s half of Transfreight. Effective June 27, 2002,
+Mitsui became the sole shareholder in Transfreight.
+[3]Jennifer Karlin, Defining the Lean Logistics Learning Enterprise: Examples from Toyota s North American
+Supply Chain, unpublished doctoral dissertation, University of Michigan, Ann Arbor, September 2003.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Partnering with Suppliers While Maintaining
+Internal Capability
+Toyota is very careful when deciding what to outsource and what to do in house. Like other Japanese automakers,
+Toyota outsources a lot, about 70% of the components of the vehicle. But it still wants to maintain internal
+competency even in components it outsources. These days a management buzzword is core competency. Toyota
+has a clear image of its core competency, but seems to look at it quite broadly. This goes back to the creation of the
+company, when Toyota decided to go it alone instead of buying designs and parts of cars from established U.S. and
+European automakers.
+As we discussed in Chapter 2, one of the philosophical roots of Toyota is the concept of self-reliance. It states in the
+Toyota Way document: We strive to decide our own fate. We act with self-reliance, trusting in our own abilities. So
+handing off key capabilities to outside firms would contradict this philosophy. Toyota sells, engineers, and makes
+transportation vehicles. If Toyota outsourced 70% of the vehicle to suppliers that controlled technology for them and
+all its competitors, how could Toyota excel or distinguish itself? If a new technology is core to the vehicle, Toyota
+wants to be an expert and best in the world at mastering it. They want to learn with suppliers, but never transfer all
+the core knowledge and responsibility in any key area to suppliers.
+
+In Chapter 6 the Prius was discussed. One of the core components of the hybrid engine is the insulated gate bipolar
+transistor IGBT (a semiconductor switching device [IGBT] boosts the voltage from the battery and converts the
+boosted DC power into AC power for driving the motor ).
+
+Toyota engineers were not experts at semiconductors, but rather than outsource this critical component, Toyota
+developed it and built a brand-new plant to make it all within the tight lead time of the Prius development. Toyota
+saw hybrid vehicles as the next step into the future. They wanted self-reliance in making that step. Once they had
+that internal expertise, they could selectively outsource. Senior managing directors insisted on making the transistor
+in-house because they saw it as a core capability for future hybrid vehicle design and manufacture. Toyota wants to
+know what is inside the black box. They also did not want to trust other companies to put the effort they knew they
+could apply into cost reduction.
+In Chapter 6 we mentioned how Toyota decided to work with Matsushita to outsource the battery technology, which
+is at the center of hybrids and future energy-efficient vehicles. Toyota sorely wanted to develop this capability
+in-house, but finally did not have the time. Rather than simply handing off responsibility to Matsushita, Toyota
+established a joint venture company Panasonic EV Energy. This was not their first experience working with
+Matsushita. The Electric Vehicle Division of Toyota had already co-developed with Matsushita a nickel-metal
+hydride battery for an electrical version of the RAV4 sport utility vehicle, so they had a prior relationship and a track
+record of successfully working together.
+Even with this past history of working together, the joint venture tested the company s differing cultures. Yuichi Fujii,
+then General Manager of Toyota s Electric Vehicle Division and Prius Battery Supervisor, at a point of frustration,
+said (as quoted in Itazaki, 1999):
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+I have a feeling that there is a difference between an auto maker and an electric appliance maker in the way
+they feel the sense of crisis about lead time. A Toyota engineer has it in his bones to be fully aware that
+preparing for production development should occur at a particular point in time. On the other hand, I feel
+that the Matsushita engineers are a little too relaxed.
+There were also some concerns about Matsushita s quality control discipline and if the level of quality required for
+this new, complex battery was too high for what Matsushita was used to. Fujii was reassured when he found a young
+Matsushita engineer one day looking pale. He learned he had been working until four in the morning to finish some
+battery tests. Yet he had come back in the next day to make sure of just one thing (Itazaki, 1999, p. 282). At that
+point Fujii realized that there was a Matsushita style that could work together with Toyota s style. Ultimately, the
+two corporate cultures did complement each other and produced a world-class hybrid vehicle battery.
+
+Even when Toyota chooses to outsource a key component, the company does not want to lose internal capability.
+Witness Toyota s relationship with Denso. Formerly, Nippon Denso (Japan Electronics) was a division of Toyota. It
+spun off as a separate company in 1949 and grew into one of the largest global parts suppliers in the world. Denso
+essentially grew up with Toyota as a partner and is still partly owned by Toyota in the Japanese keiretsu (set of
+interlocking corporations). Denso was the electrical and electronic parts supplier of choice for Toyota and acted like
+it was still a division of Toyota. As a general rule, Toyota wants to have at least two suppliers for every component,
+but it broke this rule often in its relationship with Denso, making Denso its sole supplier. So in 1988, when Toyota
+opened an electronics plant in Hirose and made a major effort to recruit electrical engineers, it was a shock to the
+industry. Why this seeming reversal of policy?
+
+First of all, Denso had become so big and powerful that there were some well-known strains in the relationship with
+Toyota, such as Denso getting a bit too cozy with Toyota s competition, including Toyota s archrival, Nissan.
+Second, and more importantly, Toyota recognized that electronics was becoming an ever-increasing part of a vehicle
+including computerization and the trend toward electrical vehicles. About 30% of total vehicle content these days is
+electronics-related and electronics technologies change at a much faster rate than traditional automotive technologies.
+Toyota believed that it needed to truly master any core technology internally in order to manage its suppliers
+effectively (e.g., understand true costs) and to continue to learn as an organization to stay at the forefront of the
+technology. Toyota determined that electronics had become so central to the automotive business that only an
+intensive program of learning by doing could infuse its entire organization with the skills and values essential to
+making electronics a genuine core competence. Now it is estimated that about 30% of Toyota recruits are electrical
+engineers (Ahmadjian and Lincoln, 2001).
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Working with Suppliers for Mutual Learning of
+TPS
+One way that Toyota has honed its skills in applying TPS is by working on projects with suppliers. Toyota needs its
+suppliers to be as capable as its own plants at building and delivering high-quality components just in time. Moreover,
+Toyota cannot cut costs unless suppliers cut costs, lest Toyota simply push cost reductions onto suppliers, which is
+not the Toyota Way. Since Toyota does not view parts as commodities to be sourced on the market through open
+bidding, it is critical that it works with highly capable suppliers that are following TPS or an equivalent system. There
+are many methods Toyota uses to learn with its suppliers and, in the Toyota Way style, these are all learning by
+doing processes, keeping classroom training to a minimum. The important learning happens through real projects on
+the shop floor.
+
+First, all key suppliers are part of Toyota s supplier association. These are core Toyota suppliers that meet
+throughout the year sharing practices, information, and concerns. There are committees that work on specific things,
+including joint projects. In the U.S., BAMA (Bluegrass Automotive Manufacturers Association) was created in the
+Kentucky area, since Toyota suppliers started there. This has now expanded to a national association. Members of
+BAMA can participate in many activities, including study groups that meet to develop greater skills in TPS. These are
+called jishuken or voluntary study groups.
+The jishuken was started in 1977 in Japan by the Operations Management Consulting Division (OMCD). OMCD is
+the elite corps of TPS experts started by Ohno in the mid-1960s to improve operations in Toyota and its suppliers.
+This included about six senior TPS gurus and about 50 consultants some of these are fast-track, young production
+engineers on a three-year rotation who are being groomed to be manufacturing leaders. Only the best TPS experts
+have directed OMCD. About 55-60 of Toyota s key suppliers (representing 80% of parts in value) were organized
+into groups of four to seven suppliers by geography and type of part. They rotate across companies, working on
+three- to four-month projects in each company one by one. They choose a theme and go to work. Representatives
+of the other suppliers visit regularly and make recommendations. The OMCD TPS expert visits the plant every week
+or so to give advice. OMCD uses an annual conference to share learnings. The projects involve radical
+transformation, not incremental improvement, often tearing up the floor and creating once-piece flow, leveling the
+schedule, and the like, to create huge improvements in cost, quality, and delivery. Strict targets are set and achieved.
+Kiyoshi Imaizumi, an executive with Araco Corporation, which is one of Toyota s most sophisticated suppliers in
+Japan, was assigned to the U.S. to lead Trim Masters, Inc., a Toyota/Araco/Johnson Controls joint venture.
+Imaizumi explained that jishuken in Japan can be very severe. It is teaching TPS in the spirit of the harsh
+approaches originally used by Taiichi Ohno.
+
+Toyota s suppliers Jishuken in Japan is completely different from that in the U.S. It is compulsory. You
+cannot say no. Toyota picks suppliers to participate. From each supplier they pick three to five members.
+Toyota sends their own TPS expert to the target plant and they review this plant s activity and give a theme,
+e.g., this line must reduce 10 people from the plant. The supplier s member has one month to come up with a
+solution. The TPS expert comes back to check to see if the supplier has met the target. Then the Toyota TPS
+expert verbally abuses the supplier participants. In the past some of the participants had a nervous
+breakdown and quit work. Toyota has a gentler version of TPS in the U.S. Once you clear Toyota s jishuken
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+in Japan, you can feel so much more confidence in yourself. One of the former Trim Masters presidents went
+through this and became so confident he never compromised anything with anybody.
+Toyota has gradually changed its style to one that is more supportive and less punitive, particularly in the U.S., when
+they learned from experience that the punitive approach does not work. They have set up similar jishuken activities
+with American suppliers (called plant development activities ), trying various configurations. They found they had to
+group suppliers by skill level with TPS, since there was such a wide range.
+
+The closest thing in America to OMCD is what occurs at the Toyota Supplier Support Center (TSSC) run by
+Hajime Ohba, a former member of OMCD. A variation on the theme of OMCD was created to fit the American
+culture, with the focus still on projects. Suppliers, and even companies outside of the auto industry, like Viking Range
+and Herman Miller, had to petition to be accepted as clients. The service was originally free, but then became a
+pay-for-service consulting firm. The TSSC identifies a business need and then picks a product line to do a project.
+The project consists of developing a model line. A typical model line includes component assembly and a
+manufacturing process that makes parts that go to the assembly line. A full TPS implementation is done with all the
+elements of JIT, jidoka, standardized work, Total Productive Maintenance, etc.
+The TSSC results have been spectacular. As of 1997 the TSSC had completed 31 projects, getting impressive
+results in every single case. They had reduced inventory an average of 75% and improved productivity an average of
+124%. Space was reduced, quality improved, and emergency freight shipments eliminated (Dyer, 2000). But there
+were compromises along the way.
+As he did in Japan, Ohba tried the OMCD approach of giving vague instructions and then expecting the plants to
+leap into action. Only after this would he provide guidance with pointed questions and challenges. What he
+discovered with U.S. companies is that they wanted more guidance and needed more visits to keep the projects
+going. Projects that might take two to three months in Japan were dragging on for four or six months and complete
+implementation could take nine months or more. Some of the companies did a good job of propagating TPS to other
+parts of the plant, but most did not. And few companies spread TPS across plants. Even the star suppliers that the
+TSSC worked with closely fell back to a lower level of TPS unless Ohba s group made continued visits, pumping
+them up and doing more projects. Unfortunately, while TPS experts could force installation of TPS principles with
+extraordinary results on selected lines, they could not inoculate the suppliers with Toyota Way genes. The explanation
+by Ohba was quite simple. Companies that failed to continue implementing TPS after seeing dramatic improvements
+were led by executives who were not serious and committed. It was not shop-floor resistance but top management
+that was responsible.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Saving Sick Suppliers Through TPS
+The TSSC by design is not part of the business relationship with suppliers. It is there to educate through projects.
+Toyota purchasing has its own quality and TPS experts to work with suppliers when there are problems, the most
+severe of which is when a supplier shuts down the Toyota assembly plant because of a quality or production
+problem. Don Jackson, who later became vice president of manufacturing in Georgetown, Kentucky, was a quality
+manager in purchasing and created a system of evaluating and classifying suppliers.
+
+Before joining Toyota, when Jackson worked for a supplier to the Big Three American automakers, he was shocked
+at how little hands-on assistance or monitoring was provided. He recalls, I was successful in shutting down Ford for
+a day. No one ever visited my plant even though I shut down the plant for a day. He was determined that would not
+happen at Toyota. Suppliers are rated from one (like when a plant burns down) to five (exemplary TPS supplier). If a
+supplier puts a Toyota assembly plant in danger of shutting down, it will be a two. Toyota will then send a team of
+people swarming through the supplier s plant and the supplier must develop an action plan to address all of their
+concerns. A level two typically means severe probation for a year.
+Jackson came up with a supplier improvement committee in 1998 to work on problem suppliers. He explained:
+I didn t realize it stood for SIC. The Japanese called it the sick supplier club. It was funny, but it was sort of
+true! We had some real successes and one of the suppliers is going to get the outstanding quality award from
+the NUMMI plant this year. I am especially proud of that.
+It is interesting how the help Toyota provided spread beyond technical issues to a human resource audit. As
+Jackson explained:
+
+My Human Resources department approached me and said, We d like to support you in the supplier
+improvement committee. At first I rejected the offer. I said a quality audit is all we need. But after I went on
+several visits to local suppliers I realized the issues were much deeper than quality of the process or the
+tooling of the process. It was a lot of the human side. You know, salary was too low or overtime was too
+high, working conditions were poor, there was no training or development plan. There was not good
+management. So I went ahead and had HR join me on audits of a couple of these critical suppliers. We did a
+very deep analysis of their organization. We looked at the turnover ratio, what they paid people, how they
+decide what the pay scale should be in the area. The HR team would investigate training, development, did
+they have an opinion survey? Etc. So for SIC suppliers, HR would do the HR investigation, quality would do
+a quality audit, production engineering would examine the manufacturing side.
+Another example of Toyota s approach to SIC suppliers is the case of Trim Masters (TMI) and its just-in-time
+Nicholasville, Kentucky, seat plant, which makes about 250,000 seat sets a year for Avalon and Camry. (See the
+case study at the end of the chapter.)
+In 1995, one year after the Nicholasville plant was brought on line, Steve Hesselbrock took over as Director of
+Operations for all TMI plants. His first year was anything but a honeymoon. Nicholasville was completely dependent
+on its computer technology to get the vehicle sequence from Toyota and convert it into a sequence for the plant s seat
+assembly line. They had a manual backup system, but it never worked. The computer system went down one day for
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+only three hours, but with TMI s very lean system it was enough to shut Toyota s assembly line down. Immediately a
+crew of supplier quality exper

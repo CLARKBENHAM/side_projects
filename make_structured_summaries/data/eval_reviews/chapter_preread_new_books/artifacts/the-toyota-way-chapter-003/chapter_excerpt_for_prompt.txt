@@ -1,0 +1,769 @@
+immediately whether they are in a standard condition or
+deviating from it.
+
+Avoid using a computer screen when it moves the worker s focus away from the workplace.
+
+Design simple visual systems at the place where the work is done, to support flow and pull.
+•
+Reduce your reports to one piece of paper whenever possible, even for your most important financial
+decisions.
+•
+
+Principle 8. Use only reliable, thoroughly tested technology that serves your people and processes.
+
+Use technology to support people, not to replace people. Often it is best to work out a process manually
+before adding technology to support the process.
+•
+New technology is often unreliable and difficult to standardize and therefore endangers flow. A proven
+process that works generally takes precedence over new and untested technology.
+•
+
+•
+
+Conduct actual tests before adopting new technology in business processes, manufacturing systems, or
+products.
+
+Reject or modify technologies that conflict with your culture or that might disrupt stability, reliability, and
+predictability.
+•
+Nevertheless, encourage your people to consider new technologies when looking into new approaches to
+work. Quickly implement a thoroughly considered technology if it has been proven in trials and it can improve
+flow in your processes.
+
+Section III: Add Value to the Organization by Developing Your People and Partners
+•
+•
+
+Principle 9. Grow leaders who thoroughly understand the work, live the philosophy, and teach it to others.
+
+Grow leaders from within, rather than buying them from outside the organization.
+
+Do not view the leader s job as simply accomplishing tasks and having good people skills. Leaders must be
+
+role models of the company s philosophy and way of doing business.
+•
+A good leader must understand the daily work in great detail so he or she can be the best teacher of your
+company s philosophy.
+•
+
+•
+
+•
+
+Principle 10. Develop exceptional people and teams who follow your company s philosophy.
+
+Create a strong, stable culture in which company values and beliefs are widely shared and lived out over a
+period of many years.
+
+Train exceptional individuals and teams to work within the corporate philosophy to achieve exceptional
+results. Work very hard to reinforce the culture continually.
+
+Use cross-functional teams to improve quality and productivity and enhance flow by solving difficult technical
+problems. Empowerment occurs when people use the company s tools to improve the company.
+•
+Make an ongoing effort to teach individuals how to work together as teams toward common goals.
+Teamwork is something that has to be learned.
+
+•
+
+Principle 11. Respect your extended network of partners and suppliers by challenging them and helping them
+improve.
+
+Have respect for your partners and suppliers and treat them as an extension of your business.
+•
+Challenge your outside business partners to grow and develop. It shows that you value them. Set challenging
+targets and assist your partners in achieving them.
+
+Section IV: Continuously Solving Root Problems Drives Organizational Learning
+•
+
+•
+
+Principle 12. Go and see for yourself to thoroughly understand the situation (genchi genbutsu).
+
+Solve problems and improve processes by going to the source and personally observing and verifying data
+rather than theorizing on the basis of what other people or the computer screen tell you.
+
+Think and speak based on personally verified data.
+•
+
+Even high-level managers and executives should go and see things for themselves, so they will have more than
+a superficial understanding of the situation.
+
+•
+
+Principle 13. Make decisions slowly by consensus, thoroughly considering all options; implement
+decisions rapidly (nemawashi).
+
+Do not pick a single direction and go down that one path until you have thoroughly considered alternatives.
+When you have picked, move quickly but cautiously down the path.
+•
+Nemawashi is the process of discussing problems and potential solutions with all of those affected, to collect
+their ideas and get agreement on a path forward. This consensus process, though time-consuming, helps
+broaden the search for solutions, and once a decision is made, the stage is set for rapid implementation.
+
+•
+
+Principle 14. Become a learning organization through relentless reflection (hansei) and continuous
+improvement (kaizen).
+
+Once you have established a stable process, use continuous improvement tools to determine the root cause
+of inefficiencies and apply effective countermeasures.
+•
+
+•
+
+•
+
+•
+
+Design processes that require almost no inventory. This will make wasted time and resources visible for all to
+see. Once waste is exposed, have employees use a continuous improvement process (kaizen) to eliminate it.
+
+Protect the organizational knowledge base by developing stable personnel, slow promotion, and very careful
+succession systems.
+
+Use hansei (reflection) at key milestones and after you finish a project to openly identify all the shortcomings
+of the project. Develop countermeasures to avoid the same mistakes again.
+
+Learn by standardizing the best practices, rather than reinventing the wheel with each new project and each
+new manager.
+
+It is quite possible to use a variety of TPS tools and still be following only a select few of the Toyota Way principles.
+The result will be short-term jumps on performance measures that are not sustainable. On the other hand, an
+organization that truly practices the full set of Toyota Way principles will be following TPS and on its way to a
+sustainable competitive advantage.
+In courses I have taught on lean manufacturing, a common question is How does TPS apply to my business? We do
+not make high-volume cars; we make low-volume, specialized products or We are a professional service
+
+organization, so TPS does not apply to us. This line of thinking tells me they are missing the point. Lean is not about
+imitating the tools used by Toyota in a particular manufacturing process. Lean is about developing principles that are
+right for your organization and diligently practicing them to achieve high performance that continues to add value to
+customers and society. This, of course, means being competitive and profitable. Toyota s principles are a great
+starting point. And Toyota practices these principles far beyond its high-volume assembly lines. For example, we will
+see in the next chapter how some of these principles are applied in the professional service organizations that design
+Toyota s products.
+
+Chapter 5: The Toyota Way in
+Action: The No Compromises
+Development of Lexus
+Overview
+Even if the target seems so high as to be unachievable at first glance, if you explain the necessity to all the people
+involved and insist upon it, everyone will become enthusiastic in the spirit of challenge, will work together, and
+achieve it.
+
+Ichiro Suzuki, chief engineer of the first Lexus
+
+Toyota is known as a very conservative company. When I first heard of this reputation in Japan in 1983, I was
+surprised. I had thought of Toyota as a very innovative company and that s why I was there to learn about the
+innovative practices of Toyota that were dominating the auto industry. But informed Japanese just laughed and said
+Toyota is very conservative, even by Japanese standards. What does conservative mean in this case? I asked. A
+typical response was conservative politically, conservative styling, conservative financially, conservative in changing
+their ways you name it. Certainly much of this conservatism derives from the Toyota Way culture, which gives
+continuity to its excellence.
+Yet central to the Toyota Way is innovation never getting complacent and always staying a step ahead of trends in
+the market. There are many levels of innovation from the small workplace changes made by plant workers on the
+shop floor to fundamental breakthroughs in production technology and vehicle engineering. It s also true that most of
+what goes on in Toyota s vehicle centers is routine product development making incremental change from one model
+to the next. But the beauty of the Toyota Way is that it allows Toyota to periodically break from this conservative
+mold and innovatively develop a new vehicle with a new developmental approach. These are defining moments for
+Toyota.
+All of the engineers I interviewed for this book agreed that two of the best examples of the Toyota Way in action
+were the Lexus and the Prius two breakthrough vehicles that reshaped Toyota as a company. The next two chapters
+tell these stories, in order to flesh out the principles of the Toyota Way.
+
+Lexus: A New Car, a New Division by the Michael
+Jordan of Chief Engineers
+Yukiyasu Togo was a successful Toyota executive in charge of Toyota Motor Sales, USA, in Southern California.
+His friends and associates were also well-to-do executives. But few would consider buying a Toyota. Mercedes and
+BMW were more their style. This bothered Togo. He was a fighter and not willing to accept being second-class.
+Making high-quality, fuel-efficient, and economical cars was fine, but he saw no reason why Toyota could not also
+make luxury vehicles competing with the best in the world. Maybe what we need is a luxurious car that would create
+a new image, a car of high quality, perhaps even up-market of the Mercedes-Benz (as quoted in Reingold, 1999).
+
+To do this, Togo realized Toyota would need a new sales channel and name. He took his idea to management. At
+first he faced resistance. At Toyota this was not unusual. Much of Toyota s success derives from incremental
+improvements year in and year out part of that conservative mindset. Building a luxury car meant breaking the mold
+from sturdy and reliable but basic Japanese built cars to competing with the kings of luxury in Europe. Also the
+development of a luxury car would mean simultaneously developing a vehicle and a brand: a car company within a
+car company. But after some debate it was clear that Toyota was not living up to its challenge of staying a step ahead
+of trends in the market and the concept for the Lexus was born.
+
+Such an effort could not be entrusted to just anybody. In this case, the task was given to one of the best and most
+revered chief engineers in Toyota s history, Ichiro Suzuki, who was introduced to me as the Michael Jordan of chief
+engineers and a legend within Toyota. His comments in this chapter are from an interview I had with him at the
+Toyota Technical Center in Ann Arbor, Michigan, in April 2002, just a few months away from real retirement.
+Toyota had called him out of retirement to act as an Executive Advisory Engineer. Basically, he was making one last
+tour of duty to teach the younger generation what it took to be an excellent engineer at Toyota. (Principle 9, Grow
+leaders who thoroughly understand the work, live the philosophy, and teach it to others.)
+
+Listening to the Customer and Benchmarking the
+Competition
+Developing a good concept, with its associated targets, will make or break any vehicle development program. If the
+concept is not well thought through and does not properly identify the market and how the vehicle will hit the market
+just right, then even excellent execution of the program will not matter. Efficiency does not equal effectiveness when it
+comes to developing a new product. Effectiveness starts with what is popularly being called the fuzzy front end,
+when judgment and qualitative data often play a greater role than precise scientific and engineering analysis. In Toyota
+Way terms, thorough consideration in decision making (Principle 13: Make decisions slowly by consensus,
+thoroughly considering all options, implement rapidly) means carefully thinking through the pros and cons of all
+the possible solutions, based on the facts, before charging ahead down a given path. The Lexus began with a
+thorough evaluation of the goals of the vehicle led by insightful and experienced engineers. To set his targets, Suzuki
+carefully considered the competition.
+
+Suzuki started with focus group interviews in the U.S. at a Marriott Hotel on Long Island a fairly affluent area. This
+was not a huge survey, but rather just two groups of about a dozen people each. Individuals within groups were
+assigned to focus on particular vehicles they owned. For example, in Group A four people were Audi 5000 owners,
+one was a BMW 528e owner, two people owned a Benz 190E, and three people owned a Volvo 740/760. Group
+B almost directly paralleled this makeup. Suzuki classified what he heard into reasons for purchase, reasons for
+rejection of other competitive vehicles, and the image they had of different cars. He simplified the results into a
+number of tables, qualitatively summarizing the results using terms that evoke emotion more than scientific precision
+(see Figures 5-1 and 5-2).
+
+Figure 5-1: Reasons for purchase and rejection of competitive luxury vehicles (1980s)
+Figure 5-1 shows the reasons for purchase and rejection. There are no surprises here, but it is worth noting how
+succinctly the table summarizes what many of us have thought and even felt about these various vehicles back in the
+mid-1980s. So much is captured with so few words. This is a part of Toyota s visual management; reflected in
+Principle 7, Use visual control so no problems are hidden. In these summary grids, Suzuki strives to communicate
+on one piece of paper so the reader sees at a glance the most important points for decision making.
+
+Figure 5-2 similarly summarizes a broader set of images associated with European, U.S., and Japanese luxury cars.
+The first thing the groups focused on was status and prestige image. Mercedes-Benz was most associated with status
+and success; Japanese models were not. Clearly a major hurdle for Suzuki was to overcome the rooted stereotype of
+
+Japanese cars being practical, efficient, reliable vehicles, but never luxurious. A rank ordering of what was important
+to buyers of Mercedes in particular was as follows (1=most important):
+1.
+Status and prestige of image
+2.
+High quality
+3.
+Resale value
+4.
+Performance (e.g., handling, ride, power)
+5.
+Safety
+
+More than any of the other information gathered, this rank ordering struck an emotional nerve because Suzuki viewed
+a car essentially as a vehicle of transportation, not an ornament. When he listened to people talk about
+Mercedes-Benz, status and prestige were number one, while performance, the actual basic function of the car, was
+only number four. Perhaps because of his engineering bias, Suzuki could not accept people choosing Mercedes-Benz
+s status appeal over performance. It was a car, after all, not an ornament. According to Suzuki:
+
+The car is not something that sits around, it s something that needs to move around. So I thought. I want to build a
+car that beats Mercedes-Benz in the most basic function a car has, its driving performance.
+
+Figure 5-2: Image of European, American, and Japanese luxury cars (1980s)
+Suzuki asked himself, what does it mean to have a high-quality product? What does it mean to have a high-quality
+luxury vehicle? What can you put into a car that makes people owning it feel like they re wealthy, ... they have a lot,
+spiritually speaking? And, what can you put into a car that, as the years go on, you become more and more attached
+to that car? So the two characteristics he felt were most important were, in the order of importance, exceptional
+functional performance and an elegant appearance, not traditionally a Toyota strength. Mercedes-Benz was kind of
+a cold vehicle in terms of styling. It s changed since then, but I decided that the vehicle should have human warmth,
+beauty, elegance, refinement. He felt if Toyota could make a car that performed not slightly better than Benz, but
+considerably better than Benz, with improved styling, then Toyota might be able to change its image and compete.
+But having exceptional functional performance and human warmth are somewhat contradictory to one another,
+
+because when you build in performance you re going to lose some of the warmth and human characteristics. It s not
+enough to try to make these qualities exist at the same time, because that implies a trade-off. What Suzuki wanted
+was to fuse these two characteristics, so they become one and the same thing. But this would take some high-level
+engineering and design decisions. So he developed quantitative targets for the vehicle with that in mind.
+Figure 5-3 summarizes the targets that Suzuki set for the Lexus as compared with BMW and Mercedes the main
+competition. They were based on the assumption that the Lexus could do it all. So when I showed this to the
+engineers at Toyota they all laughed at me. They said it was impossible, explained Suzuki.
+
+Figure 5-3: Targets for Lexus
+So he thought about this some more. He picked apart the different elements.
+
+If you want to make a car that goes very fast, it s very well-suited to also reducing the aerodynamic resistance. So
+these two elements are harmonious. When you get up to speeds of 250 km/h your air resistance reaches levels of
+about 95 percent or over. So the more you re able to reduce this aerodynamic coefficient, the more speed you re
+going to be able to achieve. So these things suit each other well, these two targets. Similarly, improving the fuel
+economy is very harmonious with the goal of reducing the vehicle mass. However, we didn t know what to do with
+the quietness factor because to reduce the quietness to an extreme level, that leads to higher mass. So we needed to
+start acting on a new operating principle. And the new principle we adopted was not to dampen the noise that exists
+but to reduce the amount of noise at its source, by making quieter engines.
+
+Suzuki explained that adding structure (mass) to reduce noise was only dealing with the surface problem. The root
+cause of the noise and vibration that customers experience was the engine. One technique that is part of kaizen
+(continuous improvement Principle 14) is to ask why a problem exists five times, going to a deeper level with each
+Why? to get to the root cause of the problem. So, by understanding the root cause of the problem and identifying
+countermeasures to dampen the noise, Suzuki reasoned he could eliminate the problem of engine noise, without
+resorting to a surface solution adding mass. He then developed a list of performance trade-offs, where he wanted to
+have A yet also B, and C yet also D. For example, he wanted to have very good handling and stability at high
+speeds, yet at the same time have good ride comfort. These are summarized in Figure 5-4 as a set of
+no-compromise goals. This led to the two guiding goals for the Lexus program.
+
+Figure 5-4: No-compromise goals
+1.
+Cut noise, vibration, and harshness at the source (rather than with after-the-fact measures).
+2.
+Maintain the yet concepts, balancing without compromising on traditional auto design trade-offs.
+The first one, at the source, turned out to be largely driven by the accuracy of the parts the precision with which the
+parts are manufactured.
+
+Achieving No-Compromise Objectives
+Since so much of the success of Lexus depended on achieving these breakthrough performance objectives for the
+engine, and since this depended so heavily on production engineering, Suzuki presented a number of strict
+requirements to the engine production engineers, whose response was largely discouraging. Their first reaction was
+that you cannot make parts that are more precise than the tolerances of the precision instruments you re using to
+make them. At the time, Toyota had the most precise instruments in the world for machining engine parts (e.g.,
+high-precision machine tools for machining castings into crankshafts, pistons, etc.). And so Suzuki said, Oh, OK, I
+see your point. But backing away from these breakthrough performance objects would mean the end of his dream
+car. So he turned to his superiors for help and was able to get them formed into a Flagship Quality Committee (The
+FQ Committee ).
+This committee was composed of head executives representing three divisions in Toyota R&D, production
+engineering, and the manufacturing plant. The person who at that time was in charge of production engineering was
+Akira Takahashi. He told Suzuki, Look, Toyota s already making products that are exceptionally high quality and to
+bring in more precise equipment to meet the accuracy and precision demands you re asking is out of control, it s
+ridiculous. You re asking too much. Not willing to give up, Suzuki said, OK, I ll tell you what. Try to make one of
+these high-precision products, an engine or transmission, and if we can t do that, if that doesn t work out, I ll quit. I
+will give up on my request.
+Takahashi agreed he could make one of anything as long as it didn t have to be in mass production. So he put
+together a team of his best engine engineers and they developed one high-precision engine that met Suzuki s tight
+specifications. It was a hand-built engine and, when it was tested in an existing vehicle, there was remarkably little
+vibration with extremely good fuel economy. The team of engineers and Takahashi got very excited and they
+immediately began discussing how they could replicate this with mass production equipment. By working with
+Takahashi and going to his superiors and creating the FQ Committee, Suzuki was in a very clever way practicing
+Principle 13: Make decisions slowly by consensus, thoroughly considering all options; implement rapidly
+(nemawashi). The nemawashi part of this principle is to take the time to build consensus across and up and down
+the organization. By asking the engineers to build an actual engine, he was using the Toyota propensity for genchi
+genbutsu (Principle 12: Go and see for yourself to thoroughly understand the situation). In this case, he chose
+to work on an actual engine instead of speculating about its viability based on theoretical arguments.
+As Suzuki explained:
+
+The people at each one of these different departments, R&D, production engineering, and so on and so forth
+are looking toward the policy of their superiors to see how to act, and naturally once I was able to bring Mr.
+Takahashi from production engineering over to my side, things became much easier to do. So there were
+various troubles and problems along the way, however, every time that happened I would say thousands of
+times, tens of thousands of times, counter measures at the source, follow the concept of this yet that. The
+end result was not just my effort alone, but all the people along the way who originally opposed what I was
+doing, and who all came around and were able to achieve all these targets that I had set in the first place.
+Another key engineering feat was to cut down on wind noises. The engineers would attach many tiny microphones to
+the window at the clay model stage, and then check to see if they had achieved a quiet noise level. The yet challenge
+was trying to balance aerodynamics with styling. If you try to adopt elegant styling, you tend to bring down the
+
+aerodynamic efficiency. On the other hand, if you have good aerodynamic efficiency, styling will suffer. Styling
+developed a bunch of clay models to achieve the distinctive and refined appearance Suzuki was after and the stylists
+were obviously very proud of them. Unfortunately, none of them passed the stringent aerodynamics test. So what do
+you do?
+Suzuki s approach, as with the engine, was to find the most talented engineers, challenge them with the goal, and ask
+them to try real things rather than just analyze and theorize. So he found an exceptional aerodynamics engineer and,
+choosing a clay model from the styling studio, challenged him to modify the design until it achieved the correct
+aerodynamic results. The aerodynamics engineer said, I will take that clay model and reach the goals that you want
+0.28 on the coefficient of drag. The aerodynamics engineer decided to physically cut and modify the clay model
+himself, a job normally done by the modeler, requiring several iterations with a lot of verbal discussion between the
+modeler and the engineer. He cut here and there and finally ended up with a vehicle that was aerodynamically
+matched to the target. It looked terrible. He had lost all the fine styling features of the designers. But through this
+process he was able to understand the aerodynamic characteristics much more quickly and deeply than if he had
+been giving verbal instructions to the clay modelers and waiting for the revised models.
+Through this hands-on experience, he uncovered reference points that he could feed to the stylists to simultaneously
+improve aerodynamic performance while achieving excellent styling. By deciding to personally cut the clay, which
+Suzuki encouraged, the aerodynamics engineer sped up the development of Lexus and got a deeper understanding of
+the aerodynamics. This was another example of Principle 12 (genchi genbutsu).
+As a result of Suzuki s engineering approach of achieving no-compromise objectives, the Lexus program took off
+and accomplished exactly what he wanted a smart design and a very smooth ride. The feel of the ride at 100 kph and
+160 kph was practically the same, despite the fact that you were traveling 1.6 times faster. To say the least, the
+consumer was impressed, and it showed in the numbers sold. At the time of the Lexus launch, Mercedes-Benz s
+three models (300E, 420SE, 560SEL) had no rival in the U.S. market. But Lexus, with only one model, was able to
+sell, in one year, 2.7 times the number of all three of those well-established Mercedes combined. As of 2002, the
+Lexus was the best-selling luxury car in the United States.
+
+The creation of the Lexus spawned an entirely new luxury division of Toyota and placed their image in the elite of the
+luxury market the original goal of visionary Togo. It also gave rise to a new spirit of innovation in Toyota s
+engineering. When Toyota started out in the automobile business, the engineers had no choice but to be innovative.
+As Toyota became a global powerhouse with clearly delineated product families, its thousands of engineers became
+specialists tweaking the next Crown and the next Camry.[1]
+Lexus broke the behavioral mold and engineers who had known only the conservative, risk-averse Toyota suddenly
+were working on a bold, new, challenging project. This renewed spirit would carry over into an entirely new project,
+with new objectives and challenges. Toyota was about to reinvent its vehicle development process with the Prius.
+
+[1]In fact, the innovative enthusiasm was almost too contagious. At some point, the vehicle content of the Camry and
+other cars rose to the point that costs got out of control. Toyota chief engineers had to be reined in and design
+appropriate levels of content while relying more on standardized parts to cut costs. This was one benefit of the later
+reorganization of Toyota into vehicle centers with vehicle center heads, as discussed in the next chapter. It is also an
+example of how Toyota is a learning organization.
+
+Chapter 6: The Toyota Way in
+Action: New Century, New Fuel,
+New Design Process Prius[1]
+Overview
+Creativity, Challenge and Courage: the Three C s
+Shoichiro Toyoda, former President, 1980s
+Toyota executives considered the early 1990s to be a very dangerous business climate for Toyota. The problem was
+that Toyota was too successful. It was the peak of the Japanese bubble economy and prosperity seemed like it
+would never end in Japan. Toyota s business was booming. This is exactly the environment that leads many
+companies into complacency. But the biggest crisis, from the perspective of Toyota leaders, is when associates do
+not believe there is a crisis or do not feel the urgency to continuously improve the way they work.
+At that time Toyota had a very strong product development system for creating routine variations of existing vehicle
+models, but the company had not changed its basic product development system for decades. Toyota Chairman Eiji
+Toyoda was concerned and took every opportunity he could to preach crisis. At one Toyota board meeting, he
+asked, Should we continue building cars as we have been doing? Can we survive in the 21st century with the type of
+R&D that we are doing? ... There is no way that this [booming] situation will last much longer.
+Much like Toyota deciding it should produce a luxury car even though they were doing just fine, Toyoda was
+practicing Principle 1: Base your management decisions on a long-term philosophy, even at the expense of
+short-term financial goals. Though Toyota s short-term financial situation was exceptional at the time of both the
+Lexus and the Prius conceptions, it challenged itself because of long-term future considerations. In fact, Toyota still
+had a crisis mentality, and Toyota leaders regularly stir the pot even creating a crisis when necessary.
+It was Yoshiro Kimbara, then Executive VP of R&D, following Toyoda s lead, who founded Global 21 (G21) the
+car that became the Prius. Kimbara led a project committee tasked with researching new cars for the 21st century. In
+its humble beginnings, the only real guidance was to develop a fuel-efficient, small-sized car exactly the opposite of
+the bigger and bigger gas guzzlers that were selling at the time. In addition to the small size, a distinguishing feature of
+the original vision was a large, spacious cabin. Thus, it had to be small and efficient but feel big inside a major design
+challenge from the start.
+[1]The Prius case is based on an interview with Takeshi Uchiyamada, Chief Engineer of the original Prius, and a
+book on Prius written by a Japanese journalist, The Prius That Shook the World: How Toyota Developed the
+
+World s First Mass-Production Hybrid Vehicle, by Hideshi Itazaki, translated by A. Yamada and M. Ishidawa
+(Tokyo: The Kikkan Kogyo Shimbun, Ltd., 1999).
+
+The Prius Blueprint
+Risuke Kubochi, General Manager of General Engineering, stepped forward and agreed to lead the effort. He was
+formerly the chief engineer of Celica. He had a reputation for being aggressive and not terribly friendly, but strongly
+determined to accomplish any task he undertook. Kubochi personally selected 10 middle managers to work on his
+team. This working-level committee reported directly to a high-level committee of Toyota board members, informally
+known as kenjinkai ( committee of wise men ), that met weekly. The project had the highest-level executive
+sponsors from the very beginning.
+At first the G21 project was not defined as a hybrid vehicle project. There were two goals:
+1.
+Develop a new method for manufacturing cars for the 21st century.
+2.
+Develop a new method of developing cars for the 21st century.
+
+The committee s job was simply to identify the general concept, and it saw the first task as mainly a packaging issue
+how to minimize vehicle size, yet maximize interior space. It also set a target for fuel economy. The then current
+engine in a basic Corolla got 30.8 mpg and the target was set at 50 percent more, 47.5 mpg. This was thought to be
+a groundbreaking target. Although the committee was aware of a hybrid engine project, they assumed it would not be
+ready in time for the G21. The committee members all had full-time jobs apart from the G21 and at first met weekly.
+
+The committee began meeting in September 1993 and had just three months to present their concept to a high-level
+executive committee. About 30 people, including Executive VP Kimbara and member of the board Masumi Konishi,
+attended the meeting. Obviously three months was too short to build an actual prototype. But the committee was not
+satisfied simply presenting ideas, so they developed a half-scale blueprint for the vehicle that took up a good part of a
+wall.
+One of the working-level members that Kubochi had selected was Sateshi Ogiso, who would be the only person
+who stayed with the Prius until its actual launch years later. The G21 as a clean sheet was a dream project for a
+young engineer. Ogiso had been charged with organizing the committee meetings and thus was given a kind of
+leadership role. At the design review session, Ogiso was about to prompt Kubochi to begin the presentation, but was
+stunned when Kubochi preempted him with Ogiso, I would like you to make the report. Ogiso was just a
+32-year-old youngster who had only recently made engineer-in-charge. He quickly recognized that he had been
+tricked, which wasn t the first time that Kubochi had put him on the spot in order to cultivate his leadership ability.
+But he did an excellent job of giving the report, which was very favorably received by the executive committee. The
+requirements for the vehicle were identified as:
+1.
+Roomy cabin space, achieved through maximizing the length of the wheelbase.
+
+2.
+A relatively high seat position, to facilitate getting in and out of the car.
+3.
+An aerodynamic exterior, with a 1500 mm height, a little less than a minivan.
+4.
+A fuel economy of 20 kilometers per liter (47.5 mpg).
+5.
+A small horizontally placed engine with a continuously variable automatic transmission (which improves fuel
+efficiency).
+
+Phase I of this project illustrates three Toyota Way principles.
+1.
+Principle 9. Grow leaders who thoroughly understand the work, live the philosophy, and teach it to others.
+We see how involved high-level executives are in a very abstract and future-oriented project that is seen as
+central to the future of the company with active sponsorship, including weekly meetings with the study group.
+2.
+Principle 10. Develop exceptional people and teams who follow your company s philosophy. We see how
+some of the best people step up to a challenging project that is seen as important to the company and then
+work extremely hard after hours to meet aggressive deadlines. They had three months as an extracurricular
+activity to do extensive research and develop a vision for the project. We also get a glimpse of how leaders
+at Toyota develop young people. Kubochi could have taken credit for leading this effort, but it was more
+important to provide a life lesson to Ogiso, who later reflected that by being placed in the critical situation to
+give the presentation, I learned to organize issues in my head as I spoke, and acquired a sense of
+self-confidence (Itazaki, 1999).
+3.
+Principle 12. Go and see for yourself to thoroughly understand the situation (genchi genbutsu). The team felt
+uncomfortable presenting only abstract concepts so short of building an actual model, they did the next best
+thing they developed a half-size blueprint so the executives could picture the actual vehicle.
+
+An Unlikely Chief Engineer Invents a New
+Approach to Car Development
+The next step was to develop a more detailed blueprint for the vehicle. High-level executives pondered who should
+lead the effort and settled on the unlikely choice of Takeshi Uchiyamada as the chief engineer. Uchiyamada hadn t
+been groomed to be a chief engineer and never even aspired to this role. His technical background was in test
+engineering and he had never worked in vehicle design. He had been assigned to technical administration and in fact
+led the reorganization of Toyota s product development organization into vehicle development centers, the largest
+reorganization in its history. His intention after working in technical administration was to go back to research. Yet,
+here he was tagged by high-level executives to lead this program blessed by the chairman of the company.
+While on the surface Toyota s decision to appoint Uchiyamada as chief engineer might at first glance seem hasty and
+illogical, in fact it followed Principle 13: Make decisions slowly by consensus, thoroughly considering all options;
+implement rapidly (nemawashi). In fact, Uchiyamada was uniquely qualified for the task for several reasons. First,
+this was the first project in decades that involved truly breakthrough technology and would need a level of research
+support uncharacteristic of most development projects. Uchiyamada came from research. While he was not a design
+engineer, he did love cars, had a very deep technical engineering background, and his father had been the chief
+engineer for the Crown a flagship Toyota vehicle so it was in his blood. Second, the project was not housed in one
+vehicle center and would require someone who had an excellent understanding of the new organization to marshal
+resources, which Uchiyamada possessed, having been one of the chief architects of the new, recently implemented
+organization structure. Third, a central purpose of the project was to develop a new approach to vehicle
+development. Someone who had been raised under the old system to be a chief engineer could be blinded by the
+current system. Someone with proven organizational design skills was needed to take a fresh look.
+No one was more surprised by this decision than Uchiyamada. As he explained to me:
+
+As a chief engineer, if there are supplier problems it is the responsibility to visit the supplier and check the
+line and solve the problems. I did not even know what I was looking for to know what to do in many cases ....
+One of the personifications of the chief engineer is that they know everything, so even when developing
+different parts of the vehicle you know where the bolts can go together as well as what the customer wants.
+So what could Uchiyamada do, since he did not know everything ? He surrounded himself with a cross-functional
+team of experts and relied on the team.
+One of the most important results of the Prius project from an organizational design perspective was the creation of
+the obeya system of vehicle development, which is now the new standard for Toyota. Obeya means big room. It is
+like the control room. In the old vehicle development system, the chief engineer traveled about, meeting with people
+as needed to coordinate the program. For the Prius, Uchiyamada gathered a group of experts in the big room to
+review the progress of the program and discuss key decisions. The project team found a room outside the fray of
+normal day-to-day affairs, which became known for housing a weird, top-secret group (G21 project) endorsed by
+top management. During the development process, Uchiyamada documented in real time the experience of designing
+a new breakthrough design from scratch. This led to a very confidential 200-page document that can be reviewed
+only with special high-level permission. Toyota executives achieved their goal of reinventing the company s design
+process by intentionally selecting a non-expert chief engineer.
+
+The 21st-Century Car: Environmentally Friendly,
+Conserving Natural Resources
+Uchiyamada proved to be a creative leader, yet very focused on achieving aggressive timing targets. In fact, the more
+detailed conceptual blueprint was completed in just six months. Normally the first step in this phase would have been
+to develop a physical prototype. But Uchiyamada decided that if they quickly made a prototype they would get
+mired in the details of improving it. He wanted to thoroughly discuss multiple alternatives before narrowing in on a
+decision. My associates and I have termed this set-based concurrent engineering (discussed further in Chapter 19),
+in which sets of alternatives are broadly considered rather then focusing in on a single solution.[2] There were many
+examples of this set-based thinking throughout the Prius development.
+
+In the early stages, the team was quickly bogged down in discussing technical details of power-train technology.
+Uchiyamada saw this as a problem. He called the team together and said, Let s stop this. Let s stop focusing on
+hardware. We engineers tend to focus on hardware. However, what we need to do with this car is to focus on the
+soft aspects, not the hardware. Let s forget everything about hardware and review from the beginning the concept of
+the car that we are trying to build from the ground up (Itazaki, 1999). Uchiyamada then lead a brainstorming session
+of key concepts to describe characteristics of the 21st-century car. Several days later, after many keywords had
+been generated and discussed, they reduced the list to two key words that ended up driving all subsequent
+development: natural resources and environment.
+Automobiles account for about 20 percent of the carbon dioxide from all human sources, yet about one fourth of the
+world s population enjoys their benefits. The goal for the G21 was stated as a small, fuel-efficient car. Ultimately, a
+hybrid engine was the key to the solution. An electric vehicle certainly would have been fuel-efficient and would have
+produced almost zero emissions, but it was not considered practical or convenient. You need a separate
+infrastructure to recharge the batteries, the distance between charges is short with the known technology, and the
+batteries that have the needed power are huge. The car would be a battery carrier. Fuel cell technology, on the
+other hand, had great promise, but the technology was not nearly developed to the point of being viable and was
+possibly decades off.
+Hybrid technology had a nice blend of fuel economy, low emissions, and practicality. The basic idea is to let the gas
+engine do what it does well and the battery-driven motor do what it does well, thus recapturing as much as possible
+the energy generated during driving and braking. Internal combustion engines are not very efficient at acceleration but
+are very efficient once a certain rpm level is reached. Electric motors are much more efficient at rapid acceleration.
+When gas engines are running, they can then recharge the batteries, so there is a harmony between the gas engine and
+the electric motor. In the most sophisticated hybrids, computers determine which of the two engines is most efficient,
+based on speed, road grade, number of passengers, and other variables. Even the energy used in braking can be
+recovered as electrical energy.
+
+[2]Allen C. Ward, Jeffrey K. Liker, John J. Cristiano, and Durward K. Sobek II, The Second Toyota Paradox:
+How Delaying Decisions Can Make Better Cars Faster, Sloan Management Review, Vol. 36, No. 3, Spring
+1995, pp. 43-61.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Hybrid Gets a Push from the Top
+At this point in 1994, the team still had rejected the notion of a hybrid engine. It was considered too new and risky
+technology. In September 1994, the team met with Executive VP Akihiro Wada and Managing Director Masanao
+Shiomi and the hybrid technology came up, but no conclusion was reached. The G21 group was given an additional
+task besides the continued development of the G21. They were asked to present the G21 as Toyota s concept
+vehicle for the Tokyo auto show in October 1995. This meant they had just a year to develop what would become
+the showcase product of the auto show.
+
+When they met with Wada in November 1994, he casually said, By the way, your group is also working on the new
+concept car for the Motor Show, right? We recently have decided to develop that concept as a hybrid vehicle. That
+way, it would be easy to explain its fuel economy (Itazaki, 1999). Shortly after this, in another meeting with Wada
+and Shiomi near the end of 1994, the bar was set even higher. It seems they concluded a 50 percent fuel economy
+improvement was not enough for a 21st-century car. They wanted double the current fuel economy. Uchiyamada
+protested that this would be impossible with current engine technology, to which they replied, Since you are already
+developing a hybrid vehicle for the Motor Show, there is no reason not to use a hybrid for the production model
+(Itazaki, 1999).
+It then became apparent to the team what these two executives were trying to do. They did not want to come out
+and order the team to make a hybrid. Instead, they warmed them up by requesting a hybrid that did not have to be a
+production model for the auto show. They then led them to the natural conclusion that a true 21st-century car had to
+have breakthrough fuel economy and thus a hybrid seemed the only practical alternative. Though this approach
+appears to go against the general spirit of Principle 8, Use only reliable, thoroughly tested technology that serves
+your people and processes, Toyota always wants to consider every new technology thoroughly and adapt it when
+it is appropriate. And the 21st-century car was about developing a breakthrough. At the time, the hybrid system
+already was a thoroughly considered technology. What was different for Toyota was that this technology hadn t yet
+been proven on a mass production basis. So, when Uchiyamada took up the challenge, he got one important
+concession from management: that he could select the finest engineers available within the company to work on the
+hybrid system.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Phase III: Accelerating the Development Project
+From the time Uchiyamada agreed to develop a hybrid concept vehicle in November 1994 until the deadline for the
+auto show in October 1995, there was less than a year to develop at least a workable hybrid engine and the vehicle
+itself. With extreme time pressure, the temptation would be to make a very fast decision on the hybrid technology and
+get to work on it immediately. Instead the team reexamined all its options with painstaking thoroughness (illustrating
+Principle 13). They used a set-based approach, considering 80 hybrid types and systematically eliminating engines
+that did not meet the requirement, narrowing it down to 10 types. The team carefully considered the merits of each of
+these and then selected the best four. Each of these four types was then evaluated carefully through computer
+simulation. Based on these results, they were confident enough to propose one alternative to the G21 team in May
+1995, just six months later.
+
+Up to this point, the focus was on concept development and research into alternative technologies. Now there was a
+clear direction for the program and technology to build the first mass-production hybrid vehicle. Toyota s board
+could approve an actual budget, human resources, and a rough timeline. In June 1995, the Prius became an official
+development project. Since there was a great deal of new product technology as well as the task of developing a
+new manufacturing system, they developed a three-year plan. The first year would focus on developing a complete
+prototype. The second year would focus on working out the details through thorough research. The third year would
+focus on finalizing the production version and production preparation. Based on their best analysis, a stretch tar get of
+starting actual production the end of 1998 was forecast, with some cushion if needed to delay this until early 1999.
+They were very proud of their aggressive schedule.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+A New President with a New Mission Prius Leads
+the Way
+But something important happened in August 1995. Toyota named a new president, Hiroshi Okuda, the first
+non-Toyoda family member to be the president in the history of the company. From the outside, he was viewed as
+unusual for the Toyota culture. Okuda was more overtly aggressive in his business dealings, including globalization.
+He also had a business background, rather than an engineering or manufacturing background, and seemed to call
+things as he saw them, in contrast to past presidents, who were more indirect and cautious in what they said. Such a
+big move obviously had a reason. It was clear that there were new challenges ahead to globalize and prepare for the
+21st century.
+
+While one might expect a non-engineer and a new executive who wants to put his imprint on the company to
+significantly change the direction and priorities of the company, Okuda stayed with Toyota s overall game plan. He
+just pursued it faster and more aggressively. In the case of the G21, he might have neglected it as the pet project of a
+former executive. Instead, he embraced it even more aggressively. When he asked Wada when the hybrid vehicle
+would be ready, Wada explained that they were aiming for December 1998, if all goes well. Okuda said, That is
+too late; no good. Can you get it done a year earlier? There will be great significance in launching the car early. This
+car may change the course of Toyota s future and even that of the auto industry (Itazaki, 1999).
+Wada and his team felt a great deal of pressure, but also renewed excitement, given Okuda s belief in the seminal
+importance of the project. The target was moved to December 1997.
+
+At last the prototype Prius was publicly unveiled at the October 1995 Toyota auto show, and it was a hit. The team
+was energized. But they would need that energy to develop a true production hybrid vehicle, with a new target date
+less than two years away. Here they were, responsible for a highly advertised vehicle breaking new ground and there
+was no clay model and no styling design and they still needed to engineer all the major (and mostly new) systems of
+the vehicle.
+The timing pressure was immense, but it did not push project leaders to cut corners. Uchiyamada refused to
+compromise even on a lower-risk approach. For example, there was a suggestion he use a hybrid-driven Camry for
+the first hybrid vehicle, since it was larger and could easily house the more complex engine and electric motor. The
+other advantage was that the difference in fuel economy between the existing model and the hybrid vehicle would be
+dramatic.
+Uchiyamada rejected this suggestion, saying:
+
+We are trying to build a car for the 21st century, and our work isn t about applying the hybrid system on
+existing models. If we take the conventional method of first trying out the system in a large car, we would
+end up making too many compromises in terms of cost and size. There would be less waste if we worked with
+a smaller car from the beginning.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Clay Model Freeze 15 Months to Go
+Over the next few months, Uchiyamada worked closely with the styling studios, the artists of the industry, to design
+the Prius. Finally, in July 1996, Uchiyamada had a car to develop. Once a car style development process reaches this
+point, it is called a clay model freeze though auto executives are notorious for making significant changes in the basic
+styling well after the so-called freeze. Not so at Toyota. Toyota stands out in sticking to its decision on the vehicle
+styling at clay model freeze. It goes through an unusual degree of thoroughness in decision making (nemawashi) to
+make a good decision at this point.
+Uchiyamada, who had never led a new car development program, had just 17 months from the July decision date to
+produce the Prius. The actual design review and formal approval by the board was in September, so from that point
+there was really only 15 months. In addition to developing the technology, Toyota had to develop and prepare a new
+manufacturing process, create a new sales plan to sell the Prius, and even prepare the service organization to service
+the vehicle. In 1996 the auto industry standard for developing vehicles, particularly in the U.S., was five to six years.
+But as early as 1982, Japanese auto companies were developing vehicles in 48 months. So when U.S. auto
+companies heard that Toyota was on an 18-month development cycle from clay model to start of production they
+were in awe. But the 18-month cycle in Toyota was typical for a variation of an existing model and the breakthrough
+Prius had only 15 months.
+
+Toyota engineers worked slavishly, canceling all vacations, to engineer the body based on the clay model selected in
+July. In September they made a formal presentation to the board, which approved it. From then on, the development
+of the vehicle was a marathon race to reach Okuda s target date of December 1997. In the mindset of Principle 10,
+Develop exceptional people and teams who follow your company s philosophy, everyone understood they had
+to make personal sacrifices to work on this project that was so visibly important to the company and had such
+aggressive goals and timing targets. As an example, Takehisa Yaegashi was a senior manager who had supervised
+many engine development projects and was personally recruited by a board member to lead the hybrid engine team.
+When he agreed, he immediately went home, explained the situation to his wife, and moved into the company
+dormitory to get away from all distractions.
+The development process did not always go smoothly. Itazaki (1999) provides an engaging blow-by-blow
+description of the process, the numerous problems encountered, and the creative and even courageous resolution of
+these problems. For example, the battery driving the motor portion of the hybrid was a continual problem. A key
+requirement was to make the battery as small as possible so that the Prius would not be viewed as a battery carrier,
+yet still have the power needed to meet the target of doubling the fuel efficiency of the car. In fact they needed to
+make the battery one-tenth the size of an electric vehicle battery. It turned out the battery was very sensitive to heat
+conditions and would shut down on hot days. It also shut down if the weather was too cold. Executives, including the
+president, were coming through on test drives, but the vehicle would shut down. A key part of the solution was to put
+the battery in the trunk, which was the most protected from heat and the easiest to keep cool. After struggling to
+resolve these and other battery-related problems, Toyota decided to start a joint venture company with Matsushita
+Electric called Panasonic EV Energy, with the idea of eventually selling the battery to other auto producers. Though
+Toyota felt a bit pushed into this partnership, it does not take partnerships lightly and took on the challenge
+characteristic of Principle 11: Respect your extended network of partners and suppliers by challenging them
+and helping them improve. Together, two corporate cultures managed to overcome their differences and blend into
+a viable, working company.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+In 1997, one thousand Toyota engineers were feverishly working to make the December target for the start of mass
+production. But incredibly, Toyota still did not have a workable prototype. Normally, just before mass production,
+prototypes have been tested and work almost perfectly. In the case of the Prius, however, since R&D was being
+done simultaneously with product development, practically every new technical breakthrough required a new
+prototype car. And the new prototypes almost never ran properly the first time. This was very disturbing, as the
+young test engineers and production engineers had never seen a vehicle in such bad condition so close to launch.
+Senior engineers were feeling a sense of déjà vu from their early years at Toyota, when every vehicle launch program
+was like this.
+Toyota president Okuda was not an engineer, but he was an exceptional manager and leader who understood how
+to motivate people. As December was approaching, he wanted to give the team a little push. The launch date for the
+Prius had been kept confidential and was known only inside the company. Conferring with Wada, they decided to
+make a public announcement in March. They knew that a public announcement would make it a matter of pride and
+social responsibility for Toyota s engineers to deliver on time. Okuda, in his speech to the press, stated:
+
+Toyota has developed a hybrid system that is an answer to the environmental problems of the 21st century. It
+achieves a fuel economy that is twice that of conventional cars of the same class, emitting half as much CO2.
+We would like to launch this car within this year.
+Uchiyamada described to me his reaction:
+
+In August 1995 I asked for more than three years for development. Mr. Okuda said we should launch at the
+end of 1997 and do your best. If it is impossible you can delay the launching time. So I said OK. But in the
+beginning of 1997 it was already publicly announced by Mr. Okuda that Toyota would come up with a
+hybrid. We had climbed the ladder and the ladder was taken out from under us. We actually worked 24 hours
+a day (two shifts), changing the people.
+The Prius did launch on time. In fact, it launched in October 1997, two months ahead of the December target date,
+and the world s first mass production hybrid car was offered to the Japanese market, soon to be followed by a U.S.
+launch. The price was subsidized by Toyota, at an amazingly low two million yen in Japan, not much more than a
+Corolla, but Okuda knew that, as volumes increased and cost reduction opportunities were identified, they could
+make money at that price. At launch the Prius took first place in the two most prestigious automotive competitions in
+Japan, winning both the coveted Japan Car of the Year and RJC New Car of the Year. Toyota was bombarded
+with inquires from potential customers and, the month after launch, orders for 3500 units had been received over
+three times the monthly sales target. This was very unusual for a car costing two million yen and being sold at no
+discount. Worldwide sales since then have continued to grow, to over 120,000 units by early 2003. Toyota has 80
+percent of the world hybrid market and has many hybrid vehicles in development.
+
+Critics of Toyota s heavy investment in Prius, estimated to be in the hundreds of millions to $1 billion, have
+questioned the return on investment. Koji Endo, an equity analyst of Credit Suisse First Boston in Tokyo estimates
+Toyota must sell 300,000 hybrids annually to pay off the investment. Toyota is not there yet.[3] The second
+generation Prius came out in 2003 as a substantial improvement over the first in styling and fuel economy going from
+48 mpg to 55 mpg. Advanced sales greatly exceeded expectations. And a hybrid version of the Lexus RX330 will
+only add to the sales and payback on investment.
+But the goals of the Prius were farther-reaching than short-term profitability. One benefit for society was the opening
+of a mass market for more environment-friendly cars. A J.D. Power study late in 2002 found 60 percent of those
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+surveyed in the U.S. would definitely or strongly consider buying a hybrid. J.D. Power forecasts demand to reach
+500,000 per year by 2006 and to keep rising. For Toyota, a benefit was the development of young engineers who
+now understand what it takes to develop new technology (Principle 10: Develop exceptional people and teams
+who follow your company s philosophy ). Toyota also developed new technical capabilities in hybrid engines
+through the Prius and is now selling key components to other manufacturers. Finally, it made fundamental innovations
+in its product development process that are being used for all vehicle development. By this measure, the returns on
+the Prius project are priceless and the investment is almost trivial. The importance of the Prius was the learning.
+Toyota employees knocked themselves out to do it their way, in house, and develop knowledge and new capabilities
+along the way.
+[3]John L. Bloomberg, electronic newsletter, September 29, 2003.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Toyota s New Product Development Process
+The seemingly impossible deadlines set by top leadership for the Prius project and the numerous technical challenges
+faced by the Prius engineers dramatically improved Toyota s already excellent product development process in two
+key ways:
+
+1. The cross-functional team and chief engineer work together almost daily in the same room (obeya). In
+Toyota s traditional approach, in the planning phase the chief engineer comes up with a concept, discusses it with the
+design groups and

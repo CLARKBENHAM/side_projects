@@ -1,0 +1,768 @@
+You are writing a pre-read guide for one chapter of a book.
+
+Book:
+- title: The Toyota Way
+- author: Jeffrey K. Liker
+- chapter: 8 of 14
+- chapter title: Span 8
+
+Goal:
+Write the thing a smart reader should read immediately before reading this chapter.
+The reader wants to move faster through the real chapter while retaining the main
+arc, load-bearing facts, important mechanisms, and a few scenes worth watching.
+
+Write Markdown only, roughly 700-1,100 words, with these sections:
+
+1. Orientation Before Reading
+   - 4-7 bullets giving the time, stakes, people, institutions, and conflict.
+
+2. The Chapter Arc
+   - 5-9 chronological bullets.
+   - Each bullet should say what changes, not just what happens.
+
+3. What To Watch For
+   - 5-9 bullets naming the important mechanisms, constraints, causal moves,
+     or authorial claims likely to matter.
+
+4. Load-Bearing Scenes
+   - 3-6 short entries.
+   - Each entry should have setup, action, and payoff in plain prose.
+
+5. Cast And Terms
+   - A compact glossary only for names, factions, places, institutions, and terms
+     needed to read this chapter without friction.
+
+6. What To Hold Lightly
+   - 2-5 bullets for vivid but probably nonessential detail.
+
+Rules:
+- Do not summarize every page.
+- Do not write a school-report recap.
+- Do not invent generic mental-model labels when a concrete event is clearer.
+- Prefer specific actors, constraints, incentives, chronology, and consequences.
+- Keep prose clean and readable; no throat-clearing and no motivational language.
+- Assume the reader has not read this chapter yet.
+- Do not mention reader highlights; this is for a new unread chapter.
+
+Chapter text:
+t it works. Finally Toyota used the principle of
+careful consideration in decision making (nemawashi, discussed in Chapter 19) and, after two years of thinking and
+debating, decided to shift to CATIA (Computer-Aided Three-Dimensional Interactive Application) a world-class
+CAD system used by Boeing and Chrysler and pretty well accepted as the auto industry benchmark. Toyota was
+slow in implementing CATIA, taking a lot of time to customize it to fit their development process. Ford, in the
+meantime, quickly adopted a different commercial CAD package, spent hundreds of millions of dollars deploying it
+internally and with suppliers, and later decided it would rather have CATIA spending millions on that and confusing a
+lot of people.
+Toyota has continued to streamline its product development process, using very specific software solutions, and has
+gone from 48 months, when it first introduced CAD software in the 1980s, down to less than 12 months to develop a
+new vehicle. Toyota refers to this approach as collaborative vehicle development using digital engineering. The
+phrase says it all. They have found a set of relatively simple technologies that support collaborative work in the
+Toyota Way of product development.
+
+These collaborative solutions always begin with a specific problem. For example, there was a problem in the old
+system of too much rework. Data from prototypes, vehicle evaluations, and pre-production tests fed back to
+engineering in the form of a series of problems to solve. But these shortcomings were discovered and fixed at the next
+process step, not in the place where they originated. This went against the principle of jidoka (see Principle 4), so
+Toyota changed the process. The new paradigm was to learn to do a lot of the testing and visualization digitally up
+front in the design process, thereby avoiding this downstream rework. This is absolutely necessary to get to a new
+vehicle design in less than one year.
+
+Now complete assemblies, for example the instrument panels, are done digitally in three dimensions. This method
+builds on the standardization that Toyota does in vehicle design. For decades Toyota engineers kept detailed
+checklists of good and bad design features. Now these are stored electronically in a know-how database that
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+allows the product to be designed with quality from the start. There is also detailed data on proper sequences in the
+assembly plant that a person can look at in the earliest stages of design. Engineering animation allows the engineers to
+watch animated versions of people putting together the vehicle to anticipate ergonomic problems and avoid them in
+the earliest design stage. Multi-point TV conferencing allows engineers throughout the world to watch the vehicle go
+together digitally and solve many of the problems that in the past would be done standing around an actual car being
+assembled.
+
+The point here is that Toyota did not go into a poorly functioning development process and try to fix it using the most
+sophisticated computer technology. They took a finely tuned development process, based on exceptionally
+well-trained engineers and excellent technical leadership, and surgically inserted information technologies to enhance
+it. These were all proven technologies that
+Toyota carefully evaluated prior to going live. Moreover, they did it maintaining the collaborative design process and
+the strong value placed on visualization of the actual situation in the design process.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Role of Technology Adapting It Appropriately
+In industry today, the watchword is flexibility. Everyone wants to be as flexible as possible and Toyota is no
+exception. Originally, what allowed Toyota to compete with global players was its flexibility. To Toyota, flexibility
+does not mean pushing the latest and greatest technology onto operations and struggling to make it work. Toyota
+follows Toyota Way Principle 8: Use only reliable, thoroughly tested technology that serves your people and
+processes. Again, testing involves both existing technology and new or cutting-edge technology that Toyota has
+thoroughly evaluated and piloted to prove that it works.
+
+One example of this is in the body shop, where the automotive body is welded together. This has been one of the few
+places for years where a lot of robotics is used and with great success. But it is also the place that most limits
+flexibility in making cars. Ultimately, all of the large panels that make up a vehicle must be held in place and welded
+together just right. There are complex fixtures that hold the parts of the body in place. Originally these fixtures were
+specific to a particular car body. To produce a different car body required changing all of the fixtures manually, which
+took weeks of hard work. Flexible body shops were a major innovation that allowed multiple car bodies to be made
+in the same shop. And this also allowed for a much more rapid changeover from one year s model to the new model.
+Toyota eventually learned to do this without stopping the line called a running change in the industry.
+
+Nevertheless, Toyota s body shop still was not very flexible, because it used very expensive pallets that were
+designed to hold the body parts in place for different cars. For example, there would be a Camry pallet and an
+Avalon pallet. And you could not change the mix of Camry and Avalons that could be run (e.g., going from 70%
+Camry to 80% Camry) without building new pallets and changing the mix of pallets an expensive and time-consuming
+proposition. Now, instead of the car body riding on a customized pallet, it is being held in place by robots that can be
+programmed for each car body. The bodies ride on something like a ski lift. The earlier pallet system held the body
+together from the outside in and had fixtures sized and positioned differently for each vehicle. The new system has a
+programmable fixturing device that holds the parts together from the inside out a radical new concept that improves
+flexibility. And it takes up about half the space. Toyota calls this new global standard the blue sky system. Among
+other things, it is not as tall as the old system and has allowed for more blue sky in the body shop, which used to be
+dark and dingy and now is very open and bright for the people working there. They also call it the Global Body Line,
+since it is being introduced as a new standard in every Toyota plant in the world. Different car models can be run
+back to back and the mix can be changed instantly through a change in programming. It is a true one-piece flow and
+will be a key contributor to Toyota s move toward build to order.
+Often when manufacturers implement new systems like this, it is a disaster disrupting production, creating quality
+problems, and keeping maintenance busy fighting fires for years. But Toyota implemented the blue sky technology
+systematically, module by module, replacing pieces of the old equipment as it was running. They never missed a beat.
+As Don Jackson, Vice President of Manufacturing at Toyota s Georgetown, Kentucky, operation, explained:
+
+At Toyota Georgetown, we were the seventh plant to get the new blue sky system. And it takes up roughly half the
+space of the old line. So we actually put two new body shops in the place of one to support our two assembly lines.
+But we had to do that during mass production at full production capacity. We didn t have any space. So every week
+we moved a piece of the line off-line and we put a new piece in. And we had 13-14-year-old equipment, so it was
+pretty challenging trying to make sure it ran the next Monday.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+For example, to create a place for the new underbody welding, we had to clear out some restrooms and some
+area where we could make a space and start assembling there. We would use part of the old line and part of
+the new line in parallel until we changed it over. And once we had the first line in, we had an empty space to
+put new equipment in. So, then we were OK, but the first year it was interesting.
+I asked Jackson how Toyota could pull this off launching an entire new body shop while continuing to make cars
+without any production losses, while maintaining 96% uptime, when most U.S. body shops are lucky to run at
+80-85% uptime. He gave a typical Toyota answer:
+
+Well, probably one of the big things is attention to detail. I probably stand myself, even at the vice president
+level, at least six or seven hours on the floor a day. And a big part of this is genchi genbutsu go and see
+activity and doing the five whys problem investigation. Why are we only running 90%? If the management
+tools are all on the plant floor in a visual fashion, then you don t have to look at a computer or go to
+somebody s desk. It s visual, and you can manage the floor from the actual floor. So that s what I m trying to
+make sure happens.
+What we see here is a blend of sophisticated technology for flexible body welding combined with human approaches
+to management. Despite being programmable, the new inside out approach is far simpler and has led to greatly
+reduced equipment maintenance cost and less downtime of the system. And even with a complex computerized
+system, team associates use simple visual displays to help them assess what is going on. The global body line meets
+Toyota s acid test for new technology lean, simple, and speedy. It has resulted in 50% fewer processes to weld the
+body together, 70% less investment to change over the line for a new vehicle, and 75% less time to go from launch to
+meeting Toyota s high-quality targets.
+It is interesting to note that I attended a presentation at the University of Michigan by Toyota s North American
+president who described this system to a room full of experts on reconfigurable manufacturing technology. Their
+immediate question was: how could you anticipate all the benefits of this new technology and cost justify it? His
+answer made it seem obvious. They did some rough calculations and based on one changeover in the next few years
+the system would pay for itself. It was easy to justify, he said. The experts were shocked as many had struggled to
+do careful cost justifications and their companies demanded a one year payback or they would not make the
+investment. At Toyota, the decision makers are typically very experienced engineers who have worked on the floor.
+If it seems clear that the new technology has been thoroughly evaluated and will pay for itself in the long term the
+decision to adopt it seems easy and obvious.
+
+Just as Toyota refuses to push parts made in one department onto another department, Toyota refuses to allow an
+information technology department or advanced manufacturing technology department to push technology onto
+departments that do the value-added work of designing and building cars. Any information technology must meet the
+acid test of supporting people and processes and prove it adds value before it is implemented broadly.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Section III: Add Value to the
+Organization by Developing Your
+People and Partners
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 15: Principle 9: Grow
+Leaders Who Thoroughly
+Understand the Work, Live the
+Philosophy, and Teach It to
+Others
+Overview
+Until senior management gets their egos out of the way and goes to the whole team and leads them all
+together ... senior management will continue to miss out on the brain power and extraordinary capabilities of
+all their employees. At Toyota, we simply place the highest value on our team members and do the best we
+can to listen to them and incorporate their ideas into our planning process.
+Alex Warren, former Senior VP
+Toyota Motor Manufacturing, Kentucky
+The Automotive News wraps up each year by recognizing the biggest newsmakers in the industry. The Newsmakers
+of 2002 (December 20, 2002) included Bill Ford (CEO of Ford), Robert Lutz (GM Executive VP), Dieter Zetsche
+(Chrysler Group President), Carlos Ghosn (Nissan President), and Fujio Cho (President of Toyota). The contrast
+between Cho s accomplishments and those of several other recognized leaders was very revealing of differences in
+culture across companies. Here are some direct quotes from the issue:
+
+Bill Ford (Ford CEO): Talks up revitalization, brings back Allan Gilmour, promotes David Thursfield, and
+stars in TV commercials. But it s tough out there. Ford Motor stock remains mired in the $10 range.
+Robert Lutz (GM Executive VP): At 70, former Marine pilot inspires GM s troops and revolutionizes (and
+simplifies) product development, giving car guys and designers a bigger voice.
+Dieter Zetzsche (Chrysler Group President): Turns the Chrysler group around a year early with three
+quarters in the black.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Carlos Ghosn (Nissan President): Perennial newsmaker produces more incredible results at Nissan. U.S.
+market share moves up again. Ghosn truly deserves to be called the Mailman. He delivers.
+Fujio Cho (Toyota President): Toyota president presides over rise in operating profit to industry record.
+Takes lead on hybrids. Grabs 10 points of U.S. market. Joins with Peugeot for plants in Eastern Europe.
+All of these leaders have made a remarkable impact on their companies. What the non-Toyota leaders have in
+common is that they were brought in from outside to turn around ailing companies. They each, in turn, brought in a
+group of their own handpicked outside lieutenants to help in the turnaround. They also reorganized and brought their
+own philosophy and approach to transform the company. Bill Ford, a Ford employee and family member, is the
+exception. However, those inside Ford would agree that he had an atypical career path for a Ford CEO; for
+example, he quit the company in 1995 after serving in 17 mid-level management jobs. He was brought in to save a
+company teetering on the brink of bankruptcy and relieve former President Jacques Nasser. None of these
+non-Toyota leaders naturally progressed through promotion to become presidents and CEOs at these companies.
+They abruptly came in from the outside to change the culture, to shake up and change the direction of a company that
+was going bad.
+In fact, it seems the typical U.S. company regularly alternates between the extremes of stunningly successful and
+borderline bankrupt. The solution to severe problems is often to bring in a new CEO who will take the company in a
+radically new direction. This roller-coaster ride is exciting and even works in bursts. Then, when something goes
+wrong, someone else preaching a still newer direction replaces him or her. It is business leadership like the hare in the
+fable, not slow and steady like the tortoise.
+
+In contrast, Cho grew up in Toyota and was a student of Taiichi Ohno. He and Ohno provided a theoretical basis for
+the Toyota Production System (TPS) and the Toyota Way principles in order to teach them throughout the company.
+Cho was the leader of the Georgetown, Kentucky, plant, Toyota s most important venture in the United States. He
+was a board member and came into his new role when the company was already successful. He moved into the
+position naturally and built on the momentum that had been ongoing for decades. His accomplishments were the
+result of years of work and preparation by his predecessors. At Toyota, the new president or CEO does not need to
+come in and take charge to move the company in a radically new direction to put his imprint on the company. The
+leadership role of Cho focuses on something entirely different.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Principle Growing Your Leaders Rather than
+Purchasing Them
+Even when Toyota promoted someone from an unusual part of the company to save it from impending doom, there
+has never been a sudden change of direction. Perhaps this is the concept of eliminating muri (unevenness) at work at
+the executive level. It seems that, throughout Toyota s history, key leaders have been found within the company, at
+the right time, to shape the next step in Toyota s evolution. They have been there across the enterprise in sales,
+product development, manufacturing, and design.
+
+Hiroshi Okuda was the first non-Toyoda family member to take the reins in decades and came at a time when
+Toyota needed to globalize the company aggressively. After this aggressive period, Fujio Cho, in a calmer, quieter
+way, continued the globalization of Toyota, building on his experiences in the United States and focusing on
+reenergizing the internal Toyota Way culture. Despite major differences in personal style, neither of these leaders
+deviated from the basic philosophies of the Toyota Way. Behind the scenes, the Toyoda family has always been
+there, carefully grooming and selecting the new leaders. Perhaps it is no coincidence that there has always been an
+internal leader ready to step up to the plate.
+
+Toyota does not go shopping for successful CEOs and Presidents because their leaders must live and thoroughly
+understand the Toyota culture day by day. Since a critical element of the culture is genchi genbutsu, which means
+deeply observing the actual situation in detail, leaders must demonstrate this ability and understand how work gets
+done at a shop floor level within Toyota. According to the Toyota Way, a superficial impression of the current
+situation in any division of Toyota will lead to ineffective decision-making and leadership. Toyota also expects its
+leaders to teach their subordinates the Toyota Way, which means they must understand and live the philosophy.
+Another important leadership tenet of the Toyota Way is the effort leaders make to support the culture year after
+year so it can create the environment for a learning organization. In Western companies with revolving door leaders,
+no one leader is in place long enough to build a mature culture to match their personal vision. (Some of the most
+successful companies are exceptions as we will discuss in Chapter 22.[1]) So changing the culture each time a new
+leader comes into office necessarily means jerking the company about superficially, without developing any real depth
+or loyalty from the employees. The problem with an outsider leading radical shifts in the culture is that the organization
+will never learn it loses the ability to build on achievements, mistakes, or enduring principles. This affects the ability of
+leaders to make effective changes. On the other hand, in Deming s terms, Toyota uses constancy of purpose
+throughout the organization, which lays the groundwork for consistent and positive leadership as well as an
+environment for learning.
+There is no doubt that Toyota s leadership culture was shaped by the personalities, values, and experiences of its
+founders in the Toyoda family. There is a long line of distinguished and remarkable leaders from this family, beginning
+with Sakichi Toyoda, who built Toyota Automatic Loom into one of the premier loom manufacturers in the world,
+and his son Kiichiro Toyoda, who founded Toyota Motor Company. As discussed in Chapter 2, they helped to
+shape the Toyota Way. Among their profound impacts on the company, they epitomized the spirit of innovation that
+drives Toyota and the hands-on philosophy of Toyota leaders. The characteristics of Toyota leadership, particularly
+the drive to meet seemingly impossible targets and the requirement to understand the work by getting your hands
+dirty, evolved from the leadership of these two company founders.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Eiji Toyoda, nephew of Sakichi Toyoda, was the president and then chairman of Toyota Motor Manufacturing during
+the company s most vital years after the war and through its growth into a global powerhouse. He played a key role
+in selecting and empowering the leaders who shaped sales, manufacturing, and product development. He seemed to
+have a sixth sense for identifying individuals who possessed the profound leadership qualities needed to shape Toyota
+s future. Arguably, a maverick like Taiichi Ohno would never have survived, let alone prospered, within a
+conservative company like Toyota without the executive sponsorship of Eiji Toyoda (Womack, Jones, and Roos,
+1991). But Toyoda was like the owner of a basketball team who needed someone like Ohno to turn the franchise
+around, a headstrong and passionate coach with a bold vision, a disciplinary motivator who knew the game of
+manufacturing inside and out and could teach it to others.
+[1]Jim Collins, Good to Great (New York: HarperBusiness, 2001).
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+First American President of Toyota Motor
+Manufacturing
+Given that the Toyota Way is to make decisions slowly, thoroughly considering alternatives (see Chapter 19 on
+nemawashi), it was not surprising that Toyota took a very long time to establish NUMMI, its first American plant,
+and then took its time setting up Toyota, Georgetown. While in each case Toyota relied on American leaders, there
+was a Toyota coordinator from Japan mentoring them behind the scenes and the top executive was from Japan. So
+it was big news when Gary Convis was named the first American President of Toyota Motor Manufacturing in
+Kentucky in 1999. His selection into this critical position leading Toyota s largest manufacturing plant outside Japan
+represented a coming of age for Toyota in the United States. It took Toyota executives about 15 years to develop
+Convis into someone they could trust to carry the banner of the Toyota Way, but the result was a true Toyota leader.
+
+His first job out of Michigan State University was in GM s Buick division, where he worked in engineering and
+production for three years. He moved from GM to Ford in 1966. He was not a job hopper and stayed with Ford,
+moving steadily up the manufacturing organization over 18 years, when an opportunity came up to be interviewed to
+help lead Toyota s joint venture with GM as general manager of the NUMMI plant. Ford was struggling, and it
+seemed like a good time to explore new pastures. Little did Gary know that this was not just a career move. His life,
+personal philosophy, and way of looking at the world would change dramatically as he learned to understand the
+Toyota Way. After 15 years as a student of TPS, Gary is as upbeat, energized, and humble about learning from
+Toyota as if he was a new employee coming to his first orientation.
+I learn all the time, but I don t think I ll finish developing as a human being. One of my main functions now is growing
+other Americans to follow that path. They call it the DNA of Toyota, the Toyota Way and TPS they re all just very
+integrated.
+
+Like other Toyota executives, Convis stresses on-the-job experience more than brilliant theoretical insights, which
+underscores Toyota executives proclamation, We build cars, not intellectuals. The fact is they are as apt to talk
+philosophy as they are nuts and bolts. But the philosophy driving the principles of the Toyota Way is always rooted in
+the nut-and-bolts practice. Gary talks in the self-deprecating, but at same time proud way that is characteristic of his
+Japanese brethren:
+
+I got where I am because of trial and error and failure and perseverance. That trial and error was on the floor under
+the direction of my Japanese mentors. I m very proud to have grown up with Toyota. Some people would look at 18
+years and say, Well, gee, you spent 20 years in the auto industry before the 18 you just spent with Toyota; you re
+sort of a slow bloomer! But this business, I don t think it s one where there are fast bloomers. There s a lot to be
+said for experience and, if you enjoy what you re doing, it s not a long day, it s a fun day, and it s something you look
+forward to doing tomorrow.
+
+Convis met and learned from all of the most famous leaders in Toyota who helped create TPS. So when I met with
+him, I was surprised he didn t want to talk about the nuts and bolts of JIT and jidoka. He wanted to talk about the
+philosophy of TPS and the importance of culture. He pulled out a diagram (see Figure 15-1) that he had obviously
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+put together thoughtfully so he could present what he had learned about TPS through years of actually living it.
+Though the technical focus includes short lead times and is prominently featured in the definition, of equal prominence
+is engaging people toward goals. Convis sees TPS as a three-pronged beast, where only one prong includes the
+technical tools often associated with lean production JIT, jidoka, heijunka, etc. According to Convis, these are just
+technical tools and they can be effective only with the right management and the right philosophy the basic way
+
+of thinking. At the center of TPS is people.
+Figure 15-1: A Toyota leader s view of the Toyota Production System
+Source: Gary Convis, President of TMMK.
+The practice of genchi genbutsu is easy to adopt as a corporate policy and new hires can be sent out to the shop
+floor to go and see and then report back on what they see. But at Toyota, this is not simply a lesson for the
+neophyte to learn. The executive or manager must go, see, and really understand the actual situation at the working
+level. Managers are not just managing technology or tasks; they are promoting the culture. The absolute core of the
+Toyota philosophy is that the culture must support the people doing the work. Management must demonstrate a
+commitment to quality every day, but ultimately quality comes from the workers. And you cannot tell people they are
+important and then risk their health and safety to make production goals that day. This leads to a complex set of
+interrelated philosophies and practices, as Convis described:
+
+Basically people will do what upper management wants them to do. So if that s consistent, if they re not
+whipsawed and being governed by different priorities, they learn what is truly important and what is not .
+The two priorities are very clear quality first, safety first. Extra effort. Extra caring. It s that kind of culture
+that we hope to create, by the way we manage our business.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+First Lesson of Management Putting Customers
+First
+Shotaro Kamiya was to Toyota Motor Sales what Ohno was to the Toyota Production System. His leadership
+defined the sales philosophy of Toyota. Like most Toyota leaders, Kamiya could be described as a self-made man.
+Unlike most Toyota employees today, who are hired directly out of school, he joined Toyota as sales manager in
+1935, when Toyota Motor Company was first being formed. Toyota needed to hire experienced people and Kamiya
+had worked at Mitsui Trading Company (a close partner to Toyota) and had a lot of international experience in the
+U.S. and Europe. Kamiya ended up creating the Toyota dealer network in Japan and was also responsible for
+expansion of Toyota into sales in the U.S. Eventually he became the honorary chairman of Toyota. One famous
+quote from Kamiya reflects the customer first philosophy he preached and ingrained in others throughout his career:
+
+The priority in receiving benefits from automobile sales should be in the order of the customer, then the
+dealer, and lastly, the manufacturer. This attitude is the best approach in winning the trust of customers and
+dealers and ultimately brings growth to the manufacturer.
+Unlike the use of auto showrooms in the United States to boost sales, Japan s tradition is door-to-door sales. In
+Japan, auto companies have extensive data on customers and know when to come knocking at the door. For
+example, when Mika is about to become of age to drive, there will be a salesperson contacting her to outfit her with
+just the right Toyota for her needs. The personal attention creates a bond between customers and the company. If
+customers need auto repairs, they are likely to call the salesperson for help rather than deal with an impersonal
+maintenance department. This supports the goal of Toyota to have customers for life and for the lives of their
+descendants.
+Toyota used this practice of door-to-door sales, and later its dealerships, as a way to teach new employees how to
+see and understand things from the customer s perspective. I asked Toshiaki Tag Taguchi, president and CEO of
+Toyota Motor, North America, if he could remember any special experience in his life when he really learned what
+the Toyota Way was all about. He recalled an early experience selling Toyota cars:
+
+The first assignment I got as a freshman trainee , I had to go through various operating departments of
+Toyota Motor Sales Company and three of us were sent to the dealerships to see if factory people would
+benefit by spending a few months at dealerships. So I spent about five months at the dealership in Nagoya,
+where I visited house to house carrying brochures, and sold a total of nine new and used cars during that
+time. But the point was learning about our customers. I think Toyota is trying to give freshmen an
+opportunity to learn about themselves. Even today, freshmen have a baptism to go to the dealership for a
+month or two to learn.
+Going to the source to see and understand (genchi genbutsu) extends to understanding what customers want. It is
+not sufficient for leaders to pore over marketing data or listen to marketing presentations and get an abstract sense of
+the customer. Selling door to door is one way to get inside the heads of customers and develop a visceral sense of
+what purchasing a Toyota means to customers.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Chief Engineer: The Critical Link to
+Innovation, Leadership, and Customer Satisfaction
+In a traditional auto company, it is difficult to pin down where the real responsibility for a new vehicle development
+program lies. Many departments and many executives have partial responsibility. If you want to find who has
+responsibility for a new vehicle development program at Toyota, find the chief engineer (CE), because the buck stops
+there. In many ways, the CE epitomizes the Toyota approach to leadership (as seen in Chapter 5 and 6).
+Traditionally, the importance of a person at a company directly relates to how many departments or direct reports he
+or she has. This is the hierarchy of top-down management. Judging by this standard, the Toyota s CE is a very
+unimportant person. Although thousands of Toyota associates work on a new vehicle program, the CE has perhaps
+only a half-dozen people formally reporting to him. This is because Toyota uses a matrix organization structure in
+engineering. (See Figure 15-2 from Cusumano and Nobeoka, 1998.)[2]
+
+Figure 15-2: Toyota s product development matrix organization3
+Vehicle centers I, II, and III each focus on a family of products rear-wheel drive cars, front-wheel drive cars, and
+utility vehicles/vans. The functional groups within each center, like body engineering and chassis engineering, are
+technical specialty (functional) groups with their own general managers. The general managers control the engineers
+by assigning them projects, generating their performance evaluations, and the like. The CE controls the vehicle
+program and is responsible for the results, but not the people who work on the project. The CE has to depend on all
+of the functional groups to supply the people and get the work done. While it is an American adage that managers
+must have authority commensurate with their responsibility, the CE system works contrary to this belief and the role
+would be uncomfortable for most U.S. managers.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+John Shook, former Toyota manager and a lifelong student of TPS, described this system to me as responsibility
+without authority and a common practice within Toyota. At Toyota, formal authority is typically one level up from the
+responsibility. This forces the person responsible, who has no formal authority, to defend his or her ideas, work
+through other people, and convince the person with formal authority that the ideas are correct. The only defense for
+taking action is to present the real facts of the situation to the formal authority. This process forces managers either to
+uncover the facts and develop a compelling case for their position or to go out on a limb and prove they are right
+through demonstrated success. For example, in the case of the development of the first Lexus, Ichiro Suzuki pushed
+the Lexus beyond the original conception of senior executives as a vehicle only for the American market and pushed
+its performance characteristics beyond what the senior executives in charge of the functional groups thought was
+possible.
+Why does the CE system work at Toyota? Clark and Fujimoto (1991), who wrote an influential book on Toyota s
+product development system, referred to the CE as a heavyweight project manager. This is in contrast to U.S.
+companies, where project managers are often lightweights with little real authority. But the CE does not have formal
+authority in the American sense by design. The checks and balances of the system force the CE to sell his or her
+ideas. On the other hand, the CE is a powerful and influential person who is empowered through multiple sources,
+including:
+•
+
+•
+
+•
+
+Being blessed by top executives at Toyota. The CE has the ear of these executives and they are committed
+to getting the CE the resources to succeed.
+
+Controlling the vehicle program. The functional groups where the engineers reside are all in support roles
+to the development process, which is controlled by the chief engineer and which is the birthplace of all the
+exciting new design programs.
+
+Leading the program. CEs are selected for this honorific position because of a history of excellence in
+leadership. Moreover, they get to do it again only if they are successful on the last program.
+•
+Having proved that you are an exceptional engineer. You also rise to this position because you have
+demonstrated exceptional technical engineering capability. CEs have much broader training and exposure
+across several engineering specialties than most other engineers at Toyota.
+•
+Being a critical link between engineering and customer satisfaction. Toyota has managed to build a
+culture of individuals focused on customer satisfaction and they recognize the CE as a critical link in that
+commitment.
+
+I think that the phrase heavyweight project manager does not do justice to the important role the chief engineer
+plays. Suzuki was known as the Michael Jordan of chief engineers. This reputation came from repeated technical
+achievements that demonstrated remarkable technical skills and engineering intuition. At Toyota, the CE is someone
+who is in the trenches of engineering and knows how to play the game. He or she exemplifies what an excellent
+engineer is through actions and leadership.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+[2]Michael A. Cusumano and Kentaro Nobeoka, Thinking Beyond Lean: How Multi-Project Management Is
+Transforming Product Development at Toyota and Other Companies (New York: Free Press, 1998).
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Common Themes of Leadership at Toyota
+Toyota leaders have a distinctive approach and philosophy that fits the Toyota Way. The two-dimensional leadership
+matrix in Figure 15-3 helps depict what distinguishes leadership at Toyota from leadership at other companies. On
+the one hand, leaders can either rule by top-down directives or use a bottom-up involving style to develop people so
+they can think and make the right decisions on their own. We have seen repeatedly that Toyota leaders are
+passionate about involving people who are doing the value-added work in improving the process. Yet encouraging
+employee involvement by itself is not enough to define a Toyota leader. A second dimension requires an in-depth
+understanding of the work in addition to general management expertise. It was fashionable in the U.S. in the 1980s
+to think of the typical successful manager as an MBA who could walk into any business and instantly run it by looking
+at the numbers and using general management and leadership principles to whip the organization into shape. No
+
+self-respecting Toyota manager would subscribe to this notion.
+Figure 15-3: Toyota leadership model
+The least effective manager in this model is top-down and has only general management expertise the bureaucratic
+manager. This characterizes a large portion of U.S. managers. How effective can you be if you are trying to run the
+organization through command and control without any intimate understanding of what is going on? Your only choice
+is to make a lot of rules and policies and measure performance relative to those rules and policies. This leads to
+metrics-driven management that takes the focus away from satisfying customers or building a learning organization.
+
+The bottom-up leader who wants to develop employees but does not really understand the work is called the group
+facilitator. The belief is that if a leader has strong facilitation skills, he or she can motivate employees to work together
+toward common goals. Facilitators are catalysts but cannot teach or guide the junior people on the content of the
+work. Leaders like these can be great at motivating teams and helping them to develop. But can they really coach or
+mentor others in what they do not understand? They don t even have the expertise to judge excellent work and
+contributions from subordinates.
+The next type is a top-down leader with a strong understanding of the work an expert in the field who lacks people
+skills and can be a tough taskmaster. The taskmaster treats subordinates like puppets, pulling all the strings at the
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+right time, a major burden since one missed pull of a string might cause the work process to collapse. This type of
+leader is likely to be distrustful of others with less experience. Like the bureaucratic manager, he or she will give
+orders, but orders to do specific tasks exactly as ordered. This is the definition of micro-management.
+
+By contrast, the Toyota leaders, by having a combination of in-depth understanding of the work and the ability to
+develop, mentor, and lead people, are respected for their technical knowledge as well as followed for their leadership
+abilities. Toyota leaders seldom give orders. In fact, the leaders often lead and mentor through questioning. The
+leader will ask questions about the situation and the person s strategy for action, but they will not give answers to
+these questions even though they have the knowledge.
+We show the Toyota leader as partially in all four of the quadrants in Figure 15-3. Each of these forms of leadership
+has a role at the appropriate time and place. But his or her primary leadership role is as builders of a learning
+organization a distinctive strength of Toyota s culture. The roots of Toyota leadership go back to the Toyoda family
+who developed Toyota Way Principle 9: Grow leaders who thoroughly understand the work, live the
+philosophy, and teach it to others.
+If we look at all of the great leaders in Toyota s history we see they share several common traits:
+•
+Focused on a long-term purpose for Toyota as a value-added contributor to society.
+•
+Never deviated from the precepts of the Toyota Way DNA and lived and modeled themselves around this
+for all to see.
+•
+
+•
+
+Worked their way up doing the detailed work and continued to go to the gemba the actual place where the
+real added-value work is done.
+
+Saw problems as opportunities to train and coach their people.
+A common phrase heard around Toyota is Before we build cars, we build people. The leader s goal at Toyota is to
+develop people so they are strong contributors who can think and follow the Toyota Way at all levels in the
+organization. The leader s real challenge is having the long-term vision of knowing what to do, the knowledge of how
+to do it, and the ability to develop people so they can understand and do their job excellently. The payoff for this
+dedication is more profound and lasting to a company s competitiveness and longevity than using a leader merely to
+solve immediate financial problems, make the correct decision for a given situation, or provide new short-term
+solutions to bail a company out of a bad situation. A company growing its own leaders and defining the ultimate role
+of leadership as building a learning organization lays the groundwork for genuine long-term success.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 16: Principle 10: Develop
+Exceptional People and Teams
+Who Follow Your Company s
+Philosophy
+Overview
+Respect for people and constant challenging to do better are these contradictory? Respect for people means
+respect for the mind and capability. You do not expect them to waste their time. You respect the capability of
+the people. Americans think teamwork is about you liking me and I liking you. Mutual respect and trust
+means I trust and respect that you will do your job so that we are successful as a company. It does not mean
+we just love each other.
+Sam Heltman, Senior Vice President of Administration
+Toyota Motor Manufacturing, North America
+(one of the first five Americans hired by Toyota)
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Form vs. Function of Teams
+General Motors has had a unique opportunity through its joint venture with Toyota at the NUMMI plant to learn the
+Toyota Production System firsthand. In recent years, they have been doing quite well in applying TPS. But that was
+not always the case.
+In the early stages of the joint venture, GM tried to carbon-copy TPS throughout the organization. Among the things
+GM copied was the work group structure, which consists of small work groups of four to eight people that use an
+hourly team leader to act in a support and coordination role for the group. The hourly team leader does not perform a
+manual job unless someone is missing. About three or four work groups report to the first-line supervisor, called the
+group leader, a salaried position. These two leadership roles are central to solving problems and implementing
+continuous improvements (kaizen).
+At GM the team leaders in particular were in a new role. They added a layer on the organizational chart, so their
+existence needed to be justified. So at some point an executive wanted to know how the groups were performing.
+GM conducted a time study to measure how the GM team leaders were using their time throughout the company as
+well as a parallel study for NUMMI team leaders. The overarching difference between GM and NUMMI team
+leaders is that GM team leaders didn t really understand their role. In fact, only 52% of the time the GM team leaders
+were doing anything that you could regard as work, while NUMMI team leaders were actively supporting the
+assembly line workers and spent 90% of their time doing work on the shop floor. Some of the things the NUMMI
+team leaders were actively doing:
+•
+21% of their time was spent filling in for workers who were absent or on vacation. GM team leaders did this
+1.5% of the time.
+•
+•
+
+10% of their time was spent ensuring a smooth flow of parts to the line. GM team leaders were at 3%.
+
+7% of their time was spent actively communicating job-related information. This was virtually absent at GM.
+•
+5% of their time was spent observing the team working, in order to anticipate problems. This did not happen
+at all at GM.
+Basically, GM team leaders focused on emergency relief of workers (e.g., so workers could use the restroom) and
+quality inspection and repair. When there were no immediate problems and no fires to put out, they went to a back
+room for a break. What GM was lacking was obvious: it did not have the Toyota Production System or the
+supporting culture. It merely copied and appended the work group structure onto traditional mass-production plants.
+The lesson was clear: don t implement work teams before you do the hard work of implementing the system and
+culture to support them.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Principle: Developing Excellent Individual
+Work While Promoting Effective Team Work
+Talk to somebody at Toyota about the Toyota Production System and you can hardly avoid getting a lecture on the
+importance of teamwork. All systems are there to support the team doing value-added work. But teams do not do
+value-added work. Individuals do. The teams coordinate the work, motivate, and learn from each other. Teams
+suggest innovative ideas, even control through peer pressure. Nevertheless, for the most part, it is more efficient for
+individuals to do the actual detailed work necessary to produce a product. Teams can coordinate in meetings, but in
+most cases, not a whole lot of the detailed work gets done if individuals spend all their time in meetings.
+Toyota has established an excellent balance between individual work and group work and between individual
+excellence and team effectiveness. While teamwork is critical, having individuals work together in a group does not
+compensate for a lack of individual excellence or understanding of Toyota s system. Excellent individual performers
+are required to make up teams that excel. This is why Toyota puts such a tremendous effort in finding and screening
+prospective employees. It wants the right individuals to train and empower to work in teams. When Toyota selects
+one person out of hundreds of job applicants after searching for many months, it is sending a message the capabilities
+and characteristics of individuals matter. The years spent carefully grooming each individual to develop depth of
+technical knowledge, a broad range of skills, and a second-nature understanding of Toyota s philosophy speaks to
+the importance of the individual in Toyota s system.
+
+Toyota s assumption is that if you make teamwork the foundation of the company, individual performers will give
+their hearts and souls to make the company successful. Originally, the Toyota Production System was called the
+respect for humanity system. As you will read on, you will see that the Toyota Way is not about lavishing goodies on
+people whether they have earned them or not; it is about challenging and respecting employees at the same time.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Launching a Toyota Facility in North America:
+One Shot at Getting the Culture Right
+By the time Toyota began setting up its service parts facility in Hebron, Kentucky, the management team had learned
+from experience that a successful startup depended much more on creating a Toyota culture than on building a facility
+with the right technology. Years earlier, Toyota set up a global service parts distribution center in Ontario, California.
+While a lot of planning and thought went into the launch of the Ontario, California, facility and how to develop the
+people there, the management team believed it could build on that experience and improve on the launch. The
+long-term vision for Hebron was to have a service parts operation driven by empowered work teams, as is the case
+in Japan. But the experience at Ontario taught them that empowering employees too quickly when setting up the
+facility can be premature. Until individuals and teams really understand the Toyota Way and TPS, they are not in a
+position to be empowered.
+I visited the Hebron facility about three years after it was launched. Manage-ment was still in the process of slowly
+implementing work teams and granting autonomy to workers. What are these people doing that is so complex that
+they need over two years to be ready to contribute as work teams? According to the manager of the facility, Ken
+Elliott, We are not building a warehouse; we are building a culture. This is why we have been as successful as we
+are. He believed it was worth the time to develop the culture early on because we have one shot at this to get the
+culture right.
+At Hebron, they began building a culture by using a three-stage process to select the best associates. It took about
+one year to do the bulk of the hiring. First was the written application process. Getting people to apply was not
+difficult. An announcement was made to the local press that Toyota would be opening the facility and there would be
+new jobs. The resulting newscast, not a paid advertisement, resulted in 13,500 applicants for 275 jobs. Second, from
+this pool they randomly selected a subset to attend a job fair where there were opportunities for informal meetings
+and assessments. Third, a random sample of those who passed the job fair were invited to three one-hour meetings
+for interviews. Randomness was used to ensure fairness and diversity. After a background check, drug test, and
+physical exam, the finalists were offered jobs.
+
+The early stages of the selection process were designed to winnow down the applications to a reasonable number.
+The job fair was designed using Toyota Way principles. The goals were both to educate the applicants in Toyota s
+philosophy and to see who fit in. The fair included presentations on Toyota s history and culture and that of service
+parts operations, a realistic videotape of what it is like to work in the facility, a review of Toyota benefits, an
+overview of the selection process, and finally a written test. The most important process was the third stage of
+face-to-face interviews to determine whether Toyota could mold the individual s values and personal characteristics
+into the Toyota Way. In the year prior to full launch, 37 associates were hired to be on the design team to develop
+the operational processes and 20 others were assigned to support roles. These hourly associates then helped in the
+interviewing of other hourly associates who would later join their teams. Some associates had to wait a year or more
+to get their actual job offer. Yet this process was relatively quick and informal process compared with the process at
+other facilities, like Toyota, Georgetown, where aptitude tests were given and applicants were put on teams to solve
+problems while being videotaped and then often waited one to two years to get their job offers.
+Elliott had learned from his experience at the Ontario facility the importance of ramping up gradually and
+systematically. So, the Hebron team developed a four-phase implementation process over an 11-month period.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+In phase one, the facility operated at a very low volume level, so there was a lot of slack time to get the job duties
+and responsibilities right. The teams worked out the basic operational procedures, often in a crude form, tested
+standard operating procedures, and trained and taught some more. In phase two, management picked the best
+suppliers to ship low-volume parts to the operation, and there were only a few resulting problems receiving the parts
+on time. In phase three, the teams added smaller suppliers that were not as sophisticated in their manufacturing and
+logistics systems. This added variability to the process, which further challenged associates. In phase four, they finally
+brought high-volume suppliers on line. At each phase, management took the time to teach more of the Toyota Way.
+This staged process also allowed for bringing on hourly associates gradually over time, so all 230 did not have to be
+trained at the same time. Even within each of these phases, there were multiple live simulations before going live with
+a new process. Each stage posed new challenges, but the earlier stages built a set of skills and routines, along with
+confidence.
+The result was a very smooth ramp up. Using metrics like fill rate (percent of parts available when customers wanted
+them), the Hebron facility was the best launch of any such Toyota facility in North America.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Developing Teams at Toyota: Not a One-Minute
+Proposition
+One surprise I had when I was visiting the Hebron operation was the frequent reference to situational leadership that
+they had learned from Ken Blanchard, famed author of The One-Minute Manager. This was only one of a number
+of leadership models they had learned from, but it at first struck me as incongruous with the Toyota philosophy. They
+showed me an evolutionary model of high-performance work teams that they had gotten from a Blanchard workshop
+that helped them think about the gradual process of developing work teams.
+This prompted me to read The One Minute Manager Builds High Performing Teams (Blanchard, Carew, and
+Parisi-Carew, 2000). The book is similar to others in the One Minute Manager series. The basic premise is that
+groups have to develop over time and cannot jump from a bunch of individuals to a high performing team
+immediately. Blanchard describes four stages of team development:
+
+Stage 1: Orientation. The group needs strong direction from the leader and must understand the basic mission, rules
+of engagement, and tools the members will use.
+
+Stage 2: Dissatisfaction. The group goes to work, which is a lot less fun than talking about great visions of success,
+and the members discover it is harder than they thought to work as a team. In this stage, they continue to need strong
+direction (structure) from the leader but also need a lot of social support to get through the tough social dynamics
+they do not understand.
+Stage 3: Integration. The group starts to develop a clearer picture of the roles of various team members and begins
+to exert control over team processes. The challenge is for the group to learn about roles, goals, norms, and team
+structure. The leader does not have to provide much task direction, but the team still needs a lot of social support.
+Stage 4: Production. The group puts it all together and is functioning as a high-performing team with little task
+support or social support from the leader.
+It was clear to me that what Toyota was doing with this simple model was combining TPS thinking with the situational
+leadership model into something new and different and much more powerful. The book by Blanchard et al. focuses
+on people coming together in task forces and holding meetings. This is what I normally think of as temporary
+problem-solving groups. Toyota was building work teams that were doing finely tuned work every day in addition to
+making improvements to the work process as problem-solving groups. It was much more than task force meetings.
+
+Combining the concepts of situational leadership with the highly evolved work processes of TPS led to something
+new that you could not teach in one minute. In fact, in Blanchard s book, one of his stages seems to happen in a few
+meetings, such as stage 3, Integration, which can even happen in even one well-facilitated meeting. Hebron was
+taking three years to get to stage 4. Were they stuck in stage 3 with slow managers and mentally inferior workers?
+Quite the contrary. As we saw earlier in the book, TPS is based on a particularly challenging technical process the
+ideal of one-piece flow. Flow involves extremely tight coordination between each step in the process and this
+coordination helps build effective work teams.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Figure 16-1 illustrates the effects of flow on team functioning. In the top half, we have traditional batch-and-queue
+manufacturing. Each worker is doing his or her job at his or her own pace and building to inventory in this case
+overproducing and creating waste. Under this system, the next operator in the process is oblivious to any problems
+occurring upstream or downstream. As long as there is inventory of incoming parts and the workers are allowed to
+build up as many parts as they want in the outbound queue, they can work happily along, regardless of what their
+associates are doing. Even if a worker produces a defect, it may not be caught in this shift and operators in the next
+shift can worry about it. If the next worker catches it, he or she can just put it aside and take a good part from the
+large pile of inventory. The person sitting down at Station C has the good job and probably has waited years to get
+that cushy job.
+Now the one-minute manager comes along and says it s time to become a team. (You can substitute for Blanchard
+any team-building program you may have experienced.) So everyone piles into the conference room to work on
+improving productivity. What is likely to happen is that the team will focus on reducing the amount of time it takes to
+perform the value-added processes, the work they perform, or work on creature comforts like the lighting and
+putting in a water cooler. In the batch-and-queue process, the workers work individually, so it is natural that they
+focus only on their individual tasks.
+Now let s consider the case of a TPS expert coming in and analyzing the batch-and-queue operation in Figure 16-1.
+The expert would immediately observe that there is no flow and that there is a great deal of waste. The first task of
+the TPS expert might be to improve the flow and eliminate most of the inventory that is getting in the way of tying
+together operations. The squares are kanban squares: as long as there is a piece in the square, stop building. The
+expert would want the flexibility of staffing the cell with one, two, or three people, depending on the demand, so
+eventually all team members will need to learn every job and rotate. To reduce the number of people in the cell and
+have each person doing multiple jobs, the expert must get rid of the cushy chair. You can t have workers stopping
+and sitting in the chair. What you need is a team creating value for customers, doing only what needs to be done. We
+can see the dissatisfaction stage coming up fast and furious from that worker who lost the chair. In addition, there
+may be more dissatisfaction when the new flow reveals that the work can be done using two workers, not three.
+
+Figure 16-1: Teams and batch production versus one-piece flow
+In fact, the very stages described by Blanchard apply nicely to the process of implementing TPS and work teams, as
+the Toyota service parts management team had learned, though the process takes years and not minutes. When the
+service parts operation was set up, apart from a small group of leaders who had experience with TPS, the concepts
+were all new to the recently hired associates. In stage 1, the leadership group explained the vision, orienting team
+members, and did various simulations, which were fun. Morale was high. The team members got some awareness
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+training in TPS, but could not really understand it. At this point, the leadership group had to be very directive.
+As the team slowly ramped up production under management s direction, there were natural problems and setbacks.
+Stage 2 kicked in and morale went down a bit. The team needed a lot of social support from the group leaders, along
+with continued direction. However, unlike Blanchard s model, the group leaders c

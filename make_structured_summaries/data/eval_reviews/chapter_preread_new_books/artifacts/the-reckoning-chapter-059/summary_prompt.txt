@@ -1,0 +1,81 @@
+You are writing a pre-read guide for one chapter of a book.
+
+Book:
+- title: The Reckoning
+- author: David Halberstam
+- chapter: 59 of 59
+- chapter title: Biography A Biography of David Halberstam
+
+Goal:
+Write the thing a smart reader should read immediately before reading this chapter.
+The reader wants to move faster through the real chapter while retaining the main
+arc, load-bearing facts, important mechanisms, and a few scenes worth watching.
+
+Write Markdown only, roughly 700-1,100 words, with these sections:
+
+1. Orientation Before Reading
+   - 4-7 bullets giving the time, stakes, people, institutions, and conflict.
+
+2. The Chapter Arc
+   - 5-9 chronological bullets.
+   - Each bullet should say what changes, not just what happens.
+
+3. What To Watch For
+   - 5-9 bullets naming the important mechanisms, constraints, causal moves,
+     or authorial claims likely to matter.
+
+4. Load-Bearing Scenes
+   - 3-6 short entries.
+   - Each entry should have setup, action, and payoff in plain prose.
+
+5. Cast And Terms
+   - A compact glossary only for names, factions, places, institutions, and terms
+     needed to read this chapter without friction.
+
+6. What To Hold Lightly
+   - 2-5 bullets for vivid but probably nonessential detail.
+
+Rules:
+- Do not summarize every page.
+- Do not write a school-report recap.
+- Do not invent generic mental-model labels when a concrete event is clearer.
+- Prefer specific actors, constraints, incentives, chronology, and consequences.
+- Keep prose clean and readable; no throat-clearing and no motivational language.
+- Assume the reader has not read this chapter yet.
+- Do not mention reader highlights; this is for a new unread chapter.
+
+Chapter text:
+Biography
+A Biography of David Halberstam
+
+David Halberstam (1934–2007) was a Pulitzer Prize–winning journalist and bestselling author. He is best known for both his courageous coverage of the Vietnam War for the New York Times, as well as for his twenty-one nonfiction books—which cover a wide array of topics, from the plight of Detroit and the auto industry to the captivating origins of baseball’s fiercest rivalry. Halberstam wrote for numerous publications throughout his career and, according to journalist George Packer, single-handedly set the standard of “the reporter as fearless truth teller.”
+
+Born in New York City, Halberstam was the second son of Dr. Charles Halberstam, an army surgeon, and Blanche Levy Halberstam, a schoolteacher. Along with his older brother, Michael, Halberstam was raised in Westchester County and went to school in Yonkers. He attended Harvard University, where he was the managing editor of the Crimson, the student-run newspaper. Dedicated to forging a career in journalism, Halberstam worked with the West Point Daily Times Leader in Mississippi after graduation and at the Nashville Tennessean, where he covered the civil rights movement, a year later. Halberstam joined the Washington bureau of the New York Times in 1960. He worked as a Times foreign correspondent, moving to Congo and then to South Vietnam to cover the war in 1962.
+
+Throughout Halberstam’s coverage of the Vietnam War, he was committed to reporting what he saw despite intense and continuous political pressure. Halberstam reported on the corrupt nature of the American-backed government in Saigon. Unlike many of his colleagues, he refused to report the misinformation that American commanders fed to the press, choosing instead to talk to soldiers and sergeants on the frontlines. His steadfast dedication left President Kennedy so infuriated that he personally asked Arthur Ochs Sulzberger, then-publisher of the New York Times, to replace Halberstam. Sulzberger refused.
+
+Halberstam won the Pulitzer Prize for his coverage of Vietnam and worked for the Times’ Warsaw bureau after the war. After leaving the Times in the late sixties, Halberstam turned his focus to writing books and magazine articles. He described his books as stories of power—sometimes used wisely, sometimes disastrously. Halberstam quickly established himself with The Best and the Brightest (1972), a blistering, landmark account of America’s role in Vietnam. For each social or political book he published—such as The Powers That Be, The Fifties, and The Children—Halberstam wrote one on sports, one of his favorite subjects. His books were regularly praised for their impeccable detail as well as for their absorbing narrative style.
+
+Halberstam died in a car accident in Menlo Park, California, in 2007, at the age of seventy-three. He was en route to an interview for an upcoming book about the 1958 National Football League championship game between the New York Giants and the Baltimore Colts. His obituary in the Guardian hailed him as “one of the most talented, influential and prolific of the American journalists who came of age professionally in the 1960s.”
+
+Young Halberstam and his typewriter in the Congo in 1960.
+
+An editorial meeting at the New York Times office, around 1962. Halberstam is at far right; Scotty Reston, who hired Halberstam, is to his right.
+
+Halberstam, shown second from left, walking with military officers in Vietnam, around 1962.
+
+Halberstam with Robert F. Kennedy, around 1967.
+
+Halberstam and his daughter, Julia, at a Fourth of July parade in Nantucket, in 1983.
+
+Halberstam and his friends James T. Wooten (in the poncho), a New York Times and ABC reporter, along with Richard C. Steadman and Gerry Krovatin in Nevis in the early 1990s.
+
+Novelist John Burnham Schwartz (Reservation Road) and Halberstam in Nantucket in the mid-1990s.
+
+Halberstam took an interest in rowing because of his work on The Amateurs, a study of four rowers striving for a place on the US Olympic team, published in 1996.
+
+Halberstam and friends.
+
+Halberstam, second from right, on a New York Times panel. Journalist Dexter Filkins (The Forever War) is to his right, discussing the Iraq war. This is one of the last photos of Halberstam before his death in 2007.
+
+A memorandum written for Halberstam following his fatal car accident in 2007.

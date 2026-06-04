@@ -1,0 +1,693 @@
+departments, it would therefore
+take 30 minutes to make and test the first batch of 10 to be shipped to the customer. And it would take 21 minutes
+to get out the first computer ready to ship, even though only three minutes of value-added work are needed to make
+that computer.
+The system that Ohno set up does not assume that the ideal batch size is what is most efficient for each individual
+process or for the material handling department. In lean thinking, the ideal batch size is always the same one. That is
+because Ohno was not trying to optimize the utilization of people and equipment in each department. When the
+Toyota factory was first organized, it was operating this way like Ford s factories. But this didn t work, because
+Toyota could not compete with Ford s volume and economies of scale. So Ohno decided to optimize the flow of
+material so it would move more quickly through the factory. This meant reducing batch size. And the fastest way to
+achieve this was to blow up departments and process islands and create work cells that were grouped by product,
+rather than by process.
+
+Figure 8-1: Batch processing example
+Figure 8-2 illustrates a view of the same computer-making process above, organized into a one-piece flow work cell.
+If Ohno were to manage this process, he would take the equipment needed to make one base from the base
+department, the equipment for making a monitor from the monitor department, and a test stand from the test
+department and then put these three processes next to each other. That is, he would have created a cell to achieve
+one-piece flow. Then he would have made clear that operators were not allowed to build up inventory between the
+three operations. For example, the computer base maker would not make the next base until the monitor maker
+finished building the monitor and mounting it on the last base. In other words, nobody would build more than what is
+needed immediately. The result is the operators in the cell take 12 minutes to make 10 computers, while the batch
+flow process takes 30 minutes for 10 computers. And it takes the lean process just three minutes instead of 21
+minutes to make the first computer ready to ship. In fact, the three minutes is pure value-added time. What flow has
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+done is to eliminate overproduction and inventory.
+Figure 8-2: Continuous flow example
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Why Faster Means Better in a Flow
+Often we think that increasing the speed of a process means compromising quality, that faster is sloppier. But flow
+achieves just the opposite it generally improves quality. In Figures 8-1 and 8-2 we show one defective computer,
+with an X on the monitor. That one failed to turn on in the test stage. In the large batch approach in Figure 8-1, by
+the time the problem is discovered, there are at least 21 parts in process that might also have that problem. And if the
+defect occurred in the base department, it could take as long as 21 minutes to discover it in the test department. In
+Figure 8-2, by contrast, when we discover a defect, there can be only two other computers in process that also have
+the defect and the maximum time it will take to discover the defect is two minutes from when it was made. The reality
+is that in a large batch operation there are probably weeks of work in process between operations and it can take
+weeks or even months from the time a defect was caused until it is discovered. By then the trail of cause and effect is
+cold, making it nearly impossible to track down and identify why the defect occurred.
+The same logic applies to a business or engineering process. Let individual departments do the work in batches and
+pass the batches to other departments and you guarantee major delays in getting work done. Lots of excessive
+bureaucracy will creep up, governing the standards for each department, and lots of non-value-adding positions will
+be created to monitor the flow. Most of the time will be spent with projects waiting for decisions or action. The result
+will be chaos and poor quality. Take the right people who do the value-added work, line them up, and flow the
+project through those people with appropriate meetings to work on integration and you will get speed, productivity,
+and better quality results.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Takt Time: The Heart Beat of One-Piece Flow
+In competitive rowing, a key position is the coxswain the little person in the back of the boat who is calling row, row,
+row. He or she is coordinating the activities of all the rowers so they are rowing at the same speed. Get a maverick
+rower who outperforms everyone else and guess what! the boat gets out of kilter and slows down. Extra power and
+speed can actually slow the boat down.
+
+A similar thing occurs in any manufacturing or service operation. Make one particular department extra efficient and it
+can actually bury other departments in excess inventory and paperwork and slow them down, making a mess of
+things. So there is a need to coordinate activities. When you set up one-piece flow in a cell, how do you know how
+fast the cell should be designed to go? What should the capacity of the equipment be? How many people do you
+need? The answer is the takt time.
+
+Takt is a German word for rhythm or meter. Takt is the rate of customer demand the rate at which the customer is
+buying product. If we are working seven hours and 20 minutes per day (440 minutes) for 20 days a month and the
+customer is buying 17,600 units per month, then you should be making 880 units per day or one unit every 30
+seconds. In a true one-piece flow process, every step of the process should be producing a part every 30 seconds. If
+they are going faster, they will overproduce; if they are going slower, they will create bottleneck departments. Takt
+can be used to set the pace of production and alert workers whenever they are getting ahead or behind.
+Continuous flow and takt time are most easily applied in repetitive manufacturing and service operations. But with
+creativity the concepts can be extended to any repeatable process in which the steps can be written out and waste
+identified and eliminated to create a better flow (see Chapter 21). At the end of this chapter is a case example of
+creating job summaries in Navy ship repair facilities. There are many other examples my associates and I have
+worked on in service operations completing bills of materials for engineering of ships, processing people through a
+security office of a Navy shipyard, processing new members into a professional association, reimbursing employees
+for expenses, processing job applicants .... And you can think of many more. Obviously, it s easiest to apply the
+concepts of takt time and one-piece flow in relatively high-volume and repetitive service operations in which there is
+some consistency in the cycle time per unit, but the Toyota Way is never satisfied with doing only what is easy.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Benefits of One-Piece Flow
+When you try to attain one-piece flow, you are also setting in motion numerous activities to eliminate all muda
+(wastes). Let s take a closer look at a few of the benefits of flow.
+1.
+Builds in Quality. It is much easier to build in quality in one-piece flow. Every operator is an inspector and
+works to fix any problems in station before passing them on. But if defects do get missed and passed on, they
+will be detected very quickly and the problem can be immediately diagnosed and corrected.
+2.
+Creates Real Flexibility. If we dedicate equipment to a product line, we have less flexibility in scheduling it
+for other purposes. But if the lead time to make a product is very short, we have more flexibility to respond
+and make what the customer really wants. Instead of putting a new order into the system and waiting weeks
+to get that product out, if lead times are a matter of mere hours we can fill a new order in a few hours. And
+changing over to a different product mix to accommodate changes in customer demand can be almost
+immediate.
+3.
+Creates Higher Productivity. The reason it appears that productivity is highest when your operation is
+organized by department is because each department is measured by equipment utilization and people
+utilization. But in fact it is hard to determine how many people are needed to produce a certain number of
+units in a large batch operation because productivity is not measured in terms of value-added work. Who
+knows how much productivity is lost when people are utilized to overproduce parts, which then have to be
+moved to storage. How much time is lost tracking down defective parts and components and repairing
+finished products? In a one-piece-flow cell, there is very little non-value-added activity like moving materials
+around. You quickly see who is too busy and who is idle. It is easy to calculate the value-added work and
+then figure out how many people are needed to reach a certain production rate. In every case of the Toyota
+Supplier Support Center, when they changed a mass-producing supplier to a TPS-style line, they achieved at
+least a 100% improvement in labor productivity.
+4.
+Frees up Floor Space. When equipment is organized by department, there is a lot of bits of space between
+equipment that are wasted, but most of the space is wasted by inventory piles and piles of it. In a cell,
+everything is pushed close together and there is very little space wasted by inventory. By making greater use
+of the floor space you often eliminate the need to build more capacity.
+5.
+Improves Safety. Wiremold Corporation, one of the early adopters of TPS in America, has an exemplary
+safety record, winning a number of state safety awards. Yet when they worked to transform their
+large-batch-process company to one-piece flow, they decided not to put in place a special safety program.
+Art Byrne, the former president and a student of TPS, led the transformation and knew that one-piece flow
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+would naturally improve safety, because smaller batches of material would be moved in the factory. Smaller
+batches meant getting rid of forklift trucks, which are a major cause of accidents. It meant lifting and moving
+smaller containers of material, so accidents relating to lifting went away. Safety was getting better because of
+a focus on flow even without focusing on safety.[1]
+6.
+Improves Morale. Wiremold, in its lean transformation, also found its morale improved in every year of the
+transformation. Before the transformation, only 60% of employees agreed with various responses about the
+company being a good place to work. That went up each year, to over 70% by the fourth year of
+transformation (Emiliani, 2002). In one-piece flow, people do much more value-added work and can
+immediately see the results of that work, giving them both a sense of accomplishment and job satisfaction.
+7.
+Reduces Cost of Inventory. You free up capital to invest elsewhere when it s not invested in inventory sitting
+on the floor. And companies do not have to pay the carrying costs of the capital they free up. Also your
+inventory obsolescence goes down.
+
+Figure 8-3 illustrates a traditional shop with machines grouped by type. One tool you can use for charting the path of
+materials is a spaghetti diagram. When we chart the flow of material through this facility, it ends up looking like a
+randomly tossed bowl of spaghetti, as in Figure 8-3. Product is moving everywhere. There is no coordination of the
+product across departments. No amount of sched uling can control the inherent variation in the system when that
+
+system causes materials to move every which way.
+Figure 8-3: Organization by machine type with convoluted flow
+By contrast, Figure 8-4 shows a lean cell. The equipment is organized to follow the flow of material as it is being
+transformed into a product. It is organized in a U shape, which is a particularly good way for efficient movement of
+people and materials and good communication. You can also arrange a cell to be a straight line or an L. In this case,
+we show the paths of two people working in the cell. What if demand is cut in half? Put one person in the cell. What
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+do we do if demand doubles? Put four people in the cell. Of course, people need to be multi-skilled to work across
+different manufacturing processes, a requirement in Toyota plants.
+
+Figure 8-4: U-shaped one-piece flow cell
+[1]For a detailed analysis of Wiremold and its lean transformation, see Bob Emiliani, David Stec, Lawrence Grasso,
+and James Stodder, Better Thinking, Better Results (Kensington, CT: Center for Lean Business Management,
+2002).
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Why Creating Flow Is Difficult
+So, life is good and all your problems and pains simply disappear by creating one-piece flow cells. Not by a long
+shot! In lean thinking, life will get tougher for a while at least until you learn how to continuously improve your
+processes. Ohno explained:
+
+In 1947, we arranged machines in parallel lines or in an L shape and tried having one worker operate three
+or four machines along the processing route. We encountered strong resistance among the production
+workers, however, even though there was no increase in work or hours. Our craftsmen did not like the new
+arrangement requiring them to function as multi-skilled operators. They did not like changing from one
+operator, one machine to a system of one operator, many machines in different processes. Their resistance
+was understandable. Furthermore, our efforts revealed various problems. As these problems became clearer,
+they showed me the direction to continue moving in. Although young and eager to push, I decided not to
+press for quick, drastic changes, but to be patient. (Ohno, 1988)
+One of the comforting things about traditional mass production thinking is that if any one process stops producing
+because it takes a lot of time to changeover a machine to a new process, or because a person is out sick, or because
+the equipment breaks down the other separate process operations can keep on working because you have lots of
+inventory. When you link operations together in a one-piece flow, your entire cell goes down if any one piece of
+equipment fails. You sink or swim together as a unit. So why not have some inventory to make life a little more
+comfortable? Because whether it is a pile of material or a virtual pile of information waiting to be processed,
+inventory hides problems and inefficiencies. Inventory enables the bad habit of not having to confront problems. If
+you don t confront your problems, you can t improve your processes. One-piece flow and continuous improvement (
+kaizen) go hand in hand! If your competitor challenges itself to adopt the pain and confusion of lean thinking, you ll
+no longer be comfortable hiding behind your inventory you ll be out of business. As Minoura, former President of
+Toyota Motor Manufacturing, North America, and a disciple of Taiichi Ohno, explained:
+When they run one-piece production, they can t have the quantity that they want so everybody gets frustrated
+and doesn t know what to do. But then, within that, they have to find ways to think: what is the way to get
+the quantity? That is the true essence of TPS and, in that sense, we create confusion so we have to do
+something different in approaching this problem.
+Many companies I have visited make one of two mistakes when implementing flow. The first is that they set up fake
+flow. The second is that they go backwards from flow as soon as problems occur.
+An example of fake flow would be moving equipment close together to create what looks like a one-piece flow cell,
+then batching product at each stage with no sense of customer takt time. It looks like a cell, but it works like a batch
+process.
+
+For example, the Will-Burt Company in Orrville, Ohio, makes many products based on steel parts. One of its
+larger-volume products is a family of telescoping steel masts that are used in vans for radar or for camera crews.
+Each mast is different, depending on the application, so there is variation from unit to unit built. This company called
+its mast-making operation a cell and believed it was doing good lean manufacturing. In fact, before I helped lead a
+lean consulting review of their processes, a production manager warned us that, with the variety of parts they made,
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+we would not have any luck improving the flow.
+
+In a one-week kaizen workshop, the current situation was analyzed and this turned out to be a classic case of fake
+flow.[2] The work time (value added) it took to build one of these masts was 431 minutes. But the pieces of
+equipment for making each mast were physically separated, so forklifts were moving big pallets of masts from work
+station to work station. WIP built up at each station. With the WIP, the total lead time from raw material to finished
+goods was 37.8 days. Most of this was the storage of tube raw material and the storage of finished goods. If you just
+looked at the processing time in the plant, it still took almost four days from sawing to final welding to do 431 minutes
+of work. The travel distance of the mast within the plant was 1792 feet. The solutions were moving the equipment
+closer together, moving one piece at a time through the system, eliminating the use of the forklift between the
+operations (a special dolly had to be created to move this large unit at workstation height between two of the
+operations that could not be placed next to each other), and creating a single shop order for one mast instead of
+batches of shop orders for a set of masts. The results of these changes were significant improvements in lead time
+(see Figure 8-5), reduced inventory, and reduced floor space.
+
+Figure 8-5: Results of lean transformation of mast operation
+One side benefit of the workshop was that the time to set up a shop order was investigated. The batching of shop
+orders was creating a lot of waste; when that system was eliminated, it reduced this time from 207 minutes to 13
+minutes. Figure 8-6 depicts the process flow before and after the one-week kaizen workshop. You can see that the
+before situation was really a case of fake flow. Pieces of equipment were sort of near each other, but there was not
+really anything like a one-piece flow. And the people working in the plant did not understand flow well enough to see
+that it was fake flow. The after situation is a marked improvement that surprised and delighted everyone in the
+company. They were shocked that it could be done in one week.
+
+Figure 8-6: Mast making operation before and after one-week lean transformation
+The second mistake when implementing flow is backtracking, which occurs as soon as the company realizes that
+there may be a cost to creating flow. This extra cost can occur in any of the following situations:
+•
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+There is a breakdown in one piece of equipment, causing the whole cell to stop production.
+•
+A changeover of another piece of equipment takes longer than expected and delays the whole cell, stopping
+production.
+•
+To create flow, you must invest in a process (like heat treating) that is currently being sent outside to a
+supplier and bring it in-house.
+In all these cases, I have seen some companies give up on flow. Their thinking is that flow is a good idea when we do
+a simulation with toy parts to illustrate the benefits of reducing batch size and creating flow. But it is a bad idea when
+we actually try it in a real operation and it causes some short-term pain and cost. When a cell is set up, it takes
+discipline to maintain, which often is beyond the capacity of many manufacturing companies, because they don t
+understand the challenges and pain of continuous improvement. In the long run, the challenges and pain and
+short-term costs almost always produce dramatically better results.
+
+Toyota s focus in any process is always on creating a true one-piece flow system that is waste free, as embodied in
+Toyota Way Principle 2. Create continuous process flow to bring problems to the surface. Creating flow means
+linking together operations that otherwise are disjointed. When operations are linked together, there is more
+teamwork, rapid feedback on earlier quality problems, control over the process, and direct pressure for people to
+solve problems and think and grow. Ultimately, within the Toyota Way the main benefit of one-piece flow is that it
+challenges people to think and improve.
+Because of the focus on thinking, TPS is now being referred to by Toyota as the Thinking Production System.
+Toyota is willing to risk shutting down production in order to surface problems and challenge team members to solve
+them. Inventory hides problems and reduces the urgency to solve them. The Toyota Way is to stop and address each
+problem as it is exposed. Chapter 11 (on jidoka) explains this in more detail.
+Case Example: Job Summaries in a Navy Ship Repair Facility
+An excellent example of one-piece flow in a service operation was implemented at Puget Sound Naval Shipyard in
+fall 2001. At this shipyard they do not build ships, but repair Navy vessels from submarines to carriers of various
+kinds. Every repair situation is unique, so there is heavy involvement of engineering in diagnosing the problem and
+writing work instructions for the repair. The engineering documentation, including work instructions, is compiled in a
+folder that goes to the shipyard so skilled mechanics can conduct the repair. This leads to the authorization, funding,
+and paperwork that mechanics use to do the repair job. The work instructions folder had become a bottleneck in the
+planning process, in many cases, as well as a cost driver.
+To improve the process, a one-week kaizen workshop was run. There was a good deal of preparation leading up to
+the workshop, including preparations for a reorganization and office space assigned to the creation of a
+cross-functional cell to process work instructions. The workshop focused on mapping the current process and
+developing a new process. The wastes identified by analyzing the process step by step included rework, redundant
+systems, different communication vehicles (e.g., spreadsheets), waiting for forms, inspection, excess reviews and
+signoffs, poor filing systems, lack of needed reference material, excess walking, waiting, and incomplete information.
+
+The solution was to develop a cross-functional work cell to put together the work instructions. As a result, many of
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+the handoffs were eliminated and non-value-added steps were eliminated. A takt time was created, based on the
+demand for work instructions (demand was fairly easy to predict) and the time available to work on them. A key part
+of the solution was to take the core people doing the bulk of the work and colocate them in an open office
+environment. A work cell was physically created in the office so that the key functions required to produce a work
+instructions folder could pass the package from station to station in record time. The old office arranged people into
+separate functions and each person had an office with high partitions. In the new work cell, the key people had desks
+surrounding a round table. The job summaries move around the table from person to person in a one-piece flow.
+Valued-added time was calculated before and after with striking results. Note that some non-value-added time is
+required, e.g., filling out paperwork that adheres to Navy policies even if it is not necessary to get the mechanics what
+they need. We separate this out from wait time, which is pure waste. The results of the lean transformation are
+shown in Figure 8-7.
+
+Figure 8-7: Documenting improvement in job summary process
+
+[2]The kaizen workshop was led by Jeffrey Rivera, former senior lean consultant with Optiprise, Inc., and Eduardo
+Lander, my doctoral student at the University of Michigan.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 9: Principle 3: Use Pull
+Systems to Avoid Overproduction
+Overview
+The more inventory a company has, the less likely they will have what they need.
+Taiichi Ohno
+Imagine that you find out about a great Internet service where you can get all your dairy products delivered directly to
+your house at a significant discount. The only hitch is that you have to sign up once and specify a weekly quantity of
+each item and the company will only guarantee that the delivery will come some time during the week. The company
+has to schedule weekly shipments of goods to its warehouse, so it wants advance orders locked in to make sure it
+sells all the inventory that it receives. They will leave it on your front porch in a thermo container so it will stay cold.
+You specify a typical quantity of eggs and milk and butter that you need in a week. But you are not sure what day of
+the week the products will come. It may be Monday, but it could be Friday. So you will need to keep enough of all
+dairy products in your refrigerator to get you through the week. And if the delivery comes on Monday, you will have
+a refrigerator full of a week s worth of dairy products, plus what comes on Monday too much to fit in one
+refrigerator. So you will need to buy a second refrigerator and put it in the garage. And if you go on vacation and
+happen to forget to cancel the order for that week, you will have a week s worth of bad dairy products on your front
+porch when you return.
+
+This is an example of an inventory push system. In business, goods and ser-vices are often pushed onto the retailer
+whether or not the retailer can sell them right away. The retailer tries to push them onto you whether you need them
+right now or not. And the result is a lot of inventory of stuff that you do not need to immediately use and most likely
+the retailer is also holding a boatload of inventory.
+Now imagine the Internet service gets a lot of complaints and upgrades its service. They send you a wireless device
+that has buttons on it for each of your dairy goods. When you open a new bottle of milk or a new carton of eggs, you
+push the button for that item. The next day they will deliver one unit to replenish what you started using. This means
+you will have the partially used unit, if you did not finish it, plus one more. Some inventory, but not a lot. If you think
+you will be using a lot of a product, like milk, then you can get on the Internet or even pick up the phone and they will
+immediately deliver what you need. On their end, they have renegotiated agreements with their dairy suppliers. When
+the customer orders more product, that will trigger a signal to dairy companies to send that amount to the retailer.
+This is an example of a pull system. You receive items only when you demand them and the retailer receives product
+based on actual customer demand. To avoid having items pushed on you, you might even be willing to pay a little
+more for this on-demand service.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Many companies and service organizations within companies work to their own internal schedule. They do what is
+convenient for them within that schedule. So they produce parts, goods, and services according to their schedule, or
+plan and push products onto their customers, who have to stockpile it in inventory.
+As you already know, the Toyota Way is not about managing inventory; it is about eliminating it. Very early on,
+Toyota starting thinking in terms of pulling inventory based on immediate customer demand, rather than using a push
+system that anticipates customer demand. In the Toyota Way, pull means the ideal state of just-in-time
+manufacturing: giving the customer (which may be the next step in the production process) what he or she wants,
+when he or she wants it, and in the amount he or she wants. The purest form of pull is one-piece flow discussed in
+Chapter 8. If you can take in a customer order and make a single product just for that order using a one-piece flow
+production cell this would be the leanest imaginable system. That is, it is 100% on-demand and you have zero
+inventory. But since there are natural breaks in flow from transforming raw materials into finished products delivered
+to customers, you have to build in some necessary inventory. And we will learn in Chapter 10 that leveling the
+schedule may even mean holding some finished goods inventory.
+
+The Internet example we used above is not a zero-inventory system. There is inventory, also referred to as a buffer.
+The (improved) Internet service is asking you to simply tell it when you are starting to use an item so it can replenish
+what you have started to use. It is replenishing what you are taking away. This is the way most supermarkets work.
+In fact, supermarkets are simply warehouses, but they operate in a particular way. There is a very specific amount of
+inventory kept on the store shelves, based on past purchase patterns and expected future demand. Customers come
+and pull items they want off the shelf. The supermarket clerk periodically looks at what has been taken off the shelf
+and replenishes that. The clerk is not simply pushing inventory onto the shelf, nor is he or she directly ordering goods
+from the manufacturer to put on the shelf. The clerk draws from the supermarket s inventory, but it is a small,
+controlled amount of inventory using a replenishment system. Well run supermarkets are an example of pull. Yes, you
+have inventory buffers, but instead of pushing material into the inventory buffers based on a schedule, you are merely
+looking at what the customer is using and replenishing that before it runs out. Similarly, the Toyota Production System
+is not a zero-inventory system. It relies on stores of materials that are replenished using pull systems.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Principle Customer Pull and Replenishment
+Taiichi Ohno and his associates were fascinated by the importance of the supermarket to daily life in America in the
+1950s. It captured the imagination of retailers in Japan and was imported there, where Ohno studied it close up.
+Though Ohno recognized from the start that in many cases inventory was necessary to allow for smooth flow, he also
+recognized that individual departments building products to a schedule using a push system would naturally
+overproduce and create large banks of inventory. In a push system, the production of goods is based upon a plan
+(schedule) that s been made in advance, which means production and purchase orders are initiated by projected
+customer demand. The operation keeps building to the schedule and creates waste. But customer demand can
+change on a dime and things can go wrong. What becomes of the schedule then?
+Most mass production departments will try to minimize the equipment changeovers that are necessary for making
+different types of products with the same equipment. As a result, a specific department may make all of the
+largest-volume items early in the week before it changes over. Since each department is making what it wants to over
+the week, there will not be any real coordination between departments. To keep the downstream departments busy,
+there will be inventory buffers between departments. So the departments working according to independent
+schedules will be pushing material into these inventory buffers.
+
+As a compromise between the ideal of one-piece flow and push, Ohno decided to create small stores of parts
+between operations to control the inventory. When the customer takes away specific items, they are replenished. If a
+customer does not use an item, it sits in the store but it is not replenished. There is no more overproduction than the
+small amount on the shelf and there is at least some direct connection between what customers want and what the
+company produces. But since factories can be large and spread out and suppliers of parts are a distance away, Ohno
+needed a way to signal that the assembly line had used the parts and needed more. He used simple signals cards,
+empty bins, empty carts called kanban. Kanban means sign, signboard, doorplate, poster, billboard, card, but it is
+taken more broadly as a signal of some kind. Send back an empty bin a kanban and it is a signal to refill it with a
+specific number of parts or send back a card with detailed information regarding the part and its location. Toyota s
+whole operation of using kanban is known as the kanban system for managing and ensuring the flow and
+production of materials in a just-in-time production system.
+Even today in the world of high-speed electronic communications, you can walk into a Toyota factory making and
+using thousands of different parts and you ll see cards and other types of kanban moving about the factory triggering
+production and delivery of parts. It is remarkable, simple, effective, and highly visual. Now, throughout the world,
+companies are learning the power of the kanban system. They are turning away from sophisticated computer
+schedules for many parts of the process. While it can seem like taking a step backward, it has been repeatedly
+demonstrated that this is a step forward because a company s inventory goes down while the frequency of having the
+right parts goes up. And all those complex systems for tracking inventory accuracy become unnecessary waste.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Pull-Replenishment in Everyday Life
+One way to demystify the concept of kanban is by thinking of simple examples of pull-replenishment systems in
+everyday life. Like when you decide to buy gas for your car. Does your gas tank get filled according to a schedule?
+Would you consider simply filling the tank once per week on Monday morning? I doubt it. If you did, you would find
+you sometimes really do not need gas Monday morning and other times you will run out before Monday. Most likely,
+when you notice the gas gauge approaching empty, you stop at a gas station. The same pull system behavior goes for
+most routine things we purchase in our households. The simple trigger is that we notice our inventory is running low
+on an item and at some point say, Yep, I better go out and get some more of that.
+Not everything can be replenished based on a pull system; some things must be scheduled. Take the example of
+high-end products, like a Rolex, a sports car, or those killer high-tech golf clubs advertised by Tiger Woods.
+Whenever you are buying a special or single-use item, you have to think about what you want, consider the costs and
+benefits, and plan when to get it. In a sense, you create a schedule to purchase, since there is no immediate need for
+it.
+Services are another type of purchase that isn t immediate but has to be scheduled. For example, we recently had our
+septic tank cleaned. We had no way of telling if it was getting full and needed to be emptied. So we followed the
+generally recommended (and probably inaccurate) schedule for cleaning the septic tank a push system. But now there
+is a device on the market that you can install that detects how full the septic tank is; when it reaches a trigger point, it
+indicates through a radio signal when to get it cleaned. If we invest in that, we can eliminate the need for a scheduling
+system and replace it with a pull-replenishment system a signal to replenish (actually, to empty) based on actual
+usage rather than a vague guess about usage.
+Because the pull system corresponds with actual usage or consumption, Toyota is constantly working to achieve the
+ideal of just-in-time replenishment. Using kanban, they are carefully monitoring and coordinating the use and
+replenishment of thousands of parts and tools, orchestrating specific schedules for replenishment, developing rules for
+when to pull the trigger to send a replenishment signal, calculating the maximum amount of inventory that will be
+allowed, and the like. The kanban/pull system works better than a schedule system for most business situations. But
+it still depends on small inventory buffers or stores of parts and inventory is always a compromise. So the goal is to
+eliminate the stores of parts and move to true one-piece flow wherever possible.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Toyota s Kanban System Pull Where You Must
+A true one-piece-flow system would be a zero-inventory system where goods just appear when they are needed by
+the customer. The closest system Toyota has devised to achieve this is the one-piece flow cell that builds to order
+only at the precise time the product is needed. But when pure flow is not possible because processes are too far
+apart or the cycle times to perform the operations vary a great deal, the next best choice is often Toyota s kanban
+system.
+
+Rother and Shook (1999), in a widely circulated book about Toyota s Production System called Learning to See,
+say, Flow where you can, pull where you must. If you want to design lean systems, repeat this phrase every day
+when you get up to start the day. You can go far with this simple principle. Where it is not possible to create a
+one-piece flow, the next best thing is to design a pull system with some inventory.
+
+Consider a pull system in a Toyota assembly plant. Orders accumulate from car dealerships. Production control
+creates a leveled schedule. For example, they make a white Camry, followed by a green Camry, followed by a Red
+Avalon, and so on. Each of these cars has a whole set of options associated with it. That schedule is sent to the body
+shop, where stamped steel panels (from a supermarket of pre-stamped panels) are welded together into a body.
+Stamping the panels is a much faster operation than the takt time in assembly plants (e.g., one second per stamped
+panel versus 60-second takt times in a plant is typical), so putting them into a one-piece flow is not practical. They
+would be productive one out of every 60 seconds. So a pull system is used. At a certain trigger point when a certain
+number of steel panels have been used by the body shop, a kanban goes back to a stamping press, ordering it to
+make another batch to replenish the store.
+Similarly, when assembly line workers begin to use parts from bins (hinges, door handles, windshield wipers), they
+take out a kanban card and put it in a mailbox. A material handler will come on a timed route and pick it up and go
+back to a store to replenish what is used on the assembly line. Another material handler will replenish the store based
+on parts from a supermarket of supplier parts. This will trigger an order back to parts suppliers. And so on. Figure
+9-1 illustrates a system like this, where parts in the assembly plant are replenished from a supplier. The process starts
+at the assembly factory (on the right side of the diagram), then withdrawal kanban and empty containers are sent by
+truck back to the supplier to be refilled. The supplier keeps a small store of finished parts in a parts store, which are
+used to refill the kanban and their empty containers. When parts are withdrawn from the parts store shelves, they
+must be replenished by sending a kanban and an empty container back to the production cell where new parts are
+built and then sent to refill the parts store shelves. Information, orders for parts in the form of kanban, flows
+backward from the customer (the assembly plant). Materials, in this case parts, are sent forward to the customer.
+
+It is fascinating to watch this work, with so many parts and materials moving through the facility in a rhythm. In a large
+assembly plant like the one in Georgetown, Kentucky, there are thousands of parts moving about. Alongside the
+assembly line, there are small bins of parts and small bins are being moved from neatly organized stores. It is hard to
+imagine how a computer system could do such a good job of orchestrating such a complex movement of parts.
+When you find out the computer is not doing the orchestration, but rather small, laminated cards moving about, it is
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+shocking.
+Figure 9-1: Internal and external pull
+Yet TPS experts get very impatient and even irritated when they hear people rave and focus on kanban as if it is the
+Toyota Production System. Kanban is a fascinating concept and it is fun to watch. I have led many tours of lean
+plants and you can spend hours talking about the technical details of many different types of kanban systems. When
+is the kanban triggered? How are the quantities calculated? What do you do if a kanban gets lost? But that is not the
+point. While you do have to know those things when you set up your system, they are pretty straightforward
+technically. The challenge is to develop a learning organization that will find ways to reduce the number of
+kanban and thereby reduce and finally eliminate the inventory buffer. Remember: the kanban is an organized
+system of inventory buffers and, according to Ohno, inventory is waste, whether it is in a push system or a pull
+system. So kanban is something you strive to get rid of, not to be proud of. In fact, one of the major benefits of using
+kanban is that it is easy to use it to force improvement in your production system. Let s say that you have printed up
+four kanban. Each one corresponds to a bin of parts. The rule is that a bin cannot move unless a kanban is traveling
+with it. Take one kanban and throw it away. What happens? There will now be only three bins of parts circulating in
+the system. So if a machine goes down, the next process will run out of parts 25% faster. It may stress the system
+and cause some shutdowns, but it will force teams to come up with process improvements.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Push Scheduling Has Its Place
+The Toyota Way is not preoccupied with adhering to Principle 3, Use pull systems to avoid overproduction.
+There are many examples of push scheduling throughout Toyota. One example is when dealing with parts shipped
+from Japan to the United States or even moved across the United States. They use traditional scheduling systems to
+order these parts, with the appropriate lead time to get them to the plant as scheduled. Also the engineering of new
+products is a tightly scheduled operation, as I have described in Chapter 6.
+
+When Toyota managers do schedule, they are preoccupied with timeliness. In other words, the schedule is not simply
+a guideline that you should do your best to make, more or less. It is a deadline and you move heaven and earth to
+make the deadline. So, even in scheduled systems, materials and information move remarkably smoothly. Scheduled
+systems work best when lead times are very short; for example, ordering parts every day instead of ordering parts
+once a month. So, when it comes to scheduling, Toyota works to make lead times as short as possible.
+
+These days Toyota is increasingly using computer systems for scheduling. For example, when ordering parts from
+suppliers, Toyota is moving to electronic kanban rather than sorting and sending cards back. In this case, it does not
+have to be either/or. As we will see in Chapter 13 on visual control, Toyota will often use a computer system for
+scheduling some operations, but then use manual cues like cards or white boards to visually control the process. For
+example, the logistics planning backbone of Toyota s Service Parts Distribution Centers is a computerized scheduling
+system but process control whiteboards actually control the operations.
+If you are using the Toyota Way to become lean, the lesson here is that you don t have to get hung up imitating
+Toyota s use of specific tools so you can appear to be lean like Toyota. The Toyota Way is a philosophy and a set of
+tools that must be appropriately applied to your situation. But understand that these principles are something to
+believe in and strive for. They are part of a greater system that is seeking harmony and perfection to sustain success.
+As you move on through the chapters in this Section II of the Toyota Way, The Right Process Will Produce the
+Right Results, you ll continue to see how each of these processes is dependent on the others.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Using Pull in a GM Office
+You can effectively use pull-replenishment systems in the office to save money and help avoid shortages of supplies.
+Most offices use some form of pull system already. Nobody knows exactly how many pencils, erasers, or reams of
+paper will be used in an office. If there were a standing, scheduled order of all these things, you would guess right in
+some cases, have too much in other cases, and run out of some critical items. So, in a well-run office, somebody s
+job is to keep the supply store stocked by looking and seeing what is used. You then replenish that.
+
+General Motors has a Technical Liaison Office in California to organize tours of its joint venture with Toyota the
+NUMMI plant. The first place GM employees see on their journey to witness the famous Toyota Production System
+at NUMMI is this office where some training is conducted. So GM made this a model lean office. In their case, the
+kanban system for supplies is very formal and they rarely run out of anything. There is a place for everything and
+everything in its place in the store, on desks, by the computer.
+In storage areas of supplies, there are little, laminated kanban cards that say when they should be triggered. For
+example, when the aspirin bottle reaches one-quarter full, the aspirin kanban is put into a coffee can. They used to
+have a conventional refrigerator of soft drinks and some drinks were always overstocked while others ran out. Since
+you could not see through the door, it was easy to hide the mess inside. So they bought a big soda machine with a
+glass front and took out the payment mechanism. The glass front allows you to easily see the state of soft drink
+supplies. They put a variety of juices and soft drinks on marked shelves. When a certain soft drink gets to a certain
+level, you take the kanban for that soft drink and put it in a box so it will get reordered.
+You might think a pull system in a small office might not be appropriate it would be a rather elaborate system to
+maintain for the promised cost savings. You might consider doing a cost-benefit analysis to decide if it is a good use
+of time. But that is the traditional mass production thinking. The benefits may go beyond the pennies saved. The
+power of the Toyota Production System is that it unleashes creativity and continuous improvement. And it strives to
+seek perfection. So putting in these kanban systems is likely to intrigue your office workers, get them interested in
+improving the process of ordering supplies and ultimately finding ways to create flow in their core work. Waste in the
+office is generally far greater than in factories. A little creative effort to improve the process will have huge multiplier
+effects.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 10: Principle 4: Level
+Out the Workload (Heijunka)
+Overview
+In general, when you try to apply the TPS, the first thing you have to do is to even out or level the
+production. And that is the responsibility primarily of production control or production management people.
+Leveling the production schedule may require some front-loading of shipments or postponing of shipments
+and you may have to ask some customers to wait for a short period of time. Once the production level is
+more or less the same or constant for a month, you will be able to apply pull systems and balance the
+assembly line. But if production levels the output varies from day to day, there is no sense in trying to apply
+those other systems, because you simply cannot establish standardized work under such circumstances.
+Fujio Cho, President, Toyota Motor Corporation
+Following the lead of Dell Computer and other successful companies, many businesses in America are rushing to a
+build-to-order model of production. They want to make just what the customers want when they want it the ultimate
+lean solution. Unfortunately, customers are not predictable and actual orders vary significantly from week to week
+and month to month. If you build product as it is ordered, you may be building huge quantities one week, paying
+overtime, and stressing your people and equipment, but then, if orders are light the next week, your people will have
+little to do and your equipment will be underutilized. You will also not know how much to order from your suppliers,
+so you will have to stockpile the maximum possible amount of each item the customers might possibly order. It is
+impossible to run a lean operation in this way. A strict build-to-order model creates piles of inventory, hidden
+problems, and ultiately poorer quality and in the end lead times are likely to grow as the factory is disorganized and
+chaotic. Toyota has found it can create the leanest operation and ultimately give customers better service and better
+quality by leveling out the production schedule and not always building to order.
+Some of the businesses I work with that try to build to order are in actuality asking customers to wait six to eight
+weeks for their build-to-order product. A few special customers may cut in line and get their orders expedited at
+the expense of the large majority of customers. But why ruin the pace of your operation to build an order in hand
+today when the customer will not get the product for six weeks? Instead, accumulate orders and level the schedule
+and you may be able to reduce production lead times, cut your parts inventories, and quote much shorter standard
+lead times to all your customers, resulting in greater overall customer satisfaction than a hurry up, then slow down
+build-to-order approach to production.
+Toyota managers and employees use the Japanese term muda when they talk about waste and eliminating muda is
+the focus of most lean manufacturing efforts. But two other M s are just as important to making lean work, and all
+three M s fit together as a system. In fact, focusing exclusively on only the eight wastes of muda can actually hurt the
+productivity of people and the production system. The Toyota Way document refers to the elimination of Muda,
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Muri, Mura (see Figure 10-1). The three M s are:
+•
+Muda Non-value-added. The most familiar M includes the eight wastes mentioned in earlier chapters. These
+are wasteful activities that lengthen lead times, cause extra movement to get parts or tools, create excess
+inventory, or result in any type of waiting.
+
+•
+
+Figure 10-1: The three M s
+
+Muri Overburdening people or equipment. This is in some respects on the opposite end of the spectrum
+from muda. Muri is pushing a machine or person beyond natural limits. Overburdening people results in safety
+and quality problems. Overburdening equipment causes breakdowns and defects.
+•
+Mura Unevenness. You can view this as the resolution of the other two M s. In normal production systems,
+at times there is more work than the people or machines can handle and at other times there is a lack of
+work. Unevenness results from an irregular production schedule or fluctuating production volumes due to
+internal problems, like downtime or missing parts or defects. Muda will be a result of mura. Unevenness in
+production levels means it will be necessary to have on hand the equipment, materials, and people for the
+highest level of production even if the average requirements are much lower than that.
+Let s say you have a production schedule that swings wildly and a production process that is not well balanced or
+reliable. You ve decided to start applying lean thinking and focus only on eliminating muda from your production
+system. You start to reduce inventory in your system. Then you look at the work balance and reduce the number of
+people from the system.[1] Then you organize the workplace better to eliminate wasted motion. Finally, you step
+back and let the system run. What you ll sadly witness is a system that will run itself into the ground due to spikes in
+customer demand that force people and equipment to work harder than they efficiently can! When work first begins
+to flow one piece at a time across work centers, without inventory, the pace and product mix of production jerk all
+over the place. The only thing you get is erratic one-piece flow. Workers will be overburdened. Equipment will break
+down even more than before. You will run out of parts. Then you ll conclude, Lean manufacturing doesn t work
+here.
+Interestingly, focusing on muda is the most common approach to implementing lean tools, because it is easy to
+identify and eliminate waste. But what many companies fail to do is the more difficult process of stabilizing the system
+and creating evenness a true balanced lean flow of work. This is the Toyota concept of heijunka, leveling out the
+work schedule. It is perhaps the Toyota Way s most counterintuitive principle. Achieving heijunka is fundamental to
+eliminating mura, which is fundamental to eliminating muri and muda.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Having starts and stops, overutilization then underutilization, is a problem because it does not lend itself to quality,
+standardization of work, productivity, or continuous improvement. As explained by Taiichi Ohno:
+
+The slower but consistent tortoise causes less waste and is much more desirable than the speedy hare that
+races ahead and then stops occasionally to doze. The Toyota Production System can be realized only when all
+the workers become tortoises. (Ohno, 1988)
+I have heard this repeated from other Toyota leaders: We would rather be slow and steady like the tortoise than fast
+and jerky like the rabbit. U.S. production systems force workers to be like rabbits. They tend to work really hard,
+wear themselves down, and then take a siesta. In many U.S. factories, workers will sometimes double up on the
+assembly line, one doing two jobs while the other has free time, and so long as the workers make production quotas
+for the day, management looks the other way.
+[1]Toyota would never let go of or demote workers displaced by productivity enhancements. This shortsighted
+cost-saving move would create ill will toward the company and prevent all other workers from cooperating in future
+kaizen efforts. Toyota always seeks alternative value-added work for workers displaced by production
+improvements.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Heijunka Leveling Production and Schedules
+Heijunka is the leveling of production by both volume and product mix. It does not build products according to the
+actual flow of customer orders, which can swing up and down wildly, but takes the total volume of orders in a period
+and levels them out so the same amount and mix are being made each day. The approach of TPS from the beginning
+was to keep batch sizes small and build what the customer (external or internal) wants. In a true one-piece flow, you
+can build Products A and B in the actual production sequence of customer orders (e.g., A, A, B, A, B, B, B, A, B ).
+The problem with building to an actual production sequence is that it causes you to build parts irregularly. So if orders
+on Monday are twice those on Tuesday, you must pay your employees overtime on Monday and then send them
+home early on Tuesday. To smooth this out, you take the actual customer demand, determine the pattern of volume
+and mix, and build a level schedule every day. For example, you know you are making five A s for every five B s.
+Now you can create a level production sequence of ABABAB. This is called leveled, mixed-model production,
+because you are mixing up production but also leveling the customer demand to a predictable sequence, which
+spreads out the different product types and levels volume.
+
+Figure 10-2 gives an example of an unleveled schedule from an engine plant that makes small engines for lawn care
+
+equipment (based on an actual case).
+Figure 10-2: Traditional production (unleveled)
+In this case, a production line makes three sizes of engines small, medium, and large. The medium engines are the big
+sellers, so these are made early in the week Monday through part of Wednesday. Then there is a several-hour
+changeover of the line to make small engines that are made the rest of Wednesday through Friday morning. Finally,
+the large engines in smallest demand are made Friday afternoon. There are four things wrong with this unleveled
+schedule:
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+1.
+Customers usually do not buy products predictably. The customer is buying medium and large engines
+throughout the week. So if the customer unexpectedly decides to buy an unusually large number of large
+engines early in the week, the plant is in trouble. You can get around this by holding a lot of finished goods
+inventory of all engines, but this leads to a high cost of inventory, with all its attendant costs.
+2.
+There is a risk of unsold goods. If the plant does not sell all its medium engines built up Monday to
+Wednesday, it must keep them in inventory.
+3.
+The use of resources is unbalanced. Most likely, there are different labor requirements for these
+different-sized engines, with the largest engines taking the most labor time. So the plant needs a medium
+amount of labor early in the week, then less labor in the middle of the week, and then a lot of labor at the end
+of the week. There is potentially a lot of muda and mura.
+4.
+Placing an uneven demand on upstream processes. This is perhaps the most serious problem. Since the
+plant is purchasing different parts for the three types of engines, it will be asking its suppliers to send certain
+parts Monday through Wednesday and different parts for the rest of the week. Experience tells us that
+customer demand always changes and the engine plant will be unable to stick to the schedule anyway. Most
+likely there will be some big shifts in the model mix, e.g., unexpected rush order of large engines and the need
+to focus on making those for a whole week. The supplier will need to be prepared for the worst possible
+scenario and will need to keep at least one week s worth of all parts for all three engine types. And
+something called the bullwhip effect will multiply this behavior backward through the supply chain. Think of
+the small force in your wrist creating a huge and destructive force at the end of the whip. Similarly, a small
+change in the schedule of the engine assembly plant will result in ever-increasing inventory banks at each
+stage of the supply chain as you move backward from the end customer.
+In a batch-processing mode, the goal is to achieve economies of scale for each individual piece of equipment.
+Changing over tools to alternate between making product A and product B seems wasteful because parts are not
+being produced during the changeover time. You are also paying the equipment operator while the machine is being
+changed over. So the logical solution is to build large batches of product A before changing over to product B. But
+this approach does

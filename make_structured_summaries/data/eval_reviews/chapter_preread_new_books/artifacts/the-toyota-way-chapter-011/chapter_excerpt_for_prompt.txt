@@ -1,0 +1,732 @@
+one
+alternative selected.
+3.
+The styling of the vehicle was also based on a competition among design centers in California, Europe,
+Tokyo, and Toyota City. Over 20 designs were put forward in the first wave of the competition, which were
+narrowed down to five sketches and then four life-sized models. Two were then selected as exceptional and
+each was revised based on feedback from a wide range of employees until one was finally selected.
+
+Recall that there was extreme time pressure in the development of Prius. For any of these decisions, Uchiyamada
+could have asked for an opinion up front on the best choice and then developed the one option and refined it through
+iteration. But the iterative approach, what we called point-based, might have completely missed a much better
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+alternative. Part of spending the 80% of time planning that Warren spoke of in the opening quote is considering a
+broad range of alternatives before deciding on one. Senior managers at Toyota have told us that one of the hardest
+and most important lessons they teach young engineers is to delay decisions until they have considered a broad array
+of alternatives. One of the advantages of getting many opinions from many different people (through nemawashi,
+discussed next) is that many alternatives are brought to light that can then be systematically evaluated.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Getting on the Same Page Through Nemawashi
+Toyota Way Principle 13 includes the important process of nemawashi: Make decisions slowly by consensus,
+thoroughly considering all options; implement rapidly. The process of nemawashi is often used to describe how
+junior people build consensus by developing a proposal and circulating it broadly for management approval. In the
+nemawashi process, many people are giving their input and this generates consensus. By the time the formal
+proposal comes up for a high-level approval, the decision is already made. Agreements have been reached and the
+final meeting is a formality. Though this is a typical process at Toyota, there are many different ways to achieve
+consensus. If suppliers or other parties could be affected by a decision, their input is required as well.
+For example, in 2002 Toyota became aware that a planned mega-development near its Arizona Proving Ground
+threatened the long-term water supply of the entire surrounding area. Toyota took legal action to stop the developers
+and worked to get a citizens committee organized to protest the plan. But instead of taking an adversarial approach,
+Toyota tried to get consensus from all the parties involved the developer, the surrounding towns, and their local
+governments. And they searched for a solution all could benefit from. Ultimately, the developers agreed to set aside
+200 acres and pay several million dollars in infrastructure costs to create a groundwater replenishment site. Basically,
+for every gallon of water they used they would purchase a gallon to replace it in the aquifer. As Mallery, who led the
+consensus-building process, explained:
+
+The Mayor, the developers, and the citizens committee all of the contending parties agreed that Toyota had
+served each of them well and had satisfied all of the parties from each of their perspectives. The town ended
+up with a more responsible, long-term solution to groundwater subsidence concerns, the problem was solved
+for the developers, who would have had to address it eventually maybe 30 years from now. And it helped the
+surrounding communities that are concerned about irresponsible growth. Everyone came away with greater
+respect for Toyota not only what Toyota did but how Toyota did it. It is the what and the how that makes the
+difference protecting the land for the next 50-100 years, not just for the short term.
+In simple terms, Toyota turned conflict into consensus and created a win-win environment for all parties. From the
+perspective of a lawyer, this is very unusual. Once you go to court, get involved with local politicians, and take sides
+politically, the usual assumption is that you are fighting against somebody to win. You win; they lose. Toyota was not
+satisfied with this, as Mallery explained:
+Achieving consensus it s a belief in reason. Let s work it out. It s a combination of reason and pragmatism
+with this overlay of integrity and excellence. We were in a political campaign, but Toyota had no thoughts of
+smearing anybody. There was no negative campaigning.
+Now let s translate this consensus-building behavior into a company s day-to-day business. Inside the company,
+everyone is supposedly on the same team. There is no reason to act in an adversarial way. Yet, the most common
+problem I hear in large corporations is the chimney phenomenon. Many different groups are in their own chimneys
+and seem to care more about their own objectives than about the company s success. These groups could be
+functional departments like purchasing, accounting, engineering, and manufacturing or they could be project teams
+that are implementing new software or even implementing lean manufacturing. These groups often seem to act as
+though they want their particular department or project to get all the resources and their perspective to dominate in
+decisions they want to win at all costs, even if other groups lose in the process.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Not so in Toyota. The same process used to gain consensus with these outside community groups in Arizona is used
+every day to get input, involvement, and agreement from a broad cross-section of the organization. This does not
+mean all parties get what they personally want, but they will get a fair hearing.
+There are a variety of decision-making methods all used at Toyota in different situations. These range from a manager
+or expert making a decision unilaterally and announcing it to group consensus with full authority to implement the
+decision they agree to. As shown in Figure 19-1, the preferred approach at Toyota is group consensus, but with
+management approval. But management reserves the right to seek group input and then make a decision and
+announce it. This is done only if the group is struggling to get consensus and management must step in or if there is an
+urgent need for a quick decision. The philosophy is to seek the maximum involvement appropriate for each situation.
+
+One example of the nemawashi process is the way the broad circulation of ideas works in the early stages of
+product development. Before the styling of a vehicle is even determined, Toyota puts an enormous amount of effort
+into evaluating the early designs and thinking through all possible engineering and manufacturing issues. Each design is
+meticulously analyzed and countermeasures are developed through study drawings. These are sketches that include
+possible problems and alternative solutions. When the study-drawing phase is completed, the collective drawings
+across all engineering departments are put together into a binder called the K4 (shorthand for kozokeikaku a
+Japanese word referring to a structure plan the study drawings that collectively address the structure and
+integration of the vehicle). One day I met with Jim Griffith, who at the time was VP of Technical Administration.
+He looked frazzled. I asked him why and he said he just had gotten a K4 on a new vehicle to review. Griffith is not
+an engineer, so I asked why an administrator would get this document. He seemed surprised I would ask and said
+that Toyota is always looking for broad input and he, too, will have opinions about the vehicle.
+He was frazzled because this was clearly a challenging task for a non-engineer and he felt obliged to take it seriously
+and come up with some useful input. As it was, there were well over one hundred signatures required on the K4. Jim
+was a vice president and very well established in a company with lifetime employment, so he could have just blown
+off the assignment. But he knew that if the chief engineer was asking for a non-engineering opinion and he had to sign
+off on the document, there was a reason. The process matters and every member must take the process seriously.
+Perhaps he might see things that others missed. In any event, he knew his opinions would count.
+
+One way new engineers learn about nemawashi is through the freshman project. They are given a very challenging
+project, something they are unprepared for and could not possibly do on their own. For example, one American
+stamping engineer responsible for setting up the process of stamping body panels was given the assignment in his first
+year of designing what is called a checking fixture. This is a complex device that clamps a body panel (like the outer
+part of a door) down on specific points and checks that the measurements are accurate. Stamping engineers generally
+have to learn how to use these, but not design one. It requires understanding the design of the part, understanding the
+critical quality points, and designing something complex from scratch. The young American stamping engineer did not
+have a clue how to start. He was not given any rulebook. So he struggled and thought about it and finally started
+asking questions. In the process of asking questions, he had to talk to many engineers from different departments
+body engineering, quality, vendors. In the process he learned a lot about quality and design and met people whom he
+would continue to draw on as resources throughout his career. The assignment forced him to learn nemawashi by
+doing it.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Figure 19-1: Alternative Toyota decision making methods
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Communicate Visually on One Piece of Paper to
+Arrive at Decisions
+With all this communication going back and forth to build consensus, one might think that Toyota takes forever to get
+anything done. Yet we know how efficient and speedy Toyota is, so it should not be surprising that they have
+communication down to a science. The most time-consuming and difficult way to understand complex ideas is to
+have to decipher a lengthy report filled with technical descriptions, business jargon, and tables of data. More efficient
+is the visual approach a picture is worth a thousand words. Acting on the fact that people are visually oriented, new
+employees at Toyota learn to communicate with as few words as possible and with visual aids. The A3 report
+discussed in Chapter 13 (in which all necessary information to make a complex decision is presented on one 11 x 17
+piece of paper) is a key part of the process of efficiently getting consensus on complex decisions
+Figure 19-2 is one example of an A3 report developed at the Toyota Technical Center in 1996. It is the final report
+for an extensive analysis of using purchasing cards for small purchases to avoid lengthy and expensive approvals.
+
+Figure 19-2: Example of an A3 report
+The A3 is read from the top left down and then into the second column. Analysis of the current situation revealed that
+40% of the purchases in the technical center were for under $500, but represented only 4% of the dollars spent. Yet,
+the time to process and approve these tiny purchases took as long as for major purchases. The proposal was to use
+purchasing cards and the benefits in time and money saved are clearly spelled out in the report. A plan is proposed to
+pilot the program along with details of who will issue the cards and what uses would be blocked out on the card. The
+plan includes a timeline for full implementation once the pilot is complete.
+This A3 report was conceived when a cross-functional purchasing team and team leader were assigned to study the
+problem. They had learned the Toyota Way of approaching an assignment like this and knew that nemawashi was
+mandatory. If they went off on their own, did a study, and came back with a lengthy report and executive summary,
+they would face resistance to their ideas and their solution might not be implemented. So, throughout the process they
+involved everyone they could think of who might be affected by this decision, not just the purchasing department but
+also the general managers and vice presidents who were used to having control over their budgets through the
+approval process. Suddenly they were going to have to relinquish this control and risk overrunning their budget.
+Employees would have to learn new procedures for purchasing items and would obviously be lobbying for as much
+flexibility and the highest spending limit possible. And so on. So all of the affected parties saw A3 reports in various
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+stages being circulated and modified to incorporate their ideas. While seeking consensus is a cumbersome process, it
+goes much faster when all the different opinions, scenarios, and numbers are communicated on one side of one sheet
+of paper.
+Embedded in an A3 report is Toyota s problem-solving process, which is based on the Deming Cycle. Deming said
+any good problem-solving process should include all of the elements of planning, doing, checking, and acting
+(PDCA). (We will discuss the Deming Cycle further in the next chapter.) When Toyota teaches A3 report writing,
+one of the prerequisites is taking its course on PDCA.
+Figure 19-3 shows how the A3 proposal incorporates PDCA. In the spirit of genchi genbutsu, the A3 report starts
+with one step before planning a thorough understanding of the current situation, the values, expectations, policies,
+reason for the current system, etc. Once you lay this groundwork, you are ready for the Deming Cycle steps the plan,
+
+doing or implementing the plan, then checking and acting.
+Figure 19-3: Plan-Do-Check-Act in the proposal process
+The checking and acting stages are critical and often overlooked in problem solving. Notice the timeline for the
+purchasing card report in Figure 19-2. A pilot program is created and then, three months into the pilot, the audit and
+analysis (check) and then a report on the results of the audit. This will include countermeasures to any problems
+discovered. Then you act by implementing the pilot corporate-wide. Once everything is in place, the process of
+continuous improvement kicks in and continues operating well beyond this timeline.
+
+After months of study and great pains in writing and refining the A3 report so it included only critical and visual
+information, the team presented the report to the decision makers for the final decision. This was the executive board
+presided over by the president of the technical center. They had exactly five minutes on the agenda. They presented
+the report, which was largely ceremonial, as everyone had seen it multiple times. There was a little discussion. And
+then the decision makers formally approved the proposal.
+Alan Cabito, Group VP of Sales Administration, went to work for Toyota as his first job out of school, so he only
+knew the Toyota way. But he was able to observe differences in the way Toyota communicated when he started
+working with General Motors on the NUMMI plant in the 1980s:
+Their (General Motors ) solution to making a decision was to write a memo. I haven t written a memo in I
+don t know how many years maybe 20. I walk over to someone and I sit down and we talk about the issue.
+And ultimately, I try to get them to buy in or to make it their idea. But you never write a memo. A memo to
+me is like a directive, as opposed to an A3 PDCA document that has in it an evaluation that everybody can
+see and understand. To me an A3 is a learning process. A memo s not a learning process . In the GM world,
+at least to those people who came here, memos were a way of finding a direction, and then expecting
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+everybody to follow it without any communication necessary.
+One of the benefits of the A3 communication format and a disciplined approach to problem solving is that Toyota
+runs its meetings very efficiently. The discipline of the A3 process helps to accomplish effective meetings. There are
+several prerequisites to an efficient meeting:
+1.
+Clear objectives prior to the meeting. These are sometimes reflected in an agenda, but the agenda needs
+to be very focused on clear tasks and deliverables.
+2.
+The right people at the meeting. People expected to show up need to show up.
+3.
+Prepared participants. All participants know what they should prepare for the meeting and have done it.
+4.
+Effective use of visual aids. The A3 format is extremely effective.
+5.
+Separate information sharing from problem solving. Share information as much as possible prior to the
+meeting so that the focus of the meeting can be on problem solving.
+6.
+The meeting starts and ends on time.
+I have been in too many meetings in many companies where the vast majority fail on all six points. The meeting has a
+vague purpose, some people do not show up, nobody does any preparation except, perhaps, the person running the
+meeting, visual aids are ad hoc, most of the meeting is about sharing information, and the meeting starts late and ends
+late. Now, this is a time-consuming, cumbersome, and wasteful way to arrive at decisions.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+A Great Deal of Learning up Front Makes for
+Easier Decision Making
+Andy Lund, program manager for the 2004 Toyota Sienna, explained to me why he always uses nemawashi when
+he is making decisions and preparing to present his recommendations:
+
+For some decisions I may think I already know the answer and do not need input from others. There may be
+a department that is not directly involved and I think they probably do not have much to contribute. I may in
+fact find the right answers on my own, but I will have a hard time presenting it because the group I skipped
+will challenge my recommendations and ask why I did not consider this and that and the presentation will
+become a debate. But through nemawashi they will agree with the presentation because they have already
+agreed with it. So I will go and talk to that department in advance anyway and generally I am pleasantly
+surprised because I get new information.
+By going through lengthy and thorough information gathering and analysis in decision making, what does Toyota
+achieve?
+1.
+It uncovers all the facts that, if not considered, could lead to a great deal of pain and backtracking further
+down the road. Execution tends to be flawless by most standards.
+2.
+It gets all the parties on board and supporting the decision so any resistance is worked out before
+implementing anything. The cost of addressing this resistance when implementation begins is likely to be many
+times the cost of addressing it in the planning stage. Dick Mallery could not believe that every concerned
+party, even Toyota s opponents, ended up thanking Toyota for solving their problems.
+3.
+It achieves a great deal of learning up front before anything is even planned or implemented.
+
+The last point leads us to the next chapter and the final Toyota Way principle, which focuses on Toyota s greatest
+accomplishment becoming a true learning organization. We will see that the Problem-Solving layer of the 4P model
+(see Figure 1-1) is actually intertwined with the other three layers: Process, Partners, and Philosophy. We already
+saw in this chapter that we could not really understand nemawashi without understanding genchi genbutsu and the
+Deming cycle of problem solving. In fact, new employees cannot learn even a seemingly simple tool like an A3 report
+without first understanding these three processes.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 20: Principle 14: Become
+a Learning Organization Through
+Relentless Reflection (Hansei)
+and Continuous Improvement (
+Kaizen)
+Overview
+We view errors as opportunities for learning. Rather than blaming individuals, the organization takes
+corrective actions and distributes knowledge about each experience broadly. Learning is a continuous
+company-wide process as superiors motivate and train subordinates; as predecessors do the same for
+successors; and as team members at all levels share knowledge with one another.
+The Toyota Way document 2001, Toyota Motor Corporation
+The beginning of the 21st century has continued the turbulence, uncertainty, and intense competition of the end of the
+20th century. Long gone are the days when a company could set up shop, make a product well, and then milk that
+product for years, hanging on to its original competitive advantage. Adaptation, innovation, and flexibility have
+knocked this old business approach off its pedestal and have become the necessary ingredients for survival as well as
+the hallmarks of a successful business. To sustain such organizational behavior requires one essential attribute: the
+ability to learn. In fact, the highest compliment we can pay to a business in today s business environment is that it is a
+true learning organization.
+Peter Senge popularized this concept in his book, The Fifth Discipline, over a decade ago, defining a learning
+organization as a place (Senge, 1990):
+
+... where people continually expand their capacity to create the results they truly desire, where new and
+expansive patterns of thinking are nurtured, where collective aspiration is set free, and where people are
+continually learning how to learn together.
+Senge focuses on new patterns of thinking and learning to learn. In other words, a learning organization does not
+only adopt and develop new business or technical skills; it puts in place a second level of learning how to learn new
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+skills, knowledge, and capabilities. To become a true learning organization, the very learning capacity of the
+organization should be developing and growing over time, as it helps its members adapt to a continually changing
+competitive environment.
+Of all the institutions I ve studied or worked for, including world-class companies and major universities, I believe
+Toyota is the best learning organization. The reason is that it sees standardization and innovation as two sides of the
+same coin, melding them in a way that creates great continuity. For example, as we discussed in Chapter 12, Toyota
+has judiciously used stability and standardization to transfer individual and team innovation into organization-wide
+learning. It is one thing for individual employees to come up with innovative ways to do things. But to be transferred
+to organization learning, the new way must be standardized and practiced across the organization until a better way is
+discovered. This is the foundation for the Toyota Way of learning standardization punctuated by innovation, which
+gets translated into new standards.
+Throughout this book, we have emphasized that the Toyota Way is far more than tools and techniques. TPS itself is
+designed to push team members to think and learn and grow. Toyota evolved out of innovation, originally in making
+looms and then in automobile design, and ever since, the leadership has worked hard to keep this innovative spirit
+alive. We saw, for example, how Toyota used the Prius project to revitalize a maturing product development
+process. Lexus also pushed the organization to new levels of quality and excellence. However, breakthrough
+innovation is only one aspect of the Toyota Way. Possibly the most important aspect is Toyota s relentless
+application of the more mundane process of continuous improvement, which results in thousands of little lessons
+learned. The Toyota Way involves the company learning from its mistakes, determining the root cause of problems,
+providing effective countermeasures, empowering people to implement those measures, and having a process for
+transferring the new knowledge to the right people to make it part of the company s repertoire of understanding and
+behavior. This chapter will describe how Toyota accomplishes this.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Principle: Identify Root Causes and Develop
+Countermeasures
+Unlike most companies, Toyota does not adopt programs of the month nor does it focus on programs that can
+deliver only short-term financial results. Toyota is process oriented and consciously and deliberately invests long term
+in systems of people, technology, and processes that work together to achieve high customer value. Systems are not
+information systems but work processes and appropriate procedures to accomplish a task with the minimum amount
+of time and effort. The philosophy of Toyota and its experience support the belief that if it focuses on the process
+itself and continual improvement, it will achieve the financial results it desires.
+As you learned in Section II, The Right Process Will Produce the Right Results, continuous improvement (kaizen)
+can occur only after a process is stable and standardized. When you make processes stable and have a process to
+make waste and inefficiencies publicly visible, you have an opportunity to learn continually from your improvements.
+To be a learning organization, it is necessary to have stability of personnel, slow promotion, and very careful
+succession systems to protect the organizational knowledge base. To learn means having the capacity to build on
+your past and move forward incrementally, rather than starting over and reinventing the wheel with new personnel
+with each new project.
+
+Ultimately, the core of kaizen and learning is an attitude and way of thinking by all leaders and associates an attitude
+of self-reflection and even self-criticism, a burning desire to improve. Westerners view criticism and admitting to a
+mistake as something negative and a sign of weakness. Westerners are often eager to blame others when something
+goes wrong. The attitude of the buck stops here is the exception, not the rule. It is just the opposite within Toyota.
+The greatest sign of strength is when an individual can openly address things that did not go right, take responsibility,
+and propose countermeasures to prevent these things from happening again.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Getting to the Root Cause by Asking Why? Five
+Times
+An integral part of kaizen is Toyota s famous five-why analysis. I recall interviewing Yuichi Okamoto, a former
+Toyota Technical Center vice president, about the secret to the success of Toyota s product development system. I
+was expecting a description of a sophisticated process similar to the TPS. Instead, he answered with an underlying
+tone of sarcasm, We have a very sophisticated technique for developing new products. It is called five-why. We ask
+why five times.
+The reason for Okamoto s sarcasm is that there are no complex tools and techniques to explain Toyota s success in
+product development. Many people are surprised when I give talks and tell them that Toyota does not have a Six
+Sigma program. Six Sigma is based on complex statistical analysis tools. People want to know how Toyota achieves
+such high levels of quality without the quality tools of Six Sigma. You can find an example of every Six Sigma tool in
+use somewhere in Toyota at some time. Yet most problems do not call for complex statistical analysis, but instead
+require painstaking, detailed problem solving. This requires a level of detailed thinking and analysis that is all too
+absent from most companies in day-to-day activity. It is a matter of discipline, attitude, and culture.
+Taiichi Ohno emphasized that true problem solving requires identifying root cause rather than source; the root
+cause lies hidden beyond the source. For example, you might find that the source of a problem is a supplier or a
+particular machining center the problem occurs there. But what is the root cause of the problem? The answer lies in
+digging deeper by asking why the problem occurred. Asking Why? five times requires taking the answer to the first
+why and then asking why that occurs. Typically, the process of asking Why? leads upstream in the process. It may
+be a defect that occurs in assembly, but the root cause is upstream in the raw material supplier, where the variation in
+the thickness or hardness of steel affects how the part is stamped, which then affects the way it is welded, which then
+affects the ability in assembly of the fastener to hold the part in place.
+
+Figure 20-1 provides a hypothetical example of five-why analysis that Toyota uses in internal problem-solving
+training. The problem is oil on the shop floor. In this example, each why brings us further upstream in the process and
+deeper into the organization. Note that the countermeasures are completely different depending on how deeply we
+dig. For example, cleaning up the oil would simply be a temporary measure until more oil leaked. Fixing the machine
+would be a little longer term, but the gasket would wear out again, leading to more oil on the floor. Changing the
+specifications for gaskets could solve the problem for those particular gaskets, but there is a deeper root cause that
+would still go unresolved. You could purchase other parts at lower cost, based on inferior materials, because
+purchasing agents are evaluated based on short-term cost savings. Only by fixing the underlying organizational
+problem of the reward system for purchasing agents can we prevent a whole range of similar problems from
+occurring again in the future.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Figure 20-1: 5-Why investigation questions
+Source: Peter R. Scholtes, The Leader s Handbook, McGraw-Hill, 1998.
+A five-why analysis of a real problem within the Toyota Technical Center (TTC) provides another illustration. The
+manager of information systems developed a plan to convert to a new e-mail system with new features such as
+extended external e-mail capability and room scheduling. He devised the plan by identifying the weaknesses of the
+current e-mail system and compiling new capabilities that users wanted. Through a bidding process, the manager
+found an e-mail system he was pleased with and got approval to purchase it. When they installed the e-mail system,
+the manager sent out manuals to all employees and had them sign a letter confirming they had received one. One
+month later, the manager received many complaints from employees who did not understand all of the functions and
+found the manual too difficult to read. The manager met with the technicians and system analysts and they decided as
+a countermeasure to provide training. The training was viewed as helpful, but one month later, the manager still had
+numerous complaints about the same problem of understanding functions and the poor manual.
+What was the real root cause of the e-mail complaints? Figure 20-2 shows the result of the five-why analysis at TTC.
+In this case, the surface problem was that employees were not happy about their understanding of the e-mail system
+and the poor manual provided. As they got deeper and deeper into the root cause, they discovered that the manager
+had not followed the Toyota Way principles of genchi genbutsu and nemawashi discussed in Chapters 18 and 19
+and this chapter. The manager had not done enough work going directly to the source and studying how people use
+e-mail or the manual. He did not develop a deep understanding of the situation (genchi genbutsu) and he failed to
+pilot the process. A well-executed A3 reporting process could have avoided the problems. When they dug even
+deeper, asking Why? TTC discovered this failure to follow principles occurred because senior management failed to
+create a culture that supported the Toyota Way. The final countermeasure resulting from the e-mail incident was to
+include training and a great deal of follow through by senior management to build a culture supporting the use of good
+internal processes that follow the Toyota Way.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Figure 20-2: 5-Why analysis of e-mail problems
+Source: Toyota Technical Center, Ann Arbor, Michigan
+
+What is the real learning point of these two cases? To keep asking why until the root cause(s) are determined.
+Take countermeasures at the deepest level of cause that is feasible and at the level that will prevent reoccurrence of
+the problem.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Practical Problem Solving in Seven Steps
+At Toyota, a five-why analysis is often used as part of a seven-step process they call practical problem solving. (See
+Figure 20-3.) Before the five-why analysis can begin, practical problem solving requires you to clarify the problem
+or, in Toyota terminology, grasp the situation. Trainers who teach this methodology within Toyota have found the
+most difficult part to learn is grasping the situation thoroughly before proceeding with five-why analysis. Grasping the
+situation starts with observing the situation with an open mind and comparing the actual situation to the standard. To
+clarify the problem, you must start by going to where the problem is (genchi genbutsu). This may include prioritizing
+a number of different problems in a Pareto analysis. The Pareto diagram uses bar graphs to sort problems
+according to severity, frequency, nature, or source and displays them in order of size to show which problems are the
+most important. It is probably the most often used statistical analysis tool within Toyota simple, but powerful.
+
+Figure 20-3: Toyota s practical problem-solving process
+At this point you also want to set targets for improvement. Then you make a first attempt at identifying the point of
+cause (POC). Where is the problem observed? Where is the likely cause? This will lead you upstream toward the
+general vicinity of the root cause, which you can discover through five-why analysis. The ultimate purpose of the
+exercise is to generate and implement a countermeasure and evaluate the results. Only at this point, if the
+countermeasure is effective, does it become part of a new standardized approach.
+The seventh step standardizing the new process is very important at Toyota. As mentioned in this chapter and
+discussed in Chapter 12, standardization and learning go hand in hand and are the basis for continuous improvement.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+If you do not standardize the improved process, the learning up to that point falls into a black hole, lost, forgotten,
+and unavailable for further improvements.
+Tools, techniques, and metrics aside, Toyota s greatest emphasis is on thinking through problems and solutions. At
+Toyota, it is said that problem solving is 20% tools and 80% thinking. Unfortunately, I ve learned from many Six
+Sigma programs that some companies get caught up in using all the great and new sophisticated analysis tools, where
+problem solving seems to be 80% tools and 20% thinking.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Hansei: Responsibility, Self-Reflection, and
+Organizational Learning
+Teamwork never overshadows individual accountability at Toyota. Individual accountability is not about blame and
+punishment, but about learning and growing. A key to learning and growing, not only within Toyota but in Japanese
+culture, is hansei, which roughly means reflection. Hansei is a bit of Japanese culture that Toyota recently has been
+working to teach to its overseas managers. It is one of the most difficult things they have ever had to teach, but it is an
+integral ingredient in Toyota s organizational learning.
+
+For many years after setting up shop in the U.S., the Japanese leadership intentionally did not introduce hansei. They
+realized it was a distinctly Japanese concept and too alien to the American culture. George Yamashina, who runs the
+Toyota Technical Center, explained it as something like the American time-out for children, though in Japan hansei
+has a broader meaning.
+
+In Japan, sometimes the mother and the father say to the children, Please do the Hansei. Some child did a
+bad thing. It means he or she must be sorry and improve his or her attitude everything is included, spirit and
+attitude. So once the child is told, Please do the Hansei, he understands almost everything about what the
+mother and the father want him to do.
+Translated as reflection, Toyota finally introduced hansei to its U.S. managers in 1994. According to Yamashina, it
+had to be introduced at some point:
+
+Without hansei it is impossible to have kaizen. In Japanese hansei, when you do something wrong, at first you
+must feel really, really sad. Then you must create a future plan to solve that problem and you must sincerely
+believe you will never make this type of mistake again. Hansei is a mindset, an attitude. Hansei and kaizen go
+hand in hand.
+Mike Masaki, president of the Toyota Technical Center from 1995 to 2000, found it very challenging to get
+Americans to understand the value of reflection they take the implied criticism personally and negatively. In 1997 he
+lamented:
+
+Wherever Mr. (Akihiro) Wada (then executive VP of global R&D) goes, he critiques. I do the same thing at
+TTC. For example, I recently reviewed a prototype of the next-generation Avalon body. I pointed out that
+these parts are very bad and the Americans had an uncomfortable reaction. In Japan the reaction is I should
+have designed this better I made a mistake! The U.S. designer s expectation is that I did a good job so I
+should be rewarded. This is a big cultural difference. In Japan we would not point out the good things, but
+would focus on the negative.
+At Toyota, even if you do a good job successfully, there is a hansei-kai (reflection meeting). Bruce Brownlee,
+General Manager at the Toyota Technical Center, helped clarify this, drawing on his experience as an American who
+grew up in Japan:
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Hansei is really much deeper than reflection. It is really being honest about your own weaknesses. If you are
+talking about only your strengths, you are bragging. If you are recognizing your weaknesses with sincerity, it
+is a high level of strength. But it does not end there. How do you change to overcome those weaknesses?
+That is at the root of the very notion of kaizen. If you do not understand hansei, than kaizen is just
+continuous improvement. Hansei is the incubator for change that whole process. We want to overcome areas
+of weakness. It also explains why we (Toyota) spend little time talking about successes. We spend more time
+talking about our weaknesses. If anything, perhaps a weakness for Toyota is that we do not celebrate our
+successes enough.
+Toyota is continually reflecting on hansei as well. By implanting hansei into an alien culture, at first in the U.S.,
+Toyota has an opportunity to watch it germinate and develop in a new way. The Americans have embraced hansei
+to a degree, but there are certain traditional elements they have rejected and new elements they are adding. Andy
+Lund, a program manager for the Toyota Sienna, also grew up in Japan as a missionary s child. He explained how
+hansei is being adapted to the American culture:
+
+The hansei view of feeling deeply sorry and admitting shame is a traditional Japanese view, but I did not
+experience it when I was growing up in Japan. Here at TTC we are using a more gentle version. If individuals
+do commit a mistake, they will learn from the mistake and from having to report to Yamashina-san. It may
+be difficult for them. When you have to prepare an A3 report for the president, you learn so much more. He
+will be looking not only at the error you made but how you reflect on it.... You will of course get advice, but
+the preparation for the meeting is when the team member will learn so much. Part of on-the-job training is to
+provide opportunities for your team associates to present to the president. We try to give all team associates
+a chance to present to the president what they have learned, and they will get feedback from the president
+about dotting every i and crossing every t, but to bring shame is not the goal.
+When I first started doing interviews at the Toyota Technical Center a decade ago, U.S. managers often used the
+term the obligatory negative in discussing their Japanese coordinators. The Americans felt that, whatever work they
+showed the coordinators, it was obligatory to find a mistake or expose a weakness. Lund believes this is a
+cross-cultural misunderstanding of hansei:
+People who have not been to Japan may not understand that the objective is not to hurt that individual but
+to help that individual improve not to hurt the program but to show flaws to improve the next program. If
+you understand that deeply, you can get through that constructive criticism. No matter how good a program
+or a presentation someone makes, we believe there is always something that can be improved, so we feel it is
+our obligation. It is not an obligatory negative but an obligatory opportunity to improve it is the heart of
+kaizen.
+Hansei is not simply a philosophical belief system at Toyota, but a practical tool for improvement. For example, TTC
+holds formal and scheduled hansei events at key milestones in a vehicle program as well as after it launches the
+vehicle and the program ends. Like other companies, Toyota conducts design reviews to identify problems with the
+vehicle. But the hansei is a reflection on the process of developing the vehicle. Hansei is the check stage of PDCA.
+It is used most often at the end of a vehicle program, but TTC is starting to move it further upstream so there are
+several hansei events at key junctures in the program.
+When Lund led a hansei event after the prototype phase of the 2004 Sienna model, he began by collecting
+information from a wide range of participants in the vehicle development process. He then was able to consolidate
+what he learned into four themes. The themes are really root causes. He asked Why? five times for many different
+problems that surfaced during the development of the Sienna and moved upstream in the process. All the process
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+flaws could be explained by these four root causes.
+
+For example, some parts on the prototype vehicle were late and therefore older parts had to be used to build the
+Sienna prototype. Other parts were not as high-quality as Toyota would have liked. A thorough five-why analysis
+revealed that, in the quest for introducing the perfect vehicle to market, Toyota had insisted that every part be as
+perfect as possible at each prototype phase. This insistence resulted in the practice of last-minute revision requests,
+such that if the design engineers had an improvement on a part just prior to the prototype, they were requested by
+program management to get the latest revision onto the prototype so they could test the best ideas. The result was
+that the design engineers did not complete some prototype parts in time. Lund concluded,
+We missed a great opportunity to test parts, even if they were not the most up-to-date versions. The reflection
+was not so much that there were late changes, because if the market changes we always need to change the
+vehicle. But we learned the value of being able to freeze the part at some point so we can test a complete
+vehicle and learn as much as possible at that point.
+Lund immediately communicated the four root cause problems he observed, along with countermeasures, to other
+program managers across the company who had not yet reached the prototype stage on their projects. One benefit
+of having a regular and short product-development cycle is that when you learn something, there are several vehicles
+coming right behind it, so you have an opportunity to apply immediately what you learned to improve the process and
+product.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Process vs. Results Orientation: The Role of
+Metrics
+Believing they can get any behavior they can measure, companies wishing to emulate Toyota s system often ask me
+about its metrics. To their inevitable disappointment, they learn that Toyota is not particularly strong at developing
+sophisticated and common metrics across the company. Toyota measures processes everywhere on the factory floor,
+but prefers simple metrics and does not use many of them at the company or plant level.
+There are at least three types of measures at Toyota:
+1.
+Global performance measures how is the company doing? At this level, Toyota uses financial, quality,
+and safety measures very similar to those used by other companies. When I queried whether the listing of
+Toyota Motor Company on the N.Y. Stock Exchange made them more short-term-focused, they assured
+me that was not the case. They did say that now they must report financial results quarterly, when in the past
+they used to report annually. They found the quarterly reporting very useful. Prior to this, they were arguably
+less sophisticated in financial measurement than other companies listed on the stock exchange.
+2.
+Operational performance measures how is the plant or department doing? Toyota s measurements
+seem to be timelier and better maintained than what I have seen at other companies. The people doing the
+work at the work group level or the project manager s level painstakingly track progress on key metrics and
+compare them with aggressive targets. The metrics tend to be specific to a process.
+3.
+Stretch improvement metrics how is the business unit or work group doing? Toyota sets stretch goals
+for the corporation, which are translated into stretch goals for every business unit and ultimately every work
+group. Tracking progress toward these goals is central to Toyota s learning process. Again, Toyota does the
+tracking at the work group and project level. The measures are very particular to what the teams are trying to
+accomplish.
+I recall talking to Wayne Ripberger, who at the time was the VP of Powertrain manufacturing for Toyota in
+Georgetown. I asked what they measure at the plant level to track its performance. I was expecting insights into the
+golden metrics that drive any manufacturing plant. He said they track total cost for plant operations, a few simple
+quality measures like parts per million defects, and productivity. They of course keep track of safety by measuring
+accidents and do some employee morale surveys. There was nothing new here, except for one thing. Ripberger
+explained that the one measure he found most useful as a manager was the number of andon pulls made by each
+department, to stop the production line. The departments regularly graph the data, noting the problems that caused
+each of the andon pulls, and use Pareto analysis to identify the most common reasons. Then they go to work on
+countermeasures. Obviously you must have a well functioning andon system before this metric makes any sense. But
+when in place, this metric provides great insight into the actual day-to-day problems faced in the production process.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The difference between Toyota and many other companies is that Toyota is process oriented. In one study I worked
+on with Tom Choi[1], we tried to understand why some companies had vital continuous improvement programs while
+others had superficial programs that died before they got going. We discovered the top management in the
+companies with vital programs had a process orientation, while the unsuccessful companies had results-oriented
+managers. The results-oriented managers immediately wanted to measure the bottom-line results of the continuous
+improvement program. The process-oriented managers were more patient, believing that an investment in the people
+and the process would lead to the results they desired.
+In short, developing standard, global metrics is not a high priority at Toyota. They do it as simply as possible. More
+important to them are the metrics driving problem solving and supporting their process orientation. The most
+important learning measurements track progress toward stretch improvement goals, which is the process called
+hoshin kanri.
+[1]Thomas Y. Choi and Jeffrey K. Liker, Bringing Japanese Continuous Improvement Approaches to U.S.
+Manufacturing: The Roles of Process Orientation and Communications, Decision Sciences, Vol. 26, No. 5,
+September-October 1995.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Hoshin Kanri Directing and Motivating
+Organizational Learning
+The adage that you get what you measure is in a sense true at Toyota as well. Toyota long ago realized that the key
+to organizational learning is to align objectives of all of its employees toward common goals. The underlying value
+system of Toyota s culture does that to a great degree. But to get everyone involved in continuous improvement in a
+way that adds up to huge corporate improvements requires aligned goals and objectives and constant measurement
+of progress toward those objectives. The important insight here is that simply setting specific, measurable, challenging
+goals and then measuring progress is highly motivating even when there is no tangible reward associated with success.
+It s approached like a game or sport. Playing tennis or even solitaire is simply not as much fun if you are not keeping
+score.
+Toyota managers have become masterful at setting challenging goals jointly with their subordinates and are passionate
+about measurement and feedback. This is the basis for hoshin kanri (also discussed in the Trim Masters case
+example, Chapter 17). Hoshin kanri, sometimes called policy deployment, is Toyota s process of cascading
+objectives from the top of the company down to the work group level. Aggressive goals start at the executive level
+and then each level in turn develops measurable objectives for the year, designed to support the executive-level
+goals. At Toyota, these objectives must be measurable and very concrete. Vague goal statements are not acceptable.
+Figure 20-4 shows how the process cascades down throughout the organization and follows the PDCA process.
+
+Figure 20-4: Policy deployment process (hoshin kanri)
+For instance, all of Toyota s service parts facilities use hoshin kanri to develop three-year stretch goals to support
+the goals of Jim Press, COO of Toyota Motor Sales, who is ultimately supporting the objectives of Toyota s CEO.
+At the Hebron, Kentucky, facility, when you walk into the lobby, one of the first things you see on the wall is a big
+matrix that shows all of the target metrics for the facility for this three-year period. For the three-year period ending
+2003, the baseline measures were taken in 2000 and targets are expressed as percent improvements over the
+baseline. You can see the annual targets through 2003 as well as monthly targets and actual achievements. The
+targets are all aggressive stretch objectives like the following:
+•
+Reduce packaging costs as a percent of sales by 47%.
+•
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Reduce transportation costs as a percent of sales by 25%.
+•
+Reduce inventory by 50%.
+•
+Reduce parts per million defects by 75%.
+•
+Reduce OSHA recordable incidents per 200K hours by 50%.
+
+At the bottom of the chart, you can see at a glance how the facility is doing on each metric. Red is less than 50%
+achieved, yellow is 50%-89% achieved, and green is over 90% achieved. The matrix I saw was as of June 2002,
+about halfway into the process, and they had achieved many of the three-year targets ahead of schedule. I also met
+with a group leader who showed me his objectives and measures for the day, which included detailed measures to
+support the overall facility-level objects that a computer program tracked. Unlike many companies I visit, where the
+posted performance metrics are months out of date, everything the group leader showed me was updated daily.
+
+The policy deployment measures and actions become more specific as you move down the hierarchy from senior
+executives to working level team members, while progress reports flow upward from the lower levels to the senior
+executives. Every team member knows his or her small number of specific objectives for the year and is working on
+them throughout the year. The process of hourensou we discussed in Chapter 18 is one way senior managers are
+updated. They go to the source and talk to the workers as well. There are also formal review sessions. At the Toyota
+Technical Center, each team member has meetings three times per year to review progress toward the hoshin kanri
+objectives. The check and act part of PDCA are critical to turn the planned goals into effective action.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Creating a Learning Organization Is a Long-Term
+Journey
+Anyone who has participated in creating a learning organization knows that it is a major undertaking. It has taken
+Toyota well over a decade to build an organization in North America that bears even a resemblance to the learning
+enterprise it built over several decades in Japan. Moving people from firefighting and short-term fixes to long-term
+improvements by adapting Toyota Way Principle 14: Become a learning organization through relentless
+reflection (hansei) and continuous improvement (kaizen) is an ongoing process at Toyota.
+Even the Toyota Production System itself embodies the learning cycle of Plan-Do-Check-Act (PDCA). (See Figure
+20-5.) You can see how the cycle relates to creating one-piece flow, surfacing problems, creating countermeasures,
+and evaluating results. An effective learning organization will then check to be sure the countermeasure is doing its job
+and then reduce inventory to create even more flow, which will surface new problems.
+
+Figure 20-5: Creating flow and PDCA
+PDCA usually applies to fairly detailed work processes, but Figure 20-6 suggests that a learning enterprise is
+continually using PDCA at all levels of the company, from the project, to the group, to the company, and ultimately
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+across companies.
+Figure 20-6: The Deming cycle at all levels of the enterprise
+Transforming a company into a learning enterprise is a daunting task. It has taken Toyota most of a century to get to
+where it is today. After reading in this chapter how Toyota doesn t have a golden set of metrics, uses hansei a
+culturally foreign method for self-reflection, and depends on the straightforward tools of five-why, PDCA, and policy
+deployment, you must be scratching your head as to how you could emulate their success at all. The final part of this
+book addresses this complex issue of learning from the Toyota Way. Read on if you are thick-skinned.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Part Three: Applying the Toyota
+Way in Your Organization
+Chapter List
+Chapter 21: Using the Toyota Way to Transform Technical and Service Organizations Chapter 22: Build Your Own
+Lean Learning Enterprise, Borrowing from the Toyota Way
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 21: Using the Toyota
+Way to Transform Technical and
+Service Organizations
+Overview
+Applying the Toyota Production System outside the shop floor can be done, but this takes some creativity.
+Certainly, the basic principles can be applied to administrative processes. We sent some associates from our
+kaizen promotion office to dealers to help them. They have been able to reduce the time it takes to inspect the
+vehicle and do routine repairs, like changing parts or changing oil, in some cases from 60 minutes to 10
+minutes. This is very good for us and makes our customers very happy. There are many more opportunities
+that we need to work on using our creativity.
+Fujio Cho, president of Toyota Motor Corporation
+Manufacturing companies throughout the world have applied the Toyota Production System on the shop floor to
+varying degrees, and interest in TPS or lean manufacturing continues to grow. As companies experience
+extraordinary improvements on the shop floor, it is natural to ask how this can apply to technical and service
+operations. Many service companies that initially look at Toyota are attracted most by the technical TPS principles of
+flow and how they can apply it to a highly variable and often chaotic process. You can sum up the prospect of
+applying lean in-service operations by the reactions of three categories of people:
+1.
+Lean zealots. Manufacturing companies that have implemented lean with any degree of success have
+experienced people who led the transformation. These people invariably become lean zealots who eat,
+breathe, and sleep lean. Understanding the power of the lean philosophy through actual experience, they
+naturally look at the enormous waste in administering technical and service operations in their companies and
+want to go at it like kids in a candy store.
+2.
+Executive decision makers. Rarely do executive decision makers have a very deep understanding of TPS
+or appreciate the power of the process or the philosophy. But they love the results. So if TPS works so well
+in manufacturing, why not try it in engineering, purchasing, accounting, and so on? Even executives of service
+industries like hospitals have heard of the benefits of lean in manufacturing and want to know if they too can
+get in on the benefits. Often this means an assignment delegated down to a less than enthusiastic manager to
+check it out.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+3.
+Ordinary people. Managers, supervisors, or ordinary workers in technical and service organizations are so
+immersed in doing their jobs it is difficult for them to see the flow in their work. To them, what goes on in the
+repetitive work in factories is as different from their lives as night is from day. The idea that you can apply
+some management fad about lean flow to their daily work seems ludicrous at best.
+
+Unfortunately, for the first and second categories of people who are enthusiastic about applying lean concepts, there
+are no ready-made models of success in lean technical or service organizations to push the idea past resisters and the
+natural organization inertia. Cho admits that Toyota has a lot more opportunity to implement TPS principles beyond
+its manufacturing and is working on it. But there are already many examples inside of Toyota of Toyota Way
+principles spread well beyond manufacturing. For example, we have discussed throughout the book how Toyota has
+continually refined its product development process to become the industry s best in lead time. Toyota has figured out
+how to view product development as a repeatable process that it can continuously improve. Recognizing that any
+process is repetitive at some level is the starting point.
+
+In this chapter I will address only one of the four layers in the Toyota Way 4P model the Process layer, which
+focuses on the technical principles of the TPS. The final chapter will address how manufacturing and service
+organizations can learn from the broader set of Toyota Way principles.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Problem of Identifying Flow in Service
+Organizations
+In technical and service organizations, people are sitting at desks, working at computers, walking about, sitting
+around conference rooms, and generally busy mo

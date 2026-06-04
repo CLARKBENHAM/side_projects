@@ -1,0 +1,803 @@
+ving from task to task. It is very difficult to understand the workflow
+in the same way you can map a physical product as it is being transformed. In service organizations, the work is often
+organized around projects that vary widely in size, complexity, number of people involved, and lead time. But if you
+start with the customer, define value, and then map the process that adds value to the customer, identifying workflow
+can be more manageable.
+My associates and I have done over one hundred kaizen events on technical and business processes and it is always
+eye-opening for the teams how much waste is uncovered once they start mapping the value stream. Another
+eye-opener is the discovery that the bulk of these processes are fairly repetitive and standardizing them is possible.
+
+Figure 21-1 illustrates a hypothetical account verification value stream. Waste in this case is mostly information
+waiting in queues for someone to act on it. People are working on their own timelines and there is no coordination
+among processes. This causes batches of stuff to build up before being shipped to the next process, where they may
+sit and wait. Often this is information inventory, rather than physical inventory, so it is more difficult to determine the
+amount. The key importance of physical inventory is how it causes a delay in the process, not the amount of physical
+inventory itself. And so it is for information inventory when information is produced before it is used and builds up
+waiting, the main issue is time delays, just as with physical inventory.
+
+Figure 21-1: A non-lean flow in an account verification process
+The ideal of TPS is one-piece flow. However, as we have seen earlier in the book, the benefits of flow really come
+from tightly linking processes to bring problems to the surface, as shown in Figure 21-2. When you link processes in
+a flow, problems cannot hide in inventory or in queues waiting to be processed. When one department immediately
+gets the information it needs just in time from a supporting department, two things happen:
+1.
+If the supporting department gets behind, it will shut down the receiving department and will get immediate
+attention.
+2.
+There will be rapid feedback from the receiving department if there is a problem with the information
+provided by the supporting department.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Figure 21-2: TPS flow environment
+Source: Glenn Uminger, Toyota Motor Manufacturing, North America
+Thus, problems will surface immediately, which will lead to the problem-solving process and organizational learning
+discussed in Chapter 20. Creating lean flow is the technical backbone of TPS in both service and manufacturing
+organizations.
+
+There are five steps to creating flow in technical and service organizations:
+1.
+Identify who the customer is for the processes and the added value they want delivered.
+2.
+Separate out the repetitive processes from the unique, one-of-a-kind processes and learn how you can apply
+TPS to the repetitive processes.
+3.
+Map the flow to determine value added and non-value added.
+4.
+Think creatively about applying the broad principles of the Toyota Way to these processes using a
+future-state value stream map.
+5.
+Start doing it and learn by doing using a PDCA cycle and then expand it to the less repetitive processes.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Canada Post Corporation: Lean in Repetitive
+Service Operations
+Canada Post Corporation (CPC) is the equivalent of the U.S. Postal Service. It has a commercial mandate and
+leaders at this government-owned corporation operate with the same corporate governance as a private company.
+The profits are reinvested in the company to secure its ability to grow or are turned over to the Canadian government
+in the form of a dividend.
+
+CPC has about 57,000 employees with 22 main sorting plants. Customers can access their services at 900,000
+points in Canada more points than all Canadian bank branches combined. They deliver to over 13 million delivery
+addresses domestically. Their revenues are approximately $6 billion Canadian. In the mid-1990s, CPC began
+applying lean methods to its sorting and delivery operations. The sorting operations are the central nervous system of
+the whole process. Mail comes in from all over Canada and abroad, it is sorted, it goes on trucks and airplanes, and
+it is distributed all over the world.
+Before the lean effort started in 1995, the situation was dreadful. The sorting facilities were more like warehouses.
+The focus in these facilities was on automation and faster sorting equipment. Yet most of the waste was between
+these value-adding processes and was being ignored. Steve Withers, an executive within Canada Post, held the
+unusual title of Senior Advisor of Lean. He described the situation as follows:
+
+We had a complete batch mentality in how we laid out our plants. In many cases, we were using equipment
+that could not be started up until we had a large enough batch. Mail went like lightning through sorting
+machines then it was moved and stored; there was very little flow. The engineering philosophy was bigger,
+faster, and more expensive equipment in plants, which led to incredible point velocities (and more wasteful
+movement and storage). We had elaborate forecasting and inventory control systems, with people wandering
+the plant floor to expedite the flow. We color-coded everything to prioritize what to process next. But
+visibility was terrible and mail was often stored in overhead buffer systems that employees couldn t see. We
+had huge sorting facilities much bigger than needed, populated with fast sorting machines and inventory
+everywhere. Some plants had thousands of pieces of material-handling equipment. This led to large travel
+distances, poor quality, and long lead times, but quick sorting.
+As it was, CPC ended up going through three stages in its lean transformation. The first was point kaizen, trying
+things here and there at various points in the value stream. The second was a big-picture value stream focus that
+systematically analyzed the value stream and implemented changes. By 2003 they were starting their journey into the
+third phase building a lean enterprise.
+
+In the first phase, applying TPS methods was a process of trial and error do a project here, apply this tool there but
+even then CPC made huge, impressive gains with lean methods. At its Ottawa sorting facility, CPC mapped the
+current state of the value stream for the facility on a wall, showing how letters, advertisements, and parcels went all
+over the place in the facility. They discovered that from the moment an incoming letter entered the facility to when it
+left the facility it traveled 167 meters, was stored and removed eight times, took 26 hours of total lead time to
+process, and the value-added time of sorting (actual work) was only 12 seconds. In short, according to Withers:
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Mail was sorted in seconds, transported in minutes, staged in hours, and delivered in days. The plant was a
+warehouse.
+As a result, in 1997 the Ottawa facility removed inventory and moved some operations to arrange the equipment in
+more of a continuous process flow. This was in a three-story facility and they were able to free up enough space to
+empty out a whole floor of the building. This allowed them to move several letter carrier depots into that space and
+sell buildings or get out of leases, saving millions of dollars. Among the results:
+•
+28% reduction in travel time for the mail
+•
+37% reduction in lead time
+•
+27% reduction in storage (staging)
+
+Here is another example. In 1996 each area in CPC s Hamilton mail-sorting facility was a stand-alone work center
+and supervisors concentrated on completing the tasks in their own areas. The Hamilton facility was operating 24
+hours a day, seven days a week, and still not meeting the commitment to postal customers. Finally, out of necessity, a
+team was formed to fix the process and in 1997 the plant brought in an external lean consultant.
+
+The first objective was to improve the flow from one process to the next. The facility created a continuous-flow cell
+for processing one type of package, pulling pieces of equipment out of departments and putting them into a flow. It
+reassigned supervisors from process islands to flow cells. The operation was paced in 15-minute intervals (similar to
+the Toyota service parts operations, chapter 13). The result was a huge improvement in flow, but the floor layout still
+led to excessive material movement. In 1998, the major focus was changing the layout to streamline the material
+movement within cells. In 1999, the facility expanded the cells to include a large sorting process that was still done in
+large batch sizes because equipment changeover required 30-40 minutes. A project was done to minimize the
+changeover activity. By reducing the changeover time to zero, the run batch sizes and the transfer batch sizes were
+reduced to a fraction of the previous sizes. This allowed much less inventory and thus reduced lead times. In 2000,
+the focus was on refinement and stabilizing the operation.
+Under the unwavering leadership of the Hamilton plant director, Mike Young, there were continuing flow
+improvements in 2001. But the major emphasis was on the rate and repair process. The rate is when people fail to
+pay postage, so the item has to be rated for the amount of postage due. The repair process deals with items damaged
+during processing. There was a specialty department that did rating and repair under a batch process. Jim Womack,
+during a visit, once referred to it as the parcel hospital. Items from all three shifts were taken to the hospital on the
+second shift, where three operators did the rating and repair. Items damaged on an off-shift could wait 16 hours to
+be worked on. Often work was done during weekends. The solution to this problem included creating a mobile
+rate-and-repair station and staffing each shift with a flexible-sized rate-and-repair team. The result was a space
+savings and higher customer satisfaction because of shortened lead times. (Note that previous work done on
+improving flow also meant that there was far less damage resulting in substantially reduced repair work.)
+A transformation of this magnitude even in one facility is not an overnight process and requires a continual cycle of
+improvement and stabilization. It also requires focused leadership all the way from the top, which CPC had. As a
+result, today the lean enterprise has become the operating philosophy of CPC and, as it continues to apply it to all its
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+facilities, the benefits are profound. For the past eight consecutive years since starting on the lean journey, Canada
+Post Corporation has turned a significant profit, far exceeding the profits before lean. In total, it has returned almost
+$300 million Canadian to the Canadian government in the last five years, and customers are getting their mail faster.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Developing and Implementing Value Stream Maps
+Through Kaizen Workshops
+Obviously, CPC is not a pure technical or service organization and has some similarities to a manufacturing process.
+So where can you find an example of TPS being successfully applied to less repetitive technical or service
+organizations? The answer is that examples will be hard to find.
+You could spend your time looking for such an example or you could follow the Toyota Way of analyzing your own
+situation, developing innovative solutions, and applying lean in your own way. As Cho s quote in Chapter 1 says,
+We place the highest value on actual implementation and taking action. The first action to take on the road to
+improvement of any complex service operation is to create a macro value stream map of the entire system.
+A proven method used in lean manufacturing is value stream mapping, which was adapted by Mike Rother and
+John Shook (1999) from Toyota s material and information flow diagrams. The value stream map captures
+processes, material flows, and information flows of a given product family and helps to identify waste in the system.
+Value stream mapping evolved from a tool Toyota now calls the material and information flow diagram that Taiichi
+Ohno s operation management consulting division used in helping manufacturing suppliers learn TPS. It was the best
+place to start for suppliers to understand their current situation so they could then map a future state vision that
+included kanban, production leveling, changeover times, etc. Processes are represented as boxes. Arrows connect
+the boxes. In the original version, tombstones (for dead material) represent inventory between processes. Overall,
+lead time is represented and broken into value-added time and non-value-added time.
+
+Even though there are no physical transformations for many service and business operations, one can easily modify
+this methodology by making more of an information flow diagram. Morgan (2002) developed a version that
+effectively maps product development value streams (see Figure 21-3). The mapping was modified to capture such
+critical things as decision points, feedback loops, and project review events (hansei events). The events are placed
+on a project timeline, showing when events take place. Since different organizational functions come into play at
+different times, the processes are arranged by the function responsible for them, for example body engineering and
+die-processing in the diagram. Like value stream mapping for manufacturing, boxes represent processes and
+triangles represent inventory. Inventory in this case is information waiting to be processed. The hours of queue times
+are shown in boxes beneath the inventory triangles between processes. The processes have some key indicators
+like the task time (TT), time in system (TIS), and the value ratio of value added to total lead time (VR). Many wastes
+are represented on the value stream map. In addition to the queue times, we see engineering changes (e/c), rework,
+and time resolving various issues that result from not doing things right the first time. The cross-hatched arrows
+connecting processes depict that everything is pushed onto the next process in batches.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Figure 21-3: Current state value stream map of product-development process (Source: Morgan, 2002)
+Service processes are often complex and involve hundreds or thousands of activities. If you try to map everything all
+at once, it leads to a mess. However, by developing a big-picture, macro value stream map of the current system,
+you bring everyone together to agree on all the waste in the processes. A macro-future state map can then identify
+the big picture version and help identify where the biggest opportunities are for reducing waste in the value stream.
+From this you can identify the most obvious five to 10 high-level phases to work on in great detail to begin to
+eliminate waste. For example, a shipbuilder created a macro value stream map for the detail design phase for a class
+of ships. While the overall process seemed too overwhelming to improve, it identified seven subprocesses that were
+relatively repetitive and therefore perfect candidates for improvement, such as performing engineering analysis. Once
+you have identified repetitive and manageable processes, an organization is ready to get the maximum return from any
+kaizen effort. It is here that you can get your team s hands dirty improving processes on a more detailed level.
+The more detailed subprocesses can then be worked on in a project format and using kaizen workshops to blitz
+activity in short periods of time. The kaizen workshop is one key tool for change in any service organization. I
+describe here a format that my associates and I have successfully used many times to illustrate the issues and what
+you can accomplish. The workshops are typically one-week events where participants analyze the current process,
+develop a lean vision for the process, and, most importantly, begin implementation.[1]
+Participants in the event must include the manager responsible for the process being improved ( process owner ),
+who is the team leader of the event, along with the people who actually do the work within the process. It is also
+advisable to include customers and suppliers of the process in the event. However, whenever possible, you should
+limit the team size to no more than 15 people, to keep the workshop discussions and implementation manageable.
+There are three phases to a kaizen workshop: preparation, the actual workshop, and sustaining and continuous
+improvement after a workshop. We will discuss each of these.
+
+[1]This material is based on work I first did applying lean to business processes in the Society of Automotive
+Engineers with my associate John Drogosz of Optiprise, Inc.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Phase One: Preparation for the Workshop
+There are five essential pre-workshop things to do to facilitate the flow of the workshop and effectively use
+participants time.
+1.
+Clearly define the scope. Determine the start point or trigger that begins the process and what the final
+deliverable product(s) to the customer is.
+2.
+Set objectives. The process owner must set measurable objectives for the team to achieve. The goals must
+clearly align with the overall corporate objectives. At the very least, specific goals should be set to reduce
+lead time, improve quality, and reduce cost. The targets should be aggressive, to ensure that participants are
+challenged to come up with innovative process changes versus simply tweaking the existing process.
+3.
+Create preliminary current state map. Have a subgroup of three or four participants walk through the
+current process prior to the event to document the steps of the process, the time it takes to perform the task
+(task times), and wait times between processes. If there isn t available data for some processes, this allows
+time to collect it prior to the workshop. This is the most important part of the pre-work activities, as it saves
+valuable workshop time over starting with a blank sheet.
+4.
+Collect all relevant documents. While creating the preliminary current state map, the subgroup should
+collect samples of forms and documents used at each step. In addition, copies of all standard procedures
+affected by the process should also be available for the workshop.
+5.
+Post a preliminary current state map in the team room. Each task in the process is listed on its own
+separate sheet (8.5 x 11 preferred) of paper and posted on butcher-block paper on a wall. Some teams list
+the tasks on large Post-its®. Space is left among task boxes to allow for notes and modifications during the
+workshop.
+Now you are ready for the actual workshop.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Phase Two: The Kaizen Workshop
+The session begins with a review of the scope of the process to be improved and a review of the objectives with the
+team. Some training is provided on basic lean concepts, particularly the concept of value added and non-value
+added. Figure 21-4 shows the flow of a typical service kaizen workshop.
+
+Figure 21-4: Flow of above shop floor kaizen workshop
+Step 1. Who is the customer? The first step in any improvement process is to have the team identify the customer s
+needs and the processes that support or add value to deliver on that need. Only then can the team clearly define
+value and assist in noting which tasks in the process are truly value added.
+This process can be more complex than you might think. I helped lead one workshop involving an entire accounting
+department. They had identified a number of subprocesses, such as accounts payable, accounts receivable, employee
+expense reimbursement, etc. In the case of employee expense reimbursement, who was the customer? Was it the
+employee who wanted to be reimbursed? Was it the organization that wanted a controlled procedure to prevent
+fraud? Was it the Internal Revenue Service, which has standards for appropriate documentation for travel expenses?
+As it turned out, all three were customers and we then had to consider their collective value systems.
+
+Step 2. Analyze current state. Participants physically walk through the process (whenever possible) for purposes of
+genchi genbutsu. During the walk, participants should discuss the process with the employees to obtain insights on
+how the process works, to surface issues, and to solicit ideas for improvement. The walk-through also gives
+participants a better sense of the travel distances and the physical stop points in the flow of the product. Following
+the walk, the team can then begin a detailed analysis of the preliminary current state map. Based on the data collected
+on the walk-through and the knowledge of the team, the processing steps are modified and/or added as required. In
+addition, the team validates all data, which includes task times, wait times, quality levels, etc. The final and most
+important part of this step is to identify what is value added. Again, this can be quite complex and even controversial.
+For this step it is critical to use the three Toyota categories:
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+•
+Value Added. What is the actual transformation process core to the service that the customer is
+paying for? This could be an information transformation, like engineering or accounting. Or it could be a
+transformation in the customer, e.g., hair styling, surgery, educating the customer.
+•
+
+•
+
+Non-Value Added. What is pure waste? For example, all wait times are non-value added, as are walk
+times, rework, and unused information.
+
+Non-Value Added, but Required. Ohno called this non-value added work or, sometimes, incidental work.
+The question to ask is What is required under today s conditions even though it does not add value from the
+customer s perspective? This can include inspections, control systems to check that procedures are being
+followed, documentation, etc.
+
+Using the required non-value added category can help avoid divisions and a conflicted workshop. Nobody wants to
+consider what they do non-value added. In the accounting example mentioned above, the whole department can be
+considered non-value added from the perspective of the customers of the Society of Automotive Engineers (SAE).
+People who pay for a professional society s services do not think they are buying its internal accounting services. Yet
+accounting serves a critical function to any business. If the business goes out of business because of poor accounting,
+it cannot serve customers at all.
+
+So what is the value add? It always comes back to how you define the customer. Take the process of employee
+reimbursement. The employee is a customer and wants to be paid fast with minimum hassle. If SAE as a business
+entity is a customer of internal accounting, then the policies, controls, and monitoring put in place add value from SAE
+s perspective, even though employees would rather they all go away. If the IRS is a customer of SAE, then following
+any IRS-imposed rules and forms is part of the value added of accounting. In the employee reimbursement case, the
+group decided the employees being reimbursed for expenses were the first customers and SAE as a business is the
+second customer. The IRS is not really a customer, but filling out IRS forms is a required non-value added. Because
+of the complexities and challenges in determining who the customer is, it is important that people do not prematurely
+jump to solutions to problems during the current state analysis. You can capture any ideas for improvement on a flip
+chart for the future state discussion.
+When analyzing the current state, you are typically following a given product through a process (e.g., a drawing, a
+bill, a purchase order). However, all service processes deal with varying volumes of transactions. Consequently, it is
+important to capture the number of transactions per period and the variety of products that flow through the
+process. This will help shed light on why there are delay points in the process and assist in locating the bottlenecks.
+Once the team has completed documenting the current state, the next step is to calculate the summary metrics of the
+business process. These are some common measures calculated at this stage:
+•
+Lead time: total time the product stays in the system
+•
+Value-added ratio: sum of value-added time divided by lead time
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+•
+Travel distance of the product
+•
+Travel distance of people doing the work
+•
+Productivity: people hours per transaction
+•
+Number of handoffs
+•
+Quality rate: percent of products that go through the process the first time with no defects
+
+After the team calculates the metrics, it revisits the objectives that were determined in the preliminary stage to see if
+they are still plausible and whether they should add objectives. At this point, the team is ready to work on developing
+a lean future state.
+
+Step 3. Develop future state vision. Before diving into changing the current process or sketching out a new
+process, it is vital to draw out all ideas for improvement from the participants. A great way to achieve this is to use
+group brainstorming and have participants write their ideas on sticky notes. The facilitator collects the ideas, reads
+them aloud, and posts them on the relevant area of the current state map. After team members post their ideas, the
+team evaluates each idea to see if it will help toward achieving one or more of the stated objectives. Some ideas that
+surface may be outside the scope of the workshop but may have merit. The team captures these ideas on a parking
+lot and forwards them to the appropriate process owners. Some of these ideas may need to be explored in another
+kaizen workshop. The team captures all ideas pertinent to creating the future state vision on a list and moves to the
+next stage of drawing the future state map of the process, incorporating lean principles. The role of the lean facilitator
+at this point is to challenge participants to create a future state vision that eliminates waste, improves first-time quality,
+and optimizes the flow through the entire process and to lay out the new flow of tasks. Afterwards, task times and
+wait times are calculated (or estimated) for the new tasks. The major lean concepts that should be a part of the future
+state vision include the following:
+•
+
+•
+
+Create one-piece flow. As much as possible, have information move through the system seamlessly rather
+than in batches.
+
+Arrange work centers (e.g., organizational structures) to align with value streams to support customers in a
+one-piece flow.
+•
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Use cross-functional teams, co-located if possible, when needed to avoid handoffs.
+•
+Identify a value stream or case manager who is responsible for the service from start to finish from the
+customer s perspective, like the chief engineer in Toyota s product development system.
+•
+Level (load level) the number of transactions whenever possible to balance workloads.
+•
+Build in quality in the process rather than inspect it (e.g., eliminate unnecessary approvals, checking, review
+cycles).
+•
+Standardize the tasks and clearly document work on standardized worksheets.
+•
+Eliminate redundant systems, such as reconciliation across different people.
+•
+Include visual displays and controls to make work status easy to see and understand (minimize tracking).
+
+Once the team completes the future state map, the new process metrics are calculated and compared with the current
+state metrics to quantify the expected savings. At this stage, the future state vision is presented to senior management
+and the owners of other affected processes for immediate approval. Once all have agreed upon the future state
+vision, the team may proceed to the next step, implementation.
+
+Step 4. Implementation: do it! The next phase of the above shop floor kaizen workshop is to start to make the
+future state vision a reality. The future state map is divided into segments and participants are broken into subgroups
+to work on each segment. A project plan is developed with what, when, and who. Implemen-tation activities during
+the workshop can include:
+•
+Re-layout of work areas to facilitate one-piece flow
+•
+Workplace organization (5S and visual displays)
+•
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Creation of standard work instructions
+•
+Revision of corporate procedures
+•
+Redesign forms and documents
+•
+Problem-solving activities to uncover root causes of quality problems
+•
+Specifications or even some changes for any information technology required to support the improved
+process
+•
+Training people in the new process
+
+Clearly, you may not complete some activities during a one-week kaizen workshop, such as creating a database or
+obtaining customer approval on changes in specifications. You capture these ongoing items in a project plan that will
+serve as the work plan for the sustaining team after the workshop. Each item in the plan should have a sustaining team
+member s name assigned to it and a firm completion date. The sustaining team typically consists of the workshop
+team leader and a subgroup of the participants whose skills are needed to complete the transition to the future state
+vision.
+Step 5. Evaluate: measuring performance. The last phase of the kaizen workshop is to establish metrics that will
+track progress toward the future state and ensure that gains achieved during the workshop are indeed sustained over
+time. Most of the metrics should be the same as those captured in the kaizen workshop. The current state metrics
+provide the baseline and the future state metrics provide the targets. Then you need to implement a simple tracking
+system that ideally should be based on the metrics data collection currently in place. You should assign a person for
+each metric to collect and collate the information. Figure 21-5 provides a sample form for establishing metrics.
+
+Figure 21-5: Sample process improvement metrics
+You post the current and future value stream maps, process metrics, project plan, objectives, and other
+communications on a lean status board in the main work area to serve as the visual display to communicate to all
+employees the progress that is taking place. Data should be posted on the lean status board at least once a month
+(weekly is preferred). It is advisable to keep the number of metrics to a minimum. Remember that tracking metrics
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+takes time away from people doing their work. It is also important at this stage to discuss the existing metrics and
+immediately eliminate ones that are superfluous or drive behaviors that are counter to the implementation of the lean
+future state vision.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Phase Three: After the Workshop Sustaining and
+Continuous Improvement
+Following the workshop, the sustaining team will continue to drive the future state. This is the check-act part of the
+Plan-Do-Check-Act (PDCA) cycle. The team meets on a weekly basis to do the following:
+•
+Review the status of the open action items from the project plan.
+•
+Review process metrics to ensure improvements are being achieved.
+•
+Discuss additional opportunities for improvements.
+•
+Continue to improve the process.
+
+Senior management should do monthly reviews of the lean status board to evaluate metrics, open items on the project
+plan, and resolve any roadblocks to implementation. They should also provide recognition to the team as it achieves
+key milestones in implementation. This is part of the hourensou process discussed in Chapter 18.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+A Northrop Grumman Ship Systems Service
+Process Kaizen Event[2]
+Northrop Grumman Ship Systems Ingalls shipyard in Mississippi began aggressively implementing lean in its
+operations areas in the summer of 2000. Since engineering is critical to shipbuilding, it soon expanded its
+transformation to lean to include engineering processes.
+The issue of label plates, the responsibility of engineering, had been a perennial problem in getting compartments of
+the ship approved by the Navy and the cost of achieving compliance. There are label plates all over the ship
+describing what things are and issuing warnings of various sorts. Label plates are a very visible aspect of a ship and
+must have the correct wording and be posted in the correct location. The perception in the yard was that it was just
+a label plate, as most are easy to fabricate and install. However, a ship has 40,000 or more label plates, so
+management clearly saw that it was a significant process and important to its customer.
+
+Based on the value stream map, the physical manufacturing processes for making the various types of label plates
+were relatively simple but the information flows required to make the label plates crossed several functions and took
+a relatively long time to reach the label plate department. Given that problems appeared to cross over functions and
+there was a potential to improve customer satisfaction while reducing costs, Ingalls management agreed to support a
+lean event to improve the label plate process led by lean consultant John Drogosz. The results of the kaizen
+workshop were:
+•
+Lead time reduction of 54%
+•
+Rework reduction of 80%
+•
+Productivity improvement of 29%
+•
+Standardized work/process for label plates
+The team achieved these results by dividing into subgroups during the week to implement the necessary changes.
+These changes made during the workshop included:
+•
+Incorporating label plate comments earlier onto system diagrams to eliminate rework downstream.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+•
+Use of a single database to maintain consistent data throughout the construction and trials of the ship.
+•
+Standardizing work for all tasks to minimize variation.
+•
+Problem-solving sessions completed to find the root cause of rework.
+•
+Mistake proofing and changes in standard work used to eliminate most of the rework.
+•
+Engineering trials of some new materials to improve durability of plates.
+
+At the end of the week, the team established metrics and posted a lean status board in its area to track the
+improvements. The process was audited four months after the kaizen workshop and the team was consistently
+meeting or beating the expected results. The team continued meeting regularly and morale greatly improved in the
+area. The stress level of people working on the process greatly diminished, since they rarely needed to make
+replacement plates and run to the ship to put them on as they so frequently had done in the past.
+
+[2]The label plate case is modified from an article by my associate John Drogosz, Applying Lean Above the Factory
+Floor, Journal of Ship Production, Vol. 18, No. 3, August 2002.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Visual Control of Engineering at Genie Industries
+A central issue for many service processes is controlling the process. Some successful kaizen workshops have
+focused on creating the system of tracking and controlling the process using visual controls. Genie Industries is an
+example of this.
+Genie makes many different kinds of lift devices, like the hoist device phone company service people use to work on
+telephone poles. Genie has aggressively implemented lean throughout its operations and credits lean with keeping it
+afloat in a down cycle in the industry in the late 1990s and then helping it grow to the number-one producer in this
+market segment. In this lean improvement period, Genie went from five or six inventory turns per year to 45 turns
+annually over a three-year period. Total cost has been going down at a rate of 5% per year.
+
+Most of Genie s products are highly engineered, many of them to a specific customer order, so engineering can
+become the bottleneck in getting customers what they want when they want it. A key part of the improvement
+process in engineering was simply moving the front offices to the shop floor, where engineers and manufacturing team
+leaders sit together. The approach was to organize around value streams, get product engineers together with
+manufacturing, and use simple visual systems to manage the process.
+
+The nerve center of engineering is now a conference room with visual displays on the wall. The two core processes
+visually represented in the room are engineering changes to existing products (e.g., to customize a product for a
+particular customer) and new product development. In the past, Genie ran both of these processes through computer
+schedules. However, it took too long, never met the schedule, and ended up generating 14 copies of each change
+order that circulated to a bunch of offices. Now they manage both processes through manual visual schedules posted
+where the team meets weekly to review progress.
+For engineering change orders they use a large magnetic board. Magnetic strips identify the number and description
+for each live change order and serve as the title of a row for that change order. Time is measured across the rows, so
+you can see when the change order was initiated, when it is due to be complete, and if it is on time or late. A
+maximum of seven days is allotted to do the necessary research to determine what the change will involve and
+commit to a completion date. Part of the magnetic board has a countdown folder with slots for completion due
+dates out 1-7 days, 8-14 days, 15-23 days, and 24-30 days and a slot for those still in research mode waiting for a
+commitment date. The master version of the engineering change notice is kept in the appropriate slot and moves as
+time passes. There is also an engineering change-notice process flowchart showing the steps and responsibilities.
+Through this process, the time to incorporate change orders into the product was reduced from 120 days to 30 days
+or less.
+
+They also use a visual system for new product development, which is essentially a large Gantt chart on the wall with
+sticky notes showing tasks. When a task is complete, a big X is put over the task. Each project takes about a year,
+and the chart covers much of the wall. There are some spreadsheets in the computer backing it up, but no complex,
+Web-enabled, collaborative product development system. What is on the wall is the main tool for managing the
+engineering projects. Since the lean effort, engineering costs have been driven down at a rate of 10% per year.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+It s All About Supporting the Core Value Stream
+I have illustrated throughout the book applications to service operations. Some of the specific, detailed tools of TPS
+may be harder to apply.
+It would not make sense, for example, for a lawyer to sit at his or her desk waiting for a material handler to deliver a
+kanban asking for the next legal brief. However, most lawyers have many repetitive processes that can benefit from
+a value stream perspective. Analyze the process from the customer s perspective, draw a current state map showing
+the waste, define the future process flow in a future state map, develop an implementation plan along with roles and
+responsibilities, track progress visually, and focus on continuously improving the process. To be effective, it may be
+necessary to reorganize around value streams. These simple steps will take you a long way.
+As I have stated since Chapter 1, the key to applying TPS in any environment is to focus on the value-added
+operations and work to eliminate waste. As you have learned in this chapter, this is a bit more challenging for a
+service operation, because defining the customers and understanding their needs can be tricky. But with extra effort,
+it can be done.
+
+When Glenn Uminger, an accountant, was given the assignment to set up the first management accounting system for
+the Toyota plant in Georgetown, Kentucky, he was advised that he must first understand the Toyota Production
+System. He spent six months in Japan and in other U.S. plants learning by doing actually working in manufacturing. It
+became evident to Uminger that he did not need to set up the same complex accounting system he had set up at a
+former company. He explained:
+
+If the system I set up in the parts supplier I previously worked for was a 10 in complexity, the Toyota system I
+set up was a 3. It was simpler and far more efficient.
+The system was simpler because Uminger took the time to understand the manufacturing system, the customer for
+which he was a supplier of services. He needed to build an accounting system that supported the real needs of the
+actual manufacturing system that Toyota set up. Through genchi genbutsu, he developed a deep understanding of
+the Toyota Production System in action. He learned that Toyota s system is based on pull and has so little inventory
+that the complex inventory tracking systems his former company used were unnecessary. And the arduous and
+expensive task of taking physical inventory could be greatly streamlined. Toyota does physical inventory twice per
+year and uses the work teams to facilitate it. Tags are prepared for the work teams for inventory counting and the
+team leader does a count in 10 minutes at the end of the shift and writes the numbers on the tags. Someone from
+accounting collects the tags and enters them in the computer. That same evening the inventory count is completed.
+They spend a few hours twice a year and it is done!
+
+Because of his experience of implementing the accounting system at the Toyota plant, Uminger had developed such a
+deep understanding of TPS that they put him in charge of creating a TPS office to do projects to improve operations
+in the plant and teach TPS. He then became the material logistics manager to apply TPS to the logistics network and
+became responsible for that network for all of North America.
+The point is that it is impossible to define value in a service operation without first understanding its core value stream
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+. Some service operations are the core value stream, as we saw in the case of the Canada Post Corporation. In a
+legal office, the lawyers are part of the core value stream. Once you define the core value stream, then all support
+service operations must view their roles as supporting the core value stream. The leaner the core value stream, the
+leaner the support operations can be. Generally, it is recommended to start by applying TPS to the core value stream
+and then branch out to the support functions.
+In the final chapter, we will discuss how to learn the broader lessons of the Toyota Way and apply them to your
+company. It is this broader philosophy the way Toyota leads people and partners, solves problems, and learns that is
+the most difficult for organizations to adapt, develop, and sustain.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 22: Build Your Own
+Lean Learning Enterprise,
+Borrowing from the Toyota Way
+Overview
+One man did his part, and the other his, and neither even had to check to make sure both parts were getting
+done. Like the dance of atoms Alvin had imagined in his mind. He never realized it before, but people could
+be like those atoms, too. Most of the time people were all disorganized, nobody knowing who anybody else
+was, nobody holding still long enough to trust or be trusted, just like Alvin imagined atoms might have been
+before God taught them who they were and gave them work to do.... It was a miracle seeing how smooth
+they knew each other s next move before the move was even begun. Alvin almost laughed out loud in the joy
+of seeing such a thing, knowing it was possible, dreaming of what it might mean thousands of people
+knowing each other that well, moving to fit each other just right, working together. Who could stand in the
+way of such people?
+Orson Scott Card
+Prentice Alvin: The Tales of Alvin Maker, Book Three
+In the series by renowned science fiction and fantasy writer Orson Scott Card, Alvin can see the tiniest bits of matter
+and detect when they are out of their natural pattern, e.g., bones broken or a fault in a piece of iron. He can see the
+correct pattern in his mind and make the matter reform itself back into the correct pattern, thus healing the bone or
+making the iron strong again. In the quote above, Alvin is learning how this works, through the ordering of atoms that
+otherwise aimlessly move about until somehow they learn a pattern learn where they are supposed to stay in relation
+to other atoms. He observes two men who appear to be strangers, but then realizes that they fit together in a pattern
+because or years they had been secretly working together to free slaves. This breakthrough in his thinking leads him
+to realize that social bonds between people can be as powerful as physical bonds between atoms creating a whole
+much greater and stronger than the sum of the individual parts.
+The lesson and secret of the Toyota Way is just as clear as this: it creates bonds among individuals and partners such
+that they move to fit together just right, working together toward a common goal. It is in stark contrast to most
+companies, which are made up of individuals who are, in Alvin s words, disorganized, nobody knowing who
+anybody else is, nobody holding still long enough to trust or be trusted. The question is how to get to there from here.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+A Commitment from the Top to Build a Total
+Culture from the Ground Up
+The toughest and most basic challenge for companies that want to learn from Toyota is how to create an aligned
+organization of individuals who each have the DNA of the organization and are continually learning together
+to add value to the customer.
+Will Rogers, American social commentator, said, We are a great people to get tired of anything awful quick. We just
+jump from one extreme to another. I am afraid that is what most companies are doing with lean manufacturing. It is
+just one more thing to jump into and one more thing to jump away from when the next fad comes along. If there is
+anything to learn from Toyota, it is the importance of developing a system and sticking with it and improving it. You
+cannot become a learning organization by jumping willy-nilly from fad to fad.
+
+The Toyota Way model was intentionally built from the ground up, starting with a philosophy. And the philosophy
+starts with the chief executives of the organization. What should their goal be? To build an enterprise for the long term
+that delivers exceptional value to customers and society. And this requires long-term thinking and continuity of
+leadership. It may take decades to lay the foundation for radically transforming the organization s culture.
+What do we know about changing a culture?
+1.
+Start from the top this may require an executive leadership shakeup.
+2.
+Involve from the bottom up.
+3.
+Use middle managers as change agents.
+4.
+It takes time to develop people who really understand and live the philosophy.
+5.
+On a scale of difficulty, it is extremely difficult.
+
+What if the top does not understand and embrace the new philosophy? I asked Gary Convis, president of Toyota
+Motor Manufacturing, Kentucky, the following question: If you were a middle manager or even a vice president
+passionate about implementing the Toyota Way in your company and the senior executives did not strongly support
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+it, what would you do? His answer was blunt:
+I would be out looking for better pastures (laughter), because the company may not be around long enough
+for me to get my pension. Actually, that s a good question. Now, there could be a change in the top
+management. Maybe somebody up in the board recognizes that lean is not happening and needs to. Like
+General Motors did. I think the board said, Wait a minute, we ve been giving these guys rope and we ve
+been giving them time and we don t see the direction. At some point in time they decided enough is enough.
+The new direction was set and new priorities were set and resources were established.
+So a prerequisite to change is for top management to have an understanding and commitment to leveraging the
+Toyota Way to become a lean learning organization. This understanding and commitment extends to building the
+lean systems and culture and, the most difficult for Western companies, sustaining and constantly improving the
+system. These are really two different skills, and even Toyota struggles with the balance, particularly in overseas
+operations.
+
+This insight led me to develop the model shown in Figure 22-1, which illustrates the minimum level of leadership
+commitment needed to start on the lean journey to learn from Toyota s model of a lean learning enterprise. Answer
+these three questions:
+1.
+Are top executives who run the company committed to a long-term vision of adding value to
+customers and society in general? If the commitment is simply to short-term profitability, the answer is No,
+so go directly to the short-term tools box (the equivalent of go directly to jail in the game Monopoly).
+2.
+Are top executives who run the company committed to developing and involving employees and
+partners? This includes key suppliers. If people are viewed as expendable labor and suppliers are viewed as
+sources of cheap parts, the answer is No, so go directly to the short-term tools box.
+3.
+Will there be continuity in top leadership s philosophy? This does not mean the same people need to run
+the company forever, but they need to develop their successors with the company s DNA to continue the
+philosophy. If leaders turn over every time there is a crisis or if the company is bought out every decade with
+a new cast of characters installed as leaders, the answer is No, so go directly to the short-term tools box.
+As Figure 22-1 illustrates, if the answer is No to any of these three questions, top leaders should pick and choose
+from whatever tools are out there to improve processes for the short term, make a bundle of money, and go do
+something else. This is tantamount to admitting the company will never be a learning enterprise, or a great company,
+and is interested only in cutting and slashing waste to look good for the short term. But beware, because whatever
+tools are implemented, they deteriorate over time and the company will suffer in the long term. As Convis said,
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+nobody s retirement income will be secure.
+Figure 22-1: Top leadership s commitment to lean journey
+Note that there is a feedback loop from begin lean journey back to the original question of top leadership s
+commitment to a long-term vision that has to be continually challenged. Let s consider two examples that illustrate the
+importance of sustained leadership commitment. One was a great success but is now on the way to deteriorating
+because of a top leadership change and the second is a work in progress.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+The Importance of Sustained Leadership
+Commitment: Two Examples
+The first example is the Wiremold Corporation, which was showcased by Womack and Jones in Lean Thinking as
+a lean exemplar and more recently has been documented in detail by Emiliani et al. (2003) in Better Thinking,
+Better Results. Wiremold makes cable-management solutions that enclose various kinds of cables. This was a
+family-owned business, started in 1900 in Hartford, Connecticut, and the family made considerable investments in the
+early 1980s in Total Quality Management and various lean tools. They got positive results, but realized they were
+only scratching the surface.
+So they hired Art Byrne as CEO, who had a great deal of success in leading lean transformations. Byrne was an
+exemplary leader in the spirit of the Toyota Way. For example, he taught TPS to employees directly and personally
+led kaizen events. He hired some experienced lean leaders to report to him and developed others. He enjoyed a
+great deal of autonomy in running the company. He started with the shop floor, beginning with simple local changes,
+and then moved to link together operations. Then he worked on the supporting infrastructure of information
+technology, accounting, purchasing, etc. He also acquired related companies and led lean conversions for those.
+Business was booming and the company was never more profitable.
+Having accomplished so much, Byrne decided it was time to retire and, shortly after that, the family decided to cash
+in the greatly enhanced value of the company. In June 2000, Wiremold became part of the Legrand Group, a global
+company that did not understand lean manufacturing. Recognizing that the new focus was on short-term cost
+reduction and not on the lean enterprise, most of the lean leaders Byrne had developed left the company years
+committed to learning and progress in building a lean enterprise stopped.
+The second example is a work in progress. Merillat is a leader in the manufacture of household cabinets for kitchens
+and other uses. Merillat also had dabbled in Total Quality Management and lean methods and decided to get serious.
+In this case, the CEO realized the need for a first-rate lean leader with the autonomy to run operations. He hired
+Keith Allman, whose superior leadership skills had helped successfully transform a plant at Donnelly Mirror to the
+Donnelly Production System with outstanding results (Liker, 1998).
+With the enthusiastic support of the CEO, Allman has systematically worked to transform Merillat into a lean
+enterprise and has made major strides in the manufacturing area as well as the support structures. Ask Allman what it
+will take to keep the lean journey going and he is very clear. My role is to drive a system to develop people and
+promote from within. Leadership development is the key to sustaining a lasting system and culture that drives
+continuous improvement. Allman does not own the company, nor is he the CEO. This means that what he s
+accomplished is not guaranteed to last unless he develops a successor and the ownership remains stable and
+continues to support the lean direction. While Allman cannot control the ownership of the company, he can take the
+opportunity he has to develop a lean leader. He believes he needs to develop the lean successor from within the
+company.
+
+Collin s best selling book on eleven great American Fortune 500 companies that had stock returns 6.9 times the
+general market over a fifteen year period found these companies had specific types of leaders (referred to as level 5
+leaders ).[1] The CEOs were unusually ambitious, but for the company, not for themselves. They had an
+extraordinary will to make the company succeed, yet equally extraordinary personal humility. Personal
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+aggrandizement or enrichment was not the goal. And they worked tirelessly to develop a successor who they set up
+for success. In short, they were a lot like Toyota s leaders.
+Figure 22-1 shows a set of factors that will influence whether top executives are committed to the lean vision. These
+include:
+1.
+Ownership structure. Obviously, who owns the company and how it is financed has a major influence on
+the ability of the company to focus on long-term objectives. Looking good to Wall Street for the quarter may
+conflict with long-term investments in excellence. Toyota clearly has a unique situation in being such a large
+company with a good deal of family control and a keiretsu structure of interlocking ownership among
+like-thinking organizations that grew up together. And being publically traded so far has not hampered
+Toyota s long-term perspective.
+2.
+Promote from within. Develop future leaders from within or there is no chance of sustaining long term.
+When Toyota has brought in outside leaders, this has been only at the upper-middle-management level, such
+as general managers, with mixed success. But the culture is so strong and there are so many people with the
+Toyota Way DNA that any outside manager will be pressured to learn the Toyota Way or decide to leave.
+3.
+Environmental pressures. Unfortunately, there are factors beyond the control of any lean leader that can
+make it difficult to sustain the lean learning enterprise. One is the market, which can take major downturns or
+the market for the particular product the company makes can deteriorate. Other factors are wars, radical
+new technologies, government policy changes, and on and on. Clearly, Toyota has survived and prospered in
+many different business and political environments and its strong culture and philosophy have helped it
+navigate through these treacherous environments.
+4.
+Experience with lean. The leaders I mentioned above, Art Byrne and Keith Allman, along with many others
+too numerous to list here, have all had very positive experiences with real TPS. The best lean leaders in my
+experience worked for Toyota, for someone who worked for Toyota, or for a company that worked closely
+with Toyota the common theme being direct exposure to the Toyota gene pool. Obviously, as more and
+more companies develop real lean systems, there are broader opportunities for learning lean thinking outside
+Toyota and its affiliates.
+
+So what can you do if you are not the CEO and top management is interested only in short-term financial results?
+There are three things I know of:
+1.
+Find greener pastures, as Convis suggests.
+2.
+Participate in playing the game of applying tools for short-term gains and hope you share in the gains.
+3.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Work to build a successful lean model and educate top management by blowing them away with exceptional
+results.
+
+The third alternative is frankly going to be the most common position of those with a passion for lean. Allman and
+Byrne were fortunate in coming in with experience, having strong support from the leaders and owners of the firm,
+and being able to bring in other passionate lean leaders one or more levels below them. Even then, they did not have
+complete control over the company. If they had not succeeded in impacting the bottom line, they would have lost
+their support in a hurry.
+In both these cases Wiremold and Merillat lean leaders had unique opportunities to come in and seriously transform
+the company with the backing of the very top executives. They were successful as far as they got and produced
+stunning results. Merillat is a work in progress and we do not know where it will be in 10 years. The Wiremold story
+took a sad turn when the company was bought by a company that did not understand or support lean. It suffered a
+serious setback. On the other hand, the lean systems are still there and many people have adopted them as standard
+operating procedures. Some remnants will remain should the new owners realize the company s vitality was because
+of the lean philosophy and choose to rebui

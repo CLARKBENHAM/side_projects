@@ -1,0 +1,3761 @@
+{
+  "timestamp": "2026-06-04T16:44:08.508702",
+  "config": {
+    "sample_count": 999,
+    "seed": 20260603,
+    "min_highlights": 1,
+    "min_chapter_chars": 2500,
+    "max_chapter_chars": 65000,
+    "backend": "codex",
+    "model": "gpt-5.5",
+    "judge_backend": "codex",
+    "judge_model": "gpt-5.5",
+    "workers": 4,
+    "dry_run": false
+  },
+  "candidate_count": 78,
+  "selected_count": 78,
+  "index_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/index.html",
+  "samples": [
+    {
+      "book": {
+        "book_id": "toyota-production-system-beyond-large-scale-production-taiichi-ohno",
+        "title": "Toyota Production System: Beyond Large-Scale Production",
+        "author": "Taiichi Ohno",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/Toyota Production System_ Beyond Large-Scale Production - Ohno, Taiichi_Bodek, Norman - (1988, Productivity Press).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/Toyota Production System_ Beyond Large-Scale Production - Ohno, Taiichi_Bodek, Norman - (1988, Productivity Press).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "Toyota Production System: Beyond Large-Scale Production"
+      },
+      "chapter": {
+        "index": 5,
+        "title": "3 Further Development An Autonomic Nervous System in the Business Organization A BUSINESS ORGANIZATION is like the human body. The (part 3)",
+        "source_label": "index_split_001.html",
+        "start_char": 228605,
+        "end_char": 274546,
+        "char_count": 45939
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/toyota-production-system-beyond-large-scale-production-chapter-005",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/toyota-production-system-beyond-large-scale-production-chapter-005.html",
+      "summary_execution": null,
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-toyota-way-jeffrey-k-liker",
+        "title": "The Toyota Way",
+        "author": "Jeffrey K. Liker",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "primary_format": "pdf",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Toyota Way"
+      },
+      "chapter": {
+        "index": 7,
+        "title": "Span 7",
+        "source_label": "fixed-span",
+        "start_char": 360000,
+        "end_char": 420000,
+        "char_count": 60000
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-toyota-way-chapter-007",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-toyota-way-chapter-007.html",
+      "summary_execution": null,
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 53,
+        "title": "Chapter 52",
+        "source_label": "OEBPS/68-chap64.xhtml",
+        "start_char": 1763548,
+        "end_char": 1776771,
+        "char_count": 13223
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-053",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-053.html",
+      "summary_execution": null,
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 45,
+        "title": "Chapter 44",
+        "source_label": "OEBPS/59-chap55.xhtml",
+        "start_char": 1607834,
+        "end_char": 1635958,
+        "char_count": 28124
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-045",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-045.html",
+      "summary_execution": null,
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "toyota-production-system-beyond-large-scale-production-taiichi-ohno",
+        "title": "Toyota Production System: Beyond Large-Scale Production",
+        "author": "Taiichi Ohno",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/Toyota Production System_ Beyond Large-Scale Production - Ohno, Taiichi_Bodek, Norman - (1988, Productivity Press).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/Toyota Production System_ Beyond Large-Scale Production - Ohno, Taiichi_Bodek, Norman - (1988, Productivity Press).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "Toyota Production System: Beyond Large-Scale Production"
+      },
+      "chapter": {
+        "index": 1,
+        "title": "Taiichi Ohno Foreword by Norman Bodek Table of Contents Publisher's Foreword . . . . . . . . . . ix (part 1)",
+        "source_label": "index_split_000.html",
+        "start_char": 7,
+        "end_char": 64840,
+        "char_count": 64833
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/toyota-production-system-beyond-large-scale-production-chapter-001",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/toyota-production-system-beyond-large-scale-production-chapter-001.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:29:41.250165",
+        "finished_at": "2026-06-04T16:30:27.157891",
+        "duration_seconds": 45.908
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-toyota-way-jeffrey-k-liker",
+        "title": "The Toyota Way",
+        "author": "Jeffrey K. Liker",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "primary_format": "pdf",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Toyota Way"
+      },
+      "chapter": {
+        "index": 3,
+        "title": "Span 3",
+        "source_label": "fixed-span",
+        "start_char": 120000,
+        "end_char": 179999,
+        "char_count": 59999
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-toyota-way-chapter-003",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-toyota-way-chapter-003.html",
+      "summary_execution": null,
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "toyota-production-system-beyond-large-scale-production-taiichi-ohno",
+        "title": "Toyota Production System: Beyond Large-Scale Production",
+        "author": "Taiichi Ohno",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/Toyota Production System_ Beyond Large-Scale Production - Ohno, Taiichi_Bodek, Norman - (1988, Productivity Press).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/Toyota Production System_ Beyond Large-Scale Production - Ohno, Taiichi_Bodek, Norman - (1988, Productivity Press).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "Toyota Production System: Beyond Large-Scale Production"
+      },
+      "chapter": {
+        "index": 2,
+        "title": "Taiichi Ohno Foreword by Norman Bodek Table of Contents Publisher's Foreword . . . . . . . . . . ix (part 2)",
+        "source_label": "index_split_000.html",
+        "start_char": 64840,
+        "end_char": 99048,
+        "char_count": 34206
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/toyota-production-system-beyond-large-scale-production-chapter-002",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/toyota-production-system-beyond-large-scale-production-chapter-002.html",
+      "summary_execution": null,
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 46,
+        "title": "Chapter 45",
+        "source_label": "OEBPS/60-chap56.xhtml",
+        "start_char": 1635960,
+        "end_char": 1654530,
+        "char_count": 18570
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-046",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-046.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:29:41.253230",
+        "finished_at": "2026-06-04T16:30:35.681519",
+        "duration_seconds": 54.428
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-toyota-way-jeffrey-k-liker",
+        "title": "The Toyota Way",
+        "author": "Jeffrey K. Liker",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "primary_format": "pdf",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Toyota Way"
+      },
+      "chapter": {
+        "index": 14,
+        "title": "Span 14",
+        "source_label": "fixed-span",
+        "start_char": 780000,
+        "end_char": 803669,
+        "char_count": 23669
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-toyota-way-chapter-014",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-toyota-way-chapter-014.html",
+      "summary_execution": null,
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-toyota-way-jeffrey-k-liker",
+        "title": "The Toyota Way",
+        "author": "Jeffrey K. Liker",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "primary_format": "pdf",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Toyota Way"
+      },
+      "chapter": {
+        "index": 13,
+        "title": "Span 13",
+        "source_label": "fixed-span",
+        "start_char": 720000,
+        "end_char": 780000,
+        "char_count": 60000
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-toyota-way-chapter-013",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-toyota-way-chapter-013.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:29:41.256592",
+        "finished_at": "2026-06-04T16:30:36.321947",
+        "duration_seconds": 55.065
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "toyota-production-system-beyond-large-scale-production-taiichi-ohno",
+        "title": "Toyota Production System: Beyond Large-Scale Production",
+        "author": "Taiichi Ohno",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/Toyota Production System_ Beyond Large-Scale Production - Ohno, Taiichi_Bodek, Norman - (1988, Productivity Press).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/Toyota Production System_ Beyond Large-Scale Production - Ohno, Taiichi_Bodek, Norman - (1988, Productivity Press).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "Toyota Production System: Beyond Large-Scale Production"
+      },
+      "chapter": {
+        "index": 4,
+        "title": "3 Further Development An Autonomic Nervous System in the Business Organization A BUSINESS ORGANIZATION is like the human body. The (part 2)",
+        "source_label": "index_split_001.html",
+        "start_char": 163866,
+        "end_char": 228605,
+        "char_count": 64737
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/toyota-production-system-beyond-large-scale-production-chapter-004",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/toyota-production-system-beyond-large-scale-production-chapter-004.html",
+      "summary_execution": null,
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 31,
+        "title": "Chapter 30",
+        "source_label": "OEBPS/42-chap38.xhtml",
+        "start_char": 1225007,
+        "end_char": 1260054,
+        "char_count": 35047
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-031",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-031.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:29:41.260317",
+        "finished_at": "2026-06-04T16:30:31.769202",
+        "duration_seconds": 50.509
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-toyota-way-jeffrey-k-liker",
+        "title": "The Toyota Way",
+        "author": "Jeffrey K. Liker",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "primary_format": "pdf",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Toyota Way"
+      },
+      "chapter": {
+        "index": 11,
+        "title": "Span 11",
+        "source_label": "fixed-span",
+        "start_char": 600000,
+        "end_char": 659999,
+        "char_count": 59999
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-toyota-way-chapter-011",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-toyota-way-chapter-011.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:30:27.159543",
+        "finished_at": "2026-06-04T16:31:12.932759",
+        "duration_seconds": 45.773
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "toyota-production-system-beyond-large-scale-production-taiichi-ohno",
+        "title": "Toyota Production System: Beyond Large-Scale Production",
+        "author": "Taiichi Ohno",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/Toyota Production System_ Beyond Large-Scale Production - Ohno, Taiichi_Bodek, Norman - (1988, Productivity Press).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/Toyota Production System_ Beyond Large-Scale Production - Ohno, Taiichi_Bodek, Norman - (1988, Productivity Press).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "Toyota Production System: Beyond Large-Scale Production"
+      },
+      "chapter": {
+        "index": 3,
+        "title": "3 Further Development An Autonomic Nervous System in the Business Organization A BUSINESS ORGANIZATION is like the human body. The (part 1)",
+        "source_label": "index_split_001.html",
+        "start_char": 99050,
+        "end_char": 163866,
+        "char_count": 64816
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/toyota-production-system-beyond-large-scale-production-chapter-003",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/toyota-production-system-beyond-large-scale-production-chapter-003.html",
+      "summary_execution": null,
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 16,
+        "title": "Chapter 15",
+        "source_label": "OEBPS/24-chap20.xhtml",
+        "start_char": 685242,
+        "end_char": 704000,
+        "char_count": 18758
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-016",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-016.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:30:31.772163",
+        "finished_at": "2026-06-04T16:31:17.693119",
+        "duration_seconds": 45.921
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 34,
+        "title": "Chapter 33",
+        "source_label": "OEBPS/45-chap41.xhtml",
+        "start_char": 1340091,
+        "end_char": 1368245,
+        "char_count": 28154
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-034",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-034.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:30:35.682759",
+        "finished_at": "2026-06-04T16:31:25.561929",
+        "duration_seconds": 49.879
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-toyota-way-jeffrey-k-liker",
+        "title": "The Toyota Way",
+        "author": "Jeffrey K. Liker",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "primary_format": "pdf",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Toyota Way"
+      },
+      "chapter": {
+        "index": 9,
+        "title": "Span 9",
+        "source_label": "fixed-span",
+        "start_char": 480000,
+        "end_char": 540000,
+        "char_count": 60000
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-toyota-way-chapter-009",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-toyota-way-chapter-009.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:30:36.323501",
+        "finished_at": "2026-06-04T16:31:24.201112",
+        "duration_seconds": 47.877
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 35,
+        "title": "Chapter 34",
+        "source_label": "OEBPS/46-chap42.xhtml",
+        "start_char": 1368247,
+        "end_char": 1430072,
+        "char_count": 61825
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-035",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-035.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:31:12.934228",
+        "finished_at": "2026-06-04T16:31:59.290432",
+        "duration_seconds": 46.356
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-toyota-way-jeffrey-k-liker",
+        "title": "The Toyota Way",
+        "author": "Jeffrey K. Liker",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "primary_format": "pdf",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Toyota Way"
+      },
+      "chapter": {
+        "index": 12,
+        "title": "Span 12",
+        "source_label": "fixed-span",
+        "start_char": 660000,
+        "end_char": 720000,
+        "char_count": 60000
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-toyota-way-chapter-012",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-toyota-way-chapter-012.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:31:17.695003",
+        "finished_at": "2026-06-04T16:32:09.509713",
+        "duration_seconds": 51.815
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 14,
+        "title": "Chapter 13 (part 2)",
+        "source_label": "OEBPS/21-chap17.xhtml",
+        "start_char": 640245,
+        "end_char": 643091,
+        "char_count": 2844
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-014",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-014.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:31:24.202731",
+        "finished_at": "2026-06-04T16:32:06.099024",
+        "duration_seconds": 41.896
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-toyota-way-jeffrey-k-liker",
+        "title": "The Toyota Way",
+        "author": "Jeffrey K. Liker",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "primary_format": "pdf",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Toyota Way"
+      },
+      "chapter": {
+        "index": 10,
+        "title": "Span 10",
+        "source_label": "fixed-span",
+        "start_char": 540000,
+        "end_char": 600000,
+        "char_count": 60000
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-toyota-way-chapter-010",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-toyota-way-chapter-010.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:31:25.563803",
+        "finished_at": "2026-06-04T16:32:14.448292",
+        "duration_seconds": 48.884
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 30,
+        "title": "Chapter 29",
+        "source_label": "OEBPS/41-chap37.xhtml",
+        "start_char": 1204338,
+        "end_char": 1225005,
+        "char_count": 20667
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-030",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-030.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:31:59.291968",
+        "finished_at": "2026-06-04T16:32:56.113891",
+        "duration_seconds": 56.822
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-toyota-way-jeffrey-k-liker",
+        "title": "The Toyota Way",
+        "author": "Jeffrey K. Liker",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "primary_format": "pdf",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Toyota Way"
+      },
+      "chapter": {
+        "index": 8,
+        "title": "Span 8",
+        "source_label": "fixed-span",
+        "start_char": 420000,
+        "end_char": 480000,
+        "char_count": 60000
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-toyota-way-chapter-008",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-toyota-way-chapter-008.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:32:06.100637",
+        "finished_at": "2026-06-04T16:32:54.793692",
+        "duration_seconds": 48.693
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-toyota-way-jeffrey-k-liker",
+        "title": "The Toyota Way",
+        "author": "Jeffrey K. Liker",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "primary_format": "pdf",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Toyota Way"
+      },
+      "chapter": {
+        "index": 2,
+        "title": "Span 2",
+        "source_label": "fixed-span",
+        "start_char": 60000,
+        "end_char": 120000,
+        "char_count": 60000
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-toyota-way-chapter-002",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-toyota-way-chapter-002.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:32:09.511878",
+        "finished_at": "2026-06-04T16:32:54.191463",
+        "duration_seconds": 44.679
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 8,
+        "title": "Chapter 8",
+        "source_label": "OEBPS/15-chap11.xhtml",
+        "start_char": 362354,
+        "end_char": 416126,
+        "char_count": 53772
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-008",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-008.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:32:14.449862",
+        "finished_at": "2026-06-04T16:32:56.734864",
+        "duration_seconds": 42.285
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 57,
+        "title": "BIBLIOGRAPHY",
+        "source_label": "OEBPS/72-chap68.xhtml",
+        "start_char": 1832758,
+        "end_char": 1843151,
+        "char_count": 10393
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-057",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-057.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:32:54.193098",
+        "finished_at": "2026-06-04T16:33:59.711516",
+        "duration_seconds": 65.518
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-toyota-way-jeffrey-k-liker",
+        "title": "The Toyota Way",
+        "author": "Jeffrey K. Liker",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "primary_format": "pdf",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Toyota Way"
+      },
+      "chapter": {
+        "index": 1,
+        "title": "Span 1",
+        "source_label": "fixed-span",
+        "start_char": 0,
+        "end_char": 60000,
+        "char_count": 60000
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-toyota-way-chapter-001",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-toyota-way-chapter-001.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:32:54.795503",
+        "finished_at": "2026-06-04T16:33:40.452205",
+        "duration_seconds": 45.657
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 33,
+        "title": "Chapter 32",
+        "source_label": "OEBPS/44-chap40.xhtml",
+        "start_char": 1277458,
+        "end_char": 1340089,
+        "char_count": 62631
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-033",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-033.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:32:56.115326",
+        "finished_at": "2026-06-04T16:33:41.930793",
+        "duration_seconds": 45.815
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-toyota-way-jeffrey-k-liker",
+        "title": "The Toyota Way",
+        "author": "Jeffrey K. Liker",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "primary_format": "pdf",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Toyota Way"
+      },
+      "chapter": {
+        "index": 5,
+        "title": "Span 5",
+        "source_label": "fixed-span",
+        "start_char": 240000,
+        "end_char": 300000,
+        "char_count": 60000
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-toyota-way-chapter-005",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-toyota-way-chapter-005.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:32:56.736256",
+        "finished_at": "2026-06-04T16:33:57.783162",
+        "duration_seconds": 61.047
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 50,
+        "title": "Chapter 49",
+        "source_label": "OEBPS/65-chap61.xhtml",
+        "start_char": 1704239,
+        "end_char": 1718500,
+        "char_count": 14261
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-050",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-050.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:33:40.453896",
+        "finished_at": "2026-06-04T16:34:22.212360",
+        "duration_seconds": 41.758
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-toyota-way-jeffrey-k-liker",
+        "title": "The Toyota Way",
+        "author": "Jeffrey K. Liker",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "primary_format": "pdf",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Toyota Way"
+      },
+      "chapter": {
+        "index": 6,
+        "title": "Span 6",
+        "source_label": "fixed-span",
+        "start_char": 300000,
+        "end_char": 359999,
+        "char_count": 59999
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-toyota-way-chapter-006",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-toyota-way-chapter-006.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:33:41.932658",
+        "finished_at": "2026-06-04T16:34:34.643816",
+        "duration_seconds": 52.711
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 26,
+        "title": "Chapter 25",
+        "source_label": "OEBPS/36-chap32.xhtml",
+        "start_char": 1084006,
+        "end_char": 1111224,
+        "char_count": 27218
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-026",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-026.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:33:57.784535",
+        "finished_at": "2026-06-04T16:34:45.126116",
+        "duration_seconds": 47.341
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-toyota-way-jeffrey-k-liker",
+        "title": "The Toyota Way",
+        "author": "Jeffrey K. Liker",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "primary_format": "pdf",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Toyota Way - 14 Management Principles From The World'S Greatest Manufacturer - Jeffrey Liker - (2003, McGraw-Hill).pdf",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Toyota Way"
+      },
+      "chapter": {
+        "index": 4,
+        "title": "Span 4",
+        "source_label": "fixed-span",
+        "start_char": 180000,
+        "end_char": 239998,
+        "char_count": 59998
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-toyota-way-chapter-004",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-toyota-way-chapter-004.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:33:59.713428",
+        "finished_at": "2026-06-04T16:34:47.398111",
+        "duration_seconds": 47.685
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 10,
+        "title": "Chapter 10",
+        "source_label": "OEBPS/18-page187.xhtml",
+        "start_char": 454839,
+        "end_char": 489453,
+        "char_count": 34614
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-010",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-010.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:34:22.213895",
+        "finished_at": "2026-06-04T16:35:01.645198",
+        "duration_seconds": 39.431
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 41,
+        "title": "Chapter 40",
+        "source_label": "OEBPS/54-chap50.xhtml",
+        "start_char": 1532799,
+        "end_char": 1546251,
+        "char_count": 13452
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-041",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-041.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:34:34.645892",
+        "finished_at": "2026-06-04T16:35:23.024856",
+        "duration_seconds": 48.379
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 24,
+        "title": "Chapter 23",
+        "source_label": "OEBPS/34-chap30.xhtml",
+        "start_char": 988915,
+        "end_char": 1044853,
+        "char_count": 55938
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-024",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-024.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:34:45.127563",
+        "finished_at": "2026-06-04T16:35:27.932707",
+        "duration_seconds": 42.805
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 51,
+        "title": "Chapter 50",
+        "source_label": "OEBPS/66-chap62.xhtml",
+        "start_char": 1718502,
+        "end_char": 1736656,
+        "char_count": 18154
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-051",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-051.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:34:47.399527",
+        "finished_at": "2026-06-04T16:35:33.028320",
+        "duration_seconds": 45.629
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 29,
+        "title": "Chapter 28",
+        "source_label": "OEBPS/40-chap36.xhtml",
+        "start_char": 1145477,
+        "end_char": 1204336,
+        "char_count": 58859
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-029",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-029.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:35:01.646930",
+        "finished_at": "2026-06-04T16:35:52.514508",
+        "duration_seconds": 50.867
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 32,
+        "title": "Chapter 31",
+        "source_label": "OEBPS/43-chap39.xhtml",
+        "start_char": 1260056,
+        "end_char": 1277456,
+        "char_count": 17400
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-032",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-032.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:35:23.026450",
+        "finished_at": "2026-06-04T16:36:14.256045",
+        "duration_seconds": 51.229
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 20,
+        "title": "Chapter 19",
+        "source_label": "OEBPS/29-chap25.xhtml",
+        "start_char": 826623,
+        "end_char": 867046,
+        "char_count": 40423
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-020",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-020.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:35:27.934309",
+        "finished_at": "2026-06-04T16:36:22.953050",
+        "duration_seconds": 55.019
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 7,
+        "title": "Chapter 7",
+        "source_label": "OEBPS/14-chap10.xhtml",
+        "start_char": 302316,
+        "end_char": 362352,
+        "char_count": 60036
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-007",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-007.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:35:33.029679",
+        "finished_at": "2026-06-04T16:36:21.261994",
+        "duration_seconds": 48.232
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 49,
+        "title": "Chapter 48",
+        "source_label": "OEBPS/64-chap60.xhtml",
+        "start_char": 1695312,
+        "end_char": 1704237,
+        "char_count": 8925
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-049",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-049.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:35:52.516013",
+        "finished_at": "2026-06-04T16:36:37.036376",
+        "duration_seconds": 44.52
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 25,
+        "title": "Chapter 24",
+        "source_label": "OEBPS/35-chap31.xhtml",
+        "start_char": 1044855,
+        "end_char": 1084004,
+        "char_count": 39149
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-025",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-025.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:36:14.257731",
+        "finished_at": "2026-06-04T16:37:14.702188",
+        "duration_seconds": 60.444
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 40,
+        "title": "Chapter 39",
+        "source_label": "OEBPS/53-chap49.xhtml",
+        "start_char": 1522678,
+        "end_char": 1532797,
+        "char_count": 10119
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-040",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-040.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:36:21.263404",
+        "finished_at": "2026-06-04T16:37:08.082022",
+        "duration_seconds": 46.819
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 23,
+        "title": "Chapter 22",
+        "source_label": "OEBPS/33-page393.xhtml",
+        "start_char": 966563,
+        "end_char": 988913,
+        "char_count": 22350
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-023",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-023.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:36:22.954377",
+        "finished_at": "2026-06-04T16:37:23.642796",
+        "duration_seconds": 60.688
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 17,
+        "title": "Chapter 16",
+        "source_label": "OEBPS/25-chap21.xhtml",
+        "start_char": 704002,
+        "end_char": 743523,
+        "char_count": 39521
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-017",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-017.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:36:37.037642",
+        "finished_at": "2026-06-04T16:37:28.442598",
+        "duration_seconds": 51.405
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 38,
+        "title": "Chapter 37",
+        "source_label": "OEBPS/51-page597.xhtml",
+        "start_char": 1465584,
+        "end_char": 1487715,
+        "char_count": 22131
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-038",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-038.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:37:08.083824",
+        "finished_at": "2026-06-04T16:38:05.211707",
+        "duration_seconds": 57.128
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 9,
+        "title": "Chapter 9",
+        "source_label": "OEBPS/16-chap12.xhtml",
+        "start_char": 416128,
+        "end_char": 454812,
+        "char_count": 38684
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-009",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-009.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:37:14.703495",
+        "finished_at": "2026-06-04T16:38:04.169306",
+        "duration_seconds": 49.466
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 1,
+        "title": "Chapter 1",
+        "source_label": "OEBPS/6-chap2.xhtml",
+        "start_char": 1589,
+        "end_char": 37653,
+        "char_count": 36064
+      },
+      "highlight_count": 17,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-001",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-001.html",
+      "summary_execution": null,
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 27,
+        "title": "Chapter 26",
+        "source_label": "OEBPS/37-chap33.xhtml",
+        "start_char": 1111226,
+        "end_char": 1122473,
+        "char_count": 11247
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-027",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-027.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:37:23.646124",
+        "finished_at": "2026-06-04T16:38:14.497553",
+        "duration_seconds": 50.851
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 15,
+        "title": "Chapter 14",
+        "source_label": "OEBPS/23-page263.xhtml",
+        "start_char": 643118,
+        "end_char": 685240,
+        "char_count": 42122
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-015",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-015.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:37:28.444506",
+        "finished_at": "2026-06-04T16:38:15.133319",
+        "duration_seconds": 46.689
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 36,
+        "title": "Chapter 35",
+        "source_label": "OEBPS/48-page579.xhtml",
+        "start_char": 1430099,
+        "end_char": 1443305,
+        "char_count": 13206
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-036",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-036.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:38:04.170861",
+        "finished_at": "2026-06-04T16:39:20.925402",
+        "duration_seconds": 76.754
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 54,
+        "title": "Chapter 53",
+        "source_label": "OEBPS/69-chap65.xhtml",
+        "start_char": 1776773,
+        "end_char": 1798114,
+        "char_count": 21341
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-054",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-054.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:38:05.213085",
+        "finished_at": "2026-06-04T16:39:10.213703",
+        "duration_seconds": 65.0
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 28,
+        "title": "Chapter 27",
+        "source_label": "OEBPS/39-page457.xhtml",
+        "start_char": 1122501,
+        "end_char": 1145475,
+        "char_count": 22974
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-028",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-028.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:38:14.498910",
+        "finished_at": "2026-06-04T16:39:02.269847",
+        "duration_seconds": 47.771
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 55,
+        "title": "Chapter 54",
+        "source_label": "OEBPS/70-chap66.xhtml",
+        "start_char": 1798116,
+        "end_char": 1817264,
+        "char_count": 19148
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-055",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-055.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:38:15.134829",
+        "finished_at": "2026-06-04T16:39:00.277029",
+        "duration_seconds": 45.142
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 3,
+        "title": "Chapter 3",
+        "source_label": "OEBPS/8-chap4.xhtml",
+        "start_char": 76170,
+        "end_char": 137376,
+        "char_count": 61206
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-003",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-003.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:39:00.278767",
+        "finished_at": "2026-06-04T16:39:52.538962",
+        "duration_seconds": 52.26
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 58,
+        "title": "INDEX A \u00a0|\u00a0 B \u00a0|\u00a0 C \u00a0|\u00a0 D \u00a0|\u00a0 E F \u00a0|\u00a0 G \u00a0|\u00a0 H \u00a0|\u00a0 I \u00a0|\u00a0 J K \u00a0|\u00a0 L \u00a0|\u00a0 M \u00a0|\u00a0 N \u00a0|\u00a0 O",
+        "source_label": "OEBPS/73-chap69.xhtml",
+        "start_char": 1843153,
+        "end_char": 1897173,
+        "char_count": 54020
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-058",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-058.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:39:02.273199",
+        "finished_at": "2026-06-04T16:40:09.154752",
+        "duration_seconds": 66.881
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 18,
+        "title": "Chapter 17",
+        "source_label": "OEBPS/26-chap22.xhtml",
+        "start_char": 743525,
+        "end_char": 792654,
+        "char_count": 49129
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-018",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-018.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:39:10.217011",
+        "finished_at": "2026-06-04T16:40:00.485140",
+        "duration_seconds": 50.268
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 56,
+        "title": "AUTHOR\u2019S NOTE",
+        "source_label": "OEBPS/71-page749.xhtml",
+        "start_char": 1817266,
+        "end_char": 1832756,
+        "char_count": 15490
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-056",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-056.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:39:20.927104",
+        "finished_at": "2026-06-04T16:40:11.098899",
+        "duration_seconds": 50.172
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 52,
+        "title": "Chapter 51",
+        "source_label": "OEBPS/67-chap63.xhtml",
+        "start_char": 1736658,
+        "end_char": 1763546,
+        "char_count": 26888
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-052",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-052.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:39:52.540673",
+        "finished_at": "2026-06-04T16:40:33.117110",
+        "duration_seconds": 40.576
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 4,
+        "title": "Chapter 4",
+        "source_label": "OEBPS/10-page59.xhtml",
+        "start_char": 137402,
+        "end_char": 198746,
+        "char_count": 61344
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-004",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-004.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:40:00.486664",
+        "finished_at": "2026-06-04T16:40:50.700236",
+        "duration_seconds": 50.213
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 21,
+        "title": "Chapter 20",
+        "source_label": "OEBPS/30-chap26.xhtml",
+        "start_char": 867048,
+        "end_char": 931309,
+        "char_count": 64261
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-021",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-021.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:40:09.156446",
+        "finished_at": "2026-06-04T16:40:55.703368",
+        "duration_seconds": 46.547
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 37,
+        "title": "Chapter 36",
+        "source_label": "OEBPS/49-chap45.xhtml",
+        "start_char": 1443307,
+        "end_char": 1465558,
+        "char_count": 22251
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-037",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-037.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:40:11.100806",
+        "finished_at": "2026-06-04T16:41:10.350728",
+        "duration_seconds": 59.25
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 12,
+        "title": "Chapter 12",
+        "source_label": "OEBPS/20-chap16.xhtml",
+        "start_char": 544958,
+        "end_char": 575939,
+        "char_count": 30981
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-012",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-012.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:40:33.118734",
+        "finished_at": "2026-06-04T16:41:19.572089",
+        "duration_seconds": 46.453
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 5,
+        "title": "Chapter 5",
+        "source_label": "OEBPS/11-chap7.xhtml",
+        "start_char": 198748,
+        "end_char": 247797,
+        "char_count": 49049
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-005",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-005.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:40:50.701792",
+        "finished_at": "2026-06-04T16:41:45.469431",
+        "duration_seconds": 54.768
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 11,
+        "title": "Chapter 11",
+        "source_label": "OEBPS/19-chap15.xhtml",
+        "start_char": 489455,
+        "end_char": 544956,
+        "char_count": 55501
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-011",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-011.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:40:55.705533",
+        "finished_at": "2026-06-04T16:41:41.330445",
+        "duration_seconds": 45.625
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 44,
+        "title": "Chapter 43",
+        "source_label": "OEBPS/58-chap54.xhtml",
+        "start_char": 1594283,
+        "end_char": 1607832,
+        "char_count": 13549
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-044",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-044.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:41:10.352260",
+        "finished_at": "2026-06-04T16:42:10.373001",
+        "duration_seconds": 60.021
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 13,
+        "title": "Chapter 13 (part 1)",
+        "source_label": "OEBPS/21-chap17.xhtml",
+        "start_char": 575941,
+        "end_char": 640245,
+        "char_count": 64304
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-013",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-013.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:41:19.573721",
+        "finished_at": "2026-06-04T16:42:08.940823",
+        "duration_seconds": 49.367
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 59,
+        "title": "Biography A Biography of David Halberstam",
+        "source_label": "OEBPS/biography.xhtml",
+        "start_char": 1897175,
+        "end_char": 1901524,
+        "char_count": 4349
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-059",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-059.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:41:41.331694",
+        "finished_at": "2026-06-04T16:42:40.915007",
+        "duration_seconds": 59.583
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 42,
+        "title": "Chapter 41",
+        "source_label": "OEBPS/56-page633.xhtml",
+        "start_char": 1546280,
+        "end_char": 1570007,
+        "char_count": 23727
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-042",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-042.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:41:45.471616",
+        "finished_at": "2026-06-04T16:42:30.586208",
+        "duration_seconds": 45.114
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 43,
+        "title": "Chapter 42",
+        "source_label": "OEBPS/57-chap53.xhtml",
+        "start_char": 1570009,
+        "end_char": 1594281,
+        "char_count": 24272
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-043",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-043.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:42:08.943248",
+        "finished_at": "2026-06-04T16:42:53.153068",
+        "duration_seconds": 44.21
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 39,
+        "title": "Chapter 38",
+        "source_label": "OEBPS/52-chap48.xhtml",
+        "start_char": 1487717,
+        "end_char": 1522676,
+        "char_count": 34959
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-039",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-039.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:42:10.374508",
+        "finished_at": "2026-06-04T16:42:57.143535",
+        "duration_seconds": 46.769
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 48,
+        "title": "Chapter 47",
+        "source_label": "OEBPS/63-page689.xhtml",
+        "start_char": 1676480,
+        "end_char": 1695310,
+        "char_count": 18830
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-048",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-048.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:42:30.588835",
+        "finished_at": "2026-06-04T16:43:20.006933",
+        "duration_seconds": 49.418
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 19,
+        "title": "Chapter 18",
+        "source_label": "OEBPS/28-page323.xhtml",
+        "start_char": 792680,
+        "end_char": 826621,
+        "char_count": 33941
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-019",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-019.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:42:40.916771",
+        "finished_at": "2026-06-04T16:43:29.310477",
+        "duration_seconds": 48.394
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 6,
+        "title": "Chapter 6",
+        "source_label": "OEBPS/13-page105.xhtml",
+        "start_char": 247825,
+        "end_char": 302314,
+        "char_count": 54489
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-006",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-006.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:42:53.154579",
+        "finished_at": "2026-06-04T16:43:51.727196",
+        "duration_seconds": 58.572
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 22,
+        "title": "Chapter 21",
+        "source_label": "OEBPS/31-chap27.xhtml",
+        "start_char": 931311,
+        "end_char": 966535,
+        "char_count": 35224
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-022",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-022.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:42:57.145237",
+        "finished_at": "2026-06-04T16:43:43.956753",
+        "duration_seconds": 46.811
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 47,
+        "title": "Chapter 46",
+        "source_label": "OEBPS/61-chap57.xhtml",
+        "start_char": 1654532,
+        "end_char": 1676451,
+        "char_count": 21919
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-047",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-047.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:43:20.008503",
+        "finished_at": "2026-06-04T16:44:05.328030",
+        "duration_seconds": 45.319
+      },
+      "judge_execution": null
+    },
+    {
+      "book": {
+        "book_id": "the-reckoning-david-halberstam",
+        "title": "The Reckoning",
+        "author": "David Halberstam",
+        "book_dir": "/Users/clarkbenham/side_projects/data/Books",
+        "primary_path": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "primary_format": "epub",
+        "companion_html_path": "",
+        "all_paths": "/Users/clarkbenham/side_projects/data/Books/The Reckoning_ Ford, Nissan, and the Decline of American Industry - Halberstam, David - (2012, Open Road).epub",
+        "duplicate_count": "0",
+        "source_name": "book_path",
+        "search_title": "The Reckoning"
+      },
+      "chapter": {
+        "index": 2,
+        "title": "Chapter 2",
+        "source_label": "OEBPS/7-chap3.xhtml",
+        "start_char": 37655,
+        "end_char": 76168,
+        "char_count": 38513
+      },
+      "highlight_count": 0,
+      "matched_highlight_titles": [
+        "Reckoning"
+      ],
+      "sample_dir": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/artifacts/the-reckoning-chapter-002",
+      "html_path": "/Users/clarkbenham/side_projects/make_structured_summaries/data/eval_reviews/chapter_preread_new_books/the-reckoning-chapter-002.html",
+      "summary_execution": {
+        "command": [
+          "codex",
+          "exec",
+          "-m",
+          "gpt-5.5",
+          "--ephemeral",
+          "--ignore-rules",
+          "--skip-git-repo-check",
+          "-s",
+          "read-only",
+          "-c",
+          "approval_policy=\"never\"",
+          "-c",
+          "model_reasoning_effort=\"high\"",
+          "-"
+        ],
+        "started_at": "2026-06-04T16:43:29.312513",
+        "finished_at": "2026-06-04T16:44:08.506316",
+        "duration_seconds": 39.194
+      },
+      "judge_execution": null
+    }
+  ]
+}

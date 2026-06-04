@@ -1,0 +1,1029 @@
+ld what they allowed to degrade.
+
+Sadly, few top executives today have the requisite understanding of lean thinking that you truly need from the outset
+to support a learning enterprise. The majority of companies will require a more radical makeover by new top leaders
+who know how to leverage the Toyota Way. Until then, the true believers of lean will simply have to do their best
+by creating, step by step, lean models that executives can learn from. But no matter what the approach, it will take
+time for new leaders to understand lean and for the old system and culture to evolve beyond the batch-and-queue
+wasteland of the past. Even within Toyota, Convis noted:
+The Toyota Way and the culture I think it takes at least 10 years to really become in tune with what is going
+on and be able to manage in a way that we would like to sustain. I don t know as you can come into Toyota
+and in three or four years have it in your heart and your spirit with a deep understanding.
+[1]Collins, J. Good to Great (New York: HarperBusiness, 2001).
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Six Sigma, Lean Tools, and Lean Sigma: Just a
+Bunch of Tools?
+There are many tools approaches to organization improvement. One very popular program, which General Electric
+adopted with great success, is Six Sigma, an extension of Total Quality Management (TQM). Six Sigma refers to a
+goal of 3.4 defects per million units produced,[2] and the focus is on training green belts, black belts, and master
+black belts. The training includes classroom sessions on the tools and a project purporting to save $100,000 or
+more. A presentation on the project is given to top executives as the last stage before earning the credential.
+At the same time Six Sigma was spreading, companies were also selectively applying various lean tools in
+manufacturing and having some success with that. While Six Sigma focused on improving the value-adding processes
+e.g., find the source of the quality problems or downtime on the machine center and put in countermeasures to fix it
+lean focused on the whole value stream and creating flow among the value-adding operations. There is an obvious
+case for a harmonious marriage between Six Sigma, which fixes individual processes, and lean, which fixes the
+connections among processes.
+
+Recently a new hybrid was born, Lean Sigma. I do not believe lean tools or Six Sigma tools or a marriage of the two
+will get a company to a lean learning enterprise. The following example from a company I worked closely with will
+clarify my concern about Six Sigma, lean tools, and Lean Sigma.
+
+The CEO of a large automotive parts supplier wanted the Six Sigma program because of the great success of GE
+and Jack Welch. He worked with a group of senior managers and executives to pick the right consultants to do the
+training and determine how many certified Six Sigma black belts were needed. The leadership team reasoned that
+recent college graduates with high grade-point averages would be best suited to learn the complex statistical methods
+that are part of Six Sigma and decided to recruit bright young stars to become black belts. They recruited
+aggressively, offering a five-digit bonus and a brand-new car when they completed the Six Sigma program and
+achieved the required dollar savings. Needless to say, they attracted some topnotch young recruits.
+Unfortunately, these young recruits had little if any manufacturing experience and stepped into these rust-belt factories
+with the mission to fix processes when these factories had been operating for decades with a well-established
+culture. Word got out about the hefty incentives for the recruits, which caused some managers and engineers to
+wonder why they should help these youngsters successfully complete a project when there wasn t any payoff for
+them. The employees with an affinity for lean claimed that the projects being turned in as Six Sigma projects were
+actually lean projects cells, pull, etc.
+
+In my view, by treating lean and Six Sigma as two tool kits and then setting up a situation in which different groups in
+the company go to war over whose tool kit is bigger and better, the company created a self-defeating improvement
+program. In this particular case, there was enough dissent over the large incentives for the Six Sigma recruits, as well
+as the awareness that experienced employees were actually helping them, that management ended up not giving out
+any of the cars.
+In the end, the company turned current employees into additional black belts. There still remained an uneasy tension
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+between lean and Six Sigma, especially with internal lean zealots who viewed Six Sigma merely as tool kits. And the
+plant managers wondered what to do with the young black belts when they needed to move them into operational
+jobs, as their salaries were too high for the lower-level positions they were really suited for based on experience.
+
+This is not to say the company should throw out Six Sigma or lean tools. Both are extremely powerful tool kits, but in
+the end, they are just tools. What companies need to be told over and over is that lean tools represent only one
+aspect of the broader philosophy of the Toyota Way. It seems like this is the most difficult lesson to get across to
+companies that want to go lean. Figure 22-2 contrasts the myth of TPS as a set of tools to make short-term
+improvements on the shop floor with true TPS as the basis of a total management philosophy, based on a
+presentation by a Toyota manager (Glenn Uminger).
+
+Figure 22-2: Myth versus reality of TPS
+In reality, the training of internal Six Sigma and lean experts serves to reinforce the superficial tool orientation in the
+vast majority of companies. We will see in the next section how Toyota has mentored international associates over
+five to 10 years to bring them to a deep understanding of the Toyota Way. Even Convis says it took 10 years of
+living in Toyota for him to begin to understand and he is still learning every day. Yet companies seeking to benefit
+from TPS and Six Sigma typically train employees for one to two weeks, ask them to do a project, and anoint them
+as experts.
+[2]In reality, statistically six sigma calculates out to .002 failures in one million chances or one defect per five million
+parts produced. But Motorola adopted the convention of 3.4 parts per million (David L. Goetsch and Stanley B.
+Davis, Quality Management: Introduction to Total Quality Management for Production, Processing, and
+Services, Fourth Edition [Upper Saddle River, NJ: Prentice Hall, 2003]).
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Why Changing Culture Is So Difficult
+Culture change is a complex topic in its own right and the subject of many books. This became most evident to
+Toyota in its efforts to globalize in the 1980s. To Toyota, globalization did not mean purchasing capacity in other
+countries. Globalization meant exporting the Toyota culture to build autonomous divisions in other countries that
+reproduced the DNA of Toyota.
+
+What is culture? There are many definitions, but one thing is for sure: what you see and hear when you walk into a
+company for the first time are only surface manifestations of culture. Figure 22-3 depicts a TPS view of culture as an
+iceberg. What many visitors to Toyota and its affiliates see when they visit are surface features such as kanban, high
+employee suggestion rates, clean floors, lots of charts and visuals, cells, and teams. The most common question I
+have heard when taking groups on tours of Toyota plants is How do you reward your people to get them so
+involved? A reward system itself is simply a surface manifestation of culture. It is a human resource tool something
+easy to manipulate and only the tip of the iceberg.
+
+Figure 22-3: Iceberg model of TPS
+Below the surface is the Toyota Way culture. In fact, Toyota takes a textbook approach to developing culture.
+Edgar Schein, one of the leaders in analyzing and understanding culture, defines culture this way:[3]
+The pattern of basic assumptions that a given group has invented, discovered, or developed in learning to
+cope with its problems of external adaptation and internal integration, and that have worked well enough to
+be considered valid, and, therefore, to be taught to new members as the correct way to perceive, think and
+feel in relation to those problems.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+This is a remarkably apt description of the Toyota Way culture in a number of ways:
+1.
+The Toyota Way has a depth that goes to the level of basic assumptions of the most effective way to
+perceive, think, and feel in relation to problems. Things like genchi genbutsu, recognizing waste, thorough
+consideration in decision making, and the focus of Toyota on long-term survival are the DNA of Toyota.
+2.
+The Toyota Way was invented, discovered, and developed over decades as talented Toyota managers and
+engineers, like Ohno, learned to cope with its (Toyota s) problems of external adaptation and internal
+integration. The history of Toyota is very important because we understand the challenges and context that
+led to active on-the-floor problem solving, not theoretical, top-down exercises.
+3.
+The Toyota Way is explicitly taught to new members. Toyota is, in fact, doing seminars on the Toyota Way,
+but that is a limited part of the learning process. The Toyota Way is explicitly taught the way you should
+transmit culture through action in day-to-day work where leaders model the way. As Jane Beseda of Toyota
+Sales explained:
+The Toyota Way matches everything that they (team members) do every hour of the day. So they are
+swimming in this culture and this philosophy. We re always doing kaizen projects. It s a part of who
+we are.
+Regarding this third point, Toyota in Japan hires almost all of its new employees fresh out of school, in some cases
+from a Toyota City technical high school, where students begin to learn the Toyota Way while still in school. Toyota
+is their first job and typically their last. Therefore, they do not have to unlearn past practices from other companies
+with conflicting approaches. Aspects of the Toyota Way are, in fact, intertwined with Japanese culture, which is
+relatively homogenous. For example, hansei, hourenso, kaizen, and nemawashi are characteristics of top Japanese
+companies and not peculiar to Toyota.
+We can look to Toyota s globalization as an object lesson in what it takes to build a culture. When Toyota began
+seriously globalizing in the 1980s, most broadly in the U.S., they quickly realized the challenges of creating the
+Toyota Way in a culture that was alien to many of their values. Toyota s approach to spreading the culture to global
+operations has been intensive and very costly. The most intensive effort has been in Toyota s largest market outside
+Japan North America. In this case:
+1.
+All U.S. senior managers were assigned Japanese coordinators. The coordinators had two jobs: coordinating
+with Japan, where there are continuous technical developments, and teaching U.S. employees the Toyota
+Way through daily mentorship. Every day is a training day, with immediate feedback shaping the thinking and
+behavior of the U.S employees.
+2.
+Toyota used trips to Japan, which turned out to be one of the most powerful ways to influence the cultural
+awareness of U.S. employees. We discussed in Chapter 7 the importance of sending group leaders and
+union officials from NUMMI to Japan to work in Toyota factories.
+3.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Toyota used the TPS technical systems, or process layer of the Toyota Way, to help reinforce the culture
+Toyota sought to build. For example, we discussed how large batch manufacturing with lots of inventory
+supports the Western culture of short-term firefighting and ignoring systems problems. By creating flow
+across operations using TPS and lean product development in its overseas operations, Toyota is helping
+change this behavior and shape the culture it seeks to nurture.
+4.
+Toyota sent over senior executives to engrain the Toyota DNA in new American leaders. This started with
+managers from Japan and has evolved to homegrown managers in North America like Gary Convis and Jim
+Press.
+The journey for Toyota is by no means over. Toyota is continually adapting its culture to local conditions. Here are
+example adaptations from the Toyota Technical Center (TTC) in Ann Arbor, Michigan:
+1.
+Being more flexible about work hours. In Japan, Toyota engineers historically worked as needed, even if it
+was 15 hours a day, nights, weekends. TTC has become more flexible, to the point of putting in flex-time
+systems.
+2.
+Performance-based rewards. Traditionally, Toyota in Japan pays a large portion of salary in semi-annual
+bonuses, but these are tied to company performance, not individual performance. In TTC they developed an
+individual bonus system based on performance.
+3.
+Hansei events at TTC have been modified to provide more positive feedback in addition to critiques and
+opportunities for improvement.
+
+Companies moving into lean will not have to take their employees to Japan to learn the culture, but will need to make
+serious long-term investments to educate and change their culture so employees can adapt to and use many of the
+Toyota Way principles.
+I was personally involved in one encouraging example of true culture change when in January 2000 my colleague Jeff
+Rivera and I began consulting with Ford s Cuautitlan assembly plant, outside Mexico City. The site had four
+assembly lines in one plant, making four different vehicles, from small cars to full-sized trucks to commercial-grade
+trucks and about 9000 parts. It was more like a city of auto parts than an assembly plant, with parts streaming in
+once a week across the border.
+Our focus was on material flow. We used kaizen workshops to get teams in the plant to reorganize parts and tools
+for best presentation and efficiency. We then followed up with pull systems to get parts to the line from a
+supermarket of parts. The operators loved it and in each case there were large gains in efficiency. The internal lean
+coaches became very committed to the process. But we faced continual resistance from senior management in the
+plant who did not see any direct labor reduction savings. As a result, once the workshops were completed, there was
+little follow-up activity. When Ford began struggling financially, it pulled product from the plant. By fall 2001, rumors
+floated that Ford was going to close it. Eventually, the internal lean coordinators we trained were let go. I feared that
+was the end of the story.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Then I learned in fall 2002 that Ford Production System (FPS) experts were flocking to see the Cuautitlan plant.
+Miraculously, the plant had become a model for FPS, a version of TPS. Operators were heavily involved in
+continuous improvement and the plant was performing at one of the highest levels in North America. Because of the
+high level of quality and efficiency at Cuautitlan, Ford gave the plant new products to build. How did this sudden
+turnabout to FPS occur?
+1.
+The director of manufacturing for Ford of Mexico, who brought us in and was a believer in TPS, realized he
+had to get more hands-on when there were rumors of shutting down the plant.
+2.
+He brought in new plant management, including an assistant plant manager from Hermosillo, Mexico, who
+had an understanding of TPS. (The Hermosillo plant was originally set up by Mazda, using a production
+system similar to TPS.)
+3.
+The Cuautitlan plant began focusing on cultural change, not simply FPS tools and checklists. This included
+mandatory training for all managers on the core disciplines of FPS and a test. Managers who failed the test
+were let go. Managers who passed were required to implement what they had learned.
+4.
+Management effectively used policy deployment (hoshin), including putting it into a Web-based system so
+everyone knew his or her objectives. Performance was monitored daily, so that every problem that occurred
+was immediately conveyed to the appropriate level of management for immediate action.
+
+In other words, this was a top-down process with real teeth in it. Management was taking a tougher approach than
+Toyota has taken in its U.S. operations. But it was necessary in an environment that had grown complacent and
+needed radical change in the culture. Management was changing the culture by aligning objectives, measurements,
+and visual systems to reinforce the appropriate behavior every day.
+
+[3]Edgar H. Schein, Coming to a New Awareness of Organizational Culture, in James B. Lau and Abraham B.
+Shani, Behavior in Organizations (Homewood, IL: Irwin, 1988), pp. 375-390.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+13 Tips for Transitioning Your Company to a
+Lean Enterprise
+We can learn a great deal from the few companies out there run by experienced and talented lean leaders who have
+really been successful at effecting change at the cultural level. It is clear there are a variety of ways of doing this. At
+Wiremold, the CEO, Art Byrne, started by personally leading kaizen events to shake up the organization with radical
+change in high-opportunity areas. Keith Allman at Merillat took a two-pronged approach. He hired a few young and
+talented lean change agents to work quietly on creating model lines (discussed below). For the rest of the company,
+he personally taught courses on lean and on the specific tools he wanted them to implement in the first year. (He
+started with 5S.) Each year he rolled out an additional level of tools and management changes, teaching the
+employees along the way while putting in management objectives committed to implementing the tools. Top experts in
+the field were brought into the company to teach other tools, like value stream mapping and standardized work.
+
+Despite different approaches, both lean leaders started immediately with action in their core value streams. In a
+manufacturing plant, this means the shop floor. In a product development organization, it means the product
+development process. In a bank, it means the core business processes that affect the bottom line, like loan
+transactions.
+Here are 13 general tips on what works in transitioning a company into a lean enterprise:
+1.
+Start with action in the technical system; follow quickly with cultural change. Most companies
+attempting a lean transformation focus on the process layer of the 4P model and this is, in fact, the right
+approach, as the technical systems of lean drive the Toyota Way behaviors, such as surfacing problems that
+employees must learn how to solve. But the social and technical systems of TPS are intertwined; if a
+company wants to change the culture, it must also develop true lean leaders who can reinforce and lead that
+cultural change. The best way a company can develop this is through action to improve the company s core
+value streams, supported by committed leaders who reinforce culture change. Leaders must be involved in
+the value stream mapping and shop floor transformation so they can learn to see waste.
+2.
+Learn by doing first and training second. I have been involved in many corporate start-ups of lean and
+someone will inevitably say, Before we can get started with all these radical changes, we need to inform
+people of what we are doing through training courses. This has led to elaborate corporate training programs
+with PowerPointTM presentations. Unfortunately you cannot PowerPointTM your way to lean. The Toyota
+Way is about learning by doing. I believe that in the early stages of lean transformation there should be at
+least 80% doing and 20% training and informing. The best training is training followed by immediately doing
+or doing followed by immediate training. The Toyota approach to training is to put people in difficult
+situations and let them solve their way out of the problems.
+3.
+Start with value stream pilots to demonstrate lean as a system and provide a go see model. In
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 17 we learned about the model lines that the Toyota Supplier Support Center implements in
+companies to teach lean. Within a value stream, defined by a product family, a model is created. By model, I
+mean implementing the whole system of tools and ultimately human resource practices so other employees
+from your company can go and see lean in action without having to go to some other company. For a plant,
+this usually means creating one product line, beginning with raw materials received and ending with finished
+goods. In a service organization, it is one complete business process from start to finish within the company
+boundaries. The go-and-see model line should become a singularly focused project with a great deal of
+management attention and resources to make it a success and an object lesson in management commitment.
+4.
+Use value stream mapping to develop future state visions and help learn to see. In Chapter 21, we
+discussed how value stream mapping is a method for clearly showing in diagram form the material and
+information flow. When developing the current state map, future state map, and action plan for
+implementation, I always recommend using a cross-functional group consisting of managers who can
+authorize resources and doers who are part of the process being mapped. The team learns together as they
+see the waste in the current state, and in the future state they come together to figure out how to apply the
+lean tools and philosophy. I have spent endless hours debating with individuals over whether lean can apply
+to their particular situation since they do not have the high volumes and repetitive processes of Toyota. I have
+never had that debate in a value stream mapping workshop, because the mapping creates a language and tool
+for the team to actually pick apart a specific process, see the waste, develop a lean vision, and apply it to that
+particular process. Value stream mapping should be applied only to specific product families that will be
+immediately transformed. I know many cases where top management mandated mapping an entire plant and
+all the products in it and the result was a lot of value stream wallpaper in the conference room.
+5.
+Use kaizen workshops to teach and make rapid changes. As described in Chapter 21, the kaizen
+workshop is a remarkable social invention that frees up a cross-functional team to make changes in a week
+that otherwise can drag on for months. Selecting the right people for the team is critical, as is setting aside the
+time for those individuals and giving them a lot of management support. Using a talented and experienced
+facilitator who has a deep understanding of lean tools and philosophy with a specific problem to tackle makes
+all the difference in what you can accomplish. However, the kaizen workshop should not become an end in
+itself. In many companies, lean efforts revolve around having numerous workshops: the more the better.
+This leads to point kaizen fixing individual problems without straightening out the core value stream. Kaizen
+workshops are best used as one tool to implement specific improvements guided by a future state value
+stream map.
+6.
+Organize around value streams. In most organizations, management is organized by process or function. In
+a factory, there is a manager of the paint department, a manager of the assembly department, and a manager
+of the maintenance department. In a bank, there may be a manager of order processing, a manager of order
+fulfillment, a manager of customer complaints, etc. In other words, managers own steps in the process of
+creating value for customers and nobody is responsible for the value stream. In Lean Thinking, Womack
+and Jones recommend creating value stream managers who have complete responsibility for the value stream
+and can answer to the customer. In the Delphi plant described at the end of this chapter, they organized
+around five product families. A manager is responsible for each product family (value stream) and has control
+of all the resources needed to make the truck cockpit including maintenance, engineering, and quality. In the
+second edition of Lean Thinking (2003), they have modified this as possibly a matrix organization where
+there are still heads of departments but also value stream managers, similar to Toyota s chief engineer system.
+The message remains the same: someone with real leadership skills and a deep understanding of the product
+and process must be responsible for the process of creating value for customers and must be accountable to
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+the customer.
+7.
+Make it mandatory. If a company looks at lean transformation as a nice thing to do in any spare time or as
+voluntary, it will simply not happen. We saw that the transformation at Cuautitlan was the result of a shift from
+management suggesting lean to making it mandatory with consequences for not buying in.
+8.
+A crisis may prompt a lean movement, but may not be necessary to turn a company around. A sinking
+ship certainly mobilizes management and the work force into getting serious about lean, as we saw at
+Cuautitlan. On the other hand, Wiremold and Merillat were not on the chopping block, yet senior
+management proactively championed improvement. What is important is that lean leadership is focused on
+long-term learning.
+9.
+Be opportunistic in identifying opportunities for big financial impacts. I have emphasized throughout the
+book that Toyota focuses on improving processes, confident that this in turn will improve financial results.
+However, when a company does not yet believe in the lean philosophy heart and soul, it is particularly
+important to achieve some big wins. By picking the right product family and with experienced lean expertise,
+a serious effort has about a 100% chance of making huge and visible improvements that will impress any
+executive.
+10.
+Realign metrics with a value stream perspective. You get what you measure has become a truism in
+most companies. But metrics are used very differently by Toyota compared to most companies. They are an
+overall tool for tracking progress of the company and they are a key tool for continuous improvement. At
+most companies they are mainly a tool for short-term cost control by managers who do not understand what
+they are managing. For example, companies track indirect/direct labor ratios and call to the carpet those with
+unfavorable ratios. The way to make the ratio look good is to have lots of direct labor and keep those people
+busy making parts, even if they are overproducing or doing wasteful jobs. Creating a team leader role for
+support like Toyota s structure means damaging that ratio and a short path to the unemployment line. The first
+step therefore is to eliminate non-lean metrics that are wreaking havoc with those seriously invested in
+improving operational excellence. The next step is to measure a variety of value stream metrics from lead time
+to inventory levels to first-pass quality and treat these metrics as seriously as labor productivity and other
+short-term cost metrics.
+11.
+Build on your company s roots to develop your own way. Toyota has its way. You need to have your
+way. When Toyota works with companies to teach TPS, they insist that the companies develop their own
+system. It is OK to borrow some of the insights from the Toyota Way and I recommend adopting the basic
+principles in this book. But you need to put them into your language in a way that fits your business and
+technical context. The Toyota Way evolved through some inspired leaders who provided a very rich cultural
+heritage. Your company probably has a rich heritage as well. A large majority of business start-ups fail within
+the first three years. If you are reading this book hoping to improve your company, most likely you are one of
+the survivors. Someone did something right to get you to this point. Build on that. When we first started
+working with Ford to help develop the Ford Production System, we held seminars for senior management
+and handed out copies of Henry Ford s book, Today and Tomorrow. This book inspired generations of
+Toyota senior managers, yet astonishingly few Ford managers had ever read the book. Build on your
+company s heritage to identify what you stand for.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+12.
+Hire or develop lean leaders and develop a succession system. We discussed what it means to be a
+Toyota leader in Chapter 15. Leaders must thoroughly understand, believe in, and live the company s way.
+All leaders must understand the work in detail and know how to involve people. If the top is not driving the
+transformation, it will not happen.
+13.
+Use experts for teaching and getting quick results. The word sensei is used in Japan with some
+reverence to refer to a teacher who has mastered the subject. A company needs a sensei to provide
+technical assistance and change management advice when it is trying something for the first time. This teacher
+will help facilitate the transformation, get quick results, and keep the momentum building. But a good teacher
+will not do it all for you. If you want a lean organization, you need to get lean knowledge into your company,
+either by hiring experts with a minimum of five years lean experience or by hiring outside experts as
+consultants. An expert, whether internal or external, can quick-start the process by educating through action,
+but to develop a lean learning enterprise you need to build internal expertise senior executives, improvement
+experts, and group leaders who believe in the philosophy and will spread lean throughout the organization
+over time.
+
+Having said all this, the question remains, can a company transform and sustain a culture to become a lean learning
+organization? If a company can maintain continuity of leadership over time, I see no reason why it cannot profit by
+implementing its version of the Toyota Way principles. It will not be easy. Typical obstacles may be reluctant top
+managers who do not understand, managers willing to try lean tools but are not committed to following through, a
+management shakeup from committed lean leaders to anti-lean managers, a market that goes sour, or a buyout.
+We also mentioned there may be cultural barriers to following the Toyota Way. There are a litany of cultural traits
+that differ between Japanese and Americans and French and Germans, etc. For example, we saw that the
+philosophies underlying hansei that Toyota considers necessary for kaizen are rooted in Japanese upbringing. And
+there is even some evidence that Asians more naturally do genchi genbutsu and observe things in greater detail. Yet,
+the Toyota Way is working and prospering within Toyota affiliates around the world albeit with a great investment of
+time and energy by Toyota in developing its unique culture. And the Toyota Way is evolving as it adapts to other
+cultures, probably making Toyota an even stronger company.
+Even though there are plenty of uncertainties and challenges, my advice is start adopting your version of Toyota Way
+principles. As you have seen in this book, it is very feasible and there are successes to emulate. If Toyota is any
+example, the rewards and results will far outweigh the great effort required. You will simply be the best in your
+business because you will be using operational excellence as a strategic weapon. Good luck on your journey!
+Case Example: Transforming Delphi to a Lean Culture
+Delphi was a division of General Motors composed of several mass production operations that produced in-house
+parts for GM. Costs were high and quality was not competitive. General Motors spun it off and named it Delphi, a
+separate company, in May 1999. For a while, it retained the high-cost structure of General Motors, including a
+UAW contract requiring higher wages than other parts suppliers.
+Almost immediately after Delphi went public, J.T. Battenberg, Delphi s president, strongly endorsed creating the
+Delphi Manufacturing System, based on the principles of TPS. John Shook and other former Toyota managers and
+TPS experts assisted Delphi in the transformation. While it took years to penetrate the old-line union culture of these
+former GM divisions, the pieces slowly began coming together, moving from the application of isolated tools to
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+building systems, to transforming the culture of Delphi toward a lean enterprise. UAW-negotiated wages could not be
+reduced, but there were opportunities for productivity improvements, quality improvements, space savings, and
+inventory savings.
+
+One of Delphi s many success stories was its Adrian, Michigan, plant, which made instrument panels for light trucks.
+Adrian was in competition with low-cost and high-quality Delphi manufacturing in Mexico. At some point in the
+1990s, it became clear the plant was on the fix, sell, or close list since it was not profitable. But the plant decided to
+fight for its survival and saw the Delphi Manufacturing System as the only way to be successful.
+During the summer of 2002, when I spent time in the plant, it was making 6,000 automotive instrument panels a day
+for seven GM plants, which was less than half its capacity. The plant had made many of the lean changes, one of the
+most dramatic being the removal of the overhead conveyor system. There had been a half mile of power and free
+chain conveyor overhead that these instrument panels circulated around on, which carried a ton of inventory.
+Moreover, because it was up in the sky, it could easily be ignored. Problems were hidden up there. As part of the
+future state value value stream map, they decided to tear it down. Removing the overhead conveyor system freed up
+four maintenance people who were just keeping it running. They were then reassigned to preventive maintenance for
+the plant. Assembly of the instrument panels was reorganized into cells by product family. Kanban was implemented
+to control the flow of parts from molding to assembly and purchased parts to the line. Various clever
+mistake-proofing devices were put in to reduce defects. Andon systems were installed so operators could call for
+help. The place was cleaned up and organized through a 5S program. Material began to flow and costs began to
+come down.
+A milestone in the lean transformation came when the plant introduced heijunka (leveled production scheduling). In
+the past, it built in big batches of each model of instrument panel. This contributed to the large buildup in inventory
+and general chaos in the plant. When the plant implemented one-piece flow, it still built in batches and had no way to
+control the erratic schedule from the customer, which varied dramatically in volume and mix from day to day. With
+the help of a lean consultant, who had worked with Toyota, it implemented heijunka to control production and
+smooth out these peaks and valleys. The plant kept a small store of finished goods instrument panels and replenished
+this based on a simple visual system: a big box with slots (heijunka box) was used to visually schedule the
+production for the day, based on changing over to different products throughout the day. An order for parts was
+pulled from the heijunka box every 26 minutes and, based on what the card said, instrument panels were loaded on
+a train of carts, which triggered the scheduling of new panels to be made. To support this, setup times were
+dramatically reduced and eventually supported four color changes a day.
+Perhaps more important than implementing these TPS tools, the entire plant was reorganized from functional units to
+five value streams, each focused on a particular part family of instrument panels mostly by customer and type of
+truck. All the operators responsible for building an instrument panel, from raw material to finished goods, reported to
+a value stream production manager. The production managers moved out of the front offices and relocated to the
+floor within their value stream. Maintenance, which had been located around the periphery of the plant, was
+reassigned to and physically located within the value streams. The main support functions for each value stream were
+matrixed. For example, quality specialists were assigned certain value streams but also reported to a quality manager.
+The result was a shift from focusing on maximizing production of individual departments and pointing fingers of blame
+to maximizing throughput and quality of value streams.
+
+Back in 1986, the plant had embraced a team problem-solving program. It was a mess. There were multiple leaders
+and different departments had different concerns, often at cross-purposes. It became a session for venting complaints
+and ultimately there was little action. When the plant took the lean approach, the improvement process relied heavily
+on value stream mapping as a visioning tool. Each of the five value stream organizations created 90-day visions, using
+value stream mapping to draw the vision. Based on the 90-day new value stream map, a detailed action plan was
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+created with assignments and due dates. A cross-functional team in each value stream would meet every week to
+assess progress in implementing the action plan. Problem solving became unified and focused on a shared vision.
+Every quarter, they updated the future state map to bring it to the next level of lean.
+Up-to-date metrics kiosks were posted in each manufacturing area. The metrics defined by the Delphi Manufacturing
+System focused on lean characteristics such as productivity (parts/labor hour), product cost, first-time quality, total
+process cycle time, overall equipment effectiveness (a measure of equipment uptime), andon response time, and
+scrap. There were specific targets for improvement for these metrics for each value stream each quarter. Since the
+measures were by value stream and the plant was organized that way, all of the resources were under one value
+stream manager to improve the process. Just improving the first-time quality paint process alone saved $2 million
+annually.
+
+A separate metric for the overall plant measured productivity improvements of direct, indirect, and salaried labor.
+Double-digit productivity improvements each year have became commonplace. Prior to the lean transformation, the
+plant was losing money every month; in less than two years of lean, the plant was profitable at about $2 million per
+month. If you tour the facility today, you may be surprised to find that your tour guide is an hourly worker, or a union
+representative, or perhaps even the plant comptroller. These people all seem to be interchangeable and it is often
+hard to tell who is who. They are all talking the same language of DMS and value stream improvement. They
+apparently impressed their largest customer, General Motors. According to Mike Schornack, who ran manufacturing
+and was instrumental in leading the lean transformation (April 2003):
+We were given some great news last week. The Adrian plant was awarded the GMT-900 instrument panel
+business. This is replacement work for the current IP and the largest IP business platform in the world. There
+is no doubt in my mind that we won this business because of our lean transformation. There were many GM
+tours through our facility before the business was awarded. Every group was impressed with the plant, the
+metrics, and the positive attitude of our people. The system really works!
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Bibliography/Chapter References
+Preface
+Liker, Jeffrey K. (Ed.). Becoming Lean: Inside Stories of U.S. Manufacturers. Portland, OR: Productivity Press,
+1997.
+
+Sobek, Durward K., II, Jeffrey K. Liker, and Allen C. Ward. Another Look at How Toyota Integrates Product
+Development. Harvard Business Review, Vol. 76, No. 4, July-August 1998, pp. 36-50.
+
+Ward, Allen C., Jeffrey K. Liker, John J. Cristiano, and Durward K. Sobek II. The Second Toyota Paradox: How
+Delaying Decisions Can Make Better Cars Faster. Sloan Management Review, Vol. 36, No. 3, Spring 1995, pp.
+43-61.
+
+Chapter 1
+Ohno, Taiichi. Toyota Production System: Beyond Large-Scale Production. Portland, OR: Productivity Press,
+1988.
+
+Womack, James P., and Daniel T. Jones. Lean Thinking: Banish Waste and Create Wealth in Your Corporation.
+New York: Simon & Schuster, 1996.
+
+Womack, James P., Daniel T. Jones, and Daniel Roos. The Machine That Changed the World: The Story of
+Lean Production. New York: HarperPerennial, 1991.
+
+Chapter 2
+Ford, Henry. Today and Tomorrow. Garden City, NY: Doubleday, Page & Company, 1926. Reprint Edition.
+Portland, OR: Productivity Press, 1988.
+Fujimoto, Takahiro. The Evolution of a Manufacturing System at Toyota. New York: Oxford University Press,
+1999.
+
+Reingold, Edwin. Toyota: People, Ideas, and the Challenge of the New. London: Penguin Books, 1999.
+
+Smiles, Samuel. Self-Help: With Illustrations of Character, Conduct, and Perseverance. New York: Harper &
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Brothers, 1860. Published as Self-Help (Peter W. Sinnema, editor). New York: Oxford University Press, 2002.
+
+Toyoda, Eiji. Toyota: Fifty Years in Motion. Tokyo: Kodansha International, 1987.
+
+Womack, James P., and Daniel T. Jones. Lean Thinking: Banish Waste and Create Wealth in Your Corporation.
+New York: Simon & Schuster, 1996.
+
+Womack, James P., Daniel T. Jones, and Daniel Roos. The Machine That Changed the World: The Story of
+Lean Production. New York: HarperPerennial, 1991.
+
+Chapter 3
+Womack, James P., and Daniel T. Jones. Lean Thinking: Banish Waste and Create Wealth in Your Corporation.
+New York: Simon & Schuster, 1996.
+
+Chapter 5
+Reingold, Edwin. Toyota: People, Ideas, and the Challenge of the New. London: Penguin Books, 1999.
+
+Chapter 6
+Itazaki, Hideshi. The Prius That Shook the World: How Toyota Developed the World s First Mass-Production
+Hybrid Vehicle. Translated by A. Yamada and M. Ishidawa. Tokyo: The Kikkan Kogyo Shimbun, Ltd., 1999.
+
+Ward, Allen C., Jeffrey K. Liker, John J. Cristiano, and Durward K. Sobek II, The Second Toyota Paradox: How
+Delaying Decisions Can Make Better Cars Faster, Sloan Management Review, Vol. 36, No. 3, Spring 1995, pp.
+43-61.
+
+Chapter 7
+Cusumano, Michael A. The Japanese Automobile Industry: Technology and Management at Nissan and Toyota
+. Cambridge, MA: Council on East Asian Studies/Harvard University Press, 1985.
+
+Dyer, Jeffrey H. How Chrysler Created an American Keiretsu. Harvard Business Review, Vol. 74, No. 4,
+July-August 1996.
+
+Shook, John. Presentation at 8th Annual Lean Manufacturing Conference, University of Michigan, Dearborn, May
+6-8, 2002.
+
+Chapter 8
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Emiliani, Bob, David Stec, Lawrence Grasso, and James Stodder. Better Thinking, Better Results: Using the
+Power of Lean as a Total Business Solution. Kensington, CT: Center for Lean Business Management, 2002.
+
+Ohno, Taiichi. Toyota Production System: Beyond Large-Scale Production. Portland, OR: Productivity Press,
+1988.
+
+Chapter 9
+Rother, Mike, and John Shook. Learning to See: Value Stream Mapping to Add Value and Eliminate Muda.
+Brookline, MA: Lean Enterprises Institute, Inc., 1999.
+
+Chapter 10
+Ohno, Taiichi. Toyota Production System: Beyond Large-Scale Production. Portland, OR: Productivity Press,
+1988.
+
+Chapter 11
+Ward, Allen C., Jeffrey K. Liker, John J. Cristiano, and Durward K. Sobek II. The Second Toyota Paradox: How
+Delaying Decisions Can Make Better Cars Faster. Sloan Management Review, Vol. 36, No. 3, Spring 1995, pp.
+43-61.
+
+Chapter 12
+Adler, Paul S. Building Better Bureaucracies. Academy of Management Executive, 13, 1999, pp. 36-49.
+
+Burns, Tom, and George M. Stalker. The Management of Innovation. New York: Oxford University Press, 1994.
+
+Ford, Henry. Today and Tomorrow. Garden City, NY: Doubleday, Page & Company, 1926. Reprint Edition.
+Portland, OR: Productivity Press, 1988.
+Huntzinger, Jim. The Roots of Lean: Training Within Industry: The Origin of Kaizen. Target, Vol. 18, No. 1, First
+Quarter 2002.
+
+Imai, Masaaki. Kaizen: The Key to Japan s Competitive Success. New York: McGraw-Hill, 1986.
+
+Ohno, Taiichi. Toyota Production System: Beyond Large-Scale Production. Portland, OR: Productivity Press,
+1988.
+
+Sobek, Durward K., II, Jeffrey K. Liker, and Allen C. Ward. Another Look at How Toyota Integrates Product
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Development. Harvard Business Review, Vol. 76, No. 4, July-August 1998, pp. 36-50.
+
+Taylor, Frederick W. Scientific Management. New York: Harper & Row, 1911. Reprint Edition. New York:
+Harper and Brothers, 1947.
+
+Chapter 13
+Hirano, Hiroyuki. 5 Pillars of the Visual Workplace: The Sourcebook for 5S Implementation. Translated by
+Bruce Talbot. Portland, OR: Productivity Press, 1995.
+
+Liker, Jeffrey K. (Ed.). Becoming Lean: Inside Stories of U.S. Manufacturers. Portland, OR: Productivity Press,
+1997.
+
+Chapter 14
+Bolles, Richard Nelson. What Color Is Your Parachute? A Practical Manual for Job-Hunters and
+Career-Changers. Revised edition. Berkeley, CA: Ten Speed Press, 2003.
+
+Toyoda, Eiji. Creativity, Challenge and Courage, Toyota Motor Corporation, 1983
+
+Chapter 15
+Clark, Kim B., and Takahiro Fujimoto. Product Development Performance: Strategy, Organization, and
+Management in the World Auto Industry. Boston: Harvard Business School Press, 1991.
+
+Cusumano, Michael A., and Kentaro Nobeoka. Thinking Beyond Lean: How Multi-Project Management Is
+Transforming Product Development at Toyota and Other Companies. New York: Free Press, 1998.
+
+Womack, James P., Daniel T. Jones, and Daniel Roos. The Machine That Changed the World: The Story of
+Lean Production. New York: HarperPerennial, 1991.
+
+Chapter 16
+Blanchard, Ken, Donald Carew, and Eunice Parisi-Carew. The One Minute Manager Builds High Performing
+Teams. Revised edition. New York: William Morrow, 2000.
+
+Chapter 17
+Ahmadjian, Christina L., and James R. Lincoln. Keiretsu, Governance, and Learning: Case Studies in Change from
+the Japanese Automotive Industry. Organization Science, Vol. 12, No. 6, November-December 2001, pp.
+683-701.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Dyer, Jeffrey H. Collaborative Advantage: Winning Through Extended Enterprise Supplier Networks. New
+York: Oxford University Press, 2000.
+
+Itazaki, Hideshi. The Prius That Shook the World: How Toyota Developed the World s First Mass-Production
+Hybrid Vehicle. Translated by A. Yamada and M. Ishidawa. Tokyo: The Kikkan Kogyo Shimbun, Ltd., 1999.
+
+Karlin, Jennifer. Defining the Lean Logistics Learning Enterprise: Examples from Toyota s North American
+Supply Chain. Unpublished doctoral dissertation, University of Michigan, Ann Arbor, September 2003.
+
+Chapter 18
+Begley, Sharon. East Versus West: One Sees Big Picture, Other Is Focused. The Wall Street Journal, March 28,
+2003.
+
+Nisbett, Richard E. The Geography of Thought: How Asians and Westerners Think Differently ... and Why.
+New York: Free Press, 2003.
+
+Chapter 19
+Ward, Allen C., Jeffrey K. Liker, John J. Cristiano, and Durward K. Sobek II. The Second Toyota Paradox: How
+Delaying Decisions Can Make Better Cars Faster. Sloan Management Review, Vol. 36, No. 3, Spring 1995, pp.
+43-61.
+
+Chapter 20
+Scholtes, Peter R. The Leader s Handbook. New York: McGraw-Hill, 1998.
+
+Senge, Peter M. The Fifth Discipline: The Art and Practice of the Learning Organization. New York:
+Doubleday, 1990, p. 1.
+
+Chapter 21
+Drogosz, John D. Applying Lean Above the Factory Floor. Journal of Ship Production, Vol. 18, No. 3, August
+2002, pp. 159-166.
+
+Morgan, James M. High Performance Product Development: A Systems Approach to a Lean Product
+Development Process. Doctoral Dissertation, University of Michigan, 2002.
+Rother, Mike, and John Shook. Learning to See: Value Stream Mapping to Add Value and Eliminate Muda.
+Brookline, MA: Lean Enterprises Institute, Inc., 1999.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Chapter 22
+Card, Orson Scott. Prentice Alvin: The Tales of Alvin Maker, Book Three. London: Orbit Books, 1989.
+
+Emiliani, Bob, David Stec, Lawrence Grasso, and James Stodder. Better Thinking, Better Results: Using the
+Power of Lean as a Total Business Solution. Kensington, CT: Center for Lean Business Management, 2002.
+
+Goetsch, David L., and Stanley B. Davis, Quality Management: Introduction to Total Quality Management for
+Production, Processing, and Services. Fourth edition. Upper Saddle River, NJ: Prentice Hall, 2003.
+
+Liker, Jeffrey K., and Keith Allman. The Donnelly Production System: Lean at Grand Haven. Jeffrey K. Liker
+(Ed.), Becoming Lean: Inside Stories of U.S. Manufacturers. Portland, OR: Productivity Press, 1998, pp.
+201-246.
+
+Womack, James P., and Daniel T. Jones. Lean Thinking: Banish Waste and Create Wealth in Your Corporation.
+New York: Simon & Schuster, 1996.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Recommended for Further
+Reading
+Akoa, Yoshi. Hoshin Kanri: Policy Deployment for Successful TQM. Productivity press, 1991.
+
+Dyer, Jeffrey H. Collaborative Advantage: Winning Through Extended Enterprise Supplier Networks. New
+York: Oxford University Press, 2000.
+
+Emiliani, Bob, David Stec, Lawrence Grasso, and James Stodder. Better Thinking, Better Results: Using the
+Power of Lean as a Total Business Solution. Kensington, CT: The Center for Lean Business Management, 2002.
+
+Ford, Henry. Today and Tomorrow, Reprint Edition. Portland, OR: Productivity Press, 1988.
+
+Fujimoto, T. The Evolution of a Manufacturing System at Toyota. NY: Oxford University Press, 1999.
+
+Imai, Masaki. Gemba Kaizen: A Commonsense, Low-Cost Approach to Management. New York:
+McGraw-Hill, 1997.
+
+Kotter, John P. Leading Change. Boston, MA: Harvard Business School Press, 1996.
+
+Liker, Jeffrey. (Ed.). Becoming Lean: Inside Stories of U.S. Manufacturers. Portland OR: Productivity Press,
+1997.
+
+Monden, Yasuhiro. The Toyota Management System. Portland, OR: Productivity Press, 1993.
+
+Monden, Yasuhiro. Toyota Production System: An Integrated Approach to Just-In-Time, Third Edition.
+Norcross, GA: Engineering and Management Press, 1998.
+
+Ohno, Taichi., The Toyota Production System: Beyond Large Scale Production. Portland, OR: Productivity
+Press, 1988.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Rother, Michael and John Shook. Learning to See: Value Stream Mapping to Add Value and Eliminate Muda.
+Brookline, MA: Lean Enterprise Institute, 1999.
+
+Womack, James P. and Daniel T. Jones. Lean Thinking: Banish Waste and Create Wealth in Your Corporation,
+Revised and Updated, Second Edition. New York: Simon & Schuster, 2003.
+
+Womack, James P., Daniel T. Jones, and Daniel Roos. The Machine That Changed The World: The Story of
+Lean Production. New York: HarperPerennial, 1991.
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Index
+A
+Accountability, 257
+Adler, Paul, 144
+Adrian plant, 307 309
+Aerodynamic development (Lexus), 49 50
+Affiliated companies, borrowing employees from, 124
+Aisin, 201 202
+Allman, Keith, 293, 302
+Alternative solutions, considering, 239 240. See also Decision making
+Aluminum gutter case example, 125 127
+American Auto example, 199 201, 214 216
+Andon systems. See also Built-in quality (jidoka)
+adapting to offices, 136
+defined, 130
+job enrichment from, 196
+for Lexus production, 132
+performance data from, 261
+as philosophy versus technology, 138 139
+segmented, 130 131
+as visual controls, 153
+Animation, 165
+Araco, 211, 217
+Assembly lines, stopping, 128 131
+A3 reports, 157, 244 248
+Attendance awards, 197
+Authority, 178 180
+Automation, when and when not to use, 9. See also Technology use
+Automotive News magazine, 171 172
+Autonomation, 129 130
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Index
+B
+Backtracking from flow, 100 101
+BAMA (Bluegrass Automotive Manufacturers Association), 210
+Batch and queue, 88, 189
+Battenberg, J. T., 307
+Battery development, 60, 208 209
+Baxter, David, 157, 227 228
+Behavior modification, 195, 197
+Big room (obeya) systems, 55, 62, 156 157
+Blanchard, Ken (The One-Minute Manager), 188 189
+Blue sky system, 166 167
+BMW, 47
+Body fabrication, adding flexibility, 166 168
+Bolles, Richard (What Color Is Your Parachute?), 159
+Brainstorming, 281
+Brownlee, Bruce, 234, 258
+Build-to-order production
+aluminum gutter case example, 125 127
+shortcomings, 113 114
+Toyota s application of, 121 123
+Built-in quality (jidoka). See also Andon systems
+in computer-aided design, 165
+countermeasures and error-proofing, 132 134
+implementing in production, 129 132
+origins, 16
+as philosophy, 138 139
+quality control systems, 134 136
+in service operations, 136 138
+standardization for, 142 143
+in TPS house, 32
+Bullwhip effect, 118
+Bureaucracies, 143 146, 216
+Bureaucratic managers, 181
+Byrne, Art, 293, 302
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Index
+C
+Cabito, Alan, 122, 246 247
+Camry
+as compromise proposal for hybrid, 58
+success of, 4, 5
+wire harness problem, 227
+Canada Post Corporation (CPC), 272 275
+Card, Orson Scott (Prentice Alvin), 289 290
+CATIA (Computer-Aided Three-Dimensional Interactive Application), 164 165
+Cells
+arranging, 97 98
+defined, 31
+Navy shipyard example, 102 103
+Celsior, 47
+Certification of suppliers, 215
+Challenge, spirit of, 25, 202 203
+Change orders, 286
+Changeovers
+minimizing in batch processing, 118
+resistance to, 124 125
+Shingo s studies, 119 120
+Change-to-order systems, 122
+Checking fixtures, 243 244
+Chicago Parts Distribution Center, 163
+Chicken tax, 76
+Chief engineers, 64, 178 180
+Chimney phenomenon, 242
+Cho, Fujio
+leadership style, 173
+memo to Scafade, 128 129
+newsmaker profile, 171 172
+personal involvement, 223 224
+on standardization, 142
+TPS house idea, 32
+Chrysler Corporation, destruction of culture, 83 84
+Clay model freeze stage, 59 60, 137 138
+Cleanliness, 149 152
+Coercive bureaucracies, 143 146, 216
+Company roots, building on, 305 306
+Computer-aided design (CAD), 164 165
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Computer-Aided Three-Dimensional Interactive Application (CATIA), 164 165
+Computerized scheduling, 110 111
+Concept development, 44
+Consensus building (nemawashi). See also Decision making
+in Lexus development, 48 49, 64
+overview, 241 244
+in Prius development, 64
+purchasing card example, 244 246
+report writing for, 246 248
+Toyota Way principle, 40
+Conservatism, 42
+Constancy of purpose, 82 83
+Consumer Reports magazine, 5, 135
+Continuous flow
+beginning to create, 87 90
+benefits, 95 97
+case example, 102
+challenges, 98 101
+coordinating, 94 95
+Ford s application, 22
+identifying in service operations, 270 272
+mass production versus, 90 93
+speed in, 93 94
+team building for, 189
+Toyota Way principle, 37
+Continuous improvement (kaizen)
+basic purpose, 24
+at core of Toyota Way, 10, 12 13, 33, 35 36
+Deming s contributions, 23 24
+employees role, 198
+five-why analysis, 46 47, 252 254, 259 260
+role of standardization, 142 143
+stabilizing and improving processes for, 251 252
+stretch goals in, 261 263
+Toyota Way principles, 40
+Convis, Gary
+first American president for Toyota, 174 176
+on leadership requirements, 290 291
+on pilot teams, 146 147
+shop-floor orientation, 231
+on shut-downs to fix problems, 130
+Coordinators for overseas plants, 300
+Corolla, 4, 5
+Cost focus
+importance to Toyota, 72
+quality focus versus, 24 25
+in supplier relations, 219
+Cost justification, 168
+Cotter pin example, 133
+Countdown folders, 286
+Crises, 51, 304 305
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Cross-docking, 203, 206 208
+Cross-functional teams, 39. See also Teamwork
+Cuautitlan assembly plant, 301 302
+Culture
+building at Hebron plant, 186 188
+difficulty of changing, 298 302
+East Asian versus North American, 235
+presenting hansei in U.S., 258
+requirements for change, 290 292, 306
+Cuneo, Dennis, 74 78
+Cup holders (Sienna), 229 230
+Customer demand, 105 107, 116
+Customer focus, 73 74, 177 178
+Customers, identifying, 278 279
+Cusumano, Michael (The Japanese Automobile Industry), 78 80
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Index
+D
+Daimler Chrysler, 83 84
+Decision making. See also Consensus building (nemawashi)
+consensus building in, 241 244
+learning prior to, 248 249
+preparation for, 244 248
+real estate purchase, 237 238
+set-based approach, 239 240
+Toyota Way principles, 40, 238 239
+Defects
+building in systems to detect, 129 132
+countermeasures for, 132 134
+five-why analysis, 46 47, 252 254, 259 260
+hidden by inventory, 93 94, 99
+long-term results, 135
+rapidly exposed by flow, 94, 95
+Trim Masters rate, 218
+as waste, 29
+Dell Computers, 8
+Delphi case example, 307 309
+Delphi Manufacturing System, 307
+Deming, W. Edwards, 23 24, 82, 246
+Deming cycle. See Plan-Do-Check-Act (PDCA) cycle
+Democratic Taylorism, 145
+Denso, 209 210
+Design process
+concurrent engineering activities, 137 138
+error-proofing, 165
+standardization for, 146 147
+Detroit Labs, 227 228
+Dissatisfaction stage, for teams, 188
+Donnelly Mirrors, 149 150
+Door-to-door sales, 177 178
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Index
+E
+Economies of scale, 91
+Efficiency, limitations of, 14
+Electronics, self-reliance in, 209 210
+E-mail, 233 234
+Empowering employees, 39, 186 188
+Enabling bureaucracies, 143 146, 216
+Engineering
+adoption of technology, 164 166
+concurrent with design, 137 138
+flow in, 90
+leadership structure, 194
+visual control system project, 285 286
+Environmental pressures on long-term goals, 294
+Equipment problems, 32, 33
+Error-proofing, 132 134, 165. See also Built-in quality (jidoka)
+Evaluation, in kaizen workshops, 283
+Excess inventory, 29, 91
+Executives, 230 234, 290 295. See also Leadership development
+Experimentation, 13
+Expert assistance, 306
+External motivation theories, 197 198
+External setup, 120
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Index
+F
+Facing fill rates, 155 156
+Fads, following, 290
+Fake flow, 99 100
+Feedback, in teams, 197
+Fifth Discipline, The (Peter Senge), 250
+Financial results, 4, 305
+Five-S (5S), 36, 150 152. See also Visual control
+Five-why analysis, 46 47, 252 254, 259 260
+Fixed-position line stop systems, 130 131
+Flagship Quality Committee, 48 49
+Flexibility
+as basis of Toyota s production system, 8
+as benefit of flow, 95, 118
+enhancing with technology, 166 168
+in mass production scheduling, 91
+of work hours, 300
+Floor space, freeing, 96
+Flow. See Continuous flow
+Focus group interviews, 44 45
+Ford, Bill, 171, 172
+Ford, Henry
+mass production methods, 22
+on standardization, 141
+Today and Tomorrow authorship, 20, 22, 306
+Ford Motor Company
+CAD implementation, 165
+Cuautitlan assembly plant, 301 302
+early influence on Toyota, 20, 21
+early use of standardization, 141
+mission statement compared to Toyota s, 80
+Jim Press s experience, 73
+supplier relationships, 203 206
+Ford Production System, 203, 301, 306
+Formal authority, 178 180
+Freshman projects, 243 244
+Fujii, Yuichi, 209
+Future state vision, 281 282
+
+This document is created with the unregistered version of Document2PDF Pilot.
+
+Index
+G
+Gemba, 224
+Genchi genbutsu. See Personal involvement
+General Electric, 295
+General management expertise, 181
+General Motors
+Delphi case example, 307 309
+early attempts to
